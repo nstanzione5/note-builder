@@ -4,6 +4,8 @@ const state = {
   currentModality: '',
   followModality: '',
   scriptVisible: false,
+  followupMode: 'scheduled',
+  selectedInterval: '',
 };
 
 const els = {
@@ -39,6 +41,8 @@ const els = {
   exportHelper: document.getElementById('exportHelper'),
   activeGptUrl: document.getElementById('activeGptUrl'),
   followDate: document.getElementById('followDate'),
+  followTime: document.getElementById('followTime'),
+  prnHelperText: document.getElementById('prnHelperText'),
   age: document.getElementById('age'),
   scriptProgressCount: document.getElementById('scriptProgressCount'),
   practiceModeBanner: document.getElementById('practiceModeBanner'),
@@ -109,6 +113,8 @@ const brandConfig = {
     fallback: 'E',
   },
 };
+
+const STORAGE_KEY = 'noteBuilderDraft_v1';
 
 function isFilled(id) {
   return getValue(id) !== '';
@@ -375,10 +381,22 @@ function buildVisitDetails() {
 }
 
 function buildFollowupDetails() {
-  return [
+  const baseLines = [
     `Face-to-Face End: ${getValue('endTime')}`,
     `Documentation End: ${getValue('docEnd')}`,
     `Follow-Up Modality: ${getValue('followModality')}`,
+  ];
+
+  if (state.followupMode === 'prn') {
+    return [
+      ...baseLines,
+      'Follow-Up Scheduling: PRN',
+      'Patient is not ready to schedule a follow-up appointment yet and will reach out later to schedule.',
+    ].join('\n');
+  }
+
+  return [
+    ...baseLines,
     `Follow-Up Date: ${getValue('followDate')}`,
     `Follow-Up Time: ${getValue('followTime')}`,
   ].join('\n');
@@ -487,13 +505,19 @@ function updateCompletionDashboard() {
     notesComplete = isFilled('testDump') && isFilled('notes');
   }
 
-  const closingComplete = [
-    isFilled('endTime'),
-    isFilled('docEnd'),
-    isFilled('followModality'),
-    isFilled('followDate'),
-    isFilled('followTime'),
-  ].every(Boolean);
+  const closingComplete = state.followupMode === 'prn'
+    ? [
+        isFilled('endTime'),
+        isFilled('docEnd'),
+        isFilled('followModality'),
+      ].every(Boolean)
+    : [
+        isFilled('endTime'),
+        isFilled('docEnd'),
+        isFilled('followModality'),
+        isFilled('followDate'),
+        isFilled('followTime'),
+      ].every(Boolean);
 
   const completedCount = [setupComplete, notesComplete, closingComplete].filter(Boolean).length;
 
@@ -512,14 +536,48 @@ function updateTopbarState() {
   els.topbar.classList.toggle('topbar-condensed', shouldCondense);
 }
 
+function updateIntervalButtons() {
+  document.querySelectorAll('.interval-btn').forEach((btn) => {
+    const isPrnButton = btn.dataset.followupMode === 'prn';
+    const isActive = isPrnButton
+      ? state.followupMode === 'prn'
+      : state.followupMode === 'scheduled' && btn.dataset.weeks === state.selectedInterval;
+
+    btn.classList.toggle('active', isActive);
+    btn.setAttribute('aria-pressed', String(isActive));
+  });
+}
+
+function updateFollowupSchedulingUI() {
+  const isPrn = state.followupMode === 'prn';
+
+  if (els.followDate) {
+    els.followDate.disabled = isPrn;
+    if (isPrn) els.followDate.value = '';
+  }
+
+  if (els.followTime) {
+    els.followTime.disabled = isPrn;
+    if (isPrn) els.followTime.value = '';
+  }
+
+  if (els.prnHelperText) {
+    els.prnHelperText.classList.toggle('hidden', !isPrn);
+  }
+
+  updateIntervalButtons();
+}
+
 function refreshUI() {
   updateBranding();
   updateScriptVisibility();
   updatePracticeSections();
   updateActiveGptUrl();
   updateScriptProgress();
+  updateFollowupSchedulingUI();
   updateCompletionDashboard();
   updateExport();
+  saveDraft();
 }
 
 function setPractice(practice) {
@@ -549,6 +607,7 @@ function setCurrentModality(value, button) {
   setActiveButtons('#currentModalityToggle', button);
   updateCompletionDashboard();
   updateExport();
+  saveDraft();
 }
 
 function setFollowModality(value, button) {
@@ -557,6 +616,7 @@ function setFollowModality(value, button) {
   setActiveButtons('#followModalityToggle', button);
   updateCompletionDashboard();
   updateExport();
+  saveDraft();
 }
 
 function setTimeNow(targetId) {
@@ -566,9 +626,13 @@ function setTimeNow(targetId) {
   setValue(targetId, `${hours}:${minutes}`);
   updateCompletionDashboard();
   updateExport();
+  saveDraft();
 }
 
-function setFollowupWeeks(weeks, button) {
+function setFollowupWeeks(weeks) {
+  state.followupMode = 'scheduled';
+  state.selectedInterval = String(weeks);
+
   const base = new Date();
   base.setHours(0, 0, 0, 0);
   base.setDate(base.getDate() + (Number(weeks) * 7));
@@ -578,10 +642,82 @@ function setFollowupWeeks(weeks, button) {
   const day = String(base.getDate()).padStart(2, '0');
   els.followDate.value = `${year}-${month}-${day}`;
 
-  document.querySelectorAll('.interval-btn').forEach((btn) => btn.classList.remove('active'));
-  button.classList.add('active');
+  updateFollowupSchedulingUI();
   updateCompletionDashboard();
   updateExport();
+  saveDraft();
+}
+
+function setPrnFollowup() {
+  if (state.followupMode === 'prn') {
+    state.followupMode = 'scheduled';
+    state.selectedInterval = '';
+  } else {
+    state.followupMode = 'prn';
+    state.selectedInterval = 'prn';
+    setValue('followDate', '');
+    setValue('followTime', '');
+  }
+
+  updateFollowupSchedulingUI();
+  updateCompletionDashboard();
+  updateExport();
+  saveDraft();
+}
+
+function saveDraft() {
+  const draft = {
+    state: {
+      practice: state.practice,
+      visitType: state.visitType,
+      currentModality: state.currentModality,
+      followModality: state.followModality,
+      scriptVisible: state.scriptVisible,
+      followupMode: state.followupMode,
+      selectedInterval: state.selectedInterval,
+    },
+    inputs: {},
+    scriptChecks: Array.from(document.querySelectorAll('[data-script-check]')).map((checkbox) => checkbox.checked),
+  };
+
+  inputIds.forEach((id) => {
+    draft.inputs[id] = getValue(id);
+  });
+
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(draft));
+}
+
+function loadDraft() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+
+    const draft = JSON.parse(raw);
+
+    if (draft.state) {
+      state.practice = draft.state.practice || state.practice;
+      state.visitType = draft.state.visitType || state.visitType;
+      state.currentModality = draft.state.currentModality || '';
+      state.followModality = draft.state.followModality || '';
+      state.scriptVisible = Boolean(draft.state.scriptVisible);
+      state.followupMode = draft.state.followupMode || 'scheduled';
+      state.selectedInterval = draft.state.selectedInterval || '';
+    }
+
+    if (draft.inputs) {
+      inputIds.forEach((id) => {
+        if (Object.prototype.hasOwnProperty.call(draft.inputs, id)) {
+          setValue(id, draft.inputs[id] || '');
+        }
+      });
+    }
+
+    document.querySelectorAll('[data-script-check]').forEach((checkbox, index) => {
+      checkbox.checked = Boolean(draft.scriptChecks && draft.scriptChecks[index]);
+    });
+  } catch (error) {
+    console.error('Unable to load saved draft:', error);
+  }
 }
 
 async function copyExport() {
@@ -614,6 +750,8 @@ function clearAll() {
   inputIds.forEach((id) => setValue(id, ''));
   state.currentModality = '';
   state.followModality = '';
+  state.followupMode = 'scheduled';
+  state.selectedInterval = '';
 
   document.querySelectorAll('#currentModalityToggle .seg-btn, #followModalityToggle .seg-btn, .interval-btn').forEach((btn) => {
     btn.classList.remove('active');
@@ -627,6 +765,7 @@ function clearAll() {
   if (els.scriptToggle) els.scriptToggle.checked = false;
   state.scriptVisible = false;
 
+  localStorage.removeItem(STORAGE_KEY);
   refreshUI();
   window.scrollTo({ top: 0, behavior: 'smooth' });
   window.setTimeout(() => {
@@ -639,8 +778,21 @@ function attachInputListeners() {
     const element = getEl(id);
     if (!element) return;
     const syncFieldState = () => {
+      if ((id === 'followDate' || id === 'followTime') && state.followupMode === 'prn') {
+        return;
+      }
+
+      if (id === 'followDate' || id === 'followTime') {
+        state.followupMode = 'scheduled';
+        if (!state.selectedInterval || state.selectedInterval === 'prn') {
+          state.selectedInterval = '';
+        }
+        updateIntervalButtons();
+      }
+
       updateCompletionDashboard();
       updateExport();
+      saveDraft();
     };
     element.addEventListener('input', syncFieldState);
     element.addEventListener('change', syncFieldState);
@@ -666,6 +818,31 @@ function attachLogoFallbacks() {
   });
 }
 
+function attachKeyboardShortcuts() {
+  document.addEventListener('keydown', async (event) => {
+    const hasModifier = event.metaKey || event.ctrlKey;
+    if (!hasModifier || !event.shiftKey) return;
+
+    const key = event.key.toLowerCase();
+
+    if (key === 'c') {
+      event.preventDefault();
+      copyExport();
+    }
+
+    if (key === 'o') {
+      event.preventDefault();
+      const copied = await copyExport();
+      if (copied) openActiveGpt();
+    }
+
+    if (key === 'g') {
+      event.preventDefault();
+      openActiveGpt();
+    }
+  });
+}
+
 function attachEventListeners() {
   els.astraBtn.addEventListener('click', () => setPractice('astra'));
   els.ebhBtn.addEventListener('click', () => setPractice('ebh'));
@@ -676,6 +853,7 @@ function attachEventListeners() {
     state.scriptVisible = event.target.checked;
     updateScriptVisibility();
     updateTopbarState();
+    saveDraft();
   });
 
   document.querySelectorAll('#currentModalityToggle .seg-btn').forEach((btn) => {
@@ -691,11 +869,21 @@ function attachEventListeners() {
   });
 
   document.querySelectorAll('.interval-btn').forEach((btn) => {
-    btn.addEventListener('click', () => setFollowupWeeks(btn.dataset.weeks, btn));
+    btn.addEventListener('click', () => {
+      if (btn.dataset.followupMode === 'prn') {
+        setPrnFollowup();
+        return;
+      }
+
+      setFollowupWeeks(btn.dataset.weeks);
+    });
   });
 
   document.querySelectorAll('[data-script-check]').forEach((checkbox) => {
-    checkbox.addEventListener('change', updateScriptProgress);
+    checkbox.addEventListener('change', () => {
+      updateScriptProgress();
+      saveDraft();
+    });
   });
 
   els.copyBtn.addEventListener('click', () => {
@@ -724,8 +912,12 @@ function init() {
   attachInputListeners();
   attachLogoFallbacks();
   attachEventListeners();
+  attachKeyboardShortcuts();
+  loadDraft();
   setActiveByData('#practiceToggle .seg-btn', 'practice', state.practice);
   setActiveByData('#visitTypeToggle .seg-btn', 'visitType', state.visitType);
+  setActiveByData('#currentModalityToggle .seg-btn', 'currentModality', state.currentModality);
+  setActiveByData('#followModalityToggle .seg-btn', 'followModality', state.followModality);
   refreshUI();
   updateTopbarState();
 }
