@@ -534,18 +534,25 @@
           <input type="hidden" id="followModality" value="">
         </div>
 
-        <div class="field top-gap">
-          <label>Quick Follow-Up Interval</label>
-          <div class="quick-followup-row" id="quickFollowupRow">
-            <button type="button" class="interval-btn" data-weeks="1">1 wk</button>
-            <button type="button" class="interval-btn" data-weeks="2">2 wk</button>
-            <button type="button" class="interval-btn" data-weeks="3">3 wk</button>
-            <button type="button" class="interval-btn" data-weeks="4">4 wk</button>
-            <button type="button" class="interval-btn" data-weeks="6">6 wk</button>
-            <button type="button" class="interval-btn" data-weeks="8">8 wk</button>
-          </div>
-          <p class="helper-text">Selecting an interval should auto-fill the follow-up date while still allowing manual edits.</p>
-        </div>
+<div class="field top-gap">
+  <label>Quick Follow-Up Interval</label>
+  <div class="quick-followup-row" id="quickFollowupRow">
+    <button type="button" class="interval-btn" data-weeks="1">1 wk</button>
+    <button type="button" class="interval-btn" data-weeks="2">2 wk</button>
+    <button type="button" class="interval-btn" data-weeks="3">3 wk</button>
+    <button type="button" class="interval-btn" data-weeks="4">4 wk</button>
+    <button type="button" class="interval-btn" data-weeks="6">6 wk</button>
+    <button type="button" class="interval-btn" data-weeks="8">8 wk</button>
+    <button type="button" class="interval-btn" data-followup-mode="prn">PRN</button>
+  </div>
+  <p class="helper-text">
+    Selecting an interval should auto-fill the follow-up date while still allowing manual edits.
+    Selecting PRN clears scheduling because the patient is not ready to schedule yet.
+  </p>
+  <p class="helper-text prn-helper-text hidden" id="prnHelperText">
+    PRN selected: follow-up date and time are cleared until the patient reaches out later to schedule.
+  </p>
+</div>
 
         <div class="grid grid-2 top-gap">
           <div class="field">
@@ -569,6 +576,55 @@
           <div class="section-mini-badge" id="exportMiniBadge">Final handoff</div>
         </div>
 
+<section class="card clinical-tools-card" data-section="tools">
+  <div class="section-heading">
+    <div>
+      <h2>Clinical Tools</h2>
+      <p>Quick external references that support common medication and switching workflows.</p>
+    </div>
+    <div class="section-mini-badge">Quick links</div>
+  </div>
+
+  <div class="clinical-tools-links">
+    <a
+      class="tool-link"
+      href="https://www.mdcalc.com/calc/10091/benzodiazepine-conversion-calculator"
+      target="_blank"
+      rel="noopener noreferrer"
+      title="Benzodiazepine conversion calculator"
+    >
+      Benzo Calc
+    </a>
+
+    <a
+      class="tool-link"
+      href="https://alpenglowbh.com/medication-calculator/"
+      target="_blank"
+      rel="noopener noreferrer"
+      title="Stimulant medication calculator"
+    >
+      Stimulant Calc
+    </a>
+
+    <a
+      class="tool-link"
+      href="https://mhmeatnpotatoes.com/antidepressant-switching-tool"
+      target="_blank"
+      rel="noopener noreferrer"
+      title="Antidepressant cross taper and switching tool"
+    >
+      Cross Titrate
+    </a>
+  </div>
+
+  <p class="helper-text top-gap">
+    Keyboard shortcuts:
+    <kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>C</kbd> copies export,
+    <kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>O</kbd> copies and opens GPT,
+    and <kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>G</kbd> opens GPT.
+  </p>
+</section>
+        
         <div class="action-row">
           <button id="copyBtn" type="button">Copy Export</button>
           <button id="copyOpenBtn" type="button">Copy &amp; Open GPT</button>
