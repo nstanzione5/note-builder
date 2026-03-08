@@ -1,4 +1,3 @@
-/* REPLACED ENTIRE FILE WITH NEW CONTENT */
 :root {
   --bg: #eef3f8;
   --bg-2: #f8fbfd;
@@ -29,6 +28,18 @@
   --radius-md: 20px;
   --radius-lg: 30px;
   --content-width: 1540px;
+
+  --brand-grad-a: #0b1e31;
+  --brand-grad-b: #14304a;
+  --brand-grad-c: #1d3e5d;
+
+  --panel-accent-a: rgba(20, 48, 74, 0.08);
+  --panel-accent-b: rgba(56, 110, 166, 0.08);
+
+  --tool-surface: rgba(255, 255, 255, 0.18);
+  --tool-surface-hover: rgba(255, 255, 255, 0.28);
+  --tool-border: rgba(255, 255, 255, 0.2);
+  --tool-icon: #ffffff;
 }
 
 * {
@@ -49,6 +60,9 @@ body {
 
 body {
   min-height: 100vh;
+  transition:
+    background 0.42s ease,
+    color 0.24s ease;
 }
 
 button,
@@ -68,6 +82,11 @@ select {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.38),
     0 20px 44px rgba(19, 34, 53, 0.12);
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.18s ease;
 }
 
 .glass-panel::before,
@@ -90,10 +109,14 @@ select {
   padding: 12px 18px 10px;
   background:
     radial-gradient(circle at top left, rgba(255, 255, 255, 0.1), transparent 22%),
-    linear-gradient(135deg, var(--navy-950) 0%, var(--navy-900) 42%, var(--navy-800) 100%);
+    linear-gradient(135deg, var(--brand-grad-a) 0%, var(--brand-grad-b) 42%, var(--brand-grad-c) 100%);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 14px 30px rgba(15, 35, 55, 0.18);
-  transition: padding 0.22s ease, box-shadow 0.22s ease, backdrop-filter 0.22s ease, background 0.22s ease;
+  transition:
+    padding 0.22s ease,
+    box-shadow 0.22s ease,
+    backdrop-filter 0.22s ease,
+    background 0.42s ease;
 }
 
 .topbar.topbar-condensed {
@@ -107,7 +130,7 @@ select {
   width: min(100%, var(--content-width));
   margin: 0 auto;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 390px;
+  grid-template-columns: minmax(0, 1fr) 420px;
   gap: 16px;
   align-items: stretch;
 }
@@ -115,33 +138,38 @@ select {
 .brand-panel,
 .toolbar-panel {
   border-radius: 22px;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .brand-shell {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
-  gap: 18px;
+  gap: 22px;
   min-width: 0;
-  padding: 14px 16px;
+  padding: 16px 20px;
 }
 
 .brand-logo-wrap {
   position: relative;
-  width: 180px;
-  height: 72px;
+  width: 280px;
+  height: 112px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  border-radius: 16px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04));
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.04));
+  border: 1px solid rgba(255, 255, 255, 0.13);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.16),
-    0 10px 18px rgba(0, 0, 0, 0.1);
+    0 12px 24px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  transition:
+    width 0.24s ease,
+    height 0.24s ease,
+    background 0.3s ease,
+    border-color 0.3s ease;
 }
 
 .brand-logo-wrap::after {
@@ -155,11 +183,16 @@ select {
 .brand-logo-img {
   position: relative;
   z-index: 2;
-  width: calc(100% - 20px);
-  height: calc(100% - 16px);
+  width: 78%;
+  height: 72%;
   object-fit: contain;
+  object-position: center;
   display: block;
-  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.1));
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.08));
+  transform: scale(1.06);
+  transition:
+    transform 0.22s ease,
+    opacity 0.22s ease;
 }
 
 .brand-logo-fallback {
@@ -182,7 +215,7 @@ select {
 
 .brand-kicker {
   display: inline-block;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   color: rgba(255, 255, 255, 0.72);
   font-size: 10px;
   font-weight: 800;
@@ -191,11 +224,12 @@ select {
 }
 
 .brand-copy h1 {
-  margin: 0 0 4px;
-  font-size: clamp(26px, 2.6vw, 36px);
-  line-height: 0.98;
+  margin: 0 0 6px;
+  font-size: clamp(28px, 2.8vw, 52px);
+  line-height: 0.96;
   color: #ffffff;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.055em;
+  text-wrap: balance;
 }
 
 .brand-copy p {
@@ -203,20 +237,21 @@ select {
   color: rgba(255, 255, 255, 0.84);
   font-size: 13.5px;
   line-height: 1.38;
-  max-width: 560px;
+  max-width: 640px;
 }
 
 .toolbar {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 10px;
-  padding: 12px;
+  gap: 12px;
+  padding: 14px;
+  transition: background 0.35s ease;
 }
 
 .toolbar-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .toggle-card {
@@ -231,6 +266,9 @@ select {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition:
+    background 0.24s ease,
+    border-color 0.24s ease;
 }
 
 .toggle-card-script {
@@ -272,6 +310,10 @@ select {
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.07);
   border: 1px solid rgba(255, 255, 255, 0.07);
+  transition:
+    background 0.24s ease,
+    border-color 0.24s ease,
+    box-shadow 0.24s ease;
 }
 
 .seg-btn,
@@ -285,12 +327,12 @@ select {
   appearance: none;
   border: 1px solid transparent;
   transition:
-    background 0.18s ease,
-    border-color 0.18s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
     transform 0.18s ease,
-    box-shadow 0.18s ease,
-    color 0.18s ease,
-    opacity 0.18s ease;
+    box-shadow 0.2s ease,
+    color 0.2s ease,
+    opacity 0.2s ease;
 }
 
 .seg-btn {
@@ -298,7 +340,7 @@ select {
   border-color: var(--line);
   background: linear-gradient(180deg, #ffffff 0%, #f5f8fb 100%);
   color: var(--navy-900);
-  padding: 9px 14px;
+  padding: 11px 16px;
   font-size: 13px;
   font-weight: 700;
   line-height: 1;
@@ -314,22 +356,22 @@ select {
 .topbar .seg-btn {
   background: rgba(255, 255, 255, 0.07);
   color: rgba(255, 255, 255, 0.92);
-  border-color: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.08);
   box-shadow: none;
 }
 
 .topbar .seg-btn:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.14);
 }
 
 .seg-btn.active,
 .seg-btn[aria-pressed="true"] {
-  background: linear-gradient(135deg, #ffffff 0%, #e8f3ff 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #eef5ff 100%);
   color: var(--navy-900);
-  border-color: rgba(255, 255, 255, 0.72);
+  border-color: rgba(255, 255, 255, 0.76);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.82),
-    0 8px 16px rgba(56, 110, 166, 0.16);
+    0 10px 20px rgba(56, 110, 166, 0.16);
   transform: translateY(-1px);
 }
 
@@ -345,76 +387,84 @@ select {
 .topbar-tool-row {
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+  gap: 14px;
   flex-wrap: wrap;
+  width: 100%;
+  padding: 2px 0 0;
 }
 
 .topbar-tool-btn {
   position: relative;
-  width: 42px;
-  height: 42px;
+  width: 56px;
+  height: 56px;
   border-radius: 999px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  background: linear-gradient(180deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.08) 100%);
-  border: 1px solid rgba(255,255,255,0.14);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0.1) 100%);
+  border: 1px solid var(--tool-border);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.12),
-    0 10px 18px rgba(8, 20, 34, 0.18);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 12px 26px rgba(8, 20, 34, 0.2);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   transition:
-    transform 0.18s ease,
-    box-shadow 0.18s ease,
-    border-color 0.18s ease,
-    background 0.18s ease;
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease,
+    filter 0.2s ease;
 }
 
 .topbar-tool-btn:hover {
-  transform: translateY(-1px);
-  background: linear-gradient(180deg, rgba(255,255,255,0.24) 0%, rgba(255,255,255,0.12) 100%);
-  border-color: rgba(255,255,255,0.28);
+  transform: translateY(-2px) scale(1.02);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.34) 0%, rgba(255, 255, 255, 0.14) 100%);
+  border-color: rgba(255, 255, 255, 0.34);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.16),
-    0 14px 22px rgba(8, 20, 34, 0.22);
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 18px 28px rgba(8, 20, 34, 0.24);
+  filter: saturate(1.08);
 }
 
 .topbar-tool-btn:focus-visible {
   outline: none;
-  border-color: rgba(255,255,255,0.44);
+  border-color: rgba(255, 255, 255, 0.5);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.18),
-    0 0 0 4px rgba(255,255,255,0.08),
-    0 14px 22px rgba(8, 20, 34, 0.22);
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 0 0 4px rgba(255, 255, 255, 0.08),
+    0 18px 28px rgba(8, 20, 34, 0.24);
 }
 
 .topbar-tool-btn svg {
-  width: 18px;
-  height: 18px;
-  fill: #ffffff;
-  opacity: 0.96;
+  width: 22px;
+  height: 22px;
+  fill: var(--tool-icon);
+  opacity: 0.98;
 }
 
 .topbar-tool-btn::after {
   content: attr(data-tooltip);
   position: absolute;
   left: 50%;
-  bottom: calc(100% + 10px);
-  transform: translateX(-50%) translateY(4px);
-  background: rgba(10, 26, 41, 0.96);
+  top: calc(100% + 12px);
+  transform: translateX(-50%) translateY(-4px);
+  background: rgba(12, 22, 36, 0.96);
   color: #ffffff;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
   white-space: nowrap;
-  padding: 8px 10px;
-  border-radius: 10px;
-  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.18);
+  padding: 10px 12px;
+  border-radius: 12px;
+  box-shadow: 0 14px 24px rgba(0, 0, 0, 0.18);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.16s ease, transform 0.16s ease;
+  z-index: 120;
+  transition: opacity 0.18s ease, transform 0.18s ease;
 }
 
 .topbar-tool-btn:hover::after,
@@ -433,8 +483,12 @@ select {
   margin-bottom: 10px;
   padding: 10px 14px;
   border-radius: 16px;
-  background: linear-gradient(135deg, rgba(24, 49, 74, 0.05), rgba(61, 148, 152, 0.05));
+  background: linear-gradient(135deg, var(--panel-accent-a), var(--panel-accent-b));
   border: 1px solid rgba(24, 49, 74, 0.05);
+  transition:
+    background 0.38s ease,
+    border-color 0.28s ease,
+    box-shadow 0.28s ease;
 }
 
 .practice-mode-kicker {
@@ -460,7 +514,11 @@ select {
   border-radius: 20px;
   padding: 12px 14px;
   margin-bottom: 12px;
-  overflow: hidden;
+  overflow: visible;
+  transition:
+    background 0.38s ease,
+    border-color 0.28s ease,
+    box-shadow 0.28s ease;
 }
 
 .workflow-ribbon {
@@ -494,7 +552,7 @@ select {
 .brand-mode-pill {
   display: inline-flex;
   align-items: center;
-  padding: 4px 10px;
+  padding: 5px 12px;
   border-radius: 999px;
   font-size: 10px;
   font-weight: 800;
@@ -504,6 +562,10 @@ select {
   color: #ffffff;
   border: 1px solid rgba(255,255,255,0.18);
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.25);
+  transition:
+    background 0.24s ease,
+    border-color 0.24s ease,
+    transform 0.18s ease;
 }
 
 .practice-context-panel {
@@ -522,6 +584,16 @@ select {
   background: linear-gradient(180deg,#ffffff 0%,#f6f9fc 100%);
   border: 1px solid var(--line);
   box-shadow: var(--shadow-xs);
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.24s ease,
+    border-color 0.24s ease,
+    background 0.24s ease;
+}
+
+.practice-context-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 22px rgba(19, 34, 53, 0.07);
 }
 
 .practice-context-label {
@@ -543,7 +615,7 @@ select {
 
 .section-mini-badge {
   align-self: start;
-  padding: 6px 10px;
+  padding: 7px 12px;
   border-radius: 999px;
   font-size: 10px;
   font-weight: 800;
@@ -553,6 +625,11 @@ select {
   border: 1px solid var(--line);
   color: var(--navy-800);
   box-shadow: var(--shadow-xs);
+  transition:
+    background 0.24s ease,
+    border-color 0.24s ease,
+    transform 0.18s ease,
+    box-shadow 0.24s ease;
 }
 
 .section-chip {
@@ -568,6 +645,10 @@ select {
   font-weight: 800;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  transition:
+    background 0.24s ease,
+    border-color 0.24s ease,
+    box-shadow 0.24s ease;
 }
 
 .section-chip-hero {
@@ -615,7 +696,11 @@ select {
   padding: 20px 20px 18px;
   margin-bottom: 16px;
   overflow: hidden;
-  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.24s ease,
+    border-color 0.24s ease,
+    background 0.24s ease;
 }
 
 .card::before {
@@ -778,7 +863,11 @@ select {
   color: var(--text);
   padding: 11px 12px;
   box-shadow: inset 0 1px 2px rgba(19, 34, 53, 0.03);
-  transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, transform 0.18s ease;
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    background 0.18s ease,
+    transform 0.18s ease;
 }
 
 .select-shell select {
@@ -889,6 +978,7 @@ textarea {
   gap: 16px;
   align-items: start;
   margin-bottom: 16px;
+  transition: grid-template-columns 0.26s ease, gap 0.26s ease;
 }
 
 .workspace-grid.workspace-grid-single {
@@ -898,6 +988,7 @@ textarea {
 .workspace-grid.workspace-grid-single .notes-card,
 .workspace-grid.workspace-grid-single .workspace-card {
   width: 100%;
+  max-width: 100%;
 }
 
 .workspace-grid .card {
@@ -1084,6 +1175,24 @@ textarea {
   display: none !important;
 }
 
+body[data-practice="astra"] {
+  --brand-grad-a: #0b1e31;
+  --brand-grad-b: #14304a;
+  --brand-grad-c: #1d3e5d;
+  --panel-accent-a: rgba(20, 48, 74, 0.08);
+  --panel-accent-b: rgba(56, 110, 166, 0.08);
+  --tool-border: rgba(255, 255, 255, 0.2);
+}
+
+body[data-practice="ebh"] {
+  --brand-grad-a: #10313c;
+  --brand-grad-b: #174a58;
+  --brand-grad-c: #1f6570;
+  --panel-accent-a: rgba(22, 74, 88, 0.08);
+  --panel-accent-b: rgba(61, 148, 152, 0.1);
+  --tool-border: rgba(255, 255, 255, 0.22);
+}
+
 body[data-practice="astra"] .practice-card-ebh,
 body[data-practice="ebh"] .practice-card-astra {
   display: none !important;
@@ -1131,11 +1240,21 @@ body[data-practice="ebh"] .practice-context-card {
   border-color: rgba(61,148,152,0.22);
 }
 
-@media (max-width: 1180px) {
+@media (max-width: 1280px) {
   .topbar-inner {
     grid-template-columns: 1fr;
   }
 
+  .toolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .topbar-tool-row {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 1180px) {
   .workflow-ribbon,
   .completion-dashboard-header,
   .completion-grid,
@@ -1207,16 +1326,30 @@ body[data-practice="ebh"] .practice-context-card {
   }
 
   .brand-logo-wrap {
-    width: 164px;
-    height: 66px;
+    width: 220px;
+    height: 92px;
+    border-radius: 20px;
+  }
+
+  .brand-copy h1 {
+    font-size: clamp(26px, 8vw, 40px);
   }
 
   .topbar-tool-row {
-    gap: 8px;
+    justify-content: center;
+    gap: 12px;
   }
 
   .topbar-tool-btn {
-    width: 40px;
-    height: 40px;
+    width: 52px;
+    height: 52px;
+  }
+
+  .topbar-tool-btn::after {
+    font-size: 11px;
+    padding: 9px 10px;
+    max-width: calc(100vw - 40px);
+    white-space: normal;
+    text-align: center;
   }
 }
