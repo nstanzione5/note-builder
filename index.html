@@ -18,7 +18,7 @@
     <div class="topbar-inner">
       <div class="brand-shell glass-panel brand-panel">
         <div class="brand-logo-wrap" aria-hidden="true">
-          <img id="astraLogo" class="brand-logo-img" src="astra-logo.png" alt="Astra Psychiatry logo">
+          <img id="astraLogo" class="brand-logo-img" src="astra_icon_transparent_1024.png" alt="Astra Psychiatry logo">
           <img id="ebhLogo" class="brand-logo-img hidden" src="ebh-logo.png" alt="Evolve Brain Health logo">
           <div class="brand-logo-fallback hidden" id="brandLogoFallback">A</div>
         </div>
@@ -68,6 +68,41 @@
       </div>
 
       <div class="workflow-ribbon-right">
+        <div class="workflow-ribbon-tools" aria-label="Clinical Tools">
+          <a
+            class="banner-tool-link"
+            href="https://www.mdcalc.com/calc/10091/benzodiazepine-conversion-calculator"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Clinical Tools: Benzo Calc"
+            aria-label="Clinical Tools: Benzo Calc"
+          >
+            💊
+          </a>
+
+          <a
+            class="banner-tool-link"
+            href="https://alpenglowbh.com/medication-calculator/"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Clinical Tools: Stimulant Calc"
+            aria-label="Clinical Tools: Stimulant Calc"
+          >
+            ⚡
+          </a>
+
+          <a
+            class="banner-tool-link"
+            href="https://mhmeatnpotatoes.com/antidepressant-switching-tool"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Clinical Tools: Cross Titrate"
+            aria-label="Clinical Tools: Cross Titrate"
+          >
+            🔄
+          </a>
+        </div>
+
         <div class="toggle-card toggle-card-script hidden" id="scriptToggleCard">
           <label class="checkbox-row" for="scriptToggle">
             <input type="checkbox" id="scriptToggle">
@@ -550,7 +585,7 @@
             Selecting an interval should auto-fill the follow-up date while still allowing manual edits. Selecting PRN clears scheduling because the patient is not ready to schedule yet.
           </p>
           <p class="helper-text prn-helper-text hidden" id="prnHelperText">
-            PRN selected: follow-up date and time are cleared until the patient reaches out later to schedule.
+            PRN selected: no follow-up appointment was scheduled during this encounter.
           </p>
         </div>
 
@@ -589,55 +624,6 @@
           <textarea id="exportBox" rows="12" readonly placeholder="Your export will appear here..."></textarea>
           <input type="hidden" id="activeGptUrl" value="">
         </div>
-      </section>
-
-      <section class="card clinical-tools-card" data-section="tools">
-        <div class="section-heading">
-          <div>
-            <h2>Clinical Tools</h2>
-            <p>Quick external references that support common medication and switching workflows.</p>
-          </div>
-          <div class="section-mini-badge">Quick links</div>
-        </div>
-
-        <div class="clinical-tools-links">
-          <a
-            class="tool-link"
-            href="https://www.mdcalc.com/calc/10091/benzodiazepine-conversion-calculator"
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Benzodiazepine conversion calculator"
-          >
-            Benzo Calc
-          </a>
-
-          <a
-            class="tool-link"
-            href="https://alpenglowbh.com/medication-calculator/"
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Stimulant medication calculator"
-          >
-            Stimulant Calc
-          </a>
-
-          <a
-            class="tool-link"
-            href="https://mhmeatnpotatoes.com/antidepressant-switching-tool"
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Antidepressant cross taper and switching tool"
-          >
-            Cross Titrate
-          </a>
-        </div>
-
-        <p class="helper-text top-gap">
-          Keyboard shortcuts:
-          <kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>C</kbd> copies export,
-          <kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>O</kbd> copies and opens GPT,
-          and <kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>G</kbd> opens GPT.
-        </p>
       </section>
     </section>
   </main>
