@@ -18,6 +18,7 @@ const els = {
   scriptToggle: document.getElementById('scriptToggle'),
   scriptToggleCard: document.getElementById('scriptToggleCard'),
   scriptPanel: document.getElementById('scriptPanel'),
+  workspaceGrid: document.getElementById('workspaceGrid'),
   workflowChip: document.getElementById('workflowChip'),
   workflowRibbonCopy: document.getElementById('workflowRibbonCopy'),
   brandKicker: document.getElementById('brandKicker'),
@@ -313,6 +314,10 @@ function updateScriptVisibility() {
   }
 
   els.scriptPanel.classList.toggle('hidden', !(isIntake && state.scriptVisible));
+
+  if (els.workspaceGrid) {
+    els.workspaceGrid.classList.toggle('workspace-grid-single', els.scriptPanel.classList.contains('hidden'));
+  }
 }
 
 function updatePracticeSections() {
@@ -390,7 +395,8 @@ function buildFollowupDetails() {
   if (state.followupMode === 'prn') {
     return [
       ...baseLines,
-      'Follow-Up Scheduling: PRN',
+      'Follow-Up Scheduling: PRN / no appointment scheduled during this encounter.',
+      'No follow-up appointment was scheduled during this encounter.',
       'Patient is not ready to schedule a follow-up appointment yet and will reach out later to schedule.',
     ].join('\n');
   }
@@ -777,6 +783,7 @@ function attachInputListeners() {
   inputIds.forEach((id) => {
     const element = getEl(id);
     if (!element) return;
+
     const syncFieldState = () => {
       if ((id === 'followDate' || id === 'followTime') && state.followupMode === 'prn') {
         return;
@@ -794,6 +801,7 @@ function attachInputListeners() {
       updateExport();
       saveDraft();
     };
+
     element.addEventListener('input', syncFieldState);
     element.addEventListener('change', syncFieldState);
   });
