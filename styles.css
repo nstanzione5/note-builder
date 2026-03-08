@@ -65,10 +65,10 @@ select {
 .glass-panel-soft {
   position: relative;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.46) 0%, rgba(255, 255, 255, 0.24) 100%);
-  backdrop-filter: blur(26px) saturate(145%);
-  -webkit-backdrop-filter: blur(26px) saturate(145%);
-  border: 1px solid rgba(255, 255, 255, 0.22);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.42) 0%, rgba(255, 255, 255, 0.22) 100%);
+  backdrop-filter: blur(24px) saturate(145%);
+  -webkit-backdrop-filter: blur(24px) saturate(145%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.34),
     inset 0 -1px 0 rgba(255, 255, 255, 0.05),
@@ -83,20 +83,20 @@ select {
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent 42%, rgba(255, 255, 255, 0.05)),
-    radial-gradient(circle at top left, rgba(255, 255, 255, 0.18), transparent 32%);
+    linear-gradient(135deg, rgba(255, 255, 255, 0.18), transparent 42%, rgba(255, 255, 255, 0.05)),
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.16), transparent 32%);
 }
 
 .glass-panel-soft {
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.62) 0%, rgba(255, 255, 255, 0.38) 100%);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.64) 0%, rgba(255, 255, 255, 0.38) 100%);
 }
 
 .topbar {
   position: sticky;
   top: 0;
   z-index: 50;
-  padding: 10px 18px 8px;
+  padding: 10px 18px 10px;
   background:
     radial-gradient(circle at top left, rgba(255, 255, 255, 0.08), transparent 22%),
     radial-gradient(circle at top right, rgba(36, 183, 207, 0.14), transparent 18%),
@@ -107,53 +107,61 @@ select {
 }
 
 .topbar.topbar-condensed {
-  padding: 8px 18px 6px;
+  padding: 8px 18px 8px;
   box-shadow: 0 10px 22px rgba(8, 20, 34, 0.18);
 }
 
 .topbar-inner {
   width: min(100%, var(--content-width));
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 520px;
-  gap: 12px;
+  display: flex;
   align-items: stretch;
+  gap: 10px;
 }
 
-.brand-panel,
-.toolbar-panel {
-  border-radius: 24px;
+/* UNIFIED SINGLE-LINE APP BAR */
+.brand-panel {
+  flex: 1 1 auto;
+  min-width: 0;
+  border-radius: 28px;
   overflow: visible;
+}
+
+.toolbar-panel {
+  flex: 0 0 auto;
+  border-radius: 28px;
+  overflow: visible;
+  min-width: 560px;
 }
 
 .brand-shell {
   display: grid;
-  grid-template-columns: 92px minmax(0, 1fr) auto;
+  grid-template-columns: 78px minmax(300px, 1fr) auto;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
   min-width: 0;
-  padding: 14px 18px;
-  min-height: 108px;
+  padding: 12px 14px;
+  min-height: 88px;
 }
 
 .brand-logo-wrap {
   position: relative;
-  width: 92px;
-  height: 92px;
+  width: 78px;
+  height: 78px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  border-radius: 28px;
+  border-radius: 24px;
   overflow: hidden;
   background:
-    radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.32), transparent 34%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+    radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.34), transparent 34%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.05));
   border: 1px solid rgba(255, 255, 255, 0.16);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.2),
     inset 0 -10px 22px rgba(255, 255, 255, 0.02),
-    0 12px 28px rgba(0, 0, 0, 0.14);
+    0 10px 24px rgba(0, 0, 0, 0.14);
 }
 
 .brand-logo-wrap::after {
@@ -169,8 +177,8 @@ select {
 .brand-logo-img {
   position: relative;
   z-index: 2;
-  width: 78%;
-  height: 78%;
+  width: 76%;
+  height: 76%;
   object-fit: contain;
   object-position: center;
   display: block;
@@ -180,13 +188,13 @@ select {
 }
 
 #astraLogo.brand-logo-img {
-  width: 86%;
-  height: 86%;
+  width: 84%;
+  height: 84%;
 }
 
 #ebhLogo.brand-logo-img {
-  width: 72%;
-  height: 72%;
+  width: 70%;
+  height: 70%;
 }
 
 .brand-logo-fallback {
@@ -205,9 +213,10 @@ select {
 
 .brand-copy {
   min-width: 0;
-  display: grid;
-  gap: 6px;
-  align-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
 }
 
 .brand-kicker {
@@ -218,23 +227,7 @@ select {
   font-weight: 800;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-}
-
-.brand-copy h1 {
-  margin: 0;
-  font-size: clamp(24px, 2.7vw, 42px);
-  line-height: 0.94;
-  color: #ffffff;
-  letter-spacing: -0.06em;
-  text-wrap: balance;
-}
-
-.brand-copy p {
-  margin: 0;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 13px;
-  line-height: 1.35;
-  max-width: 740px;
+  line-height: 1;
 }
 
 .brand-title-row {
@@ -242,6 +235,27 @@ select {
   align-items: center;
   gap: 10px;
   flex-wrap: wrap;
+  min-width: 0;
+}
+
+.brand-copy h1 {
+  margin: 0;
+  font-size: clamp(20px, 2vw, 34px);
+  line-height: 0.96;
+  color: #ffffff;
+  letter-spacing: -0.06em;
+  white-space: nowrap;
+}
+
+.brand-copy p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 12px;
+  line-height: 1.28;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .brand-mode-pill {
@@ -264,7 +278,6 @@ select {
 
 .brand-tools-rail {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 10px;
@@ -273,8 +286,8 @@ select {
 
 .brand-tool-btn {
   position: relative;
-  width: 48px;
-  height: 48px;
+  width: 46px;
+  height: 46px;
   border-radius: 999px;
   display: inline-flex;
   align-items: center;
@@ -311,8 +324,8 @@ select {
 }
 
 .brand-tool-btn svg {
-  width: 19px;
-  height: 19px;
+  width: 18px;
+  height: 18px;
   fill: #ffffff;
   opacity: 0.98;
 }
@@ -320,9 +333,10 @@ select {
 .brand-tool-btn::after {
   content: attr(data-tooltip);
   position: absolute;
-  right: calc(100% + 10px);
-  top: 50%;
-  transform: translateY(-50%) translateX(4px);
+  right: auto;
+  left: 50%;
+  top: calc(100% + 10px);
+  transform: translateX(-50%) translateY(-4px);
   background: rgba(10, 26, 41, 0.96);
   color: #ffffff;
   font-size: 12px;
@@ -340,26 +354,29 @@ select {
 .brand-tool-btn:hover::after,
 .brand-tool-btn:focus-visible::after {
   opacity: 1;
-  transform: translateY(-50%) translateX(0);
+  transform: translateX(-50%) translateY(0);
 }
 
 .toolbar {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  align-items: center;
   gap: 10px;
-  padding: 12px;
+  padding: 10px 12px;
+  min-height: 88px;
+  flex-wrap: nowrap;
 }
 
 .toolbar-group {
   display: flex;
-  flex-direction: column;
-  gap: 7px;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
 }
 
 .toggle-card {
   display: flex;
-  flex-direction: column;
-  gap: 6px;
+  align-items: center;
+  gap: 10px;
   min-width: 0;
   padding: 8px 10px;
   border-radius: 16px;
@@ -371,7 +388,7 @@ select {
 }
 
 .toggle-card-script {
-  min-width: 0;
+  min-width: auto;
   justify-content: center;
 }
 
@@ -381,6 +398,8 @@ select {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.76);
+  white-space: nowrap;
+  flex: 0 0 auto;
 }
 
 .checkbox-row {
@@ -390,6 +409,7 @@ select {
   color: #ffffff;
   font-weight: 700;
   min-height: 38px;
+  white-space: nowrap;
 }
 
 .checkbox-row input[type="checkbox"] {
@@ -400,7 +420,7 @@ select {
 
 .segmented-control {
   display: inline-flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 6px;
 }
 
@@ -435,12 +455,13 @@ select {
   border-color: var(--line);
   background: linear-gradient(180deg, #ffffff 0%, #f5f8fb 100%);
   color: var(--navy-900);
-  padding: 11px 18px;
+  padding: 11px 16px;
   font-size: 13px;
   font-weight: 700;
   line-height: 1;
   box-shadow: var(--shadow-xs);
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .seg-btn:hover {
@@ -1165,9 +1186,19 @@ body[data-practice="ebh"] .practice-context-card {
   border-color: rgba(61,148,152,0.22);
 }
 
-@media (max-width: 1380px) {
+@media (max-width: 1480px) {
   .topbar-inner {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+  }
+
+  .toolbar-panel {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .toolbar {
+    flex-wrap: wrap;
+    min-height: auto;
   }
 }
 
@@ -1191,15 +1222,19 @@ body[data-practice="ebh"] .practice-context-card {
   }
 
   .brand-shell {
-    grid-template-columns: 88px minmax(0, 1fr);
+    grid-template-columns: 72px minmax(0, 1fr);
     grid-template-areas:
       "logo copy"
       "tools tools";
-    align-items: center;
+    gap: 12px;
+    min-height: auto;
   }
 
   .brand-logo-wrap {
     grid-area: logo;
+    width: 72px;
+    height: 72px;
+    border-radius: 22px;
   }
 
   .brand-copy {
@@ -1208,31 +1243,27 @@ body[data-practice="ebh"] .practice-context-card {
 
   .brand-tools-rail {
     grid-area: tools;
-    flex-direction: row;
     justify-content: flex-start;
     padding-left: 2px;
+    flex-wrap: wrap;
   }
 
-  .brand-tool-btn::after {
-    right: auto;
-    left: 50%;
-    top: calc(100% + 12px);
-    transform: translateX(-50%) translateY(-4px);
+  .brand-copy h1 {
+    white-space: normal;
   }
 
-  .brand-tool-btn:hover::after,
-  .brand-tool-btn:focus-visible::after {
-    transform: translateX(-50%) translateY(0);
+  .brand-copy p {
+    white-space: normal;
   }
 }
 
 @media (max-width: 900px) {
   .topbar {
-    padding: 10px 14px 8px;
+    padding: 10px 14px 10px;
   }
 
   .topbar.topbar-condensed {
-    padding: 8px 14px 6px;
+    padding: 8px 14px 8px;
   }
 
   .toolbar,
@@ -1240,8 +1271,18 @@ body[data-practice="ebh"] .practice-context-card {
   .grid-3,
   .grid-4,
   .completion-grid,
-  .workflow-ribbon {
+  .workflow-ribbon,
+  .practice-context-grid {
     grid-template-columns: 1fr;
+  }
+
+  .toolbar {
+    align-items: stretch;
+  }
+
+  .toolbar-group,
+  .toggle-card {
+    flex-wrap: wrap;
   }
 
   .app-shell {
@@ -1273,16 +1314,17 @@ body[data-practice="ebh"] .practice-context-card {
   }
 
   .brand-shell {
-    grid-template-columns: 72px minmax(0, 1fr);
-    padding: 12px 14px;
-    gap: 12px;
-    min-height: unset;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "logo"
+      "copy"
+      "tools";
+    justify-items: start;
   }
 
   .brand-logo-wrap {
     width: 72px;
     height: 72px;
-    border-radius: 22px;
   }
 
   .brand-copy h1 {
@@ -1291,10 +1333,6 @@ body[data-practice="ebh"] .practice-context-card {
 
   .brand-copy p {
     font-size: 12px;
-  }
-
-  .brand-tools-rail {
-    gap: 8px;
   }
 
   .brand-tool-btn {
@@ -1312,22 +1350,8 @@ body[data-practice="ebh"] .practice-context-card {
 }
 
 @media (max-width: 640px) {
-  .topbar-inner {
-    gap: 10px;
-  }
-
-  .brand-shell {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "logo"
-      "copy"
-      "tools";
-    justify-items: start;
-  }
-
-  .brand-logo-wrap {
-    width: 76px;
-    height: 76px;
+  .segmented-control {
+    flex-wrap: wrap;
   }
 
   .brand-title-row {
