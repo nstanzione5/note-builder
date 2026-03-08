@@ -1,630 +1,251 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Clinical Note Builder</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="manifest" href="manifest.json">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clinical Note Generator</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
-<body
-  data-practice="astra"
-  data-visit-type="followup"
-  data-astra-gpt-url="https://chatgpt.com/g/g-69ac7d1d6f088191a063906d86aee792-astra-note-writer"
-  data-ebh-intake-gpt-url="https://chatgpt.com/g/g-69ac70d034e081918d72603828d45799-ebh-intake-note"
-  data-ebh-followup-gpt-url="https://chatgpt.com/g/g-69ac76b8246c8191b4474e7d24d53476-ebh-follow-up-note"
->
-  <header class="topbar" id="topbar">
-    <div class="topbar-inner">
-      <div class="brand-shell glass-panel brand-panel">
-        <div class="brand-logo-wrap" aria-hidden="true">
-          <img id="astraLogo" class="brand-logo-img" src="astra_icon_transparent_1024.png" alt="Astra Psychiatry logo">
-          <img id="ebhLogo" class="brand-logo-img hidden" src="ebh-logo.png" alt="Evolve Brain Health logo">
-          <div class="brand-logo-fallback hidden" id="brandLogoFallback">A</div>
-        </div>
-
-        <div class="brand-copy">
-          <span class="brand-kicker" id="brandKicker">Astra Psychiatry</span>
-          <div class="brand-title-row">
-            <h1 id="brandTitle">Clinical Note Builder</h1>
-            <span class="brand-mode-pill" id="brandModePill">Astra Workflow</span>
-          </div>
-          <p id="brandSubtitle">Structured raw-input capture for psychiatric documentation workflows.</p>
+<body>
+  <header class="top-shell">
+    <div class="top-ribbon">
+      <div class="brand-wrap">
+        <img
+          src="./astra-logo.png"
+          alt="Astra logo"
+          class="astra-logo"
+          onerror="this.style.display='none'; document.body.classList.add('logo-missing');"
+        />
+        <div class="brand-text">
+          <div class="brand-title">Clinical Note Generator</div>
+          <div class="brand-subtitle">Psychiatric documentation helper</div>
         </div>
       </div>
 
-      <div class="toolbar glass-panel toolbar-panel">
-        <div class="toolbar-group toolbar-group-practice">
-          <span class="toggle-label">Practice</span>
-          <div class="segmented-control segmented-control-strong" id="practiceToggle" role="group" aria-label="Practice">
-            <button type="button" class="seg-btn active" id="astraBtn" data-practice="astra">Astra</button>
-            <button type="button" class="seg-btn" id="ebhBtn" data-practice="ebh">EBH</button>
-          </div>
-        </div>
+      <div class="ribbon-tools" aria-label="Clinical Tools">
+        <a
+          class="tool-icon-btn"
+          href="https://www.mdcalc.com/calc/10091/benzodiazepine-conversion-calculator"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-tooltip="Benzo Calculator"
+          aria-label="Open Benzo Calculator"
+          title="Benzo Calculator"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M8 3.5h8a2.5 2.5 0 0 1 2.5 2.5v12A2.5 2.5 0 0 1 16 20.5H8A2.5 2.5 0 0 1 5.5 18V6A2.5 2.5 0 0 1 8 3.5Zm0 1.5A1 1 0 0 0 7 6v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H8Zm1.25 3h5.5a.75.75 0 0 1 0 1.5h-5.5a.75.75 0 0 1 0-1.5Zm0 3.75h5.5a.75.75 0 0 1 0 1.5h-5.5a.75.75 0 0 1 0-1.5Zm0 3.75h3a.75.75 0 0 1 0 1.5h-3a.75.75 0 0 1 0-1.5Z"/>
+          </svg>
+        </a>
 
-        <div class="toolbar-group toolbar-group-visit">
-          <span class="toggle-label">Appointment Type</span>
-          <div class="segmented-control segmented-control-strong" id="visitTypeToggle" role="group" aria-label="Appointment Type">
-            <button type="button" class="seg-btn active" id="followBtn" data-visit-type="followup">Follow-Up</button>
-            <button type="button" class="seg-btn" id="intakeBtn" data-visit-type="intake">Intake</button>
-          </div>
-        </div>
+        <a
+          class="tool-icon-btn"
+          href="https://alpenglowbh.com/medication-calculator/"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-tooltip="Stimulant Calculator"
+          aria-label="Open Stimulant Calculator"
+          title="Stimulant Calculator"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M9.2 4.25a4.95 4.95 0 0 1 7 7l-1.4 1.4-7-7 1.4-1.4Zm-2.45 2.45 7 7-3.6 3.6a4.95 4.95 0 0 1-7-7l3.6-3.6Zm9.36.19a.75.75 0 0 1 1.06 0l.94.94a.75.75 0 1 1-1.06 1.06l-.94-.94a.75.75 0 0 1 0-1.06ZM5.8 16.1a.75.75 0 0 1 1.06 0l1.04 1.04a.75.75 0 1 1-1.06 1.06L5.8 17.16a.75.75 0 0 1 0-1.06Z"/>
+          </svg>
+        </a>
+
+        <a
+          class="tool-icon-btn"
+          href="https://mhmeatnpotatoes.com/antidepressant-switching-tool"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-tooltip="Antidepressant Cross-Titration"
+          aria-label="Open Antidepressant Cross-Titration Tool"
+          title="Antidepressant Cross-Titration"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M7.25 4.5h9.5A2.25 2.25 0 0 1 19 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-9.5A2.25 2.25 0 0 1 5 17.25V6.75A2.25 2.25 0 0 1 7.25 4.5Zm0 1.5a.75.75 0 0 0-.75.75v10.5c0 .414.336.75.75.75h9.5a.75.75 0 0 0 .75-.75V6.75a.75.75 0 0 0-.75-.75h-9.5Zm1.5 3.25h6.5a.75.75 0 0 1 0 1.5h-6.5a.75.75 0 0 1 0-1.5Zm0 3.5h6.5a.75.75 0 0 1 0 1.5h-6.5a.75.75 0 0 1 0-1.5Z"/>
+          </svg>
+        </a>
       </div>
+    </div>
+
+    <div class="header-actions">
+      <button id="copyBtn" class="action-btn action-btn-secondary" type="button">
+        Copy Export
+      </button>
+      <button id="openGptBtn" class="action-btn action-btn-primary" type="button">
+        Copy + Open GPT
+      </button>
+      <button id="openOnlyBtn" class="action-btn action-btn-ghost" type="button">
+        Open GPT
+      </button>
     </div>
   </header>
 
   <main class="app-shell">
-    <section class="practice-mode-banner hidden" id="practiceModeBanner" aria-live="polite">
-      <div class="practice-mode-copy">
-        <span class="practice-mode-kicker" id="practiceModeKicker">Astra Mode</span>
-        <p class="practice-mode-text" id="practiceModeText">Astra workflow active: individual screeners for intake and a unified Astra GPT route.</p>
-      </div>
-    </section>
-
-    <section class="workflow-ribbon glass-panel">
-      <div class="workflow-ribbon-left">
-        <div class="section-chip section-chip-hero" id="workflowChip">Astra Follow-Up</div>
-        <p class="workflow-ribbon-copy" id="workflowRibbonCopy">A focused, copy-first documentation workspace designed around your actual visit flow.</p>
-      </div>
-
-      <div class="workflow-ribbon-right">
-        <div class="workflow-ribbon-tools" aria-label="Clinical Tools">
-          <a
-            class="banner-tool-link"
-            href="https://www.mdcalc.com/calc/10091/benzodiazepine-conversion-calculator"
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Clinical Tools: Benzo Calc"
-            aria-label="Clinical Tools: Benzo Calc"
-          >
-            💊
-          </a>
-
-          <a
-            class="banner-tool-link"
-            href="https://alpenglowbh.com/medication-calculator/"
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Clinical Tools: Stimulant Calc"
-            aria-label="Clinical Tools: Stimulant Calc"
-          >
-            ⚡
-          </a>
-
-          <a
-            class="banner-tool-link"
-            href="https://mhmeatnpotatoes.com/antidepressant-switching-tool"
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Clinical Tools: Cross Titrate"
-            aria-label="Clinical Tools: Cross Titrate"
-          >
-            🔄
-          </a>
+    <section class="dashboard-card sticky-dashboard">
+      <div class="dashboard-grid">
+        <div class="dashboard-item">
+          <div class="dashboard-label">Setup</div>
+          <div class="dashboard-value" id="setupCompletion">0%</div>
         </div>
-
-        <div class="toggle-card toggle-card-script hidden" id="scriptToggleCard">
-          <label class="checkbox-row" for="scriptToggle">
-            <input type="checkbox" id="scriptToggle">
-            <span>Show Intake Script Workspace</span>
-          </label>
+        <div class="dashboard-item">
+          <div class="dashboard-label">Notes</div>
+          <div class="dashboard-value" id="notesCompletion">0%</div>
+        </div>
+        <div class="dashboard-item">
+          <div class="dashboard-label">Closing</div>
+          <div class="dashboard-value" id="closingCompletion">0%</div>
         </div>
       </div>
     </section>
 
-    <section class="practice-context-panel hidden" id="practiceContextPanel" aria-live="polite">
-      <div class="practice-context-grid">
-        <div class="practice-context-card" id="practiceContextCardPrimary">
-          <span class="practice-context-label" id="practiceContextLabelPrimary">Astra note flow</span>
-          <p class="practice-context-text" id="practiceContextTextPrimary">Astra uses one GPT for both intake and follow-up workflows.</p>
-        </div>
-        <div class="practice-context-card" id="practiceContextCardSecondary">
-          <span class="practice-context-label" id="practiceContextLabelSecondary">Documentation emphasis</span>
-          <p class="practice-context-text" id="practiceContextTextSecondary">Use structured intake screeners for Astra intakes and prior-plan follow-up context for Astra follow-ups.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="completion-dashboard glass-panel" id="completionDashboard">
-      <div class="completion-dashboard-header">
-        <div>
-          <span class="completion-kicker">Workflow Completion</span>
-          <h2 class="completion-title">Encounter Progress</h2>
-        </div>
-        <div class="completion-total" id="completionTotal">0 / 3 complete</div>
+    <section class="card">
+      <div class="section-header">
+        <h2>Visit Setup</h2>
       </div>
 
-      <div class="completion-grid">
-        <div class="completion-card" id="setupCompletionCard" data-completion-card="setup">
-          <div class="completion-card-top">
-            <span class="completion-card-label">Visit Setup</span>
-            <span class="completion-status completion-status-pending" id="setupCompletionStatus">Incomplete</span>
+      <div class="form-grid form-grid-2">
+        <div class="field">
+          <label>Practice</label>
+          <div class="segmented" id="practiceToggle">
+            <button type="button" class="segmented-btn active" data-group="practice" data-value="Astra">Astra</button>
+            <button type="button" class="segmented-btn" data-group="practice" data-value="EBH">EBH</button>
           </div>
-          <p class="completion-card-copy">Age, gender, start timing, modality, and chief complaint.</p>
-        </div>
-
-        <div class="completion-card" id="notesCompletionCard" data-completion-card="notes">
-          <div class="completion-card-top">
-            <span class="completion-card-label">Clinical Content</span>
-            <span class="completion-status completion-status-pending" id="notesCompletionStatus">Incomplete</span>
-          </div>
-          <p class="completion-card-copy">Previous plan or intake data plus your freeform appointment notes.</p>
-        </div>
-
-        <div class="completion-card" id="closingCompletionCard" data-completion-card="closing">
-          <div class="completion-card-top">
-            <span class="completion-card-label">Closing &amp; Follow-Up</span>
-            <span class="completion-status completion-status-pending" id="closingCompletionStatus">Incomplete</span>
-          </div>
-          <p class="completion-card-copy">End times, follow-up modality, and the next appointment details.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="main-column">
-      <section class="card card-hero card-setup" data-section="setup">
-        <div class="section-heading section-heading-hero">
-          <div>
-            <h2>Visit Setup</h2>
-            <p id="setupSectionCopy">Capture the opening details in the same order you actually work so the export stays stable, complete, and fast.</p>
-          </div>
-          <div class="section-mini-badge" id="setupMiniBadge">Core intake details</div>
-        </div>
-
-        <div class="grid grid-4 grid-setup-primary">
-          <div class="field field-age">
-            <label for="age">Age <span class="required">*</span></label>
-            <input id="age" type="number" min="0" placeholder="e.g. 34">
-          </div>
-
-          <div class="field field-gender">
-            <label for="gender">Gender <span class="required">*</span></label>
-            <div class="select-shell">
-              <select id="gender">
-                <option value="">Select gender</option>
-                <option value="Female">Female</option>
-                <option value="Male">Male</option>
-                <option value="Non-binary">Non-binary</option>
-                <option value="Transgender female">Transgender female</option>
-                <option value="Transgender male">Transgender male</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="field field-scheduled-start">
-            <label for="scheduledStart">Scheduled Start <span class="required">*</span></label>
-            <input type="time" id="scheduledStart">
-          </div>
-
-          <div class="field field-encounter-modality">
-            <label>Current Encounter Modality <span class="required">*</span></label>
-            <div class="segmented-control segmented-control-form" id="currentModalityToggle" role="group" aria-label="Current Encounter Modality">
-              <button type="button" class="seg-btn" data-current-modality="Telehealth">Telehealth</button>
-              <button type="button" class="seg-btn" data-current-modality="In-person">In-Person</button>
-            </div>
-            <input type="hidden" id="currentModality" value="">
-          </div>
-        </div>
-
-        <div class="grid grid-2 top-gap grid-setup-secondary">
-          <div class="field">
-            <label for="startTime">Face-to-Face Start <span class="required">*</span></label>
-            <div class="inline-input-row">
-              <input type="time" id="startTime">
-              <button type="button" class="mini-btn nowBtn" data-target="startTime">Now</button>
-            </div>
-          </div>
-
-          <div class="field">
-            <label for="cc">Chief Complaint <span class="required">*</span></label>
-            <input id="cc" type="text" placeholder='Enter chief complaint exactly as stated by patient'>
-            <p class="helper-text">The export will place the chief complaint in quotation marks automatically.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="card" id="previousPlanCard" data-section="context">
-        <div class="section-heading">
-          <div>
-            <h2>Previous Plan / Prior Context</h2>
-            <p id="previousPlanSectionCopy">Shown only for follow-ups so the prior roadmap stays exactly where the GPT expects it.</p>
-          </div>
-          <div class="section-mini-badge" id="previousPlanMiniBadge">Follow-up context</div>
+          <input type="hidden" id="practice" value="Astra" />
         </div>
 
         <div class="field">
-          <label for="previousPlan">Previous Plan <span class="required">*</span></label>
-          <textarea id="previousPlan" rows="6" placeholder="Paste the previous plan here..."></textarea>
-        </div>
-      </section>
-
-      <section class="card practice-card practice-card-astra hidden" id="astraScreeners" data-section="screeners-astra">
-        <div class="section-heading">
-          <div>
-            <h2>Astra Screeners</h2>
-            <p>Shown for Astra intake only. Astra follow-ups should not display the screener card.</p>
+          <label>Appointment Type</label>
+          <div class="segmented" id="appointmentTypeToggle">
+            <button type="button" class="segmented-btn active" data-group="appointmentType" data-value="Follow-up">Follow-up</button>
+            <button type="button" class="segmented-btn" data-group="appointmentType" data-value="Intake">Intake</button>
           </div>
-          <div class="section-mini-badge">Astra only</div>
-        </div>
-
-        <div class="grid grid-2" id="astraScreenersFields">
-          <div class="field">
-            <label for="phq9">PHQ-9</label>
-            <input id="phq9" type="text" placeholder="Score / result">
-          </div>
-
-          <div class="field">
-            <label for="gad7">GAD-7</label>
-            <input id="gad7" type="text" placeholder="Score / result">
-          </div>
-
-          <div class="field">
-            <label for="asrsA">ASRS Part A</label>
-            <input id="asrsA" type="text" placeholder="Score / result">
-          </div>
-
-          <div class="field">
-            <label for="asrsB">ASRS Part B</label>
-            <input id="asrsB" type="text" placeholder="Score / result">
-          </div>
-
-          <div class="field">
-            <label for="pcl5">PCL-5</label>
-            <input id="pcl5" type="text" placeholder="Score / result">
-          </div>
-
-          <div class="field">
-            <label for="mdq">MDQ</label>
-            <input id="mdq" type="text" placeholder="Score / result">
-          </div>
-
-          <div class="field field-full">
-            <label for="otherScreener">Other</label>
-            <input id="otherScreener" type="text" placeholder="Name + result">
-          </div>
-        </div>
-      </section>
-
-      <section class="card practice-card practice-card-ebh hidden" id="ebhTests" data-section="screeners-ebh">
-        <div class="section-heading">
-          <div>
-            <h2>EBH Test / Screener Import</h2>
-            <p>For EBH intake, paste the generated EHR screener block exactly as it appears.</p>
-          </div>
-          <div class="section-mini-badge">EBH only</div>
+          <input type="hidden" id="appointmentType" value="Follow-up" />
         </div>
 
         <div class="field">
-          <label for="testDump">Tests / Screeners Dump</label>
-          <textarea id="testDump" rows="8" placeholder="Paste EBH tests or screener results here..."></textarea>
+          <label for="visitDate">Visit Date</label>
+          <input id="visitDate" type="date" />
         </div>
-      </section>
 
-      <section class="workspace-grid" id="workspaceGrid">
-        <section class="card notes-card workspace-card" data-section="notes">
-          <div class="section-heading">
-            <div>
-              <h2>Appointment Notes</h2>
-              <p id="notesSectionCopy">Write stream-of-consciousness notes in any order. New lines or blank lines are enough for the GPT to separate ideas.</p>
-            </div>
-            <div class="section-mini-badge" id="notesMiniBadge">Live note capture</div>
+        <div class="field">
+          <label for="visitTime">Visit Time</label>
+          <input id="visitTime" type="time" />
+        </div>
+
+        <div class="field">
+          <label for="patientName">Patient Name / Identifier</label>
+          <input id="patientName" type="text" placeholder="Optional" />
+        </div>
+
+        <div class="field">
+          <label for="clinicianName">Clinician</label>
+          <input id="clinicianName" type="text" placeholder="Optional" />
+        </div>
+      </div>
+    </section>
+
+    <section class="workspace-shell" id="workspaceShell">
+      <div class="workspace-main" id="workspaceMain">
+        <section class="card notes-card" id="notesCard">
+          <div class="section-header">
+            <h2>Appointment Notes</h2>
           </div>
 
-          <div class="field">
-            <label for="notes">Freeform Notes <span class="required">*</span></label>
-            <textarea id="notes" rows="18" placeholder="Type live appointment notes here. Shift to a new line when the topic changes."></textarea>
-            <p class="helper-text">No special symbols are needed between thoughts. Plain line breaks work well.</p>
+          <div class="form-grid">
+            <div class="field" id="priorPlanField">
+              <label for="priorPlan">Prior Plan</label>
+              <textarea id="priorPlan" rows="5" placeholder="Prior treatment plan / last visit plan"></textarea>
+            </div>
+
+            <div class="field">
+              <label for="freeformNotes">Freeform Notes</label>
+              <textarea id="freeformNotes" rows="14" placeholder="Raw visit notes, updates, symptoms, MSE details, med changes, rationale, risks, counseling, etc."></textarea>
+            </div>
           </div>
         </section>
+      </div>
 
-        <aside class="card script-workspace hidden" id="scriptPanel" data-section="script-workspace">
-          <div class="section-heading section-heading-script">
-            <div>
-              <h2>Intake Script Workspace</h2>
-              <p id="scriptSectionCopy">Visible only during intake workflows. Keep this open beside the notes box so you can reference the exact questions while typing freely.</p>
-            </div>
-            <div class="section-mini-badge" id="scriptMiniBadge">Interview prompts</div>
+      <aside class="workspace-side is-hidden" id="scriptWorkspace">
+        <section class="card">
+          <div class="section-header">
+            <h2>Intake Script Workspace</h2>
+            <button type="button" id="collapseScriptBtn" class="mini-btn">Collapse</button>
           </div>
 
-          <div class="script-progress-row">
-            <span class="script-progress-label">Script sections</span>
-            <span class="script-progress-count" id="scriptProgressCount">0 / 8 complete</span>
+          <div class="script-block">
+            <div class="script-block-title">HPI / Context</div>
+            <label class="checkline"><input type="checkbox" class="script-check" /> Chief concern clarified</label>
+            <label class="checkline"><input type="checkbox" class="script-check" /> Symptom timeline reviewed</label>
+            <label class="checkline"><input type="checkbox" class="script-check" /> Functional impact assessed</label>
+            <label class="checkline"><input type="checkbox" class="script-check" /> Prior treatment history reviewed</label>
           </div>
 
-          <div class="script-source-banner glass-panel-soft">
-            <strong>Astra intake script loaded.</strong>
-            <span>Verbatim prompts below mirror the current uploaded intake script.</span>
+          <div class="script-block">
+            <div class="script-block-title">Psychiatric Review</div>
+            <label class="checkline"><input type="checkbox" class="script-check" /> Mood symptoms reviewed</label>
+            <label class="checkline"><input type="checkbox" class="script-check" /> Anxiety symptoms reviewed</label>
+            <label class="checkline"><input type="checkbox" class="script-check" /> Attention / executive symptoms reviewed</label>
+            <label class="checkline"><input type="checkbox" class="script-check" /> Sleep / appetite / energy reviewed</label>
+            <label class="checkline"><input type="checkbox" class="script-check" /> Psychosis / mania screen reviewed</label>
           </div>
 
-<details class="script-group" open>
-  <summary>
-    <span class="script-group-check"><input type="checkbox" class="script-check" data-script-check></span>
-    <span class="script-group-title">Opening &amp; Telehealth Check-In</span>
-  </summary>
-  <div class="script-group-body">
-    <p>"Hi, it’s good to meet you. Before we begin, could you confirm your full name and which state you’re in today?"</p>
-    <p>"Are you in a private place and comfortable doing this visit via telehealth? Everything we discuss is confidential unless there’s an immediate safety concern. Please let me know if anything feels too sensitive—we can pause or come back to it."</p>
-  </div>
-</details>
-
-<details class="script-group">
-  <summary>
-    <span class="script-group-check"><input type="checkbox" class="script-check" data-script-check></span>
-    <span class="script-group-title">Why You’re Here</span>
-  </summary>
-  <div class="script-group-body">
-    <p>"What led you to schedule this appointment? What’s been most on your mind?"</p>
-    <p>"Is there anything else you’d like to make sure we cover today?"</p>
-    <p>"What are you hoping to get out of our work together?"</p>
-  </div>
-</details>
-
-<details class="script-group">
-  <summary>
-    <span class="script-group-check"><input type="checkbox" class="script-check" data-script-check></span>
-    <span class="script-group-title">Current Symptoms &amp; Impact</span>
-  </summary>
-  <div class="script-group-body">
-    <p>"When did you first notice these issues? How have they changed over time?"</p>
-    <p>"Can you tell me about your mood lately? And how does anxiety show up for you—do you feel it in your body (like tension, racing heart, nausea) or more as persistent worry and rumination?"</p>
-    <p>"How often do these feelings or symptoms show up, and how intense do they get?"</p>
-    <p>"What’s the impact on your day-to-day life—work or school, relationships, hobbies?"</p>
-    <p>"Do certain situations, thoughts, or activities seem to trigger or ease these symptoms?"</p>
-    <p>"Have you ever experienced periods where you felt unusually energetic or irritable, slept very little but still felt wired, found yourself talking more or taking risks you normally wouldn’t?"</p>
-    <p>"Have you ever noticed or sensed things others didn’t see or hear, or felt unusually suspicious or paranoid?"</p>
-  </div>
-</details>
-
-<details class="script-group">
-  <summary>
-    <span class="script-group-check"><input type="checkbox" class="script-check" data-script-check></span>
-    <span class="script-group-title">Patterns, Thoughts &amp; Coping</span>
-  </summary>
-  <div class="script-group-body">
-    <p>"When you’re feeling anxious or down, what thoughts tend to go through your mind? Do you notice any repetitive patterns or ‘loops’?"</p>
-    <p>"How do you usually respond in those moments? Are there things you do that help, or habits that seem to make things worse?"</p>
-    <p>"What strategies have you tried so far—breathing exercises, journaling, physical activity, talking to someone—and how have they worked for you?"</p>
-  </div>
-</details>
-
-<details class="script-group">
-  <summary>
-    <span class="script-group-check"><input type="checkbox" class="script-check" data-script-check></span>
-    <span class="script-group-title">Sleep, Appetite &amp; Physical Symptoms</span>
-  </summary>
-  <div class="script-group-body">
-    <p>"Walk me through your sleep routine—when do you go to bed and wake up? How many hours of sleep are you getting, and do you wake up during the night?"</p>
-    <p>"Any nightmares or particularly vivid dreams?"</p>
-    <p>"What about your appetite—any significant changes in how much or how often you eat?"</p>
-    <p>"Have you had physical symptoms that seem connected to your mood—like headaches, stomach issues, muscle tension, or anything else?"</p>
-  </div>
-</details>
-
-<details class="script-group">
-  <summary>
-    <span class="script-group-check"><input type="checkbox" class="script-check" data-script-check></span>
-    <span class="script-group-title">Immediate Safety &amp; Risk</span>
-  </summary>
-  <div class="script-group-body">
-    <p>"Have you ever intentionally hurt yourself or another person?"</p>
-    <p>"Right now, are you thinking about harming yourself or anyone else? Do you have a specific plan or access to means?"</p>
-    <p>"Are there situations, thoughts, or feelings that tend to trigger these thoughts?"</p>
-    <p>"Do substances or other factors make those thoughts stronger?"</p>
-    <p>"What keeps you going when things feel really hard? Who or what are your reasons for staying safe?"</p>
-    <p>"If things got worse, who could you turn to—friends, family, or professionals?"</p>
-  </div>
-</details>
-
-<details class="script-group">
-  <summary>
-    <span class="script-group-check"><input type="checkbox" class="script-check" data-script-check></span>
-    <span class="script-group-title">Past Mental Health &amp; Treatments</span>
-  </summary>
-  <div class="script-group-body">
-    <p>"Have you ever been diagnosed with a mental health condition?"</p>
-    <p>"Have you been hospitalized or participated in programs like residential treatment, partial hospitalization, or intensive outpatient?"</p>
-    <p>"What kinds of therapy have you tried (CBT, DBT, EMDR, or others)? What was helpful or not?"</p>
-    <p>"Let’s go over any psychiatric medications you’ve taken in the past: names, doses, how long you took them, whether they helped, and why they were stopped. This helps if we ever need to request a prior authorization."</p>
-    <p>"Have you ever stopped a medication on your own? What was going on at the time?"</p>
-    <p>"Any past suicide attempts or self-harm behaviors?"</p>
-  </div>
-</details>
-
-<details class="script-group">
-  <summary>
-    <span class="script-group-check"><input type="checkbox" class="script-check" data-script-check></span>
-    <span class="script-group-title">Current Medications &amp; Medical History</span>
-  </summary>
-  <div class="script-group-body">
-    <p>"Do you have any allergies to medications, foods, or other substances?"</p>
-    <p>"Please list the medications you’re currently taking—both for mental health and physical health—including doses and how often you take them."</p>
-    <p>"Are you taking any vitamins, herbal supplements, or over-the-counter products? What are the doses?"</p>
-    <p>"Do you take your medications consistently?"</p>
-    <p>"Do you have any chronic health conditions—like diabetes, thyroid issues, high blood pressure, heart disease, chronic pain, or autoimmune disorders?"</p>
-    <p>"Any history of seizures, concussions, head injuries, or neurological issues?"</p>
-    <p>"Any breathing problems like asthma, COPD, or sleep apnea?"</p>
-    <p>"Have you had any surgeries? If yes, what kind and when?"</p>
-    <p>"Could you share your height and weight?"</p>
-    <p>"Is there any chance you’re pregnant or trying to become pregnant?"</p>
-  </div>
-</details>
-
-<details class="script-group">
-  <summary>
-    <span class="script-group-check"><input type="checkbox" class="script-check" data-script-check></span>
-    <span class="script-group-title">Substance Use</span>
-  </summary>
-  <div class="script-group-body">
-    <p>"I ask everyone about substance use because it can impact treatment. Do you drink alcohol? If so, how much and how often?"</p>
-    <p>"Do you use cannabis or THC products? How often?"</p>
-    <p>"Do you use nicotine or caffeine? How much?"</p>
-    <p>"Do you use any other substances, including prescription meds not prescribed to you, stimulants, opioids, or other drugs?"</p>
-    <p>"When was the last time you used any of these?"</p>
-    <p>"Do you have any concerns about your substance use?"</p>
-  </div>
-</details>
-
-<details class="script-group">
-  <summary>
-    <span class="script-group-check"><input type="checkbox" class="script-check" data-script-check></span>
-    <span class="script-group-title">Family Mental Health History</span>
-  </summary>
-  <div class="script-group-body">
-    <p>"Do any family members have mental health conditions—depression, anxiety, bipolar disorder, psychosis, or substance use disorders?"</p>
-    <p>"Is there any history of suicide or suicide attempts in your family?"</p>
-  </div>
-</details>
-
-<details class="script-group">
-  <summary>
-    <span class="script-group-check"><input type="checkbox" class="script-check" data-script-check></span>
-    <span class="script-group-title">Social &amp; Life Context</span>
-  </summary>
-  <div class="script-group-body">
-    <p>"Where did you grow up, and have you lived elsewhere?"</p>
-    <p>"What’s your current living situation?"</p>
-    <p>"Are you working, in school, looking for work, retired, or on disability? How do you feel about your current role?"</p>
-    <p>"Who are the people you can count on for support?"</p>
-    <p>"Have you been facing any major stressors recently—financial issues, housing problems, relationship difficulties, caregiving responsibilities, or health concerns?"</p>
-    <p>"Have you ever had legal issues?"</p>
-    <p>"Have you experienced traumatic events earlier in life or more recently that still affect you?"</p>
-    <p>"Do you have access to firearms?"</p>
-  </div>
-</details>
-
-<details class="script-group">
-  <summary>
-    <span class="script-group-check"><input type="checkbox" class="script-check" data-script-check></span>
-    <span class="script-group-title">Daily Functioning &amp; Coping</span>
-  </summary>
-  <div class="script-group-body">
-    <p>"How are you managing daily tasks like cooking, cleaning, paying bills, and running errands?"</p>
-    <p>"Any challenges with personal care—bathing, dressing, or grooming?"</p>
-    <p>"What do you enjoy doing in your free time? How often do you get to do those things?"</p>
-    <p>"What coping strategies work best for you when you’re feeling anxious, depressed, or stressed?"</p>
-  </div>
-</details>
-
-<details class="script-group">
-  <summary>
-    <span class="script-group-check"><input type="checkbox" class="script-check" data-script-check></span>
-    <span class="script-group-title">Goals, Motivation &amp; Strengths</span>
-  </summary>
-  <div class="script-group-body">
-    <p>"Looking ahead, what changes would you like to see in your life?"</p>
-    <p>"On a scale from 1 to 10, how important is it for you to make those changes? What makes it that number and not lower? What might help you move closer to 10?"</p>
-    <p>"What personal strengths, values, or resources could help you succeed?"</p>
-    <p>"What challenges or barriers do you anticipate, and how might we address them together?"</p>
-  </div>
-</details>
-
-<details class="script-group">
-  <summary>
-    <span class="script-group-check"><input type="checkbox" class="script-check" data-script-check></span>
-    <span class="script-group-title">Wrap-Up</span>
-  </summary>
-  <div class="script-group-body">
-    <p>"We’ve covered a lot. Is there anything I haven’t asked that feels important to mention?"</p>
-    <p>"Do you have any questions about what we discussed or what happens next?"</p>
-    <p>"Would you like to talk about creating or updating a safety plan together?"</p>
-  </div>
-</details>
-        </aside>
-      </section>
-
-      <section class="card" data-section="closing">
-        <div class="section-heading">
-          <div>
-            <h2>Closing / Follow-Up</h2>
-            <p id="closingSectionCopy">Finish the visit, choose the next interval if needed, and keep follow-up scheduling in the export.</p>
+          <div class="script-block">
+            <div class="script-block-title">Risk / Background</div>
+            <label class="checkline"><input type="checkbox" class="script-check" /> SI / HI / self-harm assessed</label>
+            <label class="checkline"><input type="checkbox" class="script-check" /> Substance use reviewed</label>
+            <label class="checkline"><input type="checkbox" class="script-check" /> Trauma / psychosocial background reviewed</label>
+            <label class="checkline"><input type="checkbox" class="script-check" /> Medical history / meds reviewed</label>
           </div>
-          <div class="section-mini-badge" id="closingMiniBadge">Scheduling + close</div>
+        </section>
+      </aside>
+    </section>
+
+    <section class="card">
+      <div class="section-header">
+        <h2>Follow-up Scheduling</h2>
+      </div>
+
+      <div class="followup-toolbar">
+        <div class="quick-buttons">
+          <button type="button" class="quick-followup-btn" data-weeks="1">1 wk</button>
+          <button type="button" class="quick-followup-btn" data-weeks="2">2 wk</button>
+          <button type="button" class="quick-followup-btn" data-weeks="3">3 wk</button>
+          <button type="button" class="quick-followup-btn" data-weeks="4">4 wk</button>
+          <button type="button" class="quick-followup-btn" data-weeks="6">6 wk</button>
+          <button type="button" class="quick-followup-btn" data-weeks="8">8 wk</button>
+          <button type="button" class="quick-followup-btn" data-weeks="12">12 wk</button>
+          <button type="button" id="prnBtn" class="quick-followup-btn prn-btn">PRN</button>
         </div>
 
-        <div class="grid grid-2">
+        <div class="form-grid form-grid-2 followup-fields" id="followupFields">
           <div class="field">
-            <label for="endTime">Face-to-Face End <span class="required">*</span></label>
-            <div class="inline-input-row">
-              <input type="time" id="endTime">
-              <button type="button" class="mini-btn nowBtn" data-target="endTime">Now</button>
-            </div>
+            <label for="followupDate">Follow-up Date</label>
+            <input id="followupDate" type="date" />
           </div>
 
           <div class="field">
-            <label for="docEnd">Documentation End <span class="required">*</span></label>
-            <div class="inline-input-row">
-              <input type="time" id="docEnd">
-              <button type="button" class="mini-btn nowBtn" data-target="docEnd">Now</button>
-            </div>
+            <label for="followupTime">Follow-up Time</label>
+            <input id="followupTime" type="time" />
           </div>
         </div>
+      </div>
+    </section>
 
-        <div class="field top-gap">
-          <label>Follow-Up Modality <span class="required">*</span></label>
-          <div class="segmented-control segmented-control-form" id="followModalityToggle" role="group" aria-label="Follow-Up Modality">
-            <button type="button" class="seg-btn" data-follow-modality="Telehealth">Telehealth</button>
-            <button type="button" class="seg-btn" data-follow-modality="In-person">In-Person</button>
-          </div>
-          <input type="hidden" id="followModality" value="">
-        </div>
+    <section class="card">
+      <div class="section-header">
+        <h2>Export Preview</h2>
+      </div>
 
-        <div class="field top-gap">
-          <label>Quick Follow-Up Interval</label>
-          <div class="quick-followup-row" id="quickFollowupRow">
-            <button type="button" class="interval-btn" data-weeks="1">1 wk</button>
-            <button type="button" class="interval-btn" data-weeks="2">2 wk</button>
-            <button type="button" class="interval-btn" data-weeks="3">3 wk</button>
-            <button type="button" class="interval-btn" data-weeks="4">4 wk</button>
-            <button type="button" class="interval-btn" data-weeks="6">6 wk</button>
-            <button type="button" class="interval-btn" data-weeks="8">8 wk</button>
-            <button type="button" class="interval-btn" data-weeks="12">12 wk</button>
-            <button type="button" class="interval-btn" data-followup-mode="prn">PRN</button>
-          </div>
-          <p class="helper-text">
-            Selecting an interval should auto-fill the follow-up date while still allowing manual edits. Selecting PRN clears scheduling because the patient is not ready to schedule yet.
-          </p>
-          <p class="helper-text prn-helper-text hidden" id="prnHelperText">
-            PRN selected: no follow-up appointment was scheduled during this encounter.
-          </p>
-        </div>
+      <div class="field">
+        <label for="gptUrl">GPT URL</label>
+        <input
+          id="gptUrl"
+          type="url"
+          placeholder="Paste your GPT link here"
+        />
+      </div>
 
-        <div class="grid grid-2 top-gap">
-          <div class="field">
-            <label for="followDate">Follow-Up Date <span class="required">*</span></label>
-            <input type="date" id="followDate">
-          </div>
-
-          <div class="field">
-            <label for="followTime">Follow-Up Time <span class="required">*</span></label>
-            <input type="time" id="followTime">
-          </div>
-        </div>
-      </section>
-
-      <section class="card export-card" data-section="export">
-        <div class="section-heading">
-          <div>
-            <h2>Export</h2>
-            <p id="exportSectionCopy">Preview the structured raw input live, then copy it into the appropriate GPT.</p>
-          </div>
-          <div class="section-mini-badge" id="exportMiniBadge">Final handoff</div>
-        </div>
-
-        <div class="action-row">
-          <button id="copyBtn" type="button">Copy Export</button>
-          <button id="copyOpenBtn" type="button">Copy &amp; Open GPT</button>
-          <button id="openGptBtn" type="button">Open GPT</button>
-          <button id="clearBtn" type="button">Clear</button>
-        </div>
-        <p class="helper-text export-helper" id="exportHelper">The correct GPT can be opened automatically based on the selected practice and appointment type.</p>
-
-        <div class="field top-gap">
-          <label for="exportBox">Export Preview</label>
-          <textarea id="exportBox" rows="12" readonly placeholder="Your export will appear here..."></textarea>
-          <input type="hidden" id="activeGptUrl" value="">
-        </div>
-      </section>
+      <div class="export-panel" id="exportPreview" aria-live="polite"></div>
     </section>
   </main>
 
