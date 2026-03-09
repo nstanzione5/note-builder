@@ -1,10 +1,17 @@
 {
   "name": "Astra Clinical Note Builder",
   "short_name": "Astra Notes",
-  "start_url": "/",
+  "id": "/",
+  "scope": "./",
+  "start_url": "./",
   "display": "standalone",
-  "background_color": "#121820",
-  "theme_color": "#121820",
+  "display_override": [
+    "standalone",
+    "minimal-ui",
+    "browser"
+  ],
+  "background_color": "#e7f1ff",
+  "theme_color": "#4f9ff3",
   "icons": [
     {
       "src": "icons/icon-192.png",
