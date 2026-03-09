@@ -12,6 +12,7 @@ const state = {
   medDrawerOpen: false,
   medDrawerPinned: false,
   medClassFilter: 'all',
+  medCuratedOnly: false,
   selectedMedicationId: '',
   selectedFormulationId: '',
   selectedRoute: '',
@@ -94,6 +95,7 @@ const els = {
   medPinBtn: document.getElementById('medPinBtn'),
   medCloseBtn: document.getElementById('medCloseBtn'),
   medSearchInput: document.getElementById('medSearchInput'),
+  medCuratedOnly: document.getElementById('medCuratedOnly'),
   medClassFilters: document.getElementById('medClassFilters'),
   medFavoritesRow: document.getElementById('medFavoritesRow'),
   medRecentsRow: document.getElementById('medRecentsRow'),
@@ -2254,6 +2256,62 @@ function normalizeMedicationQueryToken(text) {
   return String(text || '').toLowerCase().replace(/[^a-z0-9+\-\s]/g, ' ').replace(/\s+/g, ' ').trim();
 }
 
+function getMedicationStatusMeta(statusRaw) {
+  const status = String(statusRaw || '').trim().toLowerCase();
+
+  if (status === 'curated') {
+    return {
+      label: 'Curated',
+      priority: 4,
+      tone: 'curated',
+      isCurated: true,
+    };
+  }
+
+  if (status === 'source synced') {
+    return {
+      label: 'Source Synced',
+      priority: 3,
+      tone: 'synced',
+      isCurated: false,
+    };
+  }
+
+  if (status === 'missing fields') {
+    return {
+      label: 'Missing Fields',
+      priority: 2,
+      tone: 'review',
+      isCurated: false,
+    };
+  }
+
+  if (status === 'newly added') {
+    return {
+      label: 'Newly Added',
+      priority: 1,
+      tone: 'review',
+      isCurated: false,
+    };
+  }
+
+  if (status === 'needs review') {
+    return {
+      label: 'Needs Review',
+      priority: 1,
+      tone: 'review',
+      isCurated: false,
+    };
+  }
+
+  return {
+    label: statusRaw ? String(statusRaw) : 'Pending Review',
+    priority: 0,
+    tone: 'review',
+    isCurated: false,
+  };
+}
+
 function isSubsequence(query, candidate) {
   let q = 0;
   let c = 0;
@@ -2407,8 +2465,9 @@ function runMedicationSearch(rawQuery) {
 
   const filteredByClass = medicationCatalog.filter((med) => {
     if (med.active === false) return false;
-    if (state.medClassFilter === 'all') return true;
-    return med.psych_class === state.medClassFilter;
+    if (state.medClassFilter !== 'all' && med.psych_class !== state.medClassFilter) return false;
+    if (state.medCuratedOnly && !getMedicationStatusMeta(med.content_review_status).isCurated) return false;
+    return true;
   });
 
   if (!query) {
@@ -2416,6 +2475,9 @@ function runMedicationSearch(rawQuery) {
       const aFav = favorites.has(a.id) ? 1 : 0;
       const bFav = favorites.has(b.id) ? 1 : 0;
       if (aFav !== bFav) return bFav - aFav;
+      const aStatus = getMedicationStatusMeta(a.content_review_status).priority;
+      const bStatus = getMedicationStatusMeta(b.content_review_status).priority;
+      if (aStatus !== bStatus) return bStatus - aStatus;
       return a.generic_name.localeCompare(b.generic_name);
     });
 
@@ -2426,6 +2488,12 @@ function runMedicationSearch(rawQuery) {
       .filter((item) => item.score > 0)
       .sort((a, b) => {
         if (b.score !== a.score) return b.score - a.score;
+        const aStatus = getMedicationStatusMeta(a.med.content_review_status).priority;
+        const bStatus = getMedicationStatusMeta(b.med.content_review_status).priority;
+        if (aStatus !== bStatus) return bStatus - aStatus;
+        const aFav = favorites.has(a.med.id) ? 1 : 0;
+        const bFav = favorites.has(b.med.id) ? 1 : 0;
+        if (aFav !== bFav) return bFav - aFav;
         return a.med.generic_name.localeCompare(b.med.generic_name);
       })
       .slice(0, 150)
@@ -2466,7 +2534,9 @@ function renderMedicationResults() {
     if (messageEl) {
       messageEl.textContent = medicationCatalogLoadError
         ? 'Medication catalog could not be loaded right now. You can still request a medication below.'
-        : 'No medication found for this search.';
+        : state.medCuratedOnly
+          ? 'No curated profile found for this search yet. Turn off "Curated only" to see source-synced records.'
+          : 'No medication found for this search.';
     }
     if (els.medRequestBtn) {
       const label = activeQuery ? `Request "${activeQuery}"` : 'Request this medication';
@@ -2491,6 +2561,7 @@ function renderMedicationResults() {
 
     const favoriteFlag = favorites.has(med.id) ? '★' : '☆';
     const brandPreview = (med.brand_names || []).slice(0, 2).join(', ');
+    const statusMeta = getMedicationStatusMeta(med.content_review_status);
 
     button.innerHTML = `
       <div class="med-result-top">
@@ -2500,7 +2571,10 @@ function renderMedicationResults() {
         </div>
         <span aria-hidden="true">${favoriteFlag}</span>
       </div>
-      <div class="med-result-sub">${escapeHtml(med.psych_class || 'Unclassified')}</div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">${escapeHtml(med.psych_class || 'Unclassified')}</div>
+        <span class="med-status-chip med-status-chip-${escapeHtml(statusMeta.tone)}">${escapeHtml(statusMeta.label)}</span>
+      </div>
     `;
 
     button.addEventListener('click', () => {
@@ -2608,6 +2682,7 @@ function renderMedicationDetail() {
   const { medication, formulations, selectedFormulation, availableRoutes } = context;
   const favorites = new Set(getMedicationFavorites());
   const isFavorite = favorites.has(medication.id);
+  const statusMeta = getMedicationStatusMeta(medication.content_review_status);
 
   const hasMultipleFormulations = formulations.length > 1;
   const shouldPromptForFormulation = hasMultipleFormulations && !selectedFormulation;
@@ -2656,10 +2731,12 @@ function renderMedicationDetail() {
         </div>
       </div>
       <div class="med-badge-row">
+        <span class="med-badge med-status-badge med-status-badge-${escapeHtml(statusMeta.tone)}">${escapeHtml(statusMeta.label)}</span>
         <span class="med-badge">${escapeHtml(medication.psych_class || 'Unclassified')}</span>
         ${(medication.formulations || []).slice(0, 8).map((form) => `<span class="med-badge">${escapeHtml(form.label || form.dosage_form || 'Formulation')}</span>`).join('')}
         ${medication.newer_brand ? '<span class="med-badge med-badge-new">Newer brand</span>' : ''}
       </div>
+      ${statusMeta.isCurated ? '' : '<p class="med-curation-note">This entry is source-derived and still in review. Curated psychiatry guidance may be partial.</p>'}
     </article>
 
     <section class="med-section">
@@ -3191,6 +3268,14 @@ function attachMedicationListeners() {
   if (els.medSearchInput) {
     els.medSearchInput.addEventListener('input', () => runMedicationSearch(els.medSearchInput.value));
     els.medSearchInput.addEventListener('keydown', handleMedicationResultsKeyboard);
+  }
+
+  if (els.medCuratedOnly) {
+    els.medCuratedOnly.checked = state.medCuratedOnly;
+    els.medCuratedOnly.addEventListener('change', () => {
+      state.medCuratedOnly = Boolean(els.medCuratedOnly.checked);
+      runMedicationSearch(els.medSearchInput ? els.medSearchInput.value : '');
+    });
   }
 
   if (els.medRequestBtn) {

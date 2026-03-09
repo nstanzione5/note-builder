@@ -33,7 +33,10 @@ Source metadata can be refreshed without overwriting curated psych summaries.
 2. Local-only check (no Drive publish)
 - `npm run med:knowledge-check:local`
 
-3. Manual steps (if needed)
+3. Force initial backend sync/index/publish (explicit alias)
+- `npm run med:initial-sync`
+
+4. Manual steps (if needed)
 - `npm run med:sync`
 - `npm run med:compile`
 - `npm run med:review`

@@ -1094,6 +1094,21 @@ textarea:disabled {
   gap: 8px;
 }
 
+.med-toggle-inline {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink-body);
+}
+
+.med-toggle-inline input {
+  width: 14px;
+  height: 14px;
+}
+
 .med-class-filters,
 .med-chip-row {
   display: flex;
@@ -1171,6 +1186,42 @@ textarea:disabled {
 .med-result-sub {
   font-size: 11px;
   color: var(--ink-soft);
+}
+
+.med-result-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: center;
+}
+
+.med-status-chip {
+  border-radius: var(--radius-pill);
+  padding: 3px 8px;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 700;
+  border: 1px solid rgba(148, 163, 184, 0.34);
+  white-space: nowrap;
+}
+
+.med-status-chip-curated {
+  border-color: rgba(16, 185, 129, 0.55);
+  background: rgba(16, 185, 129, 0.13);
+  color: #047857;
+}
+
+.med-status-chip-synced {
+  border-color: rgba(59, 130, 246, 0.5);
+  background: rgba(59, 130, 246, 0.13);
+  color: #1d4ed8;
+}
+
+.med-status-chip-review {
+  border-color: rgba(249, 115, 22, 0.48);
+  background: rgba(249, 115, 22, 0.14);
+  color: #9a3412;
 }
 
 .med-result-star {
@@ -1267,6 +1318,30 @@ textarea:disabled {
   color: #fff;
   border: 0;
   background: linear-gradient(145deg, #0ea5e9, #2563eb);
+}
+
+.med-status-badge-curated {
+  border-color: rgba(16, 185, 129, 0.55);
+  background: rgba(16, 185, 129, 0.14);
+  color: #047857;
+}
+
+.med-status-badge-synced {
+  border-color: rgba(59, 130, 246, 0.5);
+  background: rgba(59, 130, 246, 0.12);
+  color: #1d4ed8;
+}
+
+.med-status-badge-review {
+  border-color: rgba(249, 115, 22, 0.48);
+  background: rgba(249, 115, 22, 0.13);
+  color: #9a3412;
+}
+
+.med-curation-note {
+  margin-top: 2px;
+  font-size: 12px;
+  color: #9a3412;
 }
 
 .med-section {
