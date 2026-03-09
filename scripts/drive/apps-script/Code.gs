@@ -61,6 +61,8 @@ function handleAction_(action, payload) {
       return handleBootstrap_(payload);
     case 'root.audit':
       return handleRootAudit_(payload);
+    case 'mydrive.condense':
+      return handleMyDriveCondense_(payload);
     case 'manifest.get':
       return handleManifestGet_(payload);
     case 'file.get':
@@ -83,6 +85,7 @@ function handleAction_(action, payload) {
 function enforceOwnerWrite_(action, payload) {
   const writeActions = {
     bootstrap: true,
+    'mydrive.condense': true,
     'file.put': true,
     'backup.append': true,
     'med.refresh.request': true,
@@ -114,9 +117,13 @@ function enforceOwnerWrite_(action, payload) {
     return;
   }
 
+  if (action === 'mydrive.condense' && isAllowlisted) {
+    return;
+  }
+
   if (action === 'file.put') {
     const path = normalizeText_(payload.path || '');
-    if (isPatientDraftPath_(path) && isAllowlisted) {
+    if (isAllowlisted && isAllowlistedWritePath_(path)) {
       return;
     }
   }
@@ -237,6 +244,105 @@ function handleRootAudit_(payload) {
     }),
     allRoots: roots,
   };
+}
+
+function handleMyDriveCondense_(payload) {
+  const rootFolderName = normalizeText_(payload.rootFolderName || APP_ROOT_DEFAULT) || APP_ROOT_DEFAULT;
+  const archiveFolderName = normalizeText_(payload.archiveFolderName || ('Astra Personal Drive Cleanup ' + Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyyMMdd'))) || 'Astra Personal Drive Cleanup';
+  const dryRun = payload && (payload.dryRun === true || normalizeText_(payload.dryRun || '') === 'true');
+
+  const archiveFolder = getOrCreateMyDriveFolder_(archiveFolderName);
+  const candidates = findMyDriveCleanupCandidates_(rootFolderName, archiveFolder.getId());
+  const moved = [];
+  const errors = [];
+
+  if (!dryRun) {
+    candidates.forEach(function (item) {
+      try {
+        const folder = DriveApp.getFolderById(item.id);
+        folder.moveTo(archiveFolder);
+        moved.push(item);
+      } catch (error) {
+        errors.push({
+          id: item.id,
+          name: item.name,
+          error: String(error && error.message ? error.message : error),
+        });
+      }
+    });
+  }
+
+  return {
+    dryRun: dryRun,
+    archiveFolderId: archiveFolder.getId(),
+    archiveFolderName: archiveFolder.getName(),
+    archiveFolderUrl: toFolderUrl_(archiveFolder.getId()),
+    candidateCount: candidates.length,
+    movedCount: moved.length,
+    candidates: candidates,
+    moved: moved,
+    errors: errors,
+  };
+}
+
+function getOrCreateMyDriveFolder_(folderName) {
+  const root = DriveApp.getRootFolder();
+  const existing = root.getFoldersByName(folderName);
+  if (existing.hasNext()) {
+    return existing.next();
+  }
+  return root.createFolder(folderName);
+}
+
+function findMyDriveCleanupCandidates_(rootFolderName, archiveFolderId) {
+  const query = "trashed=false and mimeType='application/vnd.google-apps.folder' and 'root' in parents";
+  const listed = listFilesSafe_({ q: query, maxResults: 500 }, '');
+  const items = listed.items || [];
+
+  return items
+    .filter(function (item) {
+      const driveId = normalizeText_((item && (item.driveId || item.teamDriveId)) || '');
+      return !driveId;
+    })
+    .map(function (item) {
+      return {
+        id: String(item.id || ''),
+        name: String(item.title || item.name || ''),
+        createdAt: String(item.createdDate || item.createdTime || ''),
+        modifiedAt: String(item.modifiedDate || item.modifiedTime || ''),
+        url: toFolderUrl_(item.id),
+      };
+    })
+    .filter(function (item) {
+      if (!item.id || item.id === archiveFolderId) return false;
+      if (normalizeText_(item.name) === normalizeText_(rootFolderName)) return true;
+      if (!isUntitledLikeName_(item.name)) return false;
+      return isLikelyAppRootFolder_(item.id);
+    });
+}
+
+function isUntitledLikeName_(name) {
+  const normalized = normalizeText_(name || '').toLowerCase();
+  return normalized === 'untitled'
+    || normalized === 'untitled folder'
+    || normalized === 'untitled document'
+    || normalized.indexOf('untitled-') === 0;
+}
+
+function isLikelyAppRootFolder_(folderId) {
+  try {
+    const folder = DriveApp.getFolderById(folderId);
+    const anchors = ['app-shell', 'data', 'backups', 'logs', 'config'];
+    let matched = 0;
+    anchors.forEach(function (anchor) {
+      if (folder.getFoldersByName(anchor).hasNext()) {
+        matched += 1;
+      }
+    });
+    return matched >= 2;
+  } catch (error) {
+    return false;
+  }
 }
 
 function mergeUniqueFilesById_(groups) {
@@ -1260,6 +1366,21 @@ function isPatientDraftPath_(path) {
   return normalized === PATIENT_DRAFT_CURRENT_PATH
     || normalized === PATIENT_DRAFT_RECENT_PATH
     || normalized.indexOf(PATIENT_DRAFT_USERS_PREFIX) === 0;
+}
+
+function isAllowlistedWritePath_(path) {
+  const normalized = normalizeText_(path || '');
+  if (!normalized) return false;
+
+  if (isPatientDraftPath_(normalized)) {
+    return true;
+  }
+
+  return normalized.indexOf('data/') === 0
+    || normalized.indexOf('config/') === 0
+    || normalized.indexOf('logs/') === 0
+    || normalized.indexOf('app-shell/') === 0
+    || normalized.indexOf('backups/') === 0;
 }
 
 function resolveScopedPathForPayload_(path, payload) {

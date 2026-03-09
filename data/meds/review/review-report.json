@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-09T19:12:47.435Z",
+  "generated_at": "2026-03-09T19:42:34.024Z",
   "totals": {
     "records": 260,
     "curated": 26,
@@ -32,7 +32,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:39:25.785Z"
+      "source_last_checked": "2026-03-09T19:11:38.885Z"
     },
     {
       "id": "fluvoxamine",
@@ -55,7 +55,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:39:46.231Z"
+      "source_last_checked": "2026-03-09T19:12:00.009Z"
     },
     {
       "id": "paroxetine",
@@ -78,7 +78,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:39:53.283Z"
+      "source_last_checked": "2026-03-09T19:12:07.659Z"
     },
     {
       "id": "vilazodone",
@@ -101,7 +101,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:40:07.631Z"
+      "source_last_checked": "2026-03-09T19:12:22.394Z"
     },
     {
       "id": "vortioxetine",
@@ -124,7 +124,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:40:14.343Z"
+      "source_last_checked": "2026-03-09T19:12:29.736Z"
     },
     {
       "id": "desvenlafaxine",
@@ -147,7 +147,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:40:29.129Z"
+      "source_last_checked": "2026-03-09T19:12:44.393Z"
     },
     {
       "id": "levomilnacipran",
@@ -170,7 +170,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:40:45.180Z"
+      "source_last_checked": "2026-03-09T19:12:58.842Z"
     },
     {
       "id": "milnacipran",
@@ -193,7 +193,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:40:52.516Z"
+      "source_last_checked": "2026-03-09T19:13:06.053Z"
     },
     {
       "id": "atomoxetine",
@@ -216,7 +216,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:40:59.937Z"
+      "source_last_checked": "2026-03-09T19:13:13.486Z"
     },
     {
       "id": "sibutramine",
@@ -237,7 +237,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:41:07.337Z"
+      "source_last_checked": "2026-03-09T19:13:21.100Z"
     },
     {
       "id": "dextromethorphan-bupropion",
@@ -255,7 +255,7 @@
       "missing_data_flags": [
         "off-label psych uses"
       ],
-      "source_last_checked": "2026-03-09T18:41:21.878Z"
+      "source_last_checked": "2026-03-09T19:13:35.509Z"
     },
     {
       "id": "mirtazapine",
@@ -278,7 +278,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:41:29.205Z"
+      "source_last_checked": "2026-03-09T19:13:42.975Z"
     },
     {
       "id": "trazodone",
@@ -301,7 +301,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:41:36.541Z"
+      "source_last_checked": "2026-03-09T19:13:50.176Z"
     },
     {
       "id": "nefazodone",
@@ -324,7 +324,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:41:43.797Z"
+      "source_last_checked": "2026-03-09T19:13:57.593Z"
     },
     {
       "id": "amitriptyline",
@@ -347,7 +347,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:41:51.217Z"
+      "source_last_checked": "2026-03-09T19:14:04.888Z"
     },
     {
       "id": "nortriptyline",
@@ -370,7 +370,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:41:58.605Z"
+      "source_last_checked": "2026-03-09T19:14:12.185Z"
     },
     {
       "id": "desipramine",
@@ -393,7 +393,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:42:06.165Z"
+      "source_last_checked": "2026-03-09T19:14:19.535Z"
     },
     {
       "id": "imipramine",
@@ -416,7 +416,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:42:12.998Z"
+      "source_last_checked": "2026-03-09T19:14:26.860Z"
     },
     {
       "id": "clomipramine",
@@ -439,7 +439,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:42:20.050Z"
+      "source_last_checked": "2026-03-09T19:14:34.285Z"
     },
     {
       "id": "doxepin",
@@ -462,7 +462,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:42:26.865Z"
+      "source_last_checked": "2026-03-09T19:14:41.560Z"
     },
     {
       "id": "maprotiline",
@@ -484,7 +484,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:42:35.110Z"
+      "source_last_checked": "2026-03-09T19:14:49.026Z"
     },
     {
       "id": "amoxapine",
@@ -507,7 +507,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:42:42.637Z"
+      "source_last_checked": "2026-03-09T19:14:56.357Z"
     },
     {
       "id": "trimipramine",
@@ -530,7 +530,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:42:50.173Z"
+      "source_last_checked": "2026-03-09T19:15:03.465Z"
     },
     {
       "id": "protriptyline",
@@ -553,7 +553,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:42:57.704Z"
+      "source_last_checked": "2026-03-09T19:15:10.957Z"
     },
     {
       "id": "phenelzine",
@@ -576,7 +576,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:43:05.127Z"
+      "source_last_checked": "2026-03-09T19:15:18.278Z"
     },
     {
       "id": "tranylcypromine",
@@ -599,7 +599,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:43:12.562Z"
+      "source_last_checked": "2026-03-09T19:15:25.658Z"
     },
     {
       "id": "isocarboxazid",
@@ -622,7 +622,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:43:19.819Z"
+      "source_last_checked": "2026-03-09T19:15:32.908Z"
     },
     {
       "id": "selegiline-transdermal",
@@ -645,7 +645,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:43:27.140Z"
+      "source_last_checked": "2026-03-09T19:15:40.328Z"
     },
     {
       "id": "zuranolone",
@@ -668,7 +668,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:43:34.519Z"
+      "source_last_checked": "2026-03-09T19:15:47.777Z"
     },
     {
       "id": "amphetamine-mixed-salts-xr",
@@ -686,7 +686,7 @@
       "missing_data_flags": [
         "off-label psych uses"
       ],
-      "source_last_checked": "2026-03-09T18:43:49.157Z"
+      "source_last_checked": "2026-03-09T19:16:01.738Z"
     },
     {
       "id": "lisdexamfetamine",
@@ -704,7 +704,7 @@
       "missing_data_flags": [
         "off-label psych uses"
       ],
-      "source_last_checked": "2026-03-09T18:43:56.749Z"
+      "source_last_checked": "2026-03-09T19:16:08.760Z"
     },
     {
       "id": "dextroamphetamine",
@@ -727,7 +727,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:44:03.889Z"
+      "source_last_checked": "2026-03-09T19:16:16.095Z"
     },
     {
       "id": "methamphetamine",
@@ -750,7 +750,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:44:10.878Z"
+      "source_last_checked": "2026-03-09T19:16:23.316Z"
     },
     {
       "id": "methylphenidate-ir",
@@ -773,7 +773,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:44:17.982Z"
+      "source_last_checked": "2026-03-09T19:16:30.565Z"
     },
     {
       "id": "methylphenidate-er",
@@ -796,7 +796,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:44:25.064Z"
+      "source_last_checked": "2026-03-09T19:16:37.649Z"
     },
     {
       "id": "dexmethylphenidate",
@@ -819,7 +819,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:44:31.837Z"
+      "source_last_checked": "2026-03-09T19:16:44.715Z"
     },
     {
       "id": "dexmethylphenidate-xr",
@@ -842,7 +842,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:44:38.963Z"
+      "source_last_checked": "2026-03-09T19:16:51.966Z"
     },
     {
       "id": "serdexmethylphenidate-dexmethylphenidate",
@@ -865,7 +865,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:44:45.991Z"
+      "source_last_checked": "2026-03-09T19:16:59.036Z"
     },
     {
       "id": "methylphenidate-pm",
@@ -888,7 +888,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:44:52.579Z"
+      "source_last_checked": "2026-03-09T19:17:06.118Z"
     },
     {
       "id": "amphetamine-mixed-salts-er",
@@ -911,7 +911,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:44:59.432Z"
+      "source_last_checked": "2026-03-09T19:17:12.931Z"
     },
     {
       "id": "amphetamine-sulfate",
@@ -934,7 +934,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:45:06.349Z"
+      "source_last_checked": "2026-03-09T19:17:20.272Z"
     },
     {
       "id": "amphetamine-xr-odt",
@@ -957,7 +957,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:45:13.632Z"
+      "source_last_checked": "2026-03-09T19:17:27.321Z"
     },
     {
       "id": "amphetamine-xr-suspension",
@@ -980,7 +980,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:45:20.615Z"
+      "source_last_checked": "2026-03-09T19:17:34.423Z"
     },
     {
       "id": "methylphenidate-chewable-er",
@@ -1003,7 +1003,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:45:27.973Z"
+      "source_last_checked": "2026-03-09T19:17:41.437Z"
     },
     {
       "id": "methylphenidate-suspension-er",
@@ -1026,7 +1026,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:45:35.041Z"
+      "source_last_checked": "2026-03-09T19:17:48.575Z"
     },
     {
       "id": "methylphenidate-odt-xr",
@@ -1049,7 +1049,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:45:42.390Z"
+      "source_last_checked": "2026-03-09T19:17:55.391Z"
     },
     {
       "id": "methylphenidate-transdermal",
@@ -1072,7 +1072,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:45:49.746Z"
+      "source_last_checked": "2026-03-09T19:18:02.008Z"
     },
     {
       "id": "dextroamphetamine-transdermal",
@@ -1095,7 +1095,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:45:56.966Z"
+      "source_last_checked": "2026-03-09T19:18:08.850Z"
     },
     {
       "id": "viloxazine",
@@ -1113,7 +1113,7 @@
       "missing_data_flags": [
         "off-label psych uses"
       ],
-      "source_last_checked": "2026-03-09T18:46:04.513Z"
+      "source_last_checked": "2026-03-09T19:18:16.038Z"
     },
     {
       "id": "guanfacine-ir",
@@ -1136,7 +1136,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:46:11.889Z"
+      "source_last_checked": "2026-03-09T19:18:23.471Z"
     },
     {
       "id": "clonidine-ir",
@@ -1159,7 +1159,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:46:26.115Z"
+      "source_last_checked": "2026-03-09T19:18:37.932Z"
     },
     {
       "id": "clonidine-er",
@@ -1182,7 +1182,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:46:33.215Z"
+      "source_last_checked": "2026-03-09T19:18:44.961Z"
     },
     {
       "id": "modafinil",
@@ -1205,7 +1205,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:46:40.663Z"
+      "source_last_checked": "2026-03-09T19:18:52.081Z"
     },
     {
       "id": "armodafinil",
@@ -1228,7 +1228,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:46:47.893Z"
+      "source_last_checked": "2026-03-09T19:18:59.462Z"
     },
     {
       "id": "alprazolam",
@@ -1251,7 +1251,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:46:55.244Z"
+      "source_last_checked": "2026-03-09T19:19:07.198Z"
     },
     {
       "id": "clonazepam",
@@ -1274,7 +1274,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:47:02.837Z"
+      "source_last_checked": "2026-03-09T19:19:14.675Z"
     },
     {
       "id": "lorazepam",
@@ -1297,7 +1297,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:47:09.978Z"
+      "source_last_checked": "2026-03-09T19:19:21.964Z"
     },
     {
       "id": "diazepam",
@@ -1320,7 +1320,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:47:17.302Z"
+      "source_last_checked": "2026-03-09T19:19:29.565Z"
     },
     {
       "id": "temazepam",
@@ -1343,7 +1343,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:47:25.110Z"
+      "source_last_checked": "2026-03-09T19:19:37.077Z"
     },
     {
       "id": "oxazepam",
@@ -1366,7 +1366,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:47:32.453Z"
+      "source_last_checked": "2026-03-09T19:19:44.210Z"
     },
     {
       "id": "chlordiazepoxide",
@@ -1389,7 +1389,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:47:39.790Z"
+      "source_last_checked": "2026-03-09T19:19:51.498Z"
     },
     {
       "id": "clorazepate",
@@ -1412,7 +1412,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:47:47.038Z"
+      "source_last_checked": "2026-03-09T19:19:58.651Z"
     },
     {
       "id": "triazolam",
@@ -1435,7 +1435,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:47:54.458Z"
+      "source_last_checked": "2026-03-09T19:20:05.996Z"
     },
     {
       "id": "estazolam",
@@ -1458,7 +1458,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:48:01.715Z"
+      "source_last_checked": "2026-03-09T19:20:13.326Z"
     },
     {
       "id": "flurazepam",
@@ -1481,7 +1481,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:48:09.227Z"
+      "source_last_checked": "2026-03-09T19:20:20.741Z"
     },
     {
       "id": "quazepam",
@@ -1503,7 +1503,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:48:16.485Z"
+      "source_last_checked": "2026-03-09T19:20:28.081Z"
     },
     {
       "id": "midazolam",
@@ -1526,7 +1526,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:48:23.933Z"
+      "source_last_checked": "2026-03-09T19:20:35.606Z"
     },
     {
       "id": "diazepam-nasal",
@@ -1549,7 +1549,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:48:30.872Z"
+      "source_last_checked": "2026-03-09T19:20:42.680Z"
     },
     {
       "id": "midazolam-nasal",
@@ -1572,7 +1572,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:48:37.546Z"
+      "source_last_checked": "2026-03-09T19:20:49.703Z"
     },
     {
       "id": "zolpidem",
@@ -1595,7 +1595,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:48:44.508Z"
+      "source_last_checked": "2026-03-09T19:20:57.273Z"
     },
     {
       "id": "zolpidem-er",
@@ -1618,7 +1618,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:48:51.863Z"
+      "source_last_checked": "2026-03-09T19:21:04.433Z"
     },
     {
       "id": "zaleplon",
@@ -1641,7 +1641,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:48:58.935Z"
+      "source_last_checked": "2026-03-09T19:21:11.392Z"
     },
     {
       "id": "eszopiclone",
@@ -1664,7 +1664,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:49:06.553Z"
+      "source_last_checked": "2026-03-09T19:21:18.471Z"
     },
     {
       "id": "ramelteon",
@@ -1687,7 +1687,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:49:13.614Z"
+      "source_last_checked": "2026-03-09T19:21:25.294Z"
     },
     {
       "id": "suvorexant",
@@ -1710,7 +1710,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:49:20.871Z"
+      "source_last_checked": "2026-03-09T19:21:32.593Z"
     },
     {
       "id": "lemborexant",
@@ -1733,7 +1733,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:49:28.285Z"
+      "source_last_checked": "2026-03-09T19:21:39.609Z"
     },
     {
       "id": "daridorexant",
@@ -1756,7 +1756,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:49:35.624Z"
+      "source_last_checked": "2026-03-09T19:21:47.031Z"
     },
     {
       "id": "doxepin-low-dose",
@@ -1779,7 +1779,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:49:42.984Z"
+      "source_last_checked": "2026-03-09T19:21:54.367Z"
     },
     {
       "id": "hydroxyzine",
@@ -1802,7 +1802,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:49:50.490Z"
+      "source_last_checked": "2026-03-09T19:22:01.768Z"
     },
     {
       "id": "diphenhydramine",
@@ -1825,7 +1825,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:49:57.552Z"
+      "source_last_checked": "2026-03-09T19:22:09.045Z"
     },
     {
       "id": "gabapentin",
@@ -1848,7 +1848,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:50:04.890Z"
+      "source_last_checked": "2026-03-09T19:22:16.422Z"
     },
     {
       "id": "pregabalin",
@@ -1871,7 +1871,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:50:12.318Z"
+      "source_last_checked": "2026-03-09T19:22:23.637Z"
     },
     {
       "id": "melatonin-receptor-agonist",
@@ -1891,7 +1891,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:50:19.653Z"
+      "source_last_checked": "2026-03-09T19:22:31.331Z"
     },
     {
       "id": "brexpiprazole",
@@ -1914,7 +1914,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:50:34.331Z"
+      "source_last_checked": "2026-03-09T19:22:45.739Z"
     },
     {
       "id": "cariprazine",
@@ -1937,7 +1937,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:50:41.925Z"
+      "source_last_checked": "2026-03-09T19:22:53.075Z"
     },
     {
       "id": "olanzapine",
@@ -1960,7 +1960,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:51:03.074Z"
+      "source_last_checked": "2026-03-09T19:23:15.093Z"
     },
     {
       "id": "olanzapine-fluoxetine",
@@ -1982,7 +1982,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:51:10.498Z"
+      "source_last_checked": "2026-03-09T19:23:22.605Z"
     },
     {
       "id": "olanzapine-samidorphan",
@@ -2005,7 +2005,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:51:18.100Z"
+      "source_last_checked": "2026-03-09T19:23:29.306Z"
     },
     {
       "id": "risperidone",
@@ -2028,7 +2028,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:51:25.700Z"
+      "source_last_checked": "2026-03-09T19:23:36.308Z"
     },
     {
       "id": "paliperidone-oral",
@@ -2051,7 +2051,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:51:32.771Z"
+      "source_last_checked": "2026-03-09T19:23:43.402Z"
     },
     {
       "id": "ziprasidone",
@@ -2074,7 +2074,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:51:40.037Z"
+      "source_last_checked": "2026-03-09T19:23:50.735Z"
     },
     {
       "id": "lurasidone",
@@ -2097,7 +2097,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:51:47.200Z"
+      "source_last_checked": "2026-03-09T19:23:58.076Z"
     },
     {
       "id": "asenapine-sublingual",
@@ -2120,7 +2120,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:52:01.865Z"
+      "source_last_checked": "2026-03-09T19:24:13.255Z"
     },
     {
       "id": "iloperidone",
@@ -2143,7 +2143,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:52:09.203Z"
+      "source_last_checked": "2026-03-09T19:24:21.216Z"
     },
     {
       "id": "haloperidol",
@@ -2166,7 +2166,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:52:17.066Z"
+      "source_last_checked": "2026-03-09T19:24:28.527Z"
     },
     {
       "id": "chlorpromazine",
@@ -2189,7 +2189,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:52:24.596Z"
+      "source_last_checked": "2026-03-09T19:24:35.668Z"
     },
     {
       "id": "perphenazine",
@@ -2212,7 +2212,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:52:32.269Z"
+      "source_last_checked": "2026-03-09T19:24:42.833Z"
     },
     {
       "id": "trifluoperazine",
@@ -2235,7 +2235,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:52:39.861Z"
+      "source_last_checked": "2026-03-09T19:24:49.913Z"
     },
     {
       "id": "loxapine",
@@ -2258,7 +2258,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:52:47.094Z"
+      "source_last_checked": "2026-03-09T19:24:57.294Z"
     },
     {
       "id": "molindone",
@@ -2281,7 +2281,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:52:54.720Z"
+      "source_last_checked": "2026-03-09T19:25:04.407Z"
     },
     {
       "id": "pimozide",
@@ -2304,7 +2304,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:53:01.774Z"
+      "source_last_checked": "2026-03-09T19:25:11.472Z"
     },
     {
       "id": "thiothixene",
@@ -2327,7 +2327,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:53:08.680Z"
+      "source_last_checked": "2026-03-09T19:25:18.540Z"
     },
     {
       "id": "thioridazine",
@@ -2350,7 +2350,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:53:15.772Z"
+      "source_last_checked": "2026-03-09T19:25:25.821Z"
     },
     {
       "id": "fluphenazine",
@@ -2373,7 +2373,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:53:23.026Z"
+      "source_last_checked": "2026-03-09T19:25:32.890Z"
     },
     {
       "id": "xanomeline-trospium",
@@ -2396,7 +2396,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:53:30.364Z"
+      "source_last_checked": "2026-03-09T19:25:40.509Z"
     },
     {
       "id": "pimavanserin",
@@ -2419,7 +2419,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:53:37.785Z"
+      "source_last_checked": "2026-03-09T19:25:47.713Z"
     },
     {
       "id": "lithium-citrate",
@@ -2442,7 +2442,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:53:52.466Z"
+      "source_last_checked": "2026-03-09T19:26:01.545Z"
     },
     {
       "id": "valproic-acid",
@@ -2465,7 +2465,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:54:14.204Z"
+      "source_last_checked": "2026-03-09T19:26:22.701Z"
     },
     {
       "id": "carbamazepine",
@@ -2488,7 +2488,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:54:21.544Z"
+      "source_last_checked": "2026-03-09T19:26:29.727Z"
     },
     {
       "id": "oxcarbazepine",
@@ -2511,7 +2511,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:54:28.314Z"
+      "source_last_checked": "2026-03-09T19:26:36.845Z"
     },
     {
       "id": "topiramate",
@@ -2534,7 +2534,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:54:35.444Z"
+      "source_last_checked": "2026-03-09T19:26:43.998Z"
     },
     {
       "id": "zonisamide",
@@ -2557,7 +2557,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:54:42.498Z"
+      "source_last_checked": "2026-03-09T19:26:51.278Z"
     },
     {
       "id": "levetiracetam",
@@ -2580,7 +2580,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:54:49.510Z"
+      "source_last_checked": "2026-03-09T19:26:58.058Z"
     },
     {
       "id": "prazosin",
@@ -2603,7 +2603,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:54:56.539Z"
+      "source_last_checked": "2026-03-09T19:27:04.634Z"
     },
     {
       "id": "doxazosin",
@@ -2626,7 +2626,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:55:04.025Z"
+      "source_last_checked": "2026-03-09T19:27:11.776Z"
     },
     {
       "id": "terazosin",
@@ -2649,7 +2649,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:55:11.089Z"
+      "source_last_checked": "2026-03-09T19:27:18.700Z"
     },
     {
       "id": "propranolol",
@@ -2667,7 +2667,7 @@
       "missing_data_flags": [
         "fda psych uses"
       ],
-      "source_last_checked": "2026-03-09T18:55:18.433Z"
+      "source_last_checked": "2026-03-09T19:27:26.128Z"
     },
     {
       "id": "atenolol",
@@ -2690,7 +2690,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:55:25.768Z"
+      "source_last_checked": "2026-03-09T19:27:33.468Z"
     },
     {
       "id": "metoprolol",
@@ -2713,7 +2713,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:55:33.101Z"
+      "source_last_checked": "2026-03-09T19:27:40.720Z"
     },
     {
       "id": "nadolol",
@@ -2736,7 +2736,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:55:40.441Z"
+      "source_last_checked": "2026-03-09T19:27:47.860Z"
     },
     {
       "id": "bisoprolol",
@@ -2759,7 +2759,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:55:47.847Z"
+      "source_last_checked": "2026-03-09T19:27:54.960Z"
     },
     {
       "id": "carvedilol",
@@ -2782,7 +2782,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:55:55.395Z"
+      "source_last_checked": "2026-03-09T19:28:02.320Z"
     },
     {
       "id": "cyproheptadine",
@@ -2805,7 +2805,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:56:09.706Z"
+      "source_last_checked": "2026-03-09T19:28:16.591Z"
     },
     {
       "id": "naltrexone-oral",
@@ -2823,7 +2823,7 @@
       "missing_data_flags": [
         "fda psych uses"
       ],
-      "source_last_checked": "2026-03-09T18:56:17.134Z"
+      "source_last_checked": "2026-03-09T19:28:23.801Z"
     },
     {
       "id": "acamprosate",
@@ -2846,7 +2846,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:56:24.472Z"
+      "source_last_checked": "2026-03-09T19:28:30.612Z"
     },
     {
       "id": "disulfiram",
@@ -2869,7 +2869,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:56:31.811Z"
+      "source_last_checked": "2026-03-09T19:28:37.665Z"
     },
     {
       "id": "naloxone-intranasal",
@@ -2892,7 +2892,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:56:39.149Z"
+      "source_last_checked": "2026-03-09T19:28:44.676Z"
     },
     {
       "id": "nalmefene-intranasal",
@@ -2915,7 +2915,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:56:46.762Z"
+      "source_last_checked": "2026-03-09T19:28:51.860Z"
     },
     {
       "id": "lofexidine",
@@ -2938,7 +2938,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:56:53.908Z"
+      "source_last_checked": "2026-03-09T19:28:59.007Z"
     },
     {
       "id": "varenicline",
@@ -2961,7 +2961,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:57:01.162Z"
+      "source_last_checked": "2026-03-09T19:29:06.168Z"
     },
     {
       "id": "nicotine-transdermal",
@@ -2984,7 +2984,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:57:08.500Z"
+      "source_last_checked": "2026-03-09T19:29:13.252Z"
     },
     {
       "id": "nicotine-gum",
@@ -3007,7 +3007,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:57:16.107Z"
+      "source_last_checked": "2026-03-09T19:29:20.404Z"
     },
     {
       "id": "nicotine-lozenge",
@@ -3030,7 +3030,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:57:23.393Z"
+      "source_last_checked": "2026-03-09T19:29:27.745Z"
     },
     {
       "id": "bupropion-sr-smoking-cessation",
@@ -3053,7 +3053,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:57:30.513Z"
+      "source_last_checked": "2026-03-09T19:29:35.078Z"
     },
     {
       "id": "liothyronine",
@@ -3076,7 +3076,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:57:37.600Z"
+      "source_last_checked": "2026-03-09T19:29:42.421Z"
     },
     {
       "id": "methylfolate",
@@ -3097,7 +3097,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:57:44.910Z"
+      "source_last_checked": "2026-03-09T19:29:49.527Z"
     },
     {
       "id": "ketamine-intranasal",
@@ -3120,7 +3120,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:57:52.256Z"
+      "source_last_checked": "2026-03-09T19:29:56.627Z"
     },
     {
       "id": "benztropine",
@@ -3143,7 +3143,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:57:59.431Z"
+      "source_last_checked": "2026-03-09T19:30:03.910Z"
     },
     {
       "id": "trihexyphenidyl",
@@ -3166,7 +3166,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:58:06.902Z"
+      "source_last_checked": "2026-03-09T19:30:10.959Z"
     },
     {
       "id": "deutetrabenazine",
@@ -3189,7 +3189,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:58:13.936Z"
+      "source_last_checked": "2026-03-09T19:30:18.331Z"
     },
     {
       "id": "valbenazine",
@@ -3212,7 +3212,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:58:20.849Z"
+      "source_last_checked": "2026-03-09T19:30:25.313Z"
     },
     {
       "id": "tetrabenazine",
@@ -3235,7 +3235,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:58:27.885Z"
+      "source_last_checked": "2026-03-09T19:30:32.256Z"
     },
     {
       "id": "memantine",
@@ -3258,7 +3258,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:58:35.072Z"
+      "source_last_checked": "2026-03-09T19:30:39.604Z"
     },
     {
       "id": "donepezil",
@@ -3281,7 +3281,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:58:42.762Z"
+      "source_last_checked": "2026-03-09T19:30:46.890Z"
     },
     {
       "id": "rivastigmine",
@@ -3304,7 +3304,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:58:50.103Z"
+      "source_last_checked": "2026-03-09T19:30:53.911Z"
     },
     {
       "id": "galantamine",
@@ -3327,7 +3327,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:58:57.549Z"
+      "source_last_checked": "2026-03-09T19:31:01.064Z"
     },
     {
       "id": "amantadine",
@@ -3350,7 +3350,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:59:04.871Z"
+      "source_last_checked": "2026-03-09T19:31:08.077Z"
     },
     {
       "id": "baclofen",
@@ -3373,7 +3373,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:59:12.214Z"
+      "source_last_checked": "2026-03-09T19:31:14.922Z"
     },
     {
       "id": "tizanidine",
@@ -3396,7 +3396,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:59:19.725Z"
+      "source_last_checked": "2026-03-09T19:31:22.214Z"
     },
     {
       "id": "cyclobenzaprine",
@@ -3419,7 +3419,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:59:27.319Z"
+      "source_last_checked": "2026-03-09T19:31:29.265Z"
     },
     {
       "id": "n-acetylcysteine",
@@ -3442,7 +3442,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:59:34.978Z"
+      "source_last_checked": "2026-03-09T19:31:36.289Z"
     },
     {
       "id": "ondansetron",
@@ -3465,7 +3465,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:59:42.329Z"
+      "source_last_checked": "2026-03-09T19:31:43.227Z"
     },
     {
       "id": "metoclopramide",
@@ -3488,7 +3488,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:59:49.695Z"
+      "source_last_checked": "2026-03-09T19:31:50.319Z"
     },
     {
       "id": "lacosamide",
@@ -3511,7 +3511,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T18:59:57.196Z"
+      "source_last_checked": "2026-03-09T19:31:57.193Z"
     },
     {
       "id": "tiagabine",
@@ -3534,7 +3534,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:00:04.533Z"
+      "source_last_checked": "2026-03-09T19:32:04.601Z"
     },
     {
       "id": "rufinamide",
@@ -3557,7 +3557,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:00:12.065Z"
+      "source_last_checked": "2026-03-09T19:32:11.531Z"
     },
     {
       "id": "zolpidem-sublingual",
@@ -3580,7 +3580,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:00:19.574Z"
+      "source_last_checked": "2026-03-09T19:32:18.781Z"
     },
     {
       "id": "zolpidem-oral-spray",
@@ -3602,7 +3602,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:00:26.665Z"
+      "source_last_checked": "2026-03-09T19:32:26.018Z"
     },
     {
       "id": "alprazolam-odt",
@@ -3625,7 +3625,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:00:33.665Z"
+      "source_last_checked": "2026-03-09T19:32:33.212Z"
     },
     {
       "id": "clonazepam-odt",
@@ -3648,7 +3648,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:00:40.791Z"
+      "source_last_checked": "2026-03-09T19:32:40.134Z"
     },
     {
       "id": "lorazepam-sublingual",
@@ -3668,7 +3668,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:00:48.282Z"
+      "source_last_checked": "2026-03-09T19:32:47.449Z"
     },
     {
       "id": "asenapine-transdermal",
@@ -3691,7 +3691,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:00:55.899Z"
+      "source_last_checked": "2026-03-09T19:32:54.702Z"
     },
     {
       "id": "lithium-orotate",
@@ -3713,7 +3713,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:01:02.858Z"
+      "source_last_checked": "2026-03-09T19:33:01.622Z"
     },
     {
       "id": "dexmedetomidine-sublingual",
@@ -3736,7 +3736,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:01:09.785Z"
+      "source_last_checked": "2026-03-09T19:33:08.699Z"
     },
     {
       "id": "viloxazine-er",
@@ -3759,7 +3759,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:01:16.975Z"
+      "source_last_checked": "2026-03-09T19:33:15.319Z"
     },
     {
       "id": "modafinil-oral-suspension",
@@ -3782,7 +3782,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:01:24.023Z"
+      "source_last_checked": "2026-03-09T19:33:22.068Z"
     },
     {
       "id": "fluoxetine-weekly",
@@ -3804,7 +3804,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:01:31.144Z"
+      "source_last_checked": "2026-03-09T19:33:29.450Z"
     },
     {
       "id": "paroxetine-cr",
@@ -3827,7 +3827,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:01:38.110Z"
+      "source_last_checked": "2026-03-09T19:33:36.490Z"
     },
     {
       "id": "venlafaxine-er",
@@ -3850,7 +3850,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:01:45.171Z"
+      "source_last_checked": "2026-03-09T19:33:43.449Z"
     },
     {
       "id": "desvenlafaxine-er",
@@ -3873,7 +3873,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:01:52.238Z"
+      "source_last_checked": "2026-03-09T19:33:50.442Z"
     },
     {
       "id": "quetiapine-odt",
@@ -3896,7 +3896,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:01:59.117Z"
+      "source_last_checked": "2026-03-09T19:33:57.396Z"
     },
     {
       "id": "risperidone-odt",
@@ -3919,7 +3919,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:02:06.238Z"
+      "source_last_checked": "2026-03-09T19:34:04.034Z"
     },
     {
       "id": "olanzapine-odt",
@@ -3942,7 +3942,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:02:13.479Z"
+      "source_last_checked": "2026-03-09T19:34:11.112Z"
     },
     {
       "id": "lamotrigine-odt",
@@ -3965,7 +3965,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:02:20.535Z"
+      "source_last_checked": "2026-03-09T19:34:17.767Z"
     },
     {
       "id": "carbamazepine-er",
@@ -3988,7 +3988,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:02:27.430Z"
+      "source_last_checked": "2026-03-09T19:34:24.516Z"
     },
     {
       "id": "oxcarbazepine-er",
@@ -4011,7 +4011,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:02:34.531Z"
+      "source_last_checked": "2026-03-09T19:34:31.245Z"
     },
     {
       "id": "topiramate-er",
@@ -4034,7 +4034,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:02:41.780Z"
+      "source_last_checked": "2026-03-09T19:34:38.491Z"
     },
     {
       "id": "gabapentin-enacarbil",
@@ -4057,7 +4057,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:02:49.205Z"
+      "source_last_checked": "2026-03-09T19:34:45.655Z"
     },
     {
       "id": "pregabalin-er",
@@ -4080,7 +4080,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:02:56.455Z"
+      "source_last_checked": "2026-03-09T19:34:52.241Z"
     },
     {
       "id": "propranolol-er",
@@ -4103,7 +4103,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:03:03.607Z"
+      "source_last_checked": "2026-03-09T19:34:58.932Z"
     },
     {
       "id": "prazosin-bedtime",
@@ -4125,7 +4125,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:03:10.908Z"
+      "source_last_checked": "2026-03-09T19:35:06.270Z"
     },
     {
       "id": "hydroxyzine-pamoate",
@@ -4148,7 +4148,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:03:18.220Z"
+      "source_last_checked": "2026-03-09T19:35:13.167Z"
     },
     {
       "id": "hydroxyzine-hydrochloride",
@@ -4171,7 +4171,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:03:25.061Z"
+      "source_last_checked": "2026-03-09T19:35:20.311Z"
     },
     {
       "id": "buspirone-split-dosing",
@@ -4193,7 +4193,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:03:32.098Z"
+      "source_last_checked": "2026-03-09T19:35:27.627Z"
     },
     {
       "id": "naltrexone-low-dose",
@@ -4213,7 +4213,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:03:39.207Z"
+      "source_last_checked": "2026-03-09T19:35:34.859Z"
     },
     {
       "id": "acamprosate-delayed-release",
@@ -4236,7 +4236,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:03:46.775Z"
+      "source_last_checked": "2026-03-09T19:35:42.057Z"
     },
     {
       "id": "disulfiram-supervised",
@@ -4259,7 +4259,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:03:54.114Z"
+      "source_last_checked": "2026-03-09T19:35:49.153Z"
     },
     {
       "id": "varenicline-starter-pack",
@@ -4282,7 +4282,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:04:01.550Z"
+      "source_last_checked": "2026-03-09T19:35:56.307Z"
     },
     {
       "id": "nicotine-inhaler",
@@ -4305,7 +4305,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:04:09.106Z"
+      "source_last_checked": "2026-03-09T19:36:03.577Z"
     },
     {
       "id": "nicotine-nasal-spray",
@@ -4327,7 +4327,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:04:16.742Z"
+      "source_last_checked": "2026-03-09T19:36:11.141Z"
     },
     {
       "id": "guanfacine-patch",
@@ -4350,7 +4350,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:04:24.223Z"
+      "source_last_checked": "2026-03-09T19:36:18.078Z"
     },
     {
       "id": "clonidine-patch",
@@ -4373,7 +4373,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:04:31.121Z"
+      "source_last_checked": "2026-03-09T19:36:24.670Z"
     },
     {
       "id": "memantine-er",
@@ -4396,7 +4396,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:04:37.906Z"
+      "source_last_checked": "2026-03-09T19:36:31.510Z"
     },
     {
       "id": "donepezil-odt",
@@ -4419,7 +4419,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:04:44.784Z"
+      "source_last_checked": "2026-03-09T19:36:38.606Z"
     },
     {
       "id": "rivastigmine-patch",
@@ -4442,7 +4442,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:04:51.872Z"
+      "source_last_checked": "2026-03-09T19:36:45.945Z"
     },
     {
       "id": "galantamine-er",
@@ -4465,7 +4465,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:04:59.112Z"
+      "source_last_checked": "2026-03-09T19:36:53.012Z"
     },
     {
       "id": "armodafinil-tablet",
@@ -4488,7 +4488,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:05:06.013Z"
+      "source_last_checked": "2026-03-09T19:37:00.097Z"
     },
     {
       "id": "modafinil-tablet",
@@ -4511,7 +4511,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:05:12.932Z"
+      "source_last_checked": "2026-03-09T19:37:07.021Z"
     },
     {
       "id": "eszopiclone-low-dose",
@@ -4534,7 +4534,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:05:20.169Z"
+      "source_last_checked": "2026-03-09T19:37:14.290Z"
     },
     {
       "id": "zaleplon-low-dose",
@@ -4557,7 +4557,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:05:27.733Z"
+      "source_last_checked": "2026-03-09T19:37:21.774Z"
     },
     {
       "id": "daridorexant-dual-orexin-antagonist",
@@ -4580,7 +4580,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:05:34.918Z"
+      "source_last_checked": "2026-03-09T19:37:28.928Z"
     },
     {
       "id": "lemborexant-dual-orexin-antagonist",
@@ -4603,7 +4603,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:05:42.181Z"
+      "source_last_checked": "2026-03-09T19:37:36.064Z"
     },
     {
       "id": "suvorexant-dual-orexin-antagonist",
@@ -4626,7 +4626,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:05:49.519Z"
+      "source_last_checked": "2026-03-09T19:37:43.165Z"
     },
     {
       "id": "ramelteon-melatonin-agonist",
@@ -4649,7 +4649,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:05:56.853Z"
+      "source_last_checked": "2026-03-09T19:37:49.986Z"
     },
     {
       "id": "melatonin-extended-release",
@@ -4671,7 +4671,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:06:04.103Z"
+      "source_last_checked": "2026-03-09T19:37:57.229Z"
     },
     {
       "id": "doxepin-oral-solution",
@@ -4694,7 +4694,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:06:11.100Z"
+      "source_last_checked": "2026-03-09T19:38:04.228Z"
     },
     {
       "id": "quetiapine-oral-solution",
@@ -4717,7 +4717,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:06:18.351Z"
+      "source_last_checked": "2026-03-09T19:38:11.126Z"
     },
     {
       "id": "aripiprazole-oral-solution",
@@ -4740,7 +4740,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:06:25.370Z"
+      "source_last_checked": "2026-03-09T19:38:18.196Z"
     },
     {
       "id": "risperidone-oral-solution",
@@ -4763,7 +4763,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:06:32.621Z"
+      "source_last_checked": "2026-03-09T19:38:25.185Z"
     },
     {
       "id": "haloperidol-oral-solution",
@@ -4786,7 +4786,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:06:39.845Z"
+      "source_last_checked": "2026-03-09T19:38:32.010Z"
     },
     {
       "id": "chlorpromazine-oral-solution",
@@ -4809,7 +4809,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:06:47.087Z"
+      "source_last_checked": "2026-03-09T19:38:38.836Z"
     },
     {
       "id": "perphenazine-oral-solution",
@@ -4832,7 +4832,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:06:53.902Z"
+      "source_last_checked": "2026-03-09T19:38:45.745Z"
     },
     {
       "id": "trifluoperazine-oral-solution",
@@ -4855,7 +4855,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:07:00.440Z"
+      "source_last_checked": "2026-03-09T19:38:52.794Z"
     },
     {
       "id": "loxapine-inhalation",
@@ -4876,7 +4876,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:07:07.525Z"
+      "source_last_checked": "2026-03-09T19:39:00.220Z"
     },
     {
       "id": "ziprasidone-intramuscular",
@@ -4898,7 +4898,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:07:14.691Z"
+      "source_last_checked": "2026-03-09T19:39:07.467Z"
     },
     {
       "id": "olanzapine-intramuscular",
@@ -4921,7 +4921,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:07:21.981Z"
+      "source_last_checked": "2026-03-09T19:39:14.720Z"
     },
     {
       "id": "haloperidol-decanoate-oral-bridge",
@@ -4943,7 +4943,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:07:29.114Z"
+      "source_last_checked": "2026-03-09T19:39:22.063Z"
     },
     {
       "id": "fluphenazine-decanoate-oral-bridge",
@@ -4964,7 +4964,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:07:36.357Z"
+      "source_last_checked": "2026-03-09T19:39:29.400Z"
     },
     {
       "id": "paliperidone-oral-bridge",
@@ -4986,7 +4986,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:07:43.955Z"
+      "source_last_checked": "2026-03-09T19:39:36.443Z"
     },
     {
       "id": "lurasidone-with-food",
@@ -5009,7 +5009,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:07:51.186Z"
+      "source_last_checked": "2026-03-09T19:39:43.347Z"
     },
     {
       "id": "cariprazine-slow-titration",
@@ -5032,7 +5032,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:07:58.460Z"
+      "source_last_checked": "2026-03-09T19:39:50.578Z"
     },
     {
       "id": "lumateperone-once-daily",
@@ -5055,7 +5055,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:08:05.803Z"
+      "source_last_checked": "2026-03-09T19:39:57.706Z"
     },
     {
       "id": "brexpiprazole-low-start",
@@ -5078,7 +5078,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:08:13.135Z"
+      "source_last_checked": "2026-03-09T19:40:04.899Z"
     },
     {
       "id": "aripiprazole-partial-agonist",
@@ -5101,7 +5101,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:08:20.502Z"
+      "source_last_checked": "2026-03-09T19:40:12.205Z"
     },
     {
       "id": "olanzapine-high-metabolic-risk",
@@ -5124,7 +5124,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:08:27.813Z"
+      "source_last_checked": "2026-03-09T19:40:19.195Z"
     },
     {
       "id": "quetiapine-sedating-profile",
@@ -5147,7 +5147,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:08:35.381Z"
+      "source_last_checked": "2026-03-09T19:40:26.310Z"
     },
     {
       "id": "risperidone-prolactin-caution",
@@ -5170,7 +5170,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:08:42.767Z"
+      "source_last_checked": "2026-03-09T19:40:33.456Z"
     },
     {
       "id": "ziprasidone-qtc-caution",
@@ -5193,7 +5193,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:08:50.031Z"
+      "source_last_checked": "2026-03-09T19:40:40.298Z"
     },
     {
       "id": "lithium-narrow-therapeutic-index",
@@ -5216,7 +5216,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:08:57.851Z"
+      "source_last_checked": "2026-03-09T19:40:47.150Z"
     },
     {
       "id": "lamotrigine-slow-titration-requirement",
@@ -5239,7 +5239,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:09:05.214Z"
+      "source_last_checked": "2026-03-09T19:40:53.954Z"
     },
     {
       "id": "valproate-teratogenic-risk",
@@ -5262,7 +5262,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:09:12.364Z"
+      "source_last_checked": "2026-03-09T19:41:01.008Z"
     },
     {
       "id": "carbamazepine-cyp-inducer",
@@ -5285,7 +5285,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:09:19.888Z"
+      "source_last_checked": "2026-03-09T19:41:08.220Z"
     },
     {
       "id": "oxcarbazepine-hyponatremia-caution",
@@ -5308,7 +5308,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:09:27.479Z"
+      "source_last_checked": "2026-03-09T19:41:15.445Z"
     },
     {
       "id": "topiramate-cognitive-side-effects",
@@ -5331,7 +5331,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:09:34.940Z"
+      "source_last_checked": "2026-03-09T19:41:22.889Z"
     },
     {
       "id": "zonisamide-sulfa-caution",
@@ -5354,7 +5354,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:09:42.247Z"
+      "source_last_checked": "2026-03-09T19:41:29.608Z"
     },
     {
       "id": "gabapentin-renal-adjustment",
@@ -5377,7 +5377,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:09:49.599Z"
+      "source_last_checked": "2026-03-09T19:41:36.681Z"
     },
     {
       "id": "pregabalin-edema-caution",
@@ -5400,7 +5400,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:09:56.917Z"
+      "source_last_checked": "2026-03-09T19:41:43.679Z"
     },
     {
       "id": "buspirone-delayed-onset",
@@ -5423,7 +5423,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:10:04.532Z"
+      "source_last_checked": "2026-03-09T19:41:51.021Z"
     },
     {
       "id": "propranolol-performance-anxiety",
@@ -5446,7 +5446,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:10:11.598Z"
+      "source_last_checked": "2026-03-09T19:41:58.358Z"
     },
     {
       "id": "prazosin-ptsd-nightmares",
@@ -5468,7 +5468,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:10:18.847Z"
+      "source_last_checked": "2026-03-09T19:42:05.687Z"
     },
     {
       "id": "amphetamine-mixed-salts",
@@ -5486,7 +5486,7 @@
       "missing_data_flags": [
         "off-label psych uses"
       ],
-      "source_last_checked": "2026-03-09T19:10:25.753Z"
+      "source_last_checked": "2026-03-09T19:42:12.641Z"
     },
     {
       "id": "methylphenidate",
@@ -5504,7 +5504,7 @@
       "missing_data_flags": [
         "off-label psych uses"
       ],
-      "source_last_checked": "2026-03-09T19:10:33.098Z"
+      "source_last_checked": "2026-03-09T19:42:19.654Z"
     }
   ]
 }

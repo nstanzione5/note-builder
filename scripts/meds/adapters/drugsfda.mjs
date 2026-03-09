@@ -2,6 +2,8 @@
  * Drugs@FDA adapter (via openFDA drugsfda endpoint):
  * - approval metadata checks for product/brand validation
  */
+import { appendOpenFdaApiKey } from './openfda-key.mjs';
+
 async function fetchWithTimeout(url, timeoutMs = 12000) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
@@ -13,10 +15,20 @@ async function fetchWithTimeout(url, timeoutMs = 12000) {
   }
 }
 
+function sanitizeOpenFdaTerm(value) {
+  return String(value || '')
+    .replace(/["']/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 export async function fetchDrugsFdaApproval(term) {
-  const encoded = encodeURIComponent(term);
-  const apiKey = process.env.OPENFDA_API_KEY ? `&api_key=${encodeURIComponent(process.env.OPENFDA_API_KEY)}` : '';
-  const url = `https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22${encoded}%22&limit=1${apiKey}`;
+  const cleaned = sanitizeOpenFdaTerm(term);
+  const search = encodeURIComponent(
+    `openfda.generic_name:"${cleaned}" OR openfda.brand_name:"${cleaned}" OR products.active_ingredients.name:"${cleaned}"`,
+  );
+  const baseUrl = `https://api.fda.gov/drug/drugsfda.json?search=${search}&limit=3`;
+  const url = appendOpenFdaApiKey(baseUrl);
 
   const response = await fetchWithTimeout(url);
   if (!response.ok) {

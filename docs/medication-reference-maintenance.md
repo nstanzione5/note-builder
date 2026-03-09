@@ -80,4 +80,4 @@ This lets app runtime pick up newly published catalog data without requiring a p
 - Shared canonical catalog updates are performed by owner-side maintenance (`med:refresh-if-stale` or `med:knowledge-check`).
 - Curated psychiatry content should only be edited in curated files/scripts and reviewed clinically.
 - Drive writes are gated by Apps Script allowlist/service token policy.
-- `openFDA` endpoints can rate-limit anonymous traffic (HTTP 429). For better coverage, set `OPENFDA_API_KEY` in your shell before running sync jobs.
+- `openFDA` endpoints can rate-limit anonymous traffic (HTTP 429). For better coverage, set `OPENFDA_API_KEY` in your shell before running sync jobs, or add `openfdaApiKey` to `config/drive-sync.local.json`.

@@ -519,9 +519,9 @@ for (const med of syncTargets) {
 
     const [dailyMedResolved, openFdaResolved, rxNormResolved, drugsFdaResolved, rxClassResolved, rxTermsResolved, medlinePlusResolved] = await Promise.all([
       resolveSourceAcrossTerms(fetchDailyMedCached, sourceTerms, { maxTerms: 3 }),
-      resolveSourceAcrossTerms(fetchOpenFdaCached, sourceTerms, { maxTerms: 1 }),
+      resolveSourceAcrossTerms(fetchOpenFdaCached, sourceTerms, { maxTerms: 4 }),
       resolveSourceAcrossTerms(fetchRxNormApproximateCached, sourceTerms, { maxTerms: 3 }),
-      resolveSourceAcrossTerms(fetchDrugsFdaCached, sourceTerms, { maxTerms: 1 }),
+      resolveSourceAcrossTerms(fetchDrugsFdaCached, sourceTerms, { maxTerms: 3 }),
       resolveSourceByRxcui(fetchRxClassCached, primaryRxcui),
       resolveSourceByRxcui(fetchRxTermsCached, primaryRxcui),
       resolveSourceByRxcui(fetchMedlinePlusCached, primaryRxcui),

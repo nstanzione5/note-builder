@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-09T19:12:47.443Z",
+  "generated_at": "2026-03-09T19:51:09.635Z",
   "editorial_policy": "high-priority curated psychiatric summaries with reliability scoring for all records",
   "medications": [
     {
@@ -33,7 +33,7 @@
         "Dose in the morning if activating, evening if sedating"
       ],
       "content_review_status": "curated",
-      "editorial_last_reviewed": "2026-03-09T19:12:47.431Z"
+      "editorial_last_reviewed": "2026-03-09T19:51:09.616Z"
     },
     {
       "id": "sertraline",
@@ -67,7 +67,7 @@
         "Take with food when GI effects are prominent"
       ],
       "content_review_status": "curated",
-      "editorial_last_reviewed": "2026-03-09T19:12:47.431Z"
+      "editorial_last_reviewed": "2026-03-09T19:51:09.617Z"
     },
     {
       "id": "fluoxetine",
@@ -101,7 +101,7 @@
         "Often more activating than other SSRIs"
       ],
       "content_review_status": "curated",
-      "editorial_last_reviewed": "2026-03-09T19:12:47.431Z"
+      "editorial_last_reviewed": "2026-03-09T19:51:09.617Z"
     },
     {
       "id": "venlafaxine",
@@ -135,7 +135,7 @@
         "Taper gradually to reduce discontinuation effects"
       ],
       "content_review_status": "curated",
-      "editorial_last_reviewed": "2026-03-09T19:12:47.431Z"
+      "editorial_last_reviewed": "2026-03-09T19:51:09.617Z"
     },
     {
       "id": "duloxetine",
@@ -167,7 +167,7 @@
         "Take with food during early titration"
       ],
       "content_review_status": "curated",
-      "editorial_last_reviewed": "2026-03-09T19:12:47.431Z"
+      "editorial_last_reviewed": "2026-03-09T19:51:09.617Z"
     },
     {
       "id": "bupropion",
@@ -199,7 +199,7 @@
         "Morning dosing helps reduce insomnia"
       ],
       "content_review_status": "curated",
-      "editorial_last_reviewed": "2026-03-09T19:12:47.431Z"
+      "editorial_last_reviewed": "2026-03-09T19:51:09.617Z"
     },
     {
       "id": "dextromethorphan-bupropion",
@@ -227,7 +227,7 @@
         "Review CYP2D6 interactions carefully"
       ],
       "content_review_status": "curated",
-      "editorial_last_reviewed": "2026-03-09T19:12:47.431Z"
+      "editorial_last_reviewed": "2026-03-09T19:51:09.617Z"
     },
     {
       "id": "lithium-carbonate",
@@ -258,7 +258,7 @@
         "Split dosing can improve tolerability"
       ],
       "content_review_status": "curated",
-      "editorial_last_reviewed": "2026-03-09T19:12:47.431Z"
+      "editorial_last_reviewed": "2026-03-09T19:51:09.617Z"
     },
     {
       "id": "lamotrigine",
@@ -289,7 +289,7 @@
         "Often weight-neutral and cognitively tolerable"
       ],
       "content_review_status": "curated",
-      "editorial_last_reviewed": "2026-03-09T19:12:47.431Z"
+      "editorial_last_reviewed": "2026-03-09T19:51:09.617Z"
     },
     {
       "id": "divalproex",
@@ -320,7 +320,7 @@
         "Consider metabolic monitoring over time"
       ],
       "content_review_status": "curated",
-      "editorial_last_reviewed": "2026-03-09T19:12:47.431Z"
+      "editorial_last_reviewed": "2026-03-09T19:51:09.617Z"
     },
     {
       "id": "aripiprazole",
@@ -351,7 +351,7 @@
         "Often less sedating than other atypicals"
       ],
       "content_review_status": "curated",
-      "editorial_last_reviewed": "2026-03-09T19:12:47.431Z"
+      "editorial_last_reviewed": "2026-03-09T19:51:09.617Z"
     },
     {
       "id": "quetiapine-ir",
@@ -383,7 +383,7 @@
         "Monitor metabolic trajectory early"
       ],
       "content_review_status": "curated",
-      "editorial_last_reviewed": "2026-03-09T19:12:47.431Z"
+      "editorial_last_reviewed": "2026-03-09T19:51:09.617Z"
     },
     {
       "id": "quetiapine-xr",
@@ -415,7 +415,7 @@
         "Evening administration often improves tolerability"
       ],
       "content_review_status": "curated",
-      "editorial_last_reviewed": "2026-03-09T19:12:47.431Z"
+      "editorial_last_reviewed": "2026-03-09T19:51:09.617Z"
     },
     {
       "id": "quetiapine",
@@ -446,7 +446,7 @@
         "IR and XR forms can feel clinically different for onset and daytime carryover."
       ],
       "content_review_status": "curated",
-      "editorial_last_reviewed": "2026-03-09T19:12:47.431Z"
+      "editorial_last_reviewed": "2026-03-09T19:51:09.617Z"
     },
     {
       "id": "lumateperone",
@@ -477,7 +477,7 @@
         "Useful modern outpatient bipolar option"
       ],
       "content_review_status": "curated",
-      "editorial_last_reviewed": "2026-03-09T19:12:47.431Z"
+      "editorial_last_reviewed": "2026-03-09T19:51:09.617Z"
     },
     {
       "id": "amphetamine-mixed-salts-ir",
@@ -507,7 +507,7 @@
         "Assess baseline cardiovascular risk and follow-up vitals"
       ],
       "content_review_status": "curated",
-      "editorial_last_reviewed": "2026-03-09T19:12:47.431Z"
+      "editorial_last_reviewed": "2026-03-09T19:51:09.617Z"
     },
     {
       "id": "amphetamine-mixed-salts-xr",
@@ -535,7 +535,7 @@
         "Dose timing affects sleep quality"
       ],
       "content_review_status": "curated",
-      "editorial_last_reviewed": "2026-03-09T19:12:47.431Z"
+      "editorial_last_reviewed": "2026-03-09T19:51:09.617Z"
     },
     {
       "id": "amphetamine-mixed-salts",
@@ -562,7 +562,7 @@
         "Formulation choice is central; do not treat IR and XR as interchangeable dosing."
       ],
       "content_review_status": "curated",
-      "editorial_last_reviewed": "2026-03-09T19:12:47.431Z"
+      "editorial_last_reviewed": "2026-03-09T19:51:09.617Z"
     },
     {
       "id": "lisdexamfetamine",
@@ -591,7 +591,7 @@
         "Morning dosing usually best for sleep protection"
       ],
       "content_review_status": "curated",
-      "editorial_last_reviewed": "2026-03-09T19:12:47.431Z"
+      "editorial_last_reviewed": "2026-03-09T19:51:09.617Z"
     },
     {
       "id": "methylphenidate",
@@ -618,7 +618,7 @@
         "Select formulation based on daily functional schedule and sleep sensitivity."
       ],
       "content_review_status": "curated",
-      "editorial_last_reviewed": "2026-03-09T19:12:47.431Z"
+      "editorial_last_reviewed": "2026-03-09T19:51:09.617Z"
     },
     {
       "id": "viloxazine",
@@ -645,7 +645,7 @@
         "Useful non-stimulant alternative when stimulant side effects are limiting"
       ],
       "content_review_status": "curated",
-      "editorial_last_reviewed": "2026-03-09T19:12:47.431Z"
+      "editorial_last_reviewed": "2026-03-09T19:51:09.617Z"
     },
     {
       "id": "guanfacine-er",
@@ -675,7 +675,7 @@
         "Taper gradually if discontinuing"
       ],
       "content_review_status": "curated",
-      "editorial_last_reviewed": "2026-03-09T19:12:47.431Z"
+      "editorial_last_reviewed": "2026-03-09T19:51:09.617Z"
     },
     {
       "id": "guanfacine",
@@ -703,7 +703,7 @@
         "IR and ER are not milligram-for-milligram substitutes."
       ],
       "content_review_status": "curated",
-      "editorial_last_reviewed": "2026-03-09T19:12:47.431Z"
+      "editorial_last_reviewed": "2026-03-09T19:51:09.617Z"
     },
     {
       "id": "buspirone",
@@ -733,7 +733,7 @@
         "Useful when avoiding benzodiazepines"
       ],
       "content_review_status": "curated",
-      "editorial_last_reviewed": "2026-03-09T19:12:47.431Z"
+      "editorial_last_reviewed": "2026-03-09T19:51:09.617Z"
     },
     {
       "id": "propranolol",
@@ -763,7 +763,7 @@
         "Track pulse/BP at dose changes"
       ],
       "content_review_status": "curated",
-      "editorial_last_reviewed": "2026-03-09T19:12:47.431Z"
+      "editorial_last_reviewed": "2026-03-09T19:51:09.617Z"
     },
     {
       "id": "naltrexone-oral",
@@ -792,7 +792,7 @@
         "Track liver enzymes with ongoing therapy"
       ],
       "content_review_status": "curated",
-      "editorial_last_reviewed": "2026-03-09T19:12:47.431Z"
+      "editorial_last_reviewed": "2026-03-09T19:51:09.617Z"
     }
   ]
 }

@@ -1,1652 +1,1569 @@
 {
-  "generated_at": "2026-03-09T19:10:47.708Z",
+  "generated_at": "2026-03-09T19:51:09.570Z",
   "items": [
     {
       "id": "citalopram",
       "generic_name": "citalopram",
-      "source_last_checked": "2026-03-09T18:39:25.785Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:47:58.650Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for citalopram",
-        "Drugs@FDA request failed (429) for citalopram"
-      ]
+      "notes": []
     },
     {
       "id": "escitalopram",
       "generic_name": "escitalopram",
-      "source_last_checked": "2026-03-09T18:39:32.530Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:47:59.623Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for escitalopram",
-        "Drugs@FDA request failed (429) for escitalopram"
-      ]
+      "notes": []
     },
     {
       "id": "fluoxetine",
       "generic_name": "fluoxetine",
-      "source_last_checked": "2026-03-09T18:39:39.400Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:00.551Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for fluoxetine",
-        "Drugs@FDA request failed (429) for fluoxetine"
-      ]
+      "notes": []
     },
     {
       "id": "fluvoxamine",
       "generic_name": "fluvoxamine",
-      "source_last_checked": "2026-03-09T18:39:46.231Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:01.321Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for fluvoxamine",
-        "Drugs@FDA request failed (429) for fluvoxamine"
-      ]
+      "notes": []
     },
     {
       "id": "paroxetine",
       "generic_name": "paroxetine",
-      "source_last_checked": "2026-03-09T18:39:53.283Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:02.073Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for paroxetine",
-        "Drugs@FDA request failed (429) for paroxetine"
-      ]
+      "notes": []
     },
     {
       "id": "sertraline",
       "generic_name": "sertraline",
-      "source_last_checked": "2026-03-09T18:40:00.366Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:02.794Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for sertraline",
-        "Drugs@FDA request failed (429) for sertraline"
-      ]
+      "notes": []
     },
     {
       "id": "vilazodone",
       "generic_name": "vilazodone",
-      "source_last_checked": "2026-03-09T18:40:07.631Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:03.472Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for vilazodone",
-        "Drugs@FDA request failed (429) for vilazodone"
-      ]
+      "notes": []
     },
     {
       "id": "vortioxetine",
       "generic_name": "vortioxetine",
-      "source_last_checked": "2026-03-09T18:40:14.343Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:03.998Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for vortioxetine",
-        "Drugs@FDA request failed (429) for vortioxetine"
-      ]
+      "notes": []
     },
     {
       "id": "venlafaxine",
       "generic_name": "venlafaxine",
-      "source_last_checked": "2026-03-09T18:40:21.601Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:04.697Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for venlafaxine",
-        "Drugs@FDA request failed (429) for venlafaxine"
-      ]
+      "notes": []
     },
     {
       "id": "desvenlafaxine",
       "generic_name": "desvenlafaxine",
-      "source_last_checked": "2026-03-09T18:40:29.129Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:05.381Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for desvenlafaxine",
-        "Drugs@FDA request failed (429) for desvenlafaxine"
-      ]
+      "notes": []
     },
     {
       "id": "duloxetine",
       "generic_name": "duloxetine",
-      "source_last_checked": "2026-03-09T18:40:37.345Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:06.260Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for duloxetine",
-        "Drugs@FDA request failed (429) for duloxetine"
-      ]
+      "notes": []
     },
     {
       "id": "levomilnacipran",
       "generic_name": "levomilnacipran",
-      "source_last_checked": "2026-03-09T18:40:45.180Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:06.943Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for levomilnacipran",
-        "Drugs@FDA request failed (429) for levomilnacipran"
-      ]
+      "notes": []
     },
     {
       "id": "milnacipran",
       "generic_name": "milnacipran",
-      "source_last_checked": "2026-03-09T18:40:52.516Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:07.566Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for milnacipran",
-        "Drugs@FDA request failed (429) for milnacipran"
-      ]
+      "notes": []
     },
     {
       "id": "atomoxetine",
       "generic_name": "atomoxetine",
-      "source_last_checked": "2026-03-09T18:40:59.937Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:08.254Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for atomoxetine",
-        "Drugs@FDA request failed (429) for atomoxetine"
-      ]
+      "notes": []
     },
     {
       "id": "sibutramine",
       "generic_name": "sibutramine",
-      "source_last_checked": "2026-03-09T18:41:07.337Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:48:08.878Z",
+      "source_links_count": 3,
       "enrichment_sources_found": [
         "RxNorm",
-        "RxClass"
+        "RxClass",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for sibutramine",
-        "Drugs@FDA request failed (429) for sibutramine"
+        "openFDA request failed (404) for sibutramine"
       ]
     },
     {
       "id": "bupropion",
       "generic_name": "bupropion",
-      "source_last_checked": "2026-03-09T18:41:14.529Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:09.508Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for bupropion",
-        "Drugs@FDA request failed (429) for bupropion"
-      ]
+      "notes": []
     },
     {
       "id": "dextromethorphan-bupropion",
       "generic_name": "dextromethorphan-bupropion",
-      "source_last_checked": "2026-03-09T18:41:21.878Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:48:10.456Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for dextromethorphan-bupropion",
-        "Drugs@FDA request failed (429) for dextromethorphan-bupropion"
+        "openFDA request failed (404) for dextromethorphan-bupropion",
+        "Drugs@FDA request failed (404) for dextromethorphan-bupropion"
       ]
     },
     {
       "id": "mirtazapine",
       "generic_name": "mirtazapine",
-      "source_last_checked": "2026-03-09T18:41:29.205Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:11.136Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for mirtazapine",
-        "Drugs@FDA request failed (429) for mirtazapine"
-      ]
+      "notes": []
     },
     {
       "id": "trazodone",
       "generic_name": "trazodone",
-      "source_last_checked": "2026-03-09T18:41:36.541Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:11.910Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for trazodone",
-        "Drugs@FDA request failed (429) for trazodone"
-      ]
+      "notes": []
     },
     {
       "id": "nefazodone",
       "generic_name": "nefazodone",
-      "source_last_checked": "2026-03-09T18:41:43.797Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:12.436Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for nefazodone",
-        "Drugs@FDA request failed (429) for nefazodone"
-      ]
+      "notes": []
     },
     {
       "id": "amitriptyline",
       "generic_name": "amitriptyline",
-      "source_last_checked": "2026-03-09T18:41:51.217Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:13.202Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for amitriptyline",
-        "Drugs@FDA request failed (429) for amitriptyline"
-      ]
+      "notes": []
     },
     {
       "id": "nortriptyline",
       "generic_name": "nortriptyline",
-      "source_last_checked": "2026-03-09T18:41:58.605Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:14.027Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for nortriptyline",
-        "Drugs@FDA request failed (429) for nortriptyline"
-      ]
+      "notes": []
     },
     {
       "id": "desipramine",
       "generic_name": "desipramine",
-      "source_last_checked": "2026-03-09T18:42:06.165Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:14.669Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for desipramine",
-        "Drugs@FDA request failed (429) for desipramine"
-      ]
+      "notes": []
     },
     {
       "id": "imipramine",
       "generic_name": "imipramine",
-      "source_last_checked": "2026-03-09T18:42:12.998Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:15.437Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for imipramine",
-        "Drugs@FDA request failed (429) for imipramine"
-      ]
+      "notes": []
     },
     {
       "id": "clomipramine",
       "generic_name": "clomipramine",
-      "source_last_checked": "2026-03-09T18:42:20.050Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:16.217Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for clomipramine",
-        "Drugs@FDA request failed (429) for clomipramine"
-      ]
+      "notes": []
     },
     {
       "id": "doxepin",
       "generic_name": "doxepin",
-      "source_last_checked": "2026-03-09T18:42:26.865Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:16.982Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for doxepin",
-        "Drugs@FDA request failed (429) for doxepin"
-      ]
+      "notes": []
     },
     {
       "id": "maprotiline",
       "generic_name": "maprotiline",
-      "source_last_checked": "2026-03-09T18:42:35.110Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T19:48:17.454Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for maprotiline",
-        "Drugs@FDA request failed (429) for maprotiline"
+        "openFDA request failed (404) for maprotiline"
       ]
     },
     {
       "id": "amoxapine",
       "generic_name": "amoxapine",
-      "source_last_checked": "2026-03-09T18:42:42.637Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:18.023Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for amoxapine",
-        "Drugs@FDA request failed (429) for amoxapine"
-      ]
+      "notes": []
     },
     {
       "id": "trimipramine",
       "generic_name": "trimipramine",
-      "source_last_checked": "2026-03-09T18:42:50.173Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:18.581Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for trimipramine",
-        "Drugs@FDA request failed (429) for trimipramine"
-      ]
+      "notes": []
     },
     {
       "id": "protriptyline",
       "generic_name": "protriptyline",
-      "source_last_checked": "2026-03-09T18:42:57.704Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:19.075Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for protriptyline",
-        "Drugs@FDA request failed (429) for protriptyline"
-      ]
+      "notes": []
     },
     {
       "id": "phenelzine",
       "generic_name": "phenelzine",
-      "source_last_checked": "2026-03-09T18:43:05.127Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:19.594Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for phenelzine",
-        "Drugs@FDA request failed (429) for phenelzine"
-      ]
+      "notes": []
     },
     {
       "id": "tranylcypromine",
       "generic_name": "tranylcypromine",
-      "source_last_checked": "2026-03-09T18:43:12.562Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:20.152Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for tranylcypromine",
-        "Drugs@FDA request failed (429) for tranylcypromine"
-      ]
+      "notes": []
     },
     {
       "id": "isocarboxazid",
       "generic_name": "isocarboxazid",
-      "source_last_checked": "2026-03-09T18:43:19.819Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:48:21.163Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for isocarboxazid",
-        "Drugs@FDA request failed (429) for isocarboxazid"
+        "openFDA request failed (404) for isocarboxazid",
+        "openFDA request failed (404) for marplan"
       ]
     },
     {
       "id": "selegiline-transdermal",
       "generic_name": "selegiline transdermal",
-      "source_last_checked": "2026-03-09T18:43:27.140Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:48:21.832Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for selegiline",
-        "Drugs@FDA request failed (429) for selegiline"
-      ]
+      "notes": []
     },
     {
       "id": "zuranolone",
       "generic_name": "zuranolone",
-      "source_last_checked": "2026-03-09T18:43:34.519Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:22.337Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for zuranolone",
-        "Drugs@FDA request failed (429) for zuranolone"
-      ]
+      "notes": []
     },
     {
       "id": "amphetamine-mixed-salts-ir",
       "generic_name": "amphetamine mixed salts IR",
-      "source_last_checked": "2026-03-09T18:43:41.819Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:23.033Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for amphetamine",
-        "Drugs@FDA request failed (429) for amphetamine"
-      ]
+      "notes": []
     },
     {
       "id": "amphetamine-mixed-salts-xr",
       "generic_name": "amphetamine mixed salts XR",
-      "source_last_checked": "2026-03-09T18:43:49.157Z",
-      "source_links_count": 8,
+      "source_last_checked": "2026-03-09T19:48:23.315Z",
+      "source_links_count": 10,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for amphetamine",
-        "Drugs@FDA request failed (429) for amphetamine"
-      ]
+      "notes": []
     },
     {
       "id": "lisdexamfetamine",
       "generic_name": "lisdexamfetamine",
-      "source_last_checked": "2026-03-09T18:43:56.749Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:24.115Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for lisdexamfetamine",
-        "Drugs@FDA request failed (429) for lisdexamfetamine"
-      ]
+      "notes": []
     },
     {
       "id": "dextroamphetamine",
       "generic_name": "dextroamphetamine",
-      "source_last_checked": "2026-03-09T18:44:03.889Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:24.832Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for dextroamphetamine",
-        "Drugs@FDA request failed (429) for dextroamphetamine"
-      ]
+      "notes": []
     },
     {
       "id": "methamphetamine",
       "generic_name": "methamphetamine",
-      "source_last_checked": "2026-03-09T18:44:10.878Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:25.354Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for methamphetamine",
-        "Drugs@FDA request failed (429) for methamphetamine"
-      ]
+      "notes": []
     },
     {
       "id": "methylphenidate-ir",
       "generic_name": "methylphenidate IR",
-      "source_last_checked": "2026-03-09T18:44:17.982Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:26.000Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for methylphenidate",
-        "Drugs@FDA request failed (429) for methylphenidate"
-      ]
+      "notes": []
     },
     {
       "id": "methylphenidate-er",
       "generic_name": "methylphenidate ER",
-      "source_last_checked": "2026-03-09T18:44:25.064Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:26.281Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for methylphenidate",
-        "Drugs@FDA request failed (429) for methylphenidate"
-      ]
+      "notes": []
     },
     {
       "id": "dexmethylphenidate",
       "generic_name": "dexmethylphenidate",
-      "source_last_checked": "2026-03-09T18:44:31.837Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:26.962Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for dexmethylphenidate",
-        "Drugs@FDA request failed (429) for dexmethylphenidate"
-      ]
+      "notes": []
     },
     {
       "id": "dexmethylphenidate-xr",
       "generic_name": "dexmethylphenidate XR",
-      "source_last_checked": "2026-03-09T18:44:38.963Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:27.242Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for dexmethylphenidate",
-        "Drugs@FDA request failed (429) for dexmethylphenidate"
-      ]
+      "notes": []
     },
     {
       "id": "serdexmethylphenidate-dexmethylphenidate",
       "generic_name": "serdexmethylphenidate-dexmethylphenidate",
-      "source_last_checked": "2026-03-09T18:44:45.991Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:48:28.362Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for serdexmethylphenidate-dexmethylphenidate",
-        "Drugs@FDA request failed (429) for serdexmethylphenidate-dexmethylphenidate"
+        "openFDA request failed (404) for serdexmethylphenidate-dexmethylphenidate",
+        "Drugs@FDA request failed (404) for serdexmethylphenidate-dexmethylphenidate"
       ]
     },
     {
       "id": "methylphenidate-pm",
       "generic_name": "methylphenidate PM",
-      "source_last_checked": "2026-03-09T18:44:52.579Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:28.643Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for methylphenidate",
-        "Drugs@FDA request failed (429) for methylphenidate"
-      ]
+      "notes": []
     },
     {
       "id": "amphetamine-mixed-salts-er",
       "generic_name": "amphetamine mixed salts ER",
-      "source_last_checked": "2026-03-09T18:44:59.432Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:28.924Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for amphetamine",
-        "Drugs@FDA request failed (429) for amphetamine"
-      ]
+      "notes": []
     },
     {
       "id": "amphetamine-sulfate",
       "generic_name": "amphetamine sulfate",
-      "source_last_checked": "2026-03-09T18:45:06.349Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:29.524Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for amphetamine sulfate",
-        "Drugs@FDA request failed (429) for amphetamine sulfate"
-      ]
+      "notes": []
     },
     {
       "id": "amphetamine-xr-odt",
       "generic_name": "amphetamine XR ODT",
-      "source_last_checked": "2026-03-09T18:45:13.632Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:29.805Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for amphetamine",
-        "Drugs@FDA request failed (429) for amphetamine"
-      ]
+      "notes": []
     },
     {
       "id": "amphetamine-xr-suspension",
       "generic_name": "amphetamine XR suspension",
-      "source_last_checked": "2026-03-09T18:45:20.615Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:30.086Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for amphetamine",
-        "Drugs@FDA request failed (429) for amphetamine"
-      ]
+      "notes": []
     },
     {
       "id": "methylphenidate-chewable-er",
       "generic_name": "methylphenidate chewable ER",
-      "source_last_checked": "2026-03-09T18:45:27.973Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:30.368Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for methylphenidate",
-        "Drugs@FDA request failed (429) for methylphenidate"
-      ]
+      "notes": []
     },
     {
       "id": "methylphenidate-suspension-er",
       "generic_name": "methylphenidate suspension ER",
-      "source_last_checked": "2026-03-09T18:45:35.041Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:30.650Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for methylphenidate",
-        "Drugs@FDA request failed (429) for methylphenidate"
-      ]
+      "notes": []
     },
     {
       "id": "methylphenidate-odt-xr",
       "generic_name": "methylphenidate ODT XR",
-      "source_last_checked": "2026-03-09T18:45:42.390Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:30.931Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for methylphenidate",
-        "Drugs@FDA request failed (429) for methylphenidate"
-      ]
+      "notes": []
     },
     {
       "id": "methylphenidate-transdermal",
       "generic_name": "methylphenidate transdermal",
-      "source_last_checked": "2026-03-09T18:45:49.746Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:31.212Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for methylphenidate",
-        "Drugs@FDA request failed (429) for methylphenidate"
-      ]
+      "notes": []
     },
     {
       "id": "dextroamphetamine-transdermal",
       "generic_name": "dextroamphetamine transdermal",
-      "source_last_checked": "2026-03-09T18:45:56.966Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:48:31.494Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for dextroamphetamine",
-        "Drugs@FDA request failed (429) for dextroamphetamine"
-      ]
+      "notes": []
     },
     {
       "id": "viloxazine",
       "generic_name": "viloxazine",
-      "source_last_checked": "2026-03-09T18:46:04.513Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:31.975Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for viloxazine",
-        "Drugs@FDA request failed (429) for viloxazine"
-      ]
+      "notes": []
     },
     {
       "id": "guanfacine-ir",
       "generic_name": "guanfacine IR",
-      "source_last_checked": "2026-03-09T18:46:11.889Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:32.595Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for guanfacine",
-        "Drugs@FDA request failed (429) for guanfacine"
-      ]
+      "notes": []
     },
     {
       "id": "guanfacine-er",
       "generic_name": "guanfacine ER",
-      "source_last_checked": "2026-03-09T18:46:18.721Z",
-      "source_links_count": 9,
+      "source_last_checked": "2026-03-09T19:48:32.876Z",
+      "source_links_count": 11,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for guanfacine",
-        "Drugs@FDA request failed (429) for guanfacine"
-      ]
+      "notes": []
     },
     {
       "id": "clonidine-ir",
       "generic_name": "clonidine IR",
-      "source_last_checked": "2026-03-09T18:46:26.115Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:33.670Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for clonidine",
-        "Drugs@FDA request failed (429) for clonidine"
-      ]
+      "notes": []
     },
     {
       "id": "clonidine-er",
       "generic_name": "clonidine ER",
-      "source_last_checked": "2026-03-09T18:46:33.215Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:33.952Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for clonidine",
-        "Drugs@FDA request failed (429) for clonidine"
-      ]
+      "notes": []
     },
     {
       "id": "modafinil",
       "generic_name": "modafinil",
-      "source_last_checked": "2026-03-09T18:46:40.663Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:34.668Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for modafinil",
-        "Drugs@FDA request failed (429) for modafinil"
-      ]
+      "notes": []
     },
     {
       "id": "armodafinil",
       "generic_name": "armodafinil",
-      "source_last_checked": "2026-03-09T18:46:47.893Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:35.344Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for armodafinil",
-        "Drugs@FDA request failed (429) for armodafinil"
-      ]
+      "notes": []
     },
     {
       "id": "alprazolam",
       "generic_name": "alprazolam",
-      "source_last_checked": "2026-03-09T18:46:55.244Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:36.299Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for alprazolam",
-        "Drugs@FDA request failed (429) for alprazolam"
-      ]
+      "notes": []
     },
     {
       "id": "clonazepam",
       "generic_name": "clonazepam",
-      "source_last_checked": "2026-03-09T18:47:02.837Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:37.186Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for clonazepam",
-        "Drugs@FDA request failed (429) for clonazepam"
-      ]
+      "notes": []
     },
     {
       "id": "lorazepam",
       "generic_name": "lorazepam",
-      "source_last_checked": "2026-03-09T18:47:09.978Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:38.094Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for lorazepam",
-        "Drugs@FDA request failed (429) for lorazepam"
-      ]
+      "notes": []
     },
     {
       "id": "diazepam",
       "generic_name": "diazepam",
-      "source_last_checked": "2026-03-09T18:47:17.302Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:38.914Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for diazepam",
-        "Drugs@FDA request failed (429) for diazepam"
-      ]
+      "notes": []
     },
     {
       "id": "temazepam",
       "generic_name": "temazepam",
-      "source_last_checked": "2026-03-09T18:47:25.110Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:39.836Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for temazepam",
-        "Drugs@FDA request failed (429) for temazepam"
-      ]
+      "notes": []
     },
     {
       "id": "oxazepam",
       "generic_name": "oxazepam",
-      "source_last_checked": "2026-03-09T18:47:32.453Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:40.415Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for oxazepam",
-        "Drugs@FDA request failed (429) for oxazepam"
-      ]
+      "notes": []
     },
     {
       "id": "chlordiazepoxide",
       "generic_name": "chlordiazepoxide",
-      "source_last_checked": "2026-03-09T18:47:39.790Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:41.199Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for chlordiazepoxide",
-        "Drugs@FDA request failed (429) for chlordiazepoxide"
-      ]
+      "notes": []
     },
     {
       "id": "clorazepate",
       "generic_name": "clorazepate",
-      "source_last_checked": "2026-03-09T18:47:47.038Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:41.901Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for clorazepate",
-        "Drugs@FDA request failed (429) for clorazepate"
-      ]
+      "notes": []
     },
     {
       "id": "triazolam",
       "generic_name": "triazolam",
-      "source_last_checked": "2026-03-09T18:47:54.458Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:42.543Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for triazolam",
-        "Drugs@FDA request failed (429) for triazolam"
-      ]
+      "notes": []
     },
     {
       "id": "estazolam",
       "generic_name": "estazolam",
-      "source_last_checked": "2026-03-09T18:48:01.715Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:43.149Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for estazolam",
-        "Drugs@FDA request failed (429) for estazolam"
-      ]
+      "notes": []
     },
     {
       "id": "flurazepam",
       "generic_name": "flurazepam",
-      "source_last_checked": "2026-03-09T18:48:09.227Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:43.708Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for flurazepam",
-        "Drugs@FDA request failed (429) for flurazepam"
-      ]
+      "notes": []
     },
     {
       "id": "quazepam",
       "generic_name": "quazepam",
-      "source_last_checked": "2026-03-09T18:48:16.485Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:48:44.313Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
-        "RxClass"
+        "RxClass",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for quazepam",
-        "Drugs@FDA request failed (429) for quazepam"
-      ]
+      "notes": []
     },
     {
       "id": "midazolam",
       "generic_name": "midazolam",
-      "source_last_checked": "2026-03-09T18:48:23.933Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:45.109Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for midazolam",
-        "Drugs@FDA request failed (429) for midazolam"
-      ]
+      "notes": []
     },
     {
       "id": "diazepam-nasal",
       "generic_name": "diazepam nasal",
-      "source_last_checked": "2026-03-09T18:48:30.872Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:48:45.391Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for diazepam",
-        "Drugs@FDA request failed (429) for diazepam"
-      ]
+      "notes": []
     },
     {
       "id": "midazolam-nasal",
       "generic_name": "midazolam nasal",
-      "source_last_checked": "2026-03-09T18:48:37.546Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:48:45.673Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for midazolam",
-        "Drugs@FDA request failed (429) for midazolam"
-      ]
+      "notes": []
     },
     {
       "id": "zolpidem",
       "generic_name": "zolpidem",
-      "source_last_checked": "2026-03-09T18:48:44.508Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:46.698Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for zolpidem",
-        "Drugs@FDA request failed (429) for zolpidem"
-      ]
+      "notes": []
     },
     {
       "id": "zolpidem-er",
       "generic_name": "zolpidem ER",
-      "source_last_checked": "2026-03-09T18:48:51.863Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:48:46.982Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for zolpidem",
-        "Drugs@FDA request failed (429) for zolpidem"
-      ]
+      "notes": []
     },
     {
       "id": "zaleplon",
       "generic_name": "zaleplon",
-      "source_last_checked": "2026-03-09T18:48:58.935Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:47.745Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for zaleplon",
-        "Drugs@FDA request failed (429) for zaleplon"
-      ]
+      "notes": []
     },
     {
       "id": "eszopiclone",
       "generic_name": "eszopiclone",
-      "source_last_checked": "2026-03-09T18:49:06.553Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:48.619Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for eszopiclone",
-        "Drugs@FDA request failed (429) for eszopiclone"
-      ]
+      "notes": []
     },
     {
       "id": "ramelteon",
       "generic_name": "ramelteon",
-      "source_last_checked": "2026-03-09T18:49:13.614Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:49.302Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for ramelteon",
-        "Drugs@FDA request failed (429) for ramelteon"
-      ]
+      "notes": []
     },
     {
       "id": "suvorexant",
       "generic_name": "suvorexant",
-      "source_last_checked": "2026-03-09T18:49:20.871Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:49.786Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for suvorexant",
-        "Drugs@FDA request failed (429) for suvorexant"
-      ]
+      "notes": []
     },
     {
       "id": "lemborexant",
       "generic_name": "lemborexant",
-      "source_last_checked": "2026-03-09T18:49:28.285Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:50.356Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for lemborexant",
-        "Drugs@FDA request failed (429) for lemborexant"
-      ]
+      "notes": []
     },
     {
       "id": "daridorexant",
       "generic_name": "daridorexant",
-      "source_last_checked": "2026-03-09T18:49:35.624Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:50.861Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for daridorexant",
-        "Drugs@FDA request failed (429) for daridorexant"
-      ]
+      "notes": []
     },
     {
       "id": "doxepin-low-dose",
       "generic_name": "doxepin low-dose",
-      "source_last_checked": "2026-03-09T18:49:42.984Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:48:52.023Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for doxepin low-dose",
-        "Drugs@FDA request failed (429) for doxepin low-dose"
+        "openFDA request failed (404) for doxepin low-dose",
+        "Drugs@FDA request failed (404) for doxepin low-dose"
       ]
     },
     {
       "id": "hydroxyzine",
       "generic_name": "hydroxyzine",
-      "source_last_checked": "2026-03-09T18:49:50.490Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:52.943Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for hydroxyzine",
-        "Drugs@FDA request failed (429) for hydroxyzine"
-      ]
+      "notes": []
     },
     {
       "id": "diphenhydramine",
       "generic_name": "diphenhydramine",
-      "source_last_checked": "2026-03-09T18:49:57.552Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:53.784Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for diphenhydramine",
-        "Drugs@FDA request failed (429) for diphenhydramine"
-      ]
+      "notes": []
     },
     {
       "id": "gabapentin",
       "generic_name": "gabapentin",
-      "source_last_checked": "2026-03-09T18:50:04.890Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:54.481Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for gabapentin",
-        "Drugs@FDA request failed (429) for gabapentin"
-      ]
+      "notes": []
     },
     {
       "id": "pregabalin",
       "generic_name": "pregabalin",
-      "source_last_checked": "2026-03-09T18:50:12.318Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:55.402Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for pregabalin",
-        "Drugs@FDA request failed (429) for pregabalin"
-      ]
+      "notes": []
     },
     {
       "id": "melatonin-receptor-agonist",
       "generic_name": "melatonin receptor agonist",
-      "source_last_checked": "2026-03-09T18:50:19.653Z",
+      "source_last_checked": "2026-03-09T19:48:57.153Z",
       "source_links_count": 1,
       "enrichment_sources_found": [
         "RxNorm"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for melatonin receptor agonist",
-        "Drugs@FDA request failed (429) for melatonin receptor agonist"
+        "openFDA request failed (404) for melatonin receptor agonist",
+        "Drugs@FDA request failed (404) for melatonin receptor agonist"
       ]
     },
     {
       "id": "aripiprazole",
       "generic_name": "aripiprazole",
-      "source_last_checked": "2026-03-09T18:50:27.106Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:57.866Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for aripiprazole",
-        "Drugs@FDA request failed (429) for aripiprazole"
-      ]
+      "notes": []
     },
     {
       "id": "brexpiprazole",
       "generic_name": "brexpiprazole",
-      "source_last_checked": "2026-03-09T18:50:34.331Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:58.370Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for brexpiprazole",
-        "Drugs@FDA request failed (429) for brexpiprazole"
-      ]
+      "notes": []
     },
     {
       "id": "cariprazine",
       "generic_name": "cariprazine",
-      "source_last_checked": "2026-03-09T18:50:41.925Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:48:58.883Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for cariprazine",
-        "Drugs@FDA request failed (429) for cariprazine"
-      ]
+      "notes": []
     },
     {
       "id": "quetiapine-ir",
       "generic_name": "quetiapine IR",
-      "source_last_checked": "2026-03-09T18:50:49.008Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:48:59.725Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for quetiapine",
-        "Drugs@FDA request failed (429) for quetiapine"
-      ]
+      "notes": []
     },
     {
       "id": "quetiapine-xr",
       "generic_name": "quetiapine XR",
-      "source_last_checked": "2026-03-09T18:50:56.099Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:49:00.007Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for quetiapine",
-        "Drugs@FDA request failed (429) for quetiapine"
-      ]
+      "notes": []
     },
     {
       "id": "olanzapine",
       "generic_name": "olanzapine",
-      "source_last_checked": "2026-03-09T18:51:03.074Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:00.774Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for olanzapine",
-        "Drugs@FDA request failed (429) for olanzapine"
-      ]
+      "notes": []
     },
     {
       "id": "olanzapine-fluoxetine",
       "generic_name": "olanzapine-fluoxetine",
-      "source_last_checked": "2026-03-09T18:51:10.498Z",
+      "source_last_checked": "2026-03-09T19:49:01.825Z",
       "source_links_count": 3,
       "enrichment_sources_found": [
         "RxNorm",
@@ -1655,881 +1572,850 @@
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for olanzapine-fluoxetine",
-        "Drugs@FDA request failed (429) for olanzapine-fluoxetine"
+        "openFDA request failed (404) for olanzapine-fluoxetine",
+        "openFDA request failed (404) for symbyax",
+        "Drugs@FDA request failed (404) for olanzapine-fluoxetine",
+        "Drugs@FDA request failed (404) for symbyax"
       ]
     },
     {
       "id": "olanzapine-samidorphan",
       "generic_name": "olanzapine-samidorphan",
-      "source_last_checked": "2026-03-09T18:51:18.100Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:49:02.873Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for olanzapine-samidorphan",
-        "Drugs@FDA request failed (429) for olanzapine-samidorphan"
+        "openFDA request failed (404) for olanzapine-samidorphan",
+        "Drugs@FDA request failed (404) for olanzapine-samidorphan"
       ]
     },
     {
       "id": "risperidone",
       "generic_name": "risperidone",
-      "source_last_checked": "2026-03-09T18:51:25.700Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:03.572Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for risperidone",
-        "Drugs@FDA request failed (429) for risperidone"
-      ]
+      "notes": []
     },
     {
       "id": "paliperidone-oral",
       "generic_name": "paliperidone oral",
-      "source_last_checked": "2026-03-09T18:51:32.771Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:49:04.442Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for paliperidone",
-        "Drugs@FDA request failed (429) for paliperidone"
-      ]
+      "notes": []
     },
     {
       "id": "ziprasidone",
       "generic_name": "ziprasidone",
-      "source_last_checked": "2026-03-09T18:51:40.037Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:05.232Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for ziprasidone",
-        "Drugs@FDA request failed (429) for ziprasidone"
-      ]
+      "notes": []
     },
     {
       "id": "lurasidone",
       "generic_name": "lurasidone",
-      "source_last_checked": "2026-03-09T18:51:47.200Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:05.824Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for lurasidone",
-        "Drugs@FDA request failed (429) for lurasidone"
-      ]
+      "notes": []
     },
     {
       "id": "lumateperone",
       "generic_name": "lumateperone",
-      "source_last_checked": "2026-03-09T18:51:54.686Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:06.331Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for lumateperone",
-        "Drugs@FDA request failed (429) for lumateperone"
-      ]
+      "notes": []
     },
     {
       "id": "asenapine-sublingual",
       "generic_name": "asenapine sublingual",
-      "source_last_checked": "2026-03-09T18:52:01.865Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:49:07.411Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for asenapine sublingual",
-        "Drugs@FDA request failed (429) for asenapine sublingual"
+        "openFDA request failed (404) for asenapine sublingual",
+        "Drugs@FDA request failed (404) for asenapine sublingual"
       ]
     },
     {
       "id": "iloperidone",
       "generic_name": "iloperidone",
-      "source_last_checked": "2026-03-09T18:52:09.203Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:07.931Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for iloperidone",
-        "Drugs@FDA request failed (429) for iloperidone"
-      ]
+      "notes": []
     },
     {
       "id": "haloperidol",
       "generic_name": "haloperidol",
-      "source_last_checked": "2026-03-09T18:52:17.066Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:08.636Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for haloperidol",
-        "Drugs@FDA request failed (429) for haloperidol"
-      ]
+      "notes": []
     },
     {
       "id": "chlorpromazine",
       "generic_name": "chlorpromazine",
-      "source_last_checked": "2026-03-09T18:52:24.596Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:09.268Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for chlorpromazine",
-        "Drugs@FDA request failed (429) for chlorpromazine"
-      ]
+      "notes": []
     },
     {
       "id": "perphenazine",
       "generic_name": "perphenazine",
-      "source_last_checked": "2026-03-09T18:52:32.269Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:09.976Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for perphenazine",
-        "Drugs@FDA request failed (429) for perphenazine"
-      ]
+      "notes": []
     },
     {
       "id": "trifluoperazine",
       "generic_name": "trifluoperazine",
-      "source_last_checked": "2026-03-09T18:52:39.861Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:10.573Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for trifluoperazine",
-        "Drugs@FDA request failed (429) for trifluoperazine"
-      ]
+      "notes": []
     },
     {
       "id": "loxapine",
       "generic_name": "loxapine",
-      "source_last_checked": "2026-03-09T18:52:47.094Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:11.256Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for loxapine",
-        "Drugs@FDA request failed (429) for loxapine"
-      ]
+      "notes": []
     },
     {
       "id": "molindone",
       "generic_name": "molindone",
-      "source_last_checked": "2026-03-09T18:52:54.720Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:11.783Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for molindone",
-        "Drugs@FDA request failed (429) for molindone"
-      ]
+      "notes": []
     },
     {
       "id": "pimozide",
       "generic_name": "pimozide",
-      "source_last_checked": "2026-03-09T18:53:01.774Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:12.306Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for pimozide",
-        "Drugs@FDA request failed (429) for pimozide"
-      ]
+      "notes": []
     },
     {
       "id": "thiothixene",
       "generic_name": "thiothixene",
-      "source_last_checked": "2026-03-09T18:53:08.680Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:12.859Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for thiothixene",
-        "Drugs@FDA request failed (429) for thiothixene"
-      ]
+      "notes": []
     },
     {
       "id": "thioridazine",
       "generic_name": "thioridazine",
-      "source_last_checked": "2026-03-09T18:53:15.772Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:13.393Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for thioridazine",
-        "Drugs@FDA request failed (429) for thioridazine"
-      ]
+      "notes": []
     },
     {
       "id": "fluphenazine",
       "generic_name": "fluphenazine",
-      "source_last_checked": "2026-03-09T18:53:23.026Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:14.031Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for fluphenazine",
-        "Drugs@FDA request failed (429) for fluphenazine"
-      ]
+      "notes": []
     },
     {
       "id": "xanomeline-trospium",
       "generic_name": "xanomeline-trospium",
-      "source_last_checked": "2026-03-09T18:53:30.364Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:49:15.090Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for xanomeline-trospium",
-        "Drugs@FDA request failed (429) for xanomeline-trospium"
+        "openFDA request failed (404) for xanomeline-trospium",
+        "Drugs@FDA request failed (404) for xanomeline-trospium"
       ]
     },
     {
       "id": "pimavanserin",
       "generic_name": "pimavanserin",
-      "source_last_checked": "2026-03-09T18:53:37.785Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:15.680Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for pimavanserin",
-        "Drugs@FDA request failed (429) for pimavanserin"
-      ]
+      "notes": []
     },
     {
       "id": "lithium-carbonate",
       "generic_name": "lithium carbonate",
-      "source_last_checked": "2026-03-09T18:53:45.149Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:16.214Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for lithium carbonate",
-        "Drugs@FDA request failed (429) for lithium carbonate"
-      ]
+      "notes": []
     },
     {
       "id": "lithium-citrate",
       "generic_name": "lithium citrate",
-      "source_last_checked": "2026-03-09T18:53:52.466Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:49:16.743Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for lithium citrate",
-        "Drugs@FDA request failed (429) for lithium citrate"
-      ]
+      "notes": []
     },
     {
       "id": "lamotrigine",
       "generic_name": "lamotrigine",
-      "source_last_checked": "2026-03-09T18:53:59.801Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:17.347Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for lamotrigine",
-        "Drugs@FDA request failed (429) for lamotrigine"
-      ]
+      "notes": []
     },
     {
       "id": "divalproex",
       "generic_name": "divalproex",
-      "source_last_checked": "2026-03-09T18:54:06.890Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:17.979Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for divalproex",
-        "Drugs@FDA request failed (429) for divalproex"
-      ]
+      "notes": []
     },
     {
       "id": "valproic-acid",
       "generic_name": "valproic acid",
-      "source_last_checked": "2026-03-09T18:54:14.204Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:18.660Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for valproic acid",
-        "Drugs@FDA request failed (429) for valproic acid"
-      ]
+      "notes": []
     },
     {
       "id": "carbamazepine",
       "generic_name": "carbamazepine",
-      "source_last_checked": "2026-03-09T18:54:21.544Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:19.289Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for carbamazepine",
-        "Drugs@FDA request failed (429) for carbamazepine"
-      ]
+      "notes": []
     },
     {
       "id": "oxcarbazepine",
       "generic_name": "oxcarbazepine",
-      "source_last_checked": "2026-03-09T18:54:28.314Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:19.937Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for oxcarbazepine",
-        "Drugs@FDA request failed (429) for oxcarbazepine"
-      ]
+      "notes": []
     },
     {
       "id": "topiramate",
       "generic_name": "topiramate",
-      "source_last_checked": "2026-03-09T18:54:35.444Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:20.533Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for topiramate",
-        "Drugs@FDA request failed (429) for topiramate"
-      ]
+      "notes": []
     },
     {
       "id": "zonisamide",
       "generic_name": "zonisamide",
-      "source_last_checked": "2026-03-09T18:54:42.498Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:21.316Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for zonisamide",
-        "Drugs@FDA request failed (429) for zonisamide"
-      ]
+      "notes": []
     },
     {
       "id": "levetiracetam",
       "generic_name": "levetiracetam",
-      "source_last_checked": "2026-03-09T18:54:49.510Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:22.155Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for levetiracetam",
-        "Drugs@FDA request failed (429) for levetiracetam"
-      ]
+      "notes": []
     },
     {
       "id": "prazosin",
       "generic_name": "prazosin",
-      "source_last_checked": "2026-03-09T18:54:56.539Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:22.825Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for prazosin",
-        "Drugs@FDA request failed (429) for prazosin"
-      ]
+      "notes": []
     },
     {
       "id": "doxazosin",
       "generic_name": "doxazosin",
-      "source_last_checked": "2026-03-09T18:55:04.025Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:23.515Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for doxazosin",
-        "Drugs@FDA request failed (429) for doxazosin"
-      ]
+      "notes": []
     },
     {
       "id": "terazosin",
       "generic_name": "terazosin",
-      "source_last_checked": "2026-03-09T18:55:11.089Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:24.361Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for terazosin",
-        "Drugs@FDA request failed (429) for terazosin"
-      ]
+      "notes": []
     },
     {
       "id": "propranolol",
       "generic_name": "propranolol",
-      "source_last_checked": "2026-03-09T18:55:18.433Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:25.147Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for propranolol",
-        "Drugs@FDA request failed (429) for propranolol"
-      ]
+      "notes": []
     },
     {
       "id": "atenolol",
       "generic_name": "atenolol",
-      "source_last_checked": "2026-03-09T18:55:25.768Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:25.978Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for atenolol",
-        "Drugs@FDA request failed (429) for atenolol"
-      ]
+      "notes": []
     },
     {
       "id": "metoprolol",
       "generic_name": "metoprolol",
-      "source_last_checked": "2026-03-09T18:55:33.101Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:26.616Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for metoprolol",
-        "Drugs@FDA request failed (429) for metoprolol"
-      ]
+      "notes": []
     },
     {
       "id": "nadolol",
       "generic_name": "nadolol",
-      "source_last_checked": "2026-03-09T18:55:40.441Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:27.554Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for nadolol",
-        "Drugs@FDA request failed (429) for nadolol"
-      ]
+      "notes": []
     },
     {
       "id": "bisoprolol",
       "generic_name": "bisoprolol",
-      "source_last_checked": "2026-03-09T18:55:47.847Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:28.323Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for bisoprolol",
-        "Drugs@FDA request failed (429) for bisoprolol"
-      ]
+      "notes": []
     },
     {
       "id": "carvedilol",
       "generic_name": "carvedilol",
-      "source_last_checked": "2026-03-09T18:55:55.395Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:28.946Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for carvedilol",
-        "Drugs@FDA request failed (429) for carvedilol"
-      ]
+      "notes": []
     },
     {
       "id": "buspirone",
       "generic_name": "buspirone",
-      "source_last_checked": "2026-03-09T18:56:02.457Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:34.987Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for buspirone",
-        "Drugs@FDA request failed (429) for buspirone"
-      ]
+      "notes": []
     },
     {
       "id": "cyproheptadine",
       "generic_name": "cyproheptadine",
-      "source_last_checked": "2026-03-09T18:56:09.706Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:36.150Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for cyproheptadine",
-        "Drugs@FDA request failed (429) for cyproheptadine"
-      ]
+      "notes": []
     },
     {
       "id": "naltrexone-oral",
       "generic_name": "naltrexone oral",
-      "source_last_checked": "2026-03-09T18:56:17.134Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:49:36.837Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for naltrexone",
-        "Drugs@FDA request failed (429) for naltrexone"
-      ]
+      "notes": []
     },
     {
       "id": "acamprosate",
       "generic_name": "acamprosate",
-      "source_last_checked": "2026-03-09T18:56:24.472Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:37.467Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for acamprosate",
-        "Drugs@FDA request failed (429) for acamprosate"
-      ]
+      "notes": []
     },
     {
       "id": "disulfiram",
       "generic_name": "disulfiram",
-      "source_last_checked": "2026-03-09T18:56:31.811Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:38.013Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for disulfiram",
-        "Drugs@FDA request failed (429) for disulfiram"
-      ]
+      "notes": []
     },
     {
       "id": "naloxone-intranasal",
       "generic_name": "naloxone intranasal",
-      "source_last_checked": "2026-03-09T18:56:39.149Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:49:39.440Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for naloxone intranasal",
-        "Drugs@FDA request failed (429) for naloxone intranasal"
+        "openFDA request failed (404) for naloxone intranasal",
+        "Drugs@FDA request failed (404) for naloxone intranasal"
       ]
     },
     {
       "id": "nalmefene-intranasal",
       "generic_name": "nalmefene intranasal",
-      "source_last_checked": "2026-03-09T18:56:46.762Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:49:40.613Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for nalmefene intranasal",
-        "Drugs@FDA request failed (429) for nalmefene intranasal"
+        "openFDA request failed (404) for nalmefene intranasal",
+        "Drugs@FDA request failed (404) for nalmefene intranasal"
       ]
     },
     {
       "id": "lofexidine",
       "generic_name": "lofexidine",
-      "source_last_checked": "2026-03-09T18:56:53.908Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:41.153Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for lofexidine",
-        "Drugs@FDA request failed (429) for lofexidine"
-      ]
+      "notes": []
     },
     {
       "id": "varenicline",
       "generic_name": "varenicline",
-      "source_last_checked": "2026-03-09T18:57:01.162Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:41.878Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for varenicline",
-        "Drugs@FDA request failed (429) for varenicline"
-      ]
+      "notes": []
     },
     {
       "id": "nicotine-transdermal",
       "generic_name": "nicotine transdermal",
-      "source_last_checked": "2026-03-09T18:57:08.500Z",
-      "source_links_count": 8,
+      "source_last_checked": "2026-03-09T19:49:42.459Z",
+      "source_links_count": 10,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for nicotine",
-        "Drugs@FDA request failed (429) for nicotine"
-      ]
+      "notes": []
     },
     {
       "id": "nicotine-gum",
       "generic_name": "nicotine gum",
-      "source_last_checked": "2026-03-09T18:57:16.107Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:49:43.533Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for nicotine gum",
-        "Drugs@FDA request failed (429) for nicotine gum"
+        "openFDA request failed (404) for nicotine gum",
+        "Drugs@FDA request failed (404) for nicotine gum"
       ]
     },
     {
       "id": "nicotine-lozenge",
       "generic_name": "nicotine lozenge",
-      "source_last_checked": "2026-03-09T18:57:23.393Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:49:44.281Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for nicotine lozenge",
-        "Drugs@FDA request failed (429) for nicotine lozenge"
-      ]
+      "notes": []
     },
     {
       "id": "bupropion-sr-smoking-cessation",
       "generic_name": "bupropion SR smoking cessation",
-      "source_last_checked": "2026-03-09T18:57:30.513Z",
+      "source_last_checked": "2026-03-09T19:49:46.005Z",
       "source_links_count": 5,
       "enrichment_sources_found": [
         "RxNorm",
@@ -2539,31 +2425,34 @@
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for bupropion smoking cessation",
-        "Drugs@FDA request failed (429) for bupropion smoking cessation"
+        "openFDA request failed (404) for bupropion smoking cessation",
+        "openFDA request failed (404) for bupropion sr smoking cessation",
+        "openFDA request failed (404) for zyban",
+        "Drugs@FDA request failed (404) for bupropion smoking cessation",
+        "Drugs@FDA request failed (404) for bupropion sr smoking cessation",
+        "Drugs@FDA request failed (404) for zyban"
       ]
     },
     {
       "id": "liothyronine",
       "generic_name": "liothyronine",
-      "source_last_checked": "2026-03-09T18:57:37.600Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:46.908Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for liothyronine",
-        "Drugs@FDA request failed (429) for liothyronine"
-      ]
+      "notes": []
     },
     {
       "id": "methylfolate",
       "generic_name": "methylfolate",
-      "source_last_checked": "2026-03-09T18:57:44.910Z",
+      "source_last_checked": "2026-03-09T19:49:48.804Z",
       "source_links_count": 2,
       "enrichment_sources_found": [
         "DailyMed",
@@ -2571,252 +2460,243 @@
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for methylfolate",
-        "Drugs@FDA request failed (429) for methylfolate"
+        "openFDA request failed (404) for methylfolate",
+        "openFDA request failed (404) for deplin",
+        "Drugs@FDA request failed (404) for methylfolate",
+        "Drugs@FDA request failed (404) for deplin"
       ]
     },
     {
       "id": "ketamine-intranasal",
       "generic_name": "ketamine intranasal",
-      "source_last_checked": "2026-03-09T18:57:52.256Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:49:49.877Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for ketamine intranasal",
-        "Drugs@FDA request failed (429) for ketamine intranasal"
+        "openFDA request failed (404) for ketamine intranasal",
+        "Drugs@FDA request failed (404) for ketamine intranasal"
       ]
     },
     {
       "id": "benztropine",
       "generic_name": "benztropine",
-      "source_last_checked": "2026-03-09T18:57:59.431Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:49:50.801Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for benztropine",
-        "Drugs@FDA request failed (429) for benztropine"
-      ]
+      "notes": []
     },
     {
       "id": "trihexyphenidyl",
       "generic_name": "trihexyphenidyl",
-      "source_last_checked": "2026-03-09T18:58:06.902Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:51.473Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for trihexyphenidyl",
-        "Drugs@FDA request failed (429) for trihexyphenidyl"
-      ]
+      "notes": []
     },
     {
       "id": "deutetrabenazine",
       "generic_name": "deutetrabenazine",
-      "source_last_checked": "2026-03-09T18:58:13.936Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:49:51.961Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for deutetrabenazine",
-        "Drugs@FDA request failed (429) for deutetrabenazine"
-      ]
+      "notes": []
     },
     {
       "id": "valbenazine",
       "generic_name": "valbenazine",
-      "source_last_checked": "2026-03-09T18:58:20.849Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:52.449Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for valbenazine",
-        "Drugs@FDA request failed (429) for valbenazine"
-      ]
+      "notes": []
     },
     {
       "id": "tetrabenazine",
       "generic_name": "tetrabenazine",
-      "source_last_checked": "2026-03-09T18:58:27.885Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:53.049Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for tetrabenazine",
-        "Drugs@FDA request failed (429) for tetrabenazine"
-      ]
+      "notes": []
     },
     {
       "id": "memantine",
       "generic_name": "memantine",
-      "source_last_checked": "2026-03-09T18:58:35.072Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:53.767Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for memantine",
-        "Drugs@FDA request failed (429) for memantine"
-      ]
+      "notes": []
     },
     {
       "id": "donepezil",
       "generic_name": "donepezil",
-      "source_last_checked": "2026-03-09T18:58:42.762Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:54.585Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for donepezil",
-        "Drugs@FDA request failed (429) for donepezil"
-      ]
+      "notes": []
     },
     {
       "id": "rivastigmine",
       "generic_name": "rivastigmine",
-      "source_last_checked": "2026-03-09T18:58:50.103Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:49:55.410Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for rivastigmine",
-        "Drugs@FDA request failed (429) for rivastigmine"
-      ]
+      "notes": []
     },
     {
       "id": "galantamine",
       "generic_name": "galantamine",
-      "source_last_checked": "2026-03-09T18:58:57.549Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:56.161Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for galantamine",
-        "Drugs@FDA request failed (429) for galantamine"
-      ]
+      "notes": []
     },
     {
       "id": "amantadine",
       "generic_name": "amantadine",
-      "source_last_checked": "2026-03-09T18:59:04.871Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:56.858Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for amantadine",
-        "Drugs@FDA request failed (429) for amantadine"
-      ]
+      "notes": []
     },
     {
       "id": "baclofen",
       "generic_name": "baclofen",
-      "source_last_checked": "2026-03-09T18:59:12.214Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:57.660Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for baclofen",
-        "Drugs@FDA request failed (429) for baclofen"
-      ]
+      "notes": []
     },
     {
       "id": "tizanidine",
       "generic_name": "tizanidine",
-      "source_last_checked": "2026-03-09T18:59:19.725Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:58.432Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for tizanidine",
-        "Drugs@FDA request failed (429) for tizanidine"
-      ]
+      "notes": []
     },
     {
       "id": "cyclobenzaprine",
       "generic_name": "cyclobenzaprine",
-      "source_last_checked": "2026-03-09T18:59:27.319Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:49:59.293Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for cyclobenzaprine",
-        "Drugs@FDA request failed (429) for cyclobenzaprine"
-      ]
+      "notes": []
     },
     {
       "id": "n-acetylcysteine",
       "generic_name": "n-acetylcysteine",
-      "source_last_checked": "2026-03-09T18:59:34.978Z",
+      "source_last_checked": "2026-03-09T19:49:59.786Z",
       "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
@@ -2826,99 +2706,94 @@
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for n-acetylcysteine",
-        "Drugs@FDA request failed (429) for n-acetylcysteine"
+        "openFDA request failed (404) for n-acetylcysteine",
+        "Drugs@FDA request failed (404) for n-acetylcysteine"
       ]
     },
     {
       "id": "ondansetron",
       "generic_name": "ondansetron",
-      "source_last_checked": "2026-03-09T18:59:42.329Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:50:00.434Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for ondansetron",
-        "Drugs@FDA request failed (429) for ondansetron"
-      ]
+      "notes": []
     },
     {
       "id": "metoclopramide",
       "generic_name": "metoclopramide",
-      "source_last_checked": "2026-03-09T18:59:49.695Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:50:01.107Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for metoclopramide",
-        "Drugs@FDA request failed (429) for metoclopramide"
-      ]
+      "notes": []
     },
     {
       "id": "lacosamide",
       "generic_name": "lacosamide",
-      "source_last_checked": "2026-03-09T18:59:57.196Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:50:01.715Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for lacosamide",
-        "Drugs@FDA request failed (429) for lacosamide"
-      ]
+      "notes": []
     },
     {
       "id": "tiagabine",
       "generic_name": "tiagabine",
-      "source_last_checked": "2026-03-09T19:00:04.533Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:50:02.314Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for tiagabine",
-        "Drugs@FDA request failed (429) for tiagabine"
-      ]
+      "notes": []
     },
     {
       "id": "rufinamide",
       "generic_name": "rufinamide",
-      "source_last_checked": "2026-03-09T19:00:12.065Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:50:02.974Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for rufinamide",
-        "Drugs@FDA request failed (429) for rufinamide"
-      ]
+      "notes": []
     },
     {
       "id": "zolpidem-sublingual",
       "generic_name": "zolpidem sublingual",
-      "source_last_checked": "2026-03-09T19:00:19.574Z",
+      "source_last_checked": "2026-03-09T19:50:04.097Z",
       "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
@@ -2928,14 +2803,16 @@
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for zolpidem sublingual",
-        "Drugs@FDA request failed (429) for zolpidem sublingual"
+        "openFDA request failed (404) for zolpidem sublingual",
+        "openFDA request failed (404) for intermezzo",
+        "Drugs@FDA request failed (404) for zolpidem sublingual",
+        "Drugs@FDA request failed (404) for intermezzo"
       ]
     },
     {
       "id": "zolpidem-oral-spray",
       "generic_name": "zolpidem oral spray",
-      "source_last_checked": "2026-03-09T19:00:26.665Z",
+      "source_last_checked": "2026-03-09T19:50:05.615Z",
       "source_links_count": 4,
       "enrichment_sources_found": [
         "RxNorm",
@@ -2944,79 +2821,80 @@
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for zolpidem spray",
-        "Drugs@FDA request failed (429) for zolpidem spray"
+        "openFDA request failed (404) for zolpidem spray",
+        "openFDA request failed (404) for zolpidem oral spray",
+        "openFDA request failed (404) for zolpimist",
+        "Drugs@FDA request failed (404) for zolpidem spray",
+        "Drugs@FDA request failed (404) for zolpidem oral spray",
+        "Drugs@FDA request failed (404) for zolpimist"
       ]
     },
     {
       "id": "alprazolam-odt",
       "generic_name": "alprazolam ODT",
-      "source_last_checked": "2026-03-09T19:00:33.665Z",
-      "source_links_count": 7,
+      "source_last_checked": "2026-03-09T19:50:05.897Z",
+      "source_links_count": 9,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for alprazolam",
-        "Drugs@FDA request failed (429) for alprazolam"
-      ]
+      "notes": []
     },
     {
       "id": "clonazepam-odt",
       "generic_name": "clonazepam ODT",
-      "source_last_checked": "2026-03-09T19:00:40.791Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:50:06.178Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for clonazepam",
-        "Drugs@FDA request failed (429) for clonazepam"
-      ]
+      "notes": []
     },
     {
       "id": "lorazepam-sublingual",
       "generic_name": "lorazepam sublingual",
-      "source_last_checked": "2026-03-09T19:00:48.282Z",
+      "source_last_checked": "2026-03-09T19:50:07.871Z",
       "source_links_count": 1,
       "enrichment_sources_found": [
         "RxNorm"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for lorazepam sublingual",
-        "Drugs@FDA request failed (429) for lorazepam sublingual"
+        "openFDA request failed (404) for lorazepam sublingual",
+        "Drugs@FDA request failed (404) for lorazepam sublingual"
       ]
     },
     {
       "id": "asenapine-transdermal",
       "generic_name": "asenapine transdermal",
-      "source_last_checked": "2026-03-09T19:00:55.899Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:50:08.506Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for asenapine",
-        "Drugs@FDA request failed (429) for asenapine"
-      ]
+      "notes": []
     },
     {
       "id": "lithium-orotate",
       "generic_name": "lithium orotate",
-      "source_last_checked": "2026-03-09T19:01:02.858Z",
+      "source_last_checked": "2026-03-09T19:50:09.070Z",
       "source_links_count": 3,
       "enrichment_sources_found": [
         "RxNorm",
@@ -3025,65 +2903,65 @@
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for lithium orotate",
-        "Drugs@FDA request failed (429) for lithium orotate"
+        "openFDA request failed (404) for lithium orotate",
+        "Drugs@FDA request failed (404) for lithium orotate"
       ]
     },
     {
       "id": "dexmedetomidine-sublingual",
       "generic_name": "dexmedetomidine sublingual",
-      "source_last_checked": "2026-03-09T19:01:09.785Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:50:10.146Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for dexmedetomidine sublingual",
-        "Drugs@FDA request failed (429) for dexmedetomidine sublingual"
+        "openFDA request failed (404) for dexmedetomidine sublingual",
+        "Drugs@FDA request failed (404) for dexmedetomidine sublingual"
       ]
     },
     {
       "id": "viloxazine-er",
       "generic_name": "viloxazine ER",
-      "source_last_checked": "2026-03-09T19:01:16.975Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:50:10.427Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for viloxazine",
-        "Drugs@FDA request failed (429) for viloxazine"
-      ]
+      "notes": []
     },
     {
       "id": "modafinil-oral-suspension",
       "generic_name": "modafinil oral suspension",
-      "source_last_checked": "2026-03-09T19:01:24.023Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:50:10.709Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for modafinil",
-        "Drugs@FDA request failed (429) for modafinil"
-      ]
+      "notes": []
     },
     {
       "id": "fluoxetine-weekly",
       "generic_name": "fluoxetine weekly",
-      "source_last_checked": "2026-03-09T19:01:31.144Z",
+      "source_last_checked": "2026-03-09T19:50:11.810Z",
       "source_links_count": 3,
       "enrichment_sources_found": [
         "RxNorm",
@@ -3092,235 +2970,224 @@
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for fluoxetine weekly",
-        "Drugs@FDA request failed (429) for fluoxetine weekly"
+        "openFDA request failed (404) for fluoxetine weekly",
+        "openFDA request failed (404) for prozac weekly",
+        "Drugs@FDA request failed (404) for fluoxetine weekly",
+        "Drugs@FDA request failed (404) for prozac weekly"
       ]
     },
     {
       "id": "paroxetine-cr",
       "generic_name": "paroxetine CR",
-      "source_last_checked": "2026-03-09T19:01:38.110Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:50:12.092Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for paroxetine",
-        "Drugs@FDA request failed (429) for paroxetine"
-      ]
+      "notes": []
     },
     {
       "id": "venlafaxine-er",
       "generic_name": "venlafaxine ER",
-      "source_last_checked": "2026-03-09T19:01:45.171Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:50:12.372Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for venlafaxine",
-        "Drugs@FDA request failed (429) for venlafaxine"
-      ]
+      "notes": []
     },
     {
       "id": "desvenlafaxine-er",
       "generic_name": "desvenlafaxine ER",
-      "source_last_checked": "2026-03-09T19:01:52.238Z",
-      "source_links_count": 7,
+      "source_last_checked": "2026-03-09T19:50:12.653Z",
+      "source_links_count": 9,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for desvenlafaxine",
-        "Drugs@FDA request failed (429) for desvenlafaxine"
-      ]
+      "notes": []
     },
     {
       "id": "quetiapine-odt",
       "generic_name": "quetiapine ODT",
-      "source_last_checked": "2026-03-09T19:01:59.117Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:50:12.935Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for quetiapine",
-        "Drugs@FDA request failed (429) for quetiapine"
-      ]
+      "notes": []
     },
     {
       "id": "risperidone-odt",
       "generic_name": "risperidone ODT",
-      "source_last_checked": "2026-03-09T19:02:06.238Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:50:13.216Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for risperidone",
-        "Drugs@FDA request failed (429) for risperidone"
-      ]
+      "notes": []
     },
     {
       "id": "olanzapine-odt",
       "generic_name": "olanzapine ODT",
-      "source_last_checked": "2026-03-09T19:02:13.479Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:50:13.499Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for olanzapine",
-        "Drugs@FDA request failed (429) for olanzapine"
-      ]
+      "notes": []
     },
     {
       "id": "lamotrigine-odt",
       "generic_name": "lamotrigine ODT",
-      "source_last_checked": "2026-03-09T19:02:20.535Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:50:13.781Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for lamotrigine",
-        "Drugs@FDA request failed (429) for lamotrigine"
-      ]
+      "notes": []
     },
     {
       "id": "carbamazepine-er",
       "generic_name": "carbamazepine ER",
-      "source_last_checked": "2026-03-09T19:02:27.430Z",
-      "source_links_count": 7,
+      "source_last_checked": "2026-03-09T19:50:14.063Z",
+      "source_links_count": 9,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for carbamazepine",
-        "Drugs@FDA request failed (429) for carbamazepine"
-      ]
+      "notes": []
     },
     {
       "id": "oxcarbazepine-er",
       "generic_name": "oxcarbazepine ER",
-      "source_last_checked": "2026-03-09T19:02:34.531Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:50:14.345Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for oxcarbazepine",
-        "Drugs@FDA request failed (429) for oxcarbazepine"
-      ]
+      "notes": []
     },
     {
       "id": "topiramate-er",
       "generic_name": "topiramate ER",
-      "source_last_checked": "2026-03-09T19:02:41.780Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:50:14.627Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for topiramate",
-        "Drugs@FDA request failed (429) for topiramate"
-      ]
+      "notes": []
     },
     {
       "id": "gabapentin-enacarbil",
       "generic_name": "gabapentin enacarbil",
-      "source_last_checked": "2026-03-09T19:02:49.205Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:50:15.202Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for gabapentin enacarbil",
-        "Drugs@FDA request failed (429) for gabapentin enacarbil"
-      ]
+      "notes": []
     },
     {
       "id": "pregabalin-er",
       "generic_name": "pregabalin ER",
-      "source_last_checked": "2026-03-09T19:02:56.455Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:50:15.485Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for pregabalin",
-        "Drugs@FDA request failed (429) for pregabalin"
-      ]
+      "notes": []
     },
     {
       "id": "propranolol-er",
       "generic_name": "propranolol ER",
-      "source_last_checked": "2026-03-09T19:03:03.607Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:50:15.767Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for propranolol",
-        "Drugs@FDA request failed (429) for propranolol"
-      ]
+      "notes": []
     },
     {
       "id": "prazosin-bedtime",
       "generic_name": "prazosin bedtime",
-      "source_last_checked": "2026-03-09T19:03:10.908Z",
+      "source_last_checked": "2026-03-09T19:50:16.336Z",
       "source_links_count": 3,
       "enrichment_sources_found": [
         "RxNorm",
@@ -3329,48 +3196,46 @@
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for prazosin bedtime",
-        "Drugs@FDA request failed (429) for prazosin bedtime"
+        "openFDA request failed (404) for prazosin bedtime",
+        "Drugs@FDA request failed (404) for prazosin bedtime"
       ]
     },
     {
       "id": "hydroxyzine-pamoate",
       "generic_name": "hydroxyzine pamoate",
-      "source_last_checked": "2026-03-09T19:03:18.220Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:50:16.825Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for hydroxyzine pamoate",
-        "Drugs@FDA request failed (429) for hydroxyzine pamoate"
-      ]
+      "notes": []
     },
     {
       "id": "hydroxyzine-hydrochloride",
       "generic_name": "hydroxyzine hydrochloride",
-      "source_last_checked": "2026-03-09T19:03:25.061Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:50:17.327Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for hydroxyzine hydrochloride",
-        "Drugs@FDA request failed (429) for hydroxyzine hydrochloride"
-      ]
+      "notes": []
     },
     {
       "id": "buspirone-split-dosing",
       "generic_name": "buspirone split dosing",
-      "source_last_checked": "2026-03-09T19:03:32.098Z",
+      "source_last_checked": "2026-03-09T19:50:17.849Z",
       "source_links_count": 3,
       "enrichment_sources_found": [
         "RxNorm",
@@ -3379,28 +3244,28 @@
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for buspirone split dosing",
-        "Drugs@FDA request failed (429) for buspirone split dosing"
+        "openFDA request failed (404) for buspirone split dosing",
+        "Drugs@FDA request failed (404) for buspirone split dosing"
       ]
     },
     {
       "id": "naltrexone-low-dose",
       "generic_name": "naltrexone low dose",
-      "source_last_checked": "2026-03-09T19:03:39.207Z",
+      "source_last_checked": "2026-03-09T19:50:18.657Z",
       "source_links_count": 1,
       "enrichment_sources_found": [
         "RxNorm"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for naltrexone low dose",
-        "Drugs@FDA request failed (429) for naltrexone low dose"
+        "openFDA request failed (404) for naltrexone low dose",
+        "Drugs@FDA request failed (404) for naltrexone low dose"
       ]
     },
     {
       "id": "acamprosate-delayed-release",
       "generic_name": "acamprosate delayed-release",
-      "source_last_checked": "2026-03-09T19:03:46.775Z",
+      "source_last_checked": "2026-03-09T19:50:20.087Z",
       "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
@@ -3410,14 +3275,16 @@
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for acamprosate delayed-release",
-        "Drugs@FDA request failed (429) for acamprosate delayed-release"
+        "openFDA request failed (404) for acamprosate delayed-release",
+        "openFDA request failed (404) for campral",
+        "Drugs@FDA request failed (404) for acamprosate delayed-release",
+        "Drugs@FDA request failed (404) for campral"
       ]
     },
     {
       "id": "disulfiram-supervised",
       "generic_name": "disulfiram supervised",
-      "source_last_checked": "2026-03-09T19:03:54.114Z",
+      "source_last_checked": "2026-03-09T19:50:21.153Z",
       "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
@@ -3427,48 +3294,54 @@
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for disulfiram supervised",
-        "Drugs@FDA request failed (429) for disulfiram supervised"
+        "openFDA request failed (404) for disulfiram supervised",
+        "openFDA request failed (404) for antabuse",
+        "Drugs@FDA request failed (404) for disulfiram supervised",
+        "Drugs@FDA request failed (404) for antabuse"
       ]
     },
     {
       "id": "varenicline-starter-pack",
       "generic_name": "varenicline starter pack",
-      "source_last_checked": "2026-03-09T19:04:01.550Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:50:22.370Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for varenicline starter pack",
-        "Drugs@FDA request failed (429) for varenicline starter pack"
+        "openFDA request failed (404) for varenicline starter pack",
+        "Drugs@FDA request failed (404) for varenicline starter pack"
       ]
     },
     {
       "id": "nicotine-inhaler",
       "generic_name": "nicotine inhaler",
-      "source_last_checked": "2026-03-09T19:04:09.106Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:50:23.592Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for nicotine inhaler",
-        "Drugs@FDA request failed (429) for nicotine inhaler"
+        "openFDA request failed (404) for nicotine inhaler",
+        "Drugs@FDA request failed (404) for nicotine inhaler"
       ]
     },
     {
       "id": "nicotine-nasal-spray",
       "generic_name": "nicotine nasal spray",
-      "source_last_checked": "2026-03-09T19:04:16.742Z",
+      "source_last_checked": "2026-03-09T19:50:25.313Z",
       "source_links_count": 4,
       "enrichment_sources_found": [
         "RxNorm",
@@ -3477,167 +3350,165 @@
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for nicotine spray",
-        "Drugs@FDA request failed (429) for nicotine spray"
+        "openFDA request failed (404) for nicotine spray",
+        "openFDA request failed (404) for nicotine nasal spray",
+        "openFDA request failed (404) for nicotrol ns",
+        "Drugs@FDA request failed (404) for nicotine spray",
+        "Drugs@FDA request failed (404) for nicotine nasal spray",
+        "Drugs@FDA request failed (404) for nicotrol ns"
       ]
     },
     {
       "id": "guanfacine-patch",
       "generic_name": "guanfacine patch",
-      "source_last_checked": "2026-03-09T19:04:24.223Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:50:25.594Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for guanfacine",
-        "Drugs@FDA request failed (429) for guanfacine"
-      ]
+      "notes": []
     },
     {
       "id": "clonidine-patch",
       "generic_name": "clonidine patch",
-      "source_last_checked": "2026-03-09T19:04:31.121Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:50:25.875Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for clonidine",
-        "Drugs@FDA request failed (429) for clonidine"
-      ]
+      "notes": []
     },
     {
       "id": "memantine-er",
       "generic_name": "memantine ER",
-      "source_last_checked": "2026-03-09T19:04:37.906Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:50:26.157Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for memantine",
-        "Drugs@FDA request failed (429) for memantine"
-      ]
+      "notes": []
     },
     {
       "id": "donepezil-odt",
       "generic_name": "donepezil ODT",
-      "source_last_checked": "2026-03-09T19:04:44.784Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:50:26.438Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for donepezil",
-        "Drugs@FDA request failed (429) for donepezil"
-      ]
+      "notes": []
     },
     {
       "id": "rivastigmine-patch",
       "generic_name": "rivastigmine patch",
-      "source_last_checked": "2026-03-09T19:04:51.872Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:50:26.719Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for rivastigmine",
-        "Drugs@FDA request failed (429) for rivastigmine"
-      ]
+      "notes": []
     },
     {
       "id": "galantamine-er",
       "generic_name": "galantamine ER",
-      "source_last_checked": "2026-03-09T19:04:59.112Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:50:27.001Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for galantamine",
-        "Drugs@FDA request failed (429) for galantamine"
-      ]
+      "notes": []
     },
     {
       "id": "armodafinil-tablet",
       "generic_name": "armodafinil tablet",
-      "source_last_checked": "2026-03-09T19:05:06.013Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:50:27.283Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for armodafinil",
-        "Drugs@FDA request failed (429) for armodafinil"
-      ]
+      "notes": []
     },
     {
       "id": "modafinil-tablet",
       "generic_name": "modafinil tablet",
-      "source_last_checked": "2026-03-09T19:05:12.932Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:50:27.563Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for modafinil",
-        "Drugs@FDA request failed (429) for modafinil"
-      ]
+      "notes": []
     },
     {
       "id": "eszopiclone-low-dose",
       "generic_name": "eszopiclone low dose",
-      "source_last_checked": "2026-03-09T19:05:20.169Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:50:28.647Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for eszopiclone low dose",
-        "Drugs@FDA request failed (429) for eszopiclone low dose"
+        "openFDA request failed (404) for eszopiclone low dose",
+        "Drugs@FDA request failed (404) for eszopiclone low dose"
       ]
     },
     {
       "id": "zaleplon-low-dose",
       "generic_name": "zaleplon low dose",
-      "source_last_checked": "2026-03-09T19:05:27.733Z",
+      "source_last_checked": "2026-03-09T19:50:29.754Z",
       "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
@@ -3647,234 +3518,237 @@
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for zaleplon low dose",
-        "Drugs@FDA request failed (429) for zaleplon low dose"
+        "openFDA request failed (404) for zaleplon low dose",
+        "openFDA request failed (404) for sonata",
+        "Drugs@FDA request failed (404) for zaleplon low dose",
+        "Drugs@FDA request failed (404) for sonata"
       ]
     },
     {
       "id": "daridorexant-dual-orexin-antagonist",
       "generic_name": "daridorexant dual orexin antagonist",
-      "source_last_checked": "2026-03-09T19:05:34.918Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:50:30.841Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for daridorexant dual orexin antagonist",
-        "Drugs@FDA request failed (429) for daridorexant dual orexin antagonist"
+        "openFDA request failed (404) for daridorexant dual orexin antagonist",
+        "Drugs@FDA request failed (404) for daridorexant dual orexin antagonist"
       ]
     },
     {
       "id": "lemborexant-dual-orexin-antagonist",
       "generic_name": "lemborexant dual orexin antagonist",
-      "source_last_checked": "2026-03-09T19:05:42.181Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:50:31.981Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for lemborexant dual orexin antagonist",
-        "Drugs@FDA request failed (429) for lemborexant dual orexin antagonist"
+        "openFDA request failed (404) for lemborexant dual orexin antagonist",
+        "Drugs@FDA request failed (404) for lemborexant dual orexin antagonist"
       ]
     },
     {
       "id": "suvorexant-dual-orexin-antagonist",
       "generic_name": "suvorexant dual orexin antagonist",
-      "source_last_checked": "2026-03-09T19:05:49.519Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:50:33.185Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for suvorexant dual orexin antagonist",
-        "Drugs@FDA request failed (429) for suvorexant dual orexin antagonist"
+        "openFDA request failed (404) for suvorexant dual orexin antagonist",
+        "Drugs@FDA request failed (404) for suvorexant dual orexin antagonist"
       ]
     },
     {
       "id": "ramelteon-melatonin-agonist",
       "generic_name": "ramelteon melatonin agonist",
-      "source_last_checked": "2026-03-09T19:05:56.853Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:50:34.262Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for ramelteon melatonin agonist",
-        "Drugs@FDA request failed (429) for ramelteon melatonin agonist"
+        "openFDA request failed (404) for ramelteon melatonin agonist",
+        "Drugs@FDA request failed (404) for ramelteon melatonin agonist"
       ]
     },
     {
       "id": "melatonin-extended-release",
       "generic_name": "melatonin extended release",
-      "source_last_checked": "2026-03-09T19:06:04.103Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:50:35.271Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for melatonin",
-        "Drugs@FDA request failed (429) for melatonin"
+        "Drugs@FDA request failed (404) for melatonin",
+        "Drugs@FDA request failed (404) for melatonin extended release"
       ]
     },
     {
       "id": "doxepin-oral-solution",
       "generic_name": "doxepin oral solution",
-      "source_last_checked": "2026-03-09T19:06:11.100Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:50:35.552Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for doxepin",
-        "Drugs@FDA request failed (429) for doxepin"
-      ]
+      "notes": []
     },
     {
       "id": "quetiapine-oral-solution",
       "generic_name": "quetiapine oral solution",
-      "source_last_checked": "2026-03-09T19:06:18.351Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:50:35.835Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for quetiapine",
-        "Drugs@FDA request failed (429) for quetiapine"
-      ]
+      "notes": []
     },
     {
       "id": "aripiprazole-oral-solution",
       "generic_name": "aripiprazole oral solution",
-      "source_last_checked": "2026-03-09T19:06:25.370Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:50:36.119Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for aripiprazole",
-        "Drugs@FDA request failed (429) for aripiprazole"
-      ]
+      "notes": []
     },
     {
       "id": "risperidone-oral-solution",
       "generic_name": "risperidone oral solution",
-      "source_last_checked": "2026-03-09T19:06:32.621Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:50:36.401Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for risperidone",
-        "Drugs@FDA request failed (429) for risperidone"
-      ]
+      "notes": []
     },
     {
       "id": "haloperidol-oral-solution",
       "generic_name": "haloperidol oral solution",
-      "source_last_checked": "2026-03-09T19:06:39.845Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:50:36.682Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for haloperidol",
-        "Drugs@FDA request failed (429) for haloperidol"
-      ]
+      "notes": []
     },
     {
       "id": "chlorpromazine-oral-solution",
       "generic_name": "chlorpromazine oral solution",
-      "source_last_checked": "2026-03-09T19:06:47.087Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:50:36.963Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for chlorpromazine",
-        "Drugs@FDA request failed (429) for chlorpromazine"
-      ]
+      "notes": []
     },
     {
       "id": "perphenazine-oral-solution",
       "generic_name": "perphenazine oral solution",
-      "source_last_checked": "2026-03-09T19:06:53.902Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:50:37.244Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for perphenazine",
-        "Drugs@FDA request failed (429) for perphenazine"
-      ]
+      "notes": []
     },
     {
       "id": "trifluoperazine-oral-solution",
       "generic_name": "trifluoperazine oral solution",
-      "source_last_checked": "2026-03-09T19:07:00.440Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:50:37.525Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for trifluoperazine",
-        "Drugs@FDA request failed (429) for trifluoperazine"
-      ]
+      "notes": []
     },
     {
       "id": "loxapine-inhalation",
       "generic_name": "loxapine inhalation",
-      "source_last_checked": "2026-03-09T19:07:07.525Z",
+      "source_last_checked": "2026-03-09T19:50:38.588Z",
       "source_links_count": 2,
       "enrichment_sources_found": [
         "RxNorm",
@@ -3882,14 +3756,16 @@
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for loxapine inhalation",
-        "Drugs@FDA request failed (429) for loxapine inhalation"
+        "openFDA request failed (404) for loxapine inhalation",
+        "openFDA request failed (404) for adasuve",
+        "Drugs@FDA request failed (404) for loxapine inhalation",
+        "Drugs@FDA request failed (404) for adasuve"
       ]
     },
     {
       "id": "ziprasidone-intramuscular",
       "generic_name": "ziprasidone intramuscular",
-      "source_last_checked": "2026-03-09T19:07:14.691Z",
+      "source_last_checked": "2026-03-09T19:50:39.693Z",
       "source_links_count": 3,
       "enrichment_sources_found": [
         "RxNorm",
@@ -3898,31 +3774,32 @@
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for ziprasidone intramuscular",
-        "Drugs@FDA request failed (429) for ziprasidone intramuscular"
+        "openFDA request failed (404) for ziprasidone intramuscular",
+        "openFDA request failed (404) for geodon im",
+        "Drugs@FDA request failed (404) for ziprasidone intramuscular",
+        "Drugs@FDA request failed (404) for geodon im"
       ]
     },
     {
       "id": "olanzapine-intramuscular",
       "generic_name": "olanzapine intramuscular",
-      "source_last_checked": "2026-03-09T19:07:21.981Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:50:40.376Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for olanzapine intramuscular",
-        "Drugs@FDA request failed (429) for olanzapine intramuscular"
-      ]
+      "notes": []
     },
     {
       "id": "haloperidol-decanoate-oral-bridge",
       "generic_name": "haloperidol decanoate oral bridge",
-      "source_last_checked": "2026-03-09T19:07:29.114Z",
+      "source_last_checked": "2026-03-09T19:50:41.581Z",
       "source_links_count": 4,
       "enrichment_sources_found": [
         "RxNorm",
@@ -3931,14 +3808,16 @@
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for haloperidol decanoate bridge",
-        "Drugs@FDA request failed (429) for haloperidol decanoate bridge"
+        "openFDA request failed (404) for haloperidol decanoate bridge",
+        "openFDA request failed (404) for haloperidol decanoate oral bridge",
+        "Drugs@FDA request failed (404) for haloperidol decanoate bridge",
+        "Drugs@FDA request failed (404) for haloperidol decanoate oral bridge"
       ]
     },
     {
       "id": "fluphenazine-decanoate-oral-bridge",
       "generic_name": "fluphenazine decanoate oral bridge",
-      "source_last_checked": "2026-03-09T19:07:36.357Z",
+      "source_last_checked": "2026-03-09T19:50:42.703Z",
       "source_links_count": 3,
       "enrichment_sources_found": [
         "RxNorm",
@@ -3946,14 +3825,16 @@
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for fluphenazine decanoate bridge",
-        "Drugs@FDA request failed (429) for fluphenazine decanoate bridge"
+        "openFDA request failed (404) for fluphenazine decanoate bridge",
+        "openFDA request failed (404) for fluphenazine decanoate oral bridge",
+        "Drugs@FDA request failed (404) for fluphenazine decanoate bridge",
+        "Drugs@FDA request failed (404) for fluphenazine decanoate oral bridge"
       ]
     },
     {
       "id": "paliperidone-oral-bridge",
       "generic_name": "paliperidone oral bridge",
-      "source_last_checked": "2026-03-09T19:07:43.955Z",
+      "source_last_checked": "2026-03-09T19:50:43.816Z",
       "source_links_count": 4,
       "enrichment_sources_found": [
         "RxNorm",
@@ -3962,320 +3843,358 @@
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for paliperidone bridge",
-        "Drugs@FDA request failed (429) for paliperidone bridge"
+        "openFDA request failed (404) for paliperidone bridge",
+        "openFDA request failed (404) for paliperidone oral bridge",
+        "Drugs@FDA request failed (404) for paliperidone bridge",
+        "Drugs@FDA request failed (404) for paliperidone oral bridge"
       ]
     },
     {
       "id": "lurasidone-with-food",
       "generic_name": "lurasidone with food",
-      "source_last_checked": "2026-03-09T19:07:51.186Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:50:44.902Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for lurasidone with food",
-        "Drugs@FDA request failed (429) for lurasidone with food"
+        "openFDA request failed (404) for lurasidone with food",
+        "Drugs@FDA request failed (404) for lurasidone with food"
       ]
     },
     {
       "id": "cariprazine-slow-titration",
       "generic_name": "cariprazine slow titration",
-      "source_last_checked": "2026-03-09T19:07:58.460Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:50:45.995Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for cariprazine slow titration",
-        "Drugs@FDA request failed (429) for cariprazine slow titration"
+        "openFDA request failed (404) for cariprazine slow titration",
+        "Drugs@FDA request failed (404) for cariprazine slow titration"
       ]
     },
     {
       "id": "lumateperone-once-daily",
       "generic_name": "lumateperone once daily",
-      "source_last_checked": "2026-03-09T19:08:05.803Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:50:47.186Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for lumateperone once daily",
-        "Drugs@FDA request failed (429) for lumateperone once daily"
+        "openFDA request failed (404) for lumateperone once daily",
+        "Drugs@FDA request failed (404) for lumateperone once daily"
       ]
     },
     {
       "id": "brexpiprazole-low-start",
       "generic_name": "brexpiprazole low start",
-      "source_last_checked": "2026-03-09T19:08:13.135Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:50:48.405Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for brexpiprazole low start",
-        "Drugs@FDA request failed (429) for brexpiprazole low start"
+        "openFDA request failed (404) for brexpiprazole low start",
+        "Drugs@FDA request failed (404) for brexpiprazole low start"
       ]
     },
     {
       "id": "aripiprazole-partial-agonist",
       "generic_name": "aripiprazole partial agonist",
-      "source_last_checked": "2026-03-09T19:08:20.502Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:50:49.537Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for aripiprazole partial agonist",
-        "Drugs@FDA request failed (429) for aripiprazole partial agonist"
+        "openFDA request failed (404) for aripiprazole partial agonist",
+        "Drugs@FDA request failed (404) for aripiprazole partial agonist"
       ]
     },
     {
       "id": "olanzapine-high-metabolic-risk",
       "generic_name": "olanzapine high metabolic risk",
-      "source_last_checked": "2026-03-09T19:08:27.813Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:50:50.640Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for olanzapine high metabolic risk",
-        "Drugs@FDA request failed (429) for olanzapine high metabolic risk"
+        "openFDA request failed (404) for olanzapine high metabolic risk",
+        "Drugs@FDA request failed (404) for olanzapine high metabolic risk"
       ]
     },
     {
       "id": "quetiapine-sedating-profile",
       "generic_name": "quetiapine sedating profile",
-      "source_last_checked": "2026-03-09T19:08:35.381Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:50:51.907Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for quetiapine sedating profile",
-        "Drugs@FDA request failed (429) for quetiapine sedating profile"
+        "openFDA request failed (404) for quetiapine sedating profile",
+        "Drugs@FDA request failed (404) for quetiapine sedating profile"
       ]
     },
     {
       "id": "risperidone-prolactin-caution",
       "generic_name": "risperidone prolactin caution",
-      "source_last_checked": "2026-03-09T19:08:42.767Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:50:53.136Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for risperidone prolactin caution",
-        "Drugs@FDA request failed (429) for risperidone prolactin caution"
+        "openFDA request failed (404) for risperidone prolactin caution",
+        "Drugs@FDA request failed (404) for risperidone prolactin caution"
       ]
     },
     {
       "id": "ziprasidone-qtc-caution",
       "generic_name": "ziprasidone qtc caution",
-      "source_last_checked": "2026-03-09T19:08:50.031Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:50:54.253Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for ziprasidone qtc caution",
-        "Drugs@FDA request failed (429) for ziprasidone qtc caution"
+        "openFDA request failed (404) for ziprasidone qtc caution",
+        "Drugs@FDA request failed (404) for ziprasidone qtc caution"
       ]
     },
     {
       "id": "lithium-narrow-therapeutic-index",
       "generic_name": "lithium narrow therapeutic index",
-      "source_last_checked": "2026-03-09T19:08:57.851Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:50:55.327Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for lithium narrow therapeutic index",
-        "Drugs@FDA request failed (429) for lithium narrow therapeutic index"
+        "openFDA request failed (404) for lithium narrow therapeutic index",
+        "Drugs@FDA request failed (404) for lithium narrow therapeutic index"
       ]
     },
     {
       "id": "lamotrigine-slow-titration-requirement",
       "generic_name": "lamotrigine slow titration requirement",
-      "source_last_checked": "2026-03-09T19:09:05.214Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:50:56.443Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for lamotrigine slow titration requirement",
-        "Drugs@FDA request failed (429) for lamotrigine slow titration requirement"
+        "openFDA request failed (404) for lamotrigine slow titration requirement",
+        "Drugs@FDA request failed (404) for lamotrigine slow titration requirement"
       ]
     },
     {
       "id": "valproate-teratogenic-risk",
       "generic_name": "valproate teratogenic risk",
-      "source_last_checked": "2026-03-09T19:09:12.364Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:50:57.669Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for valproate teratogenic risk",
-        "Drugs@FDA request failed (429) for valproate teratogenic risk"
+        "openFDA request failed (404) for valproate teratogenic risk",
+        "Drugs@FDA request failed (404) for valproate teratogenic risk"
       ]
     },
     {
       "id": "carbamazepine-cyp-inducer",
       "generic_name": "carbamazepine cyp inducer",
-      "source_last_checked": "2026-03-09T19:09:19.888Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:50:58.899Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for carbamazepine cyp inducer",
-        "Drugs@FDA request failed (429) for carbamazepine cyp inducer"
+        "openFDA request failed (404) for carbamazepine cyp inducer",
+        "Drugs@FDA request failed (404) for carbamazepine cyp inducer"
       ]
     },
     {
       "id": "oxcarbazepine-hyponatremia-caution",
       "generic_name": "oxcarbazepine hyponatremia caution",
-      "source_last_checked": "2026-03-09T19:09:27.479Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:51:00.007Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for oxcarbazepine hyponatremia caution",
-        "Drugs@FDA request failed (429) for oxcarbazepine hyponatremia caution"
+        "openFDA request failed (404) for oxcarbazepine hyponatremia caution",
+        "Drugs@FDA request failed (404) for oxcarbazepine hyponatremia caution"
       ]
     },
     {
       "id": "topiramate-cognitive-side-effects",
       "generic_name": "topiramate cognitive side effects",
-      "source_last_checked": "2026-03-09T19:09:34.940Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:51:01.099Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for topiramate cognitive side effects",
-        "Drugs@FDA request failed (429) for topiramate cognitive side effects"
+        "openFDA request failed (404) for topiramate cognitive side effects",
+        "Drugs@FDA request failed (404) for topiramate cognitive side effects"
       ]
     },
     {
       "id": "zonisamide-sulfa-caution",
       "generic_name": "zonisamide sulfa caution",
-      "source_last_checked": "2026-03-09T19:09:42.247Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:51:02.179Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for zonisamide sulfa caution",
-        "Drugs@FDA request failed (429) for zonisamide sulfa caution"
+        "openFDA request failed (404) for zonisamide sulfa caution",
+        "Drugs@FDA request failed (404) for zonisamide sulfa caution"
       ]
     },
     {
       "id": "gabapentin-renal-adjustment",
       "generic_name": "gabapentin renal adjustment",
-      "source_last_checked": "2026-03-09T19:09:49.599Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:51:03.714Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for gabapentin renal adjustment",
-        "Drugs@FDA request failed (429) for gabapentin renal adjustment"
+        "openFDA request failed (404) for gabapentin renal adjustment",
+        "Drugs@FDA request failed (404) for gabapentin renal adjustment"
       ]
     },
     {
       "id": "pregabalin-edema-caution",
       "generic_name": "pregabalin edema caution",
-      "source_last_checked": "2026-03-09T19:09:56.917Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:51:04.832Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for pregabalin edema caution",
-        "Drugs@FDA request failed (429) for pregabalin edema caution"
+        "openFDA request failed (404) for pregabalin edema caution",
+        "Drugs@FDA request failed (404) for pregabalin edema caution"
       ]
     },
     {
       "id": "buspirone-delayed-onset",
       "generic_name": "buspirone delayed onset",
-      "source_last_checked": "2026-03-09T19:10:04.532Z",
+      "source_last_checked": "2026-03-09T19:51:05.928Z",
       "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
@@ -4285,31 +4204,35 @@
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for buspirone delayed onset",
-        "Drugs@FDA request failed (429) for buspirone delayed onset"
+        "openFDA request failed (404) for buspirone delayed onset",
+        "openFDA request failed (404) for buspar",
+        "Drugs@FDA request failed (404) for buspirone delayed onset",
+        "Drugs@FDA request failed (404) for buspar"
       ]
     },
     {
       "id": "propranolol-performance-anxiety",
       "generic_name": "propranolol performance anxiety",
-      "source_last_checked": "2026-03-09T19:10:11.598Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:51:07.002Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for propranolol performance anxiety",
-        "Drugs@FDA request failed (429) for propranolol performance anxiety"
+        "openFDA request failed (404) for propranolol performance anxiety",
+        "Drugs@FDA request failed (404) for propranolol performance anxiety"
       ]
     },
     {
       "id": "prazosin-ptsd-nightmares",
       "generic_name": "prazosin ptsd nightmares",
-      "source_last_checked": "2026-03-09T19:10:18.847Z",
+      "source_last_checked": "2026-03-09T19:51:08.153Z",
       "source_links_count": 3,
       "enrichment_sources_found": [
         "RxNorm",
@@ -4318,77 +4241,75 @@
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (429) for prazosin ptsd nightmares",
-        "Drugs@FDA request failed (429) for prazosin ptsd nightmares"
+        "openFDA request failed (404) for prazosin ptsd nightmares",
+        "openFDA request failed (404) for minipress",
+        "Drugs@FDA request failed (404) for prazosin ptsd nightmares",
+        "Drugs@FDA request failed (404) for minipress"
       ]
     },
     {
       "id": "amphetamine-mixed-salts",
       "generic_name": "amphetamine mixed salts",
-      "source_last_checked": "2026-03-09T19:10:25.753Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:51:08.434Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for amphetamine",
-        "Drugs@FDA request failed (429) for amphetamine"
-      ]
+      "notes": []
     },
     {
       "id": "methylphenidate",
       "generic_name": "methylphenidate",
-      "source_last_checked": "2026-03-09T19:10:33.098Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:51:08.714Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for methylphenidate",
-        "Drugs@FDA request failed (429) for methylphenidate"
-      ]
+      "notes": []
     },
     {
       "id": "guanfacine",
       "generic_name": "guanfacine",
-      "source_last_checked": "2026-03-09T19:10:40.439Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T19:51:08.995Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for guanfacine",
-        "Drugs@FDA request failed (429) for guanfacine"
-      ]
+      "notes": []
     },
     {
       "id": "quetiapine",
       "generic_name": "quetiapine",
-      "source_last_checked": "2026-03-09T19:10:47.404Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:51:09.278Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
+        "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus"
+        "MedlinePlus",
+        "Drugs@FDA"
       ],
       "status": "source scored",
-      "notes": [
-        "openFDA request failed (429) for quetiapine",
-        "Drugs@FDA request failed (429) for quetiapine"
-      ]
+      "notes": []
     }
   ]
 }
