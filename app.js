@@ -1151,7 +1151,7 @@ function setTimeControlValue(id, canonicalValue) {
     return;
   }
 
-  control.hourInput.value = parsed.hour;
+  control.hourInput.value = parsed.hour.padStart(2, '0');
   control.minuteInput.value = parsed.minute;
   setMeridiemControl(control, parsed.meridiem);
   control.hidden.value = parsed.canonical;
@@ -1225,7 +1225,7 @@ function applyParsedTimeToControl(id, parsed, notify = true) {
   const control = getTimeControl(id);
   if (!control || !parsed) return;
 
-  control.hourInput.value = parsed.hour;
+  control.hourInput.value = parsed.hour.padStart(2, '0');
   control.minuteInput.value = parsed.minute;
   setMeridiemControl(control, parsed.meridiem);
   control.hidden.value = parsed.canonical;
@@ -1306,10 +1306,6 @@ function attachTimeControlListeners() {
     const handlePartInput = (part, event) => {
       if (handleMeridiemShortcut(event)) return;
 
-      if (maybeParseFullTimeEntry(id, event.target.value)) {
-        return;
-      }
-
       const digits = event.target.value.replace(/\D/g, '');
       if (part === 'hour') {
         event.target.value = digits.slice(0, 2);
@@ -1336,8 +1332,10 @@ function attachTimeControlListeners() {
         const digits = event.target.value.replace(/\D/g, '');
         if (!digits) {
           event.target.value = '';
+        } else if (digits.length === 1) {
+          event.target.value = digits.padStart(2, '0');
         } else {
-          event.target.value = String(Number(digits.slice(0, 2)));
+          event.target.value = digits.slice(0, 2);
         }
       }
 
