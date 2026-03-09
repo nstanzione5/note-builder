@@ -1,0 +1,29 @@
+{
+  "generated_at": "2026-03-09T06:40:21.973Z",
+  "items": [
+    {
+      "id": "citalopram",
+      "generic_name": "citalopram",
+      "source_last_checked": "2026-03-09T06:40:20.532Z",
+      "source_links_count": 4,
+      "status": "source synced",
+      "notes": []
+    },
+    {
+      "id": "escitalopram",
+      "generic_name": "escitalopram",
+      "source_last_checked": "2026-03-09T06:40:21.081Z",
+      "source_links_count": 4,
+      "status": "source synced",
+      "notes": []
+    },
+    {
+      "id": "fluoxetine",
+      "generic_name": "fluoxetine",
+      "source_last_checked": "2026-03-09T06:40:21.851Z",
+      "source_links_count": 4,
+      "status": "source synced",
+      "notes": []
+    }
+  ]
+}

@@ -37,14 +37,17 @@
 
         <nav class="brand-tools-rail" aria-label="Clinical tools">
           <a class="brand-tool-btn" href="https://www.mdcalc.com/calc/10091/benzodiazepine-conversion-calculator" target="_blank" rel="noopener noreferrer" title="Benzo conversion calculator" data-tooltip="Benzo Conversion Calculator" aria-label="Benzo conversion calculator">
-            <span class="tool-emoji" aria-hidden="true">&#128138;</span>
+            <span class="tool-emoji" aria-hidden="true">💊</span>
           </a>
           <a class="brand-tool-btn" href="https://alpenglowbh.com/medication-calculator/" target="_blank" rel="noopener noreferrer" title="Stimulant medication calculator" data-tooltip="Stimulant Calculator" aria-label="Stimulant medication calculator">
-            <span class="tool-emoji" aria-hidden="true">&#9889;</span>
+            <span class="tool-emoji" aria-hidden="true">⚡</span>
           </a>
           <a class="brand-tool-btn" href="https://mhmeatnpotatoes.com/antidepressant-switching-tool" target="_blank" rel="noopener noreferrer" title="Antidepressant cross-titration tool" data-tooltip="Antidepressant Cross-Titration" aria-label="Antidepressant cross-titration tool">
-            <span class="tool-emoji" aria-hidden="true">&#128260;</span>
+            <span class="tool-emoji" aria-hidden="true">🔁</span>
           </a>
+          <button class="brand-tool-btn med-launch-btn" id="medDrawerBtn" type="button" data-tooltip="Medication Reference" aria-label="Open medication reference drawer">
+            <span class="tool-emoji" aria-hidden="true">🧠</span>
+          </button>
         </nav>
       </section>
 
@@ -73,7 +76,7 @@
           </label>
         </div>
 
-        <p class="toolbar-hint">Mac dock mode: Safari &rarr; File &rarr; Add to Dock</p>
+        <p class="toolbar-hint">Dock app: Safari → File → Add to Dock</p>
       </section>
     </div>
   </header>
@@ -119,6 +122,9 @@
 
       <div class="field">
         <label for="previousPlan">Previous Plan <span class="required">*</span></label>
+        <div class="field-header-actions">
+          <button type="button" class="med-context-btn" data-med-context-field="previousPlan" aria-label="Open medication reference from previous plan">🧠 Med info</button>
+        </div>
         <textarea id="previousPlan" rows="6" placeholder="Paste the previous plan here..."></textarea>
       </div>
     </section>
@@ -168,6 +174,9 @@
 
         <div class="field field-full">
           <label for="otherScreener">Other Screener</label>
+          <div class="field-header-actions">
+            <button type="button" class="med-context-btn" data-med-context-field="otherScreener" aria-label="Open medication reference from other screener text">🧠 Med info</button>
+          </div>
           <textarea id="otherScreener" rows="4" placeholder="Additional screener data..."></textarea>
         </div>
       </div>
@@ -187,6 +196,9 @@
 
       <div class="field">
         <label for="testDump">Tests / Screeners / Imported Data <span class="required">*</span></label>
+        <div class="field-header-actions">
+          <button type="button" class="med-context-btn" data-med-context-field="testDump" aria-label="Open medication reference from imported data">🧠 Med info</button>
+        </div>
         <textarea id="testDump" rows="8" placeholder="Paste imported test and screener content exactly as generated..."></textarea>
       </div>
     </section>
@@ -225,8 +237,17 @@
         </div>
 
         <div class="field">
-          <label for="scheduledStart">Scheduled Start <span class="required">*</span></label>
-          <input id="scheduledStart" class="smart-time" type="text" inputmode="numeric" autocomplete="off" placeholder="e.g. 9:30a">
+          <label>Scheduled Start <span class="required">*</span></label>
+          <div class="time-control" data-time-field="scheduledStart">
+            <input class="time-part time-part-hour" type="text" inputmode="text" maxlength="10" autocomplete="off" placeholder="HH" aria-label="Scheduled start hour" data-time-part="hour">
+            <span class="time-sep">:</span>
+            <input class="time-part time-part-minute" type="text" inputmode="numeric" maxlength="2" autocomplete="off" placeholder="MM" aria-label="Scheduled start minute" data-time-part="minute">
+            <div class="time-meridiem" role="group" aria-label="Scheduled start meridiem" data-time-meridiem>
+              <button type="button" class="time-meridiem-btn" data-meridiem="AM">AM</button>
+              <button type="button" class="time-meridiem-btn" data-meridiem="PM">PM</button>
+            </div>
+            <input id="scheduledStart" type="hidden" value="">
+          </div>
         </div>
 
         <div class="field">
@@ -241,9 +262,18 @@
 
       <div class="grid grid-2 top-gap">
         <div class="field">
-          <label for="startTime">Face-to-Face Start <span class="required">*</span></label>
+          <label>Face-to-Face Start <span class="required">*</span></label>
           <div class="inline-input-row">
-            <input id="startTime" class="smart-time" type="text" inputmode="numeric" autocomplete="off" placeholder="e.g. 9:35a">
+            <div class="time-control" data-time-field="startTime">
+              <input class="time-part time-part-hour" type="text" inputmode="text" maxlength="10" autocomplete="off" placeholder="HH" aria-label="Face to face start hour" data-time-part="hour">
+              <span class="time-sep">:</span>
+              <input class="time-part time-part-minute" type="text" inputmode="numeric" maxlength="2" autocomplete="off" placeholder="MM" aria-label="Face to face start minute" data-time-part="minute">
+              <div class="time-meridiem" role="group" aria-label="Face to face start meridiem" data-time-meridiem>
+                <button type="button" class="time-meridiem-btn" data-meridiem="AM">AM</button>
+                <button type="button" class="time-meridiem-btn" data-meridiem="PM">PM</button>
+              </div>
+              <input id="startTime" type="hidden" value="">
+            </div>
             <button type="button" class="mini-btn nowBtn" data-target="startTime">Now</button>
           </div>
         </div>
@@ -271,6 +301,9 @@
 
         <div class="field">
           <label for="notes">Clinical Notes <span class="required">*</span></label>
+          <div class="field-header-actions">
+            <button type="button" class="med-context-btn" data-med-context-field="notes" aria-label="Open medication reference from notes">🧠 Med info</button>
+          </div>
           <textarea id="notes" rows="14" placeholder="Type live freeform notes during visit..."></textarea>
         </div>
       </section>
@@ -287,41 +320,41 @@
         <div class="script-body" aria-label="Astra intake script">
           <article class="script-block">
             <h3>Opening &amp; Telehealth Check-In</h3>
-            <p>"Hi, it's good to meet you. Before we begin, could you confirm your full name and which state you're in today?"</p>
-            <p>"Are you in a private place and comfortable doing this visit via telehealth? Everything we discuss is confidential unless there's an immediate safety concern. Please let me know if anything feels too sensitive-we can pause or come back to it."</p>
+            <p>"Hi, it’s good to meet you. Before we begin, could you confirm your full name and which state you’re in today?"</p>
+            <p>"Are you in a private place and comfortable doing this visit via telehealth? Everything we discuss is confidential unless there’s an immediate safety concern. Please let me know if anything feels too sensitive—we can pause or come back to it."</p>
           </article>
 
           <article class="script-block">
-            <h3>Why You're Here</h3>
-            <p>"What led you to schedule this appointment? What's been most on your mind?"</p>
-            <p>"Is there anything else you'd like to make sure we cover today?"</p>
+            <h3>Why You’re Here</h3>
+            <p>"What led you to schedule this appointment? What’s been most on your mind?"</p>
+            <p>"Is there anything else you’d like to make sure we cover today?"</p>
             <p>"What are you hoping to get out of our work together?"</p>
           </article>
 
           <article class="script-block">
             <h3>Current Symptoms &amp; Impact</h3>
             <p>"When did you first notice these issues? How have they changed over time?"</p>
-            <p>"Can you tell me about your mood lately? And how does anxiety show up for you-do you feel it in your body (like tension, racing heart, nausea) or more as persistent worry and rumination?"</p>
+            <p>"Can you tell me about your mood lately? And how does anxiety show up for you—do you feel it in your body (like tension, racing heart, nausea) or more as persistent worry and rumination?"</p>
             <p>"How often do these feelings or symptoms show up, and how intense do they get?"</p>
-            <p>"What's the impact on your day-to-day life-work or school, relationships, hobbies?"</p>
+            <p>"What’s the impact on your day-to-day life—work or school, relationships, hobbies?"</p>
             <p>"Do certain situations, thoughts, or activities seem to trigger or ease these symptoms?"</p>
-            <p>"Have you ever experienced periods where you felt unusually energetic or irritable, slept very little but still felt wired, found yourself talking more or taking risks you normally wouldn't?"</p>
-            <p>"Have you ever noticed or sensed things others didn't see or hear, or felt unusually suspicious or paranoid?"</p>
+            <p>"Have you ever experienced periods where you felt unusually energetic or irritable, slept very little but still felt wired, found yourself talking more or taking risks you normally wouldn’t?"</p>
+            <p>"Have you ever noticed or sensed things others didn’t see or hear, or felt unusually suspicious or paranoid?"</p>
           </article>
 
           <article class="script-block">
             <h3>Patterns, Thoughts &amp; Coping</h3>
-            <p>"When you're feeling anxious or down, what thoughts tend to go through your mind? Do you notice any repetitive patterns or 'loops'?"</p>
+            <p>"When you’re feeling anxious or down, what thoughts tend to go through your mind? Do you notice any repetitive patterns or ‘loops’?"</p>
             <p>"How do you usually respond in those moments? Are there things you do that help, or habits that seem to make things worse?"</p>
-            <p>"What strategies have you tried so far-breathing exercises, journaling, physical activity, talking to someone-and how have they worked for you?"</p>
+            <p>"What strategies have you tried so far—breathing exercises, journaling, physical activity, talking to someone—and how have they worked for you?"</p>
           </article>
 
           <article class="script-block">
             <h3>Sleep, Appetite &amp; Physical Symptoms</h3>
-            <p>"Walk me through your sleep routine-when do you go to bed and wake up? How many hours of sleep are you getting, and do you wake up during the night?"</p>
+            <p>"Walk me through your sleep routine—when do you go to bed and wake up? How many hours of sleep are you getting, and do you wake up during the night?"</p>
             <p>"Any nightmares or particularly vivid dreams?"</p>
-            <p>"What about your appetite-any significant changes in how much or how often you eat?"</p>
-            <p>"Have you had physical symptoms that seem connected to your mood-like headaches, stomach issues, muscle tension, or anything else?"</p>
+            <p>"What about your appetite—any significant changes in how much or how often you eat?"</p>
+            <p>"Have you had physical symptoms that seem connected to your mood—like headaches, stomach issues, muscle tension, or anything else?"</p>
           </article>
 
           <article class="script-block">
@@ -331,7 +364,7 @@
             <p>"Are there situations, thoughts, or feelings that tend to trigger these thoughts?"</p>
             <p>"Do substances or other factors make those thoughts stronger?"</p>
             <p>"What keeps you going when things feel really hard? Who or what are your reasons for staying safe?"</p>
-            <p>"If things got worse, who could you turn to-friends, family, or professionals?"</p>
+            <p>"If things got worse, who could you turn to—friends, family, or professionals?"</p>
             <p>"</p>
           </article>
 
@@ -340,7 +373,7 @@
             <p>"Have you ever been diagnosed with a mental health condition?"</p>
             <p>"Have you been hospitalized or participated in programs like residential treatment, partial hospitalization, or intensive outpatient?"</p>
             <p>"What kinds of therapy have you tried (CBT, DBT, EMDR, or others)? What was helpful or not?"</p>
-            <p>"Let's go over any psychiatric medications you've taken in the past: names, doses, how long you took them, whether they helped, and why they were stopped. This helps if we ever need to request a prior authorization."</p>
+            <p>"Let’s go over any psychiatric medications you’ve taken in the past: names, doses, how long you took them, whether they helped, and why they were stopped. This helps if we ever need to request a prior authorization."</p>
             <p>"Have you ever stopped a medication on your own? What was going on at the time?"</p>
             <p>"Any past suicide attempts or self-harm behaviors?"</p>
           </article>
@@ -348,15 +381,15 @@
           <article class="script-block">
             <h3>Current Medications &amp; Medical History</h3>
             <p>"Do you have any allergies to medications, foods, or other substances?"</p>
-            <p>"Please list the medications you're currently taking-both for mental health and physical health-including doses and how often you take them."</p>
+            <p>"Please list the medications you’re currently taking—both for mental health and physical health—including doses and how often you take them."</p>
             <p>"Are you taking any vitamins, herbal supplements, or over-the-counter products? What are the doses?"</p>
             <p>"Do you take your medications consistently?"</p>
-            <p>"Do you have any chronic health conditions-like diabetes, thyroid issues, high blood pressure, heart disease, chronic pain, or autoimmune disorders?"</p>
+            <p>"Do you have any chronic health conditions—like diabetes, thyroid issues, high blood pressure, heart disease, chronic pain, or autoimmune disorders?"</p>
             <p>"Any history of seizures, concussions, head injuries, or neurological issues?"</p>
             <p>"Any breathing problems like asthma, COPD, or sleep apnea?"</p>
             <p>"Have you had any surgeries? If yes, what kind and when?"</p>
             <p>"Could you share your height and weight?"</p>
-            <p>"Is there any chance you're pregnant or trying to become pregnant?"</p>
+            <p>"Is there any chance you’re pregnant or trying to become pregnant?"</p>
           </article>
 
           <article class="script-block">
@@ -371,17 +404,17 @@
 
           <article class="script-block">
             <h3>Family Mental Health History</h3>
-            <p>"Do any family members have mental health conditions-depression, anxiety, bipolar disorder, psychosis, or substance use disorders?"</p>
+            <p>"Do any family members have mental health conditions—depression, anxiety, bipolar disorder, psychosis, or substance use disorders?"</p>
             <p>"Is there any history of suicide or suicide attempts in your family?"</p>
           </article>
 
           <article class="script-block">
             <h3>Social &amp; Life Context</h3>
             <p>"Where did you grow up, and have you lived elsewhere?"</p>
-            <p>"What's your current living situation?"</p>
+            <p>"What’s your current living situation?"</p>
             <p>"Are you working, in school, looking for work, retired, or on disability? How do you feel about your current role?"</p>
             <p>"Who are the people you can count on for support?"</p>
-            <p>"Have you been facing any major stressors recently-financial issues, housing problems, relationship difficulties, caregiving responsibilities, or health concerns?"</p>
+            <p>"Have you been facing any major stressors recently—financial issues, housing problems, relationship difficulties, caregiving responsibilities, or health concerns?"</p>
             <p>"Have you ever had legal issues?"</p>
             <p>"Have you experienced traumatic events earlier in life or more recently that still affect you?"</p>
             <p>"Do you have access to firearms?"</p>
@@ -390,9 +423,9 @@
           <article class="script-block">
             <h3>Daily Functioning &amp; Coping</h3>
             <p>"How are you managing daily tasks like cooking, cleaning, paying bills, and running errands?"</p>
-            <p>"Any challenges with personal care-bathing, dressing, or grooming?"</p>
+            <p>"Any challenges with personal care—bathing, dressing, or grooming?"</p>
             <p>"What do you enjoy doing in your free time? How often do you get to do those things?"</p>
-            <p>"What coping strategies work best for you when you're feeling anxious, depressed, or stressed?"</p>
+            <p>"What coping strategies work best for you when you’re feeling anxious, depressed, or stressed?"</p>
           </article>
 
           <article class="script-block">
@@ -405,7 +438,7 @@
 
           <article class="script-block">
             <h3>Wrap-Up</h3>
-            <p>"We've covered a lot. Is there anything I haven't asked that feels important to mention?"</p>
+            <p>"We’ve covered a lot. Is there anything I haven’t asked that feels important to mention?"</p>
             <p>"Do you have any questions about what we discussed or what happens next?"</p>
             <p>"Would you like to talk about creating or updating a safety plan together?"</p>
           </article>
@@ -457,8 +490,17 @@
         </div>
 
         <div class="field">
-          <label for="followTime">Follow-Up Time <span class="required">*</span></label>
-          <input id="followTime" class="smart-time" type="text" inputmode="numeric" autocomplete="off" placeholder="e.g. 2:15p">
+          <label>Follow-Up Time <span class="required">*</span></label>
+          <div class="time-control" data-time-field="followTime">
+            <input class="time-part time-part-hour" type="text" inputmode="text" maxlength="10" autocomplete="off" placeholder="HH" aria-label="Follow-up hour" data-time-part="hour">
+            <span class="time-sep">:</span>
+            <input class="time-part time-part-minute" type="text" inputmode="numeric" maxlength="2" autocomplete="off" placeholder="MM" aria-label="Follow-up minute" data-time-part="minute">
+            <div class="time-meridiem" role="group" aria-label="Follow-up meridiem" data-time-meridiem>
+              <button type="button" class="time-meridiem-btn" data-meridiem="AM">AM</button>
+              <button type="button" class="time-meridiem-btn" data-meridiem="PM">PM</button>
+            </div>
+            <input id="followTime" type="hidden" value="">
+          </div>
         </div>
       </div>
 
@@ -475,17 +517,35 @@
 
       <div class="grid grid-2 top-gap">
         <div class="field">
-          <label for="endTime">Face-to-Face End <span class="required">*</span></label>
+          <label>Face-to-Face End <span class="required">*</span></label>
           <div class="inline-input-row">
-            <input id="endTime" class="smart-time" type="text" inputmode="numeric" autocomplete="off" placeholder="e.g. 10:20a">
+            <div class="time-control" data-time-field="endTime">
+              <input class="time-part time-part-hour" type="text" inputmode="text" maxlength="10" autocomplete="off" placeholder="HH" aria-label="Face-to-face end hour" data-time-part="hour">
+              <span class="time-sep">:</span>
+              <input class="time-part time-part-minute" type="text" inputmode="numeric" maxlength="2" autocomplete="off" placeholder="MM" aria-label="Face-to-face end minute" data-time-part="minute">
+              <div class="time-meridiem" role="group" aria-label="Face-to-face end meridiem" data-time-meridiem>
+                <button type="button" class="time-meridiem-btn" data-meridiem="AM">AM</button>
+                <button type="button" class="time-meridiem-btn" data-meridiem="PM">PM</button>
+              </div>
+              <input id="endTime" type="hidden" value="">
+            </div>
             <button type="button" class="mini-btn nowBtn" data-target="endTime">Now</button>
           </div>
         </div>
 
         <div class="field">
-          <label for="docEnd">Documentation End <span class="required">*</span></label>
+          <label>Documentation End <span class="required">*</span></label>
           <div class="inline-input-row">
-            <input id="docEnd" class="smart-time" type="text" inputmode="numeric" autocomplete="off" placeholder="e.g. 10:35a">
+            <div class="time-control" data-time-field="docEnd">
+              <input class="time-part time-part-hour" type="text" inputmode="text" maxlength="10" autocomplete="off" placeholder="HH" aria-label="Documentation end hour" data-time-part="hour">
+              <span class="time-sep">:</span>
+              <input class="time-part time-part-minute" type="text" inputmode="numeric" maxlength="2" autocomplete="off" placeholder="MM" aria-label="Documentation end minute" data-time-part="minute">
+              <div class="time-meridiem" role="group" aria-label="Documentation end meridiem" data-time-meridiem>
+                <button type="button" class="time-meridiem-btn" data-meridiem="AM">AM</button>
+                <button type="button" class="time-meridiem-btn" data-meridiem="PM">PM</button>
+              </div>
+              <input id="docEnd" type="hidden" value="">
+            </div>
             <button type="button" class="mini-btn nowBtn" data-target="docEnd">Now</button>
           </div>
         </div>
@@ -509,7 +569,7 @@
       </div>
 
       <p class="helper-text export-helper" id="exportHelper">The correct GPT can be opened automatically based on selected practice and appointment type.</p>
-      <p class="shortcut-guide" id="shortcutGuide">Shortcuts: Cmd/Ctrl+Shift+C copy, Cmd/Ctrl+Shift+O copy+open, Cmd/Ctrl+Shift+G open GPT.</p>
+      <p class="shortcut-guide" id="shortcutGuide">Shortcuts: Cmd/Ctrl+Shift+C copy, Cmd/Ctrl+Shift+O copy+open, Cmd/Ctrl+Shift+G open GPT, Cmd/Ctrl+Shift+M open Med Reference.</p>
 
       <div class="field top-gap">
         <label for="exportBox">Export Preview</label>
@@ -527,6 +587,48 @@
       </section>
     </section>
   </main>
+
+  <div class="med-drawer-backdrop hidden" id="medDrawerBackdrop"></div>
+  <aside class="med-drawer hidden" id="medDrawer" aria-hidden="true" aria-label="Medication reference drawer">
+    <header class="med-drawer-header">
+      <div>
+        <p class="med-drawer-kicker">Psych Prescribing Support</p>
+        <h2>Medication Reference</h2>
+      </div>
+      <div class="med-drawer-header-actions">
+        <button type="button" class="med-inline-btn" id="medPinBtn" aria-pressed="false">Pin</button>
+        <button type="button" class="med-inline-btn" id="medCloseBtn">Close</button>
+      </div>
+    </header>
+
+    <div class="med-drawer-toolbar">
+      <label class="sr-only" for="medSearchInput">Search medications</label>
+      <input id="medSearchInput" type="text" placeholder="Search generic, brand, alias, or class..." autocomplete="off">
+      <div class="med-class-filters" id="medClassFilters" role="group" aria-label="Medication class filters"></div>
+      <div class="med-chip-row" id="medFavoritesRow"></div>
+      <div class="med-chip-row" id="medRecentsRow"></div>
+    </div>
+
+    <div class="med-drawer-body" id="medDrawerBody">
+      <section class="med-results-panel" aria-label="Medication results">
+        <ul class="med-result-list" id="medResultList"></ul>
+        <div class="med-empty-state hidden" id="medEmptyState">
+          <p>No medication found for this search.</p>
+          <button type="button" id="medRequestBtn">Request this medication</button>
+        </div>
+      </section>
+
+      <section class="med-detail-panel" id="medDetailPanel">
+        <div class="med-detail-empty" id="medDetailEmpty">Select a medication to view details.</div>
+        <div class="med-detail-content hidden" id="medDetailContent"></div>
+      </section>
+    </div>
+
+    <footer class="med-drawer-footer">
+      <span class="helper-text" id="medMissingCount">Missing requests: 0</span>
+      <button type="button" class="med-inline-btn" id="medExportMissingBtn">Export Missing Requests JSON</button>
+    </footer>
+  </aside>
 
   <script src="app.js"></script>
 </body>

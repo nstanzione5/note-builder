@@ -1,6 +1,7 @@
 {
-  "name": "Astra Clinical Note Builder",
-  "short_name": "Astra Notes",
+  "name": "Clinical Note Builder",
+  "short_name": "Clin Notes",
+  "description": "Structured psychiatry documentation with integrated medication reference drawer.",
   "id": "/",
   "scope": "./",
   "start_url": "./",
@@ -10,8 +11,15 @@
     "minimal-ui",
     "browser"
   ],
-  "background_color": "#e7f1ff",
-  "theme_color": "#4f9ff3",
+  "orientation": "any",
+  "background_color": "#dce7f7",
+  "theme_color": "#2f7fe8",
+  "categories": [
+    "medical",
+    "productivity",
+    "utilities"
+  ],
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "icons/icon-192.png",

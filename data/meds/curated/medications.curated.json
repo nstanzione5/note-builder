@@ -1,0 +1,798 @@
+{
+  "generated_at": "2026-03-09T06:44:50.439Z",
+  "editorial_policy": "high-priority curated psychiatric summaries; remaining records source-synced with review states",
+  "medications": [
+    {
+      "id": "escitalopram",
+      "fda_psych_uses": [
+        "Major depressive disorder",
+        "Generalized anxiety disorder"
+      ],
+      "off_label_psych_uses": [
+        "Panic disorder",
+        "Social anxiety disorder",
+        "OCD adjunct strategy"
+      ],
+      "moa_summary": "Selective serotonin reuptake inhibitor with serotonergic enhancement.",
+      "common_side_effects": [
+        "Nausea",
+        "Headache",
+        "Sexual dysfunction",
+        "Somnolence or activation"
+      ],
+      "important_risks": [
+        "Serotonin syndrome with serotonergic combinations",
+        "QT caution at higher doses"
+      ],
+      "psych_interactions": [
+        "Serotonergic combinations raise serotonin syndrome risk",
+        "Use caution with other QT-prolonging agents"
+      ],
+      "clinical_pearls": [
+        "Often well tolerated first-line SSRI",
+        "Dose in the morning if activating, evening if sedating"
+      ],
+      "content_review_status": "curated",
+      "editorial_last_reviewed": "2026-03-09T06:44:50.436Z"
+    },
+    {
+      "id": "sertraline",
+      "fda_psych_uses": [
+        "Major depressive disorder",
+        "OCD",
+        "Panic disorder",
+        "PTSD",
+        "Social anxiety disorder"
+      ],
+      "off_label_psych_uses": [
+        "Generalized anxiety disorder"
+      ],
+      "moa_summary": "Selective serotonin reuptake inhibitor with broad anxiety-spectrum utility.",
+      "common_side_effects": [
+        "GI upset",
+        "Diarrhea",
+        "Insomnia",
+        "Sexual dysfunction"
+      ],
+      "important_risks": [
+        "Serotonin syndrome risk",
+        "Activation in early titration"
+      ],
+      "psych_interactions": [
+        "MAOI contraindication window applies",
+        "Watch additive serotonergic burden"
+      ],
+      "clinical_pearls": [
+        "High-yield SSRI for trauma and anxiety disorders",
+        "Take with food when GI effects are prominent"
+      ],
+      "content_review_status": "curated",
+      "editorial_last_reviewed": "2026-03-09T06:44:50.437Z"
+    },
+    {
+      "id": "fluoxetine",
+      "fda_psych_uses": [
+        "Major depressive disorder",
+        "OCD",
+        "Panic disorder",
+        "Bulimia nervosa"
+      ],
+      "off_label_psych_uses": [
+        "PTSD",
+        "Premenstrual dysphoric disorder symptom clusters"
+      ],
+      "moa_summary": "SSRI with long half-life and active metabolite.",
+      "common_side_effects": [
+        "Activation",
+        "Insomnia",
+        "GI upset",
+        "Sexual dysfunction"
+      ],
+      "important_risks": [
+        "Can worsen anxiety early in treatment",
+        "Long half-life prolongs interaction washout"
+      ],
+      "psych_interactions": [
+        "CYP2D6 inhibition can alter co-medication exposure",
+        "Serotonergic combinations increase risk"
+      ],
+      "clinical_pearls": [
+        "Useful when adherence is inconsistent due long half-life",
+        "Often more activating than other SSRIs"
+      ],
+      "content_review_status": "curated",
+      "editorial_last_reviewed": "2026-03-09T06:44:50.437Z"
+    },
+    {
+      "id": "venlafaxine",
+      "fda_psych_uses": [
+        "Major depressive disorder",
+        "Generalized anxiety disorder",
+        "Social anxiety disorder",
+        "Panic disorder"
+      ],
+      "off_label_psych_uses": [
+        "PTSD",
+        "Neuropathic pain adjunct strategy"
+      ],
+      "moa_summary": "Serotonin-norepinephrine reuptake inhibitor with dose-related noradrenergic effect.",
+      "common_side_effects": [
+        "Nausea",
+        "Sweating",
+        "Insomnia",
+        "Blood pressure increase"
+      ],
+      "important_risks": [
+        "Discontinuation sensitivity",
+        "Hypertension risk at higher doses"
+      ],
+      "psych_interactions": [
+        "Monitor serotonergic burden",
+        "Blood pressure and pulse tracking recommended"
+      ],
+      "clinical_pearls": [
+        "Often effective for anxious depression",
+        "Taper gradually to reduce discontinuation effects"
+      ],
+      "content_review_status": "curated",
+      "editorial_last_reviewed": "2026-03-09T06:44:50.437Z"
+    },
+    {
+      "id": "duloxetine",
+      "fda_psych_uses": [
+        "Major depressive disorder",
+        "Generalized anxiety disorder"
+      ],
+      "off_label_psych_uses": [
+        "PTSD",
+        "Pain-predominant anxiety/depression presentations"
+      ],
+      "moa_summary": "SNRI with balanced serotonergic and noradrenergic activity and pain utility.",
+      "common_side_effects": [
+        "Nausea",
+        "Dry mouth",
+        "Sweating",
+        "Constipation"
+      ],
+      "important_risks": [
+        "Hepatic caution",
+        "Discontinuation symptoms if abrupt stop"
+      ],
+      "psych_interactions": [
+        "Serotonergic caution with combinations",
+        "CYP interactions can influence exposure"
+      ],
+      "clinical_pearls": [
+        "Useful when pain symptoms are comorbid",
+        "Take with food during early titration"
+      ],
+      "content_review_status": "curated",
+      "editorial_last_reviewed": "2026-03-09T06:44:50.437Z"
+    },
+    {
+      "id": "bupropion",
+      "fda_psych_uses": [
+        "Major depressive disorder",
+        "Seasonal affective disorder"
+      ],
+      "off_label_psych_uses": [
+        "ADHD adjunct",
+        "SSRI sexual side effect mitigation strategy"
+      ],
+      "moa_summary": "Norepinephrine-dopamine reuptake inhibition without primary serotonergic effect.",
+      "common_side_effects": [
+        "Insomnia",
+        "Dry mouth",
+        "Tremor",
+        "Anxiety or activation"
+      ],
+      "important_risks": [
+        "Seizure threshold lowering",
+        "Avoid in active eating disorder history"
+      ],
+      "psych_interactions": [
+        "CYP2D6 inhibition can affect co-prescribed drugs",
+        "Activation risk with stimulants"
+      ],
+      "clinical_pearls": [
+        "Often lower sexual side effect burden",
+        "Morning dosing helps reduce insomnia"
+      ],
+      "content_review_status": "curated",
+      "editorial_last_reviewed": "2026-03-09T06:44:50.437Z"
+    },
+    {
+      "id": "dextromethorphan-bupropion",
+      "fda_psych_uses": [
+        "Major depressive disorder"
+      ],
+      "off_label_psych_uses": [],
+      "moa_summary": "NMDA receptor modulation and sigma-1 activity with bupropion metabolic support.",
+      "common_side_effects": [
+        "Dizziness",
+        "Nausea",
+        "Somnolence",
+        "Dry mouth"
+      ],
+      "important_risks": [
+        "Seizure threshold and blood pressure cautions",
+        "Serotonergic and dissociative adverse effect considerations"
+      ],
+      "psych_interactions": [
+        "Avoid with MAOI",
+        "Monitor serotonergic co-prescribing risk"
+      ],
+      "clinical_pearls": [
+        "Can be useful when rapid symptom shift is prioritized",
+        "Review CYP2D6 interactions carefully"
+      ],
+      "content_review_status": "curated",
+      "editorial_last_reviewed": "2026-03-09T06:44:50.437Z"
+    },
+    {
+      "id": "lithium-carbonate",
+      "fda_psych_uses": [
+        "Bipolar disorder (acute mania and maintenance)"
+      ],
+      "off_label_psych_uses": [
+        "Major depression augmentation",
+        "Suicide risk reduction strategy"
+      ],
+      "moa_summary": "Second-messenger and neurotransmission modulation with mood-stabilizing effects.",
+      "common_side_effects": [
+        "Tremor",
+        "Polyuria",
+        "Thirst",
+        "GI upset"
+      ],
+      "important_risks": [
+        "Narrow therapeutic index and toxicity risk",
+        "Renal and thyroid adverse effects"
+      ],
+      "psych_interactions": [
+        "NSAIDs, ACE inhibitors, and diuretics may increase lithium levels",
+        "Dehydration increases toxicity risk"
+      ],
+      "clinical_pearls": [
+        "Routine level/lab monitoring required",
+        "Split dosing can improve tolerability"
+      ],
+      "content_review_status": "curated",
+      "editorial_last_reviewed": "2026-03-09T06:44:50.437Z"
+    },
+    {
+      "id": "lamotrigine",
+      "fda_psych_uses": [
+        "Bipolar disorder maintenance"
+      ],
+      "off_label_psych_uses": [
+        "Bipolar depression support",
+        "Treatment-resistant depression augmentation"
+      ],
+      "moa_summary": "Voltage-gated sodium channel modulation with glutamatergic dampening.",
+      "common_side_effects": [
+        "Headache",
+        "Nausea",
+        "Dizziness",
+        "Insomnia"
+      ],
+      "important_risks": [
+        "Serious rash risk with rapid titration",
+        "Dose changes needed with valproate or enzyme inducers"
+      ],
+      "psych_interactions": [
+        "Valproate increases lamotrigine exposure",
+        "Oral contraceptive changes can alter levels"
+      ],
+      "clinical_pearls": [
+        "Slow titration is required",
+        "Often weight-neutral and cognitively tolerable"
+      ],
+      "content_review_status": "curated",
+      "editorial_last_reviewed": "2026-03-09T06:44:50.437Z"
+    },
+    {
+      "id": "divalproex",
+      "fda_psych_uses": [
+        "Bipolar disorder (acute mania)"
+      ],
+      "off_label_psych_uses": [
+        "Mood lability support",
+        "Aggression/irritability adjunct strategy"
+      ],
+      "moa_summary": "Increases GABA signaling with broad neuronal stabilization effects.",
+      "common_side_effects": [
+        "Weight gain",
+        "Sedation",
+        "Tremor",
+        "GI upset"
+      ],
+      "important_risks": [
+        "Teratogenicity",
+        "Hepatotoxicity and pancreatitis warning"
+      ],
+      "psych_interactions": [
+        "Can increase lamotrigine levels and rash risk",
+        "CNS depressant additive burden"
+      ],
+      "clinical_pearls": [
+        "Baseline and interval labs are essential",
+        "Consider metabolic monitoring over time"
+      ],
+      "content_review_status": "curated",
+      "editorial_last_reviewed": "2026-03-09T06:44:50.437Z"
+    },
+    {
+      "id": "aripiprazole",
+      "fda_psych_uses": [
+        "Schizophrenia",
+        "Bipolar I disorder",
+        "Adjunctive treatment of major depressive disorder"
+      ],
+      "off_label_psych_uses": [
+        "Irritability/impulsivity adjunct in selected cases"
+      ],
+      "moa_summary": "D2/5-HT1A partial agonist and 5-HT2A antagonist atypical antipsychotic.",
+      "common_side_effects": [
+        "Akathisia",
+        "Insomnia",
+        "Nausea",
+        "Restlessness"
+      ],
+      "important_risks": [
+        "EPS/akathisia",
+        "Metabolic adverse effect burden still possible"
+      ],
+      "psych_interactions": [
+        "Strong CYP2D6/CYP3A4 modifiers may require dose adjustment"
+      ],
+      "clinical_pearls": [
+        "High-yield depression augmentation option",
+        "Often less sedating than other atypicals"
+      ],
+      "content_review_status": "curated",
+      "editorial_last_reviewed": "2026-03-09T06:44:50.437Z"
+    },
+    {
+      "id": "quetiapine-ir",
+      "fda_psych_uses": [
+        "Schizophrenia",
+        "Bipolar disorder"
+      ],
+      "off_label_psych_uses": [
+        "Insomnia adjunct strategy",
+        "Anxiety adjunct strategy"
+      ],
+      "moa_summary": "Multi-receptor atypical antipsychotic with sedating profile at lower doses.",
+      "common_side_effects": [
+        "Sedation",
+        "Orthostasis",
+        "Dry mouth",
+        "Weight gain"
+      ],
+      "important_risks": [
+        "Metabolic syndrome risk",
+        "QT caution and orthostatic falls"
+      ],
+      "psych_interactions": [
+        "CNS depressant additive burden",
+        "CYP3A4 inhibitors can raise levels"
+      ],
+      "clinical_pearls": [
+        "Sedation can be leveraged at bedtime",
+        "Monitor metabolic trajectory early"
+      ],
+      "content_review_status": "curated",
+      "editorial_last_reviewed": "2026-03-09T06:44:50.437Z"
+    },
+    {
+      "id": "quetiapine-xr",
+      "fda_psych_uses": [
+        "Schizophrenia",
+        "Bipolar disorder",
+        "Adjunctive treatment of major depressive disorder"
+      ],
+      "off_label_psych_uses": [
+        "Generalized anxiety disorder adjunct use in selected patients"
+      ],
+      "moa_summary": "Extended-release quetiapine profile with smoother daytime exposure.",
+      "common_side_effects": [
+        "Sedation",
+        "Dizziness",
+        "Dry mouth",
+        "Weight gain"
+      ],
+      "important_risks": [
+        "Metabolic burden",
+        "Orthostasis and QT caution"
+      ],
+      "psych_interactions": [
+        "CYP3A4 interaction sensitivity",
+        "Additive CNS depressant effects"
+      ],
+      "clinical_pearls": [
+        "XR can simplify once-daily dosing",
+        "Evening administration often improves tolerability"
+      ],
+      "content_review_status": "curated",
+      "editorial_last_reviewed": "2026-03-09T06:44:50.437Z"
+    },
+    {
+      "id": "quetiapine",
+      "fda_psych_uses": [
+        "Schizophrenia",
+        "Bipolar disorder",
+        "MDD adjunct (XR)"
+      ],
+      "off_label_psych_uses": [
+        "Insomnia and anxiety adjunct use in selected cases"
+      ],
+      "moa_summary": "Atypical antipsychotic with formulation-specific sedation and kinetic profiles.",
+      "common_side_effects": [
+        "Sedation",
+        "Orthostasis",
+        "Dry mouth",
+        "Weight gain"
+      ],
+      "important_risks": [
+        "Metabolic syndrome risk",
+        "QT and orthostatic caution"
+      ],
+      "psych_interactions": [
+        "CYP3A4 interaction sensitivity",
+        "Additive CNS depression with sedatives"
+      ],
+      "clinical_pearls": [
+        "IR and XR forms can feel clinically different for onset and daytime carryover."
+      ],
+      "content_review_status": "curated",
+      "editorial_last_reviewed": "2026-03-09T06:44:50.437Z"
+    },
+    {
+      "id": "lumateperone",
+      "fda_psych_uses": [
+        "Schizophrenia",
+        "Bipolar depression"
+      ],
+      "off_label_psych_uses": [
+        "Mood-spectrum augmentation in selected scenarios"
+      ],
+      "moa_summary": "Serotonin, dopamine, and glutamatergic modulation with low-dose once daily use.",
+      "common_side_effects": [
+        "Somnolence",
+        "Dry mouth",
+        "Dizziness",
+        "Nausea"
+      ],
+      "important_risks": [
+        "Class antipsychotic boxed warnings apply",
+        "Orthostatic caution"
+      ],
+      "psych_interactions": [
+        "CYP3A4 interactions may require adjustment",
+        "Additive CNS depressant effects"
+      ],
+      "clinical_pearls": [
+        "Generally favorable EPS profile",
+        "Useful modern outpatient bipolar option"
+      ],
+      "content_review_status": "curated",
+      "editorial_last_reviewed": "2026-03-09T06:44:50.437Z"
+    },
+    {
+      "id": "amphetamine-mixed-salts-ir",
+      "fda_psych_uses": [
+        "ADHD"
+      ],
+      "off_label_psych_uses": [
+        "Residual cognitive symptoms in selected mood disorders (specialist use)"
+      ],
+      "moa_summary": "Catecholamine release enhancement and reuptake inhibition stimulant.",
+      "common_side_effects": [
+        "Decreased appetite",
+        "Insomnia",
+        "Dry mouth",
+        "Increased heart rate"
+      ],
+      "important_risks": [
+        "Blood pressure/heart rate elevation",
+        "Misuse and diversion risk"
+      ],
+      "psych_interactions": [
+        "MAOI contraindication window applies",
+        "Activation risk with other stimulating agents"
+      ],
+      "clinical_pearls": [
+        "IR allows flexible split dosing",
+        "Assess baseline cardiovascular risk and follow-up vitals"
+      ],
+      "content_review_status": "curated",
+      "editorial_last_reviewed": "2026-03-09T06:44:50.437Z"
+    },
+    {
+      "id": "amphetamine-mixed-salts-xr",
+      "fda_psych_uses": [
+        "ADHD"
+      ],
+      "off_label_psych_uses": [],
+      "moa_summary": "Extended-release mixed amphetamine salts for all-day symptom coverage.",
+      "common_side_effects": [
+        "Appetite suppression",
+        "Insomnia",
+        "Dry mouth",
+        "Anxiety"
+      ],
+      "important_risks": [
+        "Cardiovascular activation",
+        "Misuse and diversion risk"
+      ],
+      "psych_interactions": [
+        "MAOI contraindication",
+        "Caution with other sympathomimetics"
+      ],
+      "clinical_pearls": [
+        "Useful for once-daily coverage",
+        "Dose timing affects sleep quality"
+      ],
+      "content_review_status": "curated",
+      "editorial_last_reviewed": "2026-03-09T06:44:50.437Z"
+    },
+    {
+      "id": "amphetamine-mixed-salts",
+      "fda_psych_uses": [
+        "ADHD"
+      ],
+      "off_label_psych_uses": [],
+      "moa_summary": "Mixed amphetamine stimulant where IR and XR forms are selected by coverage goals.",
+      "common_side_effects": [
+        "Appetite suppression",
+        "Insomnia",
+        "Dry mouth",
+        "BP/HR activation"
+      ],
+      "important_risks": [
+        "Cardiovascular activation",
+        "Misuse/diversion risk"
+      ],
+      "psych_interactions": [
+        "MAOI contraindication",
+        "Activation burden with other sympathomimetics"
+      ],
+      "clinical_pearls": [
+        "Formulation choice is central; do not treat IR and XR as interchangeable dosing."
+      ],
+      "content_review_status": "curated",
+      "editorial_last_reviewed": "2026-03-09T06:44:50.437Z"
+    },
+    {
+      "id": "lisdexamfetamine",
+      "fda_psych_uses": [
+        "ADHD",
+        "Binge eating disorder"
+      ],
+      "off_label_psych_uses": [],
+      "moa_summary": "Prodrug stimulant converted to dextroamphetamine for smoother exposure profile.",
+      "common_side_effects": [
+        "Appetite loss",
+        "Insomnia",
+        "Dry mouth",
+        "Irritability"
+      ],
+      "important_risks": [
+        "BP/HR activation",
+        "Misuse potential despite prodrug design"
+      ],
+      "psych_interactions": [
+        "MAOI contraindication",
+        "Activation with other stimulating medications"
+      ],
+      "clinical_pearls": [
+        "Often perceived as smoother onset/offset",
+        "Morning dosing usually best for sleep protection"
+      ],
+      "content_review_status": "curated",
+      "editorial_last_reviewed": "2026-03-09T06:44:50.437Z"
+    },
+    {
+      "id": "methylphenidate",
+      "fda_psych_uses": [
+        "ADHD"
+      ],
+      "off_label_psych_uses": [],
+      "moa_summary": "Catecholamine reuptake inhibition stimulant with IR/ER/patch formulation pathways.",
+      "common_side_effects": [
+        "Appetite suppression",
+        "Insomnia",
+        "Anxiety",
+        "Headache"
+      ],
+      "important_risks": [
+        "Blood pressure and pulse activation",
+        "Misuse/diversion risk"
+      ],
+      "psych_interactions": [
+        "MAOI contraindication",
+        "Activation burden with other stimulating therapies"
+      ],
+      "clinical_pearls": [
+        "Select formulation based on daily functional schedule and sleep sensitivity."
+      ],
+      "content_review_status": "curated",
+      "editorial_last_reviewed": "2026-03-09T06:44:50.437Z"
+    },
+    {
+      "id": "viloxazine",
+      "fda_psych_uses": [
+        "ADHD"
+      ],
+      "off_label_psych_uses": [],
+      "moa_summary": "Norepinephrine-modulating non-stimulant with serotonergic effects.",
+      "common_side_effects": [
+        "Somnolence",
+        "Fatigue",
+        "Nausea",
+        "Decreased appetite"
+      ],
+      "important_risks": [
+        "Suicidality monitoring in younger populations",
+        "Blood pressure and pulse changes"
+      ],
+      "psych_interactions": [
+        "CYP1A2 inhibition can alter co-med levels",
+        "Monitor activation and sleep changes"
+      ],
+      "clinical_pearls": [
+        "Useful non-stimulant alternative when stimulant side effects are limiting"
+      ],
+      "content_review_status": "curated",
+      "editorial_last_reviewed": "2026-03-09T06:44:50.437Z"
+    },
+    {
+      "id": "guanfacine-er",
+      "fda_psych_uses": [
+        "ADHD"
+      ],
+      "off_label_psych_uses": [
+        "Anxiety and hyperarousal adjunct strategy"
+      ],
+      "moa_summary": "Alpha-2A agonist with prefrontal modulation and calming effects.",
+      "common_side_effects": [
+        "Sedation",
+        "Fatigue",
+        "Dizziness",
+        "Dry mouth"
+      ],
+      "important_risks": [
+        "Hypotension and bradycardia",
+        "Rebound symptoms if abrupt discontinuation"
+      ],
+      "psych_interactions": [
+        "Additive sedation with CNS depressants",
+        "Monitor BP with antihypertensives"
+      ],
+      "clinical_pearls": [
+        "Evening dosing can improve daytime sedation burden",
+        "Taper gradually if discontinuing"
+      ],
+      "content_review_status": "curated",
+      "editorial_last_reviewed": "2026-03-09T06:44:50.437Z"
+    },
+    {
+      "id": "guanfacine",
+      "fda_psych_uses": [
+        "ADHD"
+      ],
+      "off_label_psych_uses": [
+        "Hyperarousal and sleep-onset support in selected patients"
+      ],
+      "moa_summary": "Alpha-2A agonist where IR and ER dosing strategy differs materially.",
+      "common_side_effects": [
+        "Sedation",
+        "Fatigue",
+        "Dizziness",
+        "Dry mouth"
+      ],
+      "important_risks": [
+        "Hypotension and bradycardia",
+        "Rebound symptoms if abruptly stopped"
+      ],
+      "psych_interactions": [
+        "Additive hypotension/sedation with CNS depressants or antihypertensives"
+      ],
+      "clinical_pearls": [
+        "IR and ER are not milligram-for-milligram substitutes."
+      ],
+      "content_review_status": "curated",
+      "editorial_last_reviewed": "2026-03-09T06:44:50.437Z"
+    },
+    {
+      "id": "buspirone",
+      "fda_psych_uses": [
+        "Generalized anxiety disorder"
+      ],
+      "off_label_psych_uses": [
+        "SSRI augmentation for anxiety-spectrum symptoms"
+      ],
+      "moa_summary": "5-HT1A partial agonist anxiolytic without benzodiazepine receptor effects.",
+      "common_side_effects": [
+        "Dizziness",
+        "Headache",
+        "Nausea",
+        "Restlessness"
+      ],
+      "important_risks": [
+        "Delayed onset may reduce early adherence",
+        "Serotonergic caution with combination therapy"
+      ],
+      "psych_interactions": [
+        "CYP3A4 inhibitors can increase exposure",
+        "Serotonergic combinations may increase adverse effect risk"
+      ],
+      "clinical_pearls": [
+        "Usually dosed BID-TID",
+        "Useful when avoiding benzodiazepines"
+      ],
+      "content_review_status": "curated",
+      "editorial_last_reviewed": "2026-03-09T06:44:50.437Z"
+    },
+    {
+      "id": "propranolol",
+      "fda_psych_uses": [],
+      "off_label_psych_uses": [
+        "Performance anxiety",
+        "Somatic anxiety symptom control",
+        "Akathisia adjunct strategy"
+      ],
+      "moa_summary": "Non-selective beta blockade reducing peripheral adrenergic symptoms.",
+      "common_side_effects": [
+        "Fatigue",
+        "Dizziness",
+        "Bradycardia",
+        "Cold extremities"
+      ],
+      "important_risks": [
+        "Hypotension/bradycardia",
+        "Can mask hypoglycemia and worsen asthma"
+      ],
+      "psych_interactions": [
+        "Additive hypotension with other antihypertensives",
+        "Monitor with sedating agents"
+      ],
+      "clinical_pearls": [
+        "Useful PRN for predictable performance anxiety",
+        "Track pulse/BP at dose changes"
+      ],
+      "content_review_status": "curated",
+      "editorial_last_reviewed": "2026-03-09T06:44:50.437Z"
+    },
+    {
+      "id": "naltrexone-oral",
+      "fda_psych_uses": [],
+      "off_label_psych_uses": [
+        "Alcohol use disorder support",
+        "Craving reduction support"
+      ],
+      "moa_summary": "Opioid receptor antagonism reducing reward reinforcement and craving.",
+      "common_side_effects": [
+        "Nausea",
+        "Headache",
+        "Fatigue",
+        "Anxiety"
+      ],
+      "important_risks": [
+        "Hepatic enzyme elevation risk",
+        "Opioid blockade implications for acute pain care"
+      ],
+      "psych_interactions": [
+        "Contraindicated with active opioid use",
+        "Coordinate perioperative pain plans"
+      ],
+      "clinical_pearls": [
+        "Confirm opioid-free interval before initiation",
+        "Track liver enzymes with ongoing therapy"
+      ],
+      "content_review_status": "curated",
+      "editorial_last_reviewed": "2026-03-09T06:44:50.437Z"
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'note-builder-shell-v2';
+const CACHE_NAME = 'note-builder-shell-v3';
 const SHELL_ASSETS = [
   './',
   './index.html',
@@ -9,6 +9,9 @@ const SHELL_ASSETS = [
   './icons/icon-512.png',
   './a_digital_vector_logo_features_an_uppercase_letter.png',
   './ebh-logo.png',
+  './data/meds/compiled/medications.compiled.json',
+  './data/meds/review/review-queue.json',
+  './docs/medication-reference-maintenance.md',
 ];
 
 self.addEventListener('install', (event) => {
