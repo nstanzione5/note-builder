@@ -852,17 +852,19 @@ function attachKeyboardShortcuts() {
 }
 
 function attachEventListeners() {
-  els.astraBtn.addEventListener('click', () => setPractice('astra'));
-  els.ebhBtn.addEventListener('click', () => setPractice('ebh'));
-  els.followBtn.addEventListener('click', () => setVisitType('followup'));
-  els.intakeBtn.addEventListener('click', () => setVisitType('intake'));
+  if (els.astraBtn) els.astraBtn.addEventListener('click', () => setPractice('astra'));
+  if (els.ebhBtn) els.ebhBtn.addEventListener('click', () => setPractice('ebh'));
+  if (els.followBtn) els.followBtn.addEventListener('click', () => setVisitType('followup'));
+  if (els.intakeBtn) els.intakeBtn.addEventListener('click', () => setVisitType('intake'));
 
-  els.scriptToggle.addEventListener('change', (event) => {
-    state.scriptVisible = event.target.checked;
-    updateScriptVisibility();
-    updateTopbarState();
-    saveDraft();
-  });
+  if (els.scriptToggle) {
+    els.scriptToggle.addEventListener('change', (event) => {
+      state.scriptVisible = event.target.checked;
+      updateScriptVisibility();
+      updateTopbarState();
+      saveDraft();
+    });
+  }
 
   document.querySelectorAll('#currentModalityToggle .seg-btn').forEach((btn) => {
     btn.addEventListener('click', () => setCurrentModality(btn.dataset.currentModality, btn));
@@ -894,20 +896,16 @@ function attachEventListeners() {
     });
   });
 
-  els.copyBtn.addEventListener('click', () => {
-    copyExport();
-  });
+  if (els.copyBtn) els.copyBtn.addEventListener('click', () => { copyExport(); });
 
-  els.copyOpenBtn.addEventListener('click', async () => {
+  if (els.copyOpenBtn) els.copyOpenBtn.addEventListener('click', async () => {
     const copied = await copyExport();
     if (copied) openActiveGpt();
   });
 
-  els.openGptBtn.addEventListener('click', () => {
-    openActiveGpt();
-  });
+  if (els.openGptBtn) els.openGptBtn.addEventListener('click', () => { openActiveGpt(); });
 
-  els.clearBtn.addEventListener('click', () => {
+  if (els.clearBtn) els.clearBtn.addEventListener('click', () => {
     if (window.confirm('Clear the current note draft?')) {
       clearAll();
     }

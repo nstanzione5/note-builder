@@ -1,0 +1,27 @@
+{
+  "name": "note-builder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nstanzione5/note-builder.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/nstanzione5/note-builder/issues"
+  },
+  "homepage": "https://github.com/nstanzione5/note-builder#readme",
+  "dependencies": {
+    "jsdom": "^21.1.2"
+  },
+  "devDependencies": {
+    "puppeteer": "^24.38.0"
+  }
+}
