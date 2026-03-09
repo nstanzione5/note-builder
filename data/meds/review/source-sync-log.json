@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-03-09T19:51:09.570Z",
+  "generated_at": "2026-03-09T20:08:34.192Z",
   "items": [
     {
       "id": "citalopram",
       "generic_name": "citalopram",
-      "source_last_checked": "2026-03-09T19:47:58.650Z",
+      "source_last_checked": "2026-03-09T20:05:11.550Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -20,7 +20,7 @@
     {
       "id": "escitalopram",
       "generic_name": "escitalopram",
-      "source_last_checked": "2026-03-09T19:47:59.623Z",
+      "source_last_checked": "2026-03-09T20:05:12.321Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -36,7 +36,7 @@
     {
       "id": "fluoxetine",
       "generic_name": "fluoxetine",
-      "source_last_checked": "2026-03-09T19:48:00.551Z",
+      "source_last_checked": "2026-03-09T20:05:13.222Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -52,7 +52,7 @@
     {
       "id": "fluvoxamine",
       "generic_name": "fluvoxamine",
-      "source_last_checked": "2026-03-09T19:48:01.321Z",
+      "source_last_checked": "2026-03-09T20:05:13.975Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -68,7 +68,7 @@
     {
       "id": "paroxetine",
       "generic_name": "paroxetine",
-      "source_last_checked": "2026-03-09T19:48:02.073Z",
+      "source_last_checked": "2026-03-09T20:05:14.797Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -84,7 +84,7 @@
     {
       "id": "sertraline",
       "generic_name": "sertraline",
-      "source_last_checked": "2026-03-09T19:48:02.794Z",
+      "source_last_checked": "2026-03-09T20:05:15.498Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -100,7 +100,7 @@
     {
       "id": "vilazodone",
       "generic_name": "vilazodone",
-      "source_last_checked": "2026-03-09T19:48:03.472Z",
+      "source_last_checked": "2026-03-09T20:05:16.120Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -116,7 +116,7 @@
     {
       "id": "vortioxetine",
       "generic_name": "vortioxetine",
-      "source_last_checked": "2026-03-09T19:48:03.998Z",
+      "source_last_checked": "2026-03-09T20:05:16.908Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -132,7 +132,7 @@
     {
       "id": "venlafaxine",
       "generic_name": "venlafaxine",
-      "source_last_checked": "2026-03-09T19:48:04.697Z",
+      "source_last_checked": "2026-03-09T20:05:17.582Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -148,7 +148,7 @@
     {
       "id": "desvenlafaxine",
       "generic_name": "desvenlafaxine",
-      "source_last_checked": "2026-03-09T19:48:05.381Z",
+      "source_last_checked": "2026-03-09T20:05:18.264Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -164,7 +164,7 @@
     {
       "id": "duloxetine",
       "generic_name": "duloxetine",
-      "source_last_checked": "2026-03-09T19:48:06.260Z",
+      "source_last_checked": "2026-03-09T20:05:19.093Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -180,7 +180,7 @@
     {
       "id": "levomilnacipran",
       "generic_name": "levomilnacipran",
-      "source_last_checked": "2026-03-09T19:48:06.943Z",
+      "source_last_checked": "2026-03-09T20:05:19.619Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -196,7 +196,7 @@
     {
       "id": "milnacipran",
       "generic_name": "milnacipran",
-      "source_last_checked": "2026-03-09T19:48:07.566Z",
+      "source_last_checked": "2026-03-09T20:05:20.157Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -212,7 +212,7 @@
     {
       "id": "atomoxetine",
       "generic_name": "atomoxetine",
-      "source_last_checked": "2026-03-09T19:48:08.254Z",
+      "source_last_checked": "2026-03-09T20:05:20.821Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -228,22 +228,24 @@
     {
       "id": "sibutramine",
       "generic_name": "sibutramine",
-      "source_last_checked": "2026-03-09T19:48:08.878Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T20:05:21.891Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
+        "DailyMed",
         "RxNorm",
         "RxClass",
         "Drugs@FDA"
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (404) for sibutramine"
+        "openFDA request failed (404) for sibutramine",
+        "openFDA request failed (404) for meridia"
       ]
     },
     {
       "id": "bupropion",
       "generic_name": "bupropion",
-      "source_last_checked": "2026-03-09T19:48:09.508Z",
+      "source_last_checked": "2026-03-09T20:05:22.579Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -259,7 +261,7 @@
     {
       "id": "dextromethorphan-bupropion",
       "generic_name": "dextromethorphan-bupropion",
-      "source_last_checked": "2026-03-09T19:48:10.456Z",
+      "source_last_checked": "2026-03-09T20:05:23.519Z",
       "source_links_count": 6,
       "enrichment_sources_found": [
         "openFDA",
@@ -278,7 +280,7 @@
     {
       "id": "mirtazapine",
       "generic_name": "mirtazapine",
-      "source_last_checked": "2026-03-09T19:48:11.136Z",
+      "source_last_checked": "2026-03-09T20:05:24.202Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -294,7 +296,7 @@
     {
       "id": "trazodone",
       "generic_name": "trazodone",
-      "source_last_checked": "2026-03-09T19:48:11.910Z",
+      "source_last_checked": "2026-03-09T20:05:24.905Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -310,7 +312,7 @@
     {
       "id": "nefazodone",
       "generic_name": "nefazodone",
-      "source_last_checked": "2026-03-09T19:48:12.436Z",
+      "source_last_checked": "2026-03-09T20:05:25.425Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -326,7 +328,7 @@
     {
       "id": "amitriptyline",
       "generic_name": "amitriptyline",
-      "source_last_checked": "2026-03-09T19:48:13.202Z",
+      "source_last_checked": "2026-03-09T20:05:26.226Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -342,7 +344,7 @@
     {
       "id": "nortriptyline",
       "generic_name": "nortriptyline",
-      "source_last_checked": "2026-03-09T19:48:14.027Z",
+      "source_last_checked": "2026-03-09T20:05:26.967Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -358,7 +360,7 @@
     {
       "id": "desipramine",
       "generic_name": "desipramine",
-      "source_last_checked": "2026-03-09T19:48:14.669Z",
+      "source_last_checked": "2026-03-09T20:05:27.594Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -374,7 +376,7 @@
     {
       "id": "imipramine",
       "generic_name": "imipramine",
-      "source_last_checked": "2026-03-09T19:48:15.437Z",
+      "source_last_checked": "2026-03-09T20:05:28.340Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -390,7 +392,7 @@
     {
       "id": "clomipramine",
       "generic_name": "clomipramine",
-      "source_last_checked": "2026-03-09T19:48:16.217Z",
+      "source_last_checked": "2026-03-09T20:05:29.306Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -406,7 +408,7 @@
     {
       "id": "doxepin",
       "generic_name": "doxepin",
-      "source_last_checked": "2026-03-09T19:48:16.982Z",
+      "source_last_checked": "2026-03-09T20:05:29.973Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -422,7 +424,7 @@
     {
       "id": "maprotiline",
       "generic_name": "maprotiline",
-      "source_last_checked": "2026-03-09T19:48:17.454Z",
+      "source_last_checked": "2026-03-09T20:05:30.905Z",
       "source_links_count": 4,
       "enrichment_sources_found": [
         "RxNorm",
@@ -432,13 +434,14 @@
       ],
       "status": "source scored",
       "notes": [
-        "openFDA request failed (404) for maprotiline"
+        "openFDA request failed (404) for maprotiline",
+        "openFDA request failed (404) for ludiomil"
       ]
     },
     {
       "id": "amoxapine",
       "generic_name": "amoxapine",
-      "source_last_checked": "2026-03-09T19:48:18.023Z",
+      "source_last_checked": "2026-03-09T20:05:31.449Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -454,7 +457,7 @@
     {
       "id": "trimipramine",
       "generic_name": "trimipramine",
-      "source_last_checked": "2026-03-09T19:48:18.581Z",
+      "source_last_checked": "2026-03-09T20:05:32.099Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -470,7 +473,7 @@
     {
       "id": "protriptyline",
       "generic_name": "protriptyline",
-      "source_last_checked": "2026-03-09T19:48:19.075Z",
+      "source_last_checked": "2026-03-09T20:05:32.597Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -486,7 +489,7 @@
     {
       "id": "phenelzine",
       "generic_name": "phenelzine",
-      "source_last_checked": "2026-03-09T19:48:19.594Z",
+      "source_last_checked": "2026-03-09T20:05:33.118Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -502,7 +505,7 @@
     {
       "id": "tranylcypromine",
       "generic_name": "tranylcypromine",
-      "source_last_checked": "2026-03-09T19:48:20.152Z",
+      "source_last_checked": "2026-03-09T20:05:33.664Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -518,7 +521,7 @@
     {
       "id": "isocarboxazid",
       "generic_name": "isocarboxazid",
-      "source_last_checked": "2026-03-09T19:48:21.163Z",
+      "source_last_checked": "2026-03-09T20:05:34.587Z",
       "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
@@ -536,7 +539,7 @@
     {
       "id": "selegiline-transdermal",
       "generic_name": "selegiline transdermal",
-      "source_last_checked": "2026-03-09T19:48:21.832Z",
+      "source_last_checked": "2026-03-09T20:05:35.248Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -552,7 +555,7 @@
     {
       "id": "zuranolone",
       "generic_name": "zuranolone",
-      "source_last_checked": "2026-03-09T19:48:22.337Z",
+      "source_last_checked": "2026-03-09T20:05:35.733Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -568,7 +571,7 @@
     {
       "id": "amphetamine-mixed-salts-ir",
       "generic_name": "amphetamine mixed salts IR",
-      "source_last_checked": "2026-03-09T19:48:23.033Z",
+      "source_last_checked": "2026-03-09T20:05:36.406Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -584,7 +587,7 @@
     {
       "id": "amphetamine-mixed-salts-xr",
       "generic_name": "amphetamine mixed salts XR",
-      "source_last_checked": "2026-03-09T19:48:23.315Z",
+      "source_last_checked": "2026-03-09T20:05:36.688Z",
       "source_links_count": 10,
       "enrichment_sources_found": [
         "openFDA",
@@ -600,7 +603,7 @@
     {
       "id": "lisdexamfetamine",
       "generic_name": "lisdexamfetamine",
-      "source_last_checked": "2026-03-09T19:48:24.115Z",
+      "source_last_checked": "2026-03-09T20:05:37.488Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -616,7 +619,7 @@
     {
       "id": "dextroamphetamine",
       "generic_name": "dextroamphetamine",
-      "source_last_checked": "2026-03-09T19:48:24.832Z",
+      "source_last_checked": "2026-03-09T20:05:38.200Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -632,7 +635,7 @@
     {
       "id": "methamphetamine",
       "generic_name": "methamphetamine",
-      "source_last_checked": "2026-03-09T19:48:25.354Z",
+      "source_last_checked": "2026-03-09T20:05:38.739Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -648,7 +651,7 @@
     {
       "id": "methylphenidate-ir",
       "generic_name": "methylphenidate IR",
-      "source_last_checked": "2026-03-09T19:48:26.000Z",
+      "source_last_checked": "2026-03-09T20:05:39.372Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -664,7 +667,7 @@
     {
       "id": "methylphenidate-er",
       "generic_name": "methylphenidate ER",
-      "source_last_checked": "2026-03-09T19:48:26.281Z",
+      "source_last_checked": "2026-03-09T20:05:39.654Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -680,7 +683,7 @@
     {
       "id": "dexmethylphenidate",
       "generic_name": "dexmethylphenidate",
-      "source_last_checked": "2026-03-09T19:48:26.962Z",
+      "source_last_checked": "2026-03-09T20:05:40.336Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -696,7 +699,7 @@
     {
       "id": "dexmethylphenidate-xr",
       "generic_name": "dexmethylphenidate XR",
-      "source_last_checked": "2026-03-09T19:48:27.242Z",
+      "source_last_checked": "2026-03-09T20:05:40.618Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -712,7 +715,7 @@
     {
       "id": "serdexmethylphenidate-dexmethylphenidate",
       "generic_name": "serdexmethylphenidate-dexmethylphenidate",
-      "source_last_checked": "2026-03-09T19:48:28.362Z",
+      "source_last_checked": "2026-03-09T20:05:41.798Z",
       "source_links_count": 6,
       "enrichment_sources_found": [
         "openFDA",
@@ -731,7 +734,7 @@
     {
       "id": "methylphenidate-pm",
       "generic_name": "methylphenidate PM",
-      "source_last_checked": "2026-03-09T19:48:28.643Z",
+      "source_last_checked": "2026-03-09T20:05:42.080Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -747,7 +750,7 @@
     {
       "id": "amphetamine-mixed-salts-er",
       "generic_name": "amphetamine mixed salts ER",
-      "source_last_checked": "2026-03-09T19:48:28.924Z",
+      "source_last_checked": "2026-03-09T20:05:42.361Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -763,7 +766,7 @@
     {
       "id": "amphetamine-sulfate",
       "generic_name": "amphetamine sulfate",
-      "source_last_checked": "2026-03-09T19:48:29.524Z",
+      "source_last_checked": "2026-03-09T20:05:42.951Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -779,7 +782,7 @@
     {
       "id": "amphetamine-xr-odt",
       "generic_name": "amphetamine XR ODT",
-      "source_last_checked": "2026-03-09T19:48:29.805Z",
+      "source_last_checked": "2026-03-09T20:05:43.232Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -795,7 +798,7 @@
     {
       "id": "amphetamine-xr-suspension",
       "generic_name": "amphetamine XR suspension",
-      "source_last_checked": "2026-03-09T19:48:30.086Z",
+      "source_last_checked": "2026-03-09T20:05:43.514Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -811,7 +814,7 @@
     {
       "id": "methylphenidate-chewable-er",
       "generic_name": "methylphenidate chewable ER",
-      "source_last_checked": "2026-03-09T19:48:30.368Z",
+      "source_last_checked": "2026-03-09T20:05:43.795Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -827,7 +830,7 @@
     {
       "id": "methylphenidate-suspension-er",
       "generic_name": "methylphenidate suspension ER",
-      "source_last_checked": "2026-03-09T19:48:30.650Z",
+      "source_last_checked": "2026-03-09T20:05:44.077Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -843,7 +846,7 @@
     {
       "id": "methylphenidate-odt-xr",
       "generic_name": "methylphenidate ODT XR",
-      "source_last_checked": "2026-03-09T19:48:30.931Z",
+      "source_last_checked": "2026-03-09T20:05:44.358Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -859,7 +862,7 @@
     {
       "id": "methylphenidate-transdermal",
       "generic_name": "methylphenidate transdermal",
-      "source_last_checked": "2026-03-09T19:48:31.212Z",
+      "source_last_checked": "2026-03-09T20:05:44.640Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -875,7 +878,7 @@
     {
       "id": "dextroamphetamine-transdermal",
       "generic_name": "dextroamphetamine transdermal",
-      "source_last_checked": "2026-03-09T19:48:31.494Z",
+      "source_last_checked": "2026-03-09T20:05:44.922Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -891,7 +894,7 @@
     {
       "id": "viloxazine",
       "generic_name": "viloxazine",
-      "source_last_checked": "2026-03-09T19:48:31.975Z",
+      "source_last_checked": "2026-03-09T20:05:45.480Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -907,7 +910,7 @@
     {
       "id": "guanfacine-ir",
       "generic_name": "guanfacine IR",
-      "source_last_checked": "2026-03-09T19:48:32.595Z",
+      "source_last_checked": "2026-03-09T20:05:46.172Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -923,7 +926,7 @@
     {
       "id": "guanfacine-er",
       "generic_name": "guanfacine ER",
-      "source_last_checked": "2026-03-09T19:48:32.876Z",
+      "source_last_checked": "2026-03-09T20:05:46.455Z",
       "source_links_count": 11,
       "enrichment_sources_found": [
         "openFDA",
@@ -939,7 +942,7 @@
     {
       "id": "clonidine-ir",
       "generic_name": "clonidine IR",
-      "source_last_checked": "2026-03-09T19:48:33.670Z",
+      "source_last_checked": "2026-03-09T20:05:47.272Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -955,7 +958,7 @@
     {
       "id": "clonidine-er",
       "generic_name": "clonidine ER",
-      "source_last_checked": "2026-03-09T19:48:33.952Z",
+      "source_last_checked": "2026-03-09T20:05:47.554Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -971,7 +974,7 @@
     {
       "id": "modafinil",
       "generic_name": "modafinil",
-      "source_last_checked": "2026-03-09T19:48:34.668Z",
+      "source_last_checked": "2026-03-09T20:05:48.461Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -987,7 +990,7 @@
     {
       "id": "armodafinil",
       "generic_name": "armodafinil",
-      "source_last_checked": "2026-03-09T19:48:35.344Z",
+      "source_last_checked": "2026-03-09T20:05:49.160Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1003,7 +1006,7 @@
     {
       "id": "alprazolam",
       "generic_name": "alprazolam",
-      "source_last_checked": "2026-03-09T19:48:36.299Z",
+      "source_last_checked": "2026-03-09T20:05:50.198Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1019,7 +1022,7 @@
     {
       "id": "clonazepam",
       "generic_name": "clonazepam",
-      "source_last_checked": "2026-03-09T19:48:37.186Z",
+      "source_last_checked": "2026-03-09T20:05:51.081Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1035,7 +1038,7 @@
     {
       "id": "lorazepam",
       "generic_name": "lorazepam",
-      "source_last_checked": "2026-03-09T19:48:38.094Z",
+      "source_last_checked": "2026-03-09T20:05:51.890Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1051,7 +1054,7 @@
     {
       "id": "diazepam",
       "generic_name": "diazepam",
-      "source_last_checked": "2026-03-09T19:48:38.914Z",
+      "source_last_checked": "2026-03-09T20:05:53.493Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1067,7 +1070,7 @@
     {
       "id": "temazepam",
       "generic_name": "temazepam",
-      "source_last_checked": "2026-03-09T19:48:39.836Z",
+      "source_last_checked": "2026-03-09T20:05:56.621Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1083,7 +1086,7 @@
     {
       "id": "oxazepam",
       "generic_name": "oxazepam",
-      "source_last_checked": "2026-03-09T19:48:40.415Z",
+      "source_last_checked": "2026-03-09T20:05:57.372Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1099,7 +1102,7 @@
     {
       "id": "chlordiazepoxide",
       "generic_name": "chlordiazepoxide",
-      "source_last_checked": "2026-03-09T19:48:41.199Z",
+      "source_last_checked": "2026-03-09T20:05:58.274Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1115,7 +1118,7 @@
     {
       "id": "clorazepate",
       "generic_name": "clorazepate",
-      "source_last_checked": "2026-03-09T19:48:41.901Z",
+      "source_last_checked": "2026-03-09T20:05:58.940Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1131,7 +1134,7 @@
     {
       "id": "triazolam",
       "generic_name": "triazolam",
-      "source_last_checked": "2026-03-09T19:48:42.543Z",
+      "source_last_checked": "2026-03-09T20:05:59.568Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1147,7 +1150,7 @@
     {
       "id": "estazolam",
       "generic_name": "estazolam",
-      "source_last_checked": "2026-03-09T19:48:43.149Z",
+      "source_last_checked": "2026-03-09T20:06:00.101Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1163,7 +1166,7 @@
     {
       "id": "flurazepam",
       "generic_name": "flurazepam",
-      "source_last_checked": "2026-03-09T19:48:43.708Z",
+      "source_last_checked": "2026-03-09T20:06:00.617Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1179,7 +1182,7 @@
     {
       "id": "quazepam",
       "generic_name": "quazepam",
-      "source_last_checked": "2026-03-09T19:48:44.313Z",
+      "source_last_checked": "2026-03-09T20:06:01.148Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -1194,7 +1197,7 @@
     {
       "id": "midazolam",
       "generic_name": "midazolam",
-      "source_last_checked": "2026-03-09T19:48:45.109Z",
+      "source_last_checked": "2026-03-09T20:06:01.964Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1210,7 +1213,7 @@
     {
       "id": "diazepam-nasal",
       "generic_name": "diazepam nasal",
-      "source_last_checked": "2026-03-09T19:48:45.391Z",
+      "source_last_checked": "2026-03-09T20:06:02.246Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -1226,7 +1229,7 @@
     {
       "id": "midazolam-nasal",
       "generic_name": "midazolam nasal",
-      "source_last_checked": "2026-03-09T19:48:45.673Z",
+      "source_last_checked": "2026-03-09T20:06:02.527Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -1242,7 +1245,7 @@
     {
       "id": "zolpidem",
       "generic_name": "zolpidem",
-      "source_last_checked": "2026-03-09T19:48:46.698Z",
+      "source_last_checked": "2026-03-09T20:06:03.501Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1258,7 +1261,7 @@
     {
       "id": "zolpidem-er",
       "generic_name": "zolpidem ER",
-      "source_last_checked": "2026-03-09T19:48:46.982Z",
+      "source_last_checked": "2026-03-09T20:06:03.783Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -1274,7 +1277,7 @@
     {
       "id": "zaleplon",
       "generic_name": "zaleplon",
-      "source_last_checked": "2026-03-09T19:48:47.745Z",
+      "source_last_checked": "2026-03-09T20:06:04.616Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1290,7 +1293,7 @@
     {
       "id": "eszopiclone",
       "generic_name": "eszopiclone",
-      "source_last_checked": "2026-03-09T19:48:48.619Z",
+      "source_last_checked": "2026-03-09T20:06:05.395Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1306,7 +1309,7 @@
     {
       "id": "ramelteon",
       "generic_name": "ramelteon",
-      "source_last_checked": "2026-03-09T19:48:49.302Z",
+      "source_last_checked": "2026-03-09T20:06:06.190Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1322,7 +1325,7 @@
     {
       "id": "suvorexant",
       "generic_name": "suvorexant",
-      "source_last_checked": "2026-03-09T19:48:49.786Z",
+      "source_last_checked": "2026-03-09T20:06:06.681Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1338,7 +1341,7 @@
     {
       "id": "lemborexant",
       "generic_name": "lemborexant",
-      "source_last_checked": "2026-03-09T19:48:50.356Z",
+      "source_last_checked": "2026-03-09T20:06:07.170Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1354,7 +1357,7 @@
     {
       "id": "daridorexant",
       "generic_name": "daridorexant",
-      "source_last_checked": "2026-03-09T19:48:50.861Z",
+      "source_last_checked": "2026-03-09T20:06:07.656Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1370,7 +1373,7 @@
     {
       "id": "doxepin-low-dose",
       "generic_name": "doxepin low-dose",
-      "source_last_checked": "2026-03-09T19:48:52.023Z",
+      "source_last_checked": "2026-03-09T20:06:08.734Z",
       "source_links_count": 6,
       "enrichment_sources_found": [
         "openFDA",
@@ -1389,7 +1392,7 @@
     {
       "id": "hydroxyzine",
       "generic_name": "hydroxyzine",
-      "source_last_checked": "2026-03-09T19:48:52.943Z",
+      "source_last_checked": "2026-03-09T20:06:09.479Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1405,7 +1408,7 @@
     {
       "id": "diphenhydramine",
       "generic_name": "diphenhydramine",
-      "source_last_checked": "2026-03-09T19:48:53.784Z",
+      "source_last_checked": "2026-03-09T20:06:10.323Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1421,7 +1424,7 @@
     {
       "id": "gabapentin",
       "generic_name": "gabapentin",
-      "source_last_checked": "2026-03-09T19:48:54.481Z",
+      "source_last_checked": "2026-03-09T20:06:11.005Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1437,7 +1440,7 @@
     {
       "id": "pregabalin",
       "generic_name": "pregabalin",
-      "source_last_checked": "2026-03-09T19:48:55.402Z",
+      "source_last_checked": "2026-03-09T20:06:11.838Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1453,7 +1456,7 @@
     {
       "id": "melatonin-receptor-agonist",
       "generic_name": "melatonin receptor agonist",
-      "source_last_checked": "2026-03-09T19:48:57.153Z",
+      "source_last_checked": "2026-03-09T20:06:12.577Z",
       "source_links_count": 1,
       "enrichment_sources_found": [
         "RxNorm"
@@ -1467,7 +1470,7 @@
     {
       "id": "aripiprazole",
       "generic_name": "aripiprazole",
-      "source_last_checked": "2026-03-09T19:48:57.866Z",
+      "source_last_checked": "2026-03-09T20:06:13.292Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1483,7 +1486,7 @@
     {
       "id": "brexpiprazole",
       "generic_name": "brexpiprazole",
-      "source_last_checked": "2026-03-09T19:48:58.370Z",
+      "source_last_checked": "2026-03-09T20:06:13.864Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1499,7 +1502,7 @@
     {
       "id": "cariprazine",
       "generic_name": "cariprazine",
-      "source_last_checked": "2026-03-09T19:48:58.883Z",
+      "source_last_checked": "2026-03-09T20:06:14.363Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1515,7 +1518,7 @@
     {
       "id": "quetiapine-ir",
       "generic_name": "quetiapine IR",
-      "source_last_checked": "2026-03-09T19:48:59.725Z",
+      "source_last_checked": "2026-03-09T20:06:15.195Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -1531,7 +1534,7 @@
     {
       "id": "quetiapine-xr",
       "generic_name": "quetiapine XR",
-      "source_last_checked": "2026-03-09T19:49:00.007Z",
+      "source_last_checked": "2026-03-09T20:06:15.479Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -1547,7 +1550,7 @@
     {
       "id": "olanzapine",
       "generic_name": "olanzapine",
-      "source_last_checked": "2026-03-09T19:49:00.774Z",
+      "source_last_checked": "2026-03-09T20:06:16.250Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1563,7 +1566,7 @@
     {
       "id": "olanzapine-fluoxetine",
       "generic_name": "olanzapine-fluoxetine",
-      "source_last_checked": "2026-03-09T19:49:01.825Z",
+      "source_last_checked": "2026-03-09T20:06:17.181Z",
       "source_links_count": 3,
       "enrichment_sources_found": [
         "RxNorm",
@@ -1581,7 +1584,7 @@
     {
       "id": "olanzapine-samidorphan",
       "generic_name": "olanzapine-samidorphan",
-      "source_last_checked": "2026-03-09T19:49:02.873Z",
+      "source_last_checked": "2026-03-09T20:06:18.640Z",
       "source_links_count": 6,
       "enrichment_sources_found": [
         "openFDA",
@@ -1600,7 +1603,7 @@
     {
       "id": "risperidone",
       "generic_name": "risperidone",
-      "source_last_checked": "2026-03-09T19:49:03.572Z",
+      "source_last_checked": "2026-03-09T20:06:19.388Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1616,7 +1619,7 @@
     {
       "id": "paliperidone-oral",
       "generic_name": "paliperidone oral",
-      "source_last_checked": "2026-03-09T19:49:04.442Z",
+      "source_last_checked": "2026-03-09T20:06:20.176Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -1632,7 +1635,7 @@
     {
       "id": "ziprasidone",
       "generic_name": "ziprasidone",
-      "source_last_checked": "2026-03-09T19:49:05.232Z",
+      "source_last_checked": "2026-03-09T20:06:20.997Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1648,7 +1651,7 @@
     {
       "id": "lurasidone",
       "generic_name": "lurasidone",
-      "source_last_checked": "2026-03-09T19:49:05.824Z",
+      "source_last_checked": "2026-03-09T20:06:21.597Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1664,7 +1667,7 @@
     {
       "id": "lumateperone",
       "generic_name": "lumateperone",
-      "source_last_checked": "2026-03-09T19:49:06.331Z",
+      "source_last_checked": "2026-03-09T20:06:22.090Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1680,7 +1683,7 @@
     {
       "id": "asenapine-sublingual",
       "generic_name": "asenapine sublingual",
-      "source_last_checked": "2026-03-09T19:49:07.411Z",
+      "source_last_checked": "2026-03-09T20:06:23.241Z",
       "source_links_count": 6,
       "enrichment_sources_found": [
         "openFDA",
@@ -1699,7 +1702,7 @@
     {
       "id": "iloperidone",
       "generic_name": "iloperidone",
-      "source_last_checked": "2026-03-09T19:49:07.931Z",
+      "source_last_checked": "2026-03-09T20:06:23.818Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1715,7 +1718,7 @@
     {
       "id": "haloperidol",
       "generic_name": "haloperidol",
-      "source_last_checked": "2026-03-09T19:49:08.636Z",
+      "source_last_checked": "2026-03-09T20:06:24.464Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1731,7 +1734,7 @@
     {
       "id": "chlorpromazine",
       "generic_name": "chlorpromazine",
-      "source_last_checked": "2026-03-09T19:49:09.268Z",
+      "source_last_checked": "2026-03-09T20:06:25.156Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1747,7 +1750,7 @@
     {
       "id": "perphenazine",
       "generic_name": "perphenazine",
-      "source_last_checked": "2026-03-09T19:49:09.976Z",
+      "source_last_checked": "2026-03-09T20:06:25.884Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1763,7 +1766,7 @@
     {
       "id": "trifluoperazine",
       "generic_name": "trifluoperazine",
-      "source_last_checked": "2026-03-09T19:49:10.573Z",
+      "source_last_checked": "2026-03-09T20:06:26.514Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1779,7 +1782,7 @@
     {
       "id": "loxapine",
       "generic_name": "loxapine",
-      "source_last_checked": "2026-03-09T19:49:11.256Z",
+      "source_last_checked": "2026-03-09T20:06:27.159Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1795,7 +1798,7 @@
     {
       "id": "molindone",
       "generic_name": "molindone",
-      "source_last_checked": "2026-03-09T19:49:11.783Z",
+      "source_last_checked": "2026-03-09T20:06:27.661Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1811,7 +1814,7 @@
     {
       "id": "pimozide",
       "generic_name": "pimozide",
-      "source_last_checked": "2026-03-09T19:49:12.306Z",
+      "source_last_checked": "2026-03-09T20:06:28.145Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1827,7 +1830,7 @@
     {
       "id": "thiothixene",
       "generic_name": "thiothixene",
-      "source_last_checked": "2026-03-09T19:49:12.859Z",
+      "source_last_checked": "2026-03-09T20:06:28.703Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1843,7 +1846,7 @@
     {
       "id": "thioridazine",
       "generic_name": "thioridazine",
-      "source_last_checked": "2026-03-09T19:49:13.393Z",
+      "source_last_checked": "2026-03-09T20:06:29.234Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1859,7 +1862,7 @@
     {
       "id": "fluphenazine",
       "generic_name": "fluphenazine",
-      "source_last_checked": "2026-03-09T19:49:14.031Z",
+      "source_last_checked": "2026-03-09T20:06:29.873Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1875,7 +1878,7 @@
     {
       "id": "xanomeline-trospium",
       "generic_name": "xanomeline-trospium",
-      "source_last_checked": "2026-03-09T19:49:15.090Z",
+      "source_last_checked": "2026-03-09T20:06:30.816Z",
       "source_links_count": 6,
       "enrichment_sources_found": [
         "openFDA",
@@ -1894,7 +1897,7 @@
     {
       "id": "pimavanserin",
       "generic_name": "pimavanserin",
-      "source_last_checked": "2026-03-09T19:49:15.680Z",
+      "source_last_checked": "2026-03-09T20:06:31.315Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1910,7 +1913,7 @@
     {
       "id": "lithium-carbonate",
       "generic_name": "lithium carbonate",
-      "source_last_checked": "2026-03-09T19:49:16.214Z",
+      "source_last_checked": "2026-03-09T20:06:31.831Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1926,7 +1929,7 @@
     {
       "id": "lithium-citrate",
       "generic_name": "lithium citrate",
-      "source_last_checked": "2026-03-09T19:49:16.743Z",
+      "source_last_checked": "2026-03-09T20:06:32.332Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -1942,7 +1945,7 @@
     {
       "id": "lamotrigine",
       "generic_name": "lamotrigine",
-      "source_last_checked": "2026-03-09T19:49:17.347Z",
+      "source_last_checked": "2026-03-09T20:06:33.029Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1958,7 +1961,7 @@
     {
       "id": "divalproex",
       "generic_name": "divalproex",
-      "source_last_checked": "2026-03-09T19:49:17.979Z",
+      "source_last_checked": "2026-03-09T20:06:33.652Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1974,7 +1977,7 @@
     {
       "id": "valproic-acid",
       "generic_name": "valproic acid",
-      "source_last_checked": "2026-03-09T19:49:18.660Z",
+      "source_last_checked": "2026-03-09T20:06:34.345Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -1990,7 +1993,7 @@
     {
       "id": "carbamazepine",
       "generic_name": "carbamazepine",
-      "source_last_checked": "2026-03-09T19:49:19.289Z",
+      "source_last_checked": "2026-03-09T20:06:34.994Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -2006,7 +2009,7 @@
     {
       "id": "oxcarbazepine",
       "generic_name": "oxcarbazepine",
-      "source_last_checked": "2026-03-09T19:49:19.937Z",
+      "source_last_checked": "2026-03-09T20:06:35.640Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -2022,7 +2025,7 @@
     {
       "id": "topiramate",
       "generic_name": "topiramate",
-      "source_last_checked": "2026-03-09T19:49:20.533Z",
+      "source_last_checked": "2026-03-09T20:06:36.237Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -2038,7 +2041,7 @@
     {
       "id": "zonisamide",
       "generic_name": "zonisamide",
-      "source_last_checked": "2026-03-09T19:49:21.316Z",
+      "source_last_checked": "2026-03-09T20:06:37.015Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -2054,7 +2057,7 @@
     {
       "id": "levetiracetam",
       "generic_name": "levetiracetam",
-      "source_last_checked": "2026-03-09T19:49:22.155Z",
+      "source_last_checked": "2026-03-09T20:06:37.739Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -2070,7 +2073,7 @@
     {
       "id": "prazosin",
       "generic_name": "prazosin",
-      "source_last_checked": "2026-03-09T19:49:22.825Z",
+      "source_last_checked": "2026-03-09T20:06:38.682Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -2086,7 +2089,7 @@
     {
       "id": "doxazosin",
       "generic_name": "doxazosin",
-      "source_last_checked": "2026-03-09T19:49:23.515Z",
+      "source_last_checked": "2026-03-09T20:06:39.370Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -2102,7 +2105,7 @@
     {
       "id": "terazosin",
       "generic_name": "terazosin",
-      "source_last_checked": "2026-03-09T19:49:24.361Z",
+      "source_last_checked": "2026-03-09T20:06:40.134Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -2118,7 +2121,7 @@
     {
       "id": "propranolol",
       "generic_name": "propranolol",
-      "source_last_checked": "2026-03-09T19:49:25.147Z",
+      "source_last_checked": "2026-03-09T20:06:40.883Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -2134,7 +2137,7 @@
     {
       "id": "atenolol",
       "generic_name": "atenolol",
-      "source_last_checked": "2026-03-09T19:49:25.978Z",
+      "source_last_checked": "2026-03-09T20:06:41.715Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -2150,7 +2153,7 @@
     {
       "id": "metoprolol",
       "generic_name": "metoprolol",
-      "source_last_checked": "2026-03-09T19:49:26.616Z",
+      "source_last_checked": "2026-03-09T20:06:42.457Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -2166,7 +2169,7 @@
     {
       "id": "nadolol",
       "generic_name": "nadolol",
-      "source_last_checked": "2026-03-09T19:49:27.554Z",
+      "source_last_checked": "2026-03-09T20:06:43.262Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -2182,7 +2185,7 @@
     {
       "id": "bisoprolol",
       "generic_name": "bisoprolol",
-      "source_last_checked": "2026-03-09T19:49:28.323Z",
+      "source_last_checked": "2026-03-09T20:06:44.054Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -2198,7 +2201,7 @@
     {
       "id": "carvedilol",
       "generic_name": "carvedilol",
-      "source_last_checked": "2026-03-09T19:49:28.946Z",
+      "source_last_checked": "2026-03-09T20:06:44.616Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -2214,7 +2217,7 @@
     {
       "id": "buspirone",
       "generic_name": "buspirone",
-      "source_last_checked": "2026-03-09T19:49:34.987Z",
+      "source_last_checked": "2026-03-09T20:06:45.363Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -2230,7 +2233,7 @@
     {
       "id": "cyproheptadine",
       "generic_name": "cyproheptadine",
-      "source_last_checked": "2026-03-09T19:49:36.150Z",
+      "source_last_checked": "2026-03-09T20:06:46.181Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -2246,7 +2249,7 @@
     {
       "id": "naltrexone-oral",
       "generic_name": "naltrexone oral",
-      "source_last_checked": "2026-03-09T19:49:36.837Z",
+      "source_last_checked": "2026-03-09T20:06:46.898Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -2262,7 +2265,7 @@
     {
       "id": "acamprosate",
       "generic_name": "acamprosate",
-      "source_last_checked": "2026-03-09T19:49:37.467Z",
+      "source_last_checked": "2026-03-09T20:06:48.044Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -2278,7 +2281,7 @@
     {
       "id": "disulfiram",
       "generic_name": "disulfiram",
-      "source_last_checked": "2026-03-09T19:49:38.013Z",
+      "source_last_checked": "2026-03-09T20:06:48.588Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -2294,7 +2297,7 @@
     {
       "id": "naloxone-intranasal",
       "generic_name": "naloxone intranasal",
-      "source_last_checked": "2026-03-09T19:49:39.440Z",
+      "source_last_checked": "2026-03-09T20:06:52.632Z",
       "source_links_count": 6,
       "enrichment_sources_found": [
         "openFDA",
@@ -2313,7 +2316,7 @@
     {
       "id": "nalmefene-intranasal",
       "generic_name": "nalmefene intranasal",
-      "source_last_checked": "2026-03-09T19:49:40.613Z",
+      "source_last_checked": "2026-03-09T20:06:55.818Z",
       "source_links_count": 6,
       "enrichment_sources_found": [
         "openFDA",
@@ -2332,7 +2335,7 @@
     {
       "id": "lofexidine",
       "generic_name": "lofexidine",
-      "source_last_checked": "2026-03-09T19:49:41.153Z",
+      "source_last_checked": "2026-03-09T20:06:56.369Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -2348,7 +2351,7 @@
     {
       "id": "varenicline",
       "generic_name": "varenicline",
-      "source_last_checked": "2026-03-09T19:49:41.878Z",
+      "source_last_checked": "2026-03-09T20:06:57.138Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -2364,7 +2367,7 @@
     {
       "id": "nicotine-transdermal",
       "generic_name": "nicotine transdermal",
-      "source_last_checked": "2026-03-09T19:49:42.459Z",
+      "source_last_checked": "2026-03-09T20:06:57.689Z",
       "source_links_count": 10,
       "enrichment_sources_found": [
         "openFDA",
@@ -2380,7 +2383,7 @@
     {
       "id": "nicotine-gum",
       "generic_name": "nicotine gum",
-      "source_last_checked": "2026-03-09T19:49:43.533Z",
+      "source_last_checked": "2026-03-09T20:06:58.897Z",
       "source_links_count": 6,
       "enrichment_sources_found": [
         "openFDA",
@@ -2399,14 +2402,13 @@
     {
       "id": "nicotine-lozenge",
       "generic_name": "nicotine lozenge",
-      "source_last_checked": "2026-03-09T19:49:44.281Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T20:06:59.661Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
         "DailyMed",
         "RxNorm",
         "RxClass",
-        "MedlinePlus",
         "Drugs@FDA"
       ],
       "status": "source scored",
@@ -2415,7 +2417,7 @@
     {
       "id": "bupropion-sr-smoking-cessation",
       "generic_name": "bupropion SR smoking cessation",
-      "source_last_checked": "2026-03-09T19:49:46.005Z",
+      "source_last_checked": "2026-03-09T20:07:01.561Z",
       "source_links_count": 5,
       "enrichment_sources_found": [
         "RxNorm",
@@ -2436,7 +2438,7 @@
     {
       "id": "liothyronine",
       "generic_name": "liothyronine",
-      "source_last_checked": "2026-03-09T19:49:46.908Z",
+      "source_last_checked": "2026-03-09T20:07:02.382Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -2452,7 +2454,7 @@
     {
       "id": "methylfolate",
       "generic_name": "methylfolate",
-      "source_last_checked": "2026-03-09T19:49:48.804Z",
+      "source_last_checked": "2026-03-09T20:07:03.590Z",
       "source_links_count": 2,
       "enrichment_sources_found": [
         "DailyMed",
@@ -2469,7 +2471,7 @@
     {
       "id": "ketamine-intranasal",
       "generic_name": "ketamine intranasal",
-      "source_last_checked": "2026-03-09T19:49:49.877Z",
+      "source_last_checked": "2026-03-09T20:07:05.100Z",
       "source_links_count": 6,
       "enrichment_sources_found": [
         "openFDA",
@@ -2488,7 +2490,7 @@
     {
       "id": "benztropine",
       "generic_name": "benztropine",
-      "source_last_checked": "2026-03-09T19:49:50.801Z",
+      "source_last_checked": "2026-03-09T20:07:06.054Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -2504,7 +2506,7 @@
     {
       "id": "trihexyphenidyl",
       "generic_name": "trihexyphenidyl",
-      "source_last_checked": "2026-03-09T19:49:51.473Z",
+      "source_last_checked": "2026-03-09T20:07:06.716Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -2520,7 +2522,7 @@
     {
       "id": "deutetrabenazine",
       "generic_name": "deutetrabenazine",
-      "source_last_checked": "2026-03-09T19:49:51.961Z",
+      "source_last_checked": "2026-03-09T20:07:07.275Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -2536,7 +2538,7 @@
     {
       "id": "valbenazine",
       "generic_name": "valbenazine",
-      "source_last_checked": "2026-03-09T19:49:52.449Z",
+      "source_last_checked": "2026-03-09T20:07:07.826Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -2552,7 +2554,7 @@
     {
       "id": "tetrabenazine",
       "generic_name": "tetrabenazine",
-      "source_last_checked": "2026-03-09T19:49:53.049Z",
+      "source_last_checked": "2026-03-09T20:07:08.510Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -2568,7 +2570,7 @@
     {
       "id": "memantine",
       "generic_name": "memantine",
-      "source_last_checked": "2026-03-09T19:49:53.767Z",
+      "source_last_checked": "2026-03-09T20:07:09.230Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -2584,7 +2586,7 @@
     {
       "id": "donepezil",
       "generic_name": "donepezil",
-      "source_last_checked": "2026-03-09T19:49:54.585Z",
+      "source_last_checked": "2026-03-09T20:07:10.039Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -2600,7 +2602,7 @@
     {
       "id": "rivastigmine",
       "generic_name": "rivastigmine",
-      "source_last_checked": "2026-03-09T19:49:55.410Z",
+      "source_last_checked": "2026-03-09T20:07:10.865Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -2616,7 +2618,7 @@
     {
       "id": "galantamine",
       "generic_name": "galantamine",
-      "source_last_checked": "2026-03-09T19:49:56.161Z",
+      "source_last_checked": "2026-03-09T20:07:11.538Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -2632,7 +2634,7 @@
     {
       "id": "amantadine",
       "generic_name": "amantadine",
-      "source_last_checked": "2026-03-09T19:49:56.858Z",
+      "source_last_checked": "2026-03-09T20:07:12.162Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -2648,7 +2650,7 @@
     {
       "id": "baclofen",
       "generic_name": "baclofen",
-      "source_last_checked": "2026-03-09T19:49:57.660Z",
+      "source_last_checked": "2026-03-09T20:07:12.875Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -2664,7 +2666,7 @@
     {
       "id": "tizanidine",
       "generic_name": "tizanidine",
-      "source_last_checked": "2026-03-09T19:49:58.432Z",
+      "source_last_checked": "2026-03-09T20:07:13.591Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -2680,7 +2682,7 @@
     {
       "id": "cyclobenzaprine",
       "generic_name": "cyclobenzaprine",
-      "source_last_checked": "2026-03-09T19:49:59.293Z",
+      "source_last_checked": "2026-03-09T20:07:14.497Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -2696,7 +2698,7 @@
     {
       "id": "n-acetylcysteine",
       "generic_name": "n-acetylcysteine",
-      "source_last_checked": "2026-03-09T19:49:59.786Z",
+      "source_last_checked": "2026-03-09T20:07:14.984Z",
       "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
@@ -2713,7 +2715,7 @@
     {
       "id": "ondansetron",
       "generic_name": "ondansetron",
-      "source_last_checked": "2026-03-09T19:50:00.434Z",
+      "source_last_checked": "2026-03-09T20:07:15.622Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -2729,7 +2731,7 @@
     {
       "id": "metoclopramide",
       "generic_name": "metoclopramide",
-      "source_last_checked": "2026-03-09T19:50:01.107Z",
+      "source_last_checked": "2026-03-09T20:07:16.381Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -2745,7 +2747,7 @@
     {
       "id": "lacosamide",
       "generic_name": "lacosamide",
-      "source_last_checked": "2026-03-09T19:50:01.715Z",
+      "source_last_checked": "2026-03-09T20:07:17.066Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -2761,7 +2763,7 @@
     {
       "id": "tiagabine",
       "generic_name": "tiagabine",
-      "source_last_checked": "2026-03-09T19:50:02.314Z",
+      "source_last_checked": "2026-03-09T20:07:17.595Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -2777,7 +2779,7 @@
     {
       "id": "rufinamide",
       "generic_name": "rufinamide",
-      "source_last_checked": "2026-03-09T19:50:02.974Z",
+      "source_last_checked": "2026-03-09T20:07:18.234Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -2793,7 +2795,7 @@
     {
       "id": "zolpidem-sublingual",
       "generic_name": "zolpidem sublingual",
-      "source_last_checked": "2026-03-09T19:50:04.097Z",
+      "source_last_checked": "2026-03-09T20:07:19.340Z",
       "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
@@ -2812,7 +2814,7 @@
     {
       "id": "zolpidem-oral-spray",
       "generic_name": "zolpidem oral spray",
-      "source_last_checked": "2026-03-09T19:50:05.615Z",
+      "source_last_checked": "2026-03-09T20:07:20.893Z",
       "source_links_count": 4,
       "enrichment_sources_found": [
         "RxNorm",
@@ -2832,7 +2834,7 @@
     {
       "id": "alprazolam-odt",
       "generic_name": "alprazolam ODT",
-      "source_last_checked": "2026-03-09T19:50:05.897Z",
+      "source_last_checked": "2026-03-09T20:07:21.174Z",
       "source_links_count": 9,
       "enrichment_sources_found": [
         "openFDA",
@@ -2848,7 +2850,7 @@
     {
       "id": "clonazepam-odt",
       "generic_name": "clonazepam ODT",
-      "source_last_checked": "2026-03-09T19:50:06.178Z",
+      "source_last_checked": "2026-03-09T20:07:21.456Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -2864,7 +2866,7 @@
     {
       "id": "lorazepam-sublingual",
       "generic_name": "lorazepam sublingual",
-      "source_last_checked": "2026-03-09T19:50:07.871Z",
+      "source_last_checked": "2026-03-09T20:07:22.220Z",
       "source_links_count": 1,
       "enrichment_sources_found": [
         "RxNorm"
@@ -2878,7 +2880,7 @@
     {
       "id": "asenapine-transdermal",
       "generic_name": "asenapine transdermal",
-      "source_last_checked": "2026-03-09T19:50:08.506Z",
+      "source_last_checked": "2026-03-09T20:07:22.833Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -2894,7 +2896,7 @@
     {
       "id": "lithium-orotate",
       "generic_name": "lithium orotate",
-      "source_last_checked": "2026-03-09T19:50:09.070Z",
+      "source_last_checked": "2026-03-09T20:07:23.359Z",
       "source_links_count": 3,
       "enrichment_sources_found": [
         "RxNorm",
@@ -2910,7 +2912,7 @@
     {
       "id": "dexmedetomidine-sublingual",
       "generic_name": "dexmedetomidine sublingual",
-      "source_last_checked": "2026-03-09T19:50:10.146Z",
+      "source_last_checked": "2026-03-09T20:07:24.592Z",
       "source_links_count": 6,
       "enrichment_sources_found": [
         "openFDA",
@@ -2929,7 +2931,7 @@
     {
       "id": "viloxazine-er",
       "generic_name": "viloxazine ER",
-      "source_last_checked": "2026-03-09T19:50:10.427Z",
+      "source_last_checked": "2026-03-09T20:07:24.873Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -2945,7 +2947,7 @@
     {
       "id": "modafinil-oral-suspension",
       "generic_name": "modafinil oral suspension",
-      "source_last_checked": "2026-03-09T19:50:10.709Z",
+      "source_last_checked": "2026-03-09T20:07:25.155Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -2961,7 +2963,7 @@
     {
       "id": "fluoxetine-weekly",
       "generic_name": "fluoxetine weekly",
-      "source_last_checked": "2026-03-09T19:50:11.810Z",
+      "source_last_checked": "2026-03-09T20:07:26.337Z",
       "source_links_count": 3,
       "enrichment_sources_found": [
         "RxNorm",
@@ -2979,7 +2981,7 @@
     {
       "id": "paroxetine-cr",
       "generic_name": "paroxetine CR",
-      "source_last_checked": "2026-03-09T19:50:12.092Z",
+      "source_last_checked": "2026-03-09T20:07:26.619Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -2995,7 +2997,7 @@
     {
       "id": "venlafaxine-er",
       "generic_name": "venlafaxine ER",
-      "source_last_checked": "2026-03-09T19:50:12.372Z",
+      "source_last_checked": "2026-03-09T20:07:26.901Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -3011,7 +3013,7 @@
     {
       "id": "desvenlafaxine-er",
       "generic_name": "desvenlafaxine ER",
-      "source_last_checked": "2026-03-09T19:50:12.653Z",
+      "source_last_checked": "2026-03-09T20:07:27.183Z",
       "source_links_count": 9,
       "enrichment_sources_found": [
         "openFDA",
@@ -3027,7 +3029,7 @@
     {
       "id": "quetiapine-odt",
       "generic_name": "quetiapine ODT",
-      "source_last_checked": "2026-03-09T19:50:12.935Z",
+      "source_last_checked": "2026-03-09T20:07:27.465Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -3043,7 +3045,7 @@
     {
       "id": "risperidone-odt",
       "generic_name": "risperidone ODT",
-      "source_last_checked": "2026-03-09T19:50:13.216Z",
+      "source_last_checked": "2026-03-09T20:07:27.747Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -3059,7 +3061,7 @@
     {
       "id": "olanzapine-odt",
       "generic_name": "olanzapine ODT",
-      "source_last_checked": "2026-03-09T19:50:13.499Z",
+      "source_last_checked": "2026-03-09T20:07:28.029Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -3075,7 +3077,7 @@
     {
       "id": "lamotrigine-odt",
       "generic_name": "lamotrigine ODT",
-      "source_last_checked": "2026-03-09T19:50:13.781Z",
+      "source_last_checked": "2026-03-09T20:07:28.313Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -3091,7 +3093,7 @@
     {
       "id": "carbamazepine-er",
       "generic_name": "carbamazepine ER",
-      "source_last_checked": "2026-03-09T19:50:14.063Z",
+      "source_last_checked": "2026-03-09T20:07:28.594Z",
       "source_links_count": 9,
       "enrichment_sources_found": [
         "openFDA",
@@ -3107,7 +3109,7 @@
     {
       "id": "oxcarbazepine-er",
       "generic_name": "oxcarbazepine ER",
-      "source_last_checked": "2026-03-09T19:50:14.345Z",
+      "source_last_checked": "2026-03-09T20:07:28.875Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -3123,7 +3125,7 @@
     {
       "id": "topiramate-er",
       "generic_name": "topiramate ER",
-      "source_last_checked": "2026-03-09T19:50:14.627Z",
+      "source_last_checked": "2026-03-09T20:07:29.157Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -3139,7 +3141,7 @@
     {
       "id": "gabapentin-enacarbil",
       "generic_name": "gabapentin enacarbil",
-      "source_last_checked": "2026-03-09T19:50:15.202Z",
+      "source_last_checked": "2026-03-09T20:07:29.687Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -3155,7 +3157,7 @@
     {
       "id": "pregabalin-er",
       "generic_name": "pregabalin ER",
-      "source_last_checked": "2026-03-09T19:50:15.485Z",
+      "source_last_checked": "2026-03-09T20:07:29.969Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -3171,7 +3173,7 @@
     {
       "id": "propranolol-er",
       "generic_name": "propranolol ER",
-      "source_last_checked": "2026-03-09T19:50:15.767Z",
+      "source_last_checked": "2026-03-09T20:07:30.250Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -3187,7 +3189,7 @@
     {
       "id": "prazosin-bedtime",
       "generic_name": "prazosin bedtime",
-      "source_last_checked": "2026-03-09T19:50:16.336Z",
+      "source_last_checked": "2026-03-09T20:07:30.862Z",
       "source_links_count": 3,
       "enrichment_sources_found": [
         "RxNorm",
@@ -3203,7 +3205,7 @@
     {
       "id": "hydroxyzine-pamoate",
       "generic_name": "hydroxyzine pamoate",
-      "source_last_checked": "2026-03-09T19:50:16.825Z",
+      "source_last_checked": "2026-03-09T20:07:31.468Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -3219,7 +3221,7 @@
     {
       "id": "hydroxyzine-hydrochloride",
       "generic_name": "hydroxyzine hydrochloride",
-      "source_last_checked": "2026-03-09T19:50:17.327Z",
+      "source_last_checked": "2026-03-09T20:07:31.984Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -3235,7 +3237,7 @@
     {
       "id": "buspirone-split-dosing",
       "generic_name": "buspirone split dosing",
-      "source_last_checked": "2026-03-09T19:50:17.849Z",
+      "source_last_checked": "2026-03-09T20:07:32.502Z",
       "source_links_count": 3,
       "enrichment_sources_found": [
         "RxNorm",
@@ -3251,7 +3253,7 @@
     {
       "id": "naltrexone-low-dose",
       "generic_name": "naltrexone low dose",
-      "source_last_checked": "2026-03-09T19:50:18.657Z",
+      "source_last_checked": "2026-03-09T20:07:33.319Z",
       "source_links_count": 1,
       "enrichment_sources_found": [
         "RxNorm"
@@ -3265,7 +3267,7 @@
     {
       "id": "acamprosate-delayed-release",
       "generic_name": "acamprosate delayed-release",
-      "source_last_checked": "2026-03-09T19:50:20.087Z",
+      "source_last_checked": "2026-03-09T20:07:34.526Z",
       "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
@@ -3284,7 +3286,7 @@
     {
       "id": "disulfiram-supervised",
       "generic_name": "disulfiram supervised",
-      "source_last_checked": "2026-03-09T19:50:21.153Z",
+      "source_last_checked": "2026-03-09T20:07:35.713Z",
       "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
@@ -3303,7 +3305,7 @@
     {
       "id": "varenicline-starter-pack",
       "generic_name": "varenicline starter pack",
-      "source_last_checked": "2026-03-09T19:50:22.370Z",
+      "source_last_checked": "2026-03-09T20:07:36.830Z",
       "source_links_count": 6,
       "enrichment_sources_found": [
         "openFDA",
@@ -3322,7 +3324,7 @@
     {
       "id": "nicotine-inhaler",
       "generic_name": "nicotine inhaler",
-      "source_last_checked": "2026-03-09T19:50:23.592Z",
+      "source_last_checked": "2026-03-09T20:07:37.912Z",
       "source_links_count": 6,
       "enrichment_sources_found": [
         "openFDA",
@@ -3341,7 +3343,7 @@
     {
       "id": "nicotine-nasal-spray",
       "generic_name": "nicotine nasal spray",
-      "source_last_checked": "2026-03-09T19:50:25.313Z",
+      "source_last_checked": "2026-03-09T20:07:39.765Z",
       "source_links_count": 4,
       "enrichment_sources_found": [
         "RxNorm",
@@ -3361,7 +3363,7 @@
     {
       "id": "guanfacine-patch",
       "generic_name": "guanfacine patch",
-      "source_last_checked": "2026-03-09T19:50:25.594Z",
+      "source_last_checked": "2026-03-09T20:07:40.046Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -3377,7 +3379,7 @@
     {
       "id": "clonidine-patch",
       "generic_name": "clonidine patch",
-      "source_last_checked": "2026-03-09T19:50:25.875Z",
+      "source_last_checked": "2026-03-09T20:07:40.328Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -3393,7 +3395,7 @@
     {
       "id": "memantine-er",
       "generic_name": "memantine ER",
-      "source_last_checked": "2026-03-09T19:50:26.157Z",
+      "source_last_checked": "2026-03-09T20:07:40.610Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -3409,7 +3411,7 @@
     {
       "id": "donepezil-odt",
       "generic_name": "donepezil ODT",
-      "source_last_checked": "2026-03-09T19:50:26.438Z",
+      "source_last_checked": "2026-03-09T20:07:40.892Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -3425,7 +3427,7 @@
     {
       "id": "rivastigmine-patch",
       "generic_name": "rivastigmine patch",
-      "source_last_checked": "2026-03-09T19:50:26.719Z",
+      "source_last_checked": "2026-03-09T20:07:41.173Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -3441,7 +3443,7 @@
     {
       "id": "galantamine-er",
       "generic_name": "galantamine ER",
-      "source_last_checked": "2026-03-09T19:50:27.001Z",
+      "source_last_checked": "2026-03-09T20:07:41.453Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -3457,7 +3459,7 @@
     {
       "id": "armodafinil-tablet",
       "generic_name": "armodafinil tablet",
-      "source_last_checked": "2026-03-09T19:50:27.283Z",
+      "source_last_checked": "2026-03-09T20:07:41.735Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -3473,7 +3475,7 @@
     {
       "id": "modafinil-tablet",
       "generic_name": "modafinil tablet",
-      "source_last_checked": "2026-03-09T19:50:27.563Z",
+      "source_last_checked": "2026-03-09T20:07:42.017Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -3489,7 +3491,7 @@
     {
       "id": "eszopiclone-low-dose",
       "generic_name": "eszopiclone low dose",
-      "source_last_checked": "2026-03-09T19:50:28.647Z",
+      "source_last_checked": "2026-03-09T20:07:43.089Z",
       "source_links_count": 6,
       "enrichment_sources_found": [
         "openFDA",
@@ -3508,7 +3510,7 @@
     {
       "id": "zaleplon-low-dose",
       "generic_name": "zaleplon low dose",
-      "source_last_checked": "2026-03-09T19:50:29.754Z",
+      "source_last_checked": "2026-03-09T20:07:44.487Z",
       "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
@@ -3527,7 +3529,7 @@
     {
       "id": "daridorexant-dual-orexin-antagonist",
       "generic_name": "daridorexant dual orexin antagonist",
-      "source_last_checked": "2026-03-09T19:50:30.841Z",
+      "source_last_checked": "2026-03-09T20:07:45.561Z",
       "source_links_count": 6,
       "enrichment_sources_found": [
         "openFDA",
@@ -3546,7 +3548,7 @@
     {
       "id": "lemborexant-dual-orexin-antagonist",
       "generic_name": "lemborexant dual orexin antagonist",
-      "source_last_checked": "2026-03-09T19:50:31.981Z",
+      "source_last_checked": "2026-03-09T20:07:46.632Z",
       "source_links_count": 6,
       "enrichment_sources_found": [
         "openFDA",
@@ -3565,7 +3567,7 @@
     {
       "id": "suvorexant-dual-orexin-antagonist",
       "generic_name": "suvorexant dual orexin antagonist",
-      "source_last_checked": "2026-03-09T19:50:33.185Z",
+      "source_last_checked": "2026-03-09T20:07:47.703Z",
       "source_links_count": 6,
       "enrichment_sources_found": [
         "openFDA",
@@ -3584,7 +3586,7 @@
     {
       "id": "ramelteon-melatonin-agonist",
       "generic_name": "ramelteon melatonin agonist",
-      "source_last_checked": "2026-03-09T19:50:34.262Z",
+      "source_last_checked": "2026-03-09T20:07:48.879Z",
       "source_links_count": 6,
       "enrichment_sources_found": [
         "openFDA",
@@ -3603,7 +3605,7 @@
     {
       "id": "melatonin-extended-release",
       "generic_name": "melatonin extended release",
-      "source_last_checked": "2026-03-09T19:50:35.271Z",
+      "source_last_checked": "2026-03-09T20:07:50.254Z",
       "source_links_count": 5,
       "enrichment_sources_found": [
         "openFDA",
@@ -3614,13 +3616,14 @@
       "status": "source scored",
       "notes": [
         "Drugs@FDA request failed (404) for melatonin",
-        "Drugs@FDA request failed (404) for melatonin extended release"
+        "Drugs@FDA request failed (404) for melatonin extended release",
+        "Drugs@FDA request failed (404) for guna-geriatrics"
       ]
     },
     {
       "id": "doxepin-oral-solution",
       "generic_name": "doxepin oral solution",
-      "source_last_checked": "2026-03-09T19:50:35.552Z",
+      "source_last_checked": "2026-03-09T20:07:50.535Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -3636,7 +3639,7 @@
     {
       "id": "quetiapine-oral-solution",
       "generic_name": "quetiapine oral solution",
-      "source_last_checked": "2026-03-09T19:50:35.835Z",
+      "source_last_checked": "2026-03-09T20:07:50.818Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -3652,7 +3655,7 @@
     {
       "id": "aripiprazole-oral-solution",
       "generic_name": "aripiprazole oral solution",
-      "source_last_checked": "2026-03-09T19:50:36.119Z",
+      "source_last_checked": "2026-03-09T20:07:51.100Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -3668,7 +3671,7 @@
     {
       "id": "risperidone-oral-solution",
       "generic_name": "risperidone oral solution",
-      "source_last_checked": "2026-03-09T19:50:36.401Z",
+      "source_last_checked": "2026-03-09T20:07:51.382Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -3684,7 +3687,7 @@
     {
       "id": "haloperidol-oral-solution",
       "generic_name": "haloperidol oral solution",
-      "source_last_checked": "2026-03-09T19:50:36.682Z",
+      "source_last_checked": "2026-03-09T20:07:51.663Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -3700,7 +3703,7 @@
     {
       "id": "chlorpromazine-oral-solution",
       "generic_name": "chlorpromazine oral solution",
-      "source_last_checked": "2026-03-09T19:50:36.963Z",
+      "source_last_checked": "2026-03-09T20:07:51.944Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -3716,7 +3719,7 @@
     {
       "id": "perphenazine-oral-solution",
       "generic_name": "perphenazine oral solution",
-      "source_last_checked": "2026-03-09T19:50:37.244Z",
+      "source_last_checked": "2026-03-09T20:07:52.225Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -3732,7 +3735,7 @@
     {
       "id": "trifluoperazine-oral-solution",
       "generic_name": "trifluoperazine oral solution",
-      "source_last_checked": "2026-03-09T19:50:37.525Z",
+      "source_last_checked": "2026-03-09T20:07:52.507Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -3748,7 +3751,7 @@
     {
       "id": "loxapine-inhalation",
       "generic_name": "loxapine inhalation",
-      "source_last_checked": "2026-03-09T19:50:38.588Z",
+      "source_last_checked": "2026-03-09T20:07:53.573Z",
       "source_links_count": 2,
       "enrichment_sources_found": [
         "RxNorm",
@@ -3765,7 +3768,7 @@
     {
       "id": "ziprasidone-intramuscular",
       "generic_name": "ziprasidone intramuscular",
-      "source_last_checked": "2026-03-09T19:50:39.693Z",
+      "source_last_checked": "2026-03-09T20:07:54.676Z",
       "source_links_count": 3,
       "enrichment_sources_found": [
         "RxNorm",
@@ -3783,7 +3786,7 @@
     {
       "id": "olanzapine-intramuscular",
       "generic_name": "olanzapine intramuscular",
-      "source_last_checked": "2026-03-09T19:50:40.376Z",
+      "source_last_checked": "2026-03-09T20:07:55.343Z",
       "source_links_count": 6,
       "enrichment_sources_found": [
         "openFDA",
@@ -3799,7 +3802,7 @@
     {
       "id": "haloperidol-decanoate-oral-bridge",
       "generic_name": "haloperidol decanoate oral bridge",
-      "source_last_checked": "2026-03-09T19:50:41.581Z",
+      "source_last_checked": "2026-03-09T20:07:56.538Z",
       "source_links_count": 4,
       "enrichment_sources_found": [
         "RxNorm",
@@ -3817,7 +3820,7 @@
     {
       "id": "fluphenazine-decanoate-oral-bridge",
       "generic_name": "fluphenazine decanoate oral bridge",
-      "source_last_checked": "2026-03-09T19:50:42.703Z",
+      "source_last_checked": "2026-03-09T20:07:57.648Z",
       "source_links_count": 3,
       "enrichment_sources_found": [
         "RxNorm",
@@ -3834,7 +3837,7 @@
     {
       "id": "paliperidone-oral-bridge",
       "generic_name": "paliperidone oral bridge",
-      "source_last_checked": "2026-03-09T19:50:43.816Z",
+      "source_last_checked": "2026-03-09T20:07:58.762Z",
       "source_links_count": 4,
       "enrichment_sources_found": [
         "RxNorm",
@@ -3852,7 +3855,7 @@
     {
       "id": "lurasidone-with-food",
       "generic_name": "lurasidone with food",
-      "source_last_checked": "2026-03-09T19:50:44.902Z",
+      "source_last_checked": "2026-03-09T20:08:01.265Z",
       "source_links_count": 6,
       "enrichment_sources_found": [
         "openFDA",
@@ -3871,7 +3874,7 @@
     {
       "id": "cariprazine-slow-titration",
       "generic_name": "cariprazine slow titration",
-      "source_last_checked": "2026-03-09T19:50:45.995Z",
+      "source_last_checked": "2026-03-09T20:08:04.480Z",
       "source_links_count": 6,
       "enrichment_sources_found": [
         "openFDA",
@@ -3890,7 +3893,7 @@
     {
       "id": "lumateperone-once-daily",
       "generic_name": "lumateperone once daily",
-      "source_last_checked": "2026-03-09T19:50:47.186Z",
+      "source_last_checked": "2026-03-09T20:08:05.553Z",
       "source_links_count": 6,
       "enrichment_sources_found": [
         "openFDA",
@@ -3909,7 +3912,7 @@
     {
       "id": "brexpiprazole-low-start",
       "generic_name": "brexpiprazole low start",
-      "source_last_checked": "2026-03-09T19:50:48.405Z",
+      "source_last_checked": "2026-03-09T20:08:06.634Z",
       "source_links_count": 6,
       "enrichment_sources_found": [
         "openFDA",
@@ -3928,7 +3931,7 @@
     {
       "id": "aripiprazole-partial-agonist",
       "generic_name": "aripiprazole partial agonist",
-      "source_last_checked": "2026-03-09T19:50:49.537Z",
+      "source_last_checked": "2026-03-09T20:08:09.785Z",
       "source_links_count": 6,
       "enrichment_sources_found": [
         "openFDA",
@@ -3947,7 +3950,7 @@
     {
       "id": "olanzapine-high-metabolic-risk",
       "generic_name": "olanzapine high metabolic risk",
-      "source_last_checked": "2026-03-09T19:50:50.640Z",
+      "source_last_checked": "2026-03-09T20:08:14.259Z",
       "source_links_count": 6,
       "enrichment_sources_found": [
         "openFDA",
@@ -3966,7 +3969,7 @@
     {
       "id": "quetiapine-sedating-profile",
       "generic_name": "quetiapine sedating profile",
-      "source_last_checked": "2026-03-09T19:50:51.907Z",
+      "source_last_checked": "2026-03-09T20:08:15.526Z",
       "source_links_count": 6,
       "enrichment_sources_found": [
         "openFDA",
@@ -3985,7 +3988,7 @@
     {
       "id": "risperidone-prolactin-caution",
       "generic_name": "risperidone prolactin caution",
-      "source_last_checked": "2026-03-09T19:50:53.136Z",
+      "source_last_checked": "2026-03-09T20:08:16.644Z",
       "source_links_count": 6,
       "enrichment_sources_found": [
         "openFDA",
@@ -4004,7 +4007,7 @@
     {
       "id": "ziprasidone-qtc-caution",
       "generic_name": "ziprasidone qtc caution",
-      "source_last_checked": "2026-03-09T19:50:54.253Z",
+      "source_last_checked": "2026-03-09T20:08:17.734Z",
       "source_links_count": 6,
       "enrichment_sources_found": [
         "openFDA",
@@ -4023,7 +4026,7 @@
     {
       "id": "lithium-narrow-therapeutic-index",
       "generic_name": "lithium narrow therapeutic index",
-      "source_last_checked": "2026-03-09T19:50:55.327Z",
+      "source_last_checked": "2026-03-09T20:08:18.936Z",
       "source_links_count": 6,
       "enrichment_sources_found": [
         "openFDA",
@@ -4042,7 +4045,7 @@
     {
       "id": "lamotrigine-slow-titration-requirement",
       "generic_name": "lamotrigine slow titration requirement",
-      "source_last_checked": "2026-03-09T19:50:56.443Z",
+      "source_last_checked": "2026-03-09T20:08:20.278Z",
       "source_links_count": 6,
       "enrichment_sources_found": [
         "openFDA",
@@ -4061,7 +4064,7 @@
     {
       "id": "valproate-teratogenic-risk",
       "generic_name": "valproate teratogenic risk",
-      "source_last_checked": "2026-03-09T19:50:57.669Z",
+      "source_last_checked": "2026-03-09T20:08:22.616Z",
       "source_links_count": 6,
       "enrichment_sources_found": [
         "openFDA",
@@ -4080,7 +4083,7 @@
     {
       "id": "carbamazepine-cyp-inducer",
       "generic_name": "carbamazepine cyp inducer",
-      "source_last_checked": "2026-03-09T19:50:58.899Z",
+      "source_last_checked": "2026-03-09T20:08:23.816Z",
       "source_links_count": 6,
       "enrichment_sources_found": [
         "openFDA",
@@ -4099,7 +4102,7 @@
     {
       "id": "oxcarbazepine-hyponatremia-caution",
       "generic_name": "oxcarbazepine hyponatremia caution",
-      "source_last_checked": "2026-03-09T19:51:00.007Z",
+      "source_last_checked": "2026-03-09T20:08:24.922Z",
       "source_links_count": 6,
       "enrichment_sources_found": [
         "openFDA",
@@ -4118,7 +4121,7 @@
     {
       "id": "topiramate-cognitive-side-effects",
       "generic_name": "topiramate cognitive side effects",
-      "source_last_checked": "2026-03-09T19:51:01.099Z",
+      "source_last_checked": "2026-03-09T20:08:26.006Z",
       "source_links_count": 6,
       "enrichment_sources_found": [
         "openFDA",
@@ -4137,7 +4140,7 @@
     {
       "id": "zonisamide-sulfa-caution",
       "generic_name": "zonisamide sulfa caution",
-      "source_last_checked": "2026-03-09T19:51:02.179Z",
+      "source_last_checked": "2026-03-09T20:08:27.116Z",
       "source_links_count": 6,
       "enrichment_sources_found": [
         "openFDA",
@@ -4156,7 +4159,7 @@
     {
       "id": "gabapentin-renal-adjustment",
       "generic_name": "gabapentin renal adjustment",
-      "source_last_checked": "2026-03-09T19:51:03.714Z",
+      "source_last_checked": "2026-03-09T20:08:28.201Z",
       "source_links_count": 6,
       "enrichment_sources_found": [
         "openFDA",
@@ -4175,7 +4178,7 @@
     {
       "id": "pregabalin-edema-caution",
       "generic_name": "pregabalin edema caution",
-      "source_last_checked": "2026-03-09T19:51:04.832Z",
+      "source_last_checked": "2026-03-09T20:08:29.426Z",
       "source_links_count": 6,
       "enrichment_sources_found": [
         "openFDA",
@@ -4194,7 +4197,7 @@
     {
       "id": "buspirone-delayed-onset",
       "generic_name": "buspirone delayed onset",
-      "source_last_checked": "2026-03-09T19:51:05.928Z",
+      "source_last_checked": "2026-03-09T20:08:30.621Z",
       "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
@@ -4213,7 +4216,7 @@
     {
       "id": "propranolol-performance-anxiety",
       "generic_name": "propranolol performance anxiety",
-      "source_last_checked": "2026-03-09T19:51:07.002Z",
+      "source_last_checked": "2026-03-09T20:08:31.697Z",
       "source_links_count": 6,
       "enrichment_sources_found": [
         "openFDA",
@@ -4232,7 +4235,7 @@
     {
       "id": "prazosin-ptsd-nightmares",
       "generic_name": "prazosin ptsd nightmares",
-      "source_last_checked": "2026-03-09T19:51:08.153Z",
+      "source_last_checked": "2026-03-09T20:08:32.768Z",
       "source_links_count": 3,
       "enrichment_sources_found": [
         "RxNorm",
@@ -4250,7 +4253,7 @@
     {
       "id": "amphetamine-mixed-salts",
       "generic_name": "amphetamine mixed salts",
-      "source_last_checked": "2026-03-09T19:51:08.434Z",
+      "source_last_checked": "2026-03-09T20:08:33.049Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -4266,7 +4269,7 @@
     {
       "id": "methylphenidate",
       "generic_name": "methylphenidate",
-      "source_last_checked": "2026-03-09T19:51:08.714Z",
+      "source_last_checked": "2026-03-09T20:08:33.331Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",
@@ -4282,7 +4285,7 @@
     {
       "id": "guanfacine",
       "generic_name": "guanfacine",
-      "source_last_checked": "2026-03-09T19:51:08.995Z",
+      "source_last_checked": "2026-03-09T20:08:33.612Z",
       "source_links_count": 8,
       "enrichment_sources_found": [
         "openFDA",
@@ -4298,7 +4301,7 @@
     {
       "id": "quetiapine",
       "generic_name": "quetiapine",
-      "source_last_checked": "2026-03-09T19:51:09.278Z",
+      "source_last_checked": "2026-03-09T20:08:33.893Z",
       "source_links_count": 7,
       "enrichment_sources_found": [
         "openFDA",

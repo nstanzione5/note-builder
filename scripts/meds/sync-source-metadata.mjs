@@ -104,7 +104,8 @@ function extractOpenFdaEnrichment(result) {
     url: result && result.url ? result.url : '',
     term_used: cleanSnippet(result && result.term_used ? result.term_used : '', 80),
     indications_and_usage: cleanList(label && label.indications_and_usage, 6),
-    dosage_and_administration: cleanList(label && label.dosage_and_administration, 6),
+    // Keep longer dosage text so compile can reliably extract numeric dose ranges.
+    dosage_and_administration: cleanList(label && label.dosage_and_administration, 8, 1600),
     drug_interactions: cleanList(label && label.drug_interactions, 6),
     adverse_reactions: cleanList(label && label.adverse_reactions, 6),
     boxed_warning: cleanList(label && label.boxed_warning, 3),

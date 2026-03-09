@@ -250,22 +250,38 @@ function handleMyDriveCondense_(payload) {
   const rootFolderName = normalizeText_(payload.rootFolderName || APP_ROOT_DEFAULT) || APP_ROOT_DEFAULT;
   const archiveFolderName = normalizeText_(payload.archiveFolderName || ('Astra Personal Drive Cleanup ' + Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyyMMdd'))) || 'Astra Personal Drive Cleanup';
   const dryRun = payload && (payload.dryRun === true || normalizeText_(payload.dryRun || '') === 'true');
+  const includeUntitledFiles = !(payload && (payload.includeUntitledFiles === false || normalizeText_(payload.includeUntitledFiles || '') === 'false'));
+  const includeUntitledFolders = !(payload && (payload.includeUntitledFolders === false || normalizeText_(payload.includeUntitledFolders || '') === 'false'));
+  const maxItems = Math.max(1, Math.min(1200, Number(payload && payload.maxItems ? payload.maxItems : 600) || 600));
 
   const archiveFolder = getOrCreateMyDriveFolder_(archiveFolderName);
-  const candidates = findMyDriveCleanupCandidates_(rootFolderName, archiveFolder.getId());
+  const candidates = findMyDriveCleanupCandidates_(rootFolderName, archiveFolder.getId(), {
+    includeUntitledFiles: includeUntitledFiles,
+    includeUntitledFolders: includeUntitledFolders,
+    maxItems: maxItems,
+  });
   const moved = [];
   const errors = [];
+  const movedByType = { files: 0, folders: 0 };
 
   if (!dryRun) {
     candidates.forEach(function (item) {
       try {
-        const folder = DriveApp.getFolderById(item.id);
-        folder.moveTo(archiveFolder);
+        if (item.kind === 'folder') {
+          const folder = DriveApp.getFolderById(item.id);
+          folder.moveTo(archiveFolder);
+          movedByType.folders += 1;
+        } else {
+          const file = DriveApp.getFileById(item.id);
+          file.moveTo(archiveFolder);
+          movedByType.files += 1;
+        }
         moved.push(item);
       } catch (error) {
         errors.push({
           id: item.id,
           name: item.name,
+          kind: item.kind,
           error: String(error && error.message ? error.message : error),
         });
       }
@@ -279,6 +295,7 @@ function handleMyDriveCondense_(payload) {
     archiveFolderUrl: toFolderUrl_(archiveFolder.getId()),
     candidateCount: candidates.length,
     movedCount: moved.length,
+    movedByType: movedByType,
     candidates: candidates,
     moved: moved,
     errors: errors,
@@ -294,31 +311,80 @@ function getOrCreateMyDriveFolder_(folderName) {
   return root.createFolder(folderName);
 }
 
-function findMyDriveCleanupCandidates_(rootFolderName, archiveFolderId) {
-  const query = "trashed=false and mimeType='application/vnd.google-apps.folder' and 'root' in parents";
-  const listed = listFilesSafe_({ q: query, maxResults: 500 }, '');
-  const items = listed.items || [];
+function findMyDriveCleanupCandidates_(rootFolderName, archiveFolderId, options) {
+  const maxItems = Math.max(1, Math.min(1200, Number(options && options.maxItems ? options.maxItems : 600) || 600));
+  const includeUntitledFiles = options ? Boolean(options.includeUntitledFiles) : true;
+  const includeUntitledFolders = options ? Boolean(options.includeUntitledFolders) : true;
+  const escapedRootName = escapeQueryText_(rootFolderName);
 
-  return items
+  const groups = [];
+  const rootByNameQuery = "trashed=false and mimeType='application/vnd.google-apps.folder' and title='" + escapedRootName + "'";
+  groups.push((listFilesSafe_({ q: rootByNameQuery, maxResults: 200 }, '') || {}).items || []);
+
+  if (includeUntitledFolders) {
+    const untitledFoldersQuery = "trashed=false and mimeType='application/vnd.google-apps.folder' and title contains 'Untitled'";
+    groups.push((listFilesSafe_({ q: untitledFoldersQuery, maxResults: 1000 }, '') || {}).items || []);
+  }
+
+  if (includeUntitledFiles) {
+    const untitledFilesQuery = "trashed=false and mimeType!='application/vnd.google-apps.folder' and title contains 'Untitled'";
+    groups.push((listFilesSafe_({ q: untitledFilesQuery, maxResults: 1000 }, '') || {}).items || []);
+  }
+
+  const merged = mergeUniqueFilesById_(groups);
+
+  const candidates = merged
     .filter(function (item) {
       const driveId = normalizeText_((item && (item.driveId || item.teamDriveId)) || '');
       return !driveId;
     })
     .map(function (item) {
+      const mimeType = normalizeText_(item && item.mimeType ? item.mimeType : '');
+      const kind = mimeType === 'application/vnd.google-apps.folder' ? 'folder' : 'file';
       return {
         id: String(item.id || ''),
         name: String(item.title || item.name || ''),
+        kind: kind,
+        mimeType: mimeType,
+        parents: getFileParentIds_(item),
         createdAt: String(item.createdDate || item.createdTime || ''),
         modifiedAt: String(item.modifiedDate || item.modifiedTime || ''),
-        url: toFolderUrl_(item.id),
+        url: kind === 'folder' ? toFolderUrl_(item.id) : toFileUrl_(item.id),
       };
     })
     .filter(function (item) {
       if (!item.id || item.id === archiveFolderId) return false;
-      if (normalizeText_(item.name) === normalizeText_(rootFolderName)) return true;
-      if (!isUntitledLikeName_(item.name)) return false;
-      return isLikelyAppRootFolder_(item.id);
+      if (item.parents.indexOf(archiveFolderId) >= 0) return false;
+
+      if (item.kind === 'folder' && normalizeText_(item.name) === normalizeText_(rootFolderName)) {
+        return true;
+      }
+
+      if (isUntitledLikeName_(item.name)) {
+        if (item.kind === 'folder' && includeUntitledFolders) return true;
+        if (item.kind === 'file' && includeUntitledFiles) return true;
+      }
+
+      if (item.kind === 'folder' && isLikelyAppRootFolder_(item.id)) {
+        return true;
+      }
+
+      return false;
     });
+
+  candidates.sort(function (a, b) {
+    const modifiedA = String(a.modifiedAt || '');
+    const modifiedB = String(b.modifiedAt || '');
+    if (modifiedA !== modifiedB) {
+      return modifiedA > modifiedB ? -1 : 1;
+    }
+    const idA = String(a.id || '');
+    const idB = String(b.id || '');
+    if (idA === idB) return 0;
+    return idA < idB ? -1 : 1;
+  });
+
+  return candidates.slice(0, maxItems);
 }
 
 function isUntitledLikeName_(name) {
@@ -326,7 +392,15 @@ function isUntitledLikeName_(name) {
   return normalized === 'untitled'
     || normalized === 'untitled folder'
     || normalized === 'untitled document'
+    || normalized.indexOf('untitled ') === 0
     || normalized.indexOf('untitled-') === 0;
+}
+
+function getFileParentIds_(file) {
+  const parents = (file && file.parents) ? file.parents : [];
+  return parents.map(function (parent) {
+    return normalizeText_((parent && parent.id) ? parent.id : parent);
+  }).filter(Boolean);
 }
 
 function isLikelyAppRootFolder_(folderId) {
@@ -1416,6 +1490,11 @@ function resolveScopedPathForPayload_(path, payload) {
 function toFolderUrl_(id) {
   const safeId = normalizeText_(id || '');
   return safeId ? 'https://drive.google.com/drive/folders/' + safeId : '';
+}
+
+function toFileUrl_(id) {
+  const safeId = normalizeText_(id || '');
+  return safeId ? 'https://drive.google.com/file/d/' + safeId + '/view' : '';
 }
 
 function sanitizeFileToken_(value) {

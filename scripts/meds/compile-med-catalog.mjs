@@ -958,12 +958,126 @@ function isMeaningfulText(value) {
   return Boolean(text) && !PLACEHOLDER_TEXT_REGEX.test(text);
 }
 
+function cleanDosageHeading(text) {
+  return String(text || '')
+    .replace(/^\s*\d+(\.\d+)?\s+[A-Z][A-Z\s/&,-]{6,}\s+/g, '')
+    .replace(/^DOSAGE AND ADMINISTRATION\s+/i, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function formatDose(value, unit, perDay) {
+  if (!value || !unit) return '';
+  const normalizedUnit = String(unit).toLowerCase();
+  return `${value} ${normalizedUnit}${perDay ? '/day' : ''}`;
+}
+
+function parseDoseDisplay(text) {
+  const match = String(text || '').match(/(\d+(?:\.\d+)?)\s*(mg|mcg|g)\b/i);
+  if (!match) return null;
+  return {
+    value: Number(match[1]),
+    unit: String(match[2]).toLowerCase(),
+  };
+}
+
+function parseDoseRangesFromSnippets(snippets) {
+  const cleanedSnippets = toArray(snippets)
+    .map((entry) => cleanDosageHeading(entry))
+    .filter(Boolean);
+
+  const joined = cleanedSnippets.join(' ');
+  if (!joined) {
+    return {
+      start: '',
+      target: '',
+      max: '',
+      note: '',
+    };
+  }
+
+  let start = '';
+  let target = '';
+  let max = '';
+
+  const startMatch = joined.match(/(?:recommended\s+starting\s+dose|starting\s+dose|initial\s+dose|start(?:ing)?\s+dose)[^.;:]{0,120}?(\d+(?:\.\d+)?)\s*(mg|mcg|g)\b/i)
+    || joined.match(/(?:start(?:ed)?\s+at|begin(?:ning)?\s+at)[^.;:]{0,80}?(\d+(?:\.\d+)?)\s*(mg|mcg|g)\b/i);
+  if (startMatch) {
+    start = formatDose(startMatch[1], startMatch[2], false);
+  }
+
+  const targetRangeMatch = joined.match(/(?:recommended\s+dose\s+range|dose\s+range|target\s+dose|usual\s+dose(?:\s+range)?)[^.;:]{0,160}?(\d+(?:\.\d+)?)\s*(mg|mcg|g)\s*(?:to|-|–)\s*(\d+(?:\.\d+)?)\s*(mg|mcg|g)?/i);
+  if (targetRangeMatch) {
+    const unit = targetRangeMatch[5] || targetRangeMatch[2];
+    target = `${targetRangeMatch[1]}-${targetRangeMatch[3]} ${String(unit).toLowerCase()}/day`;
+  }
+
+  const maxMatch = joined.match(/(?:maximum(?:\s+recommended)?\s+dose|max(?:imum)?\s+dose|do\s+not\s+exceed)[^.;:]{0,120}?(\d+(?:\.\d+)?)\s*(mg|mcg|g)\b/i);
+  if (maxMatch) {
+    const snippet = maxMatch[0] || '';
+    const perDay = /\/\s*day|\bdaily\b|\bper day\b/i.test(snippet);
+    max = formatDose(maxMatch[1], maxMatch[2], perDay);
+  }
+
+  const numericDoses = [];
+  const doseRegex = /(\d+(?:\.\d+)?)\s*(mg|mcg|g)\b(?:\s*\/\s*(day|daily|d))?/ig;
+  let match = doseRegex.exec(joined);
+  while (match) {
+    const value = Number(match[1]);
+    const unit = String(match[2] || '').toLowerCase();
+    const key = `${value}|${unit}`;
+    if (!numericDoses.find((item) => item.key === key)) {
+      numericDoses.push({
+        key,
+        value,
+        unit,
+      });
+    }
+    match = doseRegex.exec(joined);
+  }
+
+  numericDoses.sort((a, b) => a.value - b.value);
+
+  if (numericDoses.length) {
+    const minDose = numericDoses[0];
+    const maxDose = numericDoses[numericDoses.length - 1];
+
+    if (!start) {
+      start = formatDose(String(minDose.value), minDose.unit, false);
+    }
+
+    if (!max) {
+      max = formatDose(String(maxDose.value), maxDose.unit, true);
+    }
+    const parsedMax = parseDoseDisplay(max);
+    if (parsedMax && parsedMax.unit === maxDose.unit && parsedMax.value < maxDose.value) {
+      max = formatDose(String(maxDose.value), maxDose.unit, true);
+    }
+
+    if (!target) {
+      if (minDose.value !== maxDose.value && minDose.unit === maxDose.unit) {
+        target = `${minDose.value}-${maxDose.value} ${maxDose.unit}/day`;
+      } else {
+        target = start || formatDose(String(maxDose.value), maxDose.unit, false);
+      }
+    }
+  }
+
+  return {
+    start,
+    target,
+    max,
+    note: normalizeSnippet(cleanedSnippets[0] || '', 240),
+  };
+}
+
 function deriveSourceFallback(sourceMed) {
   const enrichment = sourceMed && sourceMed.source_enrichment ? sourceMed.source_enrichment : {};
   const openfda = enrichment.openfda || {};
 
   const indications = normalizeList(openfda.indications_and_usage, 8, 200);
   const psychIndications = indications.filter((item) => PSYCH_TERM_REGEX.test(item));
+  const parsedDosing = parseDoseRangesFromSnippets(openfda.dosage_and_administration);
 
   return {
     source_enrichment: enrichment,
@@ -972,7 +1086,10 @@ function deriveSourceFallback(sourceMed) {
     common_side_effects: normalizeList(openfda.adverse_reactions, 6, 160),
     important_risks: normalizeList([...(openfda.boxed_warning || []), ...(openfda.warnings || [])], 6, 180),
     moa_summary: normalizeList(openfda.mechanism_of_action, 1, 220)[0] || '',
-    dosing_snippets: normalizeList(openfda.dosage_and_administration, 2, 180),
+    dosing_start: parsedDosing.start,
+    dosing_target: parsedDosing.target,
+    dosing_max: parsedDosing.max,
+    dosing_note: parsedDosing.note,
   };
 }
 
@@ -1004,22 +1121,34 @@ function applySourceFallback(merged, sourceFallback) {
     used = true;
   }
 
-  if (Array.isArray(merged.formulations) && sourceFallback.dosing_snippets.length) {
+  if (Array.isArray(merged.formulations)) {
     merged.formulations = merged.formulations.map((formulation) => {
       const dosing = formulation.common_adult_psych_dosing || {};
       const nextDosing = { ...dosing };
+      const nextAdminNotes = Array.isArray(formulation.administration_notes)
+        ? formulation.administration_notes.slice()
+        : [];
       let nextUsed = false;
 
-      if (!isMeaningfulText(nextDosing.start)) {
-        nextDosing.start = sourceFallback.dosing_snippets[0];
+      if (!isMeaningfulText(nextDosing.start) && sourceFallback.dosing_start) {
+        nextDosing.start = sourceFallback.dosing_start;
         nextUsed = true;
       }
-      if (!isMeaningfulText(nextDosing.target)) {
-        nextDosing.target = sourceFallback.dosing_snippets[0];
+      if (!isMeaningfulText(nextDosing.target) && sourceFallback.dosing_target) {
+        nextDosing.target = sourceFallback.dosing_target;
         nextUsed = true;
       }
-      if (!isMeaningfulText(nextDosing.max)) {
-        nextDosing.max = sourceFallback.dosing_snippets[1] || 'See source dosing text';
+      if (!isMeaningfulText(nextDosing.max) && sourceFallback.dosing_max) {
+        nextDosing.max = sourceFallback.dosing_max;
+        nextUsed = true;
+      }
+
+      if (!isMeaningfulText(nextDosing.max) && !sourceFallback.dosing_max) {
+        nextDosing.max = 'See source dosing text';
+      }
+
+      if (sourceFallback.dosing_note && nextAdminNotes.indexOf(sourceFallback.dosing_note) < 0) {
+        nextAdminNotes.push(sourceFallback.dosing_note);
         nextUsed = true;
       }
 
@@ -1028,6 +1157,7 @@ function applySourceFallback(merged, sourceFallback) {
       return {
         ...formulation,
         common_adult_psych_dosing: nextDosing,
+        administration_notes: nextAdminNotes.slice(0, 4),
       };
     });
   }

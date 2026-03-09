@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-09T19:51:09.635Z",
+  "generated_at": "2026-03-09T20:09:04.807Z",
   "review_queue": [
     {
       "id": "citalopram",
@@ -194,9 +194,10 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 36,
-      "reliability_tier": "low",
+      "reliability_score": 73,
+      "reliability_tier": "high",
       "reliability_sources": [
+        "DailyMed",
         "Drugs@FDA",
         "RxNorm",
         "RxClass"
@@ -423,7 +424,7 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 40,
+      "reliability_score": 43,
       "reliability_tier": "low",
       "reliability_sources": [
         "Drugs@FDA",
@@ -550,7 +551,7 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 74,
+      "reliability_score": 77,
       "reliability_tier": "high",
       "reliability_sources": [
         "DailyMed",
@@ -1700,7 +1701,7 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 10,
+      "reliability_score": 13,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm"
@@ -1780,7 +1781,7 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 22,
+      "reliability_score": 25,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm",
@@ -2701,8 +2702,7 @@
         "openFDA",
         "Drugs@FDA",
         "RxNorm",
-        "RxClass",
-        "MedlinePlus"
+        "RxClass"
       ]
     },
     {
@@ -2718,7 +2718,7 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 30,
+      "reliability_score": 33,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm",
@@ -2760,8 +2760,8 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 44,
-      "reliability_tier": "low",
+      "reliability_score": 47,
+      "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
         "RxNorm"
@@ -3069,7 +3069,7 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3194,7 +3194,7 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3216,7 +3216,7 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 22,
+      "reliability_score": 25,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm",
@@ -3279,7 +3279,7 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 10,
+      "reliability_score": 13,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm"
@@ -3318,7 +3318,7 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 22,
+      "reliability_score": 25,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm",
@@ -3399,7 +3399,7 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 22,
+      "reliability_score": 25,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm",
@@ -3682,7 +3682,7 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 22,
+      "reliability_score": 25,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm",
@@ -3747,7 +3747,7 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 22,
+      "reliability_score": 25,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm",
@@ -3768,7 +3768,7 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 10,
+      "reliability_score": 13,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm"
@@ -3787,7 +3787,7 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3809,7 +3809,7 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3871,7 +3871,7 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 22,
+      "reliability_score": 25,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm",
@@ -4074,7 +4074,7 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -4364,7 +4364,7 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 18,
+      "reliability_score": 21,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm",
@@ -4384,7 +4384,7 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 22,
+      "reliability_score": 25,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm",
@@ -4425,7 +4425,7 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 22,
+      "reliability_score": 25,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm",
@@ -4446,7 +4446,7 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 18,
+      "reliability_score": 21,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm",
@@ -4466,7 +4466,7 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 22,
+      "reliability_score": 25,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm",
@@ -4851,7 +4851,7 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -4894,7 +4894,7 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 22,
+      "reliability_score": 25,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm",
