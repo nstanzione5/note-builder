@@ -6,7 +6,10 @@ import { execFileSync } from 'node:child_process';
 
 import { fetchDailyMedSplListing } from './adapters/dailymed.mjs';
 import { fetchOpenFdaLabelSummary } from './adapters/openfda.mjs';
-import { fetchRxNormApproximateTerm } from './adapters/rxnorm.mjs';
+import { fetchRxNormApproximateTerm, fetchRxNormRxcuiByString } from './adapters/rxnorm.mjs';
+import { fetchRxClassByRxcui } from './adapters/rxclass.mjs';
+import { fetchRxTermsByRxcui } from './adapters/rxterms.mjs';
+import { fetchMedlinePlusByRxcui } from './adapters/medlineplus.mjs';
 import { fetchDrugsFdaApproval } from './adapters/drugsfda.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -25,6 +28,37 @@ const limit = limitArg ? Number(limitArg.split('=')[1]) : 30;
 if (Number.isNaN(limit) || limit < 1) {
   throw new Error('--limit must be a positive integer');
 }
+
+const rateConfig = {
+  dailymed: {
+    minIntervalMs: Number(process.env.DAILYMED_MIN_INTERVAL_MS || 220),
+    maxCalls: Number(process.env.DAILYMED_MAX_CALLS || 2400),
+  },
+  openfda: {
+    minIntervalMs: Number(process.env.OPENFDA_MIN_INTERVAL_MS || 450),
+    maxCalls: Number(process.env.OPENFDA_MAX_CALLS || 900),
+  },
+  rxnorm: {
+    minIntervalMs: Number(process.env.RXNORM_MIN_INTERVAL_MS || 140),
+    maxCalls: Number(process.env.RXNORM_MAX_CALLS || 2800),
+  },
+  rxclass: {
+    minIntervalMs: Number(process.env.RXCLASS_MIN_INTERVAL_MS || 180),
+    maxCalls: Number(process.env.RXCLASS_MAX_CALLS || 2400),
+  },
+  rxterms: {
+    minIntervalMs: Number(process.env.RXTERMS_MIN_INTERVAL_MS || 180),
+    maxCalls: Number(process.env.RXTERMS_MAX_CALLS || 2400),
+  },
+  medlineplus: {
+    minIntervalMs: Number(process.env.MEDLINEPLUS_MIN_INTERVAL_MS || 260),
+    maxCalls: Number(process.env.MEDLINEPLUS_MAX_CALLS || 1800),
+  },
+  drugsfda: {
+    minIntervalMs: Number(process.env.DRUGSFDA_MIN_INTERVAL_MS || 450),
+    maxCalls: Number(process.env.DRUGSFDA_MAX_CALLS || 900),
+  },
+};
 
 const sourcePayload = JSON.parse(fs.readFileSync(sourcePath, 'utf8'));
 const meds = Array.isArray(sourcePayload.medications) ? sourcePayload.medications : [];
@@ -117,6 +151,65 @@ function extractRxNormEnrichment(result) {
     candidate_count: candidates.length,
     candidate_terms: Array.from(new Set(names)).slice(0, 10),
     rxcuis: Array.from(new Set(rxcuis)).slice(0, 10),
+  };
+}
+
+function extractRxClassEnrichment(result) {
+  const classes = result && Array.isArray(result.classes) ? result.classes : [];
+  const classNames = classes
+    .map((entry) => cleanSnippet(entry && entry.rxclassMinConceptItem && entry.rxclassMinConceptItem.className, 120))
+    .filter(Boolean);
+  const classTypes = classes
+    .map((entry) => cleanSnippet(entry && entry.rxclassMinConceptItem && entry.rxclassMinConceptItem.classType, 80))
+    .filter(Boolean);
+
+  return {
+    found: Boolean(result && result.found),
+    url: result && result.url ? result.url : '',
+    rxcui: cleanSnippet(result && result.rxcui ? result.rxcui : '', 40),
+    class_count: classes.length,
+    class_names: Array.from(new Set(classNames)).slice(0, 12),
+    class_types: Array.from(new Set(classTypes)).slice(0, 8),
+  };
+}
+
+function extractRxTermsEnrichment(result) {
+  const info = result && result.info ? result.info : null;
+
+  return {
+    found: Boolean(result && result.found && info),
+    url: result && result.url ? result.url : '',
+    rxcui: cleanSnippet(result && result.rxcui ? result.rxcui : '', 40),
+    brand_name: cleanSnippet(info && info.brandName ? info.brandName : '', 120),
+    generic_name: cleanSnippet(info && info.genericName ? info.genericName : '', 120),
+    strength: cleanSnippet(info && info.strength ? info.strength : '', 120),
+    route: cleanSnippet(info && info.route ? info.route : '', 80),
+    dose_form: cleanSnippet(info && info.rxtermsDoseForm ? info.rxtermsDoseForm : '', 120),
+  };
+}
+
+function extractMedlinePlusEnrichment(result) {
+  const entries = result && Array.isArray(result.entries) ? result.entries : [];
+  const titles = entries
+    .map((entry) => {
+      const title = entry && entry.title;
+      if (title && typeof title === 'object' && Object.prototype.hasOwnProperty.call(title, '_value')) {
+        return cleanSnippet(title._value, 160);
+      }
+      return cleanSnippet(title, 160);
+    })
+    .filter(Boolean);
+  const links = entries
+    .map((entry) => entry && entry.link && entry.link.href ? String(entry.link.href) : '')
+    .filter(Boolean);
+
+  return {
+    found: Boolean(result && result.found),
+    url: result && result.url ? result.url : '',
+    rxcui: cleanSnippet(result && result.rxcui ? result.rxcui : '', 40),
+    entry_count: entries.length,
+    titles: Array.from(new Set(titles)).slice(0, 8),
+    links: Array.from(new Set(links)).slice(0, 8),
   };
 }
 
@@ -237,16 +330,23 @@ async function resolveSourceAcrossTerms(fetcher, terms) {
 function createCachedFetcher(fetcher, options = {}) {
   const cache = new Map();
   const minIntervalMs = Number.isFinite(Number(options.minIntervalMs)) ? Math.max(0, Math.floor(Number(options.minIntervalMs))) : 0;
+  const maxCalls = Number.isFinite(Number(options.maxCalls)) ? Math.max(1, Math.floor(Number(options.maxCalls))) : Number.POSITIVE_INFINITY;
+  const maxRetries = Number.isFinite(Number(options.maxRetries)) ? Math.max(0, Math.floor(Number(options.maxRetries))) : 3;
   let queue = Promise.resolve();
   let lastStartedAt = 0;
+  let callCount = 0;
 
-  return async function cachedFetch(term) {
-    const key = normalizeSearchTerm(term);
+  return async function cachedFetch(arg) {
+    const key = typeof arg === 'string' ? normalizeSearchTerm(arg) : JSON.stringify(arg);
     if (cache.has(key)) {
       return cache.get(key);
     }
 
     const task = async () => {
+      if (callCount >= maxCalls) {
+        throw new Error(`Request budget exceeded for ${options.label || 'source'}`);
+      }
+
       if (minIntervalMs > 0) {
         const now = Date.now();
         const delay = Math.max(0, minIntervalMs - (now - lastStartedAt));
@@ -256,7 +356,24 @@ function createCachedFetcher(fetcher, options = {}) {
         lastStartedAt = Date.now();
       }
 
-      return fetcher(term);
+      callCount += 1;
+
+      let attempt = 0;
+      while (true) {
+        try {
+          return await fetcher(arg);
+        } catch (error) {
+          const message = String(error && error.message ? error.message : error);
+          const retryable = /\(429\)|\b5\d\d\b/i.test(message);
+          if (!retryable || attempt >= maxRetries) {
+            throw error;
+          }
+          attempt += 1;
+          const backoff = Math.min(6000, 400 * (2 ** attempt));
+          const jitter = Math.floor(Math.random() * 220);
+          await sleep(backoff + jitter);
+        }
+      }
     };
 
     const run = minIntervalMs > 0
@@ -274,10 +391,117 @@ function createCachedFetcher(fetcher, options = {}) {
   };
 }
 
-const fetchDailyMedCached = createCachedFetcher(fetchDailyMedSplListing);
-const fetchOpenFdaCached = createCachedFetcher(fetchOpenFdaLabelSummary, { minIntervalMs: 450 });
-const fetchRxNormCached = createCachedFetcher(fetchRxNormApproximateTerm);
-const fetchDrugsFdaCached = createCachedFetcher(fetchDrugsFdaApproval, { minIntervalMs: 450 });
+async function resolvePreferredRxcuiAcrossTerms(terms, fetchStringLookup, fetchApproximateLookup) {
+  const errors = [];
+  const seen = new Set();
+  const candidates = [];
+
+  for (const term of terms) {
+    try {
+      const byString = await fetchStringLookup(term);
+      const ids = byString && Array.isArray(byString.rxcuis) ? byString.rxcuis : [];
+      ids.forEach((id) => {
+        const normalized = cleanSnippet(id, 40);
+        if (normalized && !seen.has(normalized)) {
+          seen.add(normalized);
+          candidates.push(normalized);
+        }
+      });
+      if (candidates.length) {
+        break;
+      }
+    } catch (error) {
+      errors.push(String(error && error.message ? error.message : error));
+    }
+  }
+
+  if (!candidates.length) {
+    for (const term of terms) {
+      try {
+        const approximate = await fetchApproximateLookup(term);
+        const approxCandidates = approximate && Array.isArray(approximate.candidates) ? approximate.candidates : [];
+        approxCandidates.forEach((entry) => {
+          const normalized = cleanSnippet(entry && entry.rxcui ? entry.rxcui : '', 40);
+          if (normalized && !seen.has(normalized)) {
+            seen.add(normalized);
+            candidates.push(normalized);
+          }
+        });
+        if (candidates.length) {
+          break;
+        }
+      } catch (error) {
+        errors.push(String(error && error.message ? error.message : error));
+      }
+    }
+  }
+
+  return {
+    primary: candidates[0] || '',
+    candidates,
+    errors,
+  };
+}
+
+async function resolveSourceByRxcui(fetcher, rxcui) {
+  const errors = [];
+  if (!rxcui) {
+    return {
+      value: { found: false, source: '', url: '', rxcui: '' },
+      errors,
+    };
+  }
+
+  try {
+    const response = await fetcher(rxcui);
+    return {
+      value: {
+        ...response,
+        rxcui,
+      },
+      errors,
+    };
+  } catch (error) {
+    errors.push(String(error && error.message ? error.message : error));
+    return {
+      value: { found: false, source: '', url: '', rxcui },
+      errors,
+    };
+  }
+}
+
+const fetchDailyMedCached = createCachedFetcher(fetchDailyMedSplListing, {
+  ...rateConfig.dailymed,
+  label: 'DailyMed',
+});
+const fetchOpenFdaCached = createCachedFetcher(fetchOpenFdaLabelSummary, {
+  ...rateConfig.openfda,
+  label: 'openFDA',
+});
+const fetchRxNormApproximateCached = createCachedFetcher(fetchRxNormApproximateTerm, {
+  ...rateConfig.rxnorm,
+  label: 'RxNorm approximate',
+});
+const fetchRxNormByStringCached = createCachedFetcher(fetchRxNormRxcuiByString, {
+  ...rateConfig.rxnorm,
+  label: 'RxNorm rxcui',
+});
+const fetchRxClassCached = createCachedFetcher(fetchRxClassByRxcui, {
+  ...rateConfig.rxclass,
+  label: 'RxClass',
+});
+const fetchRxTermsCached = createCachedFetcher(fetchRxTermsByRxcui, {
+  ...rateConfig.rxterms,
+  label: 'RxTerms',
+});
+const fetchMedlinePlusCached = createCachedFetcher(fetchMedlinePlusByRxcui, {
+  ...rateConfig.medlineplus,
+  label: 'MedlinePlus',
+});
+const fetchDrugsFdaCached = createCachedFetcher(fetchDrugsFdaApproval, {
+  ...rateConfig.drugsfda,
+  label: 'Drugs@FDA',
+});
 
 for (const med of syncTargets) {
   const genericName = med.generic_name;
@@ -286,14 +510,25 @@ for (const med of syncTargets) {
   const sourceTerms = buildSourceSearchTerms(med);
 
   try {
-    const [dailyMedResolved, openFdaResolved, rxNormResolved, drugsFdaResolved] = await Promise.all([
+    const rxcuiResolution = await resolvePreferredRxcuiAcrossTerms(
+      sourceTerms,
+      fetchRxNormByStringCached,
+      fetchRxNormApproximateCached,
+    );
+    const primaryRxcui = rxcuiResolution.primary || '';
+
+    const [dailyMedResolved, openFdaResolved, rxNormResolved, drugsFdaResolved, rxClassResolved, rxTermsResolved, medlinePlusResolved] = await Promise.all([
       resolveSourceAcrossTerms(fetchDailyMedCached, sourceTerms, { maxTerms: 3 }),
       resolveSourceAcrossTerms(fetchOpenFdaCached, sourceTerms, { maxTerms: 1 }),
-      resolveSourceAcrossTerms(fetchRxNormCached, sourceTerms, { maxTerms: 3 }),
+      resolveSourceAcrossTerms(fetchRxNormApproximateCached, sourceTerms, { maxTerms: 3 }),
       resolveSourceAcrossTerms(fetchDrugsFdaCached, sourceTerms, { maxTerms: 1 }),
+      resolveSourceByRxcui(fetchRxClassCached, primaryRxcui),
+      resolveSourceByRxcui(fetchRxTermsCached, primaryRxcui),
+      resolveSourceByRxcui(fetchMedlinePlusCached, primaryRxcui),
     ]);
 
-    [dailyMedResolved, openFdaResolved, rxNormResolved, drugsFdaResolved].forEach((resolved) => {
+    notes.push(...(rxcuiResolution.errors || []));
+    [dailyMedResolved, openFdaResolved, rxNormResolved, drugsFdaResolved, rxClassResolved, rxTermsResolved, medlinePlusResolved].forEach((resolved) => {
       if (!resolved) return;
       notes.push(...(resolved.errors || []));
       if (resolved.value && resolved.value.found && resolved.value.url) {
@@ -305,15 +540,25 @@ for (const med of syncTargets) {
     const openFdaData = openFdaResolved ? openFdaResolved.value : null;
     const rxNormData = rxNormResolved ? rxNormResolved.value : null;
     const drugsFdaData = drugsFdaResolved ? drugsFdaResolved.value : null;
+    const rxClassData = rxClassResolved ? rxClassResolved.value : null;
+    const rxTermsData = rxTermsResolved ? rxTermsResolved.value : null;
+    const medlinePlusData = medlinePlusResolved ? medlinePlusResolved.value : null;
 
     const enrichment = {
       updated_at: new Date().toISOString(),
       search_terms: sourceTerms,
+      primary_rxcui: primaryRxcui,
+      rxcui_candidates: rxcuiResolution.candidates || [],
       openfda: extractOpenFdaEnrichment(openFdaData),
       dailymed: extractDailyMedEnrichment(dailyMedData),
       rxnorm: extractRxNormEnrichment(rxNormData),
+      rxclass: extractRxClassEnrichment(rxClassData),
+      rxterms: extractRxTermsEnrichment(rxTermsData),
+      medlineplus: extractMedlinePlusEnrichment(medlinePlusData),
       drugsfda: extractDrugsFdaEnrichment(drugsFdaData),
     };
+
+    (enrichment.medlineplus.links || []).forEach((link) => links.add(link));
 
     med.source_enrichment = enrichment;
     med.brand_names = mergeUnique(
@@ -321,6 +566,7 @@ for (const med of syncTargets) {
       [
         ...enrichment.openfda.brand_names,
         ...enrichment.drugsfda.brand_names,
+        ...(enrichment.rxterms.brand_name ? [enrichment.rxterms.brand_name] : []),
       ],
       16,
     );
@@ -329,6 +575,7 @@ for (const med of syncTargets) {
       [
         ...(med.brand_names || []),
         ...enrichment.rxnorm.candidate_terms,
+        ...(enrichment.rxterms.generic_name ? [enrichment.rxterms.generic_name] : []),
       ],
       30,
     );
@@ -352,6 +599,9 @@ for (const med of syncTargets) {
         enrichment.openfda.found ? 'openFDA' : '',
         enrichment.dailymed.found ? 'DailyMed' : '',
         enrichment.rxnorm.found ? 'RxNorm' : '',
+        enrichment.rxclass.found ? 'RxClass' : '',
+        enrichment.rxterms.found ? 'RxTerms' : '',
+        enrichment.medlineplus.found ? 'MedlinePlus' : '',
         enrichment.drugsfda.found ? 'Drugs@FDA' : '',
       ].filter(Boolean),
       status: med.content_review_status,

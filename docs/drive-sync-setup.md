@@ -23,12 +23,14 @@ It also creates/updates `config/drive-manifest.json` with revision/checksum/path
 1. Open Apps Script and create a standalone project.
 2. Enable the **Advanced Drive API** service in Apps Script.
 3. Copy `scripts/drive/apps-script/Code.gs` and `scripts/drive/apps-script/appsscript.json` into the project.
-4. Set script property `DRIVE_OWNER_EMAIL` (optional but recommended).
-5. Set script property `DRIVE_OWNER_TOKEN` to a long random secret.
-6. Deploy as web app:
+4. Set script property `DRIVE_REQUIRED_SHARED_DRIVE_ID` to your Astra shared drive ID.
+5. Set script property `DRIVE_ALLOWED_USER_EMAILS` (comma-separated), e.g. `nick@astrapsychiatry.com,kris@astrapsychiatry.com`.
+6. Set script property `DRIVE_SERVICE_TOKEN` to a long random secret for CLI/service automation.
+7. Optional legacy compatibility: `DRIVE_OWNER_EMAIL`.
+8. Deploy as web app:
    - Execute as: **Me**
    - Access: **Anyone** (required for cross-origin browser + CLI calls)
-7. Copy the deployment URL.
+9. Copy the deployment URL.
 
 ## Local configuration
 
@@ -39,8 +41,9 @@ Create `config/drive-sync.local.json` (not committed) from `config/drive-sync.co
   "endpointUrl": "https://script.google.com/macros/s/.../exec",
   "sharedDriveId": "...",
   "rootFolderName": "Astra Clinical Note Builder",
+  "userEmail": "nick@astrapsychiatry.com",
   "ownerEmail": "nick@astrapsychiatry.com",
-  "ownerToken": "same-value-as-DRIVE_OWNER_TOKEN",
+  "serviceToken": "same-value-as-DRIVE_SERVICE_TOKEN",
   "manifestPath": "config/drive-manifest.json"
 }
 ```
@@ -53,8 +56,9 @@ In `index.html` `<body>` data attributes:
 - `data-drive-endpoint-url="..."`
 - `data-drive-shared-drive-id="..."`
 - `data-drive-root-folder-name="Astra Clinical Note Builder"`
+- `data-drive-user-email="nick@astrapsychiatry.com"` (or `?driveUserEmail=...` query override)
 - `data-drive-owner-email="..."`
-- `data-drive-owner-token="same-value-as-DRIVE_OWNER_TOKEN"`
+- `data-drive-service-token=""` (blank in browser; service token belongs in local automation config)
 - `data-drive-sync-minutes="30"`
 
 When enabled:
@@ -64,13 +68,16 @@ When enabled:
 - Retry queue: pending writes are retried with exponential backoff
 - Conflict handling: revision mismatch triggers pull/merge/retry for draft writes
 - Backups: snapshot appends are non-destructive
+- Patient draft paths are user-scoped in Drive (`data/draft/users/<email-key>/...`)
 
 ## CLI helpers
 
 - `npm run drive:bootstrap` -> ensure folders + manifest
-- `npm run drive:publish` -> push med artifacts + manifest
+- `npm run drive:audit-roots` -> report canonical vs duplicate root folders
+- `npm run drive:publish` -> push med artifacts + manifest (skips unchanged files by checksum)
 - `npm run drive:pull` -> pull med artifacts + manifest to local workspace
 - `npm run med:knowledge-check` -> full med source refresh + compile + review + Drive publish
+- `npm run med:refresh-if-stale` -> staleness-aware refresh (monthly threshold unless forced)
 
 ## Reliability notes
 

@@ -165,12 +165,15 @@ const MED_RECENTS_KEY = 'medDrawerRecents_v1';
 const MED_MISSING_REQUESTS_KEY = 'medDrawerMissingRequests_v1';
 const MED_RUNTIME_OVERRIDES_KEY = 'medDrawerRuntimeOverrides_v1';
 const MED_AUTOSYNC_META_KEY = 'medDrawerAutoSyncMeta_v1';
+const MED_CATALOG_CHECKSUM_KEY = 'medCatalogChecksum_v1';
+const DRIVE_USER_EMAIL_KEY = 'driveSyncUserEmail_v1';
 const DRIVE_QUEUE_KEY = 'driveSyncPendingWrites_v1';
 const DRIVE_META_KEY = 'driveSyncMeta_v1';
 const DRIVE_REVISIONS_KEY = 'driveSyncRevisions_v1';
 const DRIVE_DRAFT_PATH = 'data/draft/current.json';
 const DRIVE_RECENT_PATIENTS_PATH = 'data/draft/recent-patients.json';
 const DRIVE_MED_COMPILED_PATH = 'data/meds/compiled/medications.compiled.json';
+const DRIVE_MED_REFRESH_QUEUE_PATH = 'logs/sync/med-refresh-requests.json';
 const DRIVE_SYNC_ENTERPRISE_NAME = 'Astra Clinical Note Builder';
 const DRIVE_MANIFEST_FILE = 'config/drive-manifest.json';
 const THERAPY_TIER_MINUTES = {
@@ -297,6 +300,14 @@ function setStorageJSON(key, value) {
 
 function getDriveConfig() {
   const dataset = els.body ? els.body.dataset : {};
+  const query = typeof window !== 'undefined' ? new URLSearchParams(window.location.search || '') : null;
+  const queryUserEmail = query ? String(query.get('driveUserEmail') || '').trim().toLowerCase() : '';
+  const storedUserEmail = String(getStorageJSON(DRIVE_USER_EMAIL_KEY, '') || '').trim().toLowerCase();
+  const datasetUserEmail = String(dataset.driveUserEmail || '').trim().toLowerCase();
+  const userEmail = queryUserEmail || datasetUserEmail || storedUserEmail || String(dataset.driveOwnerEmail || '').trim().toLowerCase();
+  if (userEmail && userEmail !== storedUserEmail) {
+    setStorageJSON(DRIVE_USER_EMAIL_KEY, userEmail);
+  }
   const intervalRaw = Number.parseInt(dataset.driveSyncMinutes || '', 10);
   const syncIntervalMinutes = Number.isFinite(intervalRaw) && intervalRaw > 0 ? intervalRaw : 30;
 
@@ -305,10 +316,51 @@ function getDriveConfig() {
     endpointUrl: String(dataset.driveEndpointUrl || '').trim(),
     sharedDriveId: String(dataset.driveSharedDriveId || '').trim(),
     rootFolderName: String(dataset.driveRootFolderName || DRIVE_SYNC_ENTERPRISE_NAME).trim() || DRIVE_SYNC_ENTERPRISE_NAME,
+    userEmail,
     ownerEmail: String(dataset.driveOwnerEmail || '').trim(),
+    serviceToken: String(dataset.driveServiceToken || '').trim() || String(dataset.driveOwnerToken || '').trim(),
     ownerToken: String(dataset.driveOwnerToken || '').trim(),
     syncIntervalMs: syncIntervalMinutes * 60 * 1000,
   };
+}
+
+function driveUserKeyFromEmail(email) {
+  return String(email || '')
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9@._-]/g, '')
+    .replace(/@/g, '-at-')
+    .replace(/\./g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
+function getScopedDriveDraftPath() {
+  const config = getDriveConfig();
+  const userKey = driveUserKeyFromEmail(config.userEmail);
+  if (!userKey) return DRIVE_DRAFT_PATH;
+  return `data/draft/users/${userKey}/current.json`;
+}
+
+function getScopedDriveRecentPatientsPath() {
+  const config = getDriveConfig();
+  const userKey = driveUserKeyFromEmail(config.userEmail);
+  if (!userKey) return DRIVE_RECENT_PATIENTS_PATH;
+  return `data/draft/users/${userKey}/recent-patients.json`;
+}
+
+function isDraftPath(path) {
+  const value = String(path || '').trim();
+  return value === DRIVE_DRAFT_PATH
+    || value === getScopedDriveDraftPath()
+    || /\/current\.json$/.test(value);
+}
+
+function isRecentPatientsPath(path) {
+  const value = String(path || '').trim();
+  return value === DRIVE_RECENT_PATIENTS_PATH
+    || value === getScopedDriveRecentPatientsPath()
+    || /\/recent-patients\.json$/.test(value);
 }
 
 function isDriveSyncEnabled() {
@@ -455,6 +507,7 @@ function enqueueDriveOperation(operation) {
 function queueDriveDraftWrite(draft) {
   if (!isDriveSyncEnabled() || !draft) return;
 
+  const path = getScopedDriveDraftPath();
   const revisions = getDriveRevisions();
   const payload = {
     savedAt: draft.savedAt || new Date().toISOString(),
@@ -467,18 +520,19 @@ function queueDriveDraftWrite(draft) {
   const content = JSON.stringify(payload, null, 2);
   enqueueDriveOperation({
     type: 'file.put',
-    path: DRIVE_DRAFT_PATH,
+    path,
     content,
     contentType: 'application/json',
     checksum: hashStringChecksum(content),
-    expectedRevision: revisions[DRIVE_DRAFT_PATH] || '',
-    dedupeKey: `file:${DRIVE_DRAFT_PATH}`,
+    expectedRevision: revisions[path] || '',
+    dedupeKey: `file:${path}`,
   });
 }
 
 function queueDriveRecentPatientsWrite(snapshots) {
   if (!isDriveSyncEnabled()) return;
 
+  const path = getScopedDriveRecentPatientsPath();
   const normalizedSnapshots = mergeSnapshotCollections(snapshots || [], []);
   const revisions = getDriveRevisions();
   const payload = {
@@ -490,12 +544,12 @@ function queueDriveRecentPatientsWrite(snapshots) {
 
   enqueueDriveOperation({
     type: 'file.put',
-    path: DRIVE_RECENT_PATIENTS_PATH,
+    path,
     content,
     contentType: 'application/json',
     checksum: hashStringChecksum(content),
-    expectedRevision: revisions[DRIVE_RECENT_PATIENTS_PATH] || '',
-    dedupeKey: `file:${DRIVE_RECENT_PATIENTS_PATH}`,
+    expectedRevision: revisions[path] || '',
+    dedupeKey: `file:${path}`,
   });
 }
 
@@ -606,9 +660,12 @@ async function callDriveEndpoint(action, payload = {}) {
   }
 
   const requestBody = {
+    ...payload,
     action,
     sharedDriveId: payload.sharedDriveId || config.sharedDriveId,
     rootFolderName: payload.rootFolderName || config.rootFolderName,
+    userEmail: payload.userEmail || config.userEmail,
+    serviceToken: payload.serviceToken || config.serviceToken || config.ownerToken,
     ownerEmail: config.ownerEmail,
     ownerToken: config.ownerToken,
     manifestPath: DRIVE_MANIFEST_FILE,
@@ -617,7 +674,6 @@ async function callDriveEndpoint(action, payload = {}) {
       timestamp: new Date().toISOString(),
       timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || '',
     },
-    ...payload,
   };
 
   const response = await fetch(config.endpointUrl, {
@@ -648,7 +704,8 @@ async function callDriveEndpoint(action, payload = {}) {
 async function pullDriveDraft(force = false) {
   if (!isDriveSyncEnabled()) return false;
 
-  const response = await callDriveEndpoint('file.get', { path: DRIVE_DRAFT_PATH });
+  const path = getScopedDriveDraftPath();
+  const response = await callDriveEndpoint('file.get', { path });
   const file = response.file || response;
   const content = typeof file.content === 'string' ? file.content : '';
   if (!content) return false;
@@ -666,7 +723,7 @@ async function pullDriveDraft(force = false) {
   if (!force && localSavedAt && remoteSavedAt && remoteSavedAt <= localSavedAt) {
     if (file.revision) {
       const revisions = getDriveRevisions();
-      revisions[DRIVE_DRAFT_PATH] = String(file.revision);
+      revisions[path] = String(file.revision);
       setDriveRevisions(revisions);
     }
     return false;
@@ -679,7 +736,7 @@ async function pullDriveDraft(force = false) {
 
   if (file.revision) {
     const revisions = getDriveRevisions();
-    revisions[DRIVE_DRAFT_PATH] = String(file.revision);
+    revisions[path] = String(file.revision);
     setDriveRevisions(revisions);
   }
 
@@ -711,7 +768,8 @@ async function pullDriveMedicationCatalog(force = false) {
 async function pullDriveRecentPatients(force = false) {
   if (!isDriveSyncEnabled()) return false;
 
-  const response = await callDriveEndpoint('file.get', { path: DRIVE_RECENT_PATIENTS_PATH });
+  const path = getScopedDriveRecentPatientsPath();
+  const response = await callDriveEndpoint('file.get', { path });
   const file = response.file || response;
   const content = typeof file.content === 'string' ? file.content : '';
   if (!content) return false;
@@ -727,7 +785,7 @@ async function pullDriveRecentPatients(force = false) {
   if (!force && remoteLatest && localLatest && remoteLatest <= localLatest) {
     if (file.revision) {
       const revisions = getDriveRevisions();
-      revisions[DRIVE_RECENT_PATIENTS_PATH] = String(file.revision);
+      revisions[path] = String(file.revision);
       setDriveRevisions(revisions);
     }
     return false;
@@ -739,7 +797,7 @@ async function pullDriveRecentPatients(force = false) {
 
   if (file.revision) {
     const revisions = getDriveRevisions();
-    revisions[DRIVE_RECENT_PATIENTS_PATH] = String(file.revision);
+    revisions[path] = String(file.revision);
     setDriveRevisions(revisions);
   }
 
@@ -812,9 +870,9 @@ async function flushDriveQueue() {
 
           if (response.conflict) {
             let merged = null;
-            if (item.path === DRIVE_DRAFT_PATH) {
+            if (isDraftPath(item.path)) {
               merged = mergeDraftConflictPayload(item.content, response.currentContent || '');
-            } else if (item.path === DRIVE_RECENT_PATIENTS_PATH) {
+            } else if (isRecentPatientsPath(item.path)) {
               merged = mergeRecentPatientsConflictPayload(item.content, response.currentContent || '');
             }
 
@@ -3389,123 +3447,58 @@ async function loadMedicationCatalog() {
   }
 }
 
-async function fetchOpenFdaSignal(genericName) {
-  if (typeof fetch !== 'function') return null;
-
-  const term = encodeURIComponent(genericName);
-  const url = `https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22${term}%22&limit=1`;
-
-  try {
-    const response = await fetch(url);
-    if (!response.ok) return null;
-    const json = await response.json();
-    const result = json.results && json.results[0] ? json.results[0] : null;
-    if (!result) return null;
-    return {
-      source: 'openFDA',
-      url,
-      hasResult: true,
-    };
-  } catch (error) {
-    return null;
-  }
-}
-
-async function fetchRxNormSignal(genericName) {
-  if (typeof fetch !== 'function') return null;
-
-  const term = encodeURIComponent(genericName);
-  const url = `https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=${term}&maxEntries=1`;
-
-  try {
-    const response = await fetch(url);
-    if (!response.ok) return null;
-    const json = await response.json();
-    const hasResult = Boolean(json.approximateGroup && Array.isArray(json.approximateGroup.candidate) && json.approximateGroup.candidate.length);
-    return {
-      source: 'RxNorm',
-      url,
-      hasResult,
-    };
-  } catch (error) {
-    return null;
-  }
-}
-
-async function fetchDailyMedSignal(genericName) {
-  if (typeof fetch !== 'function') return null;
-
-  const term = encodeURIComponent(genericName);
-  const url = `https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=${term}&pagesize=1`;
-
-  try {
-    const response = await fetch(url);
-    if (!response.ok) return null;
-    const json = await response.json();
-    const hasResult = Boolean(json.data && Array.isArray(json.data) && json.data.length);
-    return {
-      source: 'DailyMed',
-      url,
-      hasResult,
-    };
-  } catch (error) {
-    return null;
-  }
-}
-
-async function refreshMedicationSignalsInBackground(limit = 10) {
-  const recentIds = getMedicationRecents().map((entry) => entry.id);
-  const favoriteIds = getMedicationFavorites();
-  const uniqueIds = Array.from(new Set([...recentIds, ...favoriteIds])).slice(0, limit);
-
-  if (!uniqueIds.length) return;
-
-  const nowIso = new Date().toISOString();
-  const overrides = getRuntimeOverrides();
-
-  for (const id of uniqueIds) {
-    const med = getMedicationById(id);
-    if (!med) continue;
-
-    const [openFda, rxNorm, dailyMed] = await Promise.all([
-      fetchOpenFdaSignal(med.generic_name),
-      fetchRxNormSignal(med.generic_name),
-      fetchDailyMedSignal(med.generic_name),
-    ]);
-
-    const links = [
-      ...(med.source_links || []),
-      ...(openFda && openFda.hasResult ? [openFda.url] : []),
-      ...(rxNorm && rxNorm.hasResult ? [rxNorm.url] : []),
-      ...(dailyMed && dailyMed.hasResult ? [dailyMed.url] : []),
-    ];
-
-    overrides[id] = {
-      source_last_checked: nowIso,
-      source_links: Array.from(new Set(links)),
-    };
-
-    await new Promise((resolve) => setTimeout(resolve, 180));
-  }
-
-  saveRuntimeOverrides(overrides);
-
-  if (state.selectedMedicationId) {
-    renderMedicationDetail();
-  }
-}
-
 async function refreshCatalogIfChanged() {
-  if (typeof fetch !== 'function') return;
+  if (!isDriveSyncEnabled()) return false;
 
   try {
-    const response = await fetch(`${MED_CATALOG_URL}?check=${Date.now()}`, { cache: 'no-store' });
-    if (!response.ok) return;
+    const response = await callDriveEndpoint('manifest.get', { path: DRIVE_MANIFEST_FILE });
+    const manifest = response.manifest || {};
+    const pathMap = manifest.pathMap || {};
+    const remote = pathMap[DRIVE_MED_COMPILED_PATH] || {};
+    const remoteRevision = String(remote.revision || '');
+    const remoteChecksum = String(remote.checksum || '');
+    const revisions = getDriveRevisions();
+    const localRevision = String(revisions[DRIVE_MED_COMPILED_PATH] || '');
+    const localChecksum = String(getStorageJSON(MED_CATALOG_CHECKSUM_KEY, '') || '');
+    const changed = (remoteRevision && remoteRevision !== localRevision)
+      || (remoteChecksum && remoteChecksum !== localChecksum)
+      || !medicationCatalog.length;
 
-    const payload = await response.json();
-    applyMedicationCatalogPayload(payload, { force: false });
+    if (!changed) {
+      return false;
+    }
+
+    const pulled = await pullDriveMedicationCatalog(true);
+    if (remoteRevision) {
+      revisions[DRIVE_MED_COMPILED_PATH] = remoteRevision;
+      setDriveRevisions(revisions);
+    }
+    if (remoteChecksum) {
+      setStorageJSON(MED_CATALOG_CHECKSUM_KEY, remoteChecksum);
+    }
+    return Boolean(pulled || changed);
   } catch (error) {
-    // swallow to keep sync quiet
+    console.error('Medication drift check failed:', error);
+    return false;
+  }
+}
+
+async function queueMedicationRefreshRequest(reason) {
+  if (!isDriveSyncEnabled()) return false;
+
+  try {
+    await callDriveEndpoint('med.refresh.request', {
+      reason: reason || 'catalog-stale',
+      details: {
+        catalogGeneratedAt: medicationCatalogGeneratedAt || '',
+        knownCatalogRevision: String(getDriveRevisions()[DRIVE_MED_COMPILED_PATH] || ''),
+        queuePath: DRIVE_MED_REFRESH_QUEUE_PATH,
+      },
+    });
+    return true;
+  } catch (error) {
+    console.error('Unable to queue medication refresh request:', error);
+    return false;
   }
 }
 
@@ -3530,30 +3523,29 @@ async function runMedicationAutoSyncCycle(force = false) {
 
   try {
     const meta = getStorageJSON(MED_AUTOSYNC_META_KEY, {
-      lastCatalogCheck: 0,
-      lastIncrementalSync: 0,
-      lastWeeklySync: 0,
+      lastWeeklyCheck: 0,
+      lastRefreshRequestAt: 0,
     });
 
     const now = Date.now();
-
-    const shouldCatalogCheck = force || now - (meta.lastCatalogCheck || 0) >= 6 * 60 * 60 * 1000;
-    const shouldIncremental = force || now - (meta.lastIncrementalSync || 0) >= 24 * 60 * 60 * 1000;
-    const shouldWeekly = force || now - (meta.lastWeeklySync || 0) >= 7 * 24 * 60 * 60 * 1000;
-
-    if (shouldCatalogCheck) {
-      await refreshCatalogIfChanged();
-      meta.lastCatalogCheck = now;
-    }
-
-    if (shouldIncremental) {
-      await refreshMedicationSignalsInBackground(10);
-      meta.lastIncrementalSync = now;
-    }
+    const weeklyMs = 7 * 24 * 60 * 60 * 1000;
+    const monthlyMs = 30 * 24 * 60 * 60 * 1000;
+    const shouldWeekly = force || now - (meta.lastWeeklyCheck || 0) >= weeklyMs;
 
     if (shouldWeekly) {
-      await refreshMedicationSignalsInBackground(24);
-      meta.lastWeeklySync = now;
+      await refreshCatalogIfChanged();
+      meta.lastWeeklyCheck = now;
+
+      const generatedAtMs = Date.parse(medicationCatalogGeneratedAt || '') || 0;
+      const staleByAge = !generatedAtMs || (now - generatedAtMs >= monthlyMs);
+      const shouldQueueRequest = staleByAge && (force || now - (meta.lastRefreshRequestAt || 0) >= monthlyMs);
+
+      if (shouldQueueRequest) {
+        const queued = await queueMedicationRefreshRequest('catalog-stale-monthly-threshold');
+        if (queued) {
+          meta.lastRefreshRequestAt = now;
+        }
+      }
     }
 
     setStorageJSON(MED_AUTOSYNC_META_KEY, meta);
@@ -3573,7 +3565,7 @@ function startMedicationAutoSync() {
 
   medAutoSyncTimer = window.setInterval(() => {
     runWhenIdle(() => runMedicationAutoSyncCycle(false));
-  }, 60 * 60 * 1000);
+  }, 6 * 60 * 60 * 1000);
 
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'visible') {

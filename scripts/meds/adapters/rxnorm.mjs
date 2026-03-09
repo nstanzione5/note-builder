@@ -37,6 +37,29 @@ export async function fetchRxNormApproximateTerm(term) {
   };
 }
 
+export async function fetchRxNormRxcuiByString(term) {
+  const encoded = encodeURIComponent(term);
+  const url = `https://rxnav.nlm.nih.gov/REST/rxcui.json?name=${encoded}&search=2`;
+
+  const response = await fetchWithTimeout(url);
+  if (!response.ok) {
+    throw new Error(`RxNorm rxcui lookup failed (${response.status}) for ${term}`);
+  }
+
+  const payload = await response.json();
+  const ids = payload.idGroup && Array.isArray(payload.idGroup.rxnormId)
+    ? payload.idGroup.rxnormId
+    : [];
+
+  return {
+    source: 'RxNorm',
+    url,
+    found: ids.length > 0,
+    rxcuis: ids,
+    updatedAt: new Date().toISOString(),
+  };
+}
+
 export async function fetchRxNormProperties(rxcui) {
   const encoded = encodeURIComponent(rxcui);
   const url = `https://rxnav.nlm.nih.gov/REST/rxcui/${encoded}/properties.json`;

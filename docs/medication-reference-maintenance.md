@@ -28,7 +28,7 @@ Source reliability is scored with weighted source signals and content coverage:
 - `low`: sparse source evidence and/or limited clinical field coverage
 
 Current source weighting order:
-- `DailyMed` > `openFDA` > `Drugs@FDA` > `RxNorm`
+- `DailyMed` > `openFDA` > `Drugs@FDA` > `RxNorm` > `RxClass` > `RxTerms` > `MedlinePlus`
 
 ## File structure
 
@@ -45,10 +45,14 @@ Current source weighting order:
 2. Local-only check (no Drive publish)
 - `npm run med:knowledge-check:local`
 
-3. Force initial backend sync/index/publish (explicit alias)
+3. Staleness-aware full refresh (default 30-day threshold)
+- `npm run med:refresh-if-stale`
+- `npm run med:refresh-if-stale -- --force` (manual override)
+
+4. Force initial backend sync/index/publish (explicit alias)
 - `npm run med:initial-sync`
 
-4. Manual steps (if needed)
+5. Manual steps (if needed)
 - `npm run med:sync`
 - `npm run med:compile`
 - `npm run med:review`
@@ -56,13 +60,13 @@ Current source weighting order:
 
 ## Auto-sync while app is open
 
-The browser app runs a low-priority background sync loop:
+The browser app runs a low-priority background loop:
 
-- Catalog refresh check approximately every 6 hours
-- Incremental source signal refresh approximately every 24 hours
-- Broader refresh approximately every 7 days
+- Weekly medication catalog drift check (manifest/checksum based)
+- Monthly staleness threshold check for the compiled dataset
+- If stale, queue a refresh request in Drive (`logs/sync/med-refresh-requests.json`)
 
-These checks run on idle timers and keep interaction work non-blocking.
+All checks run on idle timers and avoid blocking note entry.
 
 When Drive sync is enabled, each Drive sync cycle also pulls:
 - `data/meds/compiled/medications.compiled.json`
@@ -72,8 +76,8 @@ This lets app runtime pick up newly published catalog data without requiring a p
 
 ## Important limits
 
-- Runtime browser sync updates local cache only (localStorage).
-- For shared canonical catalog updates, run `npm run med:knowledge-check` from this workspace.
+- Runtime browser sync does not republish canonical catalog files.
+- Shared canonical catalog updates are performed by owner-side maintenance (`med:refresh-if-stale` or `med:knowledge-check`).
 - Curated psychiatry content should only be edited in curated files/scripts and reviewed clinically.
-- Drive writes are owner-gated at the Apps Script layer (`DRIVE_OWNER_EMAIL` and/or `DRIVE_OWNER_TOKEN`).
+- Drive writes are gated by Apps Script allowlist/service token policy.
 - `openFDA` endpoints can rate-limit anonymous traffic (HTTP 429). For better coverage, set `OPENFDA_API_KEY` in your shell before running sync jobs.

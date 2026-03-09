@@ -10,6 +10,8 @@ export async function loadDriveConfig(configPath = DEFAULT_CONFIG_PATH) {
     sharedDriveId: process.env.DRIVE_SHARED_DRIVE_ID || '',
     rootFolderName: process.env.DRIVE_ROOT_FOLDER_NAME || 'Astra Clinical Note Builder',
     ownerEmail: process.env.DRIVE_OWNER_EMAIL || '',
+    userEmail: process.env.DRIVE_USER_EMAIL || '',
+    serviceToken: process.env.DRIVE_SERVICE_TOKEN || process.env.DRIVE_OWNER_TOKEN || '',
     ownerToken: process.env.DRIVE_OWNER_TOKEN || '',
     manifestPath: process.env.DRIVE_MANIFEST_PATH || 'config/drive-manifest.json',
   };
@@ -39,6 +41,8 @@ export async function loadDriveConfig(configPath = DEFAULT_CONFIG_PATH) {
     sharedDriveId: String(merged.sharedDriveId || '').trim(),
     rootFolderName: String(merged.rootFolderName || 'Astra Clinical Note Builder').trim(),
     ownerEmail: String(merged.ownerEmail || '').trim(),
+    userEmail: String(merged.userEmail || '').trim(),
+    serviceToken: String(merged.serviceToken || merged.ownerToken || '').trim(),
     ownerToken: String(merged.ownerToken || '').trim(),
     manifestPath: String(merged.manifestPath || 'config/drive-manifest.json').trim(),
   };
@@ -48,9 +52,12 @@ export async function callDriveAction(action, payload = {}, options = {}) {
   const config = options.config || await loadDriveConfig(options.configPath);
 
   const requestBody = {
+    ...payload,
     action,
     sharedDriveId: payload.sharedDriveId || config.sharedDriveId,
     rootFolderName: payload.rootFolderName || config.rootFolderName,
+    userEmail: payload.userEmail || config.userEmail,
+    serviceToken: payload.serviceToken || config.serviceToken || config.ownerToken,
     ownerEmail: payload.ownerEmail || config.ownerEmail,
     ownerToken: payload.ownerToken || config.ownerToken,
     manifestPath: payload.manifestPath || config.manifestPath,
@@ -58,7 +65,6 @@ export async function callDriveAction(action, payload = {}, options = {}) {
       source: 'note-builder-local-script',
       timestamp: new Date().toISOString(),
     },
-    ...payload,
   };
 
   const response = await fetch(config.endpointUrl, {

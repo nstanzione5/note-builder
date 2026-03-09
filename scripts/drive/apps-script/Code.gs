@@ -1,9 +1,21 @@
 const APP_ROOT_DEFAULT = 'Astra Clinical Note Builder';
 const MANIFEST_PATH = 'config/drive-manifest.json';
+const MED_REFRESH_QUEUE_PATH = 'logs/sync/med-refresh-requests.json';
+const PATIENT_DRAFT_CURRENT_PATH = 'data/draft/current.json';
+const PATIENT_DRAFT_RECENT_PATH = 'data/draft/recent-patients.json';
+const PATIENT_DRAFT_USERS_PREFIX = 'data/draft/users/';
 const ROOT_FOLDER_ID_PROPERTY = 'DRIVE_ROOT_FOLDER_ID';
 const ROOT_FOLDER_NAME_PROPERTY = 'DRIVE_ROOT_FOLDER_NAME';
 const ROOT_SHARED_DRIVE_ID_PROPERTY = 'DRIVE_ROOT_SHARED_DRIVE_ID';
 const MANIFEST_FILE_ID_PROPERTY = 'DRIVE_MANIFEST_FILE_ID';
+const REQUIRED_SHARED_DRIVE_ID_PROPERTY = 'DRIVE_REQUIRED_SHARED_DRIVE_ID';
+const ALLOWED_USER_EMAILS_PROPERTY = 'DRIVE_ALLOWED_USER_EMAILS';
+const SERVICE_TOKEN_PROPERTY = 'DRIVE_SERVICE_TOKEN';
+const LEGACY_OWNER_TOKEN_PROPERTY = 'DRIVE_OWNER_TOKEN';
+const DEFAULT_ALLOWED_USER_EMAILS = [
+  'nick@astrapsychiatry.com',
+  'kris@astrapsychiatry.com',
+];
 const FOLDER_STRUCTURE = [
   'app-shell',
   'data/meds/source',
@@ -20,6 +32,7 @@ function doGet(e) {
   try {
     const action = e && e.parameter ? (e.parameter.action || 'health') : 'health';
     const payload = e && e.parameter ? e.parameter : {};
+    enforceOwnerWrite_(action, payload);
     const result = handleAction_(action, payload);
     return jsonResponse_({ ok: true, action: action, ...result });
   } catch (error) {
@@ -46,6 +59,8 @@ function handleAction_(action, payload) {
   switch (action) {
     case 'bootstrap':
       return handleBootstrap_(payload);
+    case 'root.audit':
+      return handleRootAudit_(payload);
     case 'manifest.get':
       return handleManifestGet_(payload);
     case 'file.get':
@@ -56,6 +71,8 @@ function handleAction_(action, payload) {
       return handleBackupAppend_(payload);
     case 'backup.list':
       return handleBackupList_(payload);
+    case 'med.refresh.request':
+      return handleMedRefreshRequest_(payload);
     case 'health':
       return handleHealth_(payload);
     default:
@@ -68,16 +85,43 @@ function enforceOwnerWrite_(action, payload) {
     bootstrap: true,
     'file.put': true,
     'backup.append': true,
+    'med.refresh.request': true,
   };
 
   if (!writeActions[action]) return;
 
-  const tokenFromPayload = normalizeText_(payload.ownerToken || '');
-  const tokenFromProperties = normalizeText_(PropertiesService.getScriptProperties().getProperty('DRIVE_OWNER_TOKEN') || '');
-  if (tokenFromProperties && tokenFromPayload && tokenFromPayload === tokenFromProperties) {
+  const sharedDriveId = resolveSharedDriveId_(payload);
+  if (sharedDriveId) {
+    payload.sharedDriveId = sharedDriveId;
+  }
+
+  if (hasValidServiceToken_(payload)) {
     return;
   }
 
+  const effectiveUser = resolveEffectiveUserEmail_(payload);
+  const isAllowlisted = effectiveUser && isEmailAllowlisted_(effectiveUser);
+
+  if (action === 'med.refresh.request' && isAllowlisted) {
+    return;
+  }
+
+  if (action === 'bootstrap' && isAllowlisted) {
+    return;
+  }
+
+  if (action === 'backup.append' && isAllowlisted) {
+    return;
+  }
+
+  if (action === 'file.put') {
+    const path = normalizeText_(payload.path || '');
+    if (isPatientDraftPath_(path) && isAllowlisted) {
+      return;
+    }
+  }
+
+  // Fallback owner check for privileged maintenance writes.
   const ownerFromPayload = normalizeText_(payload.ownerEmail || '');
   const ownerFromProperties = normalizeText_(PropertiesService.getScriptProperties().getProperty('DRIVE_OWNER_EMAIL') || '');
   const ownerEmail = ownerFromProperties || ownerFromPayload;
@@ -93,18 +137,22 @@ function enforceOwnerWrite_(action, payload) {
 }
 
 function handleHealth_(payload) {
-  const tokenConfigured = Boolean(normalizeText_(PropertiesService.getScriptProperties().getProperty('DRIVE_OWNER_TOKEN') || ''));
+  const tokenConfigured = Boolean(getServiceToken_());
+  const allowlist = getAllowedUserEmails_();
   return {
     timestamp: new Date().toISOString(),
     owner: normalizeText_(payload.ownerEmail || '') || normalizeText_(PropertiesService.getScriptProperties().getProperty('DRIVE_OWNER_EMAIL') || ''),
     tokenConfigured: tokenConfigured,
+    requiredSharedDriveId: getRequiredSharedDriveId_(),
+    allowlistedUsers: allowlist,
     runtime: 'google-apps-script',
   };
 }
 
 function handleBootstrap_(payload) {
-  const sharedDriveId = normalizeText_(payload.sharedDriveId || '');
+  const sharedDriveId = resolveSharedDriveId_(payload);
   const rootFolderName = normalizeText_(payload.rootFolderName || APP_ROOT_DEFAULT) || APP_ROOT_DEFAULT;
+  ensureDefaultAllowlist_();
 
   const root = getOrCreateRootFolder_(sharedDriveId, rootFolderName);
   const createdFolders = [];
@@ -139,11 +187,89 @@ function handleBootstrap_(payload) {
   };
 }
 
-function handleManifestGet_(payload) {
-  const sharedDriveId = normalizeText_(payload.sharedDriveId || '');
+function handleRootAudit_(payload) {
+  const sharedDriveId = resolveSharedDriveId_(payload);
   const rootFolderName = normalizeText_(payload.rootFolderName || APP_ROOT_DEFAULT) || APP_ROOT_DEFAULT;
-  const root = getOrCreateRootFolder_(sharedDriveId, rootFolderName);
-  const manifestBundle = loadManifest_(root.id, sharedDriveId, rootFolderName, payload.ownerEmail || '');
+  const escaped = escapeQueryText_(rootFolderName);
+  const query = "trashed=false and mimeType='application/vnd.google-apps.folder' and title='" + escaped + "'";
+  const listed = listFilesSafe_({ q: query, maxResults: 100 }, '');
+  const requiredSharedDriveId = getRequiredSharedDriveId_();
+  const expectedDriveId = requiredSharedDriveId || sharedDriveId;
+
+  const roots = (listed.items || []).map(function (file) {
+    const driveId = normalizeText_((file && (file.driveId || file.teamDriveId)) || '');
+    const parents = (file && file.parents) ? file.parents.map(function (parent) {
+      return normalizeText_((parent && parent.id) ? parent.id : parent);
+    }).filter(Boolean) : [];
+
+    return {
+      id: String(file.id || ''),
+      name: String(file.title || file.name || ''),
+      driveId: driveId,
+      parents: parents,
+      createdAt: String(file.createdDate || file.createdTime || ''),
+      modifiedAt: String(file.modifiedDate || file.modifiedTime || ''),
+      inExpectedSharedDrive: Boolean(expectedDriveId && driveId === expectedDriveId),
+      isMyDriveRootCandidate: !driveId,
+      url: toFolderUrl_(file.id),
+    };
+  });
+
+  const expectedMatches = roots.filter(function (item) {
+    return item.inExpectedSharedDrive;
+  });
+  const canonical = expectedMatches.length ? selectStableRootAuditItem_(expectedMatches) : null;
+
+  return {
+    rootFolderName: rootFolderName,
+    requiredSharedDriveId: requiredSharedDriveId,
+    expectedSharedDriveId: expectedDriveId,
+    canonicalRoot: canonical || null,
+    duplicateRoots: roots.filter(function (item) {
+      return canonical ? item.id !== canonical.id : true;
+    }),
+    allRoots: roots,
+  };
+}
+
+function selectStableRootAuditItem_(items) {
+  const candidates = (items || []).slice();
+  candidates.sort(function (a, b) {
+    const createdA = String(a.createdAt || '');
+    const createdB = String(b.createdAt || '');
+    if (createdA !== createdB) {
+      return createdA < createdB ? -1 : 1;
+    }
+    const idA = String(a.id || '');
+    const idB = String(b.id || '');
+    if (idA === idB) return 0;
+    return idA < idB ? -1 : 1;
+  });
+  return candidates[0];
+}
+
+function handleManifestGet_(payload) {
+  const sharedDriveId = resolveSharedDriveId_(payload);
+  const rootFolderName = normalizeText_(payload.rootFolderName || APP_ROOT_DEFAULT) || APP_ROOT_DEFAULT;
+  const root = getRootFolderForRead_(sharedDriveId, rootFolderName);
+  if (!root) {
+    return {
+      manifest: null,
+      revision: '',
+      checksum: '',
+      updatedAt: '',
+    };
+  }
+
+  const manifestBundle = loadManifestForRead_(root.id, sharedDriveId, rootFolderName, payload.ownerEmail || '');
+  if (!manifestBundle) {
+    return {
+      manifest: null,
+      revision: '',
+      checksum: '',
+      updatedAt: '',
+    };
+  }
 
   const manifestMeta = getFileMeta_(manifestBundle.fileId);
 
@@ -156,15 +282,19 @@ function handleManifestGet_(payload) {
 }
 
 function handleFileGet_(payload) {
-  const targetPath = normalizeText_(payload.path || '');
+  const targetPath = resolveScopedPathForPayload_(normalizeText_(payload.path || ''), payload);
   if (!targetPath) throw new Error('file.get requires path');
 
-  const sharedDriveId = normalizeText_(payload.sharedDriveId || '');
+  const sharedDriveId = resolveSharedDriveId_(payload);
   const rootFolderName = normalizeText_(payload.rootFolderName || APP_ROOT_DEFAULT) || APP_ROOT_DEFAULT;
-  const root = getOrCreateRootFolder_(sharedDriveId, rootFolderName);
+  const root = getRootFolderForRead_(sharedDriveId, rootFolderName);
+  if (!root) {
+    return { file: null };
+  }
 
-  const manifestBundle = loadManifest_(root.id, sharedDriveId, rootFolderName, payload.ownerEmail || '');
-  const resolved = resolvePathFile_(manifestBundle.manifest, root.id, targetPath, sharedDriveId, false);
+  const manifestBundle = loadManifestForRead_(root.id, sharedDriveId, rootFolderName, payload.ownerEmail || '')
+    || { manifest: { pathMap: {}, revisions: {}, checksums: {} }, fileId: '' };
+  const resolved = resolvePathFile_(manifestBundle.manifest, root.id, targetPath, sharedDriveId, false, false);
 
   if (!resolved.fileId) {
     return { file: null };
@@ -172,20 +302,6 @@ function handleFileGet_(payload) {
 
   const content = readFileContent_(resolved.fileId);
   const meta = getFileMeta_(resolved.fileId);
-
-  manifestBundle.manifest.pathMap = manifestBundle.manifest.pathMap || {};
-  manifestBundle.manifest.pathMap[targetPath] = {
-    id: resolved.fileId,
-    revision: String(meta.version || ''),
-    checksum: String(meta.md5Checksum || ''),
-    updatedAt: String(meta.modifiedDate || ''),
-  };
-  manifestBundle.manifest.revisions = manifestBundle.manifest.revisions || {};
-  manifestBundle.manifest.revisions[targetPath] = String(meta.version || '');
-  manifestBundle.manifest.checksums = manifestBundle.manifest.checksums || {};
-  manifestBundle.manifest.checksums[targetPath] = String(meta.md5Checksum || '');
-  manifestBundle.manifest.lastUpdatedAt = new Date().toISOString();
-  saveManifest_(manifestBundle.fileId, manifestBundle.manifest);
 
   return {
     file: {
@@ -200,17 +316,17 @@ function handleFileGet_(payload) {
 }
 
 function handleFilePut_(payload) {
-  const targetPath = normalizeText_(payload.path || '');
+  const targetPath = resolveScopedPathForPayload_(normalizeText_(payload.path || ''), payload);
   if (!targetPath) throw new Error('file.put requires path');
 
   const content = String(payload.content == null ? '' : payload.content);
   const expectedRevision = normalizeText_(payload.expectedRevision || '');
-  const sharedDriveId = normalizeText_(payload.sharedDriveId || '');
+  const sharedDriveId = resolveSharedDriveId_(payload);
   const rootFolderName = normalizeText_(payload.rootFolderName || APP_ROOT_DEFAULT) || APP_ROOT_DEFAULT;
 
   const root = getOrCreateRootFolder_(sharedDriveId, rootFolderName);
   const manifestBundle = loadManifest_(root.id, sharedDriveId, rootFolderName, payload.ownerEmail || '');
-  const resolved = resolvePathFile_(manifestBundle.manifest, root.id, targetPath, sharedDriveId, true);
+  const resolved = resolvePathFile_(manifestBundle.manifest, root.id, targetPath, sharedDriveId, true, true);
 
   const currentMeta = getFileMeta_(resolved.fileId);
   const currentRevision = String(currentMeta.version || '');
@@ -253,7 +369,7 @@ function handleFilePut_(payload) {
 
 function handleBackupAppend_(payload) {
   const entry = payload.entry || {};
-  const sharedDriveId = normalizeText_(payload.sharedDriveId || '');
+  const sharedDriveId = resolveSharedDriveId_(payload);
   const rootFolderName = normalizeText_(payload.rootFolderName || APP_ROOT_DEFAULT) || APP_ROOT_DEFAULT;
   const root = getOrCreateRootFolder_(sharedDriveId, rootFolderName);
 
@@ -276,10 +392,17 @@ function handleBackupAppend_(payload) {
 }
 
 function handleBackupList_(payload) {
-  const sharedDriveId = normalizeText_(payload.sharedDriveId || '');
+  const sharedDriveId = resolveSharedDriveId_(payload);
   const rootFolderName = normalizeText_(payload.rootFolderName || APP_ROOT_DEFAULT) || APP_ROOT_DEFAULT;
-  const root = getOrCreateRootFolder_(sharedDriveId, rootFolderName);
-  const backupFolderId = ensureFolderPath_(root.id, 'backups/notes', sharedDriveId, []);
+  const root = getRootFolderForRead_(sharedDriveId, rootFolderName);
+  if (!root) {
+    return { backups: [] };
+  }
+
+  const backupFolderId = findFolderPath_(root.id, 'backups/notes', sharedDriveId);
+  if (!backupFolderId) {
+    return { backups: [] };
+  }
 
   const query = "trashed=false and '" + backupFolderId + "' in parents and mimeType='application/json'";
   const params = {
@@ -301,6 +424,75 @@ function handleBackupList_(payload) {
   return { backups: items };
 }
 
+function handleMedRefreshRequest_(payload) {
+  const sharedDriveId = resolveSharedDriveId_(payload);
+  const rootFolderName = normalizeText_(payload.rootFolderName || APP_ROOT_DEFAULT) || APP_ROOT_DEFAULT;
+  const root = getOrCreateRootFolder_(sharedDriveId, rootFolderName);
+  const userEmail = resolveAllowlistedUserEmail_(payload);
+  const nowIso = new Date().toISOString();
+  const reason = normalizeText_(payload.reason || 'catalog-stale') || 'catalog-stale';
+
+  const manifestBundle = loadManifest_(root.id, sharedDriveId, rootFolderName, payload.ownerEmail || '');
+  const resolved = resolvePathFile_(manifestBundle.manifest, root.id, MED_REFRESH_QUEUE_PATH, sharedDriveId, true, true);
+  if (!resolved.fileId) {
+    throw new Error('Unable to resolve medication refresh queue file.');
+  }
+
+  const existing = readFileContent_(resolved.fileId);
+  let queue = null;
+  try {
+    queue = existing ? JSON.parse(existing) : null;
+  } catch (error) {
+    queue = null;
+  }
+
+  if (!queue || typeof queue !== 'object') {
+    queue = {
+      generatedAt: nowIso,
+      items: [],
+    };
+  }
+
+  const items = Array.isArray(queue.items) ? queue.items : [];
+  const entry = {
+    id: 'med-refresh-' + Utilities.getUuid(),
+    requestedAt: nowIso,
+    userEmail: userEmail,
+    reason: reason,
+    source: normalizeText_((payload.client && payload.client.app) || (payload.client && payload.client.source) || 'note-builder'),
+    details: payload.details && typeof payload.details === 'object' ? payload.details : {},
+  };
+
+  items.push(entry);
+  queue.generatedAt = nowIso;
+  queue.items = items.slice(Math.max(0, items.length - 500));
+
+  writeFileContent_(resolved.fileId, JSON.stringify(queue, null, 2));
+  const updatedMeta = getFileMeta_(resolved.fileId);
+
+  manifestBundle.manifest.pathMap = manifestBundle.manifest.pathMap || {};
+  manifestBundle.manifest.pathMap[MED_REFRESH_QUEUE_PATH] = {
+    id: resolved.fileId,
+    revision: String(updatedMeta.version || ''),
+    checksum: String(updatedMeta.md5Checksum || ''),
+    updatedAt: String(updatedMeta.modifiedDate || ''),
+  };
+  manifestBundle.manifest.revisions = manifestBundle.manifest.revisions || {};
+  manifestBundle.manifest.revisions[MED_REFRESH_QUEUE_PATH] = String(updatedMeta.version || '');
+  manifestBundle.manifest.checksums = manifestBundle.manifest.checksums || {};
+  manifestBundle.manifest.checksums[MED_REFRESH_QUEUE_PATH] = String(updatedMeta.md5Checksum || '');
+  manifestBundle.manifest.lastUpdatedAt = nowIso;
+  saveManifest_(manifestBundle.fileId, manifestBundle.manifest);
+
+  return {
+    queued: true,
+    requestId: entry.id,
+    queuePath: MED_REFRESH_QUEUE_PATH,
+    revision: String(updatedMeta.version || ''),
+    updatedAt: String(updatedMeta.modifiedDate || ''),
+  };
+}
+
 function loadManifest_(rootFolderId, sharedDriveId, rootFolderName, ownerEmail) {
   const manifestResolved = getOrCreateManifestFile_(rootFolderId, sharedDriveId);
   const existing = readFileContent_(manifestResolved.fileId);
@@ -313,20 +505,7 @@ function loadManifest_(rootFolderId, sharedDriveId, rootFolderName, ownerEmail) 
   }
 
   if (!manifest || typeof manifest !== 'object') {
-    manifest = {
-      version: 1,
-      schema: 'astra-note-builder-drive-manifest-v1',
-      rootFolderName: rootFolderName,
-      rootFolderId: rootFolderId,
-      sharedDriveId: sharedDriveId,
-      ownerEmail: normalizeText_(ownerEmail || ''),
-      paths: {},
-      pathMap: {},
-      checksums: {},
-      revisions: {},
-      lastBootstrapAt: '',
-      lastUpdatedAt: '',
-    };
+    manifest = buildEmptyManifest_(rootFolderId, sharedDriveId, rootFolderName, ownerEmail);
   }
 
   manifest.rootFolderName = rootFolderName;
@@ -344,13 +523,63 @@ function loadManifest_(rootFolderId, sharedDriveId, rootFolderName, ownerEmail) 
   };
 }
 
+function loadManifestForRead_(rootFolderId, sharedDriveId, rootFolderName, ownerEmail) {
+  const manifestResolved = getExistingManifestFile_(rootFolderId, sharedDriveId);
+  if (!manifestResolved || !manifestResolved.fileId) {
+    return null;
+  }
+
+  const existing = readFileContent_(manifestResolved.fileId);
+  let manifest = null;
+  try {
+    manifest = existing ? JSON.parse(existing) : null;
+  } catch (error) {
+    manifest = null;
+  }
+
+  if (!manifest || typeof manifest !== 'object') {
+    manifest = buildEmptyManifest_(rootFolderId, sharedDriveId, rootFolderName, ownerEmail);
+  }
+
+  manifest.rootFolderName = rootFolderName;
+  manifest.rootFolderId = rootFolderId;
+  manifest.sharedDriveId = sharedDriveId;
+  if (ownerEmail) manifest.ownerEmail = normalizeText_(ownerEmail);
+  manifest.paths = manifest.paths || {};
+  manifest.pathMap = manifest.pathMap || {};
+  manifest.checksums = manifest.checksums || {};
+  manifest.revisions = manifest.revisions || {};
+
+  return {
+    manifest: manifest,
+    fileId: manifestResolved.fileId,
+  };
+}
+
+function buildEmptyManifest_(rootFolderId, sharedDriveId, rootFolderName, ownerEmail) {
+  return {
+    version: 1,
+    schema: 'astra-note-builder-drive-manifest-v1',
+    rootFolderName: rootFolderName,
+    rootFolderId: rootFolderId,
+    sharedDriveId: sharedDriveId,
+    ownerEmail: normalizeText_(ownerEmail || ''),
+    paths: {},
+    pathMap: {},
+    checksums: {},
+    revisions: {},
+    lastBootstrapAt: '',
+    lastUpdatedAt: '',
+  };
+}
+
 function saveManifest_(manifestFileId, manifest) {
   rememberManifestFileId_(manifestFileId);
   writeFileContent_(manifestFileId, JSON.stringify(manifest, null, 2));
   return getFileMeta_(manifestFileId);
 }
 
-function resolvePathFile_(manifest, rootFolderId, targetPath, sharedDriveId, createIfMissing) {
+function resolvePathFile_(manifest, rootFolderId, targetPath, sharedDriveId, createIfMissing, createFolders) {
   manifest.pathMap = manifest.pathMap || {};
   const mapped = manifest.pathMap[targetPath];
   if (mapped && mapped.id) {
@@ -367,7 +596,13 @@ function resolvePathFile_(manifest, rootFolderId, targetPath, sharedDriveId, cre
 
   const fileName = parts.pop();
   const folderPath = parts.join('/');
-  const folderId = folderPath ? ensureFolderPath_(rootFolderId, folderPath, sharedDriveId, []) : rootFolderId;
+  const shouldCreateFolders = createFolders !== false;
+  const folderId = folderPath
+    ? (shouldCreateFolders ? ensureFolderPath_(rootFolderId, folderPath, sharedDriveId, []) : findFolderPath_(rootFolderId, folderPath, sharedDriveId))
+    : rootFolderId;
+  if (!folderId) {
+    return { fileId: '' };
+  }
 
   let file = findFileInFolder_(folderId, fileName, sharedDriveId);
 
@@ -382,6 +617,21 @@ function resolvePathFile_(manifest, rootFolderId, targetPath, sharedDriveId, cre
   return {
     fileId: file ? file.id : '',
   };
+}
+
+function findFolderPath_(rootFolderId, folderPath, sharedDriveId) {
+  const segments = folderPath.split('/').filter(function (part) { return Boolean(part); });
+  let parentId = rootFolderId;
+
+  for (var i = 0; i < segments.length; i += 1) {
+    const child = findFolderInParent_(parentId, segments[i], sharedDriveId);
+    if (!child || !child.id) {
+      return '';
+    }
+    parentId = child.id;
+  }
+
+  return parentId;
 }
 
 function ensureFolderPath_(rootFolderId, folderPath, sharedDriveId, createdFolders) {
@@ -417,8 +667,37 @@ function folderPathUntil_(segments, segment) {
   return segments.slice(0, index + 1).join('/');
 }
 
-function getOrCreateRootFolder_(sharedDriveId, rootFolderName) {
+function getRootFolderForRead_(sharedDriveId, rootFolderName) {
   const storedRoot = getStoredRootFolder_(sharedDriveId, rootFolderName);
+  if (storedRoot) {
+    return storedRoot;
+  }
+
+  const escaped = escapeQueryText_(rootFolderName);
+  let query = "trashed=false and mimeType='application/vnd.google-apps.folder' and title='" + escaped + "'";
+  if (sharedDriveId) {
+    query += " and '" + sharedDriveId + "' in parents";
+  }
+
+  const listed = listFilesSafe_({
+    q: query,
+    maxResults: 20,
+  }, sharedDriveId);
+  const candidates = (listed.items || []).filter(function (item) {
+    return !sharedDriveId || fileBelongsToSharedDrive_(item, sharedDriveId);
+  });
+
+  if (!candidates.length) {
+    return null;
+  }
+
+  const selected = selectStableFolder_(candidates);
+  saveStoredRootFolder_(selected.id, sharedDriveId, rootFolderName);
+  return selected;
+}
+
+function getOrCreateRootFolder_(sharedDriveId, rootFolderName) {
+  const storedRoot = getRootFolderForRead_(sharedDriveId, rootFolderName);
   if (storedRoot) {
     return storedRoot;
   }
@@ -752,6 +1031,20 @@ function fileBelongsToSharedDrive_(file, sharedDriveId) {
 }
 
 function getOrCreateManifestFile_(rootFolderId, sharedDriveId) {
+  const existing = getExistingManifestFile_(rootFolderId, sharedDriveId);
+  if (existing && existing.fileId) {
+    return existing;
+  }
+
+  const resolved = resolvePathFile_({ pathMap: {} }, rootFolderId, MANIFEST_PATH, sharedDriveId, true, true);
+  if (!resolved.fileId) {
+    throw new Error('Unable to create or resolve drive manifest file.');
+  }
+  rememberManifestFileId_(resolved.fileId);
+  return resolved;
+}
+
+function getExistingManifestFile_(rootFolderId, sharedDriveId) {
   const props = PropertiesService.getScriptProperties();
   const storedManifestId = normalizeText_(props.getProperty(MANIFEST_FILE_ID_PROPERTY) || '');
   if (storedManifestId) {
@@ -769,9 +1062,9 @@ function getOrCreateManifestFile_(rootFolderId, sharedDriveId) {
     }
   }
 
-  const resolved = resolvePathFile_({ pathMap: {} }, rootFolderId, MANIFEST_PATH, sharedDriveId, true);
+  const resolved = resolvePathFile_({ pathMap: {} }, rootFolderId, MANIFEST_PATH, sharedDriveId, false, false);
   if (!resolved.fileId) {
-    throw new Error('Unable to create or resolve drive manifest file.');
+    return { fileId: '' };
   }
   rememberManifestFileId_(resolved.fileId);
   return resolved;
@@ -785,6 +1078,140 @@ function rememberManifestFileId_(fileId) {
 
 function clearManifestFileId_() {
   PropertiesService.getScriptProperties().deleteProperty(MANIFEST_FILE_ID_PROPERTY);
+}
+
+function resolveSharedDriveId_(payload) {
+  const incoming = normalizeText_((payload && payload.sharedDriveId) || '');
+  const required = getRequiredSharedDriveId_();
+  if (!required) {
+    return incoming;
+  }
+
+  if (incoming && incoming !== required) {
+    throw new Error('Configured sharedDriveId does not match required shared drive.');
+  }
+
+  return required;
+}
+
+function getRequiredSharedDriveId_() {
+  return normalizeText_(PropertiesService.getScriptProperties().getProperty(REQUIRED_SHARED_DRIVE_ID_PROPERTY) || '');
+}
+
+function getServiceToken_() {
+  const props = PropertiesService.getScriptProperties();
+  return normalizeText_(props.getProperty(SERVICE_TOKEN_PROPERTY) || props.getProperty(LEGACY_OWNER_TOKEN_PROPERTY) || '');
+}
+
+function hasValidServiceToken_(payload) {
+  const fromPayload = normalizeText_((payload && (payload.serviceToken || payload.ownerToken)) || '');
+  const fromProps = getServiceToken_();
+  return Boolean(fromPayload && fromProps && fromPayload === fromProps);
+}
+
+function getAllowedUserEmails_() {
+  const raw = normalizeText_(PropertiesService.getScriptProperties().getProperty(ALLOWED_USER_EMAILS_PROPERTY) || '');
+  if (!raw) return [];
+
+  const tokens = raw.split(/[\s,;\n\r]+/g).map(function (entry) {
+    return normalizeEmail_(entry);
+  }).filter(Boolean);
+
+  return Array.from(new Set(tokens));
+}
+
+function ensureDefaultAllowlist_() {
+  const props = PropertiesService.getScriptProperties();
+  const existing = getAllowedUserEmails_();
+  if (existing.length) return existing;
+
+  props.setProperty(ALLOWED_USER_EMAILS_PROPERTY, DEFAULT_ALLOWED_USER_EMAILS.join(','));
+  return DEFAULT_ALLOWED_USER_EMAILS.slice();
+}
+
+function normalizeEmail_(value) {
+  return normalizeText_(value || '').toLowerCase();
+}
+
+function resolveEffectiveUserEmail_(payload) {
+  const active = normalizeEmail_(Session.getActiveUser().getEmail() || '');
+  if (active) return active;
+
+  const userFromPayload = normalizeEmail_((payload && payload.userEmail) || '');
+  if (userFromPayload) return userFromPayload;
+
+  return normalizeEmail_((payload && payload.ownerEmail) || '');
+}
+
+function isEmailAllowlisted_(email) {
+  const normalized = normalizeEmail_(email || '');
+  if (!normalized) return false;
+  const allowlist = ensureDefaultAllowlist_();
+  return allowlist.indexOf(normalized) >= 0;
+}
+
+function resolveAllowlistedUserEmail_(payload) {
+  const resolved = resolveEffectiveUserEmail_(payload);
+  if (!resolved) {
+    throw new Error('userEmail is required when session email is unavailable.');
+  }
+
+  if (!isEmailAllowlisted_(resolved)) {
+    throw new Error('User is not in DRIVE_ALLOWED_USER_EMAILS allowlist.');
+  }
+
+  return resolved;
+}
+
+function userPathKeyFromEmail_(email) {
+  return normalizeEmail_(email)
+    .replace(/[^a-z0-9@._-]/g, '')
+    .replace(/@/g, '-at-')
+    .replace(/\./g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
+function isPatientDraftPath_(path) {
+  const normalized = normalizeText_(path || '');
+  return normalized === PATIENT_DRAFT_CURRENT_PATH
+    || normalized === PATIENT_DRAFT_RECENT_PATH
+    || normalized.indexOf(PATIENT_DRAFT_USERS_PREFIX) === 0;
+}
+
+function resolveScopedPathForPayload_(path, payload) {
+  const normalized = normalizeText_(path || '');
+  if (!isPatientDraftPath_(normalized)) {
+    return normalized;
+  }
+
+  const userEmail = resolveAllowlistedUserEmail_(payload);
+  const userKey = userPathKeyFromEmail_(userEmail);
+  if (!userKey) {
+    throw new Error('Unable to derive user path key from user email.');
+  }
+
+  const currentScopedPath = PATIENT_DRAFT_USERS_PREFIX + userKey + '/current.json';
+  const recentScopedPath = PATIENT_DRAFT_USERS_PREFIX + userKey + '/recent-patients.json';
+
+  if (normalized === PATIENT_DRAFT_CURRENT_PATH) {
+    return currentScopedPath;
+  }
+  if (normalized === PATIENT_DRAFT_RECENT_PATH) {
+    return recentScopedPath;
+  }
+
+  // Path already scoped: enforce same-user access.
+  if (normalized.indexOf(currentScopedPath) === 0 || normalized.indexOf(recentScopedPath) === 0) {
+    return normalized;
+  }
+
+  throw new Error('Patient draft path is scoped to a different user.');
+}
+
+function toFolderUrl_(id) {
+  const safeId = normalizeText_(id || '');
+  return safeId ? 'https://drive.google.com/drive/folders/' + safeId : '';
 }
 
 function sanitizeFileToken_(value) {

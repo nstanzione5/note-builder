@@ -14,8 +14,6 @@ const FILE_MAP = [
   ['config/drive-manifest.json', 'config/drive-manifest.json'],
 ];
 
-const RECENT_PATIENTS_PATH = 'data/draft/recent-patients.json';
-
 async function readIfExists(filePath) {
   try {
     return await fs.readFile(filePath, 'utf8');
@@ -39,42 +37,43 @@ async function main() {
     const absolute = path.resolve(process.cwd(), localPath);
     const content = await readIfExists(absolute);
     if (content == null) continue;
+    const localChecksum = checksum(content);
+
+    let remoteChecksum = '';
+    try {
+      const existing = await callDriveAction('file.get', { path: drivePath }, { config });
+      const existingFile = existing.file || existing;
+      if (existingFile && typeof existingFile.content === 'string') {
+        remoteChecksum = String(existingFile.checksum || checksum(existingFile.content));
+      }
+    } catch (error) {
+      remoteChecksum = '';
+    }
+
+    if (remoteChecksum && remoteChecksum === localChecksum) {
+      pushed.push({
+        localPath,
+        drivePath,
+        revision: null,
+        checksum: localChecksum,
+        skipped: true,
+      });
+      continue;
+    }
 
     const result = await callDriveAction('file.put', {
       path: drivePath,
       content,
       contentType: localPath.endsWith('.json') ? 'application/json' : 'text/plain',
-      checksum: checksum(content),
+      checksum: localChecksum,
     }, { config });
 
     pushed.push({
       localPath,
       drivePath,
       revision: result.revision || null,
-      checksum: result.checksum || checksum(content),
-    });
-  }
-
-  const recentPatientsGet = await callDriveAction('file.get', { path: RECENT_PATIENTS_PATH }, { config });
-  if (!recentPatientsGet.file) {
-    const bootstrapContent = JSON.stringify({
-      savedAt: new Date().toISOString(),
-      source: 'publish-bootstrap',
-      snapshots: [],
-    }, null, 2);
-
-    const created = await callDriveAction('file.put', {
-      path: RECENT_PATIENTS_PATH,
-      content: bootstrapContent,
-      contentType: 'application/json',
-      checksum: checksum(bootstrapContent),
-    }, { config });
-
-    pushed.push({
-      localPath: '(generated)',
-      drivePath: RECENT_PATIENTS_PATH,
-      revision: created.revision || null,
-      checksum: created.checksum || checksum(bootstrapContent),
+      checksum: result.checksum || localChecksum,
+      skipped: false,
     });
   }
 

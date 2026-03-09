@@ -1053,20 +1053,32 @@ function computeReliability(medication, sourceMed) {
   let score = 0;
 
   if (enrichment.dailymed && enrichment.dailymed.found) {
-    score += 38;
+    score += 34;
     sourceSignals.push('DailyMed');
   }
   if (enrichment.openfda && enrichment.openfda.found) {
-    score += 32;
+    score += 30;
     sourceSignals.push('openFDA');
   }
   if (enrichment.drugsfda && enrichment.drugsfda.found) {
-    score += 22;
+    score += 18;
     sourceSignals.push('Drugs@FDA');
   }
   if (enrichment.rxnorm && enrichment.rxnorm.found) {
-    score += 12;
+    score += 10;
     sourceSignals.push('RxNorm');
+  }
+  if (enrichment.rxclass && enrichment.rxclass.found) {
+    score += 8;
+    sourceSignals.push('RxClass');
+  }
+  if (enrichment.rxterms && enrichment.rxterms.found) {
+    score += 8;
+    sourceSignals.push('RxTerms');
+  }
+  if (enrichment.medlineplus && enrichment.medlineplus.found) {
+    score += 4;
+    sourceSignals.push('MedlinePlus');
   }
 
   let coverageBoost = 0;
@@ -1212,7 +1224,7 @@ const reliabilityStats = compiledRecords.reduce((acc, record) => {
 
 const compiledPayload = {
   generated_at: generatedAt,
-  source_hierarchy: ['DailyMed', 'openFDA', 'Drugs@FDA', 'RxNorm/RxNav'],
+  source_hierarchy: ['DailyMed', 'openFDA', 'Drugs@FDA', 'RxNorm/RxNav', 'RxClass', 'RxTerms', 'MedlinePlus'],
   medications: compiledRecords,
   stats: {
     total: compiledRecords.length,

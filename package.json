@@ -11,10 +11,12 @@
     "med:review": "node scripts/meds/build-review-report.mjs",
     "med:knowledge-check": "node scripts/meds/refresh-and-publish.mjs",
     "med:knowledge-check:local": "node scripts/meds/refresh-and-publish.mjs --skip-publish",
+    "med:refresh-if-stale": "node scripts/meds/refresh-if-stale.mjs",
     "med:initial-sync": "node scripts/meds/refresh-and-publish.mjs",
     "med:initial-sync:local": "node scripts/meds/refresh-and-publish.mjs --skip-publish",
     "drive:bootstrap": "node scripts/drive/bootstrap-drive.mjs",
     "drive:bootstrap:full": "npm run drive:bootstrap && npm run med:initial-sync",
+    "drive:audit-roots": "node scripts/drive/audit-root-folders.mjs",
     "drive:inspect": "node scripts/drive/inspect-drive.mjs",
     "drive:publish": "node scripts/drive/publish-to-drive.mjs",
     "drive:pull": "node scripts/drive/pull-from-drive.mjs"
