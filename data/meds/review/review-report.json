@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-03-09T19:42:34.024Z",
+  "generated_at": "2026-03-09T20:13:40.534Z",
   "totals": {
     "records": 260,
     "curated": 26,
     "source_scored": 234,
     "very_high_reliability": 26,
     "high_reliability": 0,
-    "moderate_reliability": 214,
-    "low_reliability": 20,
+    "moderate_reliability": 215,
+    "low_reliability": 19,
     "missing_fields": 242
   },
   "review_queue": [
@@ -16,7 +16,7 @@
       "generic_name": "citalopram",
       "psych_class": "SSRIs",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -32,14 +32,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:11:38.885Z"
+      "source_last_checked": "2026-03-09T19:43:11.217Z"
     },
     {
       "id": "fluvoxamine",
       "generic_name": "fluvoxamine",
       "psych_class": "SSRIs",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -55,14 +55,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:12:00.009Z"
+      "source_last_checked": "2026-03-09T19:43:31.899Z"
     },
     {
       "id": "paroxetine",
       "generic_name": "paroxetine",
       "psych_class": "SSRIs",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -78,14 +78,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:12:07.659Z"
+      "source_last_checked": "2026-03-09T19:43:38.743Z"
     },
     {
       "id": "vilazodone",
       "generic_name": "vilazodone",
       "psych_class": "SSRIs",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -101,14 +101,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:12:22.394Z"
+      "source_last_checked": "2026-03-09T19:43:52.536Z"
     },
     {
       "id": "vortioxetine",
       "generic_name": "vortioxetine",
       "psych_class": "SSRIs",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -124,14 +124,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:12:29.736Z"
+      "source_last_checked": "2026-03-09T19:43:59.461Z"
     },
     {
       "id": "desvenlafaxine",
       "generic_name": "desvenlafaxine",
       "psych_class": "SNRIs",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -147,14 +147,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:12:44.393Z"
+      "source_last_checked": "2026-03-09T19:44:13.833Z"
     },
     {
       "id": "levomilnacipran",
       "generic_name": "levomilnacipran",
       "psych_class": "SNRIs",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -170,14 +170,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:12:58.842Z"
+      "source_last_checked": "2026-03-09T19:44:28.450Z"
     },
     {
       "id": "milnacipran",
       "generic_name": "milnacipran",
       "psych_class": "SNRIs",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -193,14 +193,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:13:06.053Z"
+      "source_last_checked": "2026-03-09T19:44:35.521Z"
     },
     {
       "id": "atomoxetine",
       "generic_name": "atomoxetine",
       "psych_class": "SNRIs",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -216,14 +216,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:13:13.486Z"
+      "source_last_checked": "2026-03-09T19:44:42.666Z"
     },
     {
       "id": "sibutramine",
       "generic_name": "sibutramine",
       "psych_class": "SNRIs",
       "content_review_status": "source scored",
-      "reliability_score": 18,
+      "reliability_score": 21,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm",
@@ -237,7 +237,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:13:21.100Z"
+      "source_last_checked": "2026-03-09T19:44:49.828Z"
     },
     {
       "id": "dextromethorphan-bupropion",
@@ -255,14 +255,14 @@
       "missing_data_flags": [
         "off-label psych uses"
       ],
-      "source_last_checked": "2026-03-09T19:13:35.509Z"
+      "source_last_checked": "2026-03-09T19:45:04.448Z"
     },
     {
       "id": "mirtazapine",
       "generic_name": "mirtazapine",
       "psych_class": "Atypical antidepressants",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -278,14 +278,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:13:42.975Z"
+      "source_last_checked": "2026-03-09T19:45:12.039Z"
     },
     {
       "id": "trazodone",
       "generic_name": "trazodone",
       "psych_class": "Atypical antidepressants",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -301,14 +301,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:13:50.176Z"
+      "source_last_checked": "2026-03-09T19:45:19.036Z"
     },
     {
       "id": "nefazodone",
       "generic_name": "nefazodone",
       "psych_class": "Atypical antidepressants",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -324,14 +324,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:13:57.593Z"
+      "source_last_checked": "2026-03-09T19:45:26.203Z"
     },
     {
       "id": "amitriptyline",
       "generic_name": "amitriptyline",
       "psych_class": "Atypical antidepressants",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -347,14 +347,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:14:04.888Z"
+      "source_last_checked": "2026-03-09T19:45:32.988Z"
     },
     {
       "id": "nortriptyline",
       "generic_name": "nortriptyline",
       "psych_class": "Atypical antidepressants",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -370,14 +370,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:14:12.185Z"
+      "source_last_checked": "2026-03-09T19:45:39.699Z"
     },
     {
       "id": "desipramine",
       "generic_name": "desipramine",
       "psych_class": "Atypical antidepressants",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -393,14 +393,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:14:19.535Z"
+      "source_last_checked": "2026-03-09T19:45:46.590Z"
     },
     {
       "id": "imipramine",
       "generic_name": "imipramine",
       "psych_class": "Atypical antidepressants",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -416,14 +416,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:14:26.860Z"
+      "source_last_checked": "2026-03-09T19:45:53.360Z"
     },
     {
       "id": "clomipramine",
       "generic_name": "clomipramine",
       "psych_class": "Atypical antidepressants",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -439,14 +439,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:14:34.285Z"
+      "source_last_checked": "2026-03-09T19:46:00.263Z"
     },
     {
       "id": "doxepin",
       "generic_name": "doxepin",
       "psych_class": "Atypical antidepressants",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -462,14 +462,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:14:41.560Z"
+      "source_last_checked": "2026-03-09T19:46:07.379Z"
     },
     {
       "id": "maprotiline",
       "generic_name": "maprotiline",
       "psych_class": "Atypical antidepressants",
       "content_review_status": "source scored",
-      "reliability_score": 22,
+      "reliability_score": 25,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm",
@@ -484,14 +484,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:14:49.026Z"
+      "source_last_checked": "2026-03-09T19:46:14.796Z"
     },
     {
       "id": "amoxapine",
       "generic_name": "amoxapine",
       "psych_class": "Atypical antidepressants",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -507,14 +507,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:14:56.357Z"
+      "source_last_checked": "2026-03-09T19:46:21.949Z"
     },
     {
       "id": "trimipramine",
       "generic_name": "trimipramine",
       "psych_class": "Atypical antidepressants",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -530,14 +530,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:15:03.465Z"
+      "source_last_checked": "2026-03-09T19:46:28.889Z"
     },
     {
       "id": "protriptyline",
       "generic_name": "protriptyline",
       "psych_class": "Atypical antidepressants",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -553,14 +553,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:15:10.957Z"
+      "source_last_checked": "2026-03-09T19:46:36.104Z"
     },
     {
       "id": "phenelzine",
       "generic_name": "phenelzine",
       "psych_class": "Atypical antidepressants",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -576,14 +576,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:15:18.278Z"
+      "source_last_checked": "2026-03-09T19:46:43.121Z"
     },
     {
       "id": "tranylcypromine",
       "generic_name": "tranylcypromine",
       "psych_class": "Atypical antidepressants",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -599,14 +599,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:15:25.658Z"
+      "source_last_checked": "2026-03-09T19:46:49.951Z"
     },
     {
       "id": "isocarboxazid",
       "generic_name": "isocarboxazid",
       "psych_class": "Atypical antidepressants",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -622,14 +622,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:15:32.908Z"
+      "source_last_checked": "2026-03-09T19:46:56.827Z"
     },
     {
       "id": "selegiline-transdermal",
       "generic_name": "selegiline transdermal",
       "psych_class": "Atypical antidepressants",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -645,14 +645,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:15:40.328Z"
+      "source_last_checked": "2026-03-09T19:47:04.404Z"
     },
     {
       "id": "zuranolone",
       "generic_name": "zuranolone",
       "psych_class": "Atypical antidepressants",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -668,7 +668,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:15:47.777Z"
+      "source_last_checked": "2026-03-09T19:47:11.466Z"
     },
     {
       "id": "amphetamine-mixed-salts-xr",
@@ -686,7 +686,7 @@
       "missing_data_flags": [
         "off-label psych uses"
       ],
-      "source_last_checked": "2026-03-09T19:16:01.738Z"
+      "source_last_checked": "2026-03-09T19:47:24.848Z"
     },
     {
       "id": "lisdexamfetamine",
@@ -704,14 +704,14 @@
       "missing_data_flags": [
         "off-label psych uses"
       ],
-      "source_last_checked": "2026-03-09T19:16:08.760Z"
+      "source_last_checked": "2026-03-09T19:47:32.034Z"
     },
     {
       "id": "dextroamphetamine",
       "generic_name": "dextroamphetamine",
       "psych_class": "Stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -727,14 +727,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:16:16.095Z"
+      "source_last_checked": "2026-03-09T19:47:38.906Z"
     },
     {
       "id": "methamphetamine",
       "generic_name": "methamphetamine",
       "psych_class": "Stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -750,14 +750,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:16:23.316Z"
+      "source_last_checked": "2026-03-09T19:47:45.811Z"
     },
     {
       "id": "methylphenidate-ir",
       "generic_name": "methylphenidate IR",
       "psych_class": "Stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -773,14 +773,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:16:30.565Z"
+      "source_last_checked": "2026-03-09T19:47:53.038Z"
     },
     {
       "id": "methylphenidate-er",
       "generic_name": "methylphenidate ER",
       "psych_class": "Stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -796,14 +796,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:16:37.649Z"
+      "source_last_checked": "2026-03-09T19:47:59.694Z"
     },
     {
       "id": "dexmethylphenidate",
       "generic_name": "dexmethylphenidate",
       "psych_class": "Stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -819,14 +819,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:16:44.715Z"
+      "source_last_checked": "2026-03-09T19:48:06.514Z"
     },
     {
       "id": "dexmethylphenidate-xr",
       "generic_name": "dexmethylphenidate XR",
       "psych_class": "Stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -842,14 +842,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:16:51.966Z"
+      "source_last_checked": "2026-03-09T19:48:13.597Z"
     },
     {
       "id": "serdexmethylphenidate-dexmethylphenidate",
       "generic_name": "serdexmethylphenidate-dexmethylphenidate",
       "psych_class": "Stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -865,14 +865,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:16:59.036Z"
+      "source_last_checked": "2026-03-09T19:48:20.936Z"
     },
     {
       "id": "methylphenidate-pm",
       "generic_name": "methylphenidate PM",
       "psych_class": "Stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -888,14 +888,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:17:06.118Z"
+      "source_last_checked": "2026-03-09T19:48:27.843Z"
     },
     {
       "id": "amphetamine-mixed-salts-er",
       "generic_name": "amphetamine mixed salts ER",
       "psych_class": "Stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -911,14 +911,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:17:12.931Z"
+      "source_last_checked": "2026-03-09T19:48:35.086Z"
     },
     {
       "id": "amphetamine-sulfate",
       "generic_name": "amphetamine sulfate",
       "psych_class": "Stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -934,14 +934,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:17:20.272Z"
+      "source_last_checked": "2026-03-09T19:48:42.144Z"
     },
     {
       "id": "amphetamine-xr-odt",
       "generic_name": "amphetamine XR ODT",
       "psych_class": "Stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -957,14 +957,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:17:27.321Z"
+      "source_last_checked": "2026-03-09T19:48:48.953Z"
     },
     {
       "id": "amphetamine-xr-suspension",
       "generic_name": "amphetamine XR suspension",
       "psych_class": "Stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -980,14 +980,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:17:34.423Z"
+      "source_last_checked": "2026-03-09T19:48:55.704Z"
     },
     {
       "id": "methylphenidate-chewable-er",
       "generic_name": "methylphenidate chewable ER",
       "psych_class": "Stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1003,14 +1003,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:17:41.437Z"
+      "source_last_checked": "2026-03-09T19:49:02.666Z"
     },
     {
       "id": "methylphenidate-suspension-er",
       "generic_name": "methylphenidate suspension ER",
       "psych_class": "Stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1026,14 +1026,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:17:48.575Z"
+      "source_last_checked": "2026-03-09T19:49:09.474Z"
     },
     {
       "id": "methylphenidate-odt-xr",
       "generic_name": "methylphenidate ODT XR",
       "psych_class": "Stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1049,14 +1049,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:17:55.391Z"
+      "source_last_checked": "2026-03-09T19:49:16.319Z"
     },
     {
       "id": "methylphenidate-transdermal",
       "generic_name": "methylphenidate transdermal",
       "psych_class": "Stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1072,14 +1072,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:18:02.008Z"
+      "source_last_checked": "2026-03-09T19:49:23.400Z"
     },
     {
       "id": "dextroamphetamine-transdermal",
       "generic_name": "dextroamphetamine transdermal",
       "psych_class": "Stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1095,7 +1095,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:18:08.850Z"
+      "source_last_checked": "2026-03-09T19:49:30.320Z"
     },
     {
       "id": "viloxazine",
@@ -1113,14 +1113,14 @@
       "missing_data_flags": [
         "off-label psych uses"
       ],
-      "source_last_checked": "2026-03-09T19:18:16.038Z"
+      "source_last_checked": "2026-03-09T19:49:37.467Z"
     },
     {
       "id": "guanfacine-ir",
       "generic_name": "guanfacine IR",
       "psych_class": "Non-stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1136,14 +1136,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:18:23.471Z"
+      "source_last_checked": "2026-03-09T19:49:44.465Z"
     },
     {
       "id": "clonidine-ir",
       "generic_name": "clonidine IR",
       "psych_class": "Non-stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1159,14 +1159,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:18:37.932Z"
+      "source_last_checked": "2026-03-09T19:49:58.432Z"
     },
     {
       "id": "clonidine-er",
       "generic_name": "clonidine ER",
       "psych_class": "Non-stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1182,14 +1182,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:18:44.961Z"
+      "source_last_checked": "2026-03-09T19:50:05.422Z"
     },
     {
       "id": "modafinil",
       "generic_name": "modafinil",
       "psych_class": "Non-stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1205,14 +1205,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:18:52.081Z"
+      "source_last_checked": "2026-03-09T19:50:12.270Z"
     },
     {
       "id": "armodafinil",
       "generic_name": "armodafinil",
       "psych_class": "Non-stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1228,14 +1228,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:18:59.462Z"
+      "source_last_checked": "2026-03-09T19:50:19.669Z"
     },
     {
       "id": "alprazolam",
       "generic_name": "alprazolam",
       "psych_class": "Benzodiazepines",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1251,14 +1251,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:19:07.198Z"
+      "source_last_checked": "2026-03-09T19:50:26.645Z"
     },
     {
       "id": "clonazepam",
       "generic_name": "clonazepam",
       "psych_class": "Benzodiazepines",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1274,14 +1274,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:19:14.675Z"
+      "source_last_checked": "2026-03-09T19:50:33.751Z"
     },
     {
       "id": "lorazepam",
       "generic_name": "lorazepam",
       "psych_class": "Benzodiazepines",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1297,14 +1297,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:19:21.964Z"
+      "source_last_checked": "2026-03-09T19:50:40.989Z"
     },
     {
       "id": "diazepam",
       "generic_name": "diazepam",
       "psych_class": "Benzodiazepines",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1320,14 +1320,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:19:29.565Z"
+      "source_last_checked": "2026-03-09T19:50:47.794Z"
     },
     {
       "id": "temazepam",
       "generic_name": "temazepam",
       "psych_class": "Benzodiazepines",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1343,14 +1343,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:19:37.077Z"
+      "source_last_checked": "2026-03-09T19:50:54.690Z"
     },
     {
       "id": "oxazepam",
       "generic_name": "oxazepam",
       "psych_class": "Benzodiazepines",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1366,14 +1366,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:19:44.210Z"
+      "source_last_checked": "2026-03-09T19:51:01.747Z"
     },
     {
       "id": "chlordiazepoxide",
       "generic_name": "chlordiazepoxide",
       "psych_class": "Benzodiazepines",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1389,14 +1389,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:19:51.498Z"
+      "source_last_checked": "2026-03-09T19:51:08.546Z"
     },
     {
       "id": "clorazepate",
       "generic_name": "clorazepate",
       "psych_class": "Benzodiazepines",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1412,14 +1412,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:19:58.651Z"
+      "source_last_checked": "2026-03-09T19:51:15.370Z"
     },
     {
       "id": "triazolam",
       "generic_name": "triazolam",
       "psych_class": "Benzodiazepines",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1435,14 +1435,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:20:05.996Z"
+      "source_last_checked": "2026-03-09T19:51:22.308Z"
     },
     {
       "id": "estazolam",
       "generic_name": "estazolam",
       "psych_class": "Benzodiazepines",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1458,14 +1458,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:20:13.326Z"
+      "source_last_checked": "2026-03-09T19:51:29.466Z"
     },
     {
       "id": "flurazepam",
       "generic_name": "flurazepam",
       "psych_class": "Benzodiazepines",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1481,14 +1481,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:20:20.741Z"
+      "source_last_checked": "2026-03-09T19:51:36.463Z"
     },
     {
       "id": "quazepam",
       "generic_name": "quazepam",
       "psych_class": "Benzodiazepines",
       "content_review_status": "source scored",
-      "reliability_score": 52,
+      "reliability_score": 55,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1503,14 +1503,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:20:28.081Z"
+      "source_last_checked": "2026-03-09T19:51:43.484Z"
     },
     {
       "id": "midazolam",
       "generic_name": "midazolam",
       "psych_class": "Benzodiazepines",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1526,14 +1526,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:20:35.606Z"
+      "source_last_checked": "2026-03-09T19:51:50.619Z"
     },
     {
       "id": "diazepam-nasal",
       "generic_name": "diazepam nasal",
       "psych_class": "Benzodiazepines",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1549,14 +1549,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:20:42.680Z"
+      "source_last_checked": "2026-03-09T19:51:57.431Z"
     },
     {
       "id": "midazolam-nasal",
       "generic_name": "midazolam nasal",
       "psych_class": "Benzodiazepines",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1572,14 +1572,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:20:49.703Z"
+      "source_last_checked": "2026-03-09T19:52:04.369Z"
     },
     {
       "id": "zolpidem",
       "generic_name": "zolpidem",
       "psych_class": "Sleep / hypnotic medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1595,14 +1595,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:20:57.273Z"
+      "source_last_checked": "2026-03-09T19:52:11.721Z"
     },
     {
       "id": "zolpidem-er",
       "generic_name": "zolpidem ER",
       "psych_class": "Sleep / hypnotic medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1618,14 +1618,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:21:04.433Z"
+      "source_last_checked": "2026-03-09T19:52:18.788Z"
     },
     {
       "id": "zaleplon",
       "generic_name": "zaleplon",
       "psych_class": "Sleep / hypnotic medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1641,14 +1641,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:21:11.392Z"
+      "source_last_checked": "2026-03-09T19:52:26.054Z"
     },
     {
       "id": "eszopiclone",
       "generic_name": "eszopiclone",
       "psych_class": "Sleep / hypnotic medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1664,14 +1664,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:21:18.471Z"
+      "source_last_checked": "2026-03-09T19:52:33.086Z"
     },
     {
       "id": "ramelteon",
       "generic_name": "ramelteon",
       "psych_class": "Sleep / hypnotic medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1687,14 +1687,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:21:25.294Z"
+      "source_last_checked": "2026-03-09T19:52:40.068Z"
     },
     {
       "id": "suvorexant",
       "generic_name": "suvorexant",
       "psych_class": "Sleep / hypnotic medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1710,14 +1710,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:21:32.593Z"
+      "source_last_checked": "2026-03-09T19:52:46.847Z"
     },
     {
       "id": "lemborexant",
       "generic_name": "lemborexant",
       "psych_class": "Sleep / hypnotic medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1733,14 +1733,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:21:39.609Z"
+      "source_last_checked": "2026-03-09T19:52:53.657Z"
     },
     {
       "id": "daridorexant",
       "generic_name": "daridorexant",
       "psych_class": "Sleep / hypnotic medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1756,14 +1756,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:21:47.031Z"
+      "source_last_checked": "2026-03-09T19:53:00.972Z"
     },
     {
       "id": "doxepin-low-dose",
       "generic_name": "doxepin low-dose",
       "psych_class": "Sleep / hypnotic medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1779,14 +1779,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:21:54.367Z"
+      "source_last_checked": "2026-03-09T19:53:08.022Z"
     },
     {
       "id": "hydroxyzine",
       "generic_name": "hydroxyzine",
       "psych_class": "Sleep / hypnotic medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1802,14 +1802,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:22:01.768Z"
+      "source_last_checked": "2026-03-09T19:53:15.257Z"
     },
     {
       "id": "diphenhydramine",
       "generic_name": "diphenhydramine",
       "psych_class": "Sleep / hypnotic medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1825,14 +1825,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:22:09.045Z"
+      "source_last_checked": "2026-03-09T19:53:22.253Z"
     },
     {
       "id": "gabapentin",
       "generic_name": "gabapentin",
       "psych_class": "Sleep / hypnotic medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1848,14 +1848,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:22:16.422Z"
+      "source_last_checked": "2026-03-09T19:53:29.472Z"
     },
     {
       "id": "pregabalin",
       "generic_name": "pregabalin",
       "psych_class": "Sleep / hypnotic medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1871,14 +1871,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:22:23.637Z"
+      "source_last_checked": "2026-03-09T19:53:36.616Z"
     },
     {
       "id": "melatonin-receptor-agonist",
       "generic_name": "melatonin receptor agonist",
       "psych_class": "Sleep / hypnotic medications",
       "content_review_status": "source scored",
-      "reliability_score": 10,
+      "reliability_score": 13,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm"
@@ -1891,14 +1891,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:22:31.331Z"
+      "source_last_checked": "2026-03-09T19:53:44.076Z"
     },
     {
       "id": "brexpiprazole",
       "generic_name": "brexpiprazole",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1914,14 +1914,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:22:45.739Z"
+      "source_last_checked": "2026-03-09T19:53:58.634Z"
     },
     {
       "id": "cariprazine",
       "generic_name": "cariprazine",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1937,14 +1937,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:22:53.075Z"
+      "source_last_checked": "2026-03-09T19:54:05.640Z"
     },
     {
       "id": "olanzapine",
       "generic_name": "olanzapine",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -1960,14 +1960,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:23:15.093Z"
+      "source_last_checked": "2026-03-09T19:54:26.862Z"
     },
     {
       "id": "olanzapine-fluoxetine",
       "generic_name": "olanzapine-fluoxetine",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 22,
+      "reliability_score": 25,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm",
@@ -1982,14 +1982,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:23:22.605Z"
+      "source_last_checked": "2026-03-09T19:54:34.207Z"
     },
     {
       "id": "olanzapine-samidorphan",
       "generic_name": "olanzapine-samidorphan",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2005,14 +2005,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:23:29.306Z"
+      "source_last_checked": "2026-03-09T19:54:41.449Z"
     },
     {
       "id": "risperidone",
       "generic_name": "risperidone",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2028,14 +2028,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:23:36.308Z"
+      "source_last_checked": "2026-03-09T19:54:48.439Z"
     },
     {
       "id": "paliperidone-oral",
       "generic_name": "paliperidone oral",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2051,14 +2051,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:23:43.402Z"
+      "source_last_checked": "2026-03-09T19:54:55.431Z"
     },
     {
       "id": "ziprasidone",
       "generic_name": "ziprasidone",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2074,14 +2074,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:23:50.735Z"
+      "source_last_checked": "2026-03-09T19:55:03.124Z"
     },
     {
       "id": "lurasidone",
       "generic_name": "lurasidone",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2097,14 +2097,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:23:58.076Z"
+      "source_last_checked": "2026-03-09T19:55:10.484Z"
     },
     {
       "id": "asenapine-sublingual",
       "generic_name": "asenapine sublingual",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2120,14 +2120,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:24:13.255Z"
+      "source_last_checked": "2026-03-09T19:55:24.847Z"
     },
     {
       "id": "iloperidone",
       "generic_name": "iloperidone",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2143,14 +2143,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:24:21.216Z"
+      "source_last_checked": "2026-03-09T19:55:32.030Z"
     },
     {
       "id": "haloperidol",
       "generic_name": "haloperidol",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2166,14 +2166,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:24:28.527Z"
+      "source_last_checked": "2026-03-09T19:55:39.057Z"
     },
     {
       "id": "chlorpromazine",
       "generic_name": "chlorpromazine",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2189,14 +2189,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:24:35.668Z"
+      "source_last_checked": "2026-03-09T19:55:45.775Z"
     },
     {
       "id": "perphenazine",
       "generic_name": "perphenazine",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2212,14 +2212,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:24:42.833Z"
+      "source_last_checked": "2026-03-09T19:55:52.628Z"
     },
     {
       "id": "trifluoperazine",
       "generic_name": "trifluoperazine",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2235,14 +2235,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:24:49.913Z"
+      "source_last_checked": "2026-03-09T19:55:59.869Z"
     },
     {
       "id": "loxapine",
       "generic_name": "loxapine",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2258,14 +2258,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:24:57.294Z"
+      "source_last_checked": "2026-03-09T19:56:06.886Z"
     },
     {
       "id": "molindone",
       "generic_name": "molindone",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2281,14 +2281,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:25:04.407Z"
+      "source_last_checked": "2026-03-09T19:56:13.985Z"
     },
     {
       "id": "pimozide",
       "generic_name": "pimozide",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2304,14 +2304,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:25:11.472Z"
+      "source_last_checked": "2026-03-09T19:56:21.253Z"
     },
     {
       "id": "thiothixene",
       "generic_name": "thiothixene",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2327,14 +2327,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:25:18.540Z"
+      "source_last_checked": "2026-03-09T19:56:28.498Z"
     },
     {
       "id": "thioridazine",
       "generic_name": "thioridazine",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2350,14 +2350,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:25:25.821Z"
+      "source_last_checked": "2026-03-09T19:56:35.507Z"
     },
     {
       "id": "fluphenazine",
       "generic_name": "fluphenazine",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2373,14 +2373,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:25:32.890Z"
+      "source_last_checked": "2026-03-09T19:56:42.655Z"
     },
     {
       "id": "xanomeline-trospium",
       "generic_name": "xanomeline-trospium",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2396,14 +2396,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:25:40.509Z"
+      "source_last_checked": "2026-03-09T19:56:49.675Z"
     },
     {
       "id": "pimavanserin",
       "generic_name": "pimavanserin",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2419,14 +2419,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:25:47.713Z"
+      "source_last_checked": "2026-03-09T19:56:56.995Z"
     },
     {
       "id": "lithium-citrate",
       "generic_name": "lithium citrate",
       "psych_class": "Mood stabilizers",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2442,14 +2442,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:26:01.545Z"
+      "source_last_checked": "2026-03-09T19:57:11.370Z"
     },
     {
       "id": "valproic-acid",
       "generic_name": "valproic acid",
       "psych_class": "Mood stabilizers",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2465,14 +2465,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:26:22.701Z"
+      "source_last_checked": "2026-03-09T19:57:32.126Z"
     },
     {
       "id": "carbamazepine",
       "generic_name": "carbamazepine",
       "psych_class": "Mood stabilizers",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2488,14 +2488,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:26:29.727Z"
+      "source_last_checked": "2026-03-09T19:57:39.180Z"
     },
     {
       "id": "oxcarbazepine",
       "generic_name": "oxcarbazepine",
       "psych_class": "Mood stabilizers",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2511,14 +2511,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:26:36.845Z"
+      "source_last_checked": "2026-03-09T19:57:46.005Z"
     },
     {
       "id": "topiramate",
       "generic_name": "topiramate",
       "psych_class": "Mood stabilizers",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2534,14 +2534,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:26:43.998Z"
+      "source_last_checked": "2026-03-09T19:57:52.996Z"
     },
     {
       "id": "zonisamide",
       "generic_name": "zonisamide",
       "psych_class": "Mood stabilizers",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2557,14 +2557,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:26:51.278Z"
+      "source_last_checked": "2026-03-09T19:58:00.104Z"
     },
     {
       "id": "levetiracetam",
       "generic_name": "levetiracetam",
       "psych_class": "Mood stabilizers",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2580,14 +2580,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:26:58.058Z"
+      "source_last_checked": "2026-03-09T19:58:07.323Z"
     },
     {
       "id": "prazosin",
       "generic_name": "prazosin",
       "psych_class": "Alpha agonists",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2603,14 +2603,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:27:04.634Z"
+      "source_last_checked": "2026-03-09T19:58:14.494Z"
     },
     {
       "id": "doxazosin",
       "generic_name": "doxazosin",
       "psych_class": "Alpha agonists",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2626,14 +2626,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:27:11.776Z"
+      "source_last_checked": "2026-03-09T19:58:21.949Z"
     },
     {
       "id": "terazosin",
       "generic_name": "terazosin",
       "psych_class": "Alpha agonists",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2649,7 +2649,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:27:18.700Z"
+      "source_last_checked": "2026-03-09T19:58:29.085Z"
     },
     {
       "id": "propranolol",
@@ -2667,14 +2667,14 @@
       "missing_data_flags": [
         "fda psych uses"
       ],
-      "source_last_checked": "2026-03-09T19:27:26.128Z"
+      "source_last_checked": "2026-03-09T19:58:36.124Z"
     },
     {
       "id": "atenolol",
       "generic_name": "atenolol",
       "psych_class": "Beta blockers commonly used in psych",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2690,14 +2690,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:27:33.468Z"
+      "source_last_checked": "2026-03-09T19:58:43.335Z"
     },
     {
       "id": "metoprolol",
       "generic_name": "metoprolol",
       "psych_class": "Beta blockers commonly used in psych",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2713,14 +2713,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:27:40.720Z"
+      "source_last_checked": "2026-03-09T19:58:50.364Z"
     },
     {
       "id": "nadolol",
       "generic_name": "nadolol",
       "psych_class": "Beta blockers commonly used in psych",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2736,14 +2736,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:27:47.860Z"
+      "source_last_checked": "2026-03-09T19:58:57.489Z"
     },
     {
       "id": "bisoprolol",
       "generic_name": "bisoprolol",
       "psych_class": "Beta blockers commonly used in psych",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2759,14 +2759,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:27:54.960Z"
+      "source_last_checked": "2026-03-09T19:59:04.405Z"
     },
     {
       "id": "carvedilol",
       "generic_name": "carvedilol",
       "psych_class": "Beta blockers commonly used in psych",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2782,14 +2782,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:28:02.320Z"
+      "source_last_checked": "2026-03-09T19:59:11.366Z"
     },
     {
       "id": "cyproheptadine",
       "generic_name": "cyproheptadine",
       "psych_class": "Anxiolytics / anxiety adjuncts",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2805,7 +2805,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:28:16.591Z"
+      "source_last_checked": "2026-03-09T19:59:24.991Z"
     },
     {
       "id": "naltrexone-oral",
@@ -2823,14 +2823,14 @@
       "missing_data_flags": [
         "fda psych uses"
       ],
-      "source_last_checked": "2026-03-09T19:28:23.801Z"
+      "source_last_checked": "2026-03-09T19:59:32.115Z"
     },
     {
       "id": "acamprosate",
       "generic_name": "acamprosate",
       "psych_class": "Substance use support medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2846,14 +2846,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:28:30.612Z"
+      "source_last_checked": "2026-03-09T19:59:39.954Z"
     },
     {
       "id": "disulfiram",
       "generic_name": "disulfiram",
       "psych_class": "Substance use support medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2869,14 +2869,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:28:37.665Z"
+      "source_last_checked": "2026-03-09T19:59:47.105Z"
     },
     {
       "id": "naloxone-intranasal",
       "generic_name": "naloxone intranasal",
       "psych_class": "Substance use support medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2892,14 +2892,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:28:44.676Z"
+      "source_last_checked": "2026-03-09T19:59:54.375Z"
     },
     {
       "id": "nalmefene-intranasal",
       "generic_name": "nalmefene intranasal",
       "psych_class": "Substance use support medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2915,14 +2915,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:28:51.860Z"
+      "source_last_checked": "2026-03-09T20:00:01.552Z"
     },
     {
       "id": "lofexidine",
       "generic_name": "lofexidine",
       "psych_class": "Substance use support medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2938,14 +2938,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:28:59.007Z"
+      "source_last_checked": "2026-03-09T20:00:08.800Z"
     },
     {
       "id": "varenicline",
       "generic_name": "varenicline",
       "psych_class": "Substance use support medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2961,14 +2961,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:29:06.168Z"
+      "source_last_checked": "2026-03-09T20:00:15.907Z"
     },
     {
       "id": "nicotine-transdermal",
       "generic_name": "nicotine transdermal",
       "psych_class": "Substance use support medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -2984,14 +2984,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:29:13.252Z"
+      "source_last_checked": "2026-03-09T20:00:23.148Z"
     },
     {
       "id": "nicotine-gum",
       "generic_name": "nicotine gum",
       "psych_class": "Substance use support medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3007,14 +3007,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:29:20.404Z"
+      "source_last_checked": "2026-03-09T20:00:30.305Z"
     },
     {
       "id": "nicotine-lozenge",
       "generic_name": "nicotine lozenge",
       "psych_class": "Substance use support medications",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3030,14 +3030,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:29:27.745Z"
+      "source_last_checked": "2026-03-09T20:00:37.538Z"
     },
     {
       "id": "bupropion-sr-smoking-cessation",
       "generic_name": "bupropion SR smoking cessation",
       "psych_class": "Substance use support medications",
       "content_review_status": "source scored",
-      "reliability_score": 30,
+      "reliability_score": 33,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm",
@@ -3053,14 +3053,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:29:35.078Z"
+      "source_last_checked": "2026-03-09T20:00:44.873Z"
     },
     {
       "id": "liothyronine",
       "generic_name": "liothyronine",
       "psych_class": "Antidepressant augmenters",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3076,15 +3076,15 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:29:42.421Z"
+      "source_last_checked": "2026-03-09T20:00:52.047Z"
     },
     {
       "id": "methylfolate",
       "generic_name": "methylfolate",
       "psych_class": "Antidepressant augmenters",
       "content_review_status": "source scored",
-      "reliability_score": 44,
-      "reliability_tier": "low",
+      "reliability_score": 47,
+      "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
         "RxNorm"
@@ -3097,14 +3097,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:29:49.527Z"
+      "source_last_checked": "2026-03-09T20:00:59.146Z"
     },
     {
       "id": "ketamine-intranasal",
       "generic_name": "ketamine intranasal",
       "psych_class": "Antidepressant augmenters",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3120,14 +3120,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:29:56.627Z"
+      "source_last_checked": "2026-03-09T20:01:06.145Z"
     },
     {
       "id": "benztropine",
       "generic_name": "benztropine",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3143,14 +3143,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:30:03.910Z"
+      "source_last_checked": "2026-03-09T20:01:12.877Z"
     },
     {
       "id": "trihexyphenidyl",
       "generic_name": "trihexyphenidyl",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3166,14 +3166,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:30:10.959Z"
+      "source_last_checked": "2026-03-09T20:01:19.700Z"
     },
     {
       "id": "deutetrabenazine",
       "generic_name": "deutetrabenazine",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3189,14 +3189,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:30:18.331Z"
+      "source_last_checked": "2026-03-09T20:01:26.527Z"
     },
     {
       "id": "valbenazine",
       "generic_name": "valbenazine",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3212,14 +3212,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:30:25.313Z"
+      "source_last_checked": "2026-03-09T20:01:33.388Z"
     },
     {
       "id": "tetrabenazine",
       "generic_name": "tetrabenazine",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3235,14 +3235,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:30:32.256Z"
+      "source_last_checked": "2026-03-09T20:01:40.676Z"
     },
     {
       "id": "memantine",
       "generic_name": "memantine",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3258,14 +3258,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:30:39.604Z"
+      "source_last_checked": "2026-03-09T20:01:47.881Z"
     },
     {
       "id": "donepezil",
       "generic_name": "donepezil",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3281,14 +3281,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:30:46.890Z"
+      "source_last_checked": "2026-03-09T20:01:55.130Z"
     },
     {
       "id": "rivastigmine",
       "generic_name": "rivastigmine",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3304,14 +3304,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:30:53.911Z"
+      "source_last_checked": "2026-03-09T20:02:02.203Z"
     },
     {
       "id": "galantamine",
       "generic_name": "galantamine",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3327,14 +3327,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:31:01.064Z"
+      "source_last_checked": "2026-03-09T20:02:09.378Z"
     },
     {
       "id": "amantadine",
       "generic_name": "amantadine",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3350,14 +3350,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:31:08.077Z"
+      "source_last_checked": "2026-03-09T20:02:16.716Z"
     },
     {
       "id": "baclofen",
       "generic_name": "baclofen",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3373,14 +3373,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:31:14.922Z"
+      "source_last_checked": "2026-03-09T20:02:23.788Z"
     },
     {
       "id": "tizanidine",
       "generic_name": "tizanidine",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3396,14 +3396,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:31:22.214Z"
+      "source_last_checked": "2026-03-09T20:02:30.677Z"
     },
     {
       "id": "cyclobenzaprine",
       "generic_name": "cyclobenzaprine",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3419,14 +3419,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:31:29.265Z"
+      "source_last_checked": "2026-03-09T20:02:38.128Z"
     },
     {
       "id": "n-acetylcysteine",
       "generic_name": "n-acetylcysteine",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3442,14 +3442,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:31:36.289Z"
+      "source_last_checked": "2026-03-09T20:02:45.161Z"
     },
     {
       "id": "ondansetron",
       "generic_name": "ondansetron",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3465,14 +3465,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:31:43.227Z"
+      "source_last_checked": "2026-03-09T20:02:52.189Z"
     },
     {
       "id": "metoclopramide",
       "generic_name": "metoclopramide",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3488,14 +3488,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:31:50.319Z"
+      "source_last_checked": "2026-03-09T20:02:59.187Z"
     },
     {
       "id": "lacosamide",
       "generic_name": "lacosamide",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3511,14 +3511,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:31:57.193Z"
+      "source_last_checked": "2026-03-09T20:03:06.271Z"
     },
     {
       "id": "tiagabine",
       "generic_name": "tiagabine",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3534,14 +3534,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:32:04.601Z"
+      "source_last_checked": "2026-03-09T20:03:13.450Z"
     },
     {
       "id": "rufinamide",
       "generic_name": "rufinamide",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3557,14 +3557,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:32:11.531Z"
+      "source_last_checked": "2026-03-09T20:03:20.595Z"
     },
     {
       "id": "zolpidem-sublingual",
       "generic_name": "zolpidem sublingual",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3580,14 +3580,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:32:18.781Z"
+      "source_last_checked": "2026-03-09T20:03:28.023Z"
     },
     {
       "id": "zolpidem-oral-spray",
       "generic_name": "zolpidem oral spray",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 22,
+      "reliability_score": 25,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm",
@@ -3602,14 +3602,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:32:26.018Z"
+      "source_last_checked": "2026-03-09T20:03:35.172Z"
     },
     {
       "id": "alprazolam-odt",
       "generic_name": "alprazolam ODT",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3625,14 +3625,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:32:33.212Z"
+      "source_last_checked": "2026-03-09T20:03:42.375Z"
     },
     {
       "id": "clonazepam-odt",
       "generic_name": "clonazepam ODT",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3648,14 +3648,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:32:40.134Z"
+      "source_last_checked": "2026-03-09T20:03:49.333Z"
     },
     {
       "id": "lorazepam-sublingual",
       "generic_name": "lorazepam sublingual",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 10,
+      "reliability_score": 13,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm"
@@ -3668,14 +3668,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:32:47.449Z"
+      "source_last_checked": "2026-03-09T20:03:56.391Z"
     },
     {
       "id": "asenapine-transdermal",
       "generic_name": "asenapine transdermal",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3691,14 +3691,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:32:54.702Z"
+      "source_last_checked": "2026-03-09T20:04:03.593Z"
     },
     {
       "id": "lithium-orotate",
       "generic_name": "lithium orotate",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 22,
+      "reliability_score": 25,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm",
@@ -3713,14 +3713,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:33:01.622Z"
+      "source_last_checked": "2026-03-09T20:04:10.805Z"
     },
     {
       "id": "dexmedetomidine-sublingual",
       "generic_name": "dexmedetomidine sublingual",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3736,14 +3736,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:33:08.699Z"
+      "source_last_checked": "2026-03-09T20:04:17.645Z"
     },
     {
       "id": "viloxazine-er",
       "generic_name": "viloxazine ER",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3759,14 +3759,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:33:15.319Z"
+      "source_last_checked": "2026-03-09T20:04:24.470Z"
     },
     {
       "id": "modafinil-oral-suspension",
       "generic_name": "modafinil oral suspension",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3782,14 +3782,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:33:22.068Z"
+      "source_last_checked": "2026-03-09T20:04:31.466Z"
     },
     {
       "id": "fluoxetine-weekly",
       "generic_name": "fluoxetine weekly",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 22,
+      "reliability_score": 25,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm",
@@ -3804,14 +3804,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:33:29.450Z"
+      "source_last_checked": "2026-03-09T20:04:38.816Z"
     },
     {
       "id": "paroxetine-cr",
       "generic_name": "paroxetine CR",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3827,14 +3827,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:33:36.490Z"
+      "source_last_checked": "2026-03-09T20:04:46.272Z"
     },
     {
       "id": "venlafaxine-er",
       "generic_name": "venlafaxine ER",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3850,14 +3850,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:33:43.449Z"
+      "source_last_checked": "2026-03-09T20:04:52.977Z"
     },
     {
       "id": "desvenlafaxine-er",
       "generic_name": "desvenlafaxine ER",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3873,14 +3873,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:33:50.442Z"
+      "source_last_checked": "2026-03-09T20:05:00.031Z"
     },
     {
       "id": "quetiapine-odt",
       "generic_name": "quetiapine ODT",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3896,14 +3896,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:33:57.396Z"
+      "source_last_checked": "2026-03-09T20:05:06.857Z"
     },
     {
       "id": "risperidone-odt",
       "generic_name": "risperidone ODT",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3919,14 +3919,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:34:04.034Z"
+      "source_last_checked": "2026-03-09T20:05:13.645Z"
     },
     {
       "id": "olanzapine-odt",
       "generic_name": "olanzapine ODT",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3942,14 +3942,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:34:11.112Z"
+      "source_last_checked": "2026-03-09T20:05:20.848Z"
     },
     {
       "id": "lamotrigine-odt",
       "generic_name": "lamotrigine ODT",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3965,14 +3965,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:34:17.767Z"
+      "source_last_checked": "2026-03-09T20:05:27.567Z"
     },
     {
       "id": "carbamazepine-er",
       "generic_name": "carbamazepine ER",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -3988,14 +3988,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:34:24.516Z"
+      "source_last_checked": "2026-03-09T20:05:34.569Z"
     },
     {
       "id": "oxcarbazepine-er",
       "generic_name": "oxcarbazepine ER",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -4011,14 +4011,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:34:31.245Z"
+      "source_last_checked": "2026-03-09T20:05:41.380Z"
     },
     {
       "id": "topiramate-er",
       "generic_name": "topiramate ER",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -4034,14 +4034,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:34:38.491Z"
+      "source_last_checked": "2026-03-09T20:05:48.254Z"
     },
     {
       "id": "gabapentin-enacarbil",
       "generic_name": "gabapentin enacarbil",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -4057,14 +4057,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:34:45.655Z"
+      "source_last_checked": "2026-03-09T20:05:55.402Z"
     },
     {
       "id": "pregabalin-er",
       "generic_name": "pregabalin ER",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -4080,14 +4080,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:34:52.241Z"
+      "source_last_checked": "2026-03-09T20:06:02.246Z"
     },
     {
       "id": "propranolol-er",
       "generic_name": "propranolol ER",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -4103,14 +4103,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:34:58.932Z"
+      "source_last_checked": "2026-03-09T20:06:09.426Z"
     },
     {
       "id": "prazosin-bedtime",
       "generic_name": "prazosin bedtime",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 22,
+      "reliability_score": 25,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm",
@@ -4125,14 +4125,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:35:06.270Z"
+      "source_last_checked": "2026-03-09T20:06:16.768Z"
     },
     {
       "id": "hydroxyzine-pamoate",
       "generic_name": "hydroxyzine pamoate",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -4148,14 +4148,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:35:13.167Z"
+      "source_last_checked": "2026-03-09T20:06:23.848Z"
     },
     {
       "id": "hydroxyzine-hydrochloride",
       "generic_name": "hydroxyzine hydrochloride",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -4171,14 +4171,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:35:20.311Z"
+      "source_last_checked": "2026-03-09T20:06:31.010Z"
     },
     {
       "id": "buspirone-split-dosing",
       "generic_name": "buspirone split dosing",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 22,
+      "reliability_score": 25,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm",
@@ -4193,14 +4193,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:35:27.627Z"
+      "source_last_checked": "2026-03-09T20:06:38.348Z"
     },
     {
       "id": "naltrexone-low-dose",
       "generic_name": "naltrexone low dose",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 10,
+      "reliability_score": 13,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm"
@@ -4213,14 +4213,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:35:34.859Z"
+      "source_last_checked": "2026-03-09T20:06:45.688Z"
     },
     {
       "id": "acamprosate-delayed-release",
       "generic_name": "acamprosate delayed-release",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -4236,14 +4236,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:35:42.057Z"
+      "source_last_checked": "2026-03-09T20:06:52.747Z"
     },
     {
       "id": "disulfiram-supervised",
       "generic_name": "disulfiram supervised",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -4259,14 +4259,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:35:49.153Z"
+      "source_last_checked": "2026-03-09T20:06:59.659Z"
     },
     {
       "id": "varenicline-starter-pack",
       "generic_name": "varenicline starter pack",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -4282,14 +4282,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:35:56.307Z"
+      "source_last_checked": "2026-03-09T20:07:06.579Z"
     },
     {
       "id": "nicotine-inhaler",
       "generic_name": "nicotine inhaler",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -4305,14 +4305,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:36:03.577Z"
+      "source_last_checked": "2026-03-09T20:07:13.765Z"
     },
     {
       "id": "nicotine-nasal-spray",
       "generic_name": "nicotine nasal spray",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 22,
+      "reliability_score": 25,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm",
@@ -4327,14 +4327,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:36:11.141Z"
+      "source_last_checked": "2026-03-09T20:07:21.108Z"
     },
     {
       "id": "guanfacine-patch",
       "generic_name": "guanfacine patch",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -4350,14 +4350,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:36:18.078Z"
+      "source_last_checked": "2026-03-09T20:07:28.245Z"
     },
     {
       "id": "clonidine-patch",
       "generic_name": "clonidine patch",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -4373,14 +4373,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:36:24.670Z"
+      "source_last_checked": "2026-03-09T20:07:35.026Z"
     },
     {
       "id": "memantine-er",
       "generic_name": "memantine ER",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -4396,14 +4396,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:36:31.510Z"
+      "source_last_checked": "2026-03-09T20:07:42.089Z"
     },
     {
       "id": "donepezil-odt",
       "generic_name": "donepezil ODT",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -4419,14 +4419,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:36:38.606Z"
+      "source_last_checked": "2026-03-09T20:07:49.186Z"
     },
     {
       "id": "rivastigmine-patch",
       "generic_name": "rivastigmine patch",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -4442,14 +4442,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:36:45.945Z"
+      "source_last_checked": "2026-03-09T20:07:56.389Z"
     },
     {
       "id": "galantamine-er",
       "generic_name": "galantamine ER",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -4465,14 +4465,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:36:53.012Z"
+      "source_last_checked": "2026-03-09T20:08:03.013Z"
     },
     {
       "id": "armodafinil-tablet",
       "generic_name": "armodafinil tablet",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -4488,14 +4488,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:37:00.097Z"
+      "source_last_checked": "2026-03-09T20:08:09.615Z"
     },
     {
       "id": "modafinil-tablet",
       "generic_name": "modafinil tablet",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -4511,14 +4511,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:37:07.021Z"
+      "source_last_checked": "2026-03-09T20:08:16.700Z"
     },
     {
       "id": "eszopiclone-low-dose",
       "generic_name": "eszopiclone low dose",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -4534,14 +4534,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:37:14.290Z"
+      "source_last_checked": "2026-03-09T20:08:23.957Z"
     },
     {
       "id": "zaleplon-low-dose",
       "generic_name": "zaleplon low dose",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -4557,14 +4557,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:37:21.774Z"
+      "source_last_checked": "2026-03-09T20:08:31.078Z"
     },
     {
       "id": "daridorexant-dual-orexin-antagonist",
       "generic_name": "daridorexant dual orexin antagonist",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -4580,14 +4580,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:37:28.928Z"
+      "source_last_checked": "2026-03-09T20:08:38.198Z"
     },
     {
       "id": "lemborexant-dual-orexin-antagonist",
       "generic_name": "lemborexant dual orexin antagonist",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -4603,14 +4603,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:37:36.064Z"
+      "source_last_checked": "2026-03-09T20:08:44.998Z"
     },
     {
       "id": "suvorexant-dual-orexin-antagonist",
       "generic_name": "suvorexant dual orexin antagonist",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -4626,14 +4626,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:37:43.165Z"
+      "source_last_checked": "2026-03-09T20:08:51.963Z"
     },
     {
       "id": "ramelteon-melatonin-agonist",
       "generic_name": "ramelteon melatonin agonist",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -4649,14 +4649,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:37:49.986Z"
+      "source_last_checked": "2026-03-09T20:08:59.020Z"
     },
     {
       "id": "melatonin-extended-release",
       "generic_name": "melatonin extended release",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 52,
+      "reliability_score": 55,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -4671,14 +4671,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:37:57.229Z"
+      "source_last_checked": "2026-03-09T20:09:05.772Z"
     },
     {
       "id": "doxepin-oral-solution",
       "generic_name": "doxepin oral solution",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -4694,14 +4694,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:38:04.228Z"
+      "source_last_checked": "2026-03-09T20:09:12.553Z"
     },
     {
       "id": "quetiapine-oral-solution",
       "generic_name": "quetiapine oral solution",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -4717,14 +4717,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:38:11.126Z"
+      "source_last_checked": "2026-03-09T20:09:19.593Z"
     },
     {
       "id": "aripiprazole-oral-solution",
       "generic_name": "aripiprazole oral solution",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -4740,14 +4740,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:38:18.196Z"
+      "source_last_checked": "2026-03-09T20:09:26.566Z"
     },
     {
       "id": "risperidone-oral-solution",
       "generic_name": "risperidone oral solution",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -4763,14 +4763,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:38:25.185Z"
+      "source_last_checked": "2026-03-09T20:09:33.467Z"
     },
     {
       "id": "haloperidol-oral-solution",
       "generic_name": "haloperidol oral solution",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -4786,14 +4786,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:38:32.010Z"
+      "source_last_checked": "2026-03-09T20:09:40.495Z"
     },
     {
       "id": "chlorpromazine-oral-solution",
       "generic_name": "chlorpromazine oral solution",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -4809,14 +4809,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:38:38.836Z"
+      "source_last_checked": "2026-03-09T20:09:47.417Z"
     },
     {
       "id": "perphenazine-oral-solution",
       "generic_name": "perphenazine oral solution",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -4832,14 +4832,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:38:45.745Z"
+      "source_last_checked": "2026-03-09T20:09:54.354Z"
     },
     {
       "id": "trifluoperazine-oral-solution",
       "generic_name": "trifluoperazine oral solution",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -4855,14 +4855,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:38:52.794Z"
+      "source_last_checked": "2026-03-09T20:10:01.527Z"
     },
     {
       "id": "loxapine-inhalation",
       "generic_name": "loxapine inhalation",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 18,
+      "reliability_score": 21,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm",
@@ -4876,14 +4876,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:39:00.220Z"
+      "source_last_checked": "2026-03-09T20:10:08.802Z"
     },
     {
       "id": "ziprasidone-intramuscular",
       "generic_name": "ziprasidone intramuscular",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 22,
+      "reliability_score": 25,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm",
@@ -4898,14 +4898,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:39:07.467Z"
+      "source_last_checked": "2026-03-09T20:10:15.850Z"
     },
     {
       "id": "olanzapine-intramuscular",
       "generic_name": "olanzapine intramuscular",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -4921,14 +4921,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:39:14.720Z"
+      "source_last_checked": "2026-03-09T20:10:22.907Z"
     },
     {
       "id": "haloperidol-decanoate-oral-bridge",
       "generic_name": "haloperidol decanoate oral bridge",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 22,
+      "reliability_score": 25,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm",
@@ -4943,14 +4943,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:39:22.063Z"
+      "source_last_checked": "2026-03-09T20:10:30.355Z"
     },
     {
       "id": "fluphenazine-decanoate-oral-bridge",
       "generic_name": "fluphenazine decanoate oral bridge",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 18,
+      "reliability_score": 21,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm",
@@ -4964,14 +4964,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:39:29.400Z"
+      "source_last_checked": "2026-03-09T20:10:37.529Z"
     },
     {
       "id": "paliperidone-oral-bridge",
       "generic_name": "paliperidone oral bridge",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 22,
+      "reliability_score": 25,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm",
@@ -4986,14 +4986,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:39:36.443Z"
+      "source_last_checked": "2026-03-09T20:10:44.463Z"
     },
     {
       "id": "lurasidone-with-food",
       "generic_name": "lurasidone with food",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -5009,14 +5009,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:39:43.347Z"
+      "source_last_checked": "2026-03-09T20:10:51.231Z"
     },
     {
       "id": "cariprazine-slow-titration",
       "generic_name": "cariprazine slow titration",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -5032,14 +5032,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:39:50.578Z"
+      "source_last_checked": "2026-03-09T20:10:58.047Z"
     },
     {
       "id": "lumateperone-once-daily",
       "generic_name": "lumateperone once daily",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -5055,14 +5055,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:39:57.706Z"
+      "source_last_checked": "2026-03-09T20:11:05.228Z"
     },
     {
       "id": "brexpiprazole-low-start",
       "generic_name": "brexpiprazole low start",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -5078,14 +5078,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:40:04.899Z"
+      "source_last_checked": "2026-03-09T20:11:12.475Z"
     },
     {
       "id": "aripiprazole-partial-agonist",
       "generic_name": "aripiprazole partial agonist",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -5101,14 +5101,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:40:12.205Z"
+      "source_last_checked": "2026-03-09T20:11:19.507Z"
     },
     {
       "id": "olanzapine-high-metabolic-risk",
       "generic_name": "olanzapine high metabolic risk",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -5124,14 +5124,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:40:19.195Z"
+      "source_last_checked": "2026-03-09T20:11:26.627Z"
     },
     {
       "id": "quetiapine-sedating-profile",
       "generic_name": "quetiapine sedating profile",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -5147,14 +5147,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:40:26.310Z"
+      "source_last_checked": "2026-03-09T20:11:33.708Z"
     },
     {
       "id": "risperidone-prolactin-caution",
       "generic_name": "risperidone prolactin caution",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -5170,14 +5170,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:40:33.456Z"
+      "source_last_checked": "2026-03-09T20:11:40.383Z"
     },
     {
       "id": "ziprasidone-qtc-caution",
       "generic_name": "ziprasidone qtc caution",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -5193,14 +5193,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:40:40.298Z"
+      "source_last_checked": "2026-03-09T20:11:47.166Z"
     },
     {
       "id": "lithium-narrow-therapeutic-index",
       "generic_name": "lithium narrow therapeutic index",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -5216,14 +5216,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:40:47.150Z"
+      "source_last_checked": "2026-03-09T20:11:54.024Z"
     },
     {
       "id": "lamotrigine-slow-titration-requirement",
       "generic_name": "lamotrigine slow titration requirement",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -5239,14 +5239,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:40:53.954Z"
+      "source_last_checked": "2026-03-09T20:12:00.946Z"
     },
     {
       "id": "valproate-teratogenic-risk",
       "generic_name": "valproate teratogenic risk",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -5262,14 +5262,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:41:01.008Z"
+      "source_last_checked": "2026-03-09T20:12:07.862Z"
     },
     {
       "id": "carbamazepine-cyp-inducer",
       "generic_name": "carbamazepine cyp inducer",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -5285,14 +5285,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:41:08.220Z"
+      "source_last_checked": "2026-03-09T20:12:15.051Z"
     },
     {
       "id": "oxcarbazepine-hyponatremia-caution",
       "generic_name": "oxcarbazepine hyponatremia caution",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -5308,14 +5308,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:41:15.445Z"
+      "source_last_checked": "2026-03-09T20:12:22.434Z"
     },
     {
       "id": "topiramate-cognitive-side-effects",
       "generic_name": "topiramate cognitive side effects",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -5331,14 +5331,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:41:22.889Z"
+      "source_last_checked": "2026-03-09T20:12:29.447Z"
     },
     {
       "id": "zonisamide-sulfa-caution",
       "generic_name": "zonisamide sulfa caution",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -5354,14 +5354,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:41:29.608Z"
+      "source_last_checked": "2026-03-09T20:12:36.771Z"
     },
     {
       "id": "gabapentin-renal-adjustment",
       "generic_name": "gabapentin renal adjustment",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -5377,14 +5377,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:41:36.681Z"
+      "source_last_checked": "2026-03-09T20:12:44.079Z"
     },
     {
       "id": "pregabalin-edema-caution",
       "generic_name": "pregabalin edema caution",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -5400,14 +5400,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:41:43.679Z"
+      "source_last_checked": "2026-03-09T20:12:51.140Z"
     },
     {
       "id": "buspirone-delayed-onset",
       "generic_name": "buspirone delayed onset",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -5423,14 +5423,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:41:51.021Z"
+      "source_last_checked": "2026-03-09T20:12:58.477Z"
     },
     {
       "id": "propranolol-performance-anxiety",
       "generic_name": "propranolol performance anxiety",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 56,
+      "reliability_score": 59,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
@@ -5446,14 +5446,14 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:41:58.358Z"
+      "source_last_checked": "2026-03-09T20:13:05.601Z"
     },
     {
       "id": "prazosin-ptsd-nightmares",
       "generic_name": "prazosin ptsd nightmares",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 22,
+      "reliability_score": 25,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm",
@@ -5468,7 +5468,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:42:05.687Z"
+      "source_last_checked": "2026-03-09T20:13:12.687Z"
     },
     {
       "id": "amphetamine-mixed-salts",
@@ -5486,7 +5486,7 @@
       "missing_data_flags": [
         "off-label psych uses"
       ],
-      "source_last_checked": "2026-03-09T19:42:12.641Z"
+      "source_last_checked": "2026-03-09T20:13:19.666Z"
     },
     {
       "id": "methylphenidate",
@@ -5504,7 +5504,7 @@
       "missing_data_flags": [
         "off-label psych uses"
       ],
-      "source_last_checked": "2026-03-09T19:42:19.654Z"
+      "source_last_checked": "2026-03-09T20:13:26.260Z"
     }
   ]
 }
