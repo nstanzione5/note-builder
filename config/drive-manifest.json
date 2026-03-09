@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "schema": "astra-note-builder-drive-manifest-v1",
+  "rootFolderName": "Astra Clinical Note Builder",
+  "sharedDriveId": "",
+  "rootFolderId": "",
+  "ownerEmail": "",
+  "paths": {
+    "app-shell": "app-shell",
+    "data/meds/source": "data/meds/source",
+    "data/meds/curated": "data/meds/curated",
+    "data/meds/compiled": "data/meds/compiled",
+    "data/meds/review": "data/meds/review",
+    "data/draft": "data/draft",
+    "backups/notes": "backups/notes",
+    "logs/sync": "logs/sync",
+    "config": "config"
+  },
+  "pathMap": {},
+  "checksums": {},
+  "revisions": {},
+  "lastBootstrapAt": "",
+  "lastUpdatedAt": ""
+}

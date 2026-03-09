@@ -3,11 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Astra Notes">
   <title>Astra Clinical Note Builder</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/icon-192.png" type="image/png">
   <link rel="apple-touch-icon" href="icons/icon-192.png">
 </head>
 <body
@@ -16,6 +18,12 @@
   data-astra-gpt-url="https://chatgpt.com/g/g-69ac7d1d6f088191a063906d86aee792-astra-note-writer"
   data-ebh-intake-gpt-url="https://chatgpt.com/g/g-69ac70d034e081918d72603828d45799-ebh-intake-note"
   data-ebh-followup-gpt-url="https://chatgpt.com/g/g-69ac76b8246c8191b4474e7d24d53476-ebh-follow-up-note"
+  data-drive-sync-enabled="false"
+  data-drive-endpoint-url=""
+  data-drive-shared-drive-id=""
+  data-drive-root-folder-name="Astra Clinical Note Builder"
+  data-drive-owner-email=""
+  data-drive-sync-minutes="30"
 >
   <header class="topbar" id="topbar">
     <div class="topbar-inner">
@@ -76,7 +84,10 @@
           </label>
         </div>
 
-        <p class="toolbar-hint">Dock app: Safari → File → Add to Dock</p>
+        <div class="toolbar-meta-row">
+          <p class="toolbar-hint">Dock app: Safari → File → Add to Dock</p>
+          <span class="drive-sync-status drive-sync-status-local" id="driveSyncStatus" role="status" aria-live="polite">Drive: Local only</span>
+        </div>
       </section>
     </div>
   </header>
@@ -242,10 +253,7 @@
             <input class="time-part time-part-hour" type="text" inputmode="text" maxlength="10" autocomplete="off" placeholder="HH" aria-label="Scheduled start hour" data-time-part="hour">
             <span class="time-sep">:</span>
             <input class="time-part time-part-minute" type="text" inputmode="numeric" maxlength="2" autocomplete="off" placeholder="MM" aria-label="Scheduled start minute" data-time-part="minute">
-            <div class="time-meridiem" role="group" aria-label="Scheduled start meridiem" data-time-meridiem>
-              <button type="button" class="time-meridiem-btn" data-meridiem="AM">AM</button>
-              <button type="button" class="time-meridiem-btn" data-meridiem="PM">PM</button>
-            </div>
+            <input class="time-part time-part-meridiem" type="text" inputmode="text" maxlength="1" autocomplete="off" placeholder="A/P" aria-label="Scheduled start meridiem" data-time-part="meridiem">
             <input id="scheduledStart" type="hidden" value="">
           </div>
         </div>
@@ -268,10 +276,7 @@
               <input class="time-part time-part-hour" type="text" inputmode="text" maxlength="10" autocomplete="off" placeholder="HH" aria-label="Face to face start hour" data-time-part="hour">
               <span class="time-sep">:</span>
               <input class="time-part time-part-minute" type="text" inputmode="numeric" maxlength="2" autocomplete="off" placeholder="MM" aria-label="Face to face start minute" data-time-part="minute">
-              <div class="time-meridiem" role="group" aria-label="Face to face start meridiem" data-time-meridiem>
-                <button type="button" class="time-meridiem-btn" data-meridiem="AM">AM</button>
-                <button type="button" class="time-meridiem-btn" data-meridiem="PM">PM</button>
-              </div>
+              <input class="time-part time-part-meridiem" type="text" inputmode="text" maxlength="1" autocomplete="off" placeholder="A/P" aria-label="Face to face start meridiem" data-time-part="meridiem">
               <input id="startTime" type="hidden" value="">
             </div>
             <button type="button" class="mini-btn nowBtn" data-target="startTime">Now</button>
@@ -495,10 +500,7 @@
             <input class="time-part time-part-hour" type="text" inputmode="text" maxlength="10" autocomplete="off" placeholder="HH" aria-label="Follow-up hour" data-time-part="hour">
             <span class="time-sep">:</span>
             <input class="time-part time-part-minute" type="text" inputmode="numeric" maxlength="2" autocomplete="off" placeholder="MM" aria-label="Follow-up minute" data-time-part="minute">
-            <div class="time-meridiem" role="group" aria-label="Follow-up meridiem" data-time-meridiem>
-              <button type="button" class="time-meridiem-btn" data-meridiem="AM">AM</button>
-              <button type="button" class="time-meridiem-btn" data-meridiem="PM">PM</button>
-            </div>
+            <input class="time-part time-part-meridiem" type="text" inputmode="text" maxlength="1" autocomplete="off" placeholder="A/P" aria-label="Follow-up meridiem" data-time-part="meridiem">
             <input id="followTime" type="hidden" value="">
           </div>
         </div>
@@ -523,10 +525,7 @@
               <input class="time-part time-part-hour" type="text" inputmode="text" maxlength="10" autocomplete="off" placeholder="HH" aria-label="Face-to-face end hour" data-time-part="hour">
               <span class="time-sep">:</span>
               <input class="time-part time-part-minute" type="text" inputmode="numeric" maxlength="2" autocomplete="off" placeholder="MM" aria-label="Face-to-face end minute" data-time-part="minute">
-              <div class="time-meridiem" role="group" aria-label="Face-to-face end meridiem" data-time-meridiem>
-                <button type="button" class="time-meridiem-btn" data-meridiem="AM">AM</button>
-                <button type="button" class="time-meridiem-btn" data-meridiem="PM">PM</button>
-              </div>
+              <input class="time-part time-part-meridiem" type="text" inputmode="text" maxlength="1" autocomplete="off" placeholder="A/P" aria-label="Face-to-face end meridiem" data-time-part="meridiem">
               <input id="endTime" type="hidden" value="">
             </div>
             <button type="button" class="mini-btn nowBtn" data-target="endTime">Now</button>
@@ -540,10 +539,7 @@
               <input class="time-part time-part-hour" type="text" inputmode="text" maxlength="10" autocomplete="off" placeholder="HH" aria-label="Documentation end hour" data-time-part="hour">
               <span class="time-sep">:</span>
               <input class="time-part time-part-minute" type="text" inputmode="numeric" maxlength="2" autocomplete="off" placeholder="MM" aria-label="Documentation end minute" data-time-part="minute">
-              <div class="time-meridiem" role="group" aria-label="Documentation end meridiem" data-time-meridiem>
-                <button type="button" class="time-meridiem-btn" data-meridiem="AM">AM</button>
-                <button type="button" class="time-meridiem-btn" data-meridiem="PM">PM</button>
-              </div>
+              <input class="time-part time-part-meridiem" type="text" inputmode="text" maxlength="1" autocomplete="off" placeholder="A/P" aria-label="Documentation end meridiem" data-time-part="meridiem">
               <input id="docEnd" type="hidden" value="">
             </div>
             <button type="button" class="mini-btn nowBtn" data-target="docEnd">Now</button>

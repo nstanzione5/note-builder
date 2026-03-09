@@ -14,6 +14,9 @@ const state = {
   selectedMedicationId: '',
   selectedFormulationId: '',
   selectedRoute: '',
+  driveConnection: 'local',
+  driveLastError: '',
+  pendingDriveWrites: 0,
 };
 
 const els = {
@@ -100,6 +103,7 @@ const els = {
   medDetailContent: document.getElementById('medDetailContent'),
   medExportMissingBtn: document.getElementById('medExportMissingBtn'),
   medMissingCount: document.getElementById('medMissingCount'),
+  driveSyncStatus: document.getElementById('driveSyncStatus'),
 };
 
 const inputIds = [
@@ -155,6 +159,12 @@ const MED_RECENTS_KEY = 'medDrawerRecents_v1';
 const MED_MISSING_REQUESTS_KEY = 'medDrawerMissingRequests_v1';
 const MED_RUNTIME_OVERRIDES_KEY = 'medDrawerRuntimeOverrides_v1';
 const MED_AUTOSYNC_META_KEY = 'medDrawerAutoSyncMeta_v1';
+const DRIVE_QUEUE_KEY = 'driveSyncPendingWrites_v1';
+const DRIVE_META_KEY = 'driveSyncMeta_v1';
+const DRIVE_REVISIONS_KEY = 'driveSyncRevisions_v1';
+const DRIVE_DRAFT_PATH = 'data/draft/current.json';
+const DRIVE_SYNC_ENTERPRISE_NAME = 'Astra Clinical Note Builder';
+const DRIVE_MANIFEST_FILE = 'config/drive-manifest.json';
 
 let snapshotTimer = null;
 const timeControlMap = new Map();
@@ -164,6 +174,12 @@ let medicationSearchResults = [];
 let medicationFocusedResultIndex = -1;
 let medAutoSyncTimer = null;
 let medAutoSyncRunning = false;
+let medicationCatalogLoadError = false;
+let scrollRafScheduled = false;
+let driveQueueTimer = null;
+let driveSyncTimer = null;
+let driveQueueRunning = false;
+let driveSyncRunning = false;
 
 function getEl(id) {
   return document.getElementById(id);
@@ -255,6 +271,565 @@ function getStorageJSON(key, fallback) {
 
 function setStorageJSON(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
+}
+
+function getDriveConfig() {
+  const dataset = els.body ? els.body.dataset : {};
+  const intervalRaw = Number.parseInt(dataset.driveSyncMinutes || '', 10);
+  const syncIntervalMinutes = Number.isFinite(intervalRaw) && intervalRaw > 0 ? intervalRaw : 30;
+
+  return {
+    enabled: dataset.driveSyncEnabled === 'true',
+    endpointUrl: String(dataset.driveEndpointUrl || '').trim(),
+    sharedDriveId: String(dataset.driveSharedDriveId || '').trim(),
+    rootFolderName: String(dataset.driveRootFolderName || DRIVE_SYNC_ENTERPRISE_NAME).trim() || DRIVE_SYNC_ENTERPRISE_NAME,
+    ownerEmail: String(dataset.driveOwnerEmail || '').trim(),
+    syncIntervalMs: syncIntervalMinutes * 60 * 1000,
+  };
+}
+
+function isDriveSyncEnabled() {
+  const config = getDriveConfig();
+  return config.enabled && Boolean(config.endpointUrl);
+}
+
+function getDriveMeta() {
+  const fallback = {
+    connection: 'local',
+    lastPull: 0,
+    lastPush: 0,
+    lastError: '',
+    manifestRevision: '',
+    manifestChecksum: '',
+    bootstrapCompleted: false,
+  };
+  const parsed = getStorageJSON(DRIVE_META_KEY, fallback);
+  if (!parsed || typeof parsed !== 'object') return { ...fallback };
+  return { ...fallback, ...parsed };
+}
+
+function setDriveMeta(meta) {
+  setStorageJSON(DRIVE_META_KEY, meta);
+  state.driveConnection = meta.connection || 'local';
+  state.driveLastError = meta.lastError || '';
+}
+
+function getDriveRevisions() {
+  const parsed = getStorageJSON(DRIVE_REVISIONS_KEY, {});
+  if (!parsed || typeof parsed !== 'object') return {};
+  return parsed;
+}
+
+function setDriveRevisions(revisions) {
+  setStorageJSON(DRIVE_REVISIONS_KEY, revisions);
+}
+
+function getDriveQueue() {
+  const parsed = getStorageJSON(DRIVE_QUEUE_KEY, []);
+  return Array.isArray(parsed) ? parsed : [];
+}
+
+function setDriveQueue(queue) {
+  const safeQueue = Array.isArray(queue) ? queue : [];
+  setStorageJSON(DRIVE_QUEUE_KEY, safeQueue);
+  state.pendingDriveWrites = safeQueue.length;
+}
+
+function setDriveStatusBadge(message, status, title = '') {
+  if (!els.driveSyncStatus) return;
+
+  const normalized = status || 'local';
+  els.driveSyncStatus.classList.remove(
+    'drive-sync-status-local',
+    'drive-sync-status-online',
+    'drive-sync-status-syncing',
+    'drive-sync-status-offline',
+    'drive-sync-status-error',
+  );
+
+  els.driveSyncStatus.classList.add(`drive-sync-status-${normalized}`);
+  els.driveSyncStatus.textContent = message;
+  els.driveSyncStatus.title = title || message;
+}
+
+function formatTimestampLabel(value) {
+  const numeric = Number(value);
+  if (!numeric || Number.isNaN(numeric)) return 'never';
+  try {
+    return new Date(numeric).toLocaleString();
+  } catch (error) {
+    return 'unknown';
+  }
+}
+
+function updateDriveStatusBadge(meta = getDriveMeta()) {
+  if (!isDriveSyncEnabled()) {
+    setDriveStatusBadge('Drive: Local only', 'local', 'Drive sync disabled in page data attributes.');
+    return;
+  }
+
+  const queued = getDriveQueue().length;
+
+  if (meta.connection === 'syncing') {
+    setDriveStatusBadge(`Drive: Syncing (${queued} queued)`, 'syncing');
+    return;
+  }
+
+  if (meta.connection === 'offline') {
+    setDriveStatusBadge(`Drive: Offline (${queued} queued)`, 'offline', meta.lastError || 'Network unavailable.');
+    return;
+  }
+
+  if (meta.connection === 'error') {
+    setDriveStatusBadge(`Drive: Sync error (${queued} queued)`, 'error', meta.lastError || 'Drive endpoint unavailable.');
+    return;
+  }
+
+  const latest = meta.lastPush || meta.lastPull;
+  setDriveStatusBadge(
+    latest ? `Drive: Synced ${new Date(latest).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}` : 'Drive: Online',
+    'online',
+    `Last pull: ${formatTimestampLabel(meta.lastPull)} | Last push: ${formatTimestampLabel(meta.lastPush)}`,
+  );
+}
+
+function hashStringChecksum(content) {
+  const text = String(content || '');
+  let hash = 5381;
+
+  for (let i = 0; i < text.length; i += 1) {
+    hash = ((hash << 5) + hash) + text.charCodeAt(i);
+    hash >>>= 0;
+  }
+
+  return hash.toString(16);
+}
+
+function enqueueDriveOperation(operation) {
+  if (!isDriveSyncEnabled()) return;
+
+  const queue = getDriveQueue();
+  if (operation.dedupeKey) {
+    for (let i = queue.length - 1; i >= 0; i -= 1) {
+      if (queue[i].dedupeKey === operation.dedupeKey) {
+        queue.splice(i, 1);
+      }
+    }
+  }
+
+  queue.push({
+    id: `${Date.now()}-${Math.random().toString(16).slice(2, 9)}`,
+    queuedAt: new Date().toISOString(),
+    attempts: 0,
+    ...operation,
+  });
+
+  setDriveQueue(queue);
+  updateDriveStatusBadge();
+  scheduleDriveQueueFlush(800);
+}
+
+function queueDriveDraftWrite(draft) {
+  if (!isDriveSyncEnabled() || !draft) return;
+
+  const revisions = getDriveRevisions();
+  const payload = {
+    savedAt: draft.savedAt || new Date().toISOString(),
+    draft,
+    practice: draft.state && draft.state.practice ? draft.state.practice : state.practice,
+    visitType: draft.state && draft.state.visitType ? draft.state.visitType : state.visitType,
+    source: 'note-builder-client',
+  };
+
+  const content = JSON.stringify(payload, null, 2);
+  enqueueDriveOperation({
+    type: 'file.put',
+    path: DRIVE_DRAFT_PATH,
+    content,
+    contentType: 'application/json',
+    checksum: hashStringChecksum(content),
+    expectedRevision: revisions[DRIVE_DRAFT_PATH] || '',
+    dedupeKey: `file:${DRIVE_DRAFT_PATH}`,
+  });
+}
+
+function queueDriveBackupAppend(snapshotEntry) {
+  if (!isDriveSyncEnabled() || !snapshotEntry) return;
+
+  enqueueDriveOperation({
+    type: 'backup.append',
+    entry: {
+      id: snapshotEntry.id,
+      savedAt: snapshotEntry.savedAt,
+      label: formatSnapshotLabel(snapshotEntry),
+      practice: snapshotEntry.practice,
+      visitType: snapshotEntry.visitType,
+      draft: snapshotEntry.draft,
+    },
+    dedupeKey: `backup:${snapshotEntry.id}`,
+  });
+}
+
+function scheduleDriveQueueFlush(delayMs = 1100) {
+  if (!isDriveSyncEnabled()) return;
+
+  if (driveQueueTimer) {
+    window.clearTimeout(driveQueueTimer);
+  }
+
+  driveQueueTimer = window.setTimeout(() => {
+    driveQueueTimer = null;
+    runWhenIdle(() => flushDriveQueue());
+  }, delayMs);
+}
+
+function parseJsonOrNull(text) {
+  try {
+    return JSON.parse(text);
+  } catch (error) {
+    return null;
+  }
+}
+
+function mergeDraftConflictPayload(localContent, remoteContent) {
+  const localPayload = parseJsonOrNull(localContent);
+  const remotePayload = parseJsonOrNull(remoteContent);
+  if (!localPayload || !remotePayload) return null;
+
+  const localDraft = localPayload.draft || localPayload;
+  const remoteDraft = remotePayload.draft || remotePayload;
+
+  if (!localDraft || !remoteDraft || !localDraft.inputs || !remoteDraft.inputs) {
+    return null;
+  }
+
+  const merged = {
+    savedAt: new Date().toISOString(),
+    draft: {
+      state: {
+        ...(remoteDraft.state || {}),
+        ...(localDraft.state || {}),
+      },
+      inputs: {
+        ...(remoteDraft.inputs || {}),
+      },
+    },
+    mergedAt: new Date().toISOString(),
+    mergedBy: 'note-builder-conflict-merge',
+  };
+
+  inputIds.forEach((id) => {
+    const localValue = Object.prototype.hasOwnProperty.call(localDraft.inputs, id) ? localDraft.inputs[id] : '';
+    const remoteValue = Object.prototype.hasOwnProperty.call(remoteDraft.inputs, id) ? remoteDraft.inputs[id] : '';
+    merged.draft.inputs[id] = localValue !== '' && localValue != null ? localValue : (remoteValue || '');
+  });
+
+  const mergedContent = JSON.stringify(merged, null, 2);
+  return {
+    content: mergedContent,
+    checksum: hashStringChecksum(mergedContent),
+  };
+}
+
+async function callDriveEndpoint(action, payload = {}) {
+  const config = getDriveConfig();
+  if (!config.enabled || !config.endpointUrl) {
+    throw new Error('Drive sync is disabled.');
+  }
+
+  const requestBody = {
+    action,
+    sharedDriveId: payload.sharedDriveId || config.sharedDriveId,
+    rootFolderName: payload.rootFolderName || config.rootFolderName,
+    ownerEmail: config.ownerEmail,
+    manifestPath: DRIVE_MANIFEST_FILE,
+    client: {
+      app: 'note-builder',
+      timestamp: new Date().toISOString(),
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || '',
+    },
+    ...payload,
+  };
+
+  const response = await fetch(config.endpointUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(requestBody),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Drive action ${action} failed (${response.status}).`);
+  }
+
+  let data = null;
+  try {
+    data = await response.json();
+  } catch (error) {
+    throw new Error(`Drive action ${action} returned invalid JSON.`);
+  }
+
+  if (data && data.ok === false) {
+    throw new Error(data.error || `Drive action ${action} failed.`);
+  }
+
+  return data || {};
+}
+
+async function pullDriveDraft(force = false) {
+  if (!isDriveSyncEnabled()) return false;
+
+  const response = await callDriveEndpoint('file.get', { path: DRIVE_DRAFT_PATH });
+  const file = response.file || response;
+  const content = typeof file.content === 'string' ? file.content : '';
+  if (!content) return false;
+
+  const payload = parseJsonOrNull(content);
+  if (!payload) return false;
+
+  const remoteDraft = payload.draft || payload;
+  if (!remoteDraft || typeof remoteDraft !== 'object' || !remoteDraft.inputs) return false;
+
+  const localDraft = getStorageJSON(STORAGE_KEY, null);
+  const localSavedAt = localDraft && localDraft.savedAt ? Date.parse(localDraft.savedAt) : 0;
+  const remoteSavedAt = payload.savedAt ? Date.parse(payload.savedAt) : 0;
+
+  if (!force && localSavedAt && remoteSavedAt && remoteSavedAt <= localSavedAt) {
+    if (file.revision) {
+      const revisions = getDriveRevisions();
+      revisions[DRIVE_DRAFT_PATH] = String(file.revision);
+      setDriveRevisions(revisions);
+    }
+    return false;
+  }
+
+  applyDraft(remoteDraft);
+  syncToggleStates();
+  refreshUI(false);
+  saveDraft({ skipDrive: true });
+
+  if (file.revision) {
+    const revisions = getDriveRevisions();
+    revisions[DRIVE_DRAFT_PATH] = String(file.revision);
+    setDriveRevisions(revisions);
+  }
+
+  return true;
+}
+
+async function pullDriveManifestAndDraft(force = false) {
+  if (!isDriveSyncEnabled()) return;
+
+  const response = await callDriveEndpoint('manifest.get', { path: DRIVE_MANIFEST_FILE });
+  const manifest = response.manifest || null;
+  const remoteRevision = String(response.revision || (manifest && manifest.revision) || '');
+  const remoteChecksum = String(response.checksum || (manifest && manifest.checksum) || '');
+
+  const meta = getDriveMeta();
+  const changed = force
+    || !meta.manifestRevision
+    || (remoteRevision && remoteRevision !== meta.manifestRevision)
+    || (remoteChecksum && remoteChecksum !== meta.manifestChecksum);
+
+  if (changed) {
+    await pullDriveDraft(force);
+  }
+
+  meta.manifestRevision = remoteRevision || meta.manifestRevision;
+  meta.manifestChecksum = remoteChecksum || meta.manifestChecksum;
+  meta.lastPull = Date.now();
+  meta.lastError = '';
+  if (meta.connection !== 'syncing') {
+    meta.connection = 'online';
+  }
+  setDriveMeta(meta);
+}
+
+async function flushDriveQueue() {
+  if (!isDriveSyncEnabled()) return;
+  if (driveQueueRunning) return;
+
+  driveQueueRunning = true;
+  const meta = getDriveMeta();
+  meta.connection = 'syncing';
+  setDriveMeta(meta);
+  updateDriveStatusBadge(meta);
+
+  let queue = getDriveQueue();
+  const revisions = getDriveRevisions();
+
+  try {
+    while (queue.length) {
+      const item = queue[0];
+
+      try {
+        if (item.type === 'file.put') {
+          const payload = {
+            path: item.path,
+            content: item.content,
+            contentType: item.contentType || 'application/json',
+            checksum: item.checksum || hashStringChecksum(item.content || ''),
+            expectedRevision: item.expectedRevision || revisions[item.path] || '',
+          };
+
+          const response = await callDriveEndpoint('file.put', payload);
+
+          if (response.conflict) {
+            const merged = mergeDraftConflictPayload(item.content, response.currentContent || '');
+            if (!merged) {
+              throw new Error('Revision conflict detected and automatic merge failed.');
+            }
+
+            queue[0] = {
+              ...item,
+              content: merged.content,
+              checksum: merged.checksum,
+              expectedRevision: response.currentRevision || '',
+              attempts: (item.attempts || 0) + 1,
+            };
+            setDriveQueue(queue);
+            continue;
+          }
+
+          if (response.revision) {
+            revisions[item.path] = String(response.revision);
+            setDriveRevisions(revisions);
+          }
+        } else if (item.type === 'backup.append') {
+          await callDriveEndpoint('backup.append', { entry: item.entry });
+        }
+
+        queue.shift();
+        setDriveQueue(queue);
+
+        const updatedMeta = getDriveMeta();
+        updatedMeta.connection = 'online';
+        updatedMeta.lastPush = Date.now();
+        updatedMeta.lastError = '';
+        setDriveMeta(updatedMeta);
+        updateDriveStatusBadge(updatedMeta);
+      } catch (error) {
+        queue[0] = {
+          ...item,
+          attempts: (item.attempts || 0) + 1,
+          lastError: String(error.message || error),
+          lastTriedAt: new Date().toISOString(),
+        };
+        setDriveQueue(queue);
+
+        const updatedMeta = getDriveMeta();
+        updatedMeta.connection = navigator.onLine ? 'error' : 'offline';
+        updatedMeta.lastError = queue[0].lastError;
+        setDriveMeta(updatedMeta);
+        updateDriveStatusBadge(updatedMeta);
+
+        const attemptCount = queue[0].attempts || 1;
+        const retryMs = Math.min(30000, 1200 * (2 ** Math.min(attemptCount, 5)));
+        scheduleDriveQueueFlush(retryMs);
+        break;
+      }
+    }
+  } finally {
+    driveQueueRunning = false;
+  }
+}
+
+async function runDriveSyncCycle(force = false) {
+  if (!isDriveSyncEnabled()) {
+    updateDriveStatusBadge();
+    return;
+  }
+
+  if (driveSyncRunning) return;
+  driveSyncRunning = true;
+
+  const meta = getDriveMeta();
+  meta.connection = 'syncing';
+  setDriveMeta(meta);
+  updateDriveStatusBadge(meta);
+
+  try {
+    await callDriveEndpoint('health', {});
+
+    if (!meta.bootstrapCompleted) {
+      const config = getDriveConfig();
+      await callDriveEndpoint('bootstrap', {
+        sharedDriveId: config.sharedDriveId,
+        rootFolderName: config.rootFolderName || DRIVE_SYNC_ENTERPRISE_NAME,
+      });
+
+      const nextMeta = getDriveMeta();
+      nextMeta.bootstrapCompleted = true;
+      nextMeta.lastPull = Date.now();
+      setDriveMeta(nextMeta);
+    }
+
+    const hasPendingWrites = getDriveQueue().length > 0;
+    if (force || !hasPendingWrites) {
+      await pullDriveManifestAndDraft(force);
+    }
+
+    await flushDriveQueue();
+
+    const nextMeta = getDriveMeta();
+    nextMeta.connection = 'online';
+    nextMeta.lastError = '';
+    setDriveMeta(nextMeta);
+    updateDriveStatusBadge(nextMeta);
+  } catch (error) {
+    const nextMeta = getDriveMeta();
+    nextMeta.connection = navigator.onLine ? 'error' : 'offline';
+    nextMeta.lastError = String(error.message || error);
+    setDriveMeta(nextMeta);
+    updateDriveStatusBadge(nextMeta);
+  } finally {
+    driveSyncRunning = false;
+  }
+}
+
+function startDriveSync() {
+  if (!isDriveSyncEnabled()) {
+    updateDriveStatusBadge();
+    return;
+  }
+
+  const config = getDriveConfig();
+
+  if (driveSyncTimer) {
+    window.clearInterval(driveSyncTimer);
+  }
+
+  runWhenIdle(() => runDriveSyncCycle(true));
+
+  driveSyncTimer = window.setInterval(() => {
+    runWhenIdle(() => runDriveSyncCycle(false));
+  }, config.syncIntervalMs);
+
+  window.addEventListener('online', () => {
+    runWhenIdle(() => runDriveSyncCycle(false));
+  });
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+      runWhenIdle(() => runDriveSyncCycle(false));
+    }
+  });
+}
+
+function initDriveSync() {
+  state.pendingDriveWrites = getDriveQueue().length;
+  updateDriveStatusBadge();
+
+  if (!isDriveSyncEnabled()) {
+    return;
+  }
+
+  startDriveSync();
+
+  if (state.pendingDriveWrites > 0) {
+    scheduleDriveQueueFlush(900);
+  }
 }
 
 function updateBranding() {
@@ -415,10 +990,10 @@ function updatePracticeSections() {
   }
 }
 
-function updateTopbarState(forceRecalc = false) {
+function updateTopbarState(forceRecalc = false, scrollY = window.scrollY) {
   if (!els.topbar) return;
 
-  const y = window.scrollY;
+  const y = Number.isFinite(scrollY) ? scrollY : window.scrollY;
 
   if (forceRecalc) {
     state.topbarCondensed = y >= CONDENSE_ENTER_Y;
@@ -429,6 +1004,21 @@ function updateTopbarState(forceRecalc = false) {
   }
 
   els.topbar.classList.toggle('topbar-condensed', state.topbarCondensed);
+}
+
+function scheduleTopbarStateUpdate(forceRecalc = false) {
+  if (forceRecalc) {
+    updateTopbarState(true, window.scrollY);
+    return;
+  }
+
+  if (scrollRafScheduled) return;
+  scrollRafScheduled = true;
+
+  window.requestAnimationFrame(() => {
+    scrollRafScheduled = false;
+    updateTopbarState(false, window.scrollY);
+  });
 }
 
 function updateActiveGptUrl() {
@@ -514,10 +1104,27 @@ function getTimeControl(id) {
   return timeControlMap.get(id) || null;
 }
 
-function setMeridiemButtons(control, meridiem) {
+function normalizeMeridiemToken(value, fallback = 'AM') {
+  const token = String(value || '').trim().toLowerCase();
+  if (!token) return fallback === 'PM' ? 'PM' : 'AM';
+  if (token.startsWith('p')) return 'PM';
+  if (token.startsWith('a')) return 'AM';
+  return fallback === 'PM' ? 'PM' : 'AM';
+}
+
+function setMeridiemControl(control, meridiem) {
   if (!control) return;
+
+  const normalized = normalizeMeridiemToken(meridiem, control.activeMeridiem || 'AM');
+  control.activeMeridiem = normalized;
+
+  if (control.meridiemInput) {
+    control.meridiemInput.value = normalized.charAt(0);
+  }
+
+  if (!control.meridiemButtons || !control.meridiemButtons.length) return;
   control.meridiemButtons.forEach((btn) => {
-    const isActive = btn.dataset.meridiem === meridiem;
+    const isActive = btn.dataset.meridiem === normalized;
     btn.classList.toggle('active', isActive);
     btn.setAttribute('aria-pressed', String(isActive));
   });
@@ -538,7 +1145,7 @@ function setTimeControlValue(id, canonicalValue) {
     control.hourInput.value = '';
     control.minuteInput.value = '';
     control.activeMeridiem = 'AM';
-    setMeridiemButtons(control, 'AM');
+    setMeridiemControl(control, 'AM');
     control.hidden.value = '';
     markTimeControlValidity(control, true);
     return;
@@ -546,17 +1153,22 @@ function setTimeControlValue(id, canonicalValue) {
 
   control.hourInput.value = parsed.hour;
   control.minuteInput.value = parsed.minute;
-  control.activeMeridiem = parsed.meridiem;
-  setMeridiemButtons(control, parsed.meridiem);
+  setMeridiemControl(control, parsed.meridiem);
   control.hidden.value = parsed.canonical;
   markTimeControlValidity(control, true);
 }
 
 function collectTimeControlParts(control) {
+  const hour = control.hourInput.value.replace(/\D/g, '').slice(0, 2);
+  const minute = control.minuteInput.value.replace(/\D/g, '').slice(0, 2);
+  const meridiemRaw = control.meridiemInput
+    ? control.meridiemInput.value
+    : control.activeMeridiem;
+
   return {
-    hour: control.hourInput.value.replace(/\D/g, ''),
-    minute: control.minuteInput.value.replace(/\D/g, ''),
-    meridiem: control.activeMeridiem || 'AM',
+    hour,
+    minute,
+    meridiem: normalizeMeridiemToken(meridiemRaw, control.activeMeridiem || 'AM'),
   };
 }
 
@@ -601,6 +1213,7 @@ function commitTimeControlValue(id, options = {}) {
     return;
   }
 
+  setMeridiemControl(control, meridiem);
   const canonical = `${hourNumber}:${String(minuteNumber).padStart(2, '0')} ${meridiem}`;
   control.hidden.value = canonical;
   markTimeControlValidity(control, true);
@@ -614,8 +1227,7 @@ function applyParsedTimeToControl(id, parsed, notify = true) {
 
   control.hourInput.value = parsed.hour;
   control.minuteInput.value = parsed.minute;
-  control.activeMeridiem = parsed.meridiem;
-  setMeridiemButtons(control, parsed.meridiem);
+  setMeridiemControl(control, parsed.meridiem);
   control.hidden.value = parsed.canonical;
   markTimeControlValidity(control, true);
 
@@ -636,8 +1248,13 @@ function maybeParseFullTimeEntry(id, rawValue) {
   if (!parsed) return false;
 
   applyParsedTimeToControl(id, parsed, true);
-  control.minuteInput.focus();
-  control.minuteInput.select();
+  if (control.meridiemInput) {
+    control.meridiemInput.focus();
+    control.meridiemInput.select();
+  } else {
+    control.minuteInput.focus();
+    control.minuteInput.select();
+  }
   return true;
 }
 
@@ -649,6 +1266,7 @@ function attachTimeControlListeners() {
 
     const hourInput = root.querySelector('[data-time-part="hour"]');
     const minuteInput = root.querySelector('[data-time-part="minute"]');
+    const meridiemInput = root.querySelector('[data-time-part="meridiem"]');
     const meridiemButtons = Array.from(root.querySelectorAll('.time-meridiem-btn'));
 
     if (!hourInput || !minuteInput) return;
@@ -659,22 +1277,29 @@ function attachTimeControlListeners() {
       hidden,
       hourInput,
       minuteInput,
+      meridiemInput,
       meridiemButtons,
       activeMeridiem: 'AM',
     };
 
     timeControlMap.set(id, control);
-    setMeridiemButtons(control, 'AM');
+    setMeridiemControl(control, 'AM');
 
-    const handleMeridiemShortcut = (event) => {
+    const handleMeridiemShortcut = (event, options = {}) => {
       if (event.ctrlKey || event.metaKey || event.altKey) return false;
-      const key = event.key.toLowerCase();
+      const key = String(event.key || '').toLowerCase();
       if (key !== 'a' && key !== 'p') return false;
 
+      const { focusMeridiem = true } = options;
       event.preventDefault();
-      control.activeMeridiem = key === 'a' ? 'AM' : 'PM';
-      setMeridiemButtons(control, control.activeMeridiem);
+      setMeridiemControl(control, key === 'a' ? 'AM' : 'PM');
       commitTimeControlValue(id, { notify: true });
+
+      if (focusMeridiem && control.meridiemInput) {
+        control.meridiemInput.focus();
+        control.meridiemInput.select();
+      }
+
       return true;
     };
 
@@ -692,19 +1317,44 @@ function attachTimeControlListeners() {
           minuteInput.focus();
           minuteInput.select();
         }
-      } else {
+      } else if (part === 'minute') {
         event.target.value = digits.slice(0, 2);
+        if (event.target.value.length === 2 && control.meridiemInput) {
+          control.meridiemInput.focus();
+          control.meridiemInput.select();
+        }
+      } else if (part === 'meridiem' && control.meridiemInput) {
+        const picked = normalizeMeridiemToken(event.target.value, control.activeMeridiem || 'AM');
+        setMeridiemControl(control, picked);
       }
 
       commitTimeControlValue(id, { notify: true });
     };
 
     const handlePartBlur = (part, event) => {
+      if (part === 'hour') {
+        const digits = event.target.value.replace(/\D/g, '');
+        if (!digits) {
+          event.target.value = '';
+        } else {
+          event.target.value = String(Number(digits.slice(0, 2)));
+        }
+      }
+
       if (part === 'minute') {
         const digits = event.target.value.replace(/\D/g, '');
         if (digits.length === 1) {
           event.target.value = digits.padStart(2, '0');
+        } else if (!digits.length) {
+          event.target.value = '';
+        } else {
+          event.target.value = digits.slice(0, 2);
         }
+      }
+
+      if (part === 'meridiem' && control.meridiemInput) {
+        const picked = normalizeMeridiemToken(control.meridiemInput.value, control.activeMeridiem || 'AM');
+        setMeridiemControl(control, picked);
       }
 
       commitTimeControlValue(id, { validateStrict: true, notify: true });
@@ -712,9 +1362,11 @@ function attachTimeControlListeners() {
 
     hourInput.addEventListener('input', (event) => handlePartInput('hour', event));
     minuteInput.addEventListener('input', (event) => handlePartInput('minute', event));
+    if (meridiemInput) meridiemInput.addEventListener('input', (event) => handlePartInput('meridiem', event));
 
     hourInput.addEventListener('blur', (event) => handlePartBlur('hour', event));
     minuteInput.addEventListener('blur', (event) => handlePartBlur('minute', event));
+    if (meridiemInput) meridiemInput.addEventListener('blur', (event) => handlePartBlur('meridiem', event));
 
     hourInput.addEventListener('keydown', (event) => {
       if (handleMeridiemShortcut(event)) return;
@@ -725,10 +1377,28 @@ function attachTimeControlListeners() {
     });
 
     minuteInput.addEventListener('keydown', (event) => {
-      handleMeridiemShortcut(event);
+      if (handleMeridiemShortcut(event)) return;
+
+      if (event.key === 'Backspace' && !minuteInput.value) {
+        event.preventDefault();
+        hourInput.focus();
+        hourInput.setSelectionRange(hourInput.value.length, hourInput.value.length);
+      }
     });
 
-    [hourInput, minuteInput].forEach((input) => {
+    if (meridiemInput) {
+      meridiemInput.addEventListener('keydown', (event) => {
+        if (handleMeridiemShortcut(event, { focusMeridiem: false })) return;
+
+        if (event.key === 'Backspace' && !meridiemInput.value) {
+          event.preventDefault();
+          minuteInput.focus();
+          minuteInput.setSelectionRange(minuteInput.value.length, minuteInput.value.length);
+        }
+      });
+    }
+
+    [hourInput, minuteInput, meridiemInput].filter(Boolean).forEach((input) => {
       input.addEventListener('paste', (event) => {
         const pasted = event.clipboardData ? event.clipboardData.getData('text') : '';
         if (!pasted) return;
@@ -742,8 +1412,7 @@ function attachTimeControlListeners() {
     meridiemButtons.forEach((btn) => {
       btn.setAttribute('aria-pressed', 'false');
       btn.addEventListener('click', () => {
-        control.activeMeridiem = btn.dataset.meridiem === 'PM' ? 'PM' : 'AM';
-        setMeridiemButtons(control, control.activeMeridiem);
+        setMeridiemControl(control, btn.dataset.meridiem === 'PM' ? 'PM' : 'AM');
         commitTimeControlValue(id, { notify: true });
       });
     });
@@ -983,6 +1652,9 @@ function updateFollowupSchedulingUI() {
   if (followTimeControl) {
     followTimeControl.hourInput.disabled = isPrn;
     followTimeControl.minuteInput.disabled = isPrn;
+    if (followTimeControl.meridiemInput) {
+      followTimeControl.meridiemInput.disabled = isPrn;
+    }
     followTimeControl.meridiemButtons.forEach((btn) => {
       btn.disabled = isPrn;
     });
@@ -1009,7 +1681,7 @@ function formatSnapshotLabel(entry) {
   const gender = entry && entry.draft && entry.draft.inputs ? String(entry.draft.inputs.gender || '').trim() : '';
   const ageText = age || '?';
   const genderText = gender || '?';
-  return `Age ${ageText}, ${genderText}`;
+  return `Age ${ageText}, Gender ${genderText}`;
 }
 
 function renderBackupHistory() {
@@ -1040,7 +1712,9 @@ function renderBackupHistory() {
   });
 }
 
-function queueSnapshot(draft) {
+function queueSnapshot(draft, options = {}) {
+  const { skipDrive = false } = options;
+
   if (snapshotTimer) {
     window.clearTimeout(snapshotTimer);
   }
@@ -1053,22 +1727,31 @@ function queueSnapshot(draft) {
       return;
     }
 
-    snapshots.unshift({
+    const snapshotEntry = {
       id: Date.now(),
       savedAt: new Date().toISOString(),
       practice: draft.state.practice,
       visitType: draft.state.visitType,
       signature,
       draft,
-    });
+    };
+
+    snapshots.unshift(snapshotEntry);
 
     saveSnapshotsToStorage(snapshots);
     renderBackupHistory();
+
+    if (!skipDrive) {
+      queueDriveBackupAppend(snapshotEntry);
+    }
   }, 350);
 }
 
-function saveDraft() {
+function saveDraft(options = {}) {
+  const { skipDrive = false } = options;
+
   const draft = {
+    savedAt: new Date().toISOString(),
     state: {
       practice: state.practice,
       visitType: state.visitType,
@@ -1087,7 +1770,11 @@ function saveDraft() {
   });
 
   setStorageJSON(STORAGE_KEY, draft);
-  queueSnapshot(draft);
+  queueSnapshot(draft, { skipDrive });
+
+  if (!skipDrive) {
+    queueDriveDraftWrite(draft);
+  }
 }
 
 function applyDraft(draft) {
@@ -1291,6 +1978,30 @@ function clearAll() {
   }
 
   localStorage.removeItem(STORAGE_KEY);
+
+  if (isDriveSyncEnabled()) {
+    const clearedDraft = {
+      savedAt: new Date().toISOString(),
+      state: {
+        practice: state.practice,
+        visitType: state.visitType,
+        currentModality: '',
+        followModality: '',
+        scriptVisible: false,
+        followupMode: 'scheduled',
+        selectedInterval: '',
+        therapyInterwovenTier: '0',
+      },
+      inputs: {},
+    };
+
+    inputIds.forEach((id) => {
+      clearedDraft.inputs[id] = '';
+    });
+
+    queueDriveDraftWrite(clearedDraft);
+  }
+
   refreshUI(false);
 
   try {
@@ -1599,6 +2310,14 @@ function runMedicationSearch(rawQuery) {
   const query = normalizeMedicationQueryToken(rawQuery);
   const favorites = new Set(getMedicationFavorites());
 
+  if (!medicationCatalog.length) {
+    medicationSearchResults = [];
+    medicationFocusedResultIndex = -1;
+    renderMedicationResults();
+    renderMedicationDetail();
+    return;
+  }
+
   const filteredByClass = medicationCatalog.filter((med) => {
     if (med.active === false) return false;
     if (state.medClassFilter === 'all') return true;
@@ -1656,6 +2375,12 @@ function renderMedicationResults() {
 
   if (!medicationSearchResults.length) {
     els.medEmptyState.classList.remove('hidden');
+    const messageEl = els.medEmptyState.querySelector('p');
+    if (messageEl) {
+      messageEl.textContent = medicationCatalogLoadError
+        ? 'Medication catalog could not be loaded right now. You can still request a medication below.'
+        : 'No medication found for this search.';
+    }
     if (els.medRequestBtn) {
       const label = activeQuery ? `Request "${activeQuery}"` : 'Request this medication';
       els.medRequestBtn.textContent = label;
@@ -1782,6 +2507,11 @@ function renderMedicationDetail() {
   const context = getSelectedMedicationContext();
 
   if (!context) {
+    if (medicationCatalogLoadError) {
+      els.medDetailEmpty.textContent = 'Medication catalog unavailable. Search will resume automatically when sync succeeds.';
+    } else {
+      els.medDetailEmpty.textContent = 'Select a medication to view details.';
+    }
     els.medDetailEmpty.classList.remove('hidden');
     els.medDetailContent.classList.add('hidden');
     els.medDetailContent.innerHTML = '';
@@ -1991,6 +2721,11 @@ function setMedicationDrawerOpen(isOpen, options = {}) {
     runMedicationSearch(els.medSearchInput ? els.medSearchInput.value : '');
   }
 
+  if (medicationCatalogLoadError && !medicationCatalog.length) {
+    renderMedicationResults();
+    renderMedicationDetail();
+  }
+
   focusMedicationSearch();
 }
 
@@ -2079,6 +2814,7 @@ function handleMedicationContextOpen(fieldId) {
 
 async function loadMedicationCatalog() {
   if (typeof fetch !== 'function') {
+    medicationCatalogLoadError = false;
     medicationCatalog = [];
     renderMedicationClassFilters();
     renderMedicationRows();
@@ -2103,6 +2839,7 @@ async function loadMedicationCatalog() {
 
     medicationCatalog = medications;
     medicationCatalogGeneratedAt = payload.generated_at || '';
+    medicationCatalogLoadError = false;
 
     renderMedicationClassFilters();
     renderMedicationRows();
@@ -2110,6 +2847,7 @@ async function loadMedicationCatalog() {
     renderMedicationDetail();
   } catch (error) {
     console.error('Unable to load medication catalog:', error);
+    medicationCatalogLoadError = true;
     medicationCatalog = [];
     renderMedicationClassFilters();
     renderMedicationRows();
@@ -2327,10 +3065,6 @@ function startMedicationAutoSync() {
 }
 
 function attachMedicationListeners() {
-  if (els.medDrawerBtn) {
-    els.medDrawerBtn.addEventListener('click', () => setMedicationDrawerOpen(true));
-  }
-
   if (els.medCloseBtn) {
     els.medCloseBtn.addEventListener('click', () => setMedicationDrawerOpen(false, { force: true }));
   }
@@ -2424,12 +3158,21 @@ function attachMedicationListeners() {
     });
   }
 
-  document.querySelectorAll('.med-context-btn').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const fieldId = btn.dataset.medContextField;
-      if (!fieldId) return;
-      handleMedicationContextOpen(fieldId);
-    });
+  document.addEventListener('click', (event) => {
+    const drawerLaunch = event.target.closest('#medDrawerBtn');
+    if (drawerLaunch) {
+      event.preventDefault();
+      setMedicationDrawerOpen(true);
+      return;
+    }
+
+    const contextBtn = event.target.closest('.med-context-btn');
+    if (!contextBtn) return;
+
+    event.preventDefault();
+    const fieldId = contextBtn.dataset.medContextField;
+    if (!fieldId) return;
+    handleMedicationContextOpen(fieldId);
   });
 }
 
@@ -2507,7 +3250,7 @@ function attachEventListeners() {
     els.scriptToggle.addEventListener('change', (event) => {
       state.scriptVisible = Boolean(event.target.checked);
       updateScriptVisibility();
-      updateTopbarState();
+      scheduleTopbarStateUpdate(true);
       saveDraft();
     });
   }
@@ -2577,7 +3320,7 @@ function attachEventListeners() {
     });
   }
 
-  window.addEventListener('scroll', () => updateTopbarState(), { passive: true });
+  window.addEventListener('scroll', () => scheduleTopbarStateUpdate(false), { passive: true });
 }
 
 function registerServiceWorker() {
@@ -2624,6 +3367,7 @@ function init() {
   }
 
   initMedicationReference();
+  initDriveSync();
   registerServiceWorker();
 }
 

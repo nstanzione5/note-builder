@@ -36,6 +36,9 @@ Source metadata can be refreshed without overwriting curated psych summaries.
 3. Generate review report
 - `npm run med:review`
 
+4. (Optional) Publish to Astra Shared Drive canonical storage
+- `npm run drive:publish`
+
 ## Auto-sync while app is open
 
 The browser app runs a low-priority background sync loop:
@@ -51,3 +54,4 @@ These checks run on idle timers and keep interaction work non-blocking.
 - Runtime browser sync updates local cache only (localStorage).
 - For shared canonical catalog updates, run scripts and commit generated JSON.
 - Curated psychiatry content should only be edited in curated files/scripts and reviewed clinically.
+- Drive writes are owner-gated at the Apps Script layer (`DRIVE_OWNER_EMAIL` / `ownerEmail`).
