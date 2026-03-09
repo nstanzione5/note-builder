@@ -824,31 +824,47 @@ function getFileSafe_(fileId) {
 }
 
 function insertFileSafe_(resource, blobOrNull) {
+  const normalizedResource = normalizeInsertResource_(resource);
+
   if (Drive.Files.insert) {
     try {
-      return Drive.Files.insert(resource, blobOrNull, { supportsAllDrives: true });
+      return Drive.Files.insert(normalizedResource, blobOrNull, { supportsAllDrives: true });
     } catch (allDrivesError) {
       try {
-        return Drive.Files.insert(resource, blobOrNull, { supportsTeamDrives: true });
+        return Drive.Files.insert(normalizedResource, blobOrNull, { supportsTeamDrives: true });
       } catch (teamDriveError) {
-        return Drive.Files.insert(resource, blobOrNull);
+        return Drive.Files.insert(normalizedResource, blobOrNull);
       }
     }
   }
 
   if (Drive.Files.create) {
     try {
-      return Drive.Files.create(resource, blobOrNull, { supportsAllDrives: true });
+      return Drive.Files.create(normalizedResource, blobOrNull, { supportsAllDrives: true });
     } catch (allDrivesError) {
       try {
-        return Drive.Files.create(resource, blobOrNull, { supportsTeamDrives: true });
+        return Drive.Files.create(normalizedResource, blobOrNull, { supportsTeamDrives: true });
       } catch (teamDriveError) {
-        return Drive.Files.create(resource, blobOrNull);
+        return Drive.Files.create(normalizedResource, blobOrNull);
       }
     }
   }
 
   throw new Error('No supported Drive file creation method is available.');
+}
+
+function normalizeInsertResource_(resource) {
+  const normalized = cloneObject_(resource || {});
+  const title = normalizeText_(normalized.title || '');
+  const name = normalizeText_(normalized.name || '');
+
+  if (title && !name) {
+    normalized.name = title;
+  } else if (name && !title) {
+    normalized.title = name;
+  }
+
+  return normalized;
 }
 
 function listFilesSafe_(params, sharedDriveId) {
