@@ -24,10 +24,11 @@ It also creates/updates `config/drive-manifest.json` with revision/checksum/path
 2. Enable the **Advanced Drive API** service in Apps Script.
 3. Copy `scripts/drive/apps-script/Code.gs` and `scripts/drive/apps-script/appsscript.json` into the project.
 4. Set script property `DRIVE_OWNER_EMAIL` (optional but recommended).
-5. Deploy as web app:
-   - Execute as: **User accessing the web app**
-   - Access: your org/users as needed
-6. Copy the deployment URL.
+5. Set script property `DRIVE_OWNER_TOKEN` to a long random secret.
+6. Deploy as web app:
+   - Execute as: **Me**
+   - Access: **Anyone** (required for cross-origin browser + CLI calls)
+7. Copy the deployment URL.
 
 ## Local configuration
 
@@ -39,6 +40,7 @@ Create `config/drive-sync.local.json` (not committed) from `config/drive-sync.co
   "sharedDriveId": "...",
   "rootFolderName": "Astra Clinical Note Builder",
   "ownerEmail": "nick@astrapsychiatry.com",
+  "ownerToken": "same-value-as-DRIVE_OWNER_TOKEN",
   "manifestPath": "config/drive-manifest.json"
 }
 ```
@@ -52,6 +54,7 @@ In `index.html` `<body>` data attributes:
 - `data-drive-shared-drive-id="..."`
 - `data-drive-root-folder-name="Astra Clinical Note Builder"`
 - `data-drive-owner-email="..."`
+- `data-drive-owner-token="same-value-as-DRIVE_OWNER_TOKEN"`
 - `data-drive-sync-minutes="30"`
 
 When enabled:
@@ -67,6 +70,7 @@ When enabled:
 - `npm run drive:bootstrap` -> ensure folders + manifest
 - `npm run drive:publish` -> push med artifacts + manifest
 - `npm run drive:pull` -> pull med artifacts + manifest to local workspace
+- `npm run med:knowledge-check` -> full med source refresh + compile + review + Drive publish
 
 ## Reliability notes
 
@@ -74,3 +78,4 @@ When enabled:
 - `noteBuilderDraft_v1` remains the live local draft key.
 - `noteBuilderSnapshots_v1` remains local snapshot history (last 3).
 - `clear` only clears the current draft; snapshots stay intact by design.
+- During each Drive sync cycle, the app also pulls `data/meds/compiled/medications.compiled.json` so medication reference updates published to Drive can appear in runtime without rebuilding the app shell.

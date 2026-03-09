@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-09T06:44:50.439Z",
+  "generated_at": "2026-03-09T08:57:46.976Z",
   "review_queue": [
     {
       "id": "citalopram",
@@ -23,7 +23,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "paroxetine",
@@ -35,7 +35,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "vilazodone",
@@ -47,7 +47,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "vortioxetine",
@@ -59,7 +59,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "desvenlafaxine",
@@ -71,7 +71,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "levomilnacipran",
@@ -83,7 +83,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "milnacipran",
@@ -95,7 +95,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "atomoxetine",
@@ -107,7 +107,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "sibutramine",
@@ -119,7 +119,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "dextromethorphan-bupropion",
@@ -140,7 +140,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "trazodone",
@@ -152,7 +152,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "nefazodone",
@@ -164,7 +164,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "amitriptyline",
@@ -176,7 +176,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "nortriptyline",
@@ -188,7 +188,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "desipramine",
@@ -200,7 +200,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "imipramine",
@@ -212,7 +212,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "clomipramine",
@@ -224,7 +224,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "doxepin",
@@ -236,7 +236,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "maprotiline",
@@ -248,7 +248,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "amoxapine",
@@ -260,7 +260,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "trimipramine",
@@ -272,7 +272,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "protriptyline",
@@ -284,7 +284,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "phenelzine",
@@ -296,7 +296,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "tranylcypromine",
@@ -308,7 +308,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "isocarboxazid",
@@ -320,7 +320,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "selegiline-transdermal",
@@ -332,7 +332,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "zuranolone",
@@ -344,7 +344,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "amphetamine-mixed-salts-xr",
@@ -374,7 +374,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "methamphetamine",
@@ -386,7 +386,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "methylphenidate-ir",
@@ -398,7 +398,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "methylphenidate-er",
@@ -410,7 +410,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "dexmethylphenidate",
@@ -422,7 +422,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "dexmethylphenidate-xr",
@@ -434,7 +434,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "serdexmethylphenidate-dexmethylphenidate",
@@ -446,7 +446,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "methylphenidate-pm",
@@ -458,7 +458,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "amphetamine-mixed-salts-er",
@@ -470,7 +470,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "amphetamine-sulfate",
@@ -482,7 +482,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "amphetamine-xr-odt",
@@ -494,7 +494,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "amphetamine-xr-suspension",
@@ -506,7 +506,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "methylphenidate-chewable-er",
@@ -518,7 +518,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "methylphenidate-suspension-er",
@@ -530,7 +530,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "methylphenidate-odt-xr",
@@ -542,7 +542,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "methylphenidate-transdermal",
@@ -554,7 +554,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "dextroamphetamine-transdermal",
@@ -566,7 +566,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "viloxazine",
@@ -587,7 +587,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "clonidine-ir",
@@ -599,7 +599,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "clonidine-er",
@@ -611,7 +611,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "modafinil",
@@ -623,7 +623,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "armodafinil",
@@ -635,7 +635,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "alprazolam",
@@ -647,7 +647,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "clonazepam",
@@ -659,7 +659,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "lorazepam",
@@ -671,7 +671,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "diazepam",
@@ -683,7 +683,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "temazepam",
@@ -695,7 +695,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "oxazepam",
@@ -707,7 +707,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "chlordiazepoxide",
@@ -719,7 +719,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "clorazepate",
@@ -731,7 +731,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "triazolam",
@@ -743,7 +743,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "estazolam",
@@ -755,7 +755,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "flurazepam",
@@ -767,7 +767,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "quazepam",
@@ -779,7 +779,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "midazolam",
@@ -791,7 +791,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "diazepam-nasal",
@@ -803,7 +803,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "midazolam-nasal",
@@ -815,7 +815,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "zolpidem",
@@ -827,7 +827,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "zolpidem-er",
@@ -839,7 +839,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "zaleplon",
@@ -851,7 +851,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "eszopiclone",
@@ -863,7 +863,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "ramelteon",
@@ -875,7 +875,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "suvorexant",
@@ -887,7 +887,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "lemborexant",
@@ -899,7 +899,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "daridorexant",
@@ -911,7 +911,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "doxepin-low-dose",
@@ -923,7 +923,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "hydroxyzine",
@@ -935,7 +935,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "diphenhydramine",
@@ -947,7 +947,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "gabapentin",
@@ -959,7 +959,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "pregabalin",
@@ -971,7 +971,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "melatonin-receptor-agonist",
@@ -983,7 +983,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "brexpiprazole",
@@ -995,7 +995,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "cariprazine",
@@ -1007,7 +1007,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "olanzapine",
@@ -1019,7 +1019,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "olanzapine-fluoxetine",
@@ -1031,7 +1031,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "olanzapine-samidorphan",
@@ -1043,7 +1043,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "risperidone",
@@ -1055,7 +1055,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "paliperidone-oral",
@@ -1067,7 +1067,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "ziprasidone",
@@ -1079,7 +1079,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "lurasidone",
@@ -1091,7 +1091,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "asenapine-sublingual",
@@ -1103,7 +1103,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "iloperidone",
@@ -1115,7 +1115,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "haloperidol",
@@ -1127,7 +1127,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "chlorpromazine",
@@ -1139,7 +1139,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "perphenazine",
@@ -1151,7 +1151,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "trifluoperazine",
@@ -1163,7 +1163,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "loxapine",
@@ -1175,7 +1175,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "molindone",
@@ -1187,7 +1187,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "pimozide",
@@ -1199,7 +1199,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "thiothixene",
@@ -1211,7 +1211,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "thioridazine",
@@ -1223,7 +1223,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "fluphenazine",
@@ -1235,7 +1235,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "xanomeline-trospium",
@@ -1247,7 +1247,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "pimavanserin",
@@ -1259,7 +1259,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "lithium-citrate",
@@ -1271,7 +1271,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "valproic-acid",
@@ -1283,7 +1283,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "carbamazepine",
@@ -1295,7 +1295,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "oxcarbazepine",
@@ -1307,7 +1307,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "topiramate",
@@ -1319,7 +1319,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "zonisamide",
@@ -1331,7 +1331,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "levetiracetam",
@@ -1343,7 +1343,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "prazosin",
@@ -1355,7 +1355,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "doxazosin",
@@ -1367,7 +1367,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "terazosin",
@@ -1379,7 +1379,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "propranolol",
@@ -1400,7 +1400,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "metoprolol",
@@ -1412,7 +1412,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "nadolol",
@@ -1424,7 +1424,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "bisoprolol",
@@ -1436,7 +1436,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "carvedilol",
@@ -1448,7 +1448,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "cyproheptadine",
@@ -1460,7 +1460,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "naltrexone-oral",
@@ -1481,7 +1481,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "disulfiram",
@@ -1493,7 +1493,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "naloxone-intranasal",
@@ -1505,7 +1505,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "nalmefene-intranasal",
@@ -1517,7 +1517,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "lofexidine",
@@ -1529,7 +1529,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "varenicline",
@@ -1541,7 +1541,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "nicotine-transdermal",
@@ -1553,7 +1553,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "nicotine-gum",
@@ -1565,7 +1565,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "nicotine-lozenge",
@@ -1577,7 +1577,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "bupropion-sr-smoking-cessation",
@@ -1589,7 +1589,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "liothyronine",
@@ -1601,7 +1601,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "methylfolate",
@@ -1613,7 +1613,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "ketamine-intranasal",
@@ -1625,7 +1625,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "benztropine",
@@ -1637,7 +1637,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "trihexyphenidyl",
@@ -1649,7 +1649,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "deutetrabenazine",
@@ -1661,7 +1661,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "valbenazine",
@@ -1673,7 +1673,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "tetrabenazine",
@@ -1685,7 +1685,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "memantine",
@@ -1697,7 +1697,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "donepezil",
@@ -1709,7 +1709,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "rivastigmine",
@@ -1721,7 +1721,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "galantamine",
@@ -1733,7 +1733,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "amantadine",
@@ -1745,7 +1745,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "baclofen",
@@ -1757,7 +1757,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "tizanidine",
@@ -1769,7 +1769,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "cyclobenzaprine",
@@ -1781,7 +1781,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "n-acetylcysteine",
@@ -1793,7 +1793,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "ondansetron",
@@ -1805,7 +1805,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "metoclopramide",
@@ -1817,7 +1817,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "lacosamide",
@@ -1829,7 +1829,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "tiagabine",
@@ -1841,7 +1841,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "rufinamide",
@@ -1853,7 +1853,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "missing fields"
     },
     {
       "id": "zolpidem-sublingual",
@@ -1865,7 +1865,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "zolpidem-oral-spray",
@@ -1877,7 +1877,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "alprazolam-odt",
@@ -1889,7 +1889,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "clonazepam-odt",
@@ -1901,7 +1901,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "lorazepam-sublingual",
@@ -1913,7 +1913,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "asenapine-transdermal",
@@ -1925,7 +1925,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "lithium-orotate",
@@ -1937,7 +1937,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "dexmedetomidine-sublingual",
@@ -1949,7 +1949,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "viloxazine-er",
@@ -1961,7 +1961,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "modafinil-oral-suspension",
@@ -1973,7 +1973,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "fluoxetine-weekly",
@@ -1985,7 +1985,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "paroxetine-cr",
@@ -1997,7 +1997,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "venlafaxine-er",
@@ -2009,7 +2009,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "desvenlafaxine-er",
@@ -2021,7 +2021,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "quetiapine-odt",
@@ -2033,7 +2033,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "risperidone-odt",
@@ -2045,7 +2045,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "olanzapine-odt",
@@ -2057,7 +2057,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "lamotrigine-odt",
@@ -2069,7 +2069,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "carbamazepine-er",
@@ -2081,7 +2081,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "oxcarbazepine-er",
@@ -2093,7 +2093,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "topiramate-er",
@@ -2105,7 +2105,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "gabapentin-enacarbil",
@@ -2117,7 +2117,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "pregabalin-er",
@@ -2129,7 +2129,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "propranolol-er",
@@ -2141,7 +2141,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "prazosin-bedtime",
@@ -2153,7 +2153,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "hydroxyzine-pamoate",
@@ -2165,7 +2165,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "hydroxyzine-hydrochloride",
@@ -2177,7 +2177,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "buspirone-split-dosing",
@@ -2189,7 +2189,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "naltrexone-low-dose",
@@ -2201,7 +2201,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "acamprosate-delayed-release",
@@ -2213,7 +2213,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "disulfiram-supervised",
@@ -2225,7 +2225,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "varenicline-starter-pack",
@@ -2237,7 +2237,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "nicotine-inhaler",
@@ -2249,7 +2249,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "nicotine-nasal-spray",
@@ -2261,7 +2261,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "guanfacine-patch",
@@ -2273,7 +2273,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "clonidine-patch",
@@ -2285,7 +2285,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "memantine-er",
@@ -2297,7 +2297,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "donepezil-odt",
@@ -2309,7 +2309,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "rivastigmine-patch",
@@ -2321,7 +2321,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "galantamine-er",
@@ -2333,7 +2333,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "armodafinil-tablet",
@@ -2345,7 +2345,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "modafinil-tablet",
@@ -2357,7 +2357,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "eszopiclone-low-dose",
@@ -2369,7 +2369,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "zaleplon-low-dose",
@@ -2381,7 +2381,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "daridorexant-dual-orexin-antagonist",
@@ -2393,7 +2393,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "lemborexant-dual-orexin-antagonist",
@@ -2405,7 +2405,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "suvorexant-dual-orexin-antagonist",
@@ -2417,7 +2417,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "ramelteon-melatonin-agonist",
@@ -2429,7 +2429,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "melatonin-extended-release",
@@ -2441,7 +2441,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "doxepin-oral-solution",
@@ -2453,7 +2453,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "quetiapine-oral-solution",
@@ -2465,7 +2465,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "aripiprazole-oral-solution",
@@ -2477,7 +2477,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "risperidone-oral-solution",
@@ -2489,7 +2489,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "haloperidol-oral-solution",
@@ -2501,7 +2501,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "chlorpromazine-oral-solution",
@@ -2513,7 +2513,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "perphenazine-oral-solution",
@@ -2525,7 +2525,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "trifluoperazine-oral-solution",
@@ -2537,7 +2537,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "loxapine-inhalation",
@@ -2549,7 +2549,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "ziprasidone-intramuscular",
@@ -2561,7 +2561,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "olanzapine-intramuscular",
@@ -2573,7 +2573,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "haloperidol-decanoate-oral-bridge",
@@ -2585,7 +2585,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "fluphenazine-decanoate-oral-bridge",
@@ -2597,7 +2597,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "paliperidone-oral-bridge",
@@ -2609,7 +2609,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "lurasidone-with-food",
@@ -2621,7 +2621,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "cariprazine-slow-titration",
@@ -2633,7 +2633,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "lumateperone-once-daily",
@@ -2645,7 +2645,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "brexpiprazole-low-start",
@@ -2657,7 +2657,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "aripiprazole-partial-agonist",
@@ -2669,7 +2669,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "olanzapine-high-metabolic-risk",
@@ -2681,7 +2681,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "quetiapine-sedating-profile",
@@ -2693,7 +2693,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "risperidone-prolactin-caution",
@@ -2705,7 +2705,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "ziprasidone-qtc-caution",
@@ -2717,7 +2717,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "lithium-narrow-therapeutic-index",
@@ -2729,7 +2729,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "lamotrigine-slow-titration-requirement",
@@ -2741,7 +2741,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "valproate-teratogenic-risk",
@@ -2753,7 +2753,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "carbamazepine-cyp-inducer",
@@ -2765,7 +2765,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "oxcarbazepine-hyponatremia-caution",
@@ -2777,7 +2777,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "topiramate-cognitive-side-effects",
@@ -2789,7 +2789,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "zonisamide-sulfa-caution",
@@ -2801,7 +2801,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "gabapentin-renal-adjustment",
@@ -2813,7 +2813,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "pregabalin-edema-caution",
@@ -2825,7 +2825,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "buspirone-delayed-onset",
@@ -2837,7 +2837,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "propranolol-performance-anxiety",
@@ -2849,7 +2849,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "prazosin-ptsd-nightmares",
@@ -2861,7 +2861,7 @@
         "curated side effects",
         "curated pearls"
       ],
-      "content_review_status": "newly added"
+      "content_review_status": "needs review"
     },
     {
       "id": "amphetamine-mixed-salts",

@@ -3,5 +3,6 @@
   "sharedDriveId": "",
   "rootFolderName": "Astra Clinical Note Builder",
   "ownerEmail": "nick@astrapsychiatry.com",
+  "ownerToken": "replace-with-random-secret-token",
   "manifestPath": "config/drive-manifest.json"
 }

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-09T06:44:50.439Z",
+  "generated_at": "2026-03-09T08:57:46.976Z",
   "source_policy": "source-derived metadata only; curated fields merged separately",
   "medications": [
     {
@@ -27,7 +27,7 @@
         "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=citalopram&maxEntries=5",
         "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22citalopram%22&limit=1"
       ],
-      "source_last_checked": "2026-03-09T06:40:20.532Z",
+      "source_last_checked": "2026-03-09T08:56:06.840Z",
       "editorial_last_reviewed": null,
       "content_review_status": "missing fields",
       "missing_data_flags": [
@@ -85,7 +85,7 @@
         "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=escitalopram&maxEntries=5",
         "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22escitalopram%22&limit=1"
       ],
-      "source_last_checked": "2026-03-09T06:40:21.081Z",
+      "source_last_checked": "2026-03-09T08:56:07.484Z",
       "editorial_last_reviewed": null,
       "content_review_status": "source synced",
       "missing_data_flags": [
@@ -145,7 +145,7 @@
         "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=fluoxetine&maxEntries=5",
         "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22fluoxetine%22&limit=1"
       ],
-      "source_last_checked": "2026-03-09T06:40:21.851Z",
+      "source_last_checked": "2026-03-09T08:56:08.248Z",
       "editorial_last_reviewed": null,
       "content_review_status": "source synced",
       "missing_data_flags": [
@@ -197,10 +197,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=fluvoxamine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22fluvoxamine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=fluvoxamine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22fluvoxamine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:08.808Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -254,10 +259,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=paroxetine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22paroxetine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=paroxetine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22paroxetine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:09.345Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -307,8 +317,13 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=sertraline&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22sertraline%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=sertraline&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22sertraline%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:09.848Z",
       "editorial_last_reviewed": null,
       "content_review_status": "source synced",
       "missing_data_flags": [
@@ -360,10 +375,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=vilazodone&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22vilazodone%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=vilazodone&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22vilazodone%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:10.308Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -413,10 +433,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=vortioxetine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22vortioxetine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=vortioxetine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22vortioxetine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:10.630Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -466,8 +491,13 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=venlafaxine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22venlafaxine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=venlafaxine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22venlafaxine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:11.192Z",
       "editorial_last_reviewed": null,
       "content_review_status": "source synced",
       "missing_data_flags": [
@@ -519,10 +549,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=desvenlafaxine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22desvenlafaxine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=desvenlafaxine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22desvenlafaxine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:11.715Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -572,8 +607,13 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=duloxetine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22duloxetine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=duloxetine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22duloxetine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:12.506Z",
       "editorial_last_reviewed": null,
       "content_review_status": "source synced",
       "missing_data_flags": [
@@ -625,10 +665,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=levomilnacipran&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22levomilnacipran%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=levomilnacipran&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22levomilnacipran%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:12.797Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -678,10 +723,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=milnacipran&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22milnacipran%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=milnacipran&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22milnacipran%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:13.151Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -731,10 +781,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=atomoxetine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22atomoxetine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=atomoxetine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22atomoxetine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:13.633Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -780,10 +835,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=sibutramine&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:56:13.981Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -839,8 +896,13 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=bupropion&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22bupropion%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=bupropion&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22bupropion%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:14.415Z",
       "editorial_last_reviewed": null,
       "content_review_status": "source synced",
       "missing_data_flags": [
@@ -892,10 +954,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=dextromethorphan-bupropion&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:56:14.703Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "source synced",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -945,10 +1009,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=mirtazapine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22mirtazapine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=mirtazapine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22mirtazapine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:15.181Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -998,10 +1067,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=trazodone&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22trazodone%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=trazodone&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22trazodone%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:15.768Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -1047,10 +1121,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=nefazodone&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22nefazodone%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=nefazodone&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22nefazodone%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:16.124Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -1100,10 +1179,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=amitriptyline&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22amitriptyline%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=amitriptyline&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22amitriptyline%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:16.699Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -1153,10 +1237,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=nortriptyline&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22nortriptyline%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=nortriptyline&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22nortriptyline%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:17.247Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -1206,10 +1295,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=desipramine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22desipramine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=desipramine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22desipramine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:17.665Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -1259,10 +1353,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=imipramine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22imipramine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=imipramine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22imipramine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:18.215Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -1312,10 +1411,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=clomipramine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22clomipramine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=clomipramine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22clomipramine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:18.795Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -1365,10 +1469,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=doxepin&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22doxepin%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=doxepin&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22doxepin%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:19.262Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -1414,10 +1523,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=maprotiline&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:56:19.541Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -1463,10 +1574,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=amoxapine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22amoxapine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=amoxapine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22amoxapine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:19.936Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -1516,10 +1632,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=trimipramine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22trimipramine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=trimipramine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22trimipramine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:20.273Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -1569,10 +1690,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=protriptyline&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22protriptyline%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=protriptyline&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22protriptyline%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:20.583Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -1622,10 +1748,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=phenelzine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22phenelzine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=phenelzine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22phenelzine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:20.901Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -1675,10 +1806,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=tranylcypromine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22tranylcypromine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=tranylcypromine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22tranylcypromine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:21.320Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -1728,10 +1864,13 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=isocarboxazid&pagesize=3",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=isocarboxazid&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:56:21.610Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -1781,10 +1920,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=selegiline%20transdermal&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:56:21.886Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -1834,10 +1975,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=zuranolone&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22zuranolone%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=zuranolone&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22zuranolone%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:22.184Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -1887,10 +2033,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=amphetamine%20mixed%20salts%20IR&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:56:22.519Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "source synced",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -1940,10 +2088,13 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=amphetamine%20mixed%20salts%20XR&pagesize=3",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=amphetamine%20mixed%20salts%20XR&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:56:22.803Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "source synced",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -1993,8 +2144,13 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=lisdexamfetamine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22lisdexamfetamine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=lisdexamfetamine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22lisdexamfetamine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:23.459Z",
       "editorial_last_reviewed": null,
       "content_review_status": "source synced",
       "missing_data_flags": [
@@ -2048,10 +2204,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=dextroamphetamine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22dextroamphetamine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=dextroamphetamine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22dextroamphetamine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:23.979Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -2101,10 +2262,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=methamphetamine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22methamphetamine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=methamphetamine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22methamphetamine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:24.290Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -2156,10 +2322,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=methylphenidate%20IR&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:56:24.612Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -2213,10 +2381,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=methylphenidate%20ER&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:56:24.991Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -2266,10 +2436,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=dexmethylphenidate&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22dexmethylphenidate%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=dexmethylphenidate&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22dexmethylphenidate%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:25.513Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -2319,10 +2494,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=dexmethylphenidate%20XR&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:56:25.790Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -2372,10 +2549,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=serdexmethylphenidate-dexmethylphenidate&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:56:26.094Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -2425,10 +2604,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=methylphenidate%20PM&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:56:26.377Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -2478,10 +2659,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=amphetamine%20mixed%20salts%20ER&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:56:26.713Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -2531,10 +2714,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=amphetamine%20sulfate&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22amphetamine%20sulfate%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=amphetamine%20sulfate&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22amphetamine%20sulfate%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:27.096Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -2584,10 +2772,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=amphetamine%20XR%20ODT&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:56:27.374Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -2637,10 +2827,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=amphetamine%20XR%20suspension&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:56:27.654Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -2690,10 +2882,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=methylphenidate%20chewable%20ER&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:56:27.932Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -2743,10 +2937,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=methylphenidate%20suspension%20ER&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:56:28.296Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -2796,10 +2992,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=methylphenidate%20ODT%20XR&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:56:28.663Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -2849,10 +3047,13 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=methylphenidate%20transdermal&pagesize=3",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=methylphenidate%20transdermal&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:56:28.966Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -2902,10 +3103,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=dextroamphetamine%20transdermal&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:56:29.243Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -2955,8 +3158,13 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=viloxazine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22viloxazine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=viloxazine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22viloxazine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:29.540Z",
       "editorial_last_reviewed": null,
       "content_review_status": "source synced",
       "missing_data_flags": [
@@ -3008,10 +3216,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=guanfacine%20IR&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:56:29.860Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -3061,10 +3271,14 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=guanfacine%20ER&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22guanfacine%20ER%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=guanfacine%20ER&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:56:30.322Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "source synced",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -3114,10 +3328,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=clonidine%20IR&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:56:30.638Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -3167,10 +3383,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=clonidine%20ER&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:56:30.919Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -3220,10 +3438,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=modafinil&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22modafinil%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=modafinil&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22modafinil%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:31.550Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -3273,10 +3496,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=armodafinil&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22armodafinil%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=armodafinil&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22armodafinil%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:32.029Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -3326,10 +3554,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=alprazolam&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22alprazolam%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=alprazolam&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22alprazolam%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:32.981Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -3379,10 +3612,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=clonazepam&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22clonazepam%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=clonazepam&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22clonazepam%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:33.589Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -3432,10 +3670,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=lorazepam&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22lorazepam%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=lorazepam&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22lorazepam%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:34.199Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -3485,10 +3728,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=diazepam&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22diazepam%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=diazepam&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22diazepam%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:34.826Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -3538,10 +3786,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=temazepam&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22temazepam%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=temazepam&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22temazepam%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:35.542Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -3591,10 +3844,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=oxazepam&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22oxazepam%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=oxazepam&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22oxazepam%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:36.001Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -3644,10 +3902,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=chlordiazepoxide&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22chlordiazepoxide%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=chlordiazepoxide&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22chlordiazepoxide%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:36.590Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -3697,10 +3960,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=clorazepate&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22clorazepate%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=clorazepate&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22clorazepate%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:37.050Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -3750,10 +4018,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=triazolam&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22triazolam%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=triazolam&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22triazolam%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:37.479Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -3803,10 +4076,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=estazolam&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22estazolam%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=estazolam&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22estazolam%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:37.800Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -3856,10 +4134,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=flurazepam&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22flurazepam%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=flurazepam&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22flurazepam%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:38.123Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -3909,10 +4192,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=quazepam&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22quazepam%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=quazepam&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22quazepam%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:38.413Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -3962,10 +4250,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=midazolam&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22midazolam%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=midazolam&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22midazolam%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:39.022Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -4015,10 +4308,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=diazepam%20nasal&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:56:39.338Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -4068,10 +4363,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=midazolam%20nasal&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:56:39.678Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -4121,10 +4418,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=zolpidem&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22zolpidem%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=zolpidem&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22zolpidem%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:40.358Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -4174,10 +4476,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=zolpidem%20ER&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:56:40.763Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -4227,10 +4531,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=zaleplon&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22zaleplon%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=zaleplon&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22zaleplon%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:41.308Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -4280,10 +4589,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=eszopiclone&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22eszopiclone%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=eszopiclone&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22eszopiclone%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:41.883Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -4333,10 +4647,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=ramelteon&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22ramelteon%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=ramelteon&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22ramelteon%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:42.401Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -4386,10 +4705,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=suvorexant&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22suvorexant%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=suvorexant&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22suvorexant%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:42.698Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -4439,10 +4763,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=lemborexant&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22lemborexant%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=lemborexant&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22lemborexant%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:42.991Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -4492,10 +4821,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=daridorexant&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22daridorexant%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=daridorexant&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22daridorexant%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:43.347Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -4545,10 +4879,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=doxepin%20low-dose&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:56:43.627Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -4600,10 +4936,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=hydroxyzine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22hydroxyzine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=hydroxyzine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22hydroxyzine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:44.245Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -4653,10 +4994,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=diphenhydramine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22diphenhydramine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=diphenhydramine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22diphenhydramine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:45.066Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -4706,10 +5052,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=gabapentin&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22gabapentin%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=gabapentin&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22gabapentin%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:45.541Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -4759,10 +5110,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=pregabalin&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22pregabalin%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=pregabalin&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22pregabalin%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:46.146Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -4808,10 +5164,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=melatonin%20receptor%20agonist&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:56:46.491Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -4861,8 +5219,13 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=aripiprazole&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22aripiprazole%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=aripiprazole&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22aripiprazole%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:47.014Z",
       "editorial_last_reviewed": null,
       "content_review_status": "source synced",
       "missing_data_flags": [
@@ -4914,10 +5277,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=brexpiprazole&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22brexpiprazole%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=brexpiprazole&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22brexpiprazole%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:47.317Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -4967,10 +5335,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=cariprazine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22cariprazine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=cariprazine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22cariprazine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:47.609Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -5020,10 +5393,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=quetiapine%20IR&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:56:47.883Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "source synced",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -5073,10 +5448,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=quetiapine%20XR&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:56:48.208Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "source synced",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -5126,10 +5503,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=olanzapine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22olanzapine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=olanzapine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22olanzapine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:48.721Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -5179,10 +5561,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=olanzapine-fluoxetine&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:56:48.998Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -5232,10 +5616,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=olanzapine-samidorphan&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:56:49.280Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -5285,10 +5671,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=risperidone&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22risperidone%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=risperidone&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22risperidone%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:49.777Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -5338,10 +5729,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=paliperidone%20oral&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:56:50.054Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -5391,10 +5784,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=ziprasidone&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22ziprasidone%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=ziprasidone&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22ziprasidone%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:50.696Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -5444,10 +5842,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=lurasidone&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22lurasidone%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=lurasidone&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22lurasidone%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:51.090Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -5497,8 +5900,13 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=lumateperone&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22lumateperone%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=lumateperone&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22lumateperone%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:51.384Z",
       "editorial_last_reviewed": null,
       "content_review_status": "source synced",
       "missing_data_flags": [
@@ -5550,10 +5958,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=asenapine%20sublingual&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:56:51.734Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -5603,10 +6013,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=iloperidone&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22iloperidone%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=iloperidone&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22iloperidone%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:52.055Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -5656,10 +6071,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=haloperidol&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22haloperidol%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=haloperidol&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22haloperidol%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:52.576Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -5709,10 +6129,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=chlorpromazine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22chlorpromazine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=chlorpromazine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22chlorpromazine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:53.096Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -5762,10 +6187,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=perphenazine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22perphenazine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=perphenazine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22perphenazine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:53.699Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -5815,10 +6245,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=trifluoperazine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22trifluoperazine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=trifluoperazine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22trifluoperazine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:54.135Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -5868,10 +6303,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=loxapine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22loxapine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=loxapine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22loxapine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:54.592Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -5917,10 +6357,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=molindone&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22molindone%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=molindone&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22molindone%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:54.882Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -5970,10 +6415,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=pimozide&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22pimozide%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=pimozide&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22pimozide%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:55.170Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -6023,10 +6473,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=thiothixene&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22thiothixene%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=thiothixene&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22thiothixene%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:55.533Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -6076,10 +6531,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=thioridazine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22thioridazine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=thioridazine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22thioridazine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:55.927Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -6129,10 +6589,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=fluphenazine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22fluphenazine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=fluphenazine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22fluphenazine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:56.360Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -6182,10 +6647,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=xanomeline-trospium&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:56:56.638Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -6235,10 +6702,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=pimavanserin&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22pimavanserin%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=pimavanserin&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22pimavanserin%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:57.012Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -6290,8 +6762,13 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=lithium%20carbonate&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22lithium%20carbonate%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=lithium%20carbonate&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22lithium%20carbonate%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:57.391Z",
       "editorial_last_reviewed": null,
       "content_review_status": "source synced",
       "missing_data_flags": [
@@ -6343,10 +6820,14 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=lithium%20citrate&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22lithium%20citrate%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=lithium%20citrate&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:56:57.678Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -6396,8 +6877,13 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=lamotrigine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22lamotrigine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=lamotrigine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22lamotrigine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:58.055Z",
       "editorial_last_reviewed": null,
       "content_review_status": "source synced",
       "missing_data_flags": [
@@ -6449,8 +6935,13 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=divalproex&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22divalproex%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=divalproex&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22divalproex%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:58.548Z",
       "editorial_last_reviewed": null,
       "content_review_status": "source synced",
       "missing_data_flags": [
@@ -6502,10 +6993,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=valproic%20acid&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22valproic%20acid%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=valproic%20acid&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22valproic%20acid%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:58.838Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -6555,10 +7051,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=carbamazepine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22carbamazepine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=carbamazepine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22carbamazepine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:59.273Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -6608,10 +7109,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=oxcarbazepine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22oxcarbazepine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=oxcarbazepine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22oxcarbazepine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:56:59.655Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -6661,10 +7167,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=topiramate&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22topiramate%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=topiramate&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22topiramate%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:00.122Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -6714,10 +7225,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=zonisamide&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22zonisamide%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=zonisamide&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22zonisamide%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:00.717Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -6767,10 +7283,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=levetiracetam&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22levetiracetam%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=levetiracetam&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22levetiracetam%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:01.255Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -6820,10 +7341,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=prazosin&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22prazosin%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=prazosin&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22prazosin%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:01.733Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -6873,10 +7399,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=doxazosin&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22doxazosin%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=doxazosin&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22doxazosin%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:02.220Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -6926,10 +7457,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=terazosin&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22terazosin%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=terazosin&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22terazosin%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:02.784Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -6979,8 +7515,13 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=propranolol&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22propranolol%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=propranolol&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22propranolol%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:03.340Z",
       "editorial_last_reviewed": null,
       "content_review_status": "source synced",
       "missing_data_flags": [
@@ -7032,10 +7573,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=atenolol&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22atenolol%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=atenolol&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22atenolol%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:04.009Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -7087,10 +7633,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=metoprolol&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22metoprolol%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=metoprolol&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22metoprolol%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:04.460Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -7140,10 +7691,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=nadolol&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22nadolol%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=nadolol&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22nadolol%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:05.058Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -7193,10 +7749,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=bisoprolol&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22bisoprolol%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=bisoprolol&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22bisoprolol%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:05.628Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -7246,10 +7807,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=carvedilol&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22carvedilol%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=carvedilol&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22carvedilol%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:05.952Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -7299,8 +7865,13 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=buspirone&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22buspirone%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=buspirone&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22buspirone%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:06.494Z",
       "editorial_last_reviewed": null,
       "content_review_status": "source synced",
       "missing_data_flags": [
@@ -7352,10 +7923,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=cyproheptadine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22cyproheptadine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=cyproheptadine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22cyproheptadine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:07.096Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -7405,10 +7981,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=naltrexone%20oral&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:07.373Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "source synced",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -7458,10 +8036,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=acamprosate&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22acamprosate%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=acamprosate&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22acamprosate%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:07.755Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -7511,10 +8094,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=disulfiram&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22disulfiram%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=disulfiram&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22disulfiram%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:08.100Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -7564,10 +8152,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=naloxone%20intranasal&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:08.393Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -7617,10 +8207,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=nalmefene%20intranasal&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:08.669Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -7670,10 +8262,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=lofexidine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22lofexidine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=lofexidine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22lofexidine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:09.034Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -7723,10 +8320,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=varenicline&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22varenicline%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=varenicline&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22varenicline%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:09.570Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -7776,10 +8378,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=nicotine%20transdermal&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22nicotine%20transdermal%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=nicotine%20transdermal&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22nicotine%20transdermal%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:09.858Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -7829,10 +8436,13 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=nicotine%20gum&pagesize=3",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=nicotine%20gum&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:10.171Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -7882,10 +8492,13 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=nicotine%20lozenge&pagesize=3",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=nicotine%20lozenge&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:10.453Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -7935,10 +8548,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=bupropion%20SR%20smoking%20cessation&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:10.760Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -7988,10 +8603,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=liothyronine&pagesize=3",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=liothyronine&maxEntries=5",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22liothyronine%22&limit=1",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22liothyronine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:11.381Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -8041,10 +8661,13 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=methylfolate&pagesize=3",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=methylfolate&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:11.691Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -8094,10 +8717,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=ketamine%20intranasal&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:11.967Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -8147,10 +8772,14 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=benztropine&pagesize=3",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=benztropine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22benztropine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:12.714Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -8200,10 +8829,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=trihexyphenidyl&pagesize=3",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=trihexyphenidyl&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22trihexyphenidyl%22&limit=1",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22trihexyphenidyl%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:13.229Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -8253,10 +8887,14 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=deutetrabenazine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22deutetrabenazine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=deutetrabenazine&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:13.544Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -8306,10 +8944,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=valbenazine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22valbenazine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=valbenazine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22valbenazine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:13.925Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -8359,10 +9002,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=tetrabenazine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22tetrabenazine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=tetrabenazine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22tetrabenazine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:14.330Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -8412,10 +9060,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=memantine&pagesize=3",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=memantine&maxEntries=5",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22memantine%22&limit=1",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22memantine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:14.852Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -8465,10 +9118,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=donepezil&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22donepezil%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=donepezil&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22donepezil%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:15.395Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -8518,10 +9176,14 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=rivastigmine&pagesize=3",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=rivastigmine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22rivastigmine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:16.015Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -8571,10 +9233,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=galantamine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22galantamine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=galantamine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22galantamine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:16.486Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -8624,10 +9291,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=amantadine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22amantadine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=amantadine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22amantadine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:16.912Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -8677,10 +9349,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=baclofen&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22baclofen%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=baclofen&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22baclofen%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:17.429Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -8730,10 +9407,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=tizanidine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22tizanidine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=tizanidine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22tizanidine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:17.952Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -8783,10 +9465,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=cyclobenzaprine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22cyclobenzaprine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=cyclobenzaprine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22cyclobenzaprine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:18.651Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -8832,10 +9519,13 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=n-acetylcysteine&pagesize=3",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=n-acetylcysteine&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:19.000Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -8885,10 +9575,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=ondansetron&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22ondansetron%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=ondansetron&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22ondansetron%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:19.522Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -8938,10 +9633,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=metoclopramide&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22metoclopramide%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=metoclopramide&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22metoclopramide%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:20.048Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -8991,10 +9691,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=lacosamide&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22lacosamide%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=lacosamide&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22lacosamide%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:20.444Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -9044,10 +9749,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=tiagabine&pagesize=3",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=tiagabine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22tiagabine%22&limit=1",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22tiagabine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:20.782Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -9097,10 +9807,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=rufinamide&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22rufinamide%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=rufinamide&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22rufinamide%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:21.220Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -9150,10 +9865,13 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=zolpidem%20sublingual&pagesize=3",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=zolpidem%20sublingual&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:21.513Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -9203,10 +9921,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=zolpidem%20oral%20spray&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:21.792Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -9256,10 +9976,14 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=alprazolam%20ODT&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22alprazolam%20ODT%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=alprazolam%20ODT&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:22.145Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -9309,10 +10033,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=clonazepam%20ODT&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:22.423Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -9358,10 +10084,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=lorazepam%20sublingual&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:22.698Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -9411,10 +10139,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=asenapine%20transdermal&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:22.987Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -9460,10 +10190,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=lithium%20orotate&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:23.338Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -9513,10 +10245,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=dexmedetomidine%20sublingual&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:23.619Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -9566,10 +10300,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=viloxazine%20ER&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:23.895Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -9615,10 +10351,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=modafinil%20oral%20suspension&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:24.242Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -9668,10 +10406,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=fluoxetine%20weekly&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:24.520Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -9721,10 +10461,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=paroxetine%20CR&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:24.795Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -9774,10 +10516,13 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=venlafaxine%20ER&pagesize=3",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=venlafaxine%20ER&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:25.084Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -9827,10 +10572,14 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=desvenlafaxine%20ER&pagesize=3",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=desvenlafaxine%20ER&maxEntries=5",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22desvenlafaxine%20ER%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:25.450Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -9876,10 +10625,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=quetiapine%20ODT&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:25.812Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -9929,10 +10680,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=risperidone%20ODT&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:26.087Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -9982,10 +10735,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=olanzapine%20ODT&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:26.371Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -10031,10 +10786,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=lamotrigine%20ODT&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:26.650Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -10084,10 +10841,14 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=carbamazepine%20ER&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22carbamazepine%20ER%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=carbamazepine%20ER&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:27.030Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -10137,10 +10898,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=oxcarbazepine%20ER&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:27.249Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -10190,10 +10953,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=topiramate%20ER&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:27.542Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -10243,10 +11008,14 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=gabapentin%20enacarbil&pagesize=3",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=gabapentin%20enacarbil&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22gabapentin%20enacarbil%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:27.825Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -10296,10 +11065,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=pregabalin%20ER&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:28.034Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -10349,10 +11120,13 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=propranolol%20ER&pagesize=3",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=propranolol%20ER&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:28.321Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -10398,10 +11172,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=prazosin%20bedtime&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:28.597Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -10451,10 +11227,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=hydroxyzine%20pamoate&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22hydroxyzine%20pamoate%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=hydroxyzine%20pamoate&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22hydroxyzine%20pamoate%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:28.963Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -10504,10 +11285,15 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=hydroxyzine%20hydrochloride&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22hydroxyzine%20hydrochloride%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=hydroxyzine%20hydrochloride&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22hydroxyzine%20hydrochloride%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:29.273Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -10553,10 +11339,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=buspirone%20split%20dosing&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:29.635Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -10602,10 +11390,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=naltrexone%20low%20dose&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:29.917Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -10655,10 +11445,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=acamprosate%20delayed-release&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:30.128Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -10708,10 +11500,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=disulfiram%20supervised&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:30.342Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -10761,10 +11555,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=varenicline%20starter%20pack&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:30.617Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -10814,10 +11610,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=nicotine%20inhaler&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:30.941Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -10867,10 +11665,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=nicotine%20nasal%20spray&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:31.216Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -10916,10 +11716,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=guanfacine%20patch&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:31.583Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -10969,10 +11771,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=clonidine%20patch&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:31.858Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -11022,10 +11826,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=memantine%20ER&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:32.135Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -11075,10 +11881,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=donepezil%20ODT&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:32.411Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -11128,10 +11936,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=rivastigmine%20patch&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:32.688Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -11181,10 +11991,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=galantamine%20ER&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:32.898Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -11234,10 +12046,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=armodafinil%20tablet&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:33.157Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -11287,10 +12101,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=modafinil%20tablet&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:33.446Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -11340,10 +12156,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=eszopiclone%20low%20dose&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:33.723Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -11393,10 +12211,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=zaleplon%20low%20dose&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:34.045Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -11446,10 +12266,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=daridorexant%20dual%20orexin%20antagonist&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:34.352Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -11499,10 +12321,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=lemborexant%20dual%20orexin%20antagonist&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:34.563Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -11552,10 +12376,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=suvorexant%20dual%20orexin%20antagonist&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:34.875Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -11605,10 +12431,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=ramelteon%20melatonin%20agonist&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:35.157Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -11654,10 +12482,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=melatonin%20extended%20release&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:35.435Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -11703,10 +12533,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=doxepin%20oral%20solution&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:35.778Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -11752,10 +12584,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=quetiapine%20oral%20solution&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:35.993Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -11805,10 +12639,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=aripiprazole%20oral%20solution&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:36.302Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -11858,10 +12694,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=risperidone%20oral%20solution&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:36.578Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -11907,10 +12745,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=haloperidol%20oral%20solution&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:36.854Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -11956,10 +12796,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=chlorpromazine%20oral%20solution&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:37.129Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -12005,10 +12847,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=perphenazine%20oral%20solution&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:37.351Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -12054,10 +12898,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=trifluoperazine%20oral%20solution&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:37.629Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -12107,10 +12953,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=loxapine%20inhalation&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:37.906Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -12160,10 +13008,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=ziprasidone%20intramuscular&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:38.184Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -12213,10 +13063,13 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=olanzapine%20intramuscular&pagesize=3",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=olanzapine%20intramuscular&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:38.500Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -12262,10 +13115,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=haloperidol%20decanoate%20oral%20bridge&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:38.936Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -12311,10 +13166,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=fluphenazine%20decanoate%20oral%20bridge&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:39.148Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -12360,10 +13217,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=paliperidone%20oral%20bridge&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:39.448Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -12413,10 +13272,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=lurasidone%20with%20food&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:39.658Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -12466,10 +13327,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=cariprazine%20slow%20titration&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:39.972Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -12519,10 +13382,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=lumateperone%20once%20daily&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:40.253Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -12572,10 +13437,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=brexpiprazole%20low%20start&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:40.499Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -12625,10 +13492,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=aripiprazole%20partial%20agonist&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:40.773Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -12678,10 +13547,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=olanzapine%20high%20metabolic%20risk&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:41.020Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -12731,10 +13602,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=quetiapine%20sedating%20profile&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:41.230Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -12784,10 +13657,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=risperidone%20prolactin%20caution&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:41.547Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -12837,10 +13712,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=ziprasidone%20qtc%20caution&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:41.827Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -12890,10 +13767,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=lithium%20narrow%20therapeutic%20index&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:42.106Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -12943,10 +13822,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=lamotrigine%20slow%20titration%20requirement&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:42.382Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -12996,10 +13877,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=valproate%20teratogenic%20risk&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:42.678Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -13049,10 +13932,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=carbamazepine%20cyp%20inducer&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:42.954Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -13102,10 +13987,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=oxcarbazepine%20hyponatremia%20caution&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:43.265Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -13155,10 +14042,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=topiramate%20cognitive%20side%20effects&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:43.475Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -13208,10 +14097,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=zonisamide%20sulfa%20caution&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:43.790Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -13261,10 +14152,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=gabapentin%20renal%20adjustment&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:44.067Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -13314,10 +14207,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=pregabalin%20edema%20caution&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:44.275Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -13367,10 +14262,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=buspirone%20delayed%20onset&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:44.556Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -13420,10 +14317,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=propranolol%20performance%20anxiety&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:44.775Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -13473,10 +14372,12 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=prazosin%20ptsd%20nightmares&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:44.985Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -13530,10 +14431,13 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=amphetamine%20mixed%20salts&pagesize=3",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=amphetamine%20mixed%20salts&maxEntries=5"
+      ],
+      "source_last_checked": "2026-03-09T08:57:45.272Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "source synced",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -13618,10 +14522,14 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=methylphenidate&pagesize=3",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=methylphenidate&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22methylphenidate%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:45.739Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "source synced",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
@@ -13725,8 +14633,13 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=guanfacine&pagesize=3",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22guanfacine%22&limit=1",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=guanfacine&maxEntries=5",
+        "https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22guanfacine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:46.163Z",
       "editorial_last_reviewed": null,
       "content_review_status": "source synced",
       "missing_data_flags": [
@@ -13809,10 +14722,14 @@
       "important_risks": [],
       "psych_interactions": [],
       "clinical_pearls": [],
-      "source_links": [],
-      "source_last_checked": null,
+      "source_links": [
+        "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=quetiapine&pagesize=3",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=quetiapine&maxEntries=5",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22quetiapine%22&limit=1"
+      ],
+      "source_last_checked": "2026-03-09T08:57:46.788Z",
       "editorial_last_reviewed": null,
-      "content_review_status": "source synced",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",

@@ -27,16 +27,16 @@ Source metadata can be refreshed without overwriting curated psych summaries.
 
 ## Update workflow
 
-1. Compile baseline catalog (source + curated merge)
-- `npm run med:compile`
+1. Run full knowledge check + compile + review + Drive publish
+- `npm run med:knowledge-check`
 
-2. Refresh source metadata from adapters
+2. Local-only check (no Drive publish)
+- `npm run med:knowledge-check:local`
+
+3. Manual steps (if needed)
 - `npm run med:sync`
-
-3. Generate review report
+- `npm run med:compile`
 - `npm run med:review`
-
-4. (Optional) Publish to Astra Shared Drive canonical storage
 - `npm run drive:publish`
 
 ## Auto-sync while app is open
@@ -49,9 +49,15 @@ The browser app runs a low-priority background sync loop:
 
 These checks run on idle timers and keep interaction work non-blocking.
 
+When Drive sync is enabled, each Drive sync cycle also pulls:
+- `data/meds/compiled/medications.compiled.json`
+
+This lets app runtime pick up newly published catalog data without requiring a page rebuild. The sync interval is controlled by:
+- `<body data-drive-sync-minutes="...">` in `index.html`
+
 ## Important limits
 
 - Runtime browser sync updates local cache only (localStorage).
-- For shared canonical catalog updates, run scripts and commit generated JSON.
+- For shared canonical catalog updates, run `npm run med:knowledge-check` from this workspace.
 - Curated psychiatry content should only be edited in curated files/scripts and reviewed clinically.
-- Drive writes are owner-gated at the Apps Script layer (`DRIVE_OWNER_EMAIL` / `ownerEmail`).
+- Drive writes are owner-gated at the Apps Script layer (`DRIVE_OWNER_EMAIL` and/or `DRIVE_OWNER_TOKEN`).

@@ -8,6 +8,7 @@ const state = {
   selectedInterval: '',
   therapyInterwovenTier: '0',
   topbarCondensed: false,
+  topbarCondenseProgress: 0,
   medDrawerOpen: false,
   medDrawerPinned: false,
   medClassFilter: 'all',
@@ -150,8 +151,10 @@ const brandConfig = {
 const STORAGE_KEY = 'noteBuilderDraft_v1';
 const SNAPSHOT_KEY = 'noteBuilderSnapshots_v1';
 const MAX_SNAPSHOTS = 3;
-const CONDENSE_ENTER_Y = 130;
-const CONDENSE_EXIT_Y = 72;
+const CONDENSE_START_Y = 36;
+const CONDENSE_END_Y = 210;
+const CONDENSE_CLASS_ENTER = 0.86;
+const CONDENSE_CLASS_EXIT = 0.62;
 
 const MED_CATALOG_URL = './data/meds/compiled/medications.compiled.json';
 const MED_FAVORITES_KEY = 'medDrawerFavorites_v1';
@@ -163,6 +166,7 @@ const DRIVE_QUEUE_KEY = 'driveSyncPendingWrites_v1';
 const DRIVE_META_KEY = 'driveSyncMeta_v1';
 const DRIVE_REVISIONS_KEY = 'driveSyncRevisions_v1';
 const DRIVE_DRAFT_PATH = 'data/draft/current.json';
+const DRIVE_MED_COMPILED_PATH = 'data/meds/compiled/medications.compiled.json';
 const DRIVE_SYNC_ENTERPRISE_NAME = 'Astra Clinical Note Builder';
 const DRIVE_MANIFEST_FILE = 'config/drive-manifest.json';
 
@@ -211,6 +215,12 @@ function isVisible(element) {
 function safeShowLogo(imgEl, shouldShow) {
   if (!imgEl) return;
   imgEl.classList.toggle('hidden', !shouldShow);
+}
+
+function clamp(value, min, max) {
+  const num = Number(value);
+  if (!Number.isFinite(num)) return min;
+  return Math.min(max, Math.max(min, num));
 }
 
 function setActiveByData(selector, key, value) {
@@ -284,6 +294,7 @@ function getDriveConfig() {
     sharedDriveId: String(dataset.driveSharedDriveId || '').trim(),
     rootFolderName: String(dataset.driveRootFolderName || DRIVE_SYNC_ENTERPRISE_NAME).trim() || DRIVE_SYNC_ENTERPRISE_NAME,
     ownerEmail: String(dataset.driveOwnerEmail || '').trim(),
+    ownerToken: String(dataset.driveOwnerToken || '').trim(),
     syncIntervalMs: syncIntervalMinutes * 60 * 1000,
   };
 }
@@ -542,6 +553,7 @@ async function callDriveEndpoint(action, payload = {}) {
     sharedDriveId: payload.sharedDriveId || config.sharedDriveId,
     rootFolderName: payload.rootFolderName || config.rootFolderName,
     ownerEmail: config.ownerEmail,
+    ownerToken: config.ownerToken,
     manifestPath: DRIVE_MANIFEST_FILE,
     client: {
       app: 'note-builder',
@@ -553,10 +565,9 @@ async function callDriveEndpoint(action, payload = {}) {
 
   const response = await fetch(config.endpointUrl, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
     body: JSON.stringify(requestBody),
+    mode: 'cors',
+    cache: 'no-store',
   });
 
   if (!response.ok) {
@@ -618,6 +629,28 @@ async function pullDriveDraft(force = false) {
   return true;
 }
 
+async function pullDriveMedicationCatalog(force = false) {
+  if (!isDriveSyncEnabled()) return false;
+
+  const response = await callDriveEndpoint('file.get', { path: DRIVE_MED_COMPILED_PATH });
+  const file = response.file || response;
+  const content = typeof file.content === 'string' ? file.content : '';
+  if (!content) return false;
+
+  const payload = parseJsonOrNull(content);
+  if (!payload) return false;
+
+  const applied = applyMedicationCatalogPayload(payload, { force });
+
+  if (file.revision) {
+    const revisions = getDriveRevisions();
+    revisions[DRIVE_MED_COMPILED_PATH] = String(file.revision);
+    setDriveRevisions(revisions);
+  }
+
+  return applied;
+}
+
 async function pullDriveManifestAndDraft(force = false) {
   if (!isDriveSyncEnabled()) return;
 
@@ -633,7 +666,12 @@ async function pullDriveManifestAndDraft(force = false) {
     || (remoteChecksum && remoteChecksum !== meta.manifestChecksum);
 
   if (changed) {
-    await pullDriveDraft(force);
+    await Promise.allSettled([
+      pullDriveDraft(force),
+      pullDriveMedicationCatalog(force),
+    ]);
+  } else {
+    await pullDriveMedicationCatalog(false);
   }
 
   meta.manifestRevision = remoteRevision || meta.manifestRevision;
@@ -994,12 +1032,16 @@ function updateTopbarState(forceRecalc = false, scrollY = window.scrollY) {
   if (!els.topbar) return;
 
   const y = Number.isFinite(scrollY) ? scrollY : window.scrollY;
+  const range = Math.max(1, CONDENSE_END_Y - CONDENSE_START_Y);
+  const progress = clamp((y - CONDENSE_START_Y) / range, 0, 1);
+  state.topbarCondenseProgress = progress;
+  els.topbar.style.setProperty('--condense-progress', progress.toFixed(3));
 
   if (forceRecalc) {
-    state.topbarCondensed = y >= CONDENSE_ENTER_Y;
-  } else if (!state.topbarCondensed && y >= CONDENSE_ENTER_Y) {
+    state.topbarCondensed = progress >= CONDENSE_CLASS_ENTER;
+  } else if (!state.topbarCondensed && progress >= CONDENSE_CLASS_ENTER) {
     state.topbarCondensed = true;
-  } else if (state.topbarCondensed && y <= CONDENSE_EXIT_Y) {
+  } else if (state.topbarCondensed && progress <= CONDENSE_CLASS_EXIT) {
     state.topbarCondensed = false;
   }
 
@@ -1258,6 +1300,14 @@ function maybeParseFullTimeEntry(id, rawValue) {
   return true;
 }
 
+function focusAndSelectInput(input) {
+  if (!input || typeof input.focus !== 'function') return;
+  input.focus();
+  if (typeof input.select === 'function') {
+    input.select();
+  }
+}
+
 function attachTimeControlListeners() {
   TIME_FIELD_IDS.forEach((id) => {
     const root = document.querySelector(`.time-control[data-time-field="${id}"]`);
@@ -1310,14 +1360,16 @@ function attachTimeControlListeners() {
       if (part === 'hour') {
         event.target.value = digits.slice(0, 2);
         if (event.target.value.length === 2) {
-          minuteInput.focus();
-          minuteInput.select();
+          focusAndSelectInput(minuteInput);
         }
       } else if (part === 'minute') {
         event.target.value = digits.slice(0, 2);
-        if (event.target.value.length === 2 && control.meridiemInput) {
-          control.meridiemInput.focus();
-          control.meridiemInput.select();
+        if (event.target.value.length === 2) {
+          if (control.meridiemInput) {
+            focusAndSelectInput(control.meridiemInput);
+          } else if (control.meridiemButtons.length) {
+            control.meridiemButtons[0].focus();
+          }
         }
       } else if (part === 'meridiem' && control.meridiemInput) {
         const picked = normalizeMeridiemToken(event.target.value, control.activeMeridiem || 'AM');
@@ -1362,20 +1414,51 @@ function attachTimeControlListeners() {
     minuteInput.addEventListener('input', (event) => handlePartInput('minute', event));
     if (meridiemInput) meridiemInput.addEventListener('input', (event) => handlePartInput('meridiem', event));
 
+    hourInput.addEventListener('focus', () => {
+      if (hourInput.value) hourInput.select();
+    });
+    minuteInput.addEventListener('focus', () => {
+      if (minuteInput.value) minuteInput.select();
+    });
+    if (meridiemInput) {
+      meridiemInput.addEventListener('focus', () => {
+        if (meridiemInput.value) meridiemInput.select();
+      });
+    }
+
     hourInput.addEventListener('blur', (event) => handlePartBlur('hour', event));
     minuteInput.addEventListener('blur', (event) => handlePartBlur('minute', event));
     if (meridiemInput) meridiemInput.addEventListener('blur', (event) => handlePartBlur('meridiem', event));
 
     hourInput.addEventListener('keydown', (event) => {
       if (handleMeridiemShortcut(event)) return;
+
+      if (event.key === 'ArrowRight' && hourInput.selectionStart === hourInput.value.length) {
+        event.preventDefault();
+        focusAndSelectInput(minuteInput);
+        return;
+      }
+
       if (event.key === ':' || event.key === '.') {
         event.preventDefault();
-        minuteInput.focus();
+        focusAndSelectInput(minuteInput);
       }
     });
 
     minuteInput.addEventListener('keydown', (event) => {
       if (handleMeridiemShortcut(event)) return;
+
+      if (event.key === 'ArrowLeft' && minuteInput.selectionStart === 0) {
+        event.preventDefault();
+        focusAndSelectInput(hourInput);
+        return;
+      }
+
+      if (event.key === 'ArrowRight' && minuteInput.selectionStart === minuteInput.value.length && control.meridiemInput) {
+        event.preventDefault();
+        focusAndSelectInput(control.meridiemInput);
+        return;
+      }
 
       if (event.key === 'Backspace' && !minuteInput.value) {
         event.preventDefault();
@@ -1387,6 +1470,12 @@ function attachTimeControlListeners() {
     if (meridiemInput) {
       meridiemInput.addEventListener('keydown', (event) => {
         if (handleMeridiemShortcut(event, { focusMeridiem: false })) return;
+
+        if (event.key === 'ArrowLeft') {
+          event.preventDefault();
+          focusAndSelectInput(minuteInput);
+          return;
+        }
 
         if (event.key === 'Backspace' && !meridiemInput.value) {
           event.preventDefault();
@@ -2810,6 +2899,37 @@ function handleMedicationContextOpen(fieldId) {
   runMedicationSearch(query);
 }
 
+function applyMedicationCatalogPayload(payload, options = {}) {
+  const { force = false } = options;
+  const medications = Array.isArray(payload) ? payload : payload.medications;
+
+  if (!Array.isArray(medications)) {
+    return false;
+  }
+
+  const generatedAt = Array.isArray(payload) ? '' : String(payload.generated_at || '');
+  if (!force && generatedAt && medicationCatalogGeneratedAt && generatedAt === medicationCatalogGeneratedAt) {
+    return false;
+  }
+
+  medicationCatalog = medications;
+  if (generatedAt) {
+    medicationCatalogGeneratedAt = generatedAt;
+  }
+  medicationCatalogLoadError = false;
+
+  renderMedicationClassFilters();
+  renderMedicationRows();
+  runMedicationSearch(els.medSearchInput ? els.medSearchInput.value : '');
+  renderMedicationDetail();
+  return true;
+}
+
+function handleMedicationLaunch(event) {
+  if (event) event.preventDefault();
+  setMedicationDrawerOpen(true);
+}
+
 async function loadMedicationCatalog() {
   if (typeof fetch !== 'function') {
     medicationCatalogLoadError = false;
@@ -2829,20 +2949,10 @@ async function loadMedicationCatalog() {
     }
 
     const payload = await response.json();
-    const medications = Array.isArray(payload) ? payload : payload.medications;
-
-    if (!Array.isArray(medications)) {
+    const applied = applyMedicationCatalogPayload(payload, { force: true });
+    if (!applied) {
       throw new Error('Medication catalog format invalid.');
     }
-
-    medicationCatalog = medications;
-    medicationCatalogGeneratedAt = payload.generated_at || '';
-    medicationCatalogLoadError = false;
-
-    renderMedicationClassFilters();
-    renderMedicationRows();
-    runMedicationSearch(els.medSearchInput ? els.medSearchInput.value : '');
-    renderMedicationDetail();
   } catch (error) {
     console.error('Unable to load medication catalog:', error);
     medicationCatalogLoadError = true;
@@ -2970,20 +3080,7 @@ async function refreshCatalogIfChanged() {
     if (!response.ok) return;
 
     const payload = await response.json();
-    const generatedAt = payload.generated_at || '';
-    const medications = Array.isArray(payload.medications) ? payload.medications : [];
-
-    if (!medications.length) return;
-
-    if (generatedAt && generatedAt === medicationCatalogGeneratedAt) return;
-
-    medicationCatalog = medications;
-    medicationCatalogGeneratedAt = generatedAt;
-
-    renderMedicationClassFilters();
-    renderMedicationRows();
-    runMedicationSearch(els.medSearchInput ? els.medSearchInput.value : '');
-    renderMedicationDetail();
+    applyMedicationCatalogPayload(payload, { force: false });
   } catch (error) {
     // swallow to keep sync quiet
   }
@@ -3063,6 +3160,22 @@ function startMedicationAutoSync() {
 }
 
 function attachMedicationListeners() {
+  if (els.medDrawerBtn) {
+    els.medDrawerBtn.addEventListener('click', handleMedicationLaunch);
+  }
+
+  document.querySelectorAll('.med-context-btn[data-med-context-field]').forEach((button) => {
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+      const fieldId = button.dataset.medContextField;
+      if (!fieldId) {
+        setMedicationDrawerOpen(true);
+        return;
+      }
+      handleMedicationContextOpen(fieldId);
+    });
+  });
+
   if (els.medCloseBtn) {
     els.medCloseBtn.addEventListener('click', () => setMedicationDrawerOpen(false, { force: true }));
   }
@@ -3159,8 +3272,7 @@ function attachMedicationListeners() {
   document.addEventListener('click', (event) => {
     const drawerLaunch = event.target.closest('#medDrawerBtn');
     if (drawerLaunch) {
-      event.preventDefault();
-      setMedicationDrawerOpen(true);
+      handleMedicationLaunch(event);
       return;
     }
 
@@ -3319,6 +3431,7 @@ function attachEventListeners() {
   }
 
   window.addEventListener('scroll', () => scheduleTopbarStateUpdate(false), { passive: true });
+  window.addEventListener('resize', () => scheduleTopbarStateUpdate(true));
 }
 
 function registerServiceWorker() {

@@ -122,11 +122,15 @@ h3 {
 }
 
 .topbar {
+  --condense-progress: 0;
   position: sticky;
   top: 0;
   z-index: 24;
-  padding: 14px 18px 12px;
-  transition: padding 220ms ease;
+  padding:
+    calc(14px - (6px * var(--condense-progress)))
+    18px
+    calc(12px - (4px * var(--condense-progress)));
+  transition: padding 120ms linear;
 }
 
 .topbar-inner {
@@ -152,19 +156,19 @@ h3 {
 }
 
 .brand-panel {
-  padding: 14px;
+  padding: calc(14px - (5px * var(--condense-progress)));
   display: grid;
-  grid-template-columns: 88px minmax(0, 1fr) auto;
+  grid-template-columns: calc(88px - (34px * var(--condense-progress))) minmax(0, 1fr) auto;
   align-items: center;
   gap: 14px;
-  min-height: 116px;
-  transition: grid-template-columns 220ms ease, padding 220ms ease, min-height 220ms ease;
+  min-height: calc(116px - (44px * var(--condense-progress)));
+  transition: grid-template-columns 120ms linear, padding 120ms linear, min-height 120ms linear;
 }
 
 .brand-logo-wrap {
-  width: 88px;
-  height: 88px;
-  border-radius: 24px;
+  width: calc(88px - (36px * var(--condense-progress)));
+  height: calc(88px - (36px * var(--condense-progress)));
+  border-radius: calc(24px - (10px * var(--condense-progress)));
   border: 1px solid rgba(255, 255, 255, 0.58);
   display: grid;
   place-items: center;
@@ -173,25 +177,25 @@ h3 {
     radial-gradient(circle at 18% 20%, rgba(255, 255, 255, 0.34), transparent 42%),
     linear-gradient(135deg, var(--accent-400), var(--accent-600));
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 12px 24px rgba(15, 23, 42, 0.2);
-  transition: width 220ms ease, height 220ms ease, border-radius 220ms ease;
+  transition: width 120ms linear, height 120ms linear, border-radius 120ms linear;
 }
 
 .brand-logo-img {
-  width: 72px;
-  height: 72px;
+  width: calc(72px - (32px * var(--condense-progress)));
+  height: calc(72px - (32px * var(--condense-progress)));
   object-fit: contain;
   filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.24));
-  transition: width 220ms ease, height 220ms ease;
+  transition: width 120ms linear, height 120ms linear;
 }
 
 .brand-logo-fallback {
-  width: 72px;
-  height: 72px;
-  border-radius: 18px;
+  width: calc(72px - (32px * var(--condense-progress)));
+  height: calc(72px - (32px * var(--condense-progress)));
+  border-radius: calc(18px - (6px * var(--condense-progress)));
   display: grid;
   place-items: center;
   color: #fff;
-  font-size: 42px;
+  font-size: calc(42px - (14px * var(--condense-progress)));
   font-weight: 700;
   background: linear-gradient(140deg, var(--accent-400), var(--accent-600));
 }
@@ -757,6 +761,37 @@ textarea:disabled {
   text-transform: uppercase;
 }
 
+.time-meridiem-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.time-meridiem-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(148, 163, 184, 0.55);
+  background: rgba(255, 255, 255, 0.86);
+  color: var(--ink-muted);
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 120ms ease, color 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.time-meridiem-btn.active {
+  border-color: var(--accent-border);
+  background: var(--accent-weak);
+  color: var(--ink-strong);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.12);
+}
+
+.time-meridiem-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
 .time-sep {
   color: var(--ink-soft);
   font-weight: 700;
@@ -959,39 +994,17 @@ textarea:disabled {
   box-shadow: 0 5px 12px rgba(15, 23, 42, 0.12);
 }
 
-.topbar.topbar-condensed {
-  padding-top: 8px;
-  padding-bottom: 8px;
-}
-
-.topbar.topbar-condensed .brand-panel {
-  grid-template-columns: 54px minmax(0, 1fr) auto;
-  min-height: 72px;
-  padding: 9px 10px;
-}
-
-.topbar.topbar-condensed .brand-logo-wrap {
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
-}
-
-.topbar.topbar-condensed .brand-logo-img,
-.topbar.topbar-condensed .brand-logo-fallback {
-  width: 40px;
-  height: 40px;
-}
-
 .topbar .brand-title-row,
 .topbar #brandSubtitle,
 .topbar .toolbar-group-practice,
 .topbar #scriptToggleCard,
 .topbar .toolbar-hint {
-  max-height: 120px;
-  opacity: 1;
+  max-height: calc(120px * (1 - var(--condense-progress)));
+  opacity: calc(1 - var(--condense-progress));
   overflow: hidden;
   transform-origin: top;
-  transition: max-height 230ms ease, opacity 180ms ease, transform 220ms ease, margin 220ms ease;
+  transform: translateY(calc(-4px * var(--condense-progress))) scaleY(calc(1 - (0.08 * var(--condense-progress))));
+  transition: max-height 120ms linear, opacity 120ms linear, transform 120ms linear, margin 120ms linear;
 }
 
 .topbar.topbar-condensed .brand-title-row,
@@ -999,28 +1012,27 @@ textarea:disabled {
 .topbar.topbar-condensed .toolbar-group-practice,
 .topbar.topbar-condensed #scriptToggleCard,
 .topbar.topbar-condensed .toolbar-hint {
-  max-height: 0;
-  opacity: 0;
-  transform: translateY(-4px) scaleY(0.92);
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
+  visibility: hidden;
   pointer-events: none;
 }
 
-.topbar.topbar-condensed .brand-kicker {
-  font-size: 11px;
-  letter-spacing: 0.12em;
+.topbar .brand-kicker {
+  font-size: calc(12px - (1px * var(--condense-progress)));
+  letter-spacing: calc(0.18em - (0.06em * var(--condense-progress)));
 }
 
-.topbar.topbar-condensed .brand-tool-btn {
-  width: 44px;
-  height: 44px;
+.topbar .brand-tool-btn {
+  width: calc(48px - (4px * var(--condense-progress)));
+  height: calc(48px - (4px * var(--condense-progress)));
 }
 
-.topbar.topbar-condensed .toolbar-panel {
-  min-height: 72px;
+.topbar .toolbar-panel {
+  min-height: calc(112px - (38px * var(--condense-progress)));
   align-content: center;
-  padding: 8px 10px;
+  padding:
+    calc(12px - (4px * var(--condense-progress)))
+    calc(12px - (2px * var(--condense-progress)));
+  transition: min-height 120ms linear, padding 120ms linear;
 }
 
 .med-drawer-backdrop {

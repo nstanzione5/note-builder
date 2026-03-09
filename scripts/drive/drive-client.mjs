@@ -10,6 +10,7 @@ export async function loadDriveConfig(configPath = DEFAULT_CONFIG_PATH) {
     sharedDriveId: process.env.DRIVE_SHARED_DRIVE_ID || '',
     rootFolderName: process.env.DRIVE_ROOT_FOLDER_NAME || 'Astra Clinical Note Builder',
     ownerEmail: process.env.DRIVE_OWNER_EMAIL || '',
+    ownerToken: process.env.DRIVE_OWNER_TOKEN || '',
     manifestPath: process.env.DRIVE_MANIFEST_PATH || 'config/drive-manifest.json',
   };
 
@@ -38,6 +39,7 @@ export async function loadDriveConfig(configPath = DEFAULT_CONFIG_PATH) {
     sharedDriveId: String(merged.sharedDriveId || '').trim(),
     rootFolderName: String(merged.rootFolderName || 'Astra Clinical Note Builder').trim(),
     ownerEmail: String(merged.ownerEmail || '').trim(),
+    ownerToken: String(merged.ownerToken || '').trim(),
     manifestPath: String(merged.manifestPath || 'config/drive-manifest.json').trim(),
   };
 }
@@ -50,6 +52,7 @@ export async function callDriveAction(action, payload = {}, options = {}) {
     sharedDriveId: payload.sharedDriveId || config.sharedDriveId,
     rootFolderName: payload.rootFolderName || config.rootFolderName,
     ownerEmail: payload.ownerEmail || config.ownerEmail,
+    ownerToken: payload.ownerToken || config.ownerToken,
     manifestPath: payload.manifestPath || config.manifestPath,
     client: {
       source: 'note-builder-local-script',
@@ -60,10 +63,8 @@ export async function callDriveAction(action, payload = {}, options = {}) {
 
   const response = await fetch(config.endpointUrl, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
     body: JSON.stringify(requestBody),
+    cache: 'no-store',
   });
 
   if (!response.ok) {

@@ -6,8 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "med:compile": "node scripts/meds/compile-med-catalog.mjs",
-    "med:sync": "node scripts/meds/sync-source-metadata.mjs --limit=40",
+    "med:sync": "node scripts/meds/sync-source-metadata.mjs",
+    "med:sync:all": "node scripts/meds/sync-source-metadata.mjs --limit=260",
     "med:review": "node scripts/meds/build-review-report.mjs",
+    "med:knowledge-check": "node scripts/meds/refresh-and-publish.mjs",
+    "med:knowledge-check:local": "node scripts/meds/refresh-and-publish.mjs --skip-publish",
     "drive:bootstrap": "node scripts/drive/bootstrap-drive.mjs",
     "drive:publish": "node scripts/drive/publish-to-drive.mjs",
     "drive:pull": "node scripts/drive/pull-from-drive.mjs"

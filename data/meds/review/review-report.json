@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-03-09T06:45:03.851Z",
+  "generated_at": "2026-03-09T08:57:47.023Z",
   "totals": {
     "records": 260,
     "curated": 26,
     "source_synced": 0,
-    "needs_review": 0,
+    "needs_review": 137,
     "missing_fields": 242
   },
   "review_queue": [
@@ -19,124 +19,124 @@
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": "2026-03-09T06:40:20.532Z"
+      "source_last_checked": "2026-03-09T08:56:06.840Z"
     },
     {
       "id": "fluvoxamine",
       "generic_name": "fluvoxamine",
       "psych_class": "SSRIs",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:08.808Z"
     },
     {
       "id": "paroxetine",
       "generic_name": "paroxetine",
       "psych_class": "SSRIs",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:09.345Z"
     },
     {
       "id": "vilazodone",
       "generic_name": "vilazodone",
       "psych_class": "SSRIs",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:10.308Z"
     },
     {
       "id": "vortioxetine",
       "generic_name": "vortioxetine",
       "psych_class": "SSRIs",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:10.630Z"
     },
     {
       "id": "desvenlafaxine",
       "generic_name": "desvenlafaxine",
       "psych_class": "SNRIs",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:11.715Z"
     },
     {
       "id": "levomilnacipran",
       "generic_name": "levomilnacipran",
       "psych_class": "SNRIs",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:12.797Z"
     },
     {
       "id": "milnacipran",
       "generic_name": "milnacipran",
       "psych_class": "SNRIs",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:13.151Z"
     },
     {
       "id": "atomoxetine",
       "generic_name": "atomoxetine",
       "psych_class": "SNRIs",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:13.633Z"
     },
     {
       "id": "sibutramine",
       "generic_name": "sibutramine",
       "psych_class": "SNRIs",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:13.981Z"
     },
     {
       "id": "dextromethorphan-bupropion",
@@ -146,241 +146,241 @@
       "missing_data_flags": [
         "off-label psych uses"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:14.703Z"
     },
     {
       "id": "mirtazapine",
       "generic_name": "mirtazapine",
       "psych_class": "Atypical antidepressants",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:15.181Z"
     },
     {
       "id": "trazodone",
       "generic_name": "trazodone",
       "psych_class": "Atypical antidepressants",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:15.768Z"
     },
     {
       "id": "nefazodone",
       "generic_name": "nefazodone",
       "psych_class": "Atypical antidepressants",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:16.124Z"
     },
     {
       "id": "amitriptyline",
       "generic_name": "amitriptyline",
       "psych_class": "Atypical antidepressants",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:16.699Z"
     },
     {
       "id": "nortriptyline",
       "generic_name": "nortriptyline",
       "psych_class": "Atypical antidepressants",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:17.247Z"
     },
     {
       "id": "desipramine",
       "generic_name": "desipramine",
       "psych_class": "Atypical antidepressants",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:17.665Z"
     },
     {
       "id": "imipramine",
       "generic_name": "imipramine",
       "psych_class": "Atypical antidepressants",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:18.215Z"
     },
     {
       "id": "clomipramine",
       "generic_name": "clomipramine",
       "psych_class": "Atypical antidepressants",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:18.795Z"
     },
     {
       "id": "doxepin",
       "generic_name": "doxepin",
       "psych_class": "Atypical antidepressants",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:19.262Z"
     },
     {
       "id": "maprotiline",
       "generic_name": "maprotiline",
       "psych_class": "Atypical antidepressants",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:19.541Z"
     },
     {
       "id": "amoxapine",
       "generic_name": "amoxapine",
       "psych_class": "Atypical antidepressants",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:19.936Z"
     },
     {
       "id": "trimipramine",
       "generic_name": "trimipramine",
       "psych_class": "Atypical antidepressants",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:20.273Z"
     },
     {
       "id": "protriptyline",
       "generic_name": "protriptyline",
       "psych_class": "Atypical antidepressants",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:20.583Z"
     },
     {
       "id": "phenelzine",
       "generic_name": "phenelzine",
       "psych_class": "Atypical antidepressants",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:20.901Z"
     },
     {
       "id": "tranylcypromine",
       "generic_name": "tranylcypromine",
       "psych_class": "Atypical antidepressants",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:21.320Z"
     },
     {
       "id": "isocarboxazid",
       "generic_name": "isocarboxazid",
       "psych_class": "Atypical antidepressants",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:21.610Z"
     },
     {
       "id": "selegiline-transdermal",
       "generic_name": "selegiline transdermal",
       "psych_class": "Atypical antidepressants",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:21.886Z"
     },
     {
       "id": "zuranolone",
       "generic_name": "zuranolone",
       "psych_class": "Atypical antidepressants",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:22.184Z"
     },
     {
       "id": "amphetamine-mixed-salts-xr",
@@ -390,7 +390,7 @@
       "missing_data_flags": [
         "off-label psych uses"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:22.803Z"
     },
     {
       "id": "lisdexamfetamine",
@@ -400,228 +400,228 @@
       "missing_data_flags": [
         "off-label psych uses"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:23.459Z"
     },
     {
       "id": "dextroamphetamine",
       "generic_name": "dextroamphetamine",
       "psych_class": "Stimulant ADHD medications",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:23.979Z"
     },
     {
       "id": "methamphetamine",
       "generic_name": "methamphetamine",
       "psych_class": "Stimulant ADHD medications",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:24.290Z"
     },
     {
       "id": "methylphenidate-ir",
       "generic_name": "methylphenidate IR",
       "psych_class": "Stimulant ADHD medications",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:24.612Z"
     },
     {
       "id": "methylphenidate-er",
       "generic_name": "methylphenidate ER",
       "psych_class": "Stimulant ADHD medications",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:24.991Z"
     },
     {
       "id": "dexmethylphenidate",
       "generic_name": "dexmethylphenidate",
       "psych_class": "Stimulant ADHD medications",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:25.513Z"
     },
     {
       "id": "dexmethylphenidate-xr",
       "generic_name": "dexmethylphenidate XR",
       "psych_class": "Stimulant ADHD medications",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:25.790Z"
     },
     {
       "id": "serdexmethylphenidate-dexmethylphenidate",
       "generic_name": "serdexmethylphenidate-dexmethylphenidate",
       "psych_class": "Stimulant ADHD medications",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:26.094Z"
     },
     {
       "id": "methylphenidate-pm",
       "generic_name": "methylphenidate PM",
       "psych_class": "Stimulant ADHD medications",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:26.377Z"
     },
     {
       "id": "amphetamine-mixed-salts-er",
       "generic_name": "amphetamine mixed salts ER",
       "psych_class": "Stimulant ADHD medications",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:26.713Z"
     },
     {
       "id": "amphetamine-sulfate",
       "generic_name": "amphetamine sulfate",
       "psych_class": "Stimulant ADHD medications",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:27.096Z"
     },
     {
       "id": "amphetamine-xr-odt",
       "generic_name": "amphetamine XR ODT",
       "psych_class": "Stimulant ADHD medications",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:27.374Z"
     },
     {
       "id": "amphetamine-xr-suspension",
       "generic_name": "amphetamine XR suspension",
       "psych_class": "Stimulant ADHD medications",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:27.654Z"
     },
     {
       "id": "methylphenidate-chewable-er",
       "generic_name": "methylphenidate chewable ER",
       "psych_class": "Stimulant ADHD medications",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:27.932Z"
     },
     {
       "id": "methylphenidate-suspension-er",
       "generic_name": "methylphenidate suspension ER",
       "psych_class": "Stimulant ADHD medications",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:28.296Z"
     },
     {
       "id": "methylphenidate-odt-xr",
       "generic_name": "methylphenidate ODT XR",
       "psych_class": "Stimulant ADHD medications",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:28.663Z"
     },
     {
       "id": "methylphenidate-transdermal",
       "generic_name": "methylphenidate transdermal",
       "psych_class": "Stimulant ADHD medications",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:28.966Z"
     },
     {
       "id": "dextroamphetamine-transdermal",
       "generic_name": "dextroamphetamine transdermal",
       "psych_class": "Stimulant ADHD medications",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:29.243Z"
     },
     {
       "id": "viloxazine",
@@ -631,878 +631,878 @@
       "missing_data_flags": [
         "off-label psych uses"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:29.540Z"
     },
     {
       "id": "guanfacine-ir",
       "generic_name": "guanfacine IR",
       "psych_class": "Non-stimulant ADHD medications",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:29.860Z"
     },
     {
       "id": "clonidine-ir",
       "generic_name": "clonidine IR",
       "psych_class": "Non-stimulant ADHD medications",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:30.638Z"
     },
     {
       "id": "clonidine-er",
       "generic_name": "clonidine ER",
       "psych_class": "Non-stimulant ADHD medications",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:30.919Z"
     },
     {
       "id": "modafinil",
       "generic_name": "modafinil",
       "psych_class": "Non-stimulant ADHD medications",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:31.550Z"
     },
     {
       "id": "armodafinil",
       "generic_name": "armodafinil",
       "psych_class": "Non-stimulant ADHD medications",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:32.029Z"
     },
     {
       "id": "alprazolam",
       "generic_name": "alprazolam",
       "psych_class": "Benzodiazepines",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:32.981Z"
     },
     {
       "id": "clonazepam",
       "generic_name": "clonazepam",
       "psych_class": "Benzodiazepines",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:33.589Z"
     },
     {
       "id": "lorazepam",
       "generic_name": "lorazepam",
       "psych_class": "Benzodiazepines",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:34.199Z"
     },
     {
       "id": "diazepam",
       "generic_name": "diazepam",
       "psych_class": "Benzodiazepines",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:34.826Z"
     },
     {
       "id": "temazepam",
       "generic_name": "temazepam",
       "psych_class": "Benzodiazepines",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:35.542Z"
     },
     {
       "id": "oxazepam",
       "generic_name": "oxazepam",
       "psych_class": "Benzodiazepines",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:36.001Z"
     },
     {
       "id": "chlordiazepoxide",
       "generic_name": "chlordiazepoxide",
       "psych_class": "Benzodiazepines",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:36.590Z"
     },
     {
       "id": "clorazepate",
       "generic_name": "clorazepate",
       "psych_class": "Benzodiazepines",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:37.050Z"
     },
     {
       "id": "triazolam",
       "generic_name": "triazolam",
       "psych_class": "Benzodiazepines",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:37.479Z"
     },
     {
       "id": "estazolam",
       "generic_name": "estazolam",
       "psych_class": "Benzodiazepines",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:37.800Z"
     },
     {
       "id": "flurazepam",
       "generic_name": "flurazepam",
       "psych_class": "Benzodiazepines",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:38.123Z"
     },
     {
       "id": "quazepam",
       "generic_name": "quazepam",
       "psych_class": "Benzodiazepines",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:38.413Z"
     },
     {
       "id": "midazolam",
       "generic_name": "midazolam",
       "psych_class": "Benzodiazepines",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:39.022Z"
     },
     {
       "id": "diazepam-nasal",
       "generic_name": "diazepam nasal",
       "psych_class": "Benzodiazepines",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:39.338Z"
     },
     {
       "id": "midazolam-nasal",
       "generic_name": "midazolam nasal",
       "psych_class": "Benzodiazepines",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:39.678Z"
     },
     {
       "id": "zolpidem",
       "generic_name": "zolpidem",
       "psych_class": "Sleep / hypnotic medications",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:40.358Z"
     },
     {
       "id": "zolpidem-er",
       "generic_name": "zolpidem ER",
       "psych_class": "Sleep / hypnotic medications",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:40.763Z"
     },
     {
       "id": "zaleplon",
       "generic_name": "zaleplon",
       "psych_class": "Sleep / hypnotic medications",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:41.308Z"
     },
     {
       "id": "eszopiclone",
       "generic_name": "eszopiclone",
       "psych_class": "Sleep / hypnotic medications",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:41.883Z"
     },
     {
       "id": "ramelteon",
       "generic_name": "ramelteon",
       "psych_class": "Sleep / hypnotic medications",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:42.401Z"
     },
     {
       "id": "suvorexant",
       "generic_name": "suvorexant",
       "psych_class": "Sleep / hypnotic medications",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:42.698Z"
     },
     {
       "id": "lemborexant",
       "generic_name": "lemborexant",
       "psych_class": "Sleep / hypnotic medications",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:42.991Z"
     },
     {
       "id": "daridorexant",
       "generic_name": "daridorexant",
       "psych_class": "Sleep / hypnotic medications",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:43.347Z"
     },
     {
       "id": "doxepin-low-dose",
       "generic_name": "doxepin low-dose",
       "psych_class": "Sleep / hypnotic medications",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:43.627Z"
     },
     {
       "id": "hydroxyzine",
       "generic_name": "hydroxyzine",
       "psych_class": "Sleep / hypnotic medications",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:44.245Z"
     },
     {
       "id": "diphenhydramine",
       "generic_name": "diphenhydramine",
       "psych_class": "Sleep / hypnotic medications",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:45.066Z"
     },
     {
       "id": "gabapentin",
       "generic_name": "gabapentin",
       "psych_class": "Sleep / hypnotic medications",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:45.541Z"
     },
     {
       "id": "pregabalin",
       "generic_name": "pregabalin",
       "psych_class": "Sleep / hypnotic medications",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:46.146Z"
     },
     {
       "id": "melatonin-receptor-agonist",
       "generic_name": "melatonin receptor agonist",
       "psych_class": "Sleep / hypnotic medications",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:46.491Z"
     },
     {
       "id": "brexpiprazole",
       "generic_name": "brexpiprazole",
       "psych_class": "Antipsychotics",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:47.317Z"
     },
     {
       "id": "cariprazine",
       "generic_name": "cariprazine",
       "psych_class": "Antipsychotics",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:47.609Z"
     },
     {
       "id": "olanzapine",
       "generic_name": "olanzapine",
       "psych_class": "Antipsychotics",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:48.721Z"
     },
     {
       "id": "olanzapine-fluoxetine",
       "generic_name": "olanzapine-fluoxetine",
       "psych_class": "Antipsychotics",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:48.998Z"
     },
     {
       "id": "olanzapine-samidorphan",
       "generic_name": "olanzapine-samidorphan",
       "psych_class": "Antipsychotics",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:49.280Z"
     },
     {
       "id": "risperidone",
       "generic_name": "risperidone",
       "psych_class": "Antipsychotics",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:49.777Z"
     },
     {
       "id": "paliperidone-oral",
       "generic_name": "paliperidone oral",
       "psych_class": "Antipsychotics",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:50.054Z"
     },
     {
       "id": "ziprasidone",
       "generic_name": "ziprasidone",
       "psych_class": "Antipsychotics",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:50.696Z"
     },
     {
       "id": "lurasidone",
       "generic_name": "lurasidone",
       "psych_class": "Antipsychotics",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:51.090Z"
     },
     {
       "id": "asenapine-sublingual",
       "generic_name": "asenapine sublingual",
       "psych_class": "Antipsychotics",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:51.734Z"
     },
     {
       "id": "iloperidone",
       "generic_name": "iloperidone",
       "psych_class": "Antipsychotics",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:52.055Z"
     },
     {
       "id": "haloperidol",
       "generic_name": "haloperidol",
       "psych_class": "Antipsychotics",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:52.576Z"
     },
     {
       "id": "chlorpromazine",
       "generic_name": "chlorpromazine",
       "psych_class": "Antipsychotics",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:53.096Z"
     },
     {
       "id": "perphenazine",
       "generic_name": "perphenazine",
       "psych_class": "Antipsychotics",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:53.699Z"
     },
     {
       "id": "trifluoperazine",
       "generic_name": "trifluoperazine",
       "psych_class": "Antipsychotics",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:54.135Z"
     },
     {
       "id": "loxapine",
       "generic_name": "loxapine",
       "psych_class": "Antipsychotics",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:54.592Z"
     },
     {
       "id": "molindone",
       "generic_name": "molindone",
       "psych_class": "Antipsychotics",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:54.882Z"
     },
     {
       "id": "pimozide",
       "generic_name": "pimozide",
       "psych_class": "Antipsychotics",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:55.170Z"
     },
     {
       "id": "thiothixene",
       "generic_name": "thiothixene",
       "psych_class": "Antipsychotics",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:55.533Z"
     },
     {
       "id": "thioridazine",
       "generic_name": "thioridazine",
       "psych_class": "Antipsychotics",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:55.927Z"
     },
     {
       "id": "fluphenazine",
       "generic_name": "fluphenazine",
       "psych_class": "Antipsychotics",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:56.360Z"
     },
     {
       "id": "xanomeline-trospium",
       "generic_name": "xanomeline-trospium",
       "psych_class": "Antipsychotics",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:56.638Z"
     },
     {
       "id": "pimavanserin",
       "generic_name": "pimavanserin",
       "psych_class": "Antipsychotics",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:57.012Z"
     },
     {
       "id": "lithium-citrate",
       "generic_name": "lithium citrate",
       "psych_class": "Mood stabilizers",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:57.678Z"
     },
     {
       "id": "valproic-acid",
       "generic_name": "valproic acid",
       "psych_class": "Mood stabilizers",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:58.838Z"
     },
     {
       "id": "carbamazepine",
       "generic_name": "carbamazepine",
       "psych_class": "Mood stabilizers",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:59.273Z"
     },
     {
       "id": "oxcarbazepine",
       "generic_name": "oxcarbazepine",
       "psych_class": "Mood stabilizers",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:56:59.655Z"
     },
     {
       "id": "topiramate",
       "generic_name": "topiramate",
       "psych_class": "Mood stabilizers",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:00.122Z"
     },
     {
       "id": "zonisamide",
       "generic_name": "zonisamide",
       "psych_class": "Mood stabilizers",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:00.717Z"
     },
     {
       "id": "levetiracetam",
       "generic_name": "levetiracetam",
       "psych_class": "Mood stabilizers",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:01.255Z"
     },
     {
       "id": "prazosin",
       "generic_name": "prazosin",
       "psych_class": "Alpha agonists",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:01.733Z"
     },
     {
       "id": "doxazosin",
       "generic_name": "doxazosin",
       "psych_class": "Alpha agonists",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:02.220Z"
     },
     {
       "id": "terazosin",
       "generic_name": "terazosin",
       "psych_class": "Alpha agonists",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:02.784Z"
     },
     {
       "id": "propranolol",
@@ -1512,85 +1512,85 @@
       "missing_data_flags": [
         "fda psych uses"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:03.340Z"
     },
     {
       "id": "atenolol",
       "generic_name": "atenolol",
       "psych_class": "Beta blockers commonly used in psych",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:04.009Z"
     },
     {
       "id": "metoprolol",
       "generic_name": "metoprolol",
       "psych_class": "Beta blockers commonly used in psych",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:04.460Z"
     },
     {
       "id": "nadolol",
       "generic_name": "nadolol",
       "psych_class": "Beta blockers commonly used in psych",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:05.058Z"
     },
     {
       "id": "bisoprolol",
       "generic_name": "bisoprolol",
       "psych_class": "Beta blockers commonly used in psych",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:05.628Z"
     },
     {
       "id": "carvedilol",
       "generic_name": "carvedilol",
       "psych_class": "Beta blockers commonly used in psych",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:05.952Z"
     },
     {
       "id": "cyproheptadine",
       "generic_name": "cyproheptadine",
       "psych_class": "Anxiolytics / anxiety adjuncts",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:07.096Z"
     },
     {
       "id": "naltrexone-oral",
@@ -1600,1515 +1600,1515 @@
       "missing_data_flags": [
         "fda psych uses"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:07.373Z"
     },
     {
       "id": "acamprosate",
       "generic_name": "acamprosate",
       "psych_class": "Substance use support medications",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:07.755Z"
     },
     {
       "id": "disulfiram",
       "generic_name": "disulfiram",
       "psych_class": "Substance use support medications",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:08.100Z"
     },
     {
       "id": "naloxone-intranasal",
       "generic_name": "naloxone intranasal",
       "psych_class": "Substance use support medications",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:08.393Z"
     },
     {
       "id": "nalmefene-intranasal",
       "generic_name": "nalmefene intranasal",
       "psych_class": "Substance use support medications",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:08.669Z"
     },
     {
       "id": "lofexidine",
       "generic_name": "lofexidine",
       "psych_class": "Substance use support medications",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:09.034Z"
     },
     {
       "id": "varenicline",
       "generic_name": "varenicline",
       "psych_class": "Substance use support medications",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:09.570Z"
     },
     {
       "id": "nicotine-transdermal",
       "generic_name": "nicotine transdermal",
       "psych_class": "Substance use support medications",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:09.858Z"
     },
     {
       "id": "nicotine-gum",
       "generic_name": "nicotine gum",
       "psych_class": "Substance use support medications",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:10.171Z"
     },
     {
       "id": "nicotine-lozenge",
       "generic_name": "nicotine lozenge",
       "psych_class": "Substance use support medications",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:10.453Z"
     },
     {
       "id": "bupropion-sr-smoking-cessation",
       "generic_name": "bupropion SR smoking cessation",
       "psych_class": "Substance use support medications",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:10.760Z"
     },
     {
       "id": "liothyronine",
       "generic_name": "liothyronine",
       "psych_class": "Antidepressant augmenters",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:11.381Z"
     },
     {
       "id": "methylfolate",
       "generic_name": "methylfolate",
       "psych_class": "Antidepressant augmenters",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:11.691Z"
     },
     {
       "id": "ketamine-intranasal",
       "generic_name": "ketamine intranasal",
       "psych_class": "Antidepressant augmenters",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:11.967Z"
     },
     {
       "id": "benztropine",
       "generic_name": "benztropine",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:12.714Z"
     },
     {
       "id": "trihexyphenidyl",
       "generic_name": "trihexyphenidyl",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:13.229Z"
     },
     {
       "id": "deutetrabenazine",
       "generic_name": "deutetrabenazine",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:13.544Z"
     },
     {
       "id": "valbenazine",
       "generic_name": "valbenazine",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:13.925Z"
     },
     {
       "id": "tetrabenazine",
       "generic_name": "tetrabenazine",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:14.330Z"
     },
     {
       "id": "memantine",
       "generic_name": "memantine",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:14.852Z"
     },
     {
       "id": "donepezil",
       "generic_name": "donepezil",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:15.395Z"
     },
     {
       "id": "rivastigmine",
       "generic_name": "rivastigmine",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:16.015Z"
     },
     {
       "id": "galantamine",
       "generic_name": "galantamine",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:16.486Z"
     },
     {
       "id": "amantadine",
       "generic_name": "amantadine",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:16.912Z"
     },
     {
       "id": "baclofen",
       "generic_name": "baclofen",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:17.429Z"
     },
     {
       "id": "tizanidine",
       "generic_name": "tizanidine",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:17.952Z"
     },
     {
       "id": "cyclobenzaprine",
       "generic_name": "cyclobenzaprine",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:18.651Z"
     },
     {
       "id": "n-acetylcysteine",
       "generic_name": "n-acetylcysteine",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:19.000Z"
     },
     {
       "id": "ondansetron",
       "generic_name": "ondansetron",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:19.522Z"
     },
     {
       "id": "metoclopramide",
       "generic_name": "metoclopramide",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:20.048Z"
     },
     {
       "id": "lacosamide",
       "generic_name": "lacosamide",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:20.444Z"
     },
     {
       "id": "tiagabine",
       "generic_name": "tiagabine",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:20.782Z"
     },
     {
       "id": "rufinamide",
       "generic_name": "rufinamide",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "missing fields",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:21.220Z"
     },
     {
       "id": "zolpidem-sublingual",
       "generic_name": "zolpidem sublingual",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:21.513Z"
     },
     {
       "id": "zolpidem-oral-spray",
       "generic_name": "zolpidem oral spray",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:21.792Z"
     },
     {
       "id": "alprazolam-odt",
       "generic_name": "alprazolam ODT",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:22.145Z"
     },
     {
       "id": "clonazepam-odt",
       "generic_name": "clonazepam ODT",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:22.423Z"
     },
     {
       "id": "lorazepam-sublingual",
       "generic_name": "lorazepam sublingual",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:22.698Z"
     },
     {
       "id": "asenapine-transdermal",
       "generic_name": "asenapine transdermal",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:22.987Z"
     },
     {
       "id": "lithium-orotate",
       "generic_name": "lithium orotate",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:23.338Z"
     },
     {
       "id": "dexmedetomidine-sublingual",
       "generic_name": "dexmedetomidine sublingual",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:23.619Z"
     },
     {
       "id": "viloxazine-er",
       "generic_name": "viloxazine ER",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:23.895Z"
     },
     {
       "id": "modafinil-oral-suspension",
       "generic_name": "modafinil oral suspension",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:24.242Z"
     },
     {
       "id": "fluoxetine-weekly",
       "generic_name": "fluoxetine weekly",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:24.520Z"
     },
     {
       "id": "paroxetine-cr",
       "generic_name": "paroxetine CR",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:24.795Z"
     },
     {
       "id": "venlafaxine-er",
       "generic_name": "venlafaxine ER",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:25.084Z"
     },
     {
       "id": "desvenlafaxine-er",
       "generic_name": "desvenlafaxine ER",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:25.450Z"
     },
     {
       "id": "quetiapine-odt",
       "generic_name": "quetiapine ODT",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:25.812Z"
     },
     {
       "id": "risperidone-odt",
       "generic_name": "risperidone ODT",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:26.087Z"
     },
     {
       "id": "olanzapine-odt",
       "generic_name": "olanzapine ODT",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:26.371Z"
     },
     {
       "id": "lamotrigine-odt",
       "generic_name": "lamotrigine ODT",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:26.650Z"
     },
     {
       "id": "carbamazepine-er",
       "generic_name": "carbamazepine ER",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:27.030Z"
     },
     {
       "id": "oxcarbazepine-er",
       "generic_name": "oxcarbazepine ER",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:27.249Z"
     },
     {
       "id": "topiramate-er",
       "generic_name": "topiramate ER",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:27.542Z"
     },
     {
       "id": "gabapentin-enacarbil",
       "generic_name": "gabapentin enacarbil",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:27.825Z"
     },
     {
       "id": "pregabalin-er",
       "generic_name": "pregabalin ER",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:28.034Z"
     },
     {
       "id": "propranolol-er",
       "generic_name": "propranolol ER",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:28.321Z"
     },
     {
       "id": "prazosin-bedtime",
       "generic_name": "prazosin bedtime",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:28.597Z"
     },
     {
       "id": "hydroxyzine-pamoate",
       "generic_name": "hydroxyzine pamoate",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:28.963Z"
     },
     {
       "id": "hydroxyzine-hydrochloride",
       "generic_name": "hydroxyzine hydrochloride",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:29.273Z"
     },
     {
       "id": "buspirone-split-dosing",
       "generic_name": "buspirone split dosing",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:29.635Z"
     },
     {
       "id": "naltrexone-low-dose",
       "generic_name": "naltrexone low dose",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:29.917Z"
     },
     {
       "id": "acamprosate-delayed-release",
       "generic_name": "acamprosate delayed-release",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:30.128Z"
     },
     {
       "id": "disulfiram-supervised",
       "generic_name": "disulfiram supervised",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:30.342Z"
     },
     {
       "id": "varenicline-starter-pack",
       "generic_name": "varenicline starter pack",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:30.617Z"
     },
     {
       "id": "nicotine-inhaler",
       "generic_name": "nicotine inhaler",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:30.941Z"
     },
     {
       "id": "nicotine-nasal-spray",
       "generic_name": "nicotine nasal spray",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:31.216Z"
     },
     {
       "id": "guanfacine-patch",
       "generic_name": "guanfacine patch",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:31.583Z"
     },
     {
       "id": "clonidine-patch",
       "generic_name": "clonidine patch",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:31.858Z"
     },
     {
       "id": "memantine-er",
       "generic_name": "memantine ER",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:32.135Z"
     },
     {
       "id": "donepezil-odt",
       "generic_name": "donepezil ODT",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:32.411Z"
     },
     {
       "id": "rivastigmine-patch",
       "generic_name": "rivastigmine patch",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:32.688Z"
     },
     {
       "id": "galantamine-er",
       "generic_name": "galantamine ER",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:32.898Z"
     },
     {
       "id": "armodafinil-tablet",
       "generic_name": "armodafinil tablet",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:33.157Z"
     },
     {
       "id": "modafinil-tablet",
       "generic_name": "modafinil tablet",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:33.446Z"
     },
     {
       "id": "eszopiclone-low-dose",
       "generic_name": "eszopiclone low dose",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:33.723Z"
     },
     {
       "id": "zaleplon-low-dose",
       "generic_name": "zaleplon low dose",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:34.045Z"
     },
     {
       "id": "daridorexant-dual-orexin-antagonist",
       "generic_name": "daridorexant dual orexin antagonist",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:34.352Z"
     },
     {
       "id": "lemborexant-dual-orexin-antagonist",
       "generic_name": "lemborexant dual orexin antagonist",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:34.563Z"
     },
     {
       "id": "suvorexant-dual-orexin-antagonist",
       "generic_name": "suvorexant dual orexin antagonist",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:34.875Z"
     },
     {
       "id": "ramelteon-melatonin-agonist",
       "generic_name": "ramelteon melatonin agonist",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:35.157Z"
     },
     {
       "id": "melatonin-extended-release",
       "generic_name": "melatonin extended release",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:35.435Z"
     },
     {
       "id": "doxepin-oral-solution",
       "generic_name": "doxepin oral solution",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:35.778Z"
     },
     {
       "id": "quetiapine-oral-solution",
       "generic_name": "quetiapine oral solution",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:35.993Z"
     },
     {
       "id": "aripiprazole-oral-solution",
       "generic_name": "aripiprazole oral solution",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:36.302Z"
     },
     {
       "id": "risperidone-oral-solution",
       "generic_name": "risperidone oral solution",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:36.578Z"
     },
     {
       "id": "haloperidol-oral-solution",
       "generic_name": "haloperidol oral solution",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:36.854Z"
     },
     {
       "id": "chlorpromazine-oral-solution",
       "generic_name": "chlorpromazine oral solution",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:37.129Z"
     },
     {
       "id": "perphenazine-oral-solution",
       "generic_name": "perphenazine oral solution",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:37.351Z"
     },
     {
       "id": "trifluoperazine-oral-solution",
       "generic_name": "trifluoperazine oral solution",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:37.629Z"
     },
     {
       "id": "loxapine-inhalation",
       "generic_name": "loxapine inhalation",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:37.906Z"
     },
     {
       "id": "ziprasidone-intramuscular",
       "generic_name": "ziprasidone intramuscular",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:38.184Z"
     },
     {
       "id": "olanzapine-intramuscular",
       "generic_name": "olanzapine intramuscular",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:38.500Z"
     },
     {
       "id": "haloperidol-decanoate-oral-bridge",
       "generic_name": "haloperidol decanoate oral bridge",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:38.936Z"
     },
     {
       "id": "fluphenazine-decanoate-oral-bridge",
       "generic_name": "fluphenazine decanoate oral bridge",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:39.148Z"
     },
     {
       "id": "paliperidone-oral-bridge",
       "generic_name": "paliperidone oral bridge",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:39.448Z"
     },
     {
       "id": "lurasidone-with-food",
       "generic_name": "lurasidone with food",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:39.658Z"
     },
     {
       "id": "cariprazine-slow-titration",
       "generic_name": "cariprazine slow titration",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:39.972Z"
     },
     {
       "id": "lumateperone-once-daily",
       "generic_name": "lumateperone once daily",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:40.253Z"
     },
     {
       "id": "brexpiprazole-low-start",
       "generic_name": "brexpiprazole low start",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:40.499Z"
     },
     {
       "id": "aripiprazole-partial-agonist",
       "generic_name": "aripiprazole partial agonist",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:40.773Z"
     },
     {
       "id": "olanzapine-high-metabolic-risk",
       "generic_name": "olanzapine high metabolic risk",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:41.020Z"
     },
     {
       "id": "quetiapine-sedating-profile",
       "generic_name": "quetiapine sedating profile",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:41.230Z"
     },
     {
       "id": "risperidone-prolactin-caution",
       "generic_name": "risperidone prolactin caution",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:41.547Z"
     },
     {
       "id": "ziprasidone-qtc-caution",
       "generic_name": "ziprasidone qtc caution",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:41.827Z"
     },
     {
       "id": "lithium-narrow-therapeutic-index",
       "generic_name": "lithium narrow therapeutic index",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:42.106Z"
     },
     {
       "id": "lamotrigine-slow-titration-requirement",
       "generic_name": "lamotrigine slow titration requirement",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:42.382Z"
     },
     {
       "id": "valproate-teratogenic-risk",
       "generic_name": "valproate teratogenic risk",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:42.678Z"
     },
     {
       "id": "carbamazepine-cyp-inducer",
       "generic_name": "carbamazepine cyp inducer",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:42.954Z"
     },
     {
       "id": "oxcarbazepine-hyponatremia-caution",
       "generic_name": "oxcarbazepine hyponatremia caution",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:43.265Z"
     },
     {
       "id": "topiramate-cognitive-side-effects",
       "generic_name": "topiramate cognitive side effects",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:43.475Z"
     },
     {
       "id": "zonisamide-sulfa-caution",
       "generic_name": "zonisamide sulfa caution",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:43.790Z"
     },
     {
       "id": "gabapentin-renal-adjustment",
       "generic_name": "gabapentin renal adjustment",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:44.067Z"
     },
     {
       "id": "pregabalin-edema-caution",
       "generic_name": "pregabalin edema caution",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:44.275Z"
     },
     {
       "id": "buspirone-delayed-onset",
       "generic_name": "buspirone delayed onset",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:44.556Z"
     },
     {
       "id": "propranolol-performance-anxiety",
       "generic_name": "propranolol performance anxiety",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:44.775Z"
     },
     {
       "id": "prazosin-ptsd-nightmares",
       "generic_name": "prazosin ptsd nightmares",
       "psych_class": "Other psych agents",
-      "content_review_status": "newly added",
+      "content_review_status": "needs review",
       "missing_data_flags": [
         "curated dosing",
         "curated interactions",
         "curated side effects",
         "curated pearls"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:44.985Z"
     },
     {
       "id": "amphetamine-mixed-salts",
@@ -3118,7 +3118,7 @@
       "missing_data_flags": [
         "off-label psych uses"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:45.272Z"
     },
     {
       "id": "methylphenidate",
@@ -3128,7 +3128,7 @@
       "missing_data_flags": [
         "off-label psych uses"
       ],
-      "source_last_checked": null
+      "source_last_checked": "2026-03-09T08:57:45.739Z"
     }
   ]
 }

@@ -18,11 +18,12 @@
   data-astra-gpt-url="https://chatgpt.com/g/g-69ac7d1d6f088191a063906d86aee792-astra-note-writer"
   data-ebh-intake-gpt-url="https://chatgpt.com/g/g-69ac70d034e081918d72603828d45799-ebh-intake-note"
   data-ebh-followup-gpt-url="https://chatgpt.com/g/g-69ac76b8246c8191b4474e7d24d53476-ebh-follow-up-note"
-  data-drive-sync-enabled="false"
-  data-drive-endpoint-url=""
-  data-drive-shared-drive-id=""
+  data-drive-sync-enabled="true"
+  data-drive-endpoint-url="https://script.google.com/macros/s/AKfycbyCfdY3aHqLXFcHBE6fXt8UU8D_E7nmUDf-kJzcPo2VGtS4JuVVNI0m4v_SUNaVSeNXKQ/exec"
+  data-drive-shared-drive-id="0AHnYqpJA5-6ZUk9PVA"
   data-drive-root-folder-name="Astra Clinical Note Builder"
-  data-drive-owner-email=""
+  data-drive-owner-email="nick@astrapsychiatry.com"
+  data-drive-owner-token="c89576337a2a46019681146573c09b30"
   data-drive-sync-minutes="30"
 >
   <header class="topbar" id="topbar">
@@ -254,6 +255,10 @@
             <span class="time-sep">:</span>
             <input class="time-part time-part-minute" type="text" inputmode="numeric" maxlength="2" autocomplete="off" placeholder="MM" aria-label="Scheduled start minute" data-time-part="minute">
             <input class="time-part time-part-meridiem" type="text" inputmode="text" maxlength="1" autocomplete="off" placeholder="A/P" aria-label="Scheduled start meridiem" data-time-part="meridiem">
+            <div class="time-meridiem-toggle" role="group" aria-label="Scheduled start meridiem quick select">
+              <button type="button" class="time-meridiem-btn" data-meridiem="AM">A</button>
+              <button type="button" class="time-meridiem-btn" data-meridiem="PM">P</button>
+            </div>
             <input id="scheduledStart" type="hidden" value="">
           </div>
         </div>
@@ -277,6 +282,10 @@
               <span class="time-sep">:</span>
               <input class="time-part time-part-minute" type="text" inputmode="numeric" maxlength="2" autocomplete="off" placeholder="MM" aria-label="Face to face start minute" data-time-part="minute">
               <input class="time-part time-part-meridiem" type="text" inputmode="text" maxlength="1" autocomplete="off" placeholder="A/P" aria-label="Face to face start meridiem" data-time-part="meridiem">
+              <div class="time-meridiem-toggle" role="group" aria-label="Face to face start meridiem quick select">
+                <button type="button" class="time-meridiem-btn" data-meridiem="AM">A</button>
+                <button type="button" class="time-meridiem-btn" data-meridiem="PM">P</button>
+              </div>
               <input id="startTime" type="hidden" value="">
             </div>
             <button type="button" class="mini-btn nowBtn" data-target="startTime">Now</button>
@@ -501,6 +510,10 @@
             <span class="time-sep">:</span>
             <input class="time-part time-part-minute" type="text" inputmode="numeric" maxlength="2" autocomplete="off" placeholder="MM" aria-label="Follow-up minute" data-time-part="minute">
             <input class="time-part time-part-meridiem" type="text" inputmode="text" maxlength="1" autocomplete="off" placeholder="A/P" aria-label="Follow-up meridiem" data-time-part="meridiem">
+            <div class="time-meridiem-toggle" role="group" aria-label="Follow-up meridiem quick select">
+              <button type="button" class="time-meridiem-btn" data-meridiem="AM">A</button>
+              <button type="button" class="time-meridiem-btn" data-meridiem="PM">P</button>
+            </div>
             <input id="followTime" type="hidden" value="">
           </div>
         </div>
@@ -526,6 +539,10 @@
               <span class="time-sep">:</span>
               <input class="time-part time-part-minute" type="text" inputmode="numeric" maxlength="2" autocomplete="off" placeholder="MM" aria-label="Face-to-face end minute" data-time-part="minute">
               <input class="time-part time-part-meridiem" type="text" inputmode="text" maxlength="1" autocomplete="off" placeholder="A/P" aria-label="Face-to-face end meridiem" data-time-part="meridiem">
+              <div class="time-meridiem-toggle" role="group" aria-label="Face-to-face end meridiem quick select">
+                <button type="button" class="time-meridiem-btn" data-meridiem="AM">A</button>
+                <button type="button" class="time-meridiem-btn" data-meridiem="PM">P</button>
+              </div>
               <input id="endTime" type="hidden" value="">
             </div>
             <button type="button" class="mini-btn nowBtn" data-target="endTime">Now</button>
@@ -540,6 +557,10 @@
               <span class="time-sep">:</span>
               <input class="time-part time-part-minute" type="text" inputmode="numeric" maxlength="2" autocomplete="off" placeholder="MM" aria-label="Documentation end minute" data-time-part="minute">
               <input class="time-part time-part-meridiem" type="text" inputmode="text" maxlength="1" autocomplete="off" placeholder="A/P" aria-label="Documentation end meridiem" data-time-part="meridiem">
+              <div class="time-meridiem-toggle" role="group" aria-label="Documentation end meridiem quick select">
+                <button type="button" class="time-meridiem-btn" data-meridiem="AM">A</button>
+                <button type="button" class="time-meridiem-btn" data-meridiem="PM">P</button>
+              </div>
               <input id="docEnd" type="hidden" value="">
             </div>
             <button type="button" class="mini-btn nowBtn" data-target="docEnd">Now</button>
