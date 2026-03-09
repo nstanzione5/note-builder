@@ -1,7 +1,7 @@
 {
-  "name": "Clinical Note Generator",
-  "short_name": "Note Generator",
-  "start_url": ".",
+  "name": "Astra Clinical Note Builder",
+  "short_name": "Astra Notes",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#121820",
   "theme_color": "#121820",
