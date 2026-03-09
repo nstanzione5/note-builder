@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-09T14:33:34.061Z",
+  "generated_at": "2026-03-09T19:12:47.443Z",
   "review_queue": [
     {
       "id": "citalopram",
@@ -14,11 +14,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -34,11 +36,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -54,11 +58,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -74,11 +80,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -94,11 +102,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -114,11 +124,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -134,11 +146,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -154,11 +168,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -174,11 +190,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -194,10 +212,11 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 12,
+      "reliability_score": 18,
       "reliability_tier": "low",
       "reliability_sources": [
-        "RxNorm"
+        "RxNorm",
+        "RxClass"
       ]
     },
     {
@@ -212,7 +231,9 @@
       "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -228,11 +249,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -248,11 +271,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -268,11 +293,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -288,11 +315,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -308,11 +337,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -328,11 +359,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -348,11 +381,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -368,11 +403,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -388,11 +425,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -408,10 +447,12 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 12,
+      "reliability_score": 22,
       "reliability_tier": "low",
       "reliability_sources": [
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -427,11 +468,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -447,11 +490,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -467,11 +512,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -487,11 +534,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -507,11 +556,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -527,11 +578,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -547,11 +600,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -567,11 +622,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -586,7 +643,9 @@
       "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -601,7 +660,9 @@
       "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -617,11 +678,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -637,11 +700,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -657,11 +722,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -677,11 +744,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -697,11 +766,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -717,11 +788,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -737,11 +810,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -757,11 +832,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -777,11 +854,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -797,11 +876,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -817,11 +898,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -837,11 +920,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -857,11 +942,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -877,11 +964,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -897,11 +986,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -917,11 +1008,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -937,11 +1030,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -956,7 +1051,9 @@
       "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -972,11 +1069,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -992,11 +1091,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1012,11 +1113,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1032,11 +1135,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1052,11 +1157,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1072,11 +1179,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1092,11 +1201,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1112,11 +1223,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1132,11 +1245,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1152,11 +1267,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1172,11 +1289,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1192,11 +1311,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1212,11 +1333,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1232,11 +1355,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1252,11 +1377,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1272,11 +1399,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1292,11 +1421,12 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 52,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass"
       ]
     },
     {
@@ -1312,11 +1442,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1332,11 +1464,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1352,11 +1486,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1372,11 +1508,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1392,11 +1530,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1412,11 +1552,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1432,11 +1574,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1452,11 +1596,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1472,11 +1618,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1492,11 +1640,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1512,11 +1662,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1532,11 +1684,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1552,11 +1706,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1572,11 +1728,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1592,11 +1750,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1612,11 +1772,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1632,7 +1794,7 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 12,
+      "reliability_score": 10,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm"
@@ -1651,11 +1813,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1671,11 +1835,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1691,11 +1857,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1711,10 +1879,12 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 12,
+      "reliability_score": 22,
       "reliability_tier": "low",
       "reliability_sources": [
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1730,11 +1900,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1750,11 +1922,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1770,11 +1944,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1790,11 +1966,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1810,11 +1988,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1830,11 +2010,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1850,11 +2032,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1870,11 +2054,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1890,11 +2076,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1910,11 +2098,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1930,11 +2120,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1950,11 +2142,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1970,11 +2164,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -1990,11 +2186,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2010,11 +2208,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2030,11 +2230,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2050,11 +2252,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2070,11 +2274,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2090,11 +2296,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2110,11 +2318,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2130,11 +2340,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2150,11 +2362,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2170,11 +2384,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2190,11 +2406,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2210,11 +2428,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2230,11 +2450,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2250,11 +2472,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2270,11 +2494,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2290,11 +2516,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2309,7 +2537,9 @@
       "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2325,11 +2555,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2345,11 +2577,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2365,11 +2599,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2385,11 +2621,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2405,11 +2643,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2425,11 +2665,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2444,7 +2686,9 @@
       "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2460,11 +2704,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2480,11 +2726,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2500,11 +2748,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2520,11 +2770,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2540,11 +2792,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2560,11 +2814,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2580,11 +2836,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2600,11 +2858,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2620,11 +2880,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2640,10 +2902,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 12,
+      "reliability_score": 30,
       "reliability_tier": "low",
       "reliability_sources": [
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "RxTerms",
+        "MedlinePlus"
       ]
     },
     {
@@ -2659,11 +2924,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2679,8 +2946,8 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
-      "reliability_tier": "moderate",
+      "reliability_score": 44,
+      "reliability_tier": "low",
       "reliability_sources": [
         "DailyMed",
         "RxNorm"
@@ -2699,11 +2966,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2719,11 +2988,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2739,11 +3010,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2759,11 +3032,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2779,11 +3054,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2799,11 +3076,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2819,11 +3098,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2839,11 +3120,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2859,11 +3142,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2879,11 +3164,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2899,11 +3186,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2919,11 +3208,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2939,11 +3230,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2959,11 +3252,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2979,11 +3274,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -2999,11 +3296,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3019,11 +3318,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3039,11 +3340,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3059,11 +3362,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3079,11 +3384,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3099,11 +3406,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3119,10 +3428,12 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 12,
+      "reliability_score": 22,
       "reliability_tier": "low",
       "reliability_sources": [
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3138,11 +3449,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3158,11 +3471,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3178,7 +3493,7 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 12,
+      "reliability_score": 10,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm"
@@ -3197,11 +3512,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3217,10 +3534,12 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 12,
+      "reliability_score": 22,
       "reliability_tier": "low",
       "reliability_sources": [
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3236,11 +3555,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3256,11 +3577,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3276,11 +3599,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3296,10 +3621,12 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 12,
+      "reliability_score": 22,
       "reliability_tier": "low",
       "reliability_sources": [
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3315,11 +3642,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3335,11 +3664,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3355,11 +3686,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3375,11 +3708,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3395,11 +3730,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3415,11 +3752,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3435,11 +3774,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3455,11 +3796,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3475,11 +3818,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3495,11 +3840,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3515,11 +3862,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3535,11 +3884,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3555,11 +3906,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3575,10 +3928,12 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 12,
+      "reliability_score": 22,
       "reliability_tier": "low",
       "reliability_sources": [
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3594,11 +3949,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3614,11 +3971,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3634,10 +3993,12 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 12,
+      "reliability_score": 22,
       "reliability_tier": "low",
       "reliability_sources": [
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3653,7 +4014,7 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 12,
+      "reliability_score": 10,
       "reliability_tier": "low",
       "reliability_sources": [
         "RxNorm"
@@ -3672,11 +4033,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3692,11 +4055,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3712,11 +4077,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3732,11 +4099,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3752,10 +4121,12 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 12,
+      "reliability_score": 22,
       "reliability_tier": "low",
       "reliability_sources": [
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3771,11 +4142,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3791,11 +4164,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3811,11 +4186,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3831,11 +4208,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3851,11 +4230,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3871,11 +4252,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3891,11 +4274,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3911,11 +4296,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3931,11 +4318,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3951,11 +4340,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3971,11 +4362,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -3991,11 +4384,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -4011,11 +4406,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -4031,11 +4428,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -4051,11 +4450,12 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 52,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass"
       ]
     },
     {
@@ -4071,11 +4471,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -4091,11 +4493,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -4111,11 +4515,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -4131,11 +4537,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -4151,11 +4559,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -4171,11 +4581,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -4191,11 +4603,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -4211,11 +4625,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -4231,10 +4647,11 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 12,
+      "reliability_score": 18,
       "reliability_tier": "low",
       "reliability_sources": [
-        "RxNorm"
+        "RxNorm",
+        "RxClass"
       ]
     },
     {
@@ -4250,10 +4667,12 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 12,
+      "reliability_score": 22,
       "reliability_tier": "low",
       "reliability_sources": [
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -4269,11 +4688,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -4289,10 +4710,12 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 12,
+      "reliability_score": 22,
       "reliability_tier": "low",
       "reliability_sources": [
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -4308,10 +4731,11 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 12,
+      "reliability_score": 18,
       "reliability_tier": "low",
       "reliability_sources": [
-        "RxNorm"
+        "RxNorm",
+        "RxClass"
       ]
     },
     {
@@ -4327,10 +4751,12 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 12,
+      "reliability_score": 22,
       "reliability_tier": "low",
       "reliability_sources": [
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -4346,11 +4772,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -4366,11 +4794,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -4386,11 +4816,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -4406,11 +4838,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -4426,11 +4860,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -4446,11 +4882,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -4466,11 +4904,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -4486,11 +4926,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -4506,11 +4948,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -4526,11 +4970,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -4546,11 +4992,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -4566,11 +5014,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -4586,11 +5036,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -4606,11 +5058,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -4626,11 +5080,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -4646,11 +5102,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -4666,11 +5124,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -4686,11 +5146,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -4706,11 +5168,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -4726,11 +5190,13 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 50,
+      "reliability_score": 56,
       "reliability_tier": "moderate",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -4746,10 +5212,12 @@
         "mechanism summary"
       ],
       "content_review_status": "source scored",
-      "reliability_score": 12,
+      "reliability_score": 22,
       "reliability_tier": "low",
       "reliability_sources": [
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -4764,7 +5232,9 @@
       "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     },
     {
@@ -4779,7 +5249,9 @@
       "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ]
     }
   ]

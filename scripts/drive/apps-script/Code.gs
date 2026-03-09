@@ -783,7 +783,11 @@ function findFolderInParent_(parentId, folderName, sharedDriveId) {
   };
 
   const listed = listFilesSafe_(params, sharedDriveId);
-  return listed.items && listed.items.length ? listed.items[0] : null;
+  if (listed.items && listed.items.length) {
+    return listed.items[0];
+  }
+
+  return findFolderViaDriveApp_(parentId, folderName);
 }
 
 function findFileInFolder_(folderId, fileName, sharedDriveId) {
@@ -796,7 +800,37 @@ function findFileInFolder_(folderId, fileName, sharedDriveId) {
   };
 
   const listed = listFilesSafe_(params, sharedDriveId);
-  return listed.items && listed.items.length ? listed.items[0] : null;
+  if (listed.items && listed.items.length) {
+    return listed.items[0];
+  }
+
+  return findFileViaDriveApp_(folderId, fileName);
+}
+
+function findFolderViaDriveApp_(parentId, folderName) {
+  try {
+    const parent = DriveApp.getFolderById(parentId);
+    const iter = parent.getFoldersByName(folderName);
+    if (iter.hasNext()) {
+      return getFileSafe_(iter.next().getId());
+    }
+  } catch (error) {
+    // ignore lookup fallback errors and return null
+  }
+  return null;
+}
+
+function findFileViaDriveApp_(folderId, fileName) {
+  try {
+    const folder = DriveApp.getFolderById(folderId);
+    const iter = folder.getFilesByName(fileName);
+    if (iter.hasNext()) {
+      return getFileSafe_(iter.next().getId());
+    }
+  } catch (error) {
+    // ignore lookup fallback errors and return null
+  }
+  return null;
 }
 
 function readFileContent_(fileId) {

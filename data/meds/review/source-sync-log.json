@@ -1,14 +1,16 @@
 {
-  "generated_at": "2026-03-09T13:51:30.864Z",
+  "generated_at": "2026-03-09T19:10:47.708Z",
   "items": [
     {
       "id": "citalopram",
       "generic_name": "citalopram",
-      "source_last_checked": "2026-03-09T13:47:14.123Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:39:25.785Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -19,11 +21,13 @@
     {
       "id": "escitalopram",
       "generic_name": "escitalopram",
-      "source_last_checked": "2026-03-09T13:47:15.684Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:39:32.530Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -34,11 +38,13 @@
     {
       "id": "fluoxetine",
       "generic_name": "fluoxetine",
-      "source_last_checked": "2026-03-09T13:47:17.922Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:39:39.400Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -49,11 +55,13 @@
     {
       "id": "fluvoxamine",
       "generic_name": "fluvoxamine",
-      "source_last_checked": "2026-03-09T13:47:19.560Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:39:46.231Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -64,11 +72,13 @@
     {
       "id": "paroxetine",
       "generic_name": "paroxetine",
-      "source_last_checked": "2026-03-09T13:47:21.396Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:39:53.283Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -79,11 +89,13 @@
     {
       "id": "sertraline",
       "generic_name": "sertraline",
-      "source_last_checked": "2026-03-09T13:47:22.956Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:40:00.366Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -94,11 +106,13 @@
     {
       "id": "vilazodone",
       "generic_name": "vilazodone",
-      "source_last_checked": "2026-03-09T13:47:24.105Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:40:07.631Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -109,11 +123,13 @@
     {
       "id": "vortioxetine",
       "generic_name": "vortioxetine",
-      "source_last_checked": "2026-03-09T13:47:24.892Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:40:14.343Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -124,11 +140,13 @@
     {
       "id": "venlafaxine",
       "generic_name": "venlafaxine",
-      "source_last_checked": "2026-03-09T13:47:26.395Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:40:21.601Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -139,11 +157,13 @@
     {
       "id": "desvenlafaxine",
       "generic_name": "desvenlafaxine",
-      "source_last_checked": "2026-03-09T13:47:27.677Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:40:29.129Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -154,11 +174,13 @@
     {
       "id": "duloxetine",
       "generic_name": "duloxetine",
-      "source_last_checked": "2026-03-09T13:47:29.245Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:40:37.345Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -169,11 +191,13 @@
     {
       "id": "levomilnacipran",
       "generic_name": "levomilnacipran",
-      "source_last_checked": "2026-03-09T13:47:29.898Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:40:45.180Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -184,11 +208,13 @@
     {
       "id": "milnacipran",
       "generic_name": "milnacipran",
-      "source_last_checked": "2026-03-09T13:47:30.915Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:40:52.516Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -199,11 +225,13 @@
     {
       "id": "atomoxetine",
       "generic_name": "atomoxetine",
-      "source_last_checked": "2026-03-09T13:47:32.393Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:40:59.937Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -214,10 +242,11 @@
     {
       "id": "sibutramine",
       "generic_name": "sibutramine",
-      "source_last_checked": "2026-03-09T13:47:32.949Z",
-      "source_links_count": 1,
+      "source_last_checked": "2026-03-09T18:41:07.337Z",
+      "source_links_count": 2,
       "enrichment_sources_found": [
-        "RxNorm"
+        "RxNorm",
+        "RxClass"
       ],
       "status": "source scored",
       "notes": [
@@ -228,11 +257,13 @@
     {
       "id": "bupropion",
       "generic_name": "bupropion",
-      "source_last_checked": "2026-03-09T13:47:34.263Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:41:14.529Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -243,11 +274,13 @@
     {
       "id": "dextromethorphan-bupropion",
       "generic_name": "dextromethorphan-bupropion",
-      "source_last_checked": "2026-03-09T13:47:35.063Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T18:41:21.878Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -258,11 +291,13 @@
     {
       "id": "mirtazapine",
       "generic_name": "mirtazapine",
-      "source_last_checked": "2026-03-09T13:47:36.730Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:41:29.205Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -273,11 +308,13 @@
     {
       "id": "trazodone",
       "generic_name": "trazodone",
-      "source_last_checked": "2026-03-09T13:47:38.683Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:41:36.541Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -288,11 +325,13 @@
     {
       "id": "nefazodone",
       "generic_name": "nefazodone",
-      "source_last_checked": "2026-03-09T13:47:39.517Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:41:43.797Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -303,11 +342,13 @@
     {
       "id": "amitriptyline",
       "generic_name": "amitriptyline",
-      "source_last_checked": "2026-03-09T13:47:41.398Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:41:51.217Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -318,11 +359,13 @@
     {
       "id": "nortriptyline",
       "generic_name": "nortriptyline",
-      "source_last_checked": "2026-03-09T13:47:42.927Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:41:58.605Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -333,11 +376,13 @@
     {
       "id": "desipramine",
       "generic_name": "desipramine",
-      "source_last_checked": "2026-03-09T13:47:44.243Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:42:06.165Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -348,11 +393,13 @@
     {
       "id": "imipramine",
       "generic_name": "imipramine",
-      "source_last_checked": "2026-03-09T13:47:45.605Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:42:12.998Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -363,11 +410,13 @@
     {
       "id": "clomipramine",
       "generic_name": "clomipramine",
-      "source_last_checked": "2026-03-09T13:47:47.605Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:42:20.050Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -378,11 +427,13 @@
     {
       "id": "doxepin",
       "generic_name": "doxepin",
-      "source_last_checked": "2026-03-09T13:47:48.734Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:42:26.865Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -393,10 +444,12 @@
     {
       "id": "maprotiline",
       "generic_name": "maprotiline",
-      "source_last_checked": "2026-03-09T13:47:49.253Z",
-      "source_links_count": 1,
+      "source_last_checked": "2026-03-09T18:42:35.110Z",
+      "source_links_count": 3,
       "enrichment_sources_found": [
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -407,11 +460,13 @@
     {
       "id": "amoxapine",
       "generic_name": "amoxapine",
-      "source_last_checked": "2026-03-09T13:47:49.947Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:42:42.637Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -422,11 +477,13 @@
     {
       "id": "trimipramine",
       "generic_name": "trimipramine",
-      "source_last_checked": "2026-03-09T13:47:50.742Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:42:50.173Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -437,11 +494,13 @@
     {
       "id": "protriptyline",
       "generic_name": "protriptyline",
-      "source_last_checked": "2026-03-09T13:47:51.444Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:42:57.704Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -452,11 +511,13 @@
     {
       "id": "phenelzine",
       "generic_name": "phenelzine",
-      "source_last_checked": "2026-03-09T13:47:52.522Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:43:05.127Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -467,11 +528,13 @@
     {
       "id": "tranylcypromine",
       "generic_name": "tranylcypromine",
-      "source_last_checked": "2026-03-09T13:47:53.361Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:43:12.562Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -482,11 +545,13 @@
     {
       "id": "isocarboxazid",
       "generic_name": "isocarboxazid",
-      "source_last_checked": "2026-03-09T13:47:54.012Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T18:43:19.819Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -497,11 +562,13 @@
     {
       "id": "selegiline-transdermal",
       "generic_name": "selegiline transdermal",
-      "source_last_checked": "2026-03-09T13:47:55.708Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T18:43:27.140Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -512,11 +579,13 @@
     {
       "id": "zuranolone",
       "generic_name": "zuranolone",
-      "source_last_checked": "2026-03-09T13:47:56.295Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:43:34.519Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -527,11 +596,13 @@
     {
       "id": "amphetamine-mixed-salts-ir",
       "generic_name": "amphetamine mixed salts IR",
-      "source_last_checked": "2026-03-09T13:47:57.559Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:43:41.819Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -542,11 +613,13 @@
     {
       "id": "amphetamine-mixed-salts-xr",
       "generic_name": "amphetamine mixed salts XR",
-      "source_last_checked": "2026-03-09T13:47:57.929Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T18:43:49.157Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -557,11 +630,13 @@
     {
       "id": "lisdexamfetamine",
       "generic_name": "lisdexamfetamine",
-      "source_last_checked": "2026-03-09T13:47:59.385Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:43:56.749Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -572,11 +647,13 @@
     {
       "id": "dextroamphetamine",
       "generic_name": "dextroamphetamine",
-      "source_last_checked": "2026-03-09T13:48:00.799Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:44:03.889Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -587,11 +664,13 @@
     {
       "id": "methamphetamine",
       "generic_name": "methamphetamine",
-      "source_last_checked": "2026-03-09T13:48:01.764Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:44:10.878Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -602,11 +681,13 @@
     {
       "id": "methylphenidate-ir",
       "generic_name": "methylphenidate IR",
-      "source_last_checked": "2026-03-09T13:48:02.952Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:44:17.982Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -617,11 +698,13 @@
     {
       "id": "methylphenidate-er",
       "generic_name": "methylphenidate ER",
-      "source_last_checked": "2026-03-09T13:48:03.405Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:44:25.064Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -632,11 +715,13 @@
     {
       "id": "dexmethylphenidate",
       "generic_name": "dexmethylphenidate",
-      "source_last_checked": "2026-03-09T13:48:04.597Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:44:31.837Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -647,11 +732,13 @@
     {
       "id": "dexmethylphenidate-xr",
       "generic_name": "dexmethylphenidate XR",
-      "source_last_checked": "2026-03-09T13:48:04.978Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:44:38.963Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -662,11 +749,13 @@
     {
       "id": "serdexmethylphenidate-dexmethylphenidate",
       "generic_name": "serdexmethylphenidate-dexmethylphenidate",
-      "source_last_checked": "2026-03-09T13:48:05.945Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T18:44:45.991Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -677,11 +766,13 @@
     {
       "id": "methylphenidate-pm",
       "generic_name": "methylphenidate PM",
-      "source_last_checked": "2026-03-09T13:48:06.310Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:44:52.579Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -692,11 +783,13 @@
     {
       "id": "amphetamine-mixed-salts-er",
       "generic_name": "amphetamine mixed salts ER",
-      "source_last_checked": "2026-03-09T13:48:06.764Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:44:59.432Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -707,11 +800,13 @@
     {
       "id": "amphetamine-sulfate",
       "generic_name": "amphetamine sulfate",
-      "source_last_checked": "2026-03-09T13:48:07.528Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:45:06.349Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -722,11 +817,13 @@
     {
       "id": "amphetamine-xr-odt",
       "generic_name": "amphetamine XR ODT",
-      "source_last_checked": "2026-03-09T13:48:08.044Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:45:13.632Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -737,11 +834,13 @@
     {
       "id": "amphetamine-xr-suspension",
       "generic_name": "amphetamine XR suspension",
-      "source_last_checked": "2026-03-09T13:48:08.413Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:45:20.615Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -752,11 +851,13 @@
     {
       "id": "methylphenidate-chewable-er",
       "generic_name": "methylphenidate chewable ER",
-      "source_last_checked": "2026-03-09T13:48:08.862Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:45:27.973Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -767,11 +868,13 @@
     {
       "id": "methylphenidate-suspension-er",
       "generic_name": "methylphenidate suspension ER",
-      "source_last_checked": "2026-03-09T13:48:09.310Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:45:35.041Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -782,11 +885,13 @@
     {
       "id": "methylphenidate-odt-xr",
       "generic_name": "methylphenidate ODT XR",
-      "source_last_checked": "2026-03-09T13:48:09.768Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:45:42.390Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -797,11 +902,13 @@
     {
       "id": "methylphenidate-transdermal",
       "generic_name": "methylphenidate transdermal",
-      "source_last_checked": "2026-03-09T13:48:10.223Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:45:49.746Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -812,11 +919,13 @@
     {
       "id": "dextroamphetamine-transdermal",
       "generic_name": "dextroamphetamine transdermal",
-      "source_last_checked": "2026-03-09T13:48:10.754Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T18:45:56.966Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -827,11 +936,13 @@
     {
       "id": "viloxazine",
       "generic_name": "viloxazine",
-      "source_last_checked": "2026-03-09T13:48:11.443Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:46:04.513Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -842,11 +953,13 @@
     {
       "id": "guanfacine-ir",
       "generic_name": "guanfacine IR",
-      "source_last_checked": "2026-03-09T13:48:12.599Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:46:11.889Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -857,11 +970,13 @@
     {
       "id": "guanfacine-er",
       "generic_name": "guanfacine ER",
-      "source_last_checked": "2026-03-09T13:48:12.969Z",
-      "source_links_count": 7,
+      "source_last_checked": "2026-03-09T18:46:18.721Z",
+      "source_links_count": 9,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -872,11 +987,13 @@
     {
       "id": "clonidine-ir",
       "generic_name": "clonidine IR",
-      "source_last_checked": "2026-03-09T13:48:14.865Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:46:26.115Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -887,11 +1004,13 @@
     {
       "id": "clonidine-er",
       "generic_name": "clonidine ER",
-      "source_last_checked": "2026-03-09T13:48:15.384Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:46:33.215Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -902,11 +1021,13 @@
     {
       "id": "modafinil",
       "generic_name": "modafinil",
-      "source_last_checked": "2026-03-09T13:48:16.962Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:46:40.663Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -917,11 +1038,13 @@
     {
       "id": "armodafinil",
       "generic_name": "armodafinil",
-      "source_last_checked": "2026-03-09T13:48:18.201Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:46:47.893Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -932,11 +1055,13 @@
     {
       "id": "alprazolam",
       "generic_name": "alprazolam",
-      "source_last_checked": "2026-03-09T13:48:20.705Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:46:55.244Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -947,11 +1072,13 @@
     {
       "id": "clonazepam",
       "generic_name": "clonazepam",
-      "source_last_checked": "2026-03-09T13:48:22.457Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:47:02.837Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -962,11 +1089,13 @@
     {
       "id": "lorazepam",
       "generic_name": "lorazepam",
-      "source_last_checked": "2026-03-09T13:48:24.299Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:47:09.978Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -977,11 +1106,13 @@
     {
       "id": "diazepam",
       "generic_name": "diazepam",
-      "source_last_checked": "2026-03-09T13:48:26.397Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:47:17.302Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -992,11 +1123,13 @@
     {
       "id": "temazepam",
       "generic_name": "temazepam",
-      "source_last_checked": "2026-03-09T13:48:28.079Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:47:25.110Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1007,11 +1140,13 @@
     {
       "id": "oxazepam",
       "generic_name": "oxazepam",
-      "source_last_checked": "2026-03-09T13:48:29.020Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:47:32.453Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1022,11 +1157,13 @@
     {
       "id": "chlordiazepoxide",
       "generic_name": "chlordiazepoxide",
-      "source_last_checked": "2026-03-09T13:48:31.127Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:47:39.790Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1037,11 +1174,13 @@
     {
       "id": "clorazepate",
       "generic_name": "clorazepate",
-      "source_last_checked": "2026-03-09T13:48:32.458Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:47:47.038Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1052,11 +1191,13 @@
     {
       "id": "triazolam",
       "generic_name": "triazolam",
-      "source_last_checked": "2026-03-09T13:48:33.736Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:47:54.458Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1067,11 +1208,13 @@
     {
       "id": "estazolam",
       "generic_name": "estazolam",
-      "source_last_checked": "2026-03-09T13:48:34.784Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:48:01.715Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1082,11 +1225,13 @@
     {
       "id": "flurazepam",
       "generic_name": "flurazepam",
-      "source_last_checked": "2026-03-09T13:48:35.585Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:48:09.227Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1097,11 +1242,12 @@
     {
       "id": "quazepam",
       "generic_name": "quazepam",
-      "source_last_checked": "2026-03-09T13:48:36.490Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:48:16.485Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass"
       ],
       "status": "source scored",
       "notes": [
@@ -1112,11 +1258,13 @@
     {
       "id": "midazolam",
       "generic_name": "midazolam",
-      "source_last_checked": "2026-03-09T13:48:38.197Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:48:23.933Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1127,11 +1275,13 @@
     {
       "id": "diazepam-nasal",
       "generic_name": "diazepam nasal",
-      "source_last_checked": "2026-03-09T13:48:38.565Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T18:48:30.872Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1142,11 +1292,13 @@
     {
       "id": "midazolam-nasal",
       "generic_name": "midazolam nasal",
-      "source_last_checked": "2026-03-09T13:48:39.059Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T18:48:37.546Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1157,11 +1309,13 @@
     {
       "id": "zolpidem",
       "generic_name": "zolpidem",
-      "source_last_checked": "2026-03-09T13:48:41.162Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:48:44.508Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1172,11 +1326,13 @@
     {
       "id": "zolpidem-er",
       "generic_name": "zolpidem ER",
-      "source_last_checked": "2026-03-09T13:48:41.600Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T18:48:51.863Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1187,11 +1343,13 @@
     {
       "id": "zaleplon",
       "generic_name": "zaleplon",
-      "source_last_checked": "2026-03-09T13:48:43.211Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:48:58.935Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1202,11 +1360,13 @@
     {
       "id": "eszopiclone",
       "generic_name": "eszopiclone",
-      "source_last_checked": "2026-03-09T13:48:45.365Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:49:06.553Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1217,11 +1377,13 @@
     {
       "id": "ramelteon",
       "generic_name": "ramelteon",
-      "source_last_checked": "2026-03-09T13:48:46.861Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:49:13.614Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1232,11 +1394,13 @@
     {
       "id": "suvorexant",
       "generic_name": "suvorexant",
-      "source_last_checked": "2026-03-09T13:48:47.657Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:49:20.871Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1247,11 +1411,13 @@
     {
       "id": "lemborexant",
       "generic_name": "lemborexant",
-      "source_last_checked": "2026-03-09T13:48:48.737Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:49:28.285Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1262,11 +1428,13 @@
     {
       "id": "daridorexant",
       "generic_name": "daridorexant",
-      "source_last_checked": "2026-03-09T13:48:49.463Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:49:35.624Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1277,11 +1445,13 @@
     {
       "id": "doxepin-low-dose",
       "generic_name": "doxepin low-dose",
-      "source_last_checked": "2026-03-09T13:48:50.602Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T18:49:42.984Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1292,11 +1462,13 @@
     {
       "id": "hydroxyzine",
       "generic_name": "hydroxyzine",
-      "source_last_checked": "2026-03-09T13:48:52.613Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:49:50.490Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1307,11 +1479,13 @@
     {
       "id": "diphenhydramine",
       "generic_name": "diphenhydramine",
-      "source_last_checked": "2026-03-09T13:48:54.708Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:49:57.552Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1322,11 +1496,13 @@
     {
       "id": "gabapentin",
       "generic_name": "gabapentin",
-      "source_last_checked": "2026-03-09T13:48:56.297Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:50:04.890Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1337,11 +1513,13 @@
     {
       "id": "pregabalin",
       "generic_name": "pregabalin",
-      "source_last_checked": "2026-03-09T13:48:58.376Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:50:12.318Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1352,7 +1530,7 @@
     {
       "id": "melatonin-receptor-agonist",
       "generic_name": "melatonin receptor agonist",
-      "source_last_checked": "2026-03-09T13:48:58.748Z",
+      "source_last_checked": "2026-03-09T18:50:19.653Z",
       "source_links_count": 1,
       "enrichment_sources_found": [
         "RxNorm"
@@ -1366,11 +1544,13 @@
     {
       "id": "aripiprazole",
       "generic_name": "aripiprazole",
-      "source_last_checked": "2026-03-09T13:49:00.173Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:50:27.106Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1381,11 +1561,13 @@
     {
       "id": "brexpiprazole",
       "generic_name": "brexpiprazole",
-      "source_last_checked": "2026-03-09T13:49:01.000Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:50:34.331Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1396,11 +1578,13 @@
     {
       "id": "cariprazine",
       "generic_name": "cariprazine",
-      "source_last_checked": "2026-03-09T13:49:01.825Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:50:41.925Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1411,11 +1595,13 @@
     {
       "id": "quetiapine-ir",
       "generic_name": "quetiapine IR",
-      "source_last_checked": "2026-03-09T13:49:03.622Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T18:50:49.008Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1426,11 +1612,13 @@
     {
       "id": "quetiapine-xr",
       "generic_name": "quetiapine XR",
-      "source_last_checked": "2026-03-09T13:49:03.992Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T18:50:56.099Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1441,11 +1629,13 @@
     {
       "id": "olanzapine",
       "generic_name": "olanzapine",
-      "source_last_checked": "2026-03-09T13:49:05.194Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:51:03.074Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1456,10 +1646,12 @@
     {
       "id": "olanzapine-fluoxetine",
       "generic_name": "olanzapine-fluoxetine",
-      "source_last_checked": "2026-03-09T13:49:05.973Z",
-      "source_links_count": 1,
+      "source_last_checked": "2026-03-09T18:51:10.498Z",
+      "source_links_count": 3,
       "enrichment_sources_found": [
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1470,11 +1662,13 @@
     {
       "id": "olanzapine-samidorphan",
       "generic_name": "olanzapine-samidorphan",
-      "source_last_checked": "2026-03-09T13:49:06.767Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T18:51:18.100Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1485,11 +1679,13 @@
     {
       "id": "risperidone",
       "generic_name": "risperidone",
-      "source_last_checked": "2026-03-09T13:49:08.503Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:51:25.700Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1500,11 +1696,13 @@
     {
       "id": "paliperidone-oral",
       "generic_name": "paliperidone oral",
-      "source_last_checked": "2026-03-09T13:49:10.105Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T18:51:32.771Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1515,11 +1713,13 @@
     {
       "id": "ziprasidone",
       "generic_name": "ziprasidone",
-      "source_last_checked": "2026-03-09T13:49:12.012Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:51:40.037Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1530,11 +1730,13 @@
     {
       "id": "lurasidone",
       "generic_name": "lurasidone",
-      "source_last_checked": "2026-03-09T13:49:12.813Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:51:47.200Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1545,11 +1747,13 @@
     {
       "id": "lumateperone",
       "generic_name": "lumateperone",
-      "source_last_checked": "2026-03-09T13:49:13.885Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:51:54.686Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1560,11 +1764,13 @@
     {
       "id": "asenapine-sublingual",
       "generic_name": "asenapine sublingual",
-      "source_last_checked": "2026-03-09T13:49:14.660Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T18:52:01.865Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1575,11 +1781,13 @@
     {
       "id": "iloperidone",
       "generic_name": "iloperidone",
-      "source_last_checked": "2026-03-09T13:49:15.224Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:52:09.203Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1590,11 +1798,13 @@
     {
       "id": "haloperidol",
       "generic_name": "haloperidol",
-      "source_last_checked": "2026-03-09T13:49:15.978Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:52:17.066Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1605,11 +1815,13 @@
     {
       "id": "chlorpromazine",
       "generic_name": "chlorpromazine",
-      "source_last_checked": "2026-03-09T13:49:16.574Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:52:24.596Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1620,11 +1832,13 @@
     {
       "id": "perphenazine",
       "generic_name": "perphenazine",
-      "source_last_checked": "2026-03-09T13:49:17.254Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:52:32.269Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1635,11 +1849,13 @@
     {
       "id": "trifluoperazine",
       "generic_name": "trifluoperazine",
-      "source_last_checked": "2026-03-09T13:49:17.821Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:52:39.861Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1650,11 +1866,13 @@
     {
       "id": "loxapine",
       "generic_name": "loxapine",
-      "source_last_checked": "2026-03-09T13:49:18.468Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:52:47.094Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1665,11 +1883,13 @@
     {
       "id": "molindone",
       "generic_name": "molindone",
-      "source_last_checked": "2026-03-09T13:49:19.027Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:52:54.720Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1680,11 +1900,13 @@
     {
       "id": "pimozide",
       "generic_name": "pimozide",
-      "source_last_checked": "2026-03-09T13:49:19.690Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:53:01.774Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1695,11 +1917,13 @@
     {
       "id": "thiothixene",
       "generic_name": "thiothixene",
-      "source_last_checked": "2026-03-09T13:49:20.529Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:53:08.680Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1710,11 +1934,13 @@
     {
       "id": "thioridazine",
       "generic_name": "thioridazine",
-      "source_last_checked": "2026-03-09T13:49:21.466Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:53:15.772Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1725,11 +1951,13 @@
     {
       "id": "fluphenazine",
       "generic_name": "fluphenazine",
-      "source_last_checked": "2026-03-09T13:49:22.496Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:53:23.026Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1740,11 +1968,13 @@
     {
       "id": "xanomeline-trospium",
       "generic_name": "xanomeline-trospium",
-      "source_last_checked": "2026-03-09T13:49:23.543Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T18:53:30.364Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1755,11 +1985,13 @@
     {
       "id": "pimavanserin",
       "generic_name": "pimavanserin",
-      "source_last_checked": "2026-03-09T13:49:24.294Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:53:37.785Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1770,11 +2002,13 @@
     {
       "id": "lithium-carbonate",
       "generic_name": "lithium carbonate",
-      "source_last_checked": "2026-03-09T13:49:25.119Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:53:45.149Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1785,11 +2019,13 @@
     {
       "id": "lithium-citrate",
       "generic_name": "lithium citrate",
-      "source_last_checked": "2026-03-09T13:49:25.791Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T18:53:52.466Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1800,11 +2036,13 @@
     {
       "id": "lamotrigine",
       "generic_name": "lamotrigine",
-      "source_last_checked": "2026-03-09T13:49:26.724Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:53:59.801Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1815,11 +2053,13 @@
     {
       "id": "divalproex",
       "generic_name": "divalproex",
-      "source_last_checked": "2026-03-09T13:49:27.936Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:54:06.890Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1830,11 +2070,13 @@
     {
       "id": "valproic-acid",
       "generic_name": "valproic acid",
-      "source_last_checked": "2026-03-09T13:49:29.084Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:54:14.204Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1845,11 +2087,13 @@
     {
       "id": "carbamazepine",
       "generic_name": "carbamazepine",
-      "source_last_checked": "2026-03-09T13:49:30.360Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:54:21.544Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1860,11 +2104,13 @@
     {
       "id": "oxcarbazepine",
       "generic_name": "oxcarbazepine",
-      "source_last_checked": "2026-03-09T13:49:31.408Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:54:28.314Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1875,11 +2121,13 @@
     {
       "id": "topiramate",
       "generic_name": "topiramate",
-      "source_last_checked": "2026-03-09T13:49:32.457Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:54:35.444Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1890,11 +2138,13 @@
     {
       "id": "zonisamide",
       "generic_name": "zonisamide",
-      "source_last_checked": "2026-03-09T13:49:34.210Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:54:42.498Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1905,11 +2155,13 @@
     {
       "id": "levetiracetam",
       "generic_name": "levetiracetam",
-      "source_last_checked": "2026-03-09T13:49:35.671Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:54:49.510Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1920,11 +2172,13 @@
     {
       "id": "prazosin",
       "generic_name": "prazosin",
-      "source_last_checked": "2026-03-09T13:49:36.871Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:54:56.539Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1935,11 +2189,13 @@
     {
       "id": "doxazosin",
       "generic_name": "doxazosin",
-      "source_last_checked": "2026-03-09T13:49:38.385Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:55:04.025Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1950,11 +2206,13 @@
     {
       "id": "terazosin",
       "generic_name": "terazosin",
-      "source_last_checked": "2026-03-09T13:49:40.461Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:55:11.089Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1965,11 +2223,13 @@
     {
       "id": "propranolol",
       "generic_name": "propranolol",
-      "source_last_checked": "2026-03-09T13:49:42.424Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:55:18.433Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1980,11 +2240,13 @@
     {
       "id": "atenolol",
       "generic_name": "atenolol",
-      "source_last_checked": "2026-03-09T13:49:44.719Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:55:25.768Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -1995,11 +2257,13 @@
     {
       "id": "metoprolol",
       "generic_name": "metoprolol",
-      "source_last_checked": "2026-03-09T13:49:46.388Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:55:33.101Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2010,11 +2274,13 @@
     {
       "id": "nadolol",
       "generic_name": "nadolol",
-      "source_last_checked": "2026-03-09T13:49:48.540Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:55:40.441Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2025,11 +2291,13 @@
     {
       "id": "bisoprolol",
       "generic_name": "bisoprolol",
-      "source_last_checked": "2026-03-09T13:49:50.062Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:55:47.847Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2040,11 +2308,13 @@
     {
       "id": "carvedilol",
       "generic_name": "carvedilol",
-      "source_last_checked": "2026-03-09T13:49:50.914Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:55:55.395Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2055,11 +2325,13 @@
     {
       "id": "buspirone",
       "generic_name": "buspirone",
-      "source_last_checked": "2026-03-09T13:49:52.985Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:56:02.457Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2070,11 +2342,13 @@
     {
       "id": "cyproheptadine",
       "generic_name": "cyproheptadine",
-      "source_last_checked": "2026-03-09T13:49:55.000Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:56:09.706Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2085,11 +2359,13 @@
     {
       "id": "naltrexone-oral",
       "generic_name": "naltrexone oral",
-      "source_last_checked": "2026-03-09T13:49:56.338Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T18:56:17.134Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2100,11 +2376,13 @@
     {
       "id": "acamprosate",
       "generic_name": "acamprosate",
-      "source_last_checked": "2026-03-09T13:49:57.450Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:56:24.472Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2115,11 +2393,13 @@
     {
       "id": "disulfiram",
       "generic_name": "disulfiram",
-      "source_last_checked": "2026-03-09T13:49:58.679Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:56:31.811Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2130,11 +2410,13 @@
     {
       "id": "naloxone-intranasal",
       "generic_name": "naloxone intranasal",
-      "source_last_checked": "2026-03-09T13:49:59.945Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T18:56:39.149Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2145,11 +2427,13 @@
     {
       "id": "nalmefene-intranasal",
       "generic_name": "nalmefene intranasal",
-      "source_last_checked": "2026-03-09T13:50:00.829Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T18:56:46.762Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2160,11 +2444,13 @@
     {
       "id": "lofexidine",
       "generic_name": "lofexidine",
-      "source_last_checked": "2026-03-09T13:50:02.061Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:56:53.908Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2175,11 +2461,13 @@
     {
       "id": "varenicline",
       "generic_name": "varenicline",
-      "source_last_checked": "2026-03-09T13:50:03.483Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:57:01.162Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2190,11 +2478,13 @@
     {
       "id": "nicotine-transdermal",
       "generic_name": "nicotine transdermal",
-      "source_last_checked": "2026-03-09T13:50:04.442Z",
-      "source_links_count": 6,
+      "source_last_checked": "2026-03-09T18:57:08.500Z",
+      "source_links_count": 8,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2205,11 +2495,13 @@
     {
       "id": "nicotine-gum",
       "generic_name": "nicotine gum",
-      "source_last_checked": "2026-03-09T13:50:05.148Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T18:57:16.107Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2220,11 +2512,13 @@
     {
       "id": "nicotine-lozenge",
       "generic_name": "nicotine lozenge",
-      "source_last_checked": "2026-03-09T13:50:06.187Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T18:57:23.393Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2235,10 +2529,13 @@
     {
       "id": "bupropion-sr-smoking-cessation",
       "generic_name": "bupropion SR smoking cessation",
-      "source_last_checked": "2026-03-09T13:50:07.067Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T18:57:30.513Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "RxTerms",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2249,11 +2546,13 @@
     {
       "id": "liothyronine",
       "generic_name": "liothyronine",
-      "source_last_checked": "2026-03-09T13:50:08.711Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:57:37.600Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2264,7 +2563,7 @@
     {
       "id": "methylfolate",
       "generic_name": "methylfolate",
-      "source_last_checked": "2026-03-09T13:50:09.687Z",
+      "source_last_checked": "2026-03-09T18:57:44.910Z",
       "source_links_count": 2,
       "enrichment_sources_found": [
         "DailyMed",
@@ -2279,11 +2578,13 @@
     {
       "id": "ketamine-intranasal",
       "generic_name": "ketamine intranasal",
-      "source_last_checked": "2026-03-09T13:50:10.856Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T18:57:52.256Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2294,11 +2595,13 @@
     {
       "id": "benztropine",
       "generic_name": "benztropine",
-      "source_last_checked": "2026-03-09T13:50:13.064Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T18:57:59.431Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2309,11 +2612,13 @@
     {
       "id": "trihexyphenidyl",
       "generic_name": "trihexyphenidyl",
-      "source_last_checked": "2026-03-09T13:50:14.147Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:58:06.902Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2324,11 +2629,13 @@
     {
       "id": "deutetrabenazine",
       "generic_name": "deutetrabenazine",
-      "source_last_checked": "2026-03-09T13:50:14.929Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T18:58:13.936Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2339,11 +2646,13 @@
     {
       "id": "valbenazine",
       "generic_name": "valbenazine",
-      "source_last_checked": "2026-03-09T13:50:16.164Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:58:20.849Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2354,11 +2663,13 @@
     {
       "id": "tetrabenazine",
       "generic_name": "tetrabenazine",
-      "source_last_checked": "2026-03-09T13:50:17.148Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:58:27.885Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2369,11 +2680,13 @@
     {
       "id": "memantine",
       "generic_name": "memantine",
-      "source_last_checked": "2026-03-09T13:50:18.809Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:58:35.072Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2384,11 +2697,13 @@
     {
       "id": "donepezil",
       "generic_name": "donepezil",
-      "source_last_checked": "2026-03-09T13:50:20.464Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:58:42.762Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2399,11 +2714,13 @@
     {
       "id": "rivastigmine",
       "generic_name": "rivastigmine",
-      "source_last_checked": "2026-03-09T13:50:22.639Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T18:58:50.103Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2414,11 +2731,13 @@
     {
       "id": "galantamine",
       "generic_name": "galantamine",
-      "source_last_checked": "2026-03-09T13:50:24.023Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:58:57.549Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2429,11 +2748,13 @@
     {
       "id": "amantadine",
       "generic_name": "amantadine",
-      "source_last_checked": "2026-03-09T13:50:25.416Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:59:04.871Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2444,11 +2765,13 @@
     {
       "id": "baclofen",
       "generic_name": "baclofen",
-      "source_last_checked": "2026-03-09T13:50:27.147Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:59:12.214Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2459,11 +2782,13 @@
     {
       "id": "tizanidine",
       "generic_name": "tizanidine",
-      "source_last_checked": "2026-03-09T13:50:29.082Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:59:19.725Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2474,11 +2799,13 @@
     {
       "id": "cyclobenzaprine",
       "generic_name": "cyclobenzaprine",
-      "source_last_checked": "2026-03-09T13:50:31.018Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:59:27.319Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2489,11 +2816,13 @@
     {
       "id": "n-acetylcysteine",
       "generic_name": "n-acetylcysteine",
-      "source_last_checked": "2026-03-09T13:50:31.823Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T18:59:34.978Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2504,11 +2833,13 @@
     {
       "id": "ondansetron",
       "generic_name": "ondansetron",
-      "source_last_checked": "2026-03-09T13:50:33.598Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:59:42.329Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2519,11 +2850,13 @@
     {
       "id": "metoclopramide",
       "generic_name": "metoclopramide",
-      "source_last_checked": "2026-03-09T13:50:34.879Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:59:49.695Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2534,11 +2867,13 @@
     {
       "id": "lacosamide",
       "generic_name": "lacosamide",
-      "source_last_checked": "2026-03-09T13:50:35.970Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T18:59:57.196Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2549,11 +2884,13 @@
     {
       "id": "tiagabine",
       "generic_name": "tiagabine",
-      "source_last_checked": "2026-03-09T13:50:37.043Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:00:04.533Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2564,11 +2901,13 @@
     {
       "id": "rufinamide",
       "generic_name": "rufinamide",
-      "source_last_checked": "2026-03-09T13:50:38.518Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:00:12.065Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2579,11 +2918,13 @@
     {
       "id": "zolpidem-sublingual",
       "generic_name": "zolpidem sublingual",
-      "source_last_checked": "2026-03-09T13:50:39.174Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:00:19.574Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2594,10 +2935,12 @@
     {
       "id": "zolpidem-oral-spray",
       "generic_name": "zolpidem oral spray",
-      "source_last_checked": "2026-03-09T13:50:40.094Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:00:26.665Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2608,11 +2951,13 @@
     {
       "id": "alprazolam-odt",
       "generic_name": "alprazolam ODT",
-      "source_last_checked": "2026-03-09T13:50:40.461Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:00:33.665Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2623,11 +2968,13 @@
     {
       "id": "clonazepam-odt",
       "generic_name": "clonazepam ODT",
-      "source_last_checked": "2026-03-09T13:50:40.917Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T19:00:40.791Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2638,7 +2985,7 @@
     {
       "id": "lorazepam-sublingual",
       "generic_name": "lorazepam sublingual",
-      "source_last_checked": "2026-03-09T13:50:41.669Z",
+      "source_last_checked": "2026-03-09T19:00:48.282Z",
       "source_links_count": 1,
       "enrichment_sources_found": [
         "RxNorm"
@@ -2652,11 +2999,13 @@
     {
       "id": "asenapine-transdermal",
       "generic_name": "asenapine transdermal",
-      "source_last_checked": "2026-03-09T13:50:42.715Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T19:00:55.899Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2667,10 +3016,12 @@
     {
       "id": "lithium-orotate",
       "generic_name": "lithium orotate",
-      "source_last_checked": "2026-03-09T13:50:43.083Z",
-      "source_links_count": 1,
+      "source_last_checked": "2026-03-09T19:01:02.858Z",
+      "source_links_count": 3,
       "enrichment_sources_found": [
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2681,11 +3032,13 @@
     {
       "id": "dexmedetomidine-sublingual",
       "generic_name": "dexmedetomidine sublingual",
-      "source_last_checked": "2026-03-09T13:50:43.766Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:01:09.785Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2696,11 +3049,13 @@
     {
       "id": "viloxazine-er",
       "generic_name": "viloxazine ER",
-      "source_last_checked": "2026-03-09T13:50:44.131Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T19:01:16.975Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2711,11 +3066,13 @@
     {
       "id": "modafinil-oral-suspension",
       "generic_name": "modafinil oral suspension",
-      "source_last_checked": "2026-03-09T13:50:44.586Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T19:01:24.023Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2726,10 +3083,12 @@
     {
       "id": "fluoxetine-weekly",
       "generic_name": "fluoxetine weekly",
-      "source_last_checked": "2026-03-09T13:50:45.036Z",
-      "source_links_count": 1,
+      "source_last_checked": "2026-03-09T19:01:31.144Z",
+      "source_links_count": 3,
       "enrichment_sources_found": [
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2740,11 +3099,13 @@
     {
       "id": "paroxetine-cr",
       "generic_name": "paroxetine CR",
-      "source_last_checked": "2026-03-09T13:50:45.487Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T19:01:38.110Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2755,11 +3116,13 @@
     {
       "id": "venlafaxine-er",
       "generic_name": "venlafaxine ER",
-      "source_last_checked": "2026-03-09T13:50:45.940Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:01:45.171Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2770,11 +3133,13 @@
     {
       "id": "desvenlafaxine-er",
       "generic_name": "desvenlafaxine ER",
-      "source_last_checked": "2026-03-09T13:50:46.467Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:01:52.238Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2785,11 +3150,13 @@
     {
       "id": "quetiapine-odt",
       "generic_name": "quetiapine ODT",
-      "source_last_checked": "2026-03-09T13:50:46.907Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T19:01:59.117Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2800,11 +3167,13 @@
     {
       "id": "risperidone-odt",
       "generic_name": "risperidone ODT",
-      "source_last_checked": "2026-03-09T13:50:47.432Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T19:02:06.238Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2815,11 +3184,13 @@
     {
       "id": "olanzapine-odt",
       "generic_name": "olanzapine ODT",
-      "source_last_checked": "2026-03-09T13:50:47.798Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T19:02:13.479Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2830,11 +3201,13 @@
     {
       "id": "lamotrigine-odt",
       "generic_name": "lamotrigine ODT",
-      "source_last_checked": "2026-03-09T13:50:48.259Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T19:02:20.535Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2845,11 +3218,13 @@
     {
       "id": "carbamazepine-er",
       "generic_name": "carbamazepine ER",
-      "source_last_checked": "2026-03-09T13:50:48.701Z",
-      "source_links_count": 5,
+      "source_last_checked": "2026-03-09T19:02:27.430Z",
+      "source_links_count": 7,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2860,11 +3235,13 @@
     {
       "id": "oxcarbazepine-er",
       "generic_name": "oxcarbazepine ER",
-      "source_last_checked": "2026-03-09T13:50:49.151Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T19:02:34.531Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2875,11 +3252,13 @@
     {
       "id": "topiramate-er",
       "generic_name": "topiramate ER",
-      "source_last_checked": "2026-03-09T13:50:49.611Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T19:02:41.780Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2890,11 +3269,13 @@
     {
       "id": "gabapentin-enacarbil",
       "generic_name": "gabapentin enacarbil",
-      "source_last_checked": "2026-03-09T13:50:50.637Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T19:02:49.205Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2905,11 +3286,13 @@
     {
       "id": "pregabalin-er",
       "generic_name": "pregabalin ER",
-      "source_last_checked": "2026-03-09T13:50:51.101Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T19:02:56.455Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2920,11 +3303,13 @@
     {
       "id": "propranolol-er",
       "generic_name": "propranolol ER",
-      "source_last_checked": "2026-03-09T13:50:51.468Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:03:03.607Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2935,10 +3320,12 @@
     {
       "id": "prazosin-bedtime",
       "generic_name": "prazosin bedtime",
-      "source_last_checked": "2026-03-09T13:50:51.921Z",
-      "source_links_count": 1,
+      "source_last_checked": "2026-03-09T19:03:10.908Z",
+      "source_links_count": 3,
       "enrichment_sources_found": [
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2949,11 +3336,13 @@
     {
       "id": "hydroxyzine-pamoate",
       "generic_name": "hydroxyzine pamoate",
-      "source_last_checked": "2026-03-09T13:50:52.673Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:03:18.220Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2964,11 +3353,13 @@
     {
       "id": "hydroxyzine-hydrochloride",
       "generic_name": "hydroxyzine hydrochloride",
-      "source_last_checked": "2026-03-09T13:50:53.562Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:03:25.061Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2979,10 +3370,12 @@
     {
       "id": "buspirone-split-dosing",
       "generic_name": "buspirone split dosing",
-      "source_last_checked": "2026-03-09T13:50:53.931Z",
-      "source_links_count": 1,
+      "source_last_checked": "2026-03-09T19:03:32.098Z",
+      "source_links_count": 3,
       "enrichment_sources_found": [
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -2993,7 +3386,7 @@
     {
       "id": "naltrexone-low-dose",
       "generic_name": "naltrexone low dose",
-      "source_last_checked": "2026-03-09T13:50:54.383Z",
+      "source_last_checked": "2026-03-09T19:03:39.207Z",
       "source_links_count": 1,
       "enrichment_sources_found": [
         "RxNorm"
@@ -3007,11 +3400,13 @@
     {
       "id": "acamprosate-delayed-release",
       "generic_name": "acamprosate delayed-release",
-      "source_last_checked": "2026-03-09T13:50:55.410Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:03:46.775Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3022,11 +3417,13 @@
     {
       "id": "disulfiram-supervised",
       "generic_name": "disulfiram supervised",
-      "source_last_checked": "2026-03-09T13:50:56.452Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:03:54.114Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3037,11 +3434,13 @@
     {
       "id": "varenicline-starter-pack",
       "generic_name": "varenicline starter pack",
-      "source_last_checked": "2026-03-09T13:50:57.763Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:04:01.550Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3052,11 +3451,13 @@
     {
       "id": "nicotine-inhaler",
       "generic_name": "nicotine inhaler",
-      "source_last_checked": "2026-03-09T13:50:58.693Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:04:09.106Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3067,10 +3468,12 @@
     {
       "id": "nicotine-nasal-spray",
       "generic_name": "nicotine nasal spray",
-      "source_last_checked": "2026-03-09T13:50:59.188Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:04:16.742Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3081,11 +3484,13 @@
     {
       "id": "guanfacine-patch",
       "generic_name": "guanfacine patch",
-      "source_last_checked": "2026-03-09T13:50:59.572Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T19:04:24.223Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3096,11 +3501,13 @@
     {
       "id": "clonidine-patch",
       "generic_name": "clonidine patch",
-      "source_last_checked": "2026-03-09T13:51:00.101Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T19:04:31.121Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3111,11 +3518,13 @@
     {
       "id": "memantine-er",
       "generic_name": "memantine ER",
-      "source_last_checked": "2026-03-09T13:51:00.540Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T19:04:37.906Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3126,11 +3535,13 @@
     {
       "id": "donepezil-odt",
       "generic_name": "donepezil ODT",
-      "source_last_checked": "2026-03-09T13:51:01.064Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T19:04:44.784Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3141,11 +3552,13 @@
     {
       "id": "rivastigmine-patch",
       "generic_name": "rivastigmine patch",
-      "source_last_checked": "2026-03-09T13:51:01.432Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T19:04:51.872Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3156,11 +3569,13 @@
     {
       "id": "galantamine-er",
       "generic_name": "galantamine ER",
-      "source_last_checked": "2026-03-09T13:51:01.881Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T19:04:59.112Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3171,11 +3586,13 @@
     {
       "id": "armodafinil-tablet",
       "generic_name": "armodafinil tablet",
-      "source_last_checked": "2026-03-09T13:51:02.332Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T19:05:06.013Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3186,11 +3603,13 @@
     {
       "id": "modafinil-tablet",
       "generic_name": "modafinil tablet",
-      "source_last_checked": "2026-03-09T13:51:02.787Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T19:05:12.932Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3201,11 +3620,13 @@
     {
       "id": "eszopiclone-low-dose",
       "generic_name": "eszopiclone low dose",
-      "source_last_checked": "2026-03-09T13:51:03.991Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:05:20.169Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3216,11 +3637,13 @@
     {
       "id": "zaleplon-low-dose",
       "generic_name": "zaleplon low dose",
-      "source_last_checked": "2026-03-09T13:51:04.734Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:05:27.733Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3231,11 +3654,13 @@
     {
       "id": "daridorexant-dual-orexin-antagonist",
       "generic_name": "daridorexant dual orexin antagonist",
-      "source_last_checked": "2026-03-09T13:51:05.591Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:05:34.918Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3246,11 +3671,13 @@
     {
       "id": "lemborexant-dual-orexin-antagonist",
       "generic_name": "lemborexant dual orexin antagonist",
-      "source_last_checked": "2026-03-09T13:51:06.306Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:05:42.181Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3261,11 +3688,13 @@
     {
       "id": "suvorexant-dual-orexin-antagonist",
       "generic_name": "suvorexant dual orexin antagonist",
-      "source_last_checked": "2026-03-09T13:51:07.058Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:05:49.519Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3276,11 +3705,13 @@
     {
       "id": "ramelteon-melatonin-agonist",
       "generic_name": "ramelteon melatonin agonist",
-      "source_last_checked": "2026-03-09T13:51:08.051Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:05:56.853Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3291,11 +3722,12 @@
     {
       "id": "melatonin-extended-release",
       "generic_name": "melatonin extended release",
-      "source_last_checked": "2026-03-09T13:51:10.524Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T19:06:04.103Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass"
       ],
       "status": "source scored",
       "notes": [
@@ -3306,11 +3738,13 @@
     {
       "id": "doxepin-oral-solution",
       "generic_name": "doxepin oral solution",
-      "source_last_checked": "2026-03-09T13:51:11.026Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T19:06:11.100Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3321,11 +3755,13 @@
     {
       "id": "quetiapine-oral-solution",
       "generic_name": "quetiapine oral solution",
-      "source_last_checked": "2026-03-09T13:51:11.392Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T19:06:18.351Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3336,11 +3772,13 @@
     {
       "id": "aripiprazole-oral-solution",
       "generic_name": "aripiprazole oral solution",
-      "source_last_checked": "2026-03-09T13:51:11.845Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T19:06:25.370Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3351,11 +3789,13 @@
     {
       "id": "risperidone-oral-solution",
       "generic_name": "risperidone oral solution",
-      "source_last_checked": "2026-03-09T13:51:12.297Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T19:06:32.621Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3366,11 +3806,13 @@
     {
       "id": "haloperidol-oral-solution",
       "generic_name": "haloperidol oral solution",
-      "source_last_checked": "2026-03-09T13:51:12.748Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T19:06:39.845Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3381,11 +3823,13 @@
     {
       "id": "chlorpromazine-oral-solution",
       "generic_name": "chlorpromazine oral solution",
-      "source_last_checked": "2026-03-09T13:51:13.208Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T19:06:47.087Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3396,11 +3840,13 @@
     {
       "id": "perphenazine-oral-solution",
       "generic_name": "perphenazine oral solution",
-      "source_last_checked": "2026-03-09T13:51:13.729Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T19:06:53.902Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3411,11 +3857,13 @@
     {
       "id": "trifluoperazine-oral-solution",
       "generic_name": "trifluoperazine oral solution",
-      "source_last_checked": "2026-03-09T13:51:14.172Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T19:07:00.440Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3426,10 +3874,11 @@
     {
       "id": "loxapine-inhalation",
       "generic_name": "loxapine inhalation",
-      "source_last_checked": "2026-03-09T13:51:14.782Z",
-      "source_links_count": 1,
+      "source_last_checked": "2026-03-09T19:07:07.525Z",
+      "source_links_count": 2,
       "enrichment_sources_found": [
-        "RxNorm"
+        "RxNorm",
+        "RxClass"
       ],
       "status": "source scored",
       "notes": [
@@ -3440,10 +3889,12 @@
     {
       "id": "ziprasidone-intramuscular",
       "generic_name": "ziprasidone intramuscular",
-      "source_last_checked": "2026-03-09T13:51:15.259Z",
-      "source_links_count": 1,
+      "source_last_checked": "2026-03-09T19:07:14.691Z",
+      "source_links_count": 3,
       "enrichment_sources_found": [
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3454,11 +3905,13 @@
     {
       "id": "olanzapine-intramuscular",
       "generic_name": "olanzapine intramuscular",
-      "source_last_checked": "2026-03-09T13:51:15.744Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:07:21.981Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3469,10 +3922,12 @@
     {
       "id": "haloperidol-decanoate-oral-bridge",
       "generic_name": "haloperidol decanoate oral bridge",
-      "source_last_checked": "2026-03-09T13:51:16.117Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:07:29.114Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3483,10 +3938,11 @@
     {
       "id": "fluphenazine-decanoate-oral-bridge",
       "generic_name": "fluphenazine decanoate oral bridge",
-      "source_last_checked": "2026-03-09T13:51:16.565Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:07:36.357Z",
+      "source_links_count": 3,
       "enrichment_sources_found": [
-        "RxNorm"
+        "RxNorm",
+        "RxClass"
       ],
       "status": "source scored",
       "notes": [
@@ -3497,10 +3953,12 @@
     {
       "id": "paliperidone-oral-bridge",
       "generic_name": "paliperidone oral bridge",
-      "source_last_checked": "2026-03-09T13:51:17.013Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:07:43.955Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3511,11 +3969,13 @@
     {
       "id": "lurasidone-with-food",
       "generic_name": "lurasidone with food",
-      "source_last_checked": "2026-03-09T13:51:17.518Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:07:51.186Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3526,11 +3986,13 @@
     {
       "id": "cariprazine-slow-titration",
       "generic_name": "cariprazine slow titration",
-      "source_last_checked": "2026-03-09T13:51:18.130Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:07:58.460Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3541,11 +4003,13 @@
     {
       "id": "lumateperone-once-daily",
       "generic_name": "lumateperone once daily",
-      "source_last_checked": "2026-03-09T13:51:18.620Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:08:05.803Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3556,11 +4020,13 @@
     {
       "id": "brexpiprazole-low-start",
       "generic_name": "brexpiprazole low start",
-      "source_last_checked": "2026-03-09T13:51:19.106Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:08:13.135Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3571,11 +4037,13 @@
     {
       "id": "aripiprazole-partial-agonist",
       "generic_name": "aripiprazole partial agonist",
-      "source_last_checked": "2026-03-09T13:51:19.752Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:08:20.502Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3586,11 +4054,13 @@
     {
       "id": "olanzapine-high-metabolic-risk",
       "generic_name": "olanzapine high metabolic risk",
-      "source_last_checked": "2026-03-09T13:51:20.462Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:08:27.813Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3601,11 +4071,13 @@
     {
       "id": "quetiapine-sedating-profile",
       "generic_name": "quetiapine sedating profile",
-      "source_last_checked": "2026-03-09T13:51:21.046Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:08:35.381Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3616,11 +4088,13 @@
     {
       "id": "risperidone-prolactin-caution",
       "generic_name": "risperidone prolactin caution",
-      "source_last_checked": "2026-03-09T13:51:21.718Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:08:42.767Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3631,11 +4105,13 @@
     {
       "id": "ziprasidone-qtc-caution",
       "generic_name": "ziprasidone qtc caution",
-      "source_last_checked": "2026-03-09T13:51:22.293Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:08:50.031Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3646,11 +4122,13 @@
     {
       "id": "lithium-narrow-therapeutic-index",
       "generic_name": "lithium narrow therapeutic index",
-      "source_last_checked": "2026-03-09T13:51:22.788Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:08:57.851Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3661,11 +4139,13 @@
     {
       "id": "lamotrigine-slow-titration-requirement",
       "generic_name": "lamotrigine slow titration requirement",
-      "source_last_checked": "2026-03-09T13:51:23.341Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:09:05.214Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3676,11 +4156,13 @@
     {
       "id": "valproate-teratogenic-risk",
       "generic_name": "valproate teratogenic risk",
-      "source_last_checked": "2026-03-09T13:51:23.900Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:09:12.364Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3691,11 +4173,13 @@
     {
       "id": "carbamazepine-cyp-inducer",
       "generic_name": "carbamazepine cyp inducer",
-      "source_last_checked": "2026-03-09T13:51:24.399Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:09:19.888Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3706,11 +4190,13 @@
     {
       "id": "oxcarbazepine-hyponatremia-caution",
       "generic_name": "oxcarbazepine hyponatremia caution",
-      "source_last_checked": "2026-03-09T13:51:24.916Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:09:27.479Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3721,11 +4207,13 @@
     {
       "id": "topiramate-cognitive-side-effects",
       "generic_name": "topiramate cognitive side effects",
-      "source_last_checked": "2026-03-09T13:51:25.432Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:09:34.940Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3736,11 +4224,13 @@
     {
       "id": "zonisamide-sulfa-caution",
       "generic_name": "zonisamide sulfa caution",
-      "source_last_checked": "2026-03-09T13:51:25.924Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:09:42.247Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3751,11 +4241,13 @@
     {
       "id": "gabapentin-renal-adjustment",
       "generic_name": "gabapentin renal adjustment",
-      "source_last_checked": "2026-03-09T13:51:26.528Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:09:49.599Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3766,11 +4258,13 @@
     {
       "id": "pregabalin-edema-caution",
       "generic_name": "pregabalin edema caution",
-      "source_last_checked": "2026-03-09T13:51:27.279Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:09:56.917Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3781,11 +4275,13 @@
     {
       "id": "buspirone-delayed-onset",
       "generic_name": "buspirone delayed onset",
-      "source_last_checked": "2026-03-09T13:51:27.801Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:10:04.532Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3796,11 +4292,13 @@
     {
       "id": "propranolol-performance-anxiety",
       "generic_name": "propranolol performance anxiety",
-      "source_last_checked": "2026-03-09T13:51:28.325Z",
-      "source_links_count": 2,
+      "source_last_checked": "2026-03-09T19:10:11.598Z",
+      "source_links_count": 4,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3811,10 +4309,12 @@
     {
       "id": "prazosin-ptsd-nightmares",
       "generic_name": "prazosin ptsd nightmares",
-      "source_last_checked": "2026-03-09T13:51:28.850Z",
-      "source_links_count": 1,
+      "source_last_checked": "2026-03-09T19:10:18.847Z",
+      "source_links_count": 3,
       "enrichment_sources_found": [
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3825,11 +4325,13 @@
     {
       "id": "amphetamine-mixed-salts",
       "generic_name": "amphetamine mixed salts",
-      "source_last_checked": "2026-03-09T13:51:29.220Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:10:25.753Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3840,11 +4342,13 @@
     {
       "id": "methylphenidate",
       "generic_name": "methylphenidate",
-      "source_last_checked": "2026-03-09T13:51:29.670Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T19:10:33.098Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3855,11 +4359,13 @@
     {
       "id": "guanfacine",
       "generic_name": "guanfacine",
-      "source_last_checked": "2026-03-09T13:51:30.124Z",
-      "source_links_count": 4,
+      "source_last_checked": "2026-03-09T19:10:40.439Z",
+      "source_links_count": 6,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
@@ -3870,11 +4376,13 @@
     {
       "id": "quetiapine",
       "generic_name": "quetiapine",
-      "source_last_checked": "2026-03-09T13:51:30.570Z",
-      "source_links_count": 3,
+      "source_last_checked": "2026-03-09T19:10:47.404Z",
+      "source_links_count": 5,
       "enrichment_sources_found": [
         "DailyMed",
-        "RxNorm"
+        "RxNorm",
+        "RxClass",
+        "MedlinePlus"
       ],
       "status": "source scored",
       "notes": [
