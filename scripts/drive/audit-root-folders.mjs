@@ -11,6 +11,7 @@ async function main() {
     expectedSharedDriveId: result.expectedSharedDriveId || '',
     canonicalRoot: result.canonicalRoot || null,
     duplicateRoots: result.duplicateRoots || [],
+    allRoots: result.allRoots || [],
   }, null, 2));
 }
 

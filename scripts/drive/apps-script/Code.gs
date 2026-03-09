@@ -192,11 +192,18 @@ function handleRootAudit_(payload) {
   const rootFolderName = normalizeText_(payload.rootFolderName || APP_ROOT_DEFAULT) || APP_ROOT_DEFAULT;
   const escaped = escapeQueryText_(rootFolderName);
   const query = "trashed=false and mimeType='application/vnd.google-apps.folder' and title='" + escaped + "'";
-  const listed = listFilesSafe_({ q: query, maxResults: 100 }, '');
   const requiredSharedDriveId = getRequiredSharedDriveId_();
   const expectedDriveId = requiredSharedDriveId || sharedDriveId;
+  const driveScoped = expectedDriveId
+    ? listFilesSafe_({ q: query, maxResults: 100 }, expectedDriveId)
+    : { items: [] };
+  const myDriveScoped = listFilesSafe_({ q: query, maxResults: 100 }, '');
+  const merged = mergeUniqueFilesById_([
+    driveScoped.items || [],
+    myDriveScoped.items || [],
+  ]);
 
-  const roots = (listed.items || []).map(function (file) {
+  const roots = merged.map(function (file) {
     const driveId = normalizeText_((file && (file.driveId || file.teamDriveId)) || '');
     const parents = (file && file.parents) ? file.parents.map(function (parent) {
       return normalizeText_((parent && parent.id) ? parent.id : parent);
@@ -230,6 +237,24 @@ function handleRootAudit_(payload) {
     }),
     allRoots: roots,
   };
+}
+
+function mergeUniqueFilesById_(groups) {
+  const seen = {};
+  const out = [];
+
+  (groups || []).forEach(function (group) {
+    (group || []).forEach(function (item) {
+      const id = normalizeText_((item && item.id) || '');
+      if (!id || seen[id]) {
+        return;
+      }
+      seen[id] = true;
+      out.push(item);
+    });
+  });
+
+  return out;
 }
 
 function selectStableRootAuditItem_(items) {
@@ -974,9 +999,17 @@ function getStoredRootFolder_(sharedDriveId, rootFolderName) {
       return null;
     }
 
-    if (sharedDriveId && !fileBelongsToSharedDrive_(file, sharedDriveId)) {
-      clearStoredRootFolder_();
-      return null;
+    if (sharedDriveId) {
+      // When the cached drive ID matches the required drive, trust the pinned root.
+      // Some Drive API variants omit driveId/teamDriveId for folders in responses.
+      if (storedDriveId && storedDriveId === sharedDriveId) {
+        return file;
+      }
+
+      if (!fileBelongsToSharedDrive_(file, sharedDriveId)) {
+        clearStoredRootFolder_();
+        return null;
+      }
     }
 
     return file;
