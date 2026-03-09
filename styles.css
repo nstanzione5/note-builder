@@ -119,7 +119,6 @@ select {
   gap: 10px;
 }
 
-/* UNIFIED SINGLE-LINE APP BAR */
 .brand-panel {
   flex: 1 1 auto;
   min-width: 0;
