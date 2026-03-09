@@ -3,11 +3,23 @@
  * - source-derived labeling metadata only
  * - never writes curated psych summaries
  */
+async function fetchWithTimeout(url, timeoutMs = 12000) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    return await fetch(url, { signal: controller.signal });
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
 export async function fetchOpenFdaLabelSummary(genericName) {
   const term = encodeURIComponent(genericName);
-  const url = `https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22${term}%22&limit=1`;
+  const apiKey = process.env.OPENFDA_API_KEY ? `&api_key=${encodeURIComponent(process.env.OPENFDA_API_KEY)}` : '';
+  const url = `https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22${term}%22&limit=1${apiKey}`;
 
-  const response = await fetch(url);
+  const response = await fetchWithTimeout(url);
   if (!response.ok) {
     throw new Error(`openFDA request failed (${response.status}) for ${genericName}`);
   }

@@ -60,6 +60,7 @@ const els = {
   activeGptUrl: document.getElementById('activeGptUrl'),
   followDate: document.getElementById('followDate'),
   prnHelperText: document.getElementById('prnHelperText'),
+  therapyInterwovenHint: document.getElementById('therapyInterwovenHint'),
   age: document.getElementById('age'),
   practiceModeBanner: document.getElementById('practiceModeBanner'),
   practiceModeKicker: document.getElementById('practiceModeKicker'),
@@ -168,9 +169,16 @@ const DRIVE_QUEUE_KEY = 'driveSyncPendingWrites_v1';
 const DRIVE_META_KEY = 'driveSyncMeta_v1';
 const DRIVE_REVISIONS_KEY = 'driveSyncRevisions_v1';
 const DRIVE_DRAFT_PATH = 'data/draft/current.json';
+const DRIVE_RECENT_PATIENTS_PATH = 'data/draft/recent-patients.json';
 const DRIVE_MED_COMPILED_PATH = 'data/meds/compiled/medications.compiled.json';
 const DRIVE_SYNC_ENTERPRISE_NAME = 'Astra Clinical Note Builder';
 const DRIVE_MANIFEST_FILE = 'config/drive-manifest.json';
+const THERAPY_TIER_MINUTES = {
+  '0': 0,
+  '>=16': 16,
+  '>=38': 38,
+  '>=53': 53,
+};
 
 let snapshotTimer = null;
 const timeControlMap = new Map();
@@ -181,6 +189,8 @@ let medicationFocusedResultIndex = -1;
 let medAutoSyncTimer = null;
 let medAutoSyncRunning = false;
 let medicationCatalogLoadError = false;
+let medicationCatalogLoading = false;
+let medicationCatalogLoadPromise = null;
 let scrollRafScheduled = false;
 let driveQueueTimer = null;
 let driveSyncTimer = null;
@@ -466,6 +476,29 @@ function queueDriveDraftWrite(draft) {
   });
 }
 
+function queueDriveRecentPatientsWrite(snapshots) {
+  if (!isDriveSyncEnabled()) return;
+
+  const normalizedSnapshots = mergeSnapshotCollections(snapshots || [], []);
+  const revisions = getDriveRevisions();
+  const payload = {
+    savedAt: new Date().toISOString(),
+    source: 'note-builder-client',
+    snapshots: normalizedSnapshots,
+  };
+  const content = JSON.stringify(payload, null, 2);
+
+  enqueueDriveOperation({
+    type: 'file.put',
+    path: DRIVE_RECENT_PATIENTS_PATH,
+    content,
+    contentType: 'application/json',
+    checksum: hashStringChecksum(content),
+    expectedRevision: revisions[DRIVE_RECENT_PATIENTS_PATH] || '',
+    dedupeKey: `file:${DRIVE_RECENT_PATIENTS_PATH}`,
+  });
+}
+
 function queueDriveBackupAppend(snapshotEntry) {
   if (!isDriveSyncEnabled() || !snapshotEntry) return;
 
@@ -538,6 +571,28 @@ function mergeDraftConflictPayload(localContent, remoteContent) {
   });
 
   const mergedContent = JSON.stringify(merged, null, 2);
+  return {
+    content: mergedContent,
+    checksum: hashStringChecksum(mergedContent),
+  };
+}
+
+function mergeRecentPatientsConflictPayload(localContent, remoteContent) {
+  const localPayload = parseJsonOrNull(localContent);
+  const remotePayload = parseJsonOrNull(remoteContent);
+  if (!localPayload && !remotePayload) return null;
+
+  const localSnapshots = localPayload && Array.isArray(localPayload.snapshots) ? localPayload.snapshots : [];
+  const remoteSnapshots = remotePayload && Array.isArray(remotePayload.snapshots) ? remotePayload.snapshots : [];
+  const mergedSnapshots = mergeSnapshotCollections(localSnapshots, remoteSnapshots);
+
+  const mergedPayload = {
+    savedAt: new Date().toISOString(),
+    source: 'note-builder-conflict-merge',
+    snapshots: mergedSnapshots,
+  };
+
+  const mergedContent = JSON.stringify(mergedPayload, null, 2);
   return {
     content: mergedContent,
     checksum: hashStringChecksum(mergedContent),
@@ -653,6 +708,44 @@ async function pullDriveMedicationCatalog(force = false) {
   return applied;
 }
 
+async function pullDriveRecentPatients(force = false) {
+  if (!isDriveSyncEnabled()) return false;
+
+  const response = await callDriveEndpoint('file.get', { path: DRIVE_RECENT_PATIENTS_PATH });
+  const file = response.file || response;
+  const content = typeof file.content === 'string' ? file.content : '';
+  if (!content) return false;
+
+  const payload = parseJsonOrNull(content);
+  if (!payload || !Array.isArray(payload.snapshots)) return false;
+
+  const remoteSnapshots = mergeSnapshotCollections(payload.snapshots, []);
+  const localSnapshots = loadSnapshotsFromStorage();
+  const remoteLatest = getLatestSnapshotTimestamp(remoteSnapshots);
+  const localLatest = getLatestSnapshotTimestamp(localSnapshots);
+
+  if (!force && remoteLatest && localLatest && remoteLatest <= localLatest) {
+    if (file.revision) {
+      const revisions = getDriveRevisions();
+      revisions[DRIVE_RECENT_PATIENTS_PATH] = String(file.revision);
+      setDriveRevisions(revisions);
+    }
+    return false;
+  }
+
+  const mergedSnapshots = mergeSnapshotCollections(remoteSnapshots, localSnapshots);
+  saveSnapshotsToStorage(mergedSnapshots);
+  renderBackupHistory();
+
+  if (file.revision) {
+    const revisions = getDriveRevisions();
+    revisions[DRIVE_RECENT_PATIENTS_PATH] = String(file.revision);
+    setDriveRevisions(revisions);
+  }
+
+  return true;
+}
+
 async function pullDriveManifestAndDraft(force = false) {
   if (!isDriveSyncEnabled()) return;
 
@@ -671,9 +764,11 @@ async function pullDriveManifestAndDraft(force = false) {
     await Promise.allSettled([
       pullDriveDraft(force),
       pullDriveMedicationCatalog(force),
+      pullDriveRecentPatients(force),
     ]);
   } else {
     await pullDriveMedicationCatalog(false);
+    await pullDriveRecentPatients(false);
   }
 
   meta.manifestRevision = remoteRevision || meta.manifestRevision;
@@ -716,7 +811,20 @@ async function flushDriveQueue() {
           const response = await callDriveEndpoint('file.put', payload);
 
           if (response.conflict) {
-            const merged = mergeDraftConflictPayload(item.content, response.currentContent || '');
+            let merged = null;
+            if (item.path === DRIVE_DRAFT_PATH) {
+              merged = mergeDraftConflictPayload(item.content, response.currentContent || '');
+            } else if (item.path === DRIVE_RECENT_PATIENTS_PATH) {
+              merged = mergeRecentPatientsConflictPayload(item.content, response.currentContent || '');
+            }
+
+            if (!merged) {
+              merged = {
+                content: item.content,
+                checksum: item.checksum || hashStringChecksum(item.content || ''),
+              };
+            }
+
             if (!merged) {
               throw new Error('Revision conflict detected and automatic merge failed.');
             }
@@ -1142,6 +1250,41 @@ function parseTimeInputValue(rawValue, meridiemHint = 'AM') {
     meridiem,
     canonical: `${hour}:${String(minuteNumber).padStart(2, '0')} ${meridiem}`,
   };
+}
+
+function toMinutesFromMidnight(canonicalTime) {
+  const parsed = parseTimeInputValue(canonicalTime || '', 'AM');
+  if (!parsed) return null;
+
+  const hour12 = Number(parsed.hour);
+  const minute = Number(parsed.minute);
+  if (!Number.isFinite(hour12) || !Number.isFinite(minute)) return null;
+
+  const hour24 = (hour12 % 12) + (parsed.meridiem === 'PM' ? 12 : 0);
+  return (hour24 * 60) + minute;
+}
+
+function getFaceToFaceElapsedMinutes() {
+  const start = toMinutesFromMidnight(getValue('startTime'));
+  const end = toMinutesFromMidnight(getValue('endTime'));
+  if (start == null || end == null) return null;
+
+  let elapsed = end - start;
+  if (elapsed < 0) {
+    elapsed += 24 * 60;
+  }
+
+  if (elapsed < 0 || elapsed > 12 * 60) {
+    return null;
+  }
+
+  return elapsed;
+}
+
+function getTherapyTierRequirement(tier) {
+  return Object.prototype.hasOwnProperty.call(THERAPY_TIER_MINUTES, tier)
+    ? THERAPY_TIER_MINUTES[tier]
+    : 0;
 }
 
 function getTimeControl(id) {
@@ -1714,6 +1857,35 @@ function updateIntervalButtons() {
 }
 
 function updateTherapyButtons() {
+  const elapsed = getFaceToFaceElapsedMinutes();
+  let hasSelectedTier = false;
+
+  document.querySelectorAll('#therapyInterwovenToggle .seg-btn').forEach((btn) => {
+    const tier = btn.dataset.therapyTier || '0';
+    const requiredMinutes = getTherapyTierRequirement(tier);
+    const enabled = requiredMinutes === 0 || (elapsed != null && elapsed >= requiredMinutes);
+
+    btn.disabled = !enabled;
+    if (!enabled) {
+      btn.title = elapsed == null
+        ? `Requires at least ${requiredMinutes} minutes of face-to-face time. Enter start/end times first.`
+        : `Requires at least ${requiredMinutes} minutes (current elapsed: ${elapsed} min).`;
+    } else {
+      btn.title = requiredMinutes > 0
+        ? `Eligible with ${requiredMinutes}+ minutes face-to-face time.`
+        : 'No interwoven therapy time.';
+    }
+
+    if (tier === state.therapyInterwovenTier && enabled) {
+      hasSelectedTier = true;
+    }
+  });
+
+  if (!hasSelectedTier) {
+    state.therapyInterwovenTier = '0';
+    setValue('therapyInterwoven', '0');
+  }
+
   document.querySelectorAll('#therapyInterwovenToggle .seg-btn').forEach((btn) => {
     const isActive = btn.dataset.therapyTier === state.therapyInterwovenTier;
     btn.classList.toggle('active', isActive);
@@ -1722,6 +1894,14 @@ function updateTherapyButtons() {
 
   if (els.therapyInterwoven) {
     els.therapyInterwoven.value = state.therapyInterwovenTier;
+  }
+
+  if (els.therapyInterwovenHint) {
+    if (elapsed == null) {
+      els.therapyInterwovenHint.textContent = 'Enter face-to-face start and end times to unlock higher therapy tiers.';
+    } else {
+      els.therapyInterwovenHint.textContent = `Face-to-face elapsed: ${elapsed} minutes.`;
+    }
   }
 }
 
@@ -1758,19 +1938,99 @@ function updateFollowupSchedulingUI() {
 
 function loadSnapshotsFromStorage() {
   const parsed = getStorageJSON(SNAPSHOT_KEY, []);
-  return Array.isArray(parsed) ? parsed : [];
+  if (!Array.isArray(parsed)) return [];
+  return mergeSnapshotCollections(parsed, []);
 }
 
 function saveSnapshotsToStorage(snapshots) {
-  setStorageJSON(SNAPSHOT_KEY, snapshots.slice(0, MAX_SNAPSHOTS));
+  const normalized = mergeSnapshotCollections(snapshots, []);
+  setStorageJSON(SNAPSHOT_KEY, normalized);
 }
 
 function formatSnapshotLabel(entry) {
+  if (entry && entry.patientLabel) {
+    return entry.patientLabel;
+  }
+
   const age = entry && entry.draft && entry.draft.inputs ? String(entry.draft.inputs.age || '').trim() : '';
   const gender = entry && entry.draft && entry.draft.inputs ? String(entry.draft.inputs.gender || '').trim() : '';
   const ageText = age || '?';
-  const genderText = gender || '?';
-  return `Age ${ageText}, Gender ${genderText}`;
+  const genderText = gender ? gender.charAt(0).toUpperCase() : '?';
+  return `${ageText} ${genderText}`;
+}
+
+function getDraftPatientIdentity(draft) {
+  const inputs = draft && draft.inputs ? draft.inputs : {};
+  const age = String(inputs.age || '').trim();
+  const genderRaw = String(inputs.gender || '').trim();
+  const genderInitial = genderRaw ? genderRaw.charAt(0).toUpperCase() : '';
+
+  if (!age && !genderInitial) {
+    return {
+      key: 'patient-unknown',
+      label: 'Unknown patient',
+    };
+  }
+
+  const safeAge = age || '?';
+  const safeGender = genderInitial || '?';
+  const ageToken = age ? age.toLowerCase() : 'unknown-age';
+  const genderToken = genderInitial ? genderInitial.toLowerCase() : 'unknown-gender';
+  const key = `patient-${ageToken}-${genderToken}`
+    .replace(/[^a-z0-9-]+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+
+  return {
+    key,
+    label: `${safeAge} ${safeGender}`,
+  };
+}
+
+function normalizeSnapshotEntry(entry) {
+  if (!entry || !entry.draft) return null;
+
+  const identity = getDraftPatientIdentity(entry.draft);
+  const savedAt = entry.savedAt || new Date().toISOString();
+
+  return {
+    id: identity.key,
+    patientKey: identity.key,
+    patientLabel: identity.label,
+    savedAt,
+    practice: entry.practice || (entry.draft.state ? entry.draft.state.practice : state.practice),
+    visitType: entry.visitType || (entry.draft.state ? entry.draft.state.visitType : state.visitType),
+    signature: entry.signature || JSON.stringify({ state: entry.draft.state || {}, inputs: entry.draft.inputs || {} }),
+    draft: entry.draft,
+  };
+}
+
+function mergeSnapshotCollections(primaryList, secondaryList) {
+  const mergedMap = new Map();
+
+  [...(primaryList || []), ...(secondaryList || [])].forEach((entry) => {
+    const normalized = normalizeSnapshotEntry(entry);
+    if (!normalized) return;
+
+    const existing = mergedMap.get(normalized.patientKey);
+    const normalizedSavedAt = Date.parse(normalized.savedAt) || 0;
+    const existingSavedAt = existing ? (Date.parse(existing.savedAt) || 0) : 0;
+
+    if (!existing || normalizedSavedAt >= existingSavedAt) {
+      mergedMap.set(normalized.patientKey, normalized);
+    }
+  });
+
+  return Array.from(mergedMap.values())
+    .sort((a, b) => (Date.parse(b.savedAt) || 0) - (Date.parse(a.savedAt) || 0))
+    .slice(0, MAX_SNAPSHOTS);
+}
+
+function getLatestSnapshotTimestamp(snapshots) {
+  return (snapshots || []).reduce((latest, entry) => {
+    const timestamp = Date.parse(entry && entry.savedAt ? entry.savedAt : '') || 0;
+    return Math.max(latest, timestamp);
+  }, 0);
 }
 
 function renderBackupHistory() {
@@ -1811,27 +2071,37 @@ function queueSnapshot(draft, options = {}) {
   snapshotTimer = window.setTimeout(() => {
     const snapshots = loadSnapshotsFromStorage();
     const signature = JSON.stringify({ state: draft.state, inputs: draft.inputs });
+    const identity = getDraftPatientIdentity(draft);
+    const existingIndex = snapshots.findIndex((entry) => entry && entry.patientKey === identity.key);
+    const existingEntry = existingIndex >= 0 ? snapshots[existingIndex] : null;
 
-    if (snapshots[0] && snapshots[0].signature === signature) {
+    if (existingEntry && existingEntry.signature === signature && existingIndex === 0) {
       return;
     }
 
-    const snapshotEntry = {
-      id: Date.now(),
+    const snapshotEntry = normalizeSnapshotEntry({
+      id: identity.key,
+      patientKey: identity.key,
+      patientLabel: identity.label,
       savedAt: new Date().toISOString(),
       practice: draft.state.practice,
       visitType: draft.state.visitType,
       signature,
       draft,
-    };
+    });
 
-    snapshots.unshift(snapshotEntry);
+    const nextSnapshots = snapshots.slice();
+    if (existingIndex >= 0) {
+      nextSnapshots.splice(existingIndex, 1);
+    }
+    nextSnapshots.unshift(snapshotEntry);
 
-    saveSnapshotsToStorage(snapshots);
+    const normalizedSnapshots = mergeSnapshotCollections(nextSnapshots, []);
+    saveSnapshotsToStorage(normalizedSnapshots);
     renderBackupHistory();
 
     if (!skipDrive) {
-      queueDriveBackupAppend(snapshotEntry);
+      queueDriveRecentPatientsWrite(normalizedSnapshots);
     }
   }, 350);
 }
@@ -1947,6 +2217,9 @@ function setFollowModality(value, button) {
 }
 
 function setTherapyTier(value, button) {
+  if (button && button.disabled) {
+    return;
+  }
   state.therapyInterwovenTier = value;
   setValue('therapyInterwoven', value);
   setActiveButtons('#therapyInterwovenToggle', button);
@@ -2122,6 +2395,10 @@ function handleFieldMutation(id) {
     updateTherapyButtons();
   }
 
+  if (id === 'startTime' || id === 'endTime') {
+    updateTherapyButtons();
+  }
+
   if (id === 'currentModality') {
     state.currentModality = getValue('currentModality');
   }
@@ -2256,59 +2533,55 @@ function normalizeMedicationQueryToken(text) {
   return String(text || '').toLowerCase().replace(/[^a-z0-9+\-\s]/g, ' ').replace(/\s+/g, ' ').trim();
 }
 
-function getMedicationStatusMeta(statusRaw) {
-  const status = String(statusRaw || '').trim().toLowerCase();
+function normalizeReliabilityTier(value) {
+  const tier = String(value || '').trim().toLowerCase().replace(/_/g, '-');
+  if (tier === 'very-high' || tier === 'high' || tier === 'moderate' || tier === 'low') {
+    return tier;
+  }
+  return '';
+}
 
-  if (status === 'curated') {
-    return {
-      label: 'Curated',
-      priority: 4,
-      tone: 'curated',
-      isCurated: true,
-    };
+function getMedicationReliabilityMeta(medication) {
+  const status = String((medication && medication.content_review_status) || '').trim().toLowerCase();
+  const rawTier = normalizeReliabilityTier(medication && medication.reliability_tier);
+  const rawScore = Number(medication && medication.reliability_score);
+
+  let score = Number.isFinite(rawScore) ? Math.max(0, Math.min(100, Math.round(rawScore))) : 0;
+  let tier = rawTier;
+
+  if (!tier) {
+    if (status === 'curated') {
+      tier = 'very-high';
+      score = Math.max(score, 95);
+    } else if (score >= 90) {
+      tier = 'very-high';
+    } else if (score >= 75) {
+      tier = 'high';
+    } else if (score >= 60) {
+      tier = 'moderate';
+    } else {
+      tier = 'low';
+    }
   }
 
-  if (status === 'source synced') {
-    return {
-      label: 'Source Synced',
-      priority: 3,
-      tone: 'synced',
-      isCurated: false,
-    };
-  }
+  const labelMap = {
+    'very-high': 'Very High',
+    high: 'High',
+    moderate: 'Moderate',
+    low: 'Low',
+  };
 
-  if (status === 'missing fields') {
-    return {
-      label: 'Missing Fields',
-      priority: 2,
-      tone: 'review',
-      isCurated: false,
-    };
-  }
-
-  if (status === 'newly added') {
-    return {
-      label: 'Newly Added',
-      priority: 1,
-      tone: 'review',
-      isCurated: false,
-    };
-  }
-
-  if (status === 'needs review') {
-    return {
-      label: 'Needs Review',
-      priority: 1,
-      tone: 'review',
-      isCurated: false,
-    };
-  }
+  const label = labelMap[tier] || 'Low';
+  const isHighReliability = tier === 'very-high' || tier === 'high';
 
   return {
-    label: statusRaw ? String(statusRaw) : 'Pending Review',
-    priority: 0,
-    tone: 'review',
-    isCurated: false,
+    label: `${label} reliability`,
+    compactLabel: `${label} • ${score}/100`,
+    priority: score,
+    tone: tier,
+    score,
+    tier,
+    isHighReliability,
   };
 }
 
@@ -2356,7 +2629,7 @@ function scoreMedication(query, med) {
       return;
     }
 
-    if (isSubsequence(q, candidate)) {
+    if (q.length <= 4 && isSubsequence(q, candidate)) {
       score = Math.max(score, 120 - Math.max(0, candidate.length - q.length));
     }
   });
@@ -2456,6 +2729,9 @@ function runMedicationSearch(rawQuery) {
   const favorites = new Set(getMedicationFavorites());
 
   if (!medicationCatalog.length) {
+    if (!medicationCatalogLoading && !medicationCatalogLoadError) {
+      ensureMedicationCatalogReady({ force: false, preferDrive: true }).catch(() => {});
+    }
     medicationSearchResults = [];
     medicationFocusedResultIndex = -1;
     renderMedicationResults();
@@ -2466,7 +2742,7 @@ function runMedicationSearch(rawQuery) {
   const filteredByClass = medicationCatalog.filter((med) => {
     if (med.active === false) return false;
     if (state.medClassFilter !== 'all' && med.psych_class !== state.medClassFilter) return false;
-    if (state.medCuratedOnly && !getMedicationStatusMeta(med.content_review_status).isCurated) return false;
+    if (state.medCuratedOnly && !getMedicationReliabilityMeta(med).isHighReliability) return false;
     return true;
   });
 
@@ -2475,9 +2751,9 @@ function runMedicationSearch(rawQuery) {
       const aFav = favorites.has(a.id) ? 1 : 0;
       const bFav = favorites.has(b.id) ? 1 : 0;
       if (aFav !== bFav) return bFav - aFav;
-      const aStatus = getMedicationStatusMeta(a.content_review_status).priority;
-      const bStatus = getMedicationStatusMeta(b.content_review_status).priority;
-      if (aStatus !== bStatus) return bStatus - aStatus;
+      const aReliability = getMedicationReliabilityMeta(a).priority;
+      const bReliability = getMedicationReliabilityMeta(b).priority;
+      if (aReliability !== bReliability) return bReliability - aReliability;
       return a.generic_name.localeCompare(b.generic_name);
     });
 
@@ -2488,9 +2764,9 @@ function runMedicationSearch(rawQuery) {
       .filter((item) => item.score > 0)
       .sort((a, b) => {
         if (b.score !== a.score) return b.score - a.score;
-        const aStatus = getMedicationStatusMeta(a.med.content_review_status).priority;
-        const bStatus = getMedicationStatusMeta(b.med.content_review_status).priority;
-        if (aStatus !== bStatus) return bStatus - aStatus;
+        const aReliability = getMedicationReliabilityMeta(a.med).priority;
+        const bReliability = getMedicationReliabilityMeta(b.med).priority;
+        if (aReliability !== bReliability) return bReliability - aReliability;
         const aFav = favorites.has(a.med.id) ? 1 : 0;
         const bFav = favorites.has(b.med.id) ? 1 : 0;
         if (aFav !== bFav) return bFav - aFav;
@@ -2532,10 +2808,12 @@ function renderMedicationResults() {
     els.medEmptyState.classList.remove('hidden');
     const messageEl = els.medEmptyState.querySelector('p');
     if (messageEl) {
-      messageEl.textContent = medicationCatalogLoadError
+      messageEl.textContent = medicationCatalogLoading
+        ? 'Loading medication catalog...'
+        : medicationCatalogLoadError
         ? 'Medication catalog could not be loaded right now. You can still request a medication below.'
         : state.medCuratedOnly
-          ? 'No curated profile found for this search yet. Turn off "Curated only" to see source-synced records.'
+          ? 'No high-reliability profile found for this search yet. Turn off "High reliability only" to see all source-scored records.'
           : 'No medication found for this search.';
     }
     if (els.medRequestBtn) {
@@ -2561,7 +2839,7 @@ function renderMedicationResults() {
 
     const favoriteFlag = favorites.has(med.id) ? '★' : '☆';
     const brandPreview = (med.brand_names || []).slice(0, 2).join(', ');
-    const statusMeta = getMedicationStatusMeta(med.content_review_status);
+    const reliabilityMeta = getMedicationReliabilityMeta(med);
 
     button.innerHTML = `
       <div class="med-result-top">
@@ -2573,7 +2851,7 @@ function renderMedicationResults() {
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">${escapeHtml(med.psych_class || 'Unclassified')}</div>
-        <span class="med-status-chip med-status-chip-${escapeHtml(statusMeta.tone)}">${escapeHtml(statusMeta.label)}</span>
+        <span class="med-status-chip med-status-chip-${escapeHtml(reliabilityMeta.tone)}">${escapeHtml(reliabilityMeta.compactLabel)}</span>
       </div>
     `;
 
@@ -2628,6 +2906,7 @@ function getSelectedMedicationContext() {
 
 function buildMedicationSummaryText(context) {
   const { medication, selectedFormulation } = context;
+  const reliabilityMeta = getMedicationReliabilityMeta(medication);
   const dosing = selectedFormulation && selectedFormulation.common_adult_psych_dosing
     ? selectedFormulation.common_adult_psych_dosing
     : null;
@@ -2635,8 +2914,9 @@ function buildMedicationSummaryText(context) {
   const lines = [
     `Medication: ${medication.generic_name}${(medication.brand_names || []).length ? ` (${medication.brand_names.join(', ')})` : ''}`,
     `Class: ${medication.psych_class || 'Unclassified'}`,
-    `FDA psych uses: ${(medication.fda_psych_uses || []).join('; ') || 'No curated summary available yet'}`,
-    `Common off-label psych uses: ${(medication.off_label_psych_uses || []).join('; ') || 'No curated summary available yet'}`,
+    `Reliability: ${reliabilityMeta.compactLabel}`,
+    `FDA psych uses: ${(medication.fda_psych_uses || []).join('; ') || 'No summary available yet'}`,
+    `Common off-label psych uses: ${(medication.off_label_psych_uses || []).join('; ') || 'No summary available yet'}`,
   ];
 
   if (dosing) {
@@ -2645,8 +2925,8 @@ function buildMedicationSummaryText(context) {
     lines.push('Dosing: Select formulation to view formulation-specific psych dosing.');
   }
 
-  lines.push(`Common side effects: ${(medication.common_side_effects || []).join('; ') || 'No curated summary available yet'}`);
-  lines.push(`Psych interaction guide: ${(medication.psych_interactions || []).join('; ') || 'No curated summary available yet'}`);
+  lines.push(`Common side effects: ${(medication.common_side_effects || []).join('; ') || 'No summary available yet'}`);
+  lines.push(`Psych interaction guide: ${(medication.psych_interactions || []).join('; ') || 'No summary available yet'}`);
 
   return lines.join('\n');
 }
@@ -2682,7 +2962,7 @@ function renderMedicationDetail() {
   const { medication, formulations, selectedFormulation, availableRoutes } = context;
   const favorites = new Set(getMedicationFavorites());
   const isFavorite = favorites.has(medication.id);
-  const statusMeta = getMedicationStatusMeta(medication.content_review_status);
+  const reliabilityMeta = getMedicationReliabilityMeta(medication);
 
   const hasMultipleFormulations = formulations.length > 1;
   const shouldPromptForFormulation = hasMultipleFormulations && !selectedFormulation;
@@ -2731,22 +3011,22 @@ function renderMedicationDetail() {
         </div>
       </div>
       <div class="med-badge-row">
-        <span class="med-badge med-status-badge med-status-badge-${escapeHtml(statusMeta.tone)}">${escapeHtml(statusMeta.label)}</span>
+        <span class="med-badge med-status-badge med-status-badge-${escapeHtml(reliabilityMeta.tone)}">${escapeHtml(reliabilityMeta.compactLabel)}</span>
         <span class="med-badge">${escapeHtml(medication.psych_class || 'Unclassified')}</span>
         ${(medication.formulations || []).slice(0, 8).map((form) => `<span class="med-badge">${escapeHtml(form.label || form.dosage_form || 'Formulation')}</span>`).join('')}
         ${medication.newer_brand ? '<span class="med-badge med-badge-new">Newer brand</span>' : ''}
       </div>
-      ${statusMeta.isCurated ? '' : '<p class="med-curation-note">This entry is source-derived and still in review. Curated psychiatry guidance may be partial.</p>'}
+      ${reliabilityMeta.isHighReliability ? '' : '<p class="med-curation-note">This entry has lower confidence source coverage. Validate against official labeling before final decisions.</p>'}
     </article>
 
     <section class="med-section">
       <h3>FDA-Approved Psychiatric Uses</h3>
-      ${listHtml(medication.fda_psych_uses, 'No curated summary available yet.')}
+      ${listHtml(medication.fda_psych_uses, 'No summary available yet.')}
     </section>
 
     <section class="med-section">
       <h3>Common Psychiatric Off-Label Uses</h3>
-      ${listHtml(medication.off_label_psych_uses, 'No curated summary available yet.')}
+      ${listHtml(medication.off_label_psych_uses, 'No summary available yet.')}
     </section>
 
     <section class="med-section">
@@ -2775,30 +3055,32 @@ function renderMedicationDetail() {
 
     <section class="med-section">
       <h3>Psych Interaction Guide</h3>
-      ${listHtml(interactions, 'No curated summary available yet.')}
+      ${listHtml(interactions, 'No summary available yet.')}
     </section>
 
     <section class="med-section">
       <h3>Most Common Side Effects</h3>
-      ${listHtml(sideEffects, 'No curated summary available yet.')}
+      ${listHtml(sideEffects, 'No summary available yet.')}
       ${listHtml(medication.important_risks, 'No important serious risk summary available yet.')}
     </section>
 
     <section class="med-section">
       <h3>Basic Neurotransmitter / Mechanism Of Action</h3>
-      <p>${escapeHtml(medication.moa_summary || 'No curated summary available yet.')}</p>
+      <p>${escapeHtml(medication.moa_summary || 'No summary available yet.')}</p>
     </section>
 
     <section class="med-section">
       <h3>Clinical Pearls</h3>
-      ${listHtml(pearls, 'No curated summary available yet.')}
+      ${listHtml(pearls, 'No summary available yet.')}
     </section>
 
     <section class="med-section">
       <h3>Source + Freshness</h3>
+      <p>Reliability score: ${escapeHtml(String(reliabilityMeta.score))}/100 (${escapeHtml(reliabilityMeta.label)})</p>
+      <p>Reliability sources: ${escapeHtml(((medication.reliability_sources || []).join(', ')) || 'None captured yet')}</p>
       <p>Last source sync: ${escapeHtml(medication.source_last_checked || 'Unknown')}</p>
       <p>Editorial review: ${escapeHtml(medication.editorial_last_reviewed || 'Pending review')}</p>
-      <p>Status: ${escapeHtml(medication.content_review_status || 'pending review')}</p>
+      <p>Review state: ${escapeHtml(medication.content_review_status || 'source scored')}</p>
       <div class="med-links">
         ${sourceLinks.length ? sourceLinks.map((url) => `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(url)}</a>`).join('') : '<span class="helper-text">No source links yet.</span>'}
       </div>
@@ -2883,6 +3165,10 @@ function setMedicationDrawerOpen(isOpen, options = {}) {
     setMedicationSelection(medicationId);
   } else {
     runMedicationSearch(els.medSearchInput ? els.medSearchInput.value : '');
+  }
+
+  if (!medicationCatalog.length && !medicationCatalogLoading) {
+    ensureMedicationCatalogReady({ force: false, preferDrive: true }).catch(() => {});
   }
 
   if (medicationCatalogLoadError && !medicationCatalog.length) {
@@ -2976,6 +3262,45 @@ function handleMedicationContextOpen(fieldId) {
   runMedicationSearch(query);
 }
 
+async function ensureMedicationCatalogReady(options = {}) {
+  const { force = false, preferDrive = false } = options;
+
+  if (!force && medicationCatalog.length) {
+    return true;
+  }
+
+  if (!force && medicationCatalogLoadPromise) {
+    return medicationCatalogLoadPromise;
+  }
+
+  medicationCatalogLoadPromise = (async () => {
+    medicationCatalogLoading = true;
+    try {
+      let loaded = false;
+
+      if (preferDrive && isDriveSyncEnabled()) {
+        try {
+          loaded = await pullDriveMedicationCatalog(true);
+        } catch (error) {
+          loaded = false;
+        }
+      }
+
+      if (!loaded) {
+        loaded = await loadMedicationCatalog();
+      }
+
+      return loaded;
+    } finally {
+      medicationCatalogLoading = false;
+      medicationCatalogLoadPromise = null;
+      renderMedicationResults();
+    }
+  })();
+
+  return medicationCatalogLoadPromise;
+}
+
 function applyMedicationCatalogPayload(payload, options = {}) {
   const { force = false } = options;
   const medications = Array.isArray(payload) ? payload : payload.medications;
@@ -3009,17 +3334,19 @@ function handleMedicationLaunch(event) {
 
 async function loadMedicationCatalog() {
   if (typeof fetch !== 'function') {
-    medicationCatalogLoadError = false;
+    medicationCatalogLoadError = true;
+    medicationCatalogLoading = false;
     medicationCatalog = [];
     renderMedicationClassFilters();
     renderMedicationRows();
     runMedicationSearch('');
     renderMedicationDetail();
     updateMissingRequestCount();
-    return;
+    return false;
   }
 
   try {
+    medicationCatalogLoading = true;
     const response = await fetch(`${MED_CATALOG_URL}?v=${Date.now()}`, { cache: 'no-store' });
     if (!response.ok) {
       throw new Error(`Medication catalog request failed: ${response.status}`);
@@ -3030,17 +3357,36 @@ async function loadMedicationCatalog() {
     if (!applied) {
       throw new Error('Medication catalog format invalid.');
     }
+    medicationCatalogLoadError = false;
+    medicationCatalogLoading = false;
+    updateMissingRequestCount();
+    return true;
   } catch (error) {
+    if (isDriveSyncEnabled()) {
+      try {
+        const pulled = await pullDriveMedicationCatalog(true);
+        if (pulled || medicationCatalog.length) {
+          medicationCatalogLoadError = false;
+          medicationCatalogLoading = false;
+          updateMissingRequestCount();
+          return true;
+        }
+      } catch (driveError) {
+        console.error('Unable to load medication catalog from Drive fallback:', driveError);
+      }
+    }
+
     console.error('Unable to load medication catalog:', error);
     medicationCatalogLoadError = true;
+    medicationCatalogLoading = false;
     medicationCatalog = [];
     renderMedicationClassFilters();
     renderMedicationRows();
     runMedicationSearch('');
     renderMedicationDetail();
+    updateMissingRequestCount();
+    return false;
   }
-
-  updateMissingRequestCount();
 }
 
 async function fetchOpenFdaSignal(genericName) {
@@ -3266,7 +3612,10 @@ function attachMedicationListeners() {
   }
 
   if (els.medSearchInput) {
-    els.medSearchInput.addEventListener('input', () => runMedicationSearch(els.medSearchInput.value));
+    const handleSearchInput = () => runMedicationSearch(els.medSearchInput.value);
+    els.medSearchInput.addEventListener('input', handleSearchInput);
+    els.medSearchInput.addEventListener('change', handleSearchInput);
+    els.medSearchInput.addEventListener('search', handleSearchInput);
     els.medSearchInput.addEventListener('keydown', handleMedicationResultsKeyboard);
   }
 
@@ -3534,7 +3883,9 @@ function initMedicationReference() {
   renderMedicationRows();
   updateMissingRequestCount();
   attachMedicationListeners();
-  loadMedicationCatalog();
+  ensureMedicationCatalogReady({ force: true, preferDrive: false }).catch((error) => {
+    console.error('Unable to initialize medication catalog:', error);
+  });
   startMedicationAutoSync();
 }
 

@@ -27,11 +27,11 @@ function defaultFormulation(id, label = 'Tablet', route = 'oral', dosageForm = '
     dosage_form: dosageForm,
     strength_examples: [],
     common_adult_psych_dosing: {
-      start: 'No curated summary available yet.',
+      start: 'No summary available yet.',
       target: 'Pending review.',
       max: 'Verify official source.',
     },
-    titration_notes: ['No curated summary available yet.'],
+    titration_notes: ['No summary available yet.'],
     formulation_specific_pearls: [],
     formulation_specific_interactions: [],
     formulation_specific_side_effect_notes: [],
@@ -73,7 +73,7 @@ function medEntry({
     newer_brand: newerBrand,
     fda_psych_uses: [],
     off_label_psych_uses: [],
-    moa_summary: 'No curated summary available yet.',
+    moa_summary: 'No summary available yet.',
     common_side_effects: [],
     important_risks: [],
     psych_interactions: [],
@@ -81,8 +81,8 @@ function medEntry({
     source_links: [],
     source_last_checked: null,
     editorial_last_reviewed: null,
-    content_review_status: 'source synced',
-    missing_data_flags: ['curated dosing', 'curated interactions', 'curated side effects', 'curated pearls'],
+    content_review_status: 'source scored',
+    missing_data_flags: ['psych dosing', 'psych interactions', 'common side effects', 'clinical pearls'],
     formulations: formulations && formulations.length
       ? formulations
       : [defaultFormulation(id)],
@@ -930,6 +930,185 @@ function mergeMedication(sourceMed, curatedMed) {
   return merged;
 }
 
+const PSYCH_TERM_REGEX = /(depress|anxiety|panic|ocd|bipolar|schizo|psych|ptsd|adhd|attention|autism|mania|insomnia|sleep|substance|alcohol|opioid|mood|agitation|irritab|obsess|compuls)/i;
+const PLACEHOLDER_TEXT_REGEX = /(no summary available yet|no curated summary available yet|pending review|verify official source)/i;
+
+function toArray(value) {
+  if (Array.isArray(value)) return value;
+  if (value == null) return [];
+  return [value];
+}
+
+function normalizeSnippet(value, maxLength = 180) {
+  const text = String(value || '').replace(/\s+/g, ' ').trim();
+  if (!text) return '';
+  if (text.length <= maxLength) return text;
+  return `${text.slice(0, maxLength - 1).trimEnd()}…`;
+}
+
+function normalizeList(value, maxItems = 6, maxLength = 180) {
+  const items = toArray(value)
+    .map((entry) => normalizeSnippet(entry, maxLength))
+    .filter(Boolean);
+  return Array.from(new Set(items)).slice(0, maxItems);
+}
+
+function isMeaningfulText(value) {
+  const text = normalizeSnippet(value, 260);
+  return Boolean(text) && !PLACEHOLDER_TEXT_REGEX.test(text);
+}
+
+function deriveSourceFallback(sourceMed) {
+  const enrichment = sourceMed && sourceMed.source_enrichment ? sourceMed.source_enrichment : {};
+  const openfda = enrichment.openfda || {};
+
+  const indications = normalizeList(openfda.indications_and_usage, 8, 200);
+  const psychIndications = indications.filter((item) => PSYCH_TERM_REGEX.test(item));
+
+  return {
+    source_enrichment: enrichment,
+    fda_psych_uses: (psychIndications.length ? psychIndications : indications).slice(0, 6),
+    psych_interactions: normalizeList(openfda.drug_interactions, 6, 180),
+    common_side_effects: normalizeList(openfda.adverse_reactions, 6, 160),
+    important_risks: normalizeList([...(openfda.boxed_warning || []), ...(openfda.warnings || [])], 6, 180),
+    moa_summary: normalizeList(openfda.mechanism_of_action, 1, 220)[0] || '',
+    dosing_snippets: normalizeList(openfda.dosage_and_administration, 2, 180),
+  };
+}
+
+function applySourceFallback(merged, sourceFallback) {
+  let used = false;
+
+  if ((!merged.fda_psych_uses || !merged.fda_psych_uses.length) && sourceFallback.fda_psych_uses.length) {
+    merged.fda_psych_uses = sourceFallback.fda_psych_uses;
+    used = true;
+  }
+
+  if ((!merged.psych_interactions || !merged.psych_interactions.length) && sourceFallback.psych_interactions.length) {
+    merged.psych_interactions = sourceFallback.psych_interactions;
+    used = true;
+  }
+
+  if ((!merged.common_side_effects || !merged.common_side_effects.length) && sourceFallback.common_side_effects.length) {
+    merged.common_side_effects = sourceFallback.common_side_effects;
+    used = true;
+  }
+
+  if ((!merged.important_risks || !merged.important_risks.length) && sourceFallback.important_risks.length) {
+    merged.important_risks = sourceFallback.important_risks;
+    used = true;
+  }
+
+  if (!isMeaningfulText(merged.moa_summary) && sourceFallback.moa_summary) {
+    merged.moa_summary = sourceFallback.moa_summary;
+    used = true;
+  }
+
+  if (Array.isArray(merged.formulations) && sourceFallback.dosing_snippets.length) {
+    merged.formulations = merged.formulations.map((formulation) => {
+      const dosing = formulation.common_adult_psych_dosing || {};
+      const nextDosing = { ...dosing };
+      let nextUsed = false;
+
+      if (!isMeaningfulText(nextDosing.start)) {
+        nextDosing.start = sourceFallback.dosing_snippets[0];
+        nextUsed = true;
+      }
+      if (!isMeaningfulText(nextDosing.target)) {
+        nextDosing.target = sourceFallback.dosing_snippets[0];
+        nextUsed = true;
+      }
+      if (!isMeaningfulText(nextDosing.max)) {
+        nextDosing.max = sourceFallback.dosing_snippets[1] || 'See source dosing text';
+        nextUsed = true;
+      }
+
+      if (nextUsed) used = true;
+
+      return {
+        ...formulation,
+        common_adult_psych_dosing: nextDosing,
+      };
+    });
+  }
+
+  merged.source_enrichment = sourceFallback.source_enrichment || {};
+  merged.source_derived_fallback_used = used;
+}
+
+function buildMissingDataFlags(medication) {
+  const flags = [];
+  if (!medication.fda_psych_uses || !medication.fda_psych_uses.length) flags.push('fda psych uses');
+  if (!medication.off_label_psych_uses || !medication.off_label_psych_uses.length) flags.push('off-label psych uses');
+  if (!medication.common_side_effects || !medication.common_side_effects.length) flags.push('common side effects');
+  if (!medication.psych_interactions || !medication.psych_interactions.length) flags.push('psych interactions');
+  if (!medication.clinical_pearls || !medication.clinical_pearls.length) flags.push('clinical pearls');
+  if (!isMeaningfulText(medication.moa_summary)) flags.push('mechanism summary');
+  return flags;
+}
+
+function computeReliability(medication, sourceMed) {
+  const enrichment = sourceMed && sourceMed.source_enrichment ? sourceMed.source_enrichment : {};
+  const sourceSignals = [];
+  let score = 0;
+
+  if (enrichment.dailymed && enrichment.dailymed.found) {
+    score += 38;
+    sourceSignals.push('DailyMed');
+  }
+  if (enrichment.openfda && enrichment.openfda.found) {
+    score += 32;
+    sourceSignals.push('openFDA');
+  }
+  if (enrichment.drugsfda && enrichment.drugsfda.found) {
+    score += 22;
+    sourceSignals.push('Drugs@FDA');
+  }
+  if (enrichment.rxnorm && enrichment.rxnorm.found) {
+    score += 12;
+    sourceSignals.push('RxNorm');
+  }
+
+  let coverageBoost = 0;
+  if ((medication.fda_psych_uses || []).length) coverageBoost += 4;
+  if ((medication.off_label_psych_uses || []).length) coverageBoost += 2;
+  if ((medication.common_side_effects || []).length) coverageBoost += 3;
+  if ((medication.psych_interactions || []).length) coverageBoost += 3;
+  if ((medication.important_risks || []).length) coverageBoost += 3;
+  if ((medication.clinical_pearls || []).length) coverageBoost += 2;
+  if (isMeaningfulText(medication.moa_summary)) coverageBoost += 3;
+
+  const hasDosing = Array.isArray(medication.formulations) && medication.formulations.some((formulation) => {
+    const dosing = formulation.common_adult_psych_dosing || {};
+    return isMeaningfulText(dosing.start) || isMeaningfulText(dosing.target) || isMeaningfulText(dosing.max);
+  });
+  if (hasDosing) coverageBoost += 3;
+
+  score += Math.min(20, coverageBoost);
+
+  if (medication.content_review_status === 'curated') {
+    score = Math.max(score, 92);
+  }
+
+  score = Math.min(100, Math.max(0, Math.round(score)));
+
+  let tier = 'low';
+  if (score >= 90) {
+    tier = 'very-high';
+  } else if (score >= 70) {
+    tier = 'high';
+  } else if (score >= 45) {
+    tier = 'moderate';
+  }
+
+  return {
+    score,
+    tier,
+    sources: sourceSignals,
+    coverage_boost: Math.min(20, coverageBoost),
+  };
+}
+
 function dedupeById(records) {
   const map = new Map();
   records.forEach((record) => {
@@ -963,8 +1142,11 @@ const sourceRecords = dedupeById([
 
   return {
     ...seedMed,
+    brand_names: Array.from(new Set([...(seedMed.brand_names || []), ...(existing.brand_names || [])])),
+    aliases: Array.from(new Set([...(seedMed.aliases || []), ...(existing.aliases || [])])),
     source_links: Array.from(new Set([...(existing.source_links || []), ...(seedMed.source_links || [])])),
     source_last_checked: existing.source_last_checked || seedMed.source_last_checked || null,
+    source_enrichment: existing.source_enrichment || seedMed.source_enrichment || {},
     content_review_status: existing.content_review_status && existing.content_review_status !== 'curated'
       ? existing.content_review_status
       : seedMed.content_review_status,
@@ -977,20 +1159,20 @@ const curatedMap = new Map(curatedRecords.map((record) => [record.id, record]));
 const compiledRecords = sourceRecords.map((sourceMed) => {
   const curated = curatedMap.get(sourceMed.id);
   const merged = mergeMedication(sourceMed, curated);
+  const sourceFallback = deriveSourceFallback(sourceMed);
 
-  const hasMissing = Array.isArray(merged.missing_data_flags) && merged.missing_data_flags.length > 0;
+  applySourceFallback(merged, sourceFallback);
+  merged.missing_data_flags = buildMissingDataFlags(merged);
 
   if (merged.content_review_status !== 'curated') {
-    if (merged.content_review_status === 'needs review') {
-      merged.content_review_status = 'needs review';
-    } else if (!merged.source_last_checked) {
-      merged.content_review_status = 'newly added';
-    } else if (hasMissing) {
-      merged.content_review_status = 'missing fields';
-    } else {
-      merged.content_review_status = 'source synced';
-    }
+    merged.content_review_status = 'source scored';
   }
+
+  const reliability = computeReliability(merged, sourceMed);
+  merged.reliability_score = reliability.score;
+  merged.reliability_tier = reliability.tier;
+  merged.reliability_sources = reliability.sources;
+  merged.reliability_coverage_boost = reliability.coverage_boost;
 
   return merged;
 });
@@ -999,37 +1181,66 @@ const generatedAt = new Date().toISOString();
 
 const sourcePayload = {
   generated_at: generatedAt,
-  source_policy: 'source-derived metadata only; curated fields merged separately',
+  source_policy: 'source-derived metadata only; curated narrative fields merged when available',
   medications: sourceRecords,
 };
 
 const curatedPayload = {
   generated_at: generatedAt,
-  editorial_policy: 'high-priority curated psychiatric summaries; remaining records source-synced with review states',
+  editorial_policy: 'high-priority curated psychiatric summaries with reliability scoring for all records',
   medications: curatedRecords,
 };
 
+const reliabilityStats = compiledRecords.reduce((acc, record) => {
+  const tier = String(record.reliability_tier || 'low').toLowerCase();
+  if (tier === 'very-high') {
+    acc.very_high += 1;
+  } else if (tier === 'high') {
+    acc.high += 1;
+  } else if (tier === 'moderate') {
+    acc.moderate += 1;
+  } else {
+    acc.low += 1;
+  }
+  return acc;
+}, {
+  very_high: 0,
+  high: 0,
+  moderate: 0,
+  low: 0,
+});
+
 const compiledPayload = {
   generated_at: generatedAt,
-  source_hierarchy: ['DailyMed', 'openFDA', 'RxNorm/RxNav', 'Drugs@FDA'],
+  source_hierarchy: ['DailyMed', 'openFDA', 'Drugs@FDA', 'RxNorm/RxNav'],
   medications: compiledRecords,
   stats: {
     total: compiledRecords.length,
     curated: compiledRecords.filter((record) => record.content_review_status === 'curated').length,
-    pending_review: compiledRecords.filter((record) => record.content_review_status !== 'curated').length,
+    source_scored: compiledRecords.filter((record) => record.content_review_status !== 'curated').length,
+    pending_review: compiledRecords.filter((record) => (record.missing_data_flags || []).length > 0).length,
+    reliability: reliabilityStats,
+    missing_fields: compiledRecords.filter((record) => (record.missing_data_flags || []).length > 0).length,
   },
 };
 
 const reviewPayload = {
   generated_at: generatedAt,
   review_queue: compiledRecords
-    .filter((record) => (record.missing_data_flags || []).length)
+    .filter((record) => {
+      const tier = String(record.reliability_tier || 'low').toLowerCase();
+      const score = Number(record.reliability_score || 0);
+      return (record.missing_data_flags || []).length > 0 || tier === 'low' || score < 75;
+    })
     .map((record) => ({
       id: record.id,
       generic_name: record.generic_name,
       psych_class: record.psych_class,
       missing_data_flags: record.missing_data_flags,
       content_review_status: record.content_review_status,
+      reliability_score: record.reliability_score || 0,
+      reliability_tier: record.reliability_tier || 'low',
+      reliability_sources: record.reliability_sources || [],
     })),
 };
 
@@ -1040,4 +1251,5 @@ fs.writeFileSync(REVIEW_PATH, JSON.stringify(reviewPayload, null, 2));
 
 console.log(`Compiled medication catalog with ${compiledRecords.length} records.`);
 console.log(`Curated records: ${compiledPayload.stats.curated}`);
+console.log(`Reliability tiers: ${JSON.stringify(compiledPayload.stats.reliability)}`);
 console.log(`Pending review records: ${compiledPayload.stats.pending_review}`);

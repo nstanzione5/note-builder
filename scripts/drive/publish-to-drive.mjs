@@ -14,6 +14,8 @@ const FILE_MAP = [
   ['config/drive-manifest.json', 'config/drive-manifest.json'],
 ];
 
+const RECENT_PATIENTS_PATH = 'data/draft/recent-patients.json';
+
 async function readIfExists(filePath) {
   try {
     return await fs.readFile(filePath, 'utf8');
@@ -50,6 +52,29 @@ async function main() {
       drivePath,
       revision: result.revision || null,
       checksum: result.checksum || checksum(content),
+    });
+  }
+
+  const recentPatientsGet = await callDriveAction('file.get', { path: RECENT_PATIENTS_PATH }, { config });
+  if (!recentPatientsGet.file) {
+    const bootstrapContent = JSON.stringify({
+      savedAt: new Date().toISOString(),
+      source: 'publish-bootstrap',
+      snapshots: [],
+    }, null, 2);
+
+    const created = await callDriveAction('file.put', {
+      path: RECENT_PATIENTS_PATH,
+      content: bootstrapContent,
+      contentType: 'application/json',
+      checksum: checksum(bootstrapContent),
+    }, { config });
+
+    pushed.push({
+      localPath: '(generated)',
+      drivePath: RECENT_PATIENTS_PATH,
+      revision: created.revision || null,
+      checksum: created.checksum || checksum(bootstrapContent),
     });
   }
 

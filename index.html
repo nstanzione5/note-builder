@@ -527,6 +527,8 @@
           <button type="button" class="seg-btn" data-therapy-tier=">=38">&gt;=38</button>
           <button type="button" class="seg-btn" data-therapy-tier=">=53">&gt;=53</button>
         </div>
+        <p class="helper-text">Eligible options unlock based on face-to-face elapsed time.</p>
+        <p class="helper-text" id="therapyInterwovenHint">Enter face-to-face start and end times to unlock higher therapy tiers.</p>
         <input type="hidden" id="therapyInterwoven" value="0">
       </div>
 
@@ -597,10 +599,10 @@
       <section class="backup-tray" id="backupTray" aria-live="polite">
         <div class="backup-header">
           <span class="backup-title">Local Backup (last 3)</span>
-          <span class="backup-subtitle">Autosaved snapshots for quick restore</span>
+          <span class="backup-subtitle">Autosaved by patient (same patient overwrites previous autosave)</span>
         </div>
         <div class="backup-list" id="backupList"></div>
-        <p class="helper-text" id="backupEmpty">No snapshots yet.</p>
+        <p class="helper-text" id="backupEmpty">No patient drafts yet.</p>
       </section>
     </section>
   </main>
@@ -623,7 +625,7 @@
       <input id="medSearchInput" type="text" placeholder="Search generic, brand, alias, or class..." autocomplete="off">
       <label class="med-toggle-inline" for="medCuratedOnly">
         <input id="medCuratedOnly" type="checkbox">
-        <span>Curated only</span>
+        <span>High reliability only</span>
       </label>
       <div class="med-class-filters" id="medClassFilters" role="group" aria-label="Medication class filters"></div>
       <div class="med-chip-row" id="medFavoritesRow"></div>

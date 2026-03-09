@@ -3,11 +3,22 @@
  * - normalization + brand/generic linking + alias support
  * - source-derived only
  */
+async function fetchWithTimeout(url, timeoutMs = 12000) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    return await fetch(url, { signal: controller.signal });
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
 export async function fetchRxNormApproximateTerm(term) {
   const encoded = encodeURIComponent(term);
   const url = `https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=${encoded}&maxEntries=5`;
 
-  const response = await fetch(url);
+  const response = await fetchWithTimeout(url);
   if (!response.ok) {
     throw new Error(`RxNorm approximate term failed (${response.status}) for ${term}`);
   }
@@ -30,7 +41,7 @@ export async function fetchRxNormProperties(rxcui) {
   const encoded = encodeURIComponent(rxcui);
   const url = `https://rxnav.nlm.nih.gov/REST/rxcui/${encoded}/properties.json`;
 
-  const response = await fetch(url);
+  const response = await fetchWithTimeout(url);
   if (!response.ok) {
     throw new Error(`RxNorm properties failed (${response.status}) for RXCUI ${rxcui}`);
   }

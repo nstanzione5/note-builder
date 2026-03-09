@@ -8,7 +8,7 @@ The medication system uses two independent layers:
 - Brand/generic alias mapping
 - Formulation and route metadata
 - Source links + sync timestamps
-- Review status flags
+- Reliability scoring (`reliability_score`, `reliability_tier`, `reliability_sources`)
 
 2. Curated psychiatry fields (editorial)
 - Psych-focused FDA and off-label display text
@@ -17,6 +17,18 @@ The medication system uses two independent layers:
 - Side effects, MOA, and clinical pearls
 
 Source metadata can be refreshed without overwriting curated psych summaries.
+
+### Reliability tiers
+
+Source reliability is scored with weighted source signals and content coverage:
+
+- `very-high`: curated editorial coverage (or equivalent high-confidence blend)
+- `high`: multiple top-tier source hits + broad field coverage
+- `moderate`: trusted source presence with partial psych-field coverage
+- `low`: sparse source evidence and/or limited clinical field coverage
+
+Current source weighting order:
+- `DailyMed` > `openFDA` > `Drugs@FDA` > `RxNorm`
 
 ## File structure
 
@@ -64,3 +76,4 @@ This lets app runtime pick up newly published catalog data without requiring a p
 - For shared canonical catalog updates, run `npm run med:knowledge-check` from this workspace.
 - Curated psychiatry content should only be edited in curated files/scripts and reviewed clinically.
 - Drive writes are owner-gated at the Apps Script layer (`DRIVE_OWNER_EMAIL` and/or `DRIVE_OWNER_TOKEN`).
+- `openFDA` endpoints can rate-limit anonymous traffic (HTTP 429). For better coverage, set `OPENFDA_API_KEY` in your shell before running sync jobs.

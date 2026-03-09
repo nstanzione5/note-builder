@@ -398,7 +398,10 @@ function ensureFolderPath_(rootFolderId, folderPath, sharedDriveId, createdFolde
       }, null);
 
       if (createdFolders) {
-        createdFolders.push(folderPathUntil_(segments, segment));
+        const createdPath = folderPathUntil_(segments, segment);
+        if (createdFolders.indexOf(createdPath) < 0) {
+          createdFolders.push(createdPath);
+        }
       }
     }
 
@@ -421,7 +424,10 @@ function getOrCreateRootFolder_(sharedDriveId, rootFolderName) {
   }
 
   const escaped = escapeQueryText_(rootFolderName);
-  const query = "trashed=false and mimeType='application/vnd.google-apps.folder' and title='" + escaped + "'";
+  let query = "trashed=false and mimeType='application/vnd.google-apps.folder' and title='" + escaped + "'";
+  if (sharedDriveId) {
+    query += " and '" + sharedDriveId + "' in parents";
+  }
 
   const params = {
     q: query,
@@ -429,8 +435,12 @@ function getOrCreateRootFolder_(sharedDriveId, rootFolderName) {
   };
 
   const listed = listFilesSafe_(params, sharedDriveId);
-  if (listed.items && listed.items.length) {
-    const selected = selectStableFolder_(listed.items);
+  const candidates = (listed.items || []).filter(function (item) {
+    return !sharedDriveId || fileBelongsToSharedDrive_(item, sharedDriveId);
+  });
+
+  if (candidates.length) {
+    const selected = selectStableFolder_(candidates);
     saveStoredRootFolder_(selected.id, sharedDriveId, rootFolderName);
     return selected;
   }
@@ -449,6 +459,9 @@ function getOrCreateRootFolder_(sharedDriveId, rootFolderName) {
     saveStoredRootFolder_(created.id, sharedDriveId, rootFolderName);
     return created;
   } catch (error) {
+    if (sharedDriveId) {
+      throw new Error('Unable to create root folder inside shared drive. Verify DRIVE root shared drive access and ID.');
+    }
     const fallback = DriveApp.createFolder(rootFolderName);
     const fallbackMeta = getFileSafe_(fallback.getId());
     saveStoredRootFolder_(fallbackMeta.id, sharedDriveId, rootFolderName);
@@ -732,7 +745,7 @@ function fileBelongsToSharedDrive_(file, sharedDriveId) {
   // Some API variants omit driveId in responses; fall back to parent check if available.
   const parents = (file && file.parents) ? file.parents : [];
   if (!parents.length) {
-    return true;
+    return false;
   }
 
   return fileHasParent_(file, normalizedDriveId);

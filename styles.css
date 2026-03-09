@@ -363,6 +363,13 @@ h3 {
   background: rgba(15, 23, 42, 0.06);
 }
 
+.seg-btn:disabled {
+  cursor: not-allowed;
+  color: rgba(100, 116, 139, 0.62);
+  background: rgba(148, 163, 184, 0.14);
+  box-shadow: none;
+}
+
 .seg-btn.active,
 .seg-btn[aria-pressed="true"],
 .interval-btn.active,
@@ -1212,6 +1219,30 @@ textarea:disabled {
   color: #047857;
 }
 
+.med-status-chip-very-high {
+  border-color: rgba(5, 150, 105, 0.56);
+  background: rgba(5, 150, 105, 0.14);
+  color: #065f46;
+}
+
+.med-status-chip-high {
+  border-color: rgba(14, 165, 233, 0.52);
+  background: rgba(14, 165, 233, 0.14);
+  color: #0c4a6e;
+}
+
+.med-status-chip-moderate {
+  border-color: rgba(245, 158, 11, 0.52);
+  background: rgba(245, 158, 11, 0.13);
+  color: #92400e;
+}
+
+.med-status-chip-low {
+  border-color: rgba(239, 68, 68, 0.48);
+  background: rgba(239, 68, 68, 0.14);
+  color: #991b1b;
+}
+
 .med-status-chip-synced {
   border-color: rgba(59, 130, 246, 0.5);
   background: rgba(59, 130, 246, 0.13);
@@ -1324,6 +1355,30 @@ textarea:disabled {
   border-color: rgba(16, 185, 129, 0.55);
   background: rgba(16, 185, 129, 0.14);
   color: #047857;
+}
+
+.med-status-badge-very-high {
+  border-color: rgba(5, 150, 105, 0.56);
+  background: rgba(5, 150, 105, 0.14);
+  color: #065f46;
+}
+
+.med-status-badge-high {
+  border-color: rgba(14, 165, 233, 0.52);
+  background: rgba(14, 165, 233, 0.14);
+  color: #0c4a6e;
+}
+
+.med-status-badge-moderate {
+  border-color: rgba(245, 158, 11, 0.52);
+  background: rgba(245, 158, 11, 0.13);
+  color: #92400e;
+}
+
+.med-status-badge-low {
+  border-color: rgba(239, 68, 68, 0.48);
+  background: rgba(239, 68, 68, 0.14);
+  color: #991b1b;
 }
 
 .med-status-badge-synced {

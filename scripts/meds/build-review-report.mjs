@@ -18,17 +18,27 @@ const report = {
   totals: {
     records: meds.length,
     curated: meds.filter((med) => med.content_review_status === 'curated').length,
-    source_synced: meds.filter((med) => med.content_review_status === 'source synced').length,
-    needs_review: meds.filter((med) => med.content_review_status === 'needs review').length,
+    source_scored: meds.filter((med) => med.content_review_status === 'source scored').length,
+    very_high_reliability: meds.filter((med) => String(med.reliability_tier || '').toLowerCase() === 'very-high').length,
+    high_reliability: meds.filter((med) => String(med.reliability_tier || '').toLowerCase() === 'high').length,
+    moderate_reliability: meds.filter((med) => String(med.reliability_tier || '').toLowerCase() === 'moderate').length,
+    low_reliability: meds.filter((med) => String(med.reliability_tier || '').toLowerCase() === 'low' || !med.reliability_tier).length,
     missing_fields: meds.filter((med) => Array.isArray(med.missing_data_flags) && med.missing_data_flags.length > 0).length,
   },
   review_queue: meds
-    .filter((med) => med.content_review_status !== 'curated' || (med.missing_data_flags || []).length)
+    .filter((med) => {
+      const tier = String(med.reliability_tier || 'low').toLowerCase();
+      const score = Number(med.reliability_score || 0);
+      return tier === 'low' || score < 75 || (med.missing_data_flags || []).length > 0;
+    })
     .map((med) => ({
       id: med.id,
       generic_name: med.generic_name,
       psych_class: med.psych_class,
       content_review_status: med.content_review_status,
+      reliability_score: med.reliability_score || 0,
+      reliability_tier: med.reliability_tier || 'low',
+      reliability_sources: med.reliability_sources || [],
       missing_data_flags: med.missing_data_flags || [],
       source_last_checked: med.source_last_checked || null,
     })),
@@ -37,5 +47,5 @@ const report = {
 fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
 
 console.log(`Review report written: ${reportPath}`);
-console.log(`Needs review: ${report.totals.needs_review}`);
+console.log(`Low reliability: ${report.totals.low_reliability}`);
 console.log(`Missing fields: ${report.totals.missing_fields}`);
