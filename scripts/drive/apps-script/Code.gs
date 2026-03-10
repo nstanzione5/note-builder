@@ -1028,15 +1028,26 @@ function getFileMeta_(fileId) {
 }
 
 function getFileSafe_(fileId) {
-  try {
-    return Drive.Files.get(fileId, { supportsAllDrives: true });
-  } catch (allDrivesError) {
+  const fields = 'id,title,name,mimeType,parents,driveId,teamDriveId,createdDate,createdTime,modifiedDate,modifiedTime,version,md5Checksum';
+  const variants = [
+    { supportsAllDrives: true, fields: fields },
+    { supportsTeamDrives: true, fields: fields },
+    { fields: fields },
+    { supportsAllDrives: true },
+    { supportsTeamDrives: true },
+    {},
+  ];
+
+  let lastError = null;
+  for (var i = 0; i < variants.length; i += 1) {
     try {
-      return Drive.Files.get(fileId, { supportsTeamDrives: true });
-    } catch (teamDriveError) {
-      return Drive.Files.get(fileId);
+      return Drive.Files.get(fileId, variants[i]);
+    } catch (error) {
+      lastError = error;
     }
   }
+
+  throw lastError || new Error('Unable to fetch Drive file metadata.');
 }
 
 function insertFileSafe_(resource, blobOrNull) {
@@ -1279,7 +1290,7 @@ function fileHasParent_(file, parentId) {
   return false;
 }
 
-function fileBelongsToSharedDrive_(file, sharedDriveId) {
+function fileBelongsToSharedDrive_(file, sharedDriveId, visitedIds) {
   const normalizedDriveId = normalizeText_(sharedDriveId || '');
   if (!normalizedDriveId) return true;
 
@@ -1288,14 +1299,46 @@ function fileBelongsToSharedDrive_(file, sharedDriveId) {
     return fileDriveId === normalizedDriveId;
   }
 
-  // Some API variants omit driveId in responses; fall back to parent check if available.
-  const parents = (file && file.parents) ? file.parents : [];
-  if (!parents.length) {
-    // When metadata is sparse (no driveId + no parents), treat as unknown and keep cached IDs.
+  const seen = visitedIds || {};
+  const currentId = normalizeText_((file && file.id) || '');
+  if (currentId) {
+    if (seen[currentId]) return false;
+    seen[currentId] = true;
+  }
+
+  const storedRootId = normalizeText_(PropertiesService.getScriptProperties().getProperty(ROOT_FOLDER_ID_PROPERTY) || '');
+  const parentIds = getFileParentIds_(file);
+
+  if (!parentIds.length) {
+    return Boolean(currentId && storedRootId && currentId === storedRootId);
+  }
+
+  if (parentIds.indexOf(normalizedDriveId) >= 0) {
+    return true;
+  }
+  if (storedRootId && parentIds.indexOf(storedRootId) >= 0) {
     return true;
   }
 
-  return fileHasParent_(file, normalizedDriveId);
+  for (var i = 0; i < parentIds.length; i += 1) {
+    const parentId = parentIds[i];
+    if (!parentId || seen[parentId]) continue;
+
+    if (storedRootId && parentId === storedRootId) {
+      return true;
+    }
+
+    try {
+      const parentMeta = getFileSafe_(parentId);
+      if (parentMeta && fileBelongsToSharedDrive_(parentMeta, normalizedDriveId, seen)) {
+        return true;
+      }
+    } catch (error) {
+      // best-effort ancestry check; continue scanning parents
+    }
+  }
+
+  return false;
 }
 
 function getOrCreateManifestFile_(rootFolderId, sharedDriveId) {
