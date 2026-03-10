@@ -10,6 +10,7 @@ const FILE_MAP = [
   ['data/meds/review/review-queue.json', 'data/meds/review/review-queue.json'],
   ['data/meds/review/review-report.json', 'data/meds/review/review-report.json'],
   ['data/meds/review/source-sync-log.json', 'data/meds/review/source-sync-log.json'],
+  ['data/meds/review/runtime-fallbacks.json', 'data/meds/review/runtime-fallbacks.json'],
   ['docs/medication-reference-maintenance.md', 'app-shell/docs/medication-reference-maintenance.md'],
   ['config/drive-manifest.json', 'config/drive-manifest.json'],
 ];

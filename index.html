@@ -21,7 +21,7 @@
   data-drive-sync-enabled="true"
   data-drive-endpoint-url="https://script.google.com/macros/s/AKfycbyCfdY3aHqLXFcHBE6fXt8UU8D_E7nmUDf-kJzcPo2VGtS4JuVVNI0m4v_SUNaVSeNXKQ/exec"
   data-drive-shared-drive-id="0AHnYqpJA5-6ZUk9PVA"
-  data-drive-root-folder-name="Astra Clinical Note Builder"
+  data-drive-root-folder-name="Note App"
   data-drive-user-email="nick@astrapsychiatry.com"
   data-drive-owner-email="nick@astrapsychiatry.com"
   data-drive-service-token=""
@@ -568,6 +568,14 @@
               <input id="docEnd" type="hidden" value="">
             </div>
             <button type="button" class="mini-btn nowBtn" data-target="docEnd">Now</button>
+            <div class="now-plus-group" data-now-plus-target="docEnd" aria-label="Documentation end quick add minutes">
+              <button type="button" class="mini-btn nowPlusBtn" data-plus-minutes="5">+5</button>
+              <button type="button" class="mini-btn nowPlusBtn" data-plus-minutes="10">+10</button>
+              <button type="button" class="mini-btn nowPlusBtn" data-plus-minutes="15">+15</button>
+              <label class="now-plus-custom" for="docEndPlusMinutes">now+</label>
+              <input id="docEndPlusMinutes" class="now-plus-input" type="number" min="1" max="180" step="1" inputmode="numeric" placeholder="min" aria-label="Add custom minutes to documentation end">
+              <button type="button" class="mini-btn nowPlusApplyBtn" data-plus-apply="docEnd">Apply</button>
+            </div>
           </div>
         </div>
       </div>
@@ -640,6 +648,7 @@
         <div class="med-empty-state hidden" id="medEmptyState">
           <p>No medication found for this search.</p>
           <button type="button" id="medRequestBtn">Request this medication</button>
+          <button type="button" id="medFetchFallbackBtn">Fetch low-confidence fallback</button>
         </div>
       </section>
 

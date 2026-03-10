@@ -38,6 +38,7 @@ async function main() {
     'data/meds/review/review-queue.json',
     'data/meds/review/review-report.json',
     'data/meds/review/source-sync-log.json',
+    'data/meds/review/runtime-fallbacks.json',
     userDraftPath || 'data/draft/current.json',
     userRecentPath || 'data/draft/recent-patients.json',
     'logs/sync/med-refresh-requests.json',

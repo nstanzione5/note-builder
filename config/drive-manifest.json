@@ -1,7 +1,7 @@
 {
   "version": 1,
   "schema": "astra-note-builder-drive-manifest-v1",
-  "rootFolderName": "Astra Clinical Note Builder",
+  "rootFolderName": "Note App",
   "sharedDriveId": "",
   "rootFolderId": "",
   "ownerEmail": "",

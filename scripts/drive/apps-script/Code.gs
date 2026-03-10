@@ -1,4 +1,4 @@
-const APP_ROOT_DEFAULT = 'Astra Clinical Note Builder';
+const APP_ROOT_DEFAULT = 'Note App';
 const MANIFEST_PATH = 'config/drive-manifest.json';
 const MED_REFRESH_QUEUE_PATH = 'logs/sync/med-refresh-requests.json';
 const PATIENT_DRAFT_CURRENT_PATH = 'data/draft/current.json';
@@ -967,6 +967,10 @@ function findFolderInParent_(parentId, folderName, sharedDriveId) {
     return listed.items[0];
   }
 
+  if (sharedDriveId) {
+    return null;
+  }
+
   return findFolderViaDriveApp_(parentId, folderName);
 }
 
@@ -982,6 +986,10 @@ function findFileInFolder_(folderId, fileName, sharedDriveId) {
   const listed = listFilesSafe_(params, sharedDriveId);
   if (listed.items && listed.items.length) {
     return listed.items[0];
+  }
+
+  if (sharedDriveId) {
+    return null;
   }
 
   return findFileViaDriveApp_(folderId, fileName);
@@ -1110,11 +1118,13 @@ function listFilesSafe_(params, sharedDriveId) {
   const v3All = toV3ListParams_(base, sharedDriveId, true);
   variants.push(v3All);
 
-  const v3NoDrive = toV3ListParams_(base, '', false);
-  variants.push(v3NoDrive);
+  if (!sharedDriveId) {
+    const v3NoDrive = toV3ListParams_(base, '', false);
+    variants.push(v3NoDrive);
 
-  const plain = cloneObject_(base);
-  variants.push(plain);
+    const plain = cloneObject_(base);
+    variants.push(plain);
+  }
 
   let lastError = null;
   let firstSuccess = null;

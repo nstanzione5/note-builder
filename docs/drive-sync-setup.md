@@ -4,7 +4,7 @@ This project now supports a Drive-primary sync mode through a Google Apps Script
 
 ## Folder bootstrap target
 
-When `bootstrap` runs, the endpoint ensures this structure under **Astra Clinical Note Builder**:
+When `bootstrap` runs, the endpoint ensures this structure under **Note App**:
 
 - `app-shell`
 - `data/meds/source`
@@ -40,7 +40,7 @@ Create `config/drive-sync.local.json` (not committed) from `config/drive-sync.co
 {
   "endpointUrl": "https://script.google.com/macros/s/.../exec",
   "sharedDriveId": "...",
-  "rootFolderName": "Astra Clinical Note Builder",
+  "rootFolderName": "Note App",
   "userEmail": "nick@astrapsychiatry.com",
   "ownerEmail": "nick@astrapsychiatry.com",
   "serviceToken": "same-value-as-DRIVE_SERVICE_TOKEN",
@@ -55,7 +55,7 @@ In `index.html` `<body>` data attributes:
 - `data-drive-sync-enabled="true"`
 - `data-drive-endpoint-url="..."`
 - `data-drive-shared-drive-id="..."`
-- `data-drive-root-folder-name="Astra Clinical Note Builder"`
+- `data-drive-root-folder-name="Note App"`
 - `data-drive-user-email="nick@astrapsychiatry.com"` (or `?driveUserEmail=...` query override)
 - `data-drive-owner-email="..."`
 - `data-drive-service-token=""` (blank in browser; service token belongs in local automation config)
@@ -74,6 +74,8 @@ When enabled:
 
 - `npm run drive:bootstrap` -> ensure folders + manifest
 - `npm run drive:audit-roots` -> report canonical vs duplicate root folders
+- `npm run drive:cleanup:dry-run` -> preview archive-only cleanup candidates for duplicate My Drive clutter
+- `npm run drive:cleanup:apply` -> move duplicate My Drive clutter into an archive folder (no delete)
 - `npm run drive:publish` -> push med artifacts + manifest (skips unchanged files by checksum)
 - `npm run drive:pull` -> pull med artifacts + manifest to local workspace
 - `npm run med:knowledge-check` -> full med source refresh + compile + review + Drive publish

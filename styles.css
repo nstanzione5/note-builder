@@ -811,6 +811,40 @@ textarea:disabled {
   align-items: center;
 }
 
+.now-plus-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.now-plus-custom {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.now-plus-input {
+  width: 62px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--ink-strong);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 7px 10px;
+}
+
+.now-plus-input:focus {
+  outline: none;
+  border-color: var(--accent-border);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.18);
+}
+
+.now-plus-input.now-plus-input-invalid {
+  border-color: rgba(220, 38, 38, 0.74);
+}
+
 .mini-btn,
 .med-context-btn,
 .med-inline-btn {
@@ -1282,6 +1316,11 @@ textarea:disabled {
   cursor: pointer;
   font-size: 12px;
   font-weight: 700;
+}
+
+.med-empty-state button:disabled {
+  opacity: 0.58;
+  cursor: not-allowed;
 }
 
 .med-detail-panel {

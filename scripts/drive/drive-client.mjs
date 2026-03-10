@@ -8,7 +8,7 @@ export async function loadDriveConfig(configPath = DEFAULT_CONFIG_PATH) {
   const merged = {
     endpointUrl: process.env.DRIVE_ENDPOINT_URL || '',
     sharedDriveId: process.env.DRIVE_SHARED_DRIVE_ID || '',
-    rootFolderName: process.env.DRIVE_ROOT_FOLDER_NAME || 'Astra Clinical Note Builder',
+    rootFolderName: process.env.DRIVE_ROOT_FOLDER_NAME || 'Note App',
     ownerEmail: process.env.DRIVE_OWNER_EMAIL || '',
     userEmail: process.env.DRIVE_USER_EMAIL || '',
     serviceToken: process.env.DRIVE_SERVICE_TOKEN || process.env.DRIVE_OWNER_TOKEN || '',
@@ -39,7 +39,7 @@ export async function loadDriveConfig(configPath = DEFAULT_CONFIG_PATH) {
     ...merged,
     endpointUrl: String(merged.endpointUrl).trim(),
     sharedDriveId: String(merged.sharedDriveId || '').trim(),
-    rootFolderName: String(merged.rootFolderName || 'Astra Clinical Note Builder').trim(),
+    rootFolderName: String(merged.rootFolderName || 'Note App').trim(),
     ownerEmail: String(merged.ownerEmail || '').trim(),
     userEmail: String(merged.userEmail || '').trim(),
     serviceToken: String(merged.serviceToken || merged.ownerToken || '').trim(),

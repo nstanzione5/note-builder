@@ -36,6 +36,7 @@ Current source weighting order:
 - `data/meds/curated/medications.curated.json`: curated psychiatry overrides
 - `data/meds/compiled/medications.compiled.json`: runtime drawer catalog
 - `data/meds/review/*.json`: review queue and sync logs
+- `data/meds/review/runtime-fallbacks.json`: low-confidence runtime fallback entries captured from in-app lookup
 
 ## Update workflow
 

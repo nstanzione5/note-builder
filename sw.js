@@ -1,4 +1,4 @@
-const CACHE_NAME = 'note-builder-shell-v5';
+const CACHE_NAME = 'note-builder-shell-v6';
 const SHELL_ASSETS = [
   './',
   './index.html',
@@ -11,6 +11,7 @@ const SHELL_ASSETS = [
   './ebh-logo.png',
   './data/meds/compiled/medications.compiled.json',
   './data/meds/review/review-queue.json',
+  './data/meds/review/runtime-fallbacks.json',
   './docs/medication-reference-maintenance.md',
   './docs/drive-sync-setup.md',
   './config/drive-manifest.json',

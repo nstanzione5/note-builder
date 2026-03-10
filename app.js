@@ -19,6 +19,9 @@ const state = {
   driveConnection: 'local',
   driveLastError: '',
   pendingDriveWrites: 0,
+  saveUnlocked: false,
+  driveWritesBlocked: true,
+  driveWriteBlockReason: 'Drive preflight pending.',
 };
 
 const els = {
@@ -103,11 +106,13 @@ const els = {
   medResultList: document.getElementById('medResultList'),
   medEmptyState: document.getElementById('medEmptyState'),
   medRequestBtn: document.getElementById('medRequestBtn'),
+  medFetchFallbackBtn: document.getElementById('medFetchFallbackBtn'),
   medDetailEmpty: document.getElementById('medDetailEmpty'),
   medDetailContent: document.getElementById('medDetailContent'),
   medExportMissingBtn: document.getElementById('medExportMissingBtn'),
   medMissingCount: document.getElementById('medMissingCount'),
   driveSyncStatus: document.getElementById('driveSyncStatus'),
+  docEndPlusMinutes: document.getElementById('docEndPlusMinutes'),
 };
 
 const inputIds = [
@@ -164,6 +169,7 @@ const MED_FAVORITES_KEY = 'medDrawerFavorites_v1';
 const MED_RECENTS_KEY = 'medDrawerRecents_v1';
 const MED_MISSING_REQUESTS_KEY = 'medDrawerMissingRequests_v1';
 const MED_RUNTIME_OVERRIDES_KEY = 'medDrawerRuntimeOverrides_v1';
+const MED_RUNTIME_FALLBACKS_KEY = 'medDrawerRuntimeFallbacks_v1';
 const MED_AUTOSYNC_META_KEY = 'medDrawerAutoSyncMeta_v1';
 const MED_CATALOG_CHECKSUM_KEY = 'medCatalogChecksum_v1';
 const DRIVE_USER_EMAIL_KEY = 'driveSyncUserEmail_v1';
@@ -174,8 +180,10 @@ const DRIVE_DRAFT_PATH = 'data/draft/current.json';
 const DRIVE_RECENT_PATIENTS_PATH = 'data/draft/recent-patients.json';
 const DRIVE_MED_COMPILED_PATH = 'data/meds/compiled/medications.compiled.json';
 const DRIVE_MED_REFRESH_QUEUE_PATH = 'logs/sync/med-refresh-requests.json';
-const DRIVE_SYNC_ENTERPRISE_NAME = 'Astra Clinical Note Builder';
+const DRIVE_MED_RUNTIME_FALLBACKS_PATH = 'data/meds/review/runtime-fallbacks.json';
+const DRIVE_SYNC_ENTERPRISE_NAME = 'Note App';
 const DRIVE_MANIFEST_FILE = 'config/drive-manifest.json';
+const DRAFT_PERSIST_IDLE_MS = 3000;
 const THERAPY_TIER_MINUTES = {
   '0': 0,
   '>=16': 16,
@@ -184,11 +192,17 @@ const THERAPY_TIER_MINUTES = {
 };
 
 let snapshotTimer = null;
+let draftPersistTimer = null;
+let pendingDraftPersistSkipDrive = false;
+let latestDraftHash = '';
 const timeControlMap = new Map();
+let medicationCatalogBase = [];
 let medicationCatalog = [];
+let runtimeMedicationFallbacks = {};
 let medicationCatalogGeneratedAt = '';
 let medicationSearchResults = [];
 let medicationFocusedResultIndex = -1;
+let medicationFallbackFetchRunning = false;
 let medAutoSyncTimer = null;
 let medAutoSyncRunning = false;
 let medicationCatalogLoadError = false;
@@ -199,6 +213,7 @@ let driveQueueTimer = null;
 let driveSyncTimer = null;
 let driveQueueRunning = false;
 let driveSyncRunning = false;
+const driveQueuedChecksums = new Map();
 
 function getEl(id) {
   return document.getElementById(id);
@@ -315,7 +330,7 @@ function getDriveConfig() {
     enabled: dataset.driveSyncEnabled === 'true',
     endpointUrl: String(dataset.driveEndpointUrl || '').trim(),
     sharedDriveId: String(dataset.driveSharedDriveId || '').trim(),
-    rootFolderName: String(dataset.driveRootFolderName || DRIVE_SYNC_ENTERPRISE_NAME).trim() || DRIVE_SYNC_ENTERPRISE_NAME,
+    rootFolderName: DRIVE_SYNC_ENTERPRISE_NAME,
     userEmail,
     ownerEmail: String(dataset.driveOwnerEmail || '').trim(),
     serviceToken: String(dataset.driveServiceToken || '').trim() || String(dataset.driveOwnerToken || '').trim(),
@@ -361,6 +376,10 @@ function isRecentPatientsPath(path) {
   return value === DRIVE_RECENT_PATIENTS_PATH
     || value === getScopedDriveRecentPatientsPath()
     || /\/recent-patients\.json$/.test(value);
+}
+
+function isRuntimeFallbacksPath(path) {
+  return String(path || '').trim() === DRIVE_MED_RUNTIME_FALLBACKS_PATH;
 }
 
 function isDriveSyncEnabled() {
@@ -443,6 +462,11 @@ function updateDriveStatusBadge(meta = getDriveMeta()) {
     return;
   }
 
+  if (state.driveWritesBlocked) {
+    setDriveStatusBadge('Drive: Writes blocked', 'error', state.driveWriteBlockReason || 'Drive write preflight failed.');
+    return;
+  }
+
   const queued = getDriveQueue().length;
 
   if (meta.connection === 'syncing') {
@@ -468,6 +492,25 @@ function updateDriveStatusBadge(meta = getDriveMeta()) {
   );
 }
 
+function setDriveWriteBlock(blocked, reason = '') {
+  const nextBlocked = Boolean(blocked);
+  state.driveWritesBlocked = nextBlocked;
+  state.driveWriteBlockReason = nextBlocked ? String(reason || 'Drive writes are blocked by preflight validation.') : '';
+
+  if (!nextBlocked) {
+    return;
+  }
+
+  const meta = getDriveMeta();
+  meta.connection = 'error';
+  meta.lastError = state.driveWriteBlockReason;
+  setDriveMeta(meta);
+}
+
+function canQueueDriveWrites() {
+  return isDriveSyncEnabled() && !state.driveWritesBlocked;
+}
+
 function hashStringChecksum(content) {
   const text = String(content || '');
   let hash = 5381;
@@ -481,7 +524,10 @@ function hashStringChecksum(content) {
 }
 
 function enqueueDriveOperation(operation) {
-  if (!isDriveSyncEnabled()) return;
+  if (!canQueueDriveWrites()) {
+    updateDriveStatusBadge();
+    return;
+  }
 
   const queue = getDriveQueue();
   if (operation.dedupeKey) {
@@ -505,7 +551,7 @@ function enqueueDriveOperation(operation) {
 }
 
 function queueDriveDraftWrite(draft) {
-  if (!isDriveSyncEnabled() || !draft) return;
+  if (!canQueueDriveWrites() || !draft) return;
 
   const path = getScopedDriveDraftPath();
   const revisions = getDriveRevisions();
@@ -518,19 +564,25 @@ function queueDriveDraftWrite(draft) {
   };
 
   const content = JSON.stringify(payload, null, 2);
+  const checksum = hashStringChecksum(content);
+  if (driveQueuedChecksums.get(path) === checksum) {
+    return;
+  }
+
   enqueueDriveOperation({
     type: 'file.put',
     path,
     content,
     contentType: 'application/json',
-    checksum: hashStringChecksum(content),
+    checksum,
     expectedRevision: revisions[path] || '',
     dedupeKey: `file:${path}`,
   });
+  driveQueuedChecksums.set(path, checksum);
 }
 
 function queueDriveRecentPatientsWrite(snapshots) {
-  if (!isDriveSyncEnabled()) return;
+  if (!canQueueDriveWrites()) return;
 
   const path = getScopedDriveRecentPatientsPath();
   const normalizedSnapshots = mergeSnapshotCollections(snapshots || [], []);
@@ -541,20 +593,53 @@ function queueDriveRecentPatientsWrite(snapshots) {
     snapshots: normalizedSnapshots,
   };
   const content = JSON.stringify(payload, null, 2);
+  const checksum = hashStringChecksum(content);
+  if (driveQueuedChecksums.get(path) === checksum) {
+    return;
+  }
 
   enqueueDriveOperation({
     type: 'file.put',
     path,
     content,
     contentType: 'application/json',
-    checksum: hashStringChecksum(content),
+    checksum,
     expectedRevision: revisions[path] || '',
     dedupeKey: `file:${path}`,
   });
+  driveQueuedChecksums.set(path, checksum);
+}
+
+function queueDriveRuntimeFallbacksWrite(fallbackMap) {
+  if (!canQueueDriveWrites()) return;
+
+  const path = DRIVE_MED_RUNTIME_FALLBACKS_PATH;
+  const revisions = getDriveRevisions();
+  const payload = {
+    savedAt: new Date().toISOString(),
+    source: 'note-builder-client',
+    entries: Object.values(fallbackMap || {}),
+  };
+  const content = JSON.stringify(payload, null, 2);
+  const checksum = hashStringChecksum(content);
+  if (driveQueuedChecksums.get(path) === checksum) {
+    return;
+  }
+
+  enqueueDriveOperation({
+    type: 'file.put',
+    path,
+    content,
+    contentType: 'application/json',
+    checksum,
+    expectedRevision: revisions[path] || '',
+    dedupeKey: `file:${path}`,
+  });
+  driveQueuedChecksums.set(path, checksum);
 }
 
 function queueDriveBackupAppend(snapshotEntry) {
-  if (!isDriveSyncEnabled() || !snapshotEntry) return;
+  if (!canQueueDriveWrites() || !snapshotEntry) return;
 
   enqueueDriveOperation({
     type: 'backup.append',
@@ -571,7 +656,7 @@ function queueDriveBackupAppend(snapshotEntry) {
 }
 
 function scheduleDriveQueueFlush(delayMs = 1100) {
-  if (!isDriveSyncEnabled()) return;
+  if (!canQueueDriveWrites()) return;
 
   if (driveQueueTimer) {
     window.clearTimeout(driveQueueTimer);
@@ -650,6 +735,35 @@ function mergeRecentPatientsConflictPayload(localContent, remoteContent) {
   return {
     content: mergedContent,
     checksum: hashStringChecksum(mergedContent),
+  };
+}
+
+function mergeRuntimeFallbacksConflictPayload(localContent, remoteContent) {
+  const localPayload = parseJsonOrNull(localContent);
+  const remotePayload = parseJsonOrNull(remoteContent);
+  const localEntries = localPayload && Array.isArray(localPayload.entries) ? localPayload.entries : [];
+  const remoteEntries = remotePayload && Array.isArray(remotePayload.entries) ? remotePayload.entries : [];
+
+  const merged = {};
+  [...remoteEntries, ...localEntries].forEach((entry) => {
+    if (!entry || !entry.id) return;
+    const existing = merged[entry.id];
+    const incomingTs = Date.parse(String(entry.source_last_checked || entry.savedAt || '')) || 0;
+    const existingTs = existing ? (Date.parse(String(existing.source_last_checked || existing.savedAt || '')) || 0) : 0;
+    if (!existing || incomingTs >= existingTs) {
+      merged[entry.id] = entry;
+    }
+  });
+
+  const payload = {
+    savedAt: new Date().toISOString(),
+    source: 'note-builder-conflict-merge',
+    entries: Object.values(merged),
+  };
+  const content = JSON.stringify(payload, null, 2);
+  return {
+    content,
+    checksum: hashStringChecksum(content),
   };
 }
 
@@ -732,7 +846,8 @@ async function pullDriveDraft(force = false) {
   applyDraft(remoteDraft);
   syncToggleStates();
   refreshUI(false);
-  saveDraft({ skipDrive: true });
+  state.saveUnlocked = hasValidStartTimeForSaveUnlock();
+  saveDraft({ skipDrive: true, flush: true, force: true });
 
   if (file.revision) {
     const revisions = getDriveRevisions();
@@ -763,6 +878,79 @@ async function pullDriveMedicationCatalog(force = false) {
   }
 
   return applied;
+}
+
+function getEntryTimestamp(entry) {
+  if (!entry || typeof entry !== 'object') return 0;
+  return Date.parse(String(entry.source_last_checked || entry.savedAt || '')) || 0;
+}
+
+function mergeRuntimeFallbackEntries(entries = []) {
+  if (!Array.isArray(entries) || !entries.length) return false;
+
+  let changed = false;
+  const next = { ...runtimeMedicationFallbacks };
+
+  entries.forEach((entry) => {
+    const normalized = normalizeRuntimeFallbackEntry(entry);
+    if (!normalized) return;
+
+    const existing = next[normalized.id];
+    if (!existing) {
+      next[normalized.id] = normalized;
+      changed = true;
+      return;
+    }
+
+    if (getEntryTimestamp(normalized) >= getEntryTimestamp(existing)) {
+      const before = JSON.stringify(existing);
+      const after = JSON.stringify(normalized);
+      if (before !== after) {
+        next[normalized.id] = normalized;
+        changed = true;
+      }
+    }
+  });
+
+  if (changed) {
+    saveRuntimeMedicationFallbackMap(next);
+    rebuildMedicationCatalog();
+  }
+
+  return changed;
+}
+
+async function pullDriveRuntimeFallbacks(force = false) {
+  if (!isDriveSyncEnabled()) return false;
+
+  const response = await callDriveEndpoint('file.get', { path: DRIVE_MED_RUNTIME_FALLBACKS_PATH });
+  const file = response.file || response;
+  const content = typeof file.content === 'string' ? file.content : '';
+  if (!content) return false;
+
+  const payload = parseJsonOrNull(content);
+  if (!payload || !Array.isArray(payload.entries)) return false;
+  const incomingEntries = payload.entries;
+
+  if (!force && !incomingEntries.length) {
+    return false;
+  }
+
+  const changed = mergeRuntimeFallbackEntries(incomingEntries);
+  if (changed) {
+    renderMedicationClassFilters();
+    renderMedicationRows();
+    runMedicationSearch(els.medSearchInput ? els.medSearchInput.value : '');
+    renderMedicationDetail();
+  }
+
+  if (file.revision) {
+    const revisions = getDriveRevisions();
+    revisions[DRIVE_MED_RUNTIME_FALLBACKS_PATH] = String(file.revision);
+    setDriveRevisions(revisions);
+  }
+
+  return changed;
 }
 
 async function pullDriveRecentPatients(force = false) {
@@ -823,10 +1011,12 @@ async function pullDriveManifestAndDraft(force = false) {
       pullDriveDraft(force),
       pullDriveMedicationCatalog(force),
       pullDriveRecentPatients(force),
+      pullDriveRuntimeFallbacks(force),
     ]);
   } else {
     await pullDriveMedicationCatalog(false);
     await pullDriveRecentPatients(false);
+    await pullDriveRuntimeFallbacks(false);
   }
 
   meta.manifestRevision = remoteRevision || meta.manifestRevision;
@@ -840,7 +1030,7 @@ async function pullDriveManifestAndDraft(force = false) {
 }
 
 async function flushDriveQueue() {
-  if (!isDriveSyncEnabled()) return;
+  if (!canQueueDriveWrites()) return;
   if (driveQueueRunning) return;
 
   driveQueueRunning = true;
@@ -874,6 +1064,8 @@ async function flushDriveQueue() {
               merged = mergeDraftConflictPayload(item.content, response.currentContent || '');
             } else if (isRecentPatientsPath(item.path)) {
               merged = mergeRecentPatientsConflictPayload(item.content, response.currentContent || '');
+            } else if (isRuntimeFallbacksPath(item.path)) {
+              merged = mergeRuntimeFallbacksConflictPayload(item.content, response.currentContent || '');
             }
 
             if (!merged) {
@@ -901,6 +1093,10 @@ async function flushDriveQueue() {
           if (response.revision) {
             revisions[item.path] = String(response.revision);
             setDriveRevisions(revisions);
+          }
+
+          if (item.path && item.checksum) {
+            driveQueuedChecksums.set(item.path, item.checksum);
           }
         } else if (item.type === 'backup.append') {
           await callDriveEndpoint('backup.append', { entry: item.entry });
@@ -941,6 +1137,45 @@ async function flushDriveQueue() {
   }
 }
 
+async function verifyDriveRootPreflight() {
+  if (!isDriveSyncEnabled()) return false;
+
+  const config = getDriveConfig();
+  const requiredDriveId = String(config.sharedDriveId || '').trim();
+  if (!requiredDriveId) {
+    setDriveWriteBlock(true, 'Drive preflight failed: sharedDriveId is required for write safety.');
+    updateDriveStatusBadge();
+    return false;
+  }
+
+  const audit = await callDriveEndpoint('root.audit', {
+    sharedDriveId: requiredDriveId,
+    rootFolderName: config.rootFolderName || DRIVE_SYNC_ENTERPRISE_NAME,
+  });
+
+  const canonical = audit && audit.canonicalRoot ? audit.canonicalRoot : null;
+  const canonicalDriveId = canonical ? String(canonical.driveId || '').trim() : '';
+  const canonicalName = canonical ? String(canonical.name || '').trim() : '';
+  const expectedName = String(config.rootFolderName || DRIVE_SYNC_ENTERPRISE_NAME).trim();
+
+  const rootIsValid = Boolean(
+    canonical
+    && canonicalDriveId
+    && canonicalDriveId === requiredDriveId
+    && canonicalName === expectedName,
+  );
+
+  if (!rootIsValid) {
+    const reason = `Drive preflight failed: shared root "${expectedName}" is missing or not bound to shared drive ${requiredDriveId}.`;
+    setDriveWriteBlock(true, reason);
+    updateDriveStatusBadge();
+    return false;
+  }
+
+  setDriveWriteBlock(false, '');
+  return true;
+}
+
 async function runDriveSyncCycle(force = false) {
   if (!isDriveSyncEnabled()) {
     updateDriveStatusBadge();
@@ -957,6 +1192,10 @@ async function runDriveSyncCycle(force = false) {
 
   try {
     await callDriveEndpoint('health', {});
+    const preflightOk = await verifyDriveRootPreflight();
+    if (!preflightOk) {
+      throw new Error(state.driveWriteBlockReason || 'Drive root preflight failed.');
+    }
 
     if (!meta.bootstrapCompleted) {
       const config = getDriveConfig();
@@ -1031,11 +1270,9 @@ function initDriveSync() {
     return;
   }
 
+  setDriveWriteBlock(true, 'Drive preflight pending.');
+  updateDriveStatusBadge();
   startDriveSync();
-
-  if (state.pendingDriveWrites > 0) {
-    scheduleDriveQueueFlush(900);
-  }
 }
 
 function updateBranding() {
@@ -1611,6 +1848,7 @@ function attachTimeControlListeners() {
       }
 
       commitTimeControlValue(id, { validateStrict: true, notify: true });
+      saveDraft({ flush: true });
     };
 
     hourInput.addEventListener('input', (event) => handlePartInput('hour', event));
@@ -2164,9 +2402,7 @@ function queueSnapshot(draft, options = {}) {
   }, 350);
 }
 
-function saveDraft(options = {}) {
-  const { skipDrive = false } = options;
-
+function buildDraftPayload() {
   const draft = {
     savedAt: new Date().toISOString(),
     state: {
@@ -2186,12 +2422,106 @@ function saveDraft(options = {}) {
     draft.inputs[id] = getValue(id);
   });
 
+  return draft;
+}
+
+function getDraftContentHash(draft) {
+  if (!draft || typeof draft !== 'object') return '';
+  const signature = JSON.stringify({ state: draft.state || {}, inputs: draft.inputs || {} });
+  return hashStringChecksum(signature);
+}
+
+function hasValidStartTimeForSaveUnlock() {
+  const startValue = getValue('startTime');
+  return Boolean(parseTimeInputValue(startValue, 'AM'));
+}
+
+function unlockSaveGateIfReady() {
+  if (state.saveUnlocked) return true;
+  if (!hasValidStartTimeForSaveUnlock()) return false;
+  state.saveUnlocked = true;
+  return true;
+}
+
+function persistDraftNow(options = {}) {
+  const { skipDrive = false, force = false } = options;
+  if (!force && !unlockSaveGateIfReady()) {
+    return false;
+  }
+
+  const draft = buildDraftPayload();
+  const contentHash = getDraftContentHash(draft);
+  if (!force && contentHash && latestDraftHash && contentHash === latestDraftHash) {
+    return false;
+  }
+
   setStorageJSON(STORAGE_KEY, draft);
   queueSnapshot(draft, { skipDrive });
 
   if (!skipDrive) {
     queueDriveDraftWrite(draft);
   }
+
+  latestDraftHash = contentHash || latestDraftHash;
+  return true;
+}
+
+function flushDraftPersist(options = {}) {
+  const { skipDrive = false, force = false } = options;
+
+  if (draftPersistTimer) {
+    window.clearTimeout(draftPersistTimer);
+    draftPersistTimer = null;
+  }
+
+  pendingDraftPersistSkipDrive = false;
+  return persistDraftNow({ skipDrive, force });
+}
+
+function scheduleDraftPersist(options = {}) {
+  const { skipDrive = false, force = false } = options;
+  if (!force && !unlockSaveGateIfReady()) {
+    return false;
+  }
+
+  pendingDraftPersistSkipDrive = Boolean(skipDrive);
+
+  if (draftPersistTimer) {
+    window.clearTimeout(draftPersistTimer);
+  }
+
+  draftPersistTimer = window.setTimeout(() => {
+    const skipDriveAtFlush = pendingDraftPersistSkipDrive;
+    draftPersistTimer = null;
+    pendingDraftPersistSkipDrive = false;
+    persistDraftNow({ skipDrive: skipDriveAtFlush, force });
+  }, DRAFT_PERSIST_IDLE_MS);
+
+  return true;
+}
+
+function saveDraft(options = {}) {
+  const {
+    skipDrive = false,
+    flush = false,
+    force = false,
+  } = options;
+
+  if (flush) {
+    return flushDraftPersist({ skipDrive, force });
+  }
+
+  return scheduleDraftPersist({ skipDrive, force });
+}
+
+function clearDraftPersistRuntime() {
+  if (draftPersistTimer) {
+    window.clearTimeout(draftPersistTimer);
+    draftPersistTimer = null;
+  }
+  pendingDraftPersistSkipDrive = false;
+  latestDraftHash = '';
+  state.saveUnlocked = false;
 }
 
 function applyDraft(draft) {
@@ -2290,6 +2620,46 @@ function setTimeNow(targetId) {
   handleFieldMutation(targetId);
 }
 
+function minutesToCanonicalTime(totalMinutes) {
+  const normalized = ((Number(totalMinutes) % (24 * 60)) + (24 * 60)) % (24 * 60);
+  const hours24 = Math.floor(normalized / 60);
+  const minutes = normalized % 60;
+  return format12Hour(hours24, minutes);
+}
+
+function addMinutesToTimeField(targetId, deltaMinutes) {
+  const increment = Number(deltaMinutes);
+  if (!Number.isFinite(increment) || increment <= 0) {
+    return false;
+  }
+
+  const existingMinutes = toMinutesFromMidnight(getValue(targetId));
+  const now = new Date();
+  const baseMinutes = existingMinutes == null
+    ? (now.getHours() * 60) + now.getMinutes()
+    : existingMinutes;
+
+  const nextValue = minutesToCanonicalTime(baseMinutes + Math.floor(increment));
+  setValue(targetId, nextValue);
+  handleFieldMutation(targetId);
+  return true;
+}
+
+function applyDocEndCustomIncrement() {
+  if (!els.docEndPlusMinutes) return;
+
+  const raw = String(els.docEndPlusMinutes.value || '').trim();
+  const parsed = Number.parseInt(raw, 10);
+  const isValid = Number.isInteger(parsed) && parsed > 0 && parsed <= 180;
+
+  els.docEndPlusMinutes.classList.toggle('now-plus-input-invalid', !isValid && raw !== '');
+  if (!isValid) {
+    return;
+  }
+
+  addMinutesToTimeField('docEnd', parsed);
+}
+
 function setFollowupWeeks(weeks) {
   state.followupMode = 'scheduled';
   state.selectedInterval = String(weeks);
@@ -2377,6 +2747,8 @@ function refreshUI(persist = true) {
 }
 
 function clearAll() {
+  const hadPersistedDraft = Boolean(localStorage.getItem(STORAGE_KEY));
+
   inputIds.forEach((id) => setValue(id, ''));
 
   state.currentModality = '';
@@ -2398,8 +2770,9 @@ function clearAll() {
   }
 
   localStorage.removeItem(STORAGE_KEY);
+  clearDraftPersistRuntime();
 
-  if (isDriveSyncEnabled()) {
+  if (isDriveSyncEnabled() && hadPersistedDraft) {
     const clearedDraft = {
       savedAt: new Date().toISOString(),
       state: {
@@ -2457,6 +2830,10 @@ function handleFieldMutation(id) {
     updateTherapyButtons();
   }
 
+  if (id === 'startTime') {
+    unlockSaveGateIfReady();
+  }
+
   if (id === 'currentModality') {
     state.currentModality = getValue('currentModality');
   }
@@ -2481,6 +2858,9 @@ function attachInputListeners() {
 
     element.addEventListener('input', syncFieldState);
     element.addEventListener('change', syncFieldState);
+    element.addEventListener('blur', () => {
+      saveDraft({ flush: true });
+    });
   });
 }
 
@@ -2543,6 +2923,103 @@ function getRuntimeOverrides() {
 
 function saveRuntimeOverrides(overrides) {
   setStorageJSON(MED_RUNTIME_OVERRIDES_KEY, overrides);
+}
+
+function slugifyMedicationToken(value) {
+  return String(value || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function normalizeRuntimeFallbackEntry(entry) {
+  if (!entry || typeof entry !== 'object') return null;
+  const id = String(entry.id || '').trim();
+  const genericName = String(entry.generic_name || '').trim();
+  if (!id || !genericName) return null;
+
+  const formulations = Array.isArray(entry.formulations) ? entry.formulations : [];
+  const normalizedForms = formulations.length ? formulations : [{
+    formulation_id: `${id}-fallback-oral`,
+    label: 'Fallback oral',
+    route: 'oral',
+    dosage_form: 'unknown',
+    strength_examples: [],
+    common_adult_psych_dosing: {
+      start: 'Verify official source.',
+      target: 'Verify official source.',
+      max: 'Verify official source.',
+    },
+    titration_notes: ['No source-verified psych dosing summary yet.'],
+    formulation_specific_pearls: [],
+    formulation_specific_interactions: [],
+    formulation_specific_side_effect_notes: [],
+    administration_notes: [],
+    source_links: [],
+    active: true,
+  }];
+
+  return {
+    id,
+    generic_name: genericName,
+    brand_names: Array.isArray(entry.brand_names) ? entry.brand_names.filter(Boolean).slice(0, 16) : [],
+    aliases: Array.isArray(entry.aliases) ? entry.aliases.filter(Boolean).slice(0, 24) : [],
+    psych_class: String(entry.psych_class || 'Unclassified').trim() || 'Unclassified',
+    active: entry.active !== false,
+    newer_brand: Boolean(entry.newer_brand),
+    fda_psych_uses: Array.isArray(entry.fda_psych_uses) ? entry.fda_psych_uses.filter(Boolean).slice(0, 12) : [],
+    off_label_psych_uses: Array.isArray(entry.off_label_psych_uses) ? entry.off_label_psych_uses.filter(Boolean).slice(0, 12) : [],
+    moa_summary: String(entry.moa_summary || 'No summary available yet.'),
+    common_side_effects: Array.isArray(entry.common_side_effects) ? entry.common_side_effects.filter(Boolean).slice(0, 20) : [],
+    important_risks: Array.isArray(entry.important_risks) ? entry.important_risks.filter(Boolean).slice(0, 16) : [],
+    psych_interactions: Array.isArray(entry.psych_interactions) ? entry.psych_interactions.filter(Boolean).slice(0, 16) : [],
+    clinical_pearls: Array.isArray(entry.clinical_pearls) ? entry.clinical_pearls.filter(Boolean).slice(0, 16) : [],
+    source_links: Array.isArray(entry.source_links) ? entry.source_links.filter(Boolean).slice(0, 20) : [],
+    source_last_checked: String(entry.source_last_checked || new Date().toISOString()),
+    editorial_last_reviewed: entry.editorial_last_reviewed || null,
+    content_review_status: String(entry.content_review_status || 'source scored'),
+    missing_data_flags: Array.isArray(entry.missing_data_flags) ? entry.missing_data_flags.filter(Boolean).slice(0, 20) : [],
+    reliability_score: Number.isFinite(Number(entry.reliability_score)) ? Number(entry.reliability_score) : 28,
+    reliability_tier: String(entry.reliability_tier || 'low').toLowerCase(),
+    reliability_sources: Array.isArray(entry.reliability_sources) ? entry.reliability_sources.filter(Boolean).slice(0, 10) : ['openFDA', 'RxNorm'],
+    formulations: normalizedForms,
+  };
+}
+
+function getRuntimeMedicationFallbackMapFromStorage() {
+  const raw = getStorageJSON(MED_RUNTIME_FALLBACKS_KEY, {});
+  if (!raw || typeof raw !== 'object') return {};
+
+  const normalized = {};
+  Object.values(raw).forEach((entry) => {
+    const item = normalizeRuntimeFallbackEntry(entry);
+    if (item) normalized[item.id] = item;
+  });
+  return normalized;
+}
+
+function saveRuntimeMedicationFallbackMap(map) {
+  const payload = {};
+  Object.values(map || {}).forEach((entry) => {
+    const normalized = normalizeRuntimeFallbackEntry(entry);
+    if (normalized) payload[normalized.id] = normalized;
+  });
+  runtimeMedicationFallbacks = payload;
+  setStorageJSON(MED_RUNTIME_FALLBACKS_KEY, runtimeMedicationFallbacks);
+}
+
+function rebuildMedicationCatalog() {
+  const merged = medicationCatalogBase.slice();
+  const seen = new Set(merged.map((entry) => entry.id));
+
+  Object.values(runtimeMedicationFallbacks).forEach((entry) => {
+    if (!entry || !entry.id) return;
+    if (seen.has(entry.id)) return;
+    merged.push(entry);
+    seen.add(entry.id);
+  });
+
+  medicationCatalog = merged;
 }
 
 function mergeMedicationWithRuntimeOverrides(medication) {
@@ -2878,6 +3355,16 @@ function renderMedicationResults() {
       const label = activeQuery ? `Request "${activeQuery}"` : 'Request this medication';
       els.medRequestBtn.textContent = label;
     }
+
+    if (els.medFetchFallbackBtn) {
+      const canFetch = Boolean(activeQuery) && !medicationCatalogLoading;
+      els.medFetchFallbackBtn.disabled = !canFetch || medicationFallbackFetchRunning;
+      els.medFetchFallbackBtn.textContent = medicationFallbackFetchRunning
+        ? 'Fetching fallback...'
+        : activeQuery
+          ? `Fetch fallback "${activeQuery}"`
+          : 'Fetch low-confidence fallback';
+    }
     return;
   }
 
@@ -3191,6 +3678,231 @@ function exportMissingMedicationRequests() {
   URL.revokeObjectURL(url);
 }
 
+function listOrEmpty(value) {
+  return Array.isArray(value) ? value : [];
+}
+
+function splitSentences(text, maxItems = 6) {
+  const cleaned = String(text || '').replace(/\s+/g, ' ').trim();
+  if (!cleaned) return [];
+  return cleaned
+    .split(/(?<=[.!?])\s+/)
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .slice(0, maxItems);
+}
+
+async function fetchJsonWithTimeout(url, timeoutMs = 12000) {
+  const controller = new AbortController();
+  const timer = window.setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    const response = await fetch(url, {
+      method: 'GET',
+      cache: 'no-store',
+      signal: controller.signal,
+    });
+    if (!response.ok) {
+      throw new Error(`Request failed (${response.status})`);
+    }
+    return response.json();
+  } finally {
+    window.clearTimeout(timer);
+  }
+}
+
+function scoreOpenFdaRecord(record) {
+  if (!record || typeof record !== 'object') return -1;
+  return (listOrEmpty(record.dosage_and_administration).length * 4)
+    + (listOrEmpty(record.indications_and_usage).length * 3)
+    + (listOrEmpty(record.adverse_reactions).length * 2)
+    + listOrEmpty(record.drug_interactions).length;
+}
+
+function buildFallbackFormulations(fallbackId, dosageForms = [], routes = []) {
+  const safeDosageForms = dosageForms.length ? dosageForms : ['unknown formulation'];
+  const safeRoutes = routes.length ? routes : ['oral'];
+  const forms = [];
+
+  safeDosageForms.slice(0, 3).forEach((dosageForm, doseIndex) => {
+    safeRoutes.slice(0, 3).forEach((route, routeIndex) => {
+      forms.push({
+        formulation_id: `${fallbackId}-${slugifyMedicationToken(dosageForm)}-${slugifyMedicationToken(route)}-${doseIndex}-${routeIndex}`,
+        label: `${String(dosageForm || 'Formulation').trim()} (${String(route || 'oral').trim()})`,
+        route: String(route || 'oral').trim() || 'oral',
+        dosage_form: String(dosageForm || 'unknown').trim() || 'unknown',
+        strength_examples: [],
+        common_adult_psych_dosing: {
+          start: 'Verify official source.',
+          target: 'Verify official source.',
+          max: 'Verify official source.',
+        },
+        titration_notes: ['No source-verified psych dosing summary yet.'],
+        formulation_specific_pearls: [],
+        formulation_specific_interactions: [],
+        formulation_specific_side_effect_notes: [],
+        administration_notes: [],
+        source_links: [],
+        active: true,
+      });
+    });
+  });
+
+  return forms.length ? forms : [{
+    formulation_id: `${fallbackId}-fallback-oral`,
+    label: 'Fallback oral',
+    route: 'oral',
+    dosage_form: 'unknown',
+    strength_examples: [],
+    common_adult_psych_dosing: {
+      start: 'Verify official source.',
+      target: 'Verify official source.',
+      max: 'Verify official source.',
+    },
+    titration_notes: ['No source-verified psych dosing summary yet.'],
+    formulation_specific_pearls: [],
+    formulation_specific_interactions: [],
+    formulation_specific_side_effect_notes: [],
+    administration_notes: [],
+    source_links: [],
+    active: true,
+  }];
+}
+
+async function fetchMedicationFallbackRecord(rawTerm) {
+  const query = normalizeMedicationQueryToken(rawTerm);
+  if (!query) {
+    throw new Error('Medication query is required.');
+  }
+
+  const searchTerm = encodeURIComponent(
+    `openfda.generic_name:"${query}" OR openfda.brand_name:"${query}" OR openfda.substance_name:"${query}"`,
+  );
+  const openFdaUrl = `https://api.fda.gov/drug/label.json?search=${searchTerm}&limit=4`;
+  const openFdaPayload = await fetchJsonWithTimeout(openFdaUrl, 12000);
+  const openFdaResults = listOrEmpty(openFdaPayload && openFdaPayload.results);
+
+  const bestOpenFda = openFdaResults
+    .slice()
+    .sort((a, b) => scoreOpenFdaRecord(b) - scoreOpenFdaRecord(a))[0];
+
+  if (!bestOpenFda) {
+    throw new Error('No source match found for fallback fetch.');
+  }
+
+  const openfda = bestOpenFda.openfda || {};
+  const rxnormSeed = String(
+    (Array.isArray(openfda.generic_name) && openfda.generic_name[0])
+    || (Array.isArray(openfda.substance_name) && openfda.substance_name[0])
+    || query,
+  ).trim();
+
+  const rxNormLookupUrl = `https://rxnav.nlm.nih.gov/REST/rxcui.json?name=${encodeURIComponent(rxnormSeed)}&search=2`;
+  const rxNormLookup = await fetchJsonWithTimeout(rxNormLookupUrl, 10000).catch(() => ({}));
+  const rxcui = listOrEmpty(rxNormLookup && rxNormLookup.idGroup && rxNormLookup.idGroup.rxnormId)[0] || '';
+
+  let rxNormPropertiesUrl = '';
+  let rxNormProperties = null;
+  if (rxcui) {
+    rxNormPropertiesUrl = `https://rxnav.nlm.nih.gov/REST/rxcui/${encodeURIComponent(rxcui)}/properties.json`;
+    const payload = await fetchJsonWithTimeout(rxNormPropertiesUrl, 10000).catch(() => null);
+    rxNormProperties = payload && payload.properties ? payload.properties : null;
+  }
+
+  const genericName = String(
+    (Array.isArray(openfda.generic_name) && openfda.generic_name[0])
+    || (rxNormProperties && rxNormProperties.name)
+    || query,
+  ).trim();
+
+  const fallbackId = `fallback-${slugifyMedicationToken(genericName || query)}`;
+  const brandNames = Array.from(new Set([
+    ...listOrEmpty(openfda.brand_name),
+    ...listOrEmpty(openfda.product_ndc),
+  ].map((value) => String(value || '').trim()).filter(Boolean))).slice(0, 16);
+  const aliases = Array.from(new Set([
+    ...brandNames,
+    ...listOrEmpty(openfda.substance_name).map((value) => String(value || '').trim()),
+    String(query),
+  ].filter(Boolean))).slice(0, 24);
+
+  const dosageForms = listOrEmpty(openfda.dosage_form).map((value) => String(value || '').trim()).filter(Boolean);
+  const routes = listOrEmpty(openfda.route).map((value) => String(value || '').trim()).filter(Boolean);
+  const indications = splitSentences(listOrEmpty(bestOpenFda.indications_and_usage).join(' '), 8);
+  const reactions = splitSentences(listOrEmpty(bestOpenFda.adverse_reactions).join(' '), 8);
+  const interactions = splitSentences(listOrEmpty(bestOpenFda.drug_interactions).join(' '), 8);
+  const warnings = splitSentences([
+    ...listOrEmpty(bestOpenFda.boxed_warning),
+    ...listOrEmpty(bestOpenFda.warnings),
+  ].join(' '), 8);
+  const mechanism = splitSentences(listOrEmpty(bestOpenFda.mechanism_of_action).join(' '), 2).join(' ') || 'No summary available yet.';
+
+  return normalizeRuntimeFallbackEntry({
+    id: fallbackId,
+    generic_name: genericName || query,
+    brand_names: brandNames,
+    aliases,
+    psych_class: 'Unclassified',
+    active: true,
+    newer_brand: false,
+    fda_psych_uses: indications,
+    off_label_psych_uses: [],
+    moa_summary: mechanism,
+    common_side_effects: reactions,
+    important_risks: warnings,
+    psych_interactions: interactions,
+    clinical_pearls: ['Low-confidence runtime fallback. Verify with official labeling before clinical use.'],
+    source_links: [openFdaUrl, rxNormLookupUrl, rxNormPropertiesUrl].filter(Boolean),
+    source_last_checked: new Date().toISOString(),
+    editorial_last_reviewed: null,
+    content_review_status: 'source scored',
+    missing_data_flags: ['curated psych review pending', 'psych dosing verification required'],
+    reliability_score: 28,
+    reliability_tier: 'low',
+    reliability_sources: ['openFDA', 'RxNorm'],
+    formulations: buildFallbackFormulations(fallbackId, dosageForms, routes),
+  });
+}
+
+function upsertRuntimeFallbackEntry(entry, options = {}) {
+  const { syncDrive = true } = options;
+  const normalized = normalizeRuntimeFallbackEntry(entry);
+  if (!normalized) return false;
+
+  const next = { ...runtimeMedicationFallbacks, [normalized.id]: normalized };
+  saveRuntimeMedicationFallbackMap(next);
+  rebuildMedicationCatalog();
+
+  renderMedicationClassFilters();
+  renderMedicationRows();
+  runMedicationSearch(els.medSearchInput ? els.medSearchInput.value : '');
+  setMedicationSelection(normalized.id);
+
+  if (syncDrive) {
+    queueDriveRuntimeFallbacksWrite(runtimeMedicationFallbacks);
+    scheduleDriveQueueFlush(250);
+  }
+
+  return true;
+}
+
+async function fetchAndPersistMedicationFallback(rawTerm) {
+  if (medicationFallbackFetchRunning) return;
+  medicationFallbackFetchRunning = true;
+  renderMedicationResults();
+
+  try {
+    const fallback = await fetchMedicationFallbackRecord(rawTerm);
+    const stored = upsertRuntimeFallbackEntry(fallback, { syncDrive: true });
+    if (!stored) {
+      throw new Error('Fallback normalization failed.');
+    }
+  } finally {
+    medicationFallbackFetchRunning = false;
+    renderMedicationResults();
+  }
+}
+
 function focusMedicationSearch() {
   if (!els.medSearchInput) return;
   window.setTimeout(() => {
@@ -3339,6 +4051,7 @@ async function ensureMedicationCatalogReady(options = {}) {
       if (preferDrive && isDriveSyncEnabled()) {
         try {
           loaded = await pullDriveMedicationCatalog(true);
+          await pullDriveRuntimeFallbacks(true);
         } catch (error) {
           loaded = false;
         }
@@ -3372,7 +4085,8 @@ function applyMedicationCatalogPayload(payload, options = {}) {
     return false;
   }
 
-  medicationCatalog = medications;
+  medicationCatalogBase = medications;
+  rebuildMedicationCatalog();
   if (generatedAt) {
     medicationCatalogGeneratedAt = generatedAt;
   }
@@ -3394,7 +4108,8 @@ async function loadMedicationCatalog() {
   if (typeof fetch !== 'function') {
     medicationCatalogLoadError = true;
     medicationCatalogLoading = false;
-    medicationCatalog = [];
+    medicationCatalogBase = [];
+    rebuildMedicationCatalog();
     renderMedicationClassFilters();
     renderMedicationRows();
     runMedicationSearch('');
@@ -3423,6 +4138,7 @@ async function loadMedicationCatalog() {
     if (isDriveSyncEnabled()) {
       try {
         const pulled = await pullDriveMedicationCatalog(true);
+        await pullDriveRuntimeFallbacks(true);
         if (pulled || medicationCatalog.length) {
           medicationCatalogLoadError = false;
           medicationCatalogLoading = false;
@@ -3437,7 +4153,8 @@ async function loadMedicationCatalog() {
     console.error('Unable to load medication catalog:', error);
     medicationCatalogLoadError = true;
     medicationCatalogLoading = false;
-    medicationCatalog = [];
+    medicationCatalogBase = [];
+    rebuildMedicationCatalog();
     renderMedicationClassFilters();
     renderMedicationRows();
     runMedicationSearch('');
@@ -3627,6 +4344,18 @@ function attachMedicationListeners() {
     });
   }
 
+  if (els.medFetchFallbackBtn) {
+    els.medFetchFallbackBtn.addEventListener('click', async () => {
+      const query = els.medSearchInput ? els.medSearchInput.value : '';
+      try {
+        await fetchAndPersistMedicationFallback(query);
+      } catch (error) {
+        console.error('Unable to fetch medication fallback:', error);
+        window.alert('Fallback lookup failed for this medication query.');
+      }
+    });
+  }
+
   if (els.medExportMissingBtn) {
     els.medExportMissingBtn.addEventListener('click', exportMissingMedicationRequests);
   }
@@ -3807,6 +4536,37 @@ function attachEventListeners() {
     btn.addEventListener('click', () => setTimeNow(btn.dataset.target));
   });
 
+  document.querySelectorAll('.nowPlusBtn[data-plus-minutes]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const target = btn.closest('[data-now-plus-target]')?.dataset.nowPlusTarget || 'docEnd';
+      const minutes = Number.parseInt(btn.dataset.plusMinutes || '', 10);
+      addMinutesToTimeField(target, minutes);
+    });
+  });
+
+  document.querySelectorAll('.nowPlusApplyBtn[data-plus-apply]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.plusApply;
+      if (target === 'docEnd') {
+        applyDocEndCustomIncrement();
+      }
+    });
+  });
+
+  if (els.docEndPlusMinutes) {
+    els.docEndPlusMinutes.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter') return;
+      event.preventDefault();
+      applyDocEndCustomIncrement();
+    });
+    els.docEndPlusMinutes.addEventListener('input', () => {
+      if (!els.docEndPlusMinutes) return;
+      if (!String(els.docEndPlusMinutes.value || '').trim()) {
+        els.docEndPlusMinutes.classList.remove('now-plus-input-invalid');
+      }
+    });
+  }
+
   document.querySelectorAll('.interval-btn').forEach((btn) => {
     btn.addEventListener('click', () => {
       if (btn.dataset.followupMode === 'prn') {
@@ -3858,6 +4618,17 @@ function attachEventListeners() {
 
   window.addEventListener('scroll', () => scheduleTopbarStateUpdate(false), { passive: true });
   window.addEventListener('resize', () => scheduleTopbarStateUpdate(true));
+  window.addEventListener('beforeunload', () => {
+    saveDraft({ flush: true });
+  });
+  window.addEventListener('pagehide', () => {
+    saveDraft({ flush: true });
+  });
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') {
+      saveDraft({ flush: true });
+    }
+  });
 }
 
 function registerServiceWorker() {
@@ -3871,6 +4642,8 @@ function registerServiceWorker() {
 }
 
 function initMedicationReference() {
+  runtimeMedicationFallbacks = getRuntimeMedicationFallbackMapFromStorage();
+  rebuildMedicationCatalog();
   renderMedicationClassFilters();
   renderMedicationRows();
   updateMissingRequestCount();
@@ -3900,6 +4673,11 @@ function init() {
 
   syncToggleStates();
   refreshUI(false);
+  state.saveUnlocked = hasValidStartTimeForSaveUnlock();
+
+  if (loadedFrom !== 'none') {
+    latestDraftHash = getDraftContentHash(buildDraftPayload());
+  }
 
   if (loadedFrom === 'snapshot') {
     saveDraft();
