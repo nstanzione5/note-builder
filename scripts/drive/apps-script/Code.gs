@@ -879,10 +879,7 @@ function getRootFolderForRead_(sharedDriveId, rootFolderName) {
   }
 
   const escaped = escapeQueryText_(rootFolderName);
-  let query = "trashed=false and mimeType='application/vnd.google-apps.folder' and title='" + escaped + "'";
-  if (sharedDriveId) {
-    query += " and '" + sharedDriveId + "' in parents";
-  }
+  const query = "trashed=false and mimeType='application/vnd.google-apps.folder' and title='" + escaped + "'";
 
   const listed = listFilesSafe_({
     q: query,
@@ -908,10 +905,7 @@ function getOrCreateRootFolder_(sharedDriveId, rootFolderName) {
   }
 
   const escaped = escapeQueryText_(rootFolderName);
-  let query = "trashed=false and mimeType='application/vnd.google-apps.folder' and title='" + escaped + "'";
-  if (sharedDriveId) {
-    query += " and '" + sharedDriveId + "' in parents";
-  }
+  const query = "trashed=false and mimeType='application/vnd.google-apps.folder' and title='" + escaped + "'";
 
   const params = {
     q: query,
@@ -1297,7 +1291,8 @@ function fileBelongsToSharedDrive_(file, sharedDriveId) {
   // Some API variants omit driveId in responses; fall back to parent check if available.
   const parents = (file && file.parents) ? file.parents : [];
   if (!parents.length) {
-    return false;
+    // When metadata is sparse (no driveId + no parents), treat as unknown and keep cached IDs.
+    return true;
   }
 
   return fileHasParent_(file, normalizedDriveId);
