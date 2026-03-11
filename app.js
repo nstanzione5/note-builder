@@ -186,7 +186,7 @@ const brandConfig = {
 
 const STORAGE_KEY = 'noteBuilderDraft_v1';
 const SNAPSHOT_KEY = 'noteBuilderSnapshots_v1';
-const MAX_SNAPSHOTS = 3;
+const MAX_SNAPSHOTS = 10;
 const CONDENSE_START_Y = 36;
 const CONDENSE_END_Y = 210;
 const CONDENSE_CLASS_ENTER = 0.86;
@@ -442,6 +442,70 @@ function driveUserKeyFromEmail(email) {
     .replace(/\./g, '-')
     .replace(/-+/g, '-')
     .replace(/^-|-$/g, '');
+}
+
+function getScopedStorageUserKey() {
+  const config = getDriveConfig();
+  const effectiveEmail = String(
+    state.driveResolvedUserEmail
+    || config.userEmail
+    || getStorageJSON(DRIVE_RESOLVED_USER_EMAIL_KEY, '')
+    || '',
+  ).trim().toLowerCase();
+  return driveUserKeyFromEmail(effectiveEmail) || 'anonymous';
+}
+
+function getDraftStorageKey() {
+  return `${STORAGE_KEY}:${getScopedStorageUserKey()}`;
+}
+
+function getSnapshotStorageKey() {
+  return `${SNAPSHOT_KEY}:${getScopedStorageUserKey()}`;
+}
+
+function migrateLegacyDraftStorageToScoped() {
+  const scopedDraftKey = getDraftStorageKey();
+  const scopedSnapshotKey = getSnapshotStorageKey();
+  const legacyDraft = localStorage.getItem(STORAGE_KEY);
+  const legacySnapshots = localStorage.getItem(SNAPSHOT_KEY);
+  if (!legacyDraft && !legacySnapshots) {
+    return;
+  }
+
+  if (legacyDraft && !localStorage.getItem(scopedDraftKey)) {
+    localStorage.setItem(scopedDraftKey, legacyDraft);
+  }
+  if (legacySnapshots && !localStorage.getItem(scopedSnapshotKey)) {
+    localStorage.setItem(scopedSnapshotKey, legacySnapshots);
+  }
+
+  localStorage.removeItem(STORAGE_KEY);
+  localStorage.removeItem(SNAPSHOT_KEY);
+}
+
+function migrateAnonymousScopedStorageToResolvedUser() {
+  const resolvedUserKey = getScopedStorageUserKey();
+  if (!resolvedUserKey || resolvedUserKey === 'anonymous') {
+    return;
+  }
+
+  const anonymousDraftKey = `${STORAGE_KEY}:anonymous`;
+  const anonymousSnapshotKey = `${SNAPSHOT_KEY}:anonymous`;
+  const resolvedDraftKey = getDraftStorageKey();
+  const resolvedSnapshotKey = getSnapshotStorageKey();
+
+  const anonymousDraft = localStorage.getItem(anonymousDraftKey);
+  if (anonymousDraft && !localStorage.getItem(resolvedDraftKey)) {
+    localStorage.setItem(resolvedDraftKey, anonymousDraft);
+  }
+
+  const anonymousSnapshots = localStorage.getItem(anonymousSnapshotKey);
+  if (anonymousSnapshots && !localStorage.getItem(resolvedSnapshotKey)) {
+    localStorage.setItem(resolvedSnapshotKey, anonymousSnapshots);
+  }
+
+  localStorage.removeItem(anonymousDraftKey);
+  localStorage.removeItem(anonymousSnapshotKey);
 }
 
 function getScopedDriveDraftPath() {
@@ -721,7 +785,7 @@ function handleDriveRecovered() {
   const canPublish = state.saveUnlocked || hasValidStartTimeForSaveUnlock();
   if (!canPublish) return;
 
-  const localDraft = getStorageJSON(STORAGE_KEY, null);
+  const localDraft = getStorageJSON(getDraftStorageKey(), null);
   if (localDraft && typeof localDraft === 'object') {
     queueDriveDraftWrite(localDraft);
   }
@@ -1187,7 +1251,7 @@ async function pullDriveDraft(force = false) {
   const remoteDraft = payload.draft || payload;
   if (!remoteDraft || typeof remoteDraft !== 'object' || !remoteDraft.inputs) return false;
 
-  const localDraft = getStorageJSON(STORAGE_KEY, null);
+  const localDraft = getStorageJSON(getDraftStorageKey(), null);
   const localSavedAt = localDraft && localDraft.savedAt ? Date.parse(localDraft.savedAt) : 0;
   const remoteSavedAt = payload.savedAt ? Date.parse(payload.savedAt) : 0;
 
@@ -1790,6 +1854,8 @@ async function runDriveSyncCycle(force = false) {
       setDriveQueue([]);
       setDriveRevisions({});
       driveQueuedChecksums.clear();
+      migrateAnonymousScopedStorageToResolvedUser();
+      renderBackupHistory();
     }
 
     const preflightStatus = String(healthState.preflightStatus || '').trim();
@@ -2875,14 +2941,14 @@ function updateFollowupSchedulingUI() {
 }
 
 function loadSnapshotsFromStorage() {
-  const parsed = getStorageJSON(SNAPSHOT_KEY, []);
+  const parsed = getStorageJSON(getSnapshotStorageKey(), []);
   if (!Array.isArray(parsed)) return [];
   return mergeSnapshotCollections(parsed, []);
 }
 
 function saveSnapshotsToStorage(snapshots) {
   const normalized = mergeSnapshotCollections(snapshots, []);
-  setStorageJSON(SNAPSHOT_KEY, normalized);
+  setStorageJSON(getSnapshotStorageKey(), normalized);
 }
 
 function formatSnapshotLabel(entry) {
@@ -3097,7 +3163,7 @@ function persistDraftNow(options = {}) {
     return false;
   }
 
-  setStorageJSON(STORAGE_KEY, draft);
+  setStorageJSON(getDraftStorageKey(), draft);
   queueSnapshot(draft, { skipDrive });
 
   if (!skipDrive) {
@@ -3202,7 +3268,8 @@ function applyDraft(draft) {
 
 function loadInitialData() {
   try {
-    const rawDraft = localStorage.getItem(STORAGE_KEY);
+    migrateLegacyDraftStorageToScoped();
+    const rawDraft = localStorage.getItem(getDraftStorageKey());
 
     if (rawDraft) {
       applyDraft(JSON.parse(rawDraft));
@@ -3389,7 +3456,7 @@ function refreshUI(persist = true) {
 }
 
 function clearAll() {
-  const hadPersistedDraft = Boolean(localStorage.getItem(STORAGE_KEY));
+  const hadPersistedDraft = Boolean(localStorage.getItem(getDraftStorageKey()));
 
   inputIds.forEach((id) => setValue(id, ''));
 
@@ -3411,7 +3478,7 @@ function clearAll() {
     els.scriptToggle.checked = false;
   }
 
-  localStorage.removeItem(STORAGE_KEY);
+  localStorage.removeItem(getDraftStorageKey());
   clearDraftPersistRuntime();
   pendingRecentPatientsForDrive = null;
   if (recentPatientsDriveTimer) {

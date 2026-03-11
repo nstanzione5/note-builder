@@ -28,6 +28,8 @@ const PREFLIGHT_STATUS = {
   VERSION_MISMATCH: 'version_mismatch',
 };
 const CLEANUP_SNAPSHOT_DIR = 'backups/cleanup-snapshots';
+const BACKUP_NOTES_RETENTION_PER_USER = 200;
+const CLEANUP_SNAPSHOT_RETENTION = 40;
 const DEFAULT_ALLOWED_USER_EMAILS = [
   'nick@astrapsychiatry.com',
   'kris@astrapsychiatry.com',
@@ -603,6 +605,7 @@ function handleCleanupSnapshot_(payload) {
     mimeType: 'application/json',
     parents: [{ id: snapshotFolderId }],
   }, Utilities.newBlob(JSON.stringify(snapshotPayload, null, 2), 'application/json', snapshotName), sharedDriveId, root.id);
+  const retention = pruneJsonFilesInFolder_(snapshotFolderId, sharedDriveId, CLEANUP_SNAPSHOT_RETENTION);
 
   return {
     mode: 'snapshot',
@@ -614,6 +617,12 @@ function handleCleanupSnapshot_(payload) {
     snapshotPath: CLEANUP_SNAPSHOT_DIR + '/' + snapshotName,
     fileCount: files.filter(function (entry) { return entry.exists; }).length,
     missingCount: files.filter(function (entry) { return !entry.exists; }).length,
+    retention: {
+      keep: CLEANUP_SNAPSHOT_RETENTION,
+      scanned: retention.scannedCount,
+      trashed: retention.trashedCount,
+      errors: retention.errorCount,
+    },
   };
 }
 
@@ -1346,9 +1355,14 @@ function handleBackupAppend_(payload) {
   const entry = payload.entry || {};
   const sharedDriveId = resolveSharedDriveId_(payload);
   const rootFolderName = normalizeText_(payload.rootFolderName || APP_ROOT_DEFAULT) || APP_ROOT_DEFAULT;
+  const requestedBy = resolveAllowlistedUserEmail_(payload);
+  const userKey = userPathKeyFromEmail_(requestedBy);
+  if (!userKey) {
+    throw new Error('Unable to derive user key for backup append.');
+  }
   const root = getOrCreateRootFolder_(sharedDriveId, rootFolderName);
-
-  const backupFolderId = ensureFolderPath_(root.id, 'backups/notes', sharedDriveId, []);
+  const backupFolderPath = 'backups/notes/users/' + userKey;
+  const backupFolderId = ensureFolderPath_(root.id, backupFolderPath, sharedDriveId, []);
 
   const timestamp = Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyyMMdd-HHmmss');
   const safeLabel = sanitizeFileToken_(String(entry.label || 'note-backup')).slice(0, 42);
@@ -1359,22 +1373,36 @@ function handleBackupAppend_(payload) {
     mimeType: 'application/json',
     parents: [{ id: backupFolderId }],
   }, Utilities.newBlob(JSON.stringify(entry, null, 2), 'application/json', fileName), sharedDriveId, root.id);
+  const retention = pruneJsonFilesInFolder_(backupFolderId, sharedDriveId, BACKUP_NOTES_RETENTION_PER_USER);
 
   return {
     backupId: file.id,
     backupFile: file.title || file.name || fileName,
+    backupFolderPath: backupFolderPath,
+    retention: {
+      keep: BACKUP_NOTES_RETENTION_PER_USER,
+      scanned: retention.scannedCount,
+      trashed: retention.trashedCount,
+      errors: retention.errorCount,
+    },
   };
 }
 
 function handleBackupList_(payload) {
   const sharedDriveId = resolveSharedDriveId_(payload);
   const rootFolderName = normalizeText_(payload.rootFolderName || APP_ROOT_DEFAULT) || APP_ROOT_DEFAULT;
+  const requestedBy = resolveAllowlistedUserEmail_(payload);
+  const userKey = userPathKeyFromEmail_(requestedBy);
+  if (!userKey) {
+    return { backups: [] };
+  }
   const root = getRootFolderForRead_(sharedDriveId, rootFolderName);
   if (!root) {
     return { backups: [] };
   }
 
-  const backupFolderId = findFolderPath_(root.id, 'backups/notes', sharedDriveId);
+  const backupFolderPath = 'backups/notes/users/' + userKey;
+  const backupFolderId = findFolderPath_(root.id, backupFolderPath, sharedDriveId);
   if (!backupFolderId) {
     return { backups: [] };
   }
@@ -1396,7 +1424,52 @@ function handleBackupList_(payload) {
     };
   });
 
-  return { backups: items };
+  return {
+    backups: items,
+    backupFolderPath: backupFolderPath,
+  };
+}
+
+function pruneJsonFilesInFolder_(folderId, sharedDriveId, keepCount) {
+  const safeFolderId = normalizeText_(folderId || '');
+  const keep = Math.max(1, Math.min(5000, Number(keepCount || 0) || 0));
+  if (!safeFolderId || !keep) {
+    return {
+      keep: keep,
+      scannedCount: 0,
+      trashedCount: 0,
+      errorCount: 0,
+    };
+  }
+
+  const query = "trashed=false and '" + escapeQueryText_(safeFolderId) + "' in parents and mimeType='application/json'";
+  const scanLimit = Math.max(keep + 200, Math.min(60000, keep * 10));
+  const listed = listFilesAllSafe_({
+    q: query,
+    maxResults: 250,
+    orderBy: 'modifiedDate desc',
+  }, sharedDriveId, scanLimit);
+  const overflow = listed.slice(keep);
+  let trashedCount = 0;
+  let errorCount = 0;
+
+  overflow.forEach(function (item) {
+    const itemId = normalizeText_((item && item.id) || '');
+    if (!itemId) return;
+    try {
+      DriveApp.getFileById(itemId).setTrashed(true);
+      trashedCount += 1;
+    } catch (error) {
+      errorCount += 1;
+    }
+  });
+
+  return {
+    keep: keep,
+    scannedCount: listed.length,
+    trashedCount: trashedCount,
+    errorCount: errorCount,
+  };
 }
 
 function handleMedRefreshRequest_(payload) {
