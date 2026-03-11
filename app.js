@@ -193,6 +193,7 @@ const DRAFT_PERSIST_IDLE_MS = 3000;
 const RECENT_PATIENTS_DRIVE_MIN_INTERVAL_MS = 90000;
 const DRIVE_AUTO_CLEANUP_INTERVAL_MS = 1000 * 60 * 60 * 24;
 const DRIVE_MANUAL_CLEANUP_MAX_ITEMS = 1200;
+const DRIVE_MANUAL_CLEANUP_MAX_ROUNDS = 8;
 const THERAPY_TIER_MINUTES = {
   '0': 0,
   '>=16': 16,
@@ -1114,11 +1115,25 @@ async function pullDriveRecentPatients(force = false) {
 async function pullDriveManifestAndDraft(force = false) {
   if (!isDriveSyncEnabled()) return;
 
-  const response = await callDriveEndpoint('manifest.get', { path: DRIVE_MANIFEST_FILE });
-  const manifest = response.manifest || null;
+  let response = await callDriveEndpoint('manifest.get', { path: DRIVE_MANIFEST_FILE });
+  let manifest = response.manifest || null;
   if (!manifest) {
-    const reason = 'Drive manifest unavailable; writes paused to prevent duplicate files.';
-    setDriveWriteBlock(true, reason);
+    const config = getDriveConfig();
+    try {
+      await callDriveEndpoint('bootstrap', {
+        sharedDriveId: config.sharedDriveId,
+        rootFolderName: config.rootFolderName || DRIVE_SYNC_ENTERPRISE_NAME,
+        rootFolderId: state.driveCanonicalRootId || '',
+      });
+      response = await callDriveEndpoint('manifest.get', { path: DRIVE_MANIFEST_FILE });
+      manifest = response.manifest || null;
+    } catch (error) {
+      // proceed to warning fallback below
+    }
+  }
+
+  if (!manifest) {
+    const reason = 'Drive manifest unavailable; running in write-only safety mode until manifest is restored.';
     const meta = getDriveMeta();
     meta.connection = navigator.onLine ? 'error' : 'offline';
     meta.lastError = reason;
@@ -1328,17 +1343,22 @@ async function attemptDriveAutoCleanup() {
   }
 
   try {
-    const result = await callDriveEndpoint('mydrive.condense', {
-      rootFolderName: DRIVE_CLEANUP_LEGACY_ROOT,
-      includeUntitledFiles: false,
-      includeUntitledFolders: false,
-      maxItems: 800,
-      dryRun: false,
-      archiveFolderName: `${DRIVE_CLEANUP_ARCHIVE_PREFIX} ${new Date().toISOString().slice(0, 10).replace(/-/g, '')}`,
-    });
+    const autoProfiles = [DRIVE_CLEANUP_LEGACY_ROOT, 'app-shell'];
+    let movedCount = 0;
+    for (let i = 0; i < autoProfiles.length; i += 1) {
+      const result = await callDriveEndpoint('mydrive.condense', {
+        rootFolderName: autoProfiles[i],
+        includeUntitledFiles: false,
+        includeUntitledFolders: false,
+        maxItems: 800,
+        dryRun: false,
+        archiveFolderName: `${DRIVE_CLEANUP_ARCHIVE_PREFIX} ${new Date().toISOString().slice(0, 10).replace(/-/g, '')}`,
+      });
+      movedCount += Number(result && result.movedCount) || 0;
+    }
     setDriveAutoCleanupMeta({
       lastAttemptAt: now,
-      lastMovedCount: Number(result && result.movedCount) || 0,
+      lastMovedCount: movedCount,
       lastError: '',
     });
   } catch (error) {
@@ -1378,37 +1398,72 @@ async function runManualDriveCleanup() {
   setDriveCleanupStatus('Scanning for app-generated duplicate artifacts...');
 
   try {
-    const archiveFolderName = getCleanupArchiveName();
-    const [legacyPreview, sharedPreview] = await Promise.all([
-      callDriveEndpoint('mydrive.condense', {
+    const cleanupProfiles = [
+      {
+        label: 'Legacy root',
         rootFolderName: DRIVE_CLEANUP_LEGACY_ROOT,
         includeUntitledFiles: true,
         includeUntitledFolders: true,
-        maxItems: DRIVE_MANUAL_CLEANUP_MAX_ITEMS,
-        dryRun: true,
-        archiveFolderName,
-      }),
-      callDriveEndpoint('mydrive.condense', {
+      },
+      {
+        label: 'App shell',
+        rootFolderName: 'app-shell',
+        includeUntitledFiles: true,
+        includeUntitledFolders: true,
+      },
+      {
+        label: 'Shared root',
         rootFolderName: DRIVE_SYNC_ENTERPRISE_NAME,
-        includeUntitledFiles: false,
-        includeUntitledFolders: false,
-        maxItems: DRIVE_MANUAL_CLEANUP_MAX_ITEMS,
-        dryRun: true,
-        archiveFolderName,
-      }),
-    ]);
+        includeUntitledFiles: true,
+        includeUntitledFolders: true,
+      },
+    ];
+    const archiveFolderName = getCleanupArchiveName();
+    const runCleanupPass = async (dryRun = true) => {
+      let candidateCount = 0;
+      let movedCount = 0;
+      let archiveId = '';
+      const breakdown = [];
 
-    const previewLegacyCount = Number(legacyPreview && legacyPreview.candidateCount) || 0;
-    const previewSharedCount = Number(sharedPreview && sharedPreview.candidateCount) || 0;
-    const previewTotal = previewLegacyCount + previewSharedCount;
+      for (let i = 0; i < cleanupProfiles.length; i += 1) {
+        const profile = cleanupProfiles[i];
+        const result = await callDriveEndpoint('mydrive.condense', {
+          rootFolderName: profile.rootFolderName,
+          includeUntitledFiles: profile.includeUntitledFiles,
+          includeUntitledFolders: profile.includeUntitledFolders,
+          maxItems: DRIVE_MANUAL_CLEANUP_MAX_ITEMS,
+          dryRun,
+          archiveFolderName,
+        });
+
+        const profileCandidates = Number(result && result.candidateCount) || 0;
+        const profileMoved = Number(result && result.movedCount) || 0;
+        candidateCount += profileCandidates;
+        movedCount += profileMoved;
+        if (!archiveId) {
+          archiveId = String(result && result.archiveFolderId || '').trim();
+        }
+        breakdown.push({
+          label: profile.label,
+          candidates: profileCandidates,
+          moved: profileMoved,
+        });
+      }
+
+      return { candidateCount, movedCount, archiveId, breakdown };
+    };
+
+    const preview = await runCleanupPass(true);
+    const previewTotal = preview.candidateCount;
 
     if (!previewTotal) {
       setDriveCleanupStatus('No cleanup candidates found in My Drive.');
       return;
     }
 
+    const previewSummary = preview.breakdown.map((item) => `${item.label}: ${item.candidates}`).join(', ');
     const proceed = window.confirm(
-      `Found ${previewTotal} My Drive cleanup candidates (${previewLegacyCount} legacy + ${previewSharedCount} Note App root).\n\n`
+      `Found ${previewTotal} My Drive cleanup candidates (${previewSummary}).\n\n`
       + 'These items will be MOVED to an archive folder (not deleted). Continue cleanup?',
     );
     if (!proceed) {
@@ -1416,38 +1471,32 @@ async function runManualDriveCleanup() {
       return;
     }
 
-    setDriveCleanupButtonState(true, 'Cleaning My Drive...');
-    const [legacyApply, sharedApply] = await Promise.all([
-      callDriveEndpoint('mydrive.condense', {
-        rootFolderName: DRIVE_CLEANUP_LEGACY_ROOT,
-        includeUntitledFiles: true,
-        includeUntitledFolders: true,
-        maxItems: DRIVE_MANUAL_CLEANUP_MAX_ITEMS,
-        dryRun: false,
-        archiveFolderName,
-      }),
-      callDriveEndpoint('mydrive.condense', {
-        rootFolderName: DRIVE_SYNC_ENTERPRISE_NAME,
-        includeUntitledFiles: false,
-        includeUntitledFolders: false,
-        maxItems: DRIVE_MANUAL_CLEANUP_MAX_ITEMS,
-        dryRun: false,
-        archiveFolderName,
-      }),
-    ]);
+    let movedTotal = 0;
+    let roundsCompleted = 0;
+    let archiveId = preview.archiveId || '';
 
-    const movedLegacy = Number(legacyApply && legacyApply.movedCount) || 0;
-    const movedShared = Number(sharedApply && sharedApply.movedCount) || 0;
-    const movedTotal = movedLegacy + movedShared;
-    const archiveId = String(
-      (legacyApply && legacyApply.archiveFolderId)
-      || (sharedApply && sharedApply.archiveFolderId)
-      || '',
-    ).trim();
+    for (let round = 1; round <= DRIVE_MANUAL_CLEANUP_MAX_ROUNDS; round += 1) {
+      setDriveCleanupButtonState(true, `Cleaning My Drive... (${round}/${DRIVE_MANUAL_CLEANUP_MAX_ROUNDS})`);
+      const applyResult = await runCleanupPass(false);
+      roundsCompleted = round;
+      movedTotal += applyResult.movedCount;
+      if (!archiveId) {
+        archiveId = applyResult.archiveId || '';
+      }
+      setDriveCleanupStatus(`Cleanup round ${round}: moved ${applyResult.movedCount} item(s).`);
+
+      if (applyResult.movedCount <= 0) {
+        break;
+      }
+    }
+
+    setDriveCleanupButtonState(true, 'Verifying cleanup...');
+    const remaining = await runCleanupPass(true);
+    const remainingCount = Number(remaining.candidateCount) || 0;
 
     setDriveCleanupStatus(
       movedTotal
-        ? `Cleanup complete: moved ${movedTotal} item(s) to archive folder ${archiveId || archiveFolderName}.`
+        ? `Cleanup complete: moved ${movedTotal} item(s) across ${roundsCompleted} round(s). Remaining candidates: ${remainingCount}. Archive: ${archiveId || archiveFolderName}.`
         : 'Cleanup completed with no moves.',
     );
 
