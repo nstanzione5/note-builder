@@ -1,4 +1,4 @@
-const APP_BUILD_ID = '20260311-drive-reset-v1';
+const APP_BUILD_ID = '20260311-drive-reset-v2';
 const CACHE_PREFIX = 'note-builder-shell-';
 const CACHE_NAME = `${CACHE_PREFIX}${APP_BUILD_ID}`;
 const SHELL_ASSETS = [

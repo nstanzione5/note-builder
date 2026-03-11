@@ -20,6 +20,9 @@ const state = {
   driveLastError: '',
   pendingDriveWrites: 0,
   driveCanonicalRootId: '',
+  driveRequiredSharedDriveId: '',
+  driveRequiredRootId: '',
+  driveResolvedRootId: '',
   saveUnlocked: false,
   driveWritesBlocked: true,
   driveWriteBlockReason: 'Drive preflight pending.',
@@ -119,6 +122,7 @@ const els = {
   medMissingCount: document.getElementById('medMissingCount'),
   driveSyncStatus: document.getElementById('driveSyncStatus'),
   driveDiagnosticsBtn: document.getElementById('driveDiagnosticsBtn'),
+  driveSnapshotBtn: document.getElementById('driveSnapshotBtn'),
   driveCleanupBtn: document.getElementById('driveCleanupBtn'),
   driveCleanupStatus: document.getElementById('driveCleanupStatus'),
   driveDiagnosticsModal: document.getElementById('driveDiagnosticsModal'),
@@ -129,6 +133,8 @@ const els = {
   diagEndpoint: document.getElementById('diagEndpoint'),
   diagResolvedUser: document.getElementById('diagResolvedUser'),
   diagSharedDrive: document.getElementById('diagSharedDrive'),
+  diagRequiredRoot: document.getElementById('diagRequiredRoot'),
+  diagResolvedRoot: document.getElementById('diagResolvedRoot'),
   diagCanonicalRoot: document.getElementById('diagCanonicalRoot'),
   diagPreflightStatus: document.getElementById('diagPreflightStatus'),
   diagBlockCode: document.getElementById('diagBlockCode'),
@@ -187,7 +193,7 @@ const CONDENSE_CLASS_ENTER = 0.86;
 const CONDENSE_CLASS_EXIT = 0.62;
 
 const MED_CATALOG_URL = './data/meds/compiled/medications.compiled.json';
-const APP_BUILD_ID = String((els.body && els.body.dataset && els.body.dataset.appBuildId) || '20260311-drive-reset-v1').trim() || '20260311-drive-reset-v1';
+const APP_BUILD_ID = String((els.body && els.body.dataset && els.body.dataset.appBuildId) || '20260311-drive-reset-v2').trim() || '20260311-drive-reset-v2';
 const MED_FAVORITES_KEY = 'medDrawerFavorites_v1';
 const MED_RECENTS_KEY = 'medDrawerRecents_v1';
 const MED_MISSING_REQUESTS_KEY = 'medDrawerMissingRequests_v1';
@@ -213,6 +219,7 @@ const RECENT_PATIENTS_DRIVE_MIN_INTERVAL_MS = 90000;
 const DRIVE_AUTO_CLEANUP_INTERVAL_MS = 1000 * 60 * 60 * 24;
 const DRIVE_MANUAL_CLEANUP_MAX_ROUNDS = 8;
 const DRIVE_CLEANUP_APPLY_BATCH_SIZE = 250;
+const DRIVE_CLEANUP_MAX_ITEMS = 60000;
 const DRIVE_AUTO_REPAIR_COOLDOWN_MS = 1000 * 60 * 5;
 const MEDICATION_FALLBACK_CACHE_TTL_MS = 1000 * 60 * 60 * 6;
 const MEDICATION_TERM_QUALIFIER_REGEX = /\b(?:xr|er|sr|dr|ir|odt|xl|hcl|hydrochloride|fumarate|succinate|maleate|tartrate|mesylate|sodium|phosphate|capsule|capsules|tablet|tablets|solution|extended release|immediate release)\b/gi;
@@ -416,7 +423,8 @@ function getDriveConfig() {
     enabled: dataset.driveSyncEnabled === 'true',
     endpointUrl: String(dataset.driveEndpointUrl || '').trim(),
     sharedDriveId: String(dataset.driveSharedDriveId || '').trim(),
-    rootFolderName: DRIVE_SYNC_ENTERPRISE_NAME,
+    rootFolderId: String(dataset.driveRootFolderId || '').trim(),
+    rootFolderName: String(dataset.driveRootFolderName || '').trim() || DRIVE_SYNC_ENTERPRISE_NAME,
     userEmail,
     ownerEmail: String(dataset.driveOwnerEmail || '').trim(),
     serviceToken: String(dataset.driveServiceToken || '').trim() || String(dataset.driveOwnerToken || '').trim(),
@@ -525,8 +533,11 @@ function applyDriveHealthState(healthPayload) {
   const payload = healthPayload && typeof healthPayload === 'object' ? healthPayload : {};
   const resolvedUser = String(payload.resolvedUserEmail || '').trim().toLowerCase();
   const backendBuild = String(payload.appBuildId || '').trim();
+  const requiredSharedDriveId = String(payload.requiredSharedDriveId || '').trim();
   const preflightStatus = String(payload.preflightStatus || '').trim() || 'unknown';
   const preflightReason = String(payload.preflightReason || '').trim();
+  const requiredRootFolderId = String(payload.requiredRootFolderId || '').trim();
+  const resolvedRootFolderId = String(payload.resolvedRootFolderId || '').trim();
   const canonicalRootId = payload.canonicalRoot && payload.canonicalRoot.id
     ? String(payload.canonicalRoot.id).trim()
     : '';
@@ -534,17 +545,28 @@ function applyDriveHealthState(healthPayload) {
     ? setResolvedDriveUserEmail(resolvedUser)
     : clearResolvedDriveUserEmail();
   state.driveBackendBuildId = backendBuild;
+  state.driveRequiredSharedDriveId = requiredSharedDriveId;
   state.drivePreflightStatus = preflightStatus;
   state.drivePreflightReason = preflightReason;
+  state.driveRequiredRootId = requiredRootFolderId;
+  state.driveResolvedRootId = resolvedRootFolderId;
   if (canonicalRootId) {
     state.driveCanonicalRootId = canonicalRootId;
+  } else if (!resolvedRootFolderId) {
+    state.driveCanonicalRootId = '';
+  }
+  if (resolvedRootFolderId) {
+    state.driveCanonicalRootId = resolvedRootFolderId;
   }
 
   return {
     resolvedUser,
     backendBuild,
+    requiredSharedDriveId,
     preflightStatus,
     preflightReason,
+    requiredRootFolderId,
+    resolvedRootFolderId,
     canonicalRootId,
     userChanged,
   };
@@ -719,8 +741,10 @@ function renderDriveDiagnostics() {
   if (els.diagBackendBuild) els.diagBackendBuild.textContent = state.driveBackendBuildId || 'unknown';
   if (els.diagEndpoint) els.diagEndpoint.textContent = config.endpointUrl || 'not configured';
   if (els.diagResolvedUser) els.diagResolvedUser.textContent = state.driveResolvedUserEmail || config.userEmail || 'unknown';
-  if (els.diagSharedDrive) els.diagSharedDrive.textContent = config.sharedDriveId || 'not configured';
-  if (els.diagCanonicalRoot) els.diagCanonicalRoot.textContent = state.driveCanonicalRootId || 'unknown';
+  if (els.diagSharedDrive) els.diagSharedDrive.textContent = state.driveRequiredSharedDriveId || config.sharedDriveId || 'not configured';
+  if (els.diagRequiredRoot) els.diagRequiredRoot.textContent = state.driveRequiredRootId || config.rootFolderId || 'not configured';
+  if (els.diagResolvedRoot) els.diagResolvedRoot.textContent = state.driveResolvedRootId || 'unknown';
+  if (els.diagCanonicalRoot) els.diagCanonicalRoot.textContent = state.driveCanonicalRootId || state.driveResolvedRootId || 'unknown';
   if (els.diagPreflightStatus) {
     const status = state.drivePreflightStatus || 'unknown';
     const reason = state.drivePreflightReason || '';
@@ -765,8 +789,9 @@ async function runDriveRepair(trigger = 'manual', options = {}) {
   try {
     const config = getDriveConfig();
     await callDriveEndpoint('drive.repair', {
-      sharedDriveId: config.sharedDriveId,
+      sharedDriveId: state.driveRequiredSharedDriveId || config.sharedDriveId,
       rootFolderName: config.rootFolderName || DRIVE_SYNC_ENTERPRISE_NAME,
+      rootFolderId: state.driveRequiredRootId || config.rootFolderId || '',
       trigger,
     });
 
@@ -1104,6 +1129,7 @@ async function callDriveEndpoint(action, payload = {}) {
     ...payload,
     action,
     sharedDriveId: payload.sharedDriveId || config.sharedDriveId,
+    rootFolderId: payload.rootFolderId || config.rootFolderId,
     rootFolderName: payload.rootFolderName || config.rootFolderName,
     userEmail: payload.userEmail || config.userEmail,
     serviceToken: payload.serviceToken || config.serviceToken || config.ownerToken,
@@ -1333,9 +1359,9 @@ async function pullDriveManifestAndDraft(force = false) {
     const config = getDriveConfig();
     try {
       await callDriveEndpoint('bootstrap', {
-        sharedDriveId: config.sharedDriveId,
+        sharedDriveId: state.driveRequiredSharedDriveId || config.sharedDriveId,
         rootFolderName: config.rootFolderName || DRIVE_SYNC_ENTERPRISE_NAME,
-        rootFolderId: state.driveCanonicalRootId || '',
+        rootFolderId: state.driveRequiredRootId || state.driveCanonicalRootId || config.rootFolderId || '',
       });
       response = await callDriveEndpoint('manifest.get', { path: DRIVE_MANIFEST_FILE });
       manifest = response.manifest || null;
@@ -1494,11 +1520,17 @@ async function flushDriveQueue() {
   }
 }
 
-async function verifyDriveRootPreflight() {
+async function verifyDriveRootPreflight(healthState = null) {
   if (!isDriveSyncEnabled()) return false;
 
   const config = getDriveConfig();
-  const userKey = driveUserKeyFromEmail(config.userEmail);
+  const effectiveUser = String(
+    (healthState && healthState.resolvedUser)
+    || state.driveResolvedUserEmail
+    || config.userEmail
+    || '',
+  ).trim().toLowerCase();
+  const userKey = driveUserKeyFromEmail(effectiveUser);
   if (!userKey) {
     state.driveCanonicalRootId = '';
     setDriveWriteBlock(true, 'Drive preflight failed: drive user email is required for per-user draft isolation.', 'identity_missing');
@@ -1506,40 +1538,67 @@ async function verifyDriveRootPreflight() {
     return false;
   }
 
-  const requiredDriveId = String(config.sharedDriveId || '').trim();
+  const requiredDriveId = String(
+    (healthState && healthState.requiredSharedDriveId)
+    || state.driveRequiredSharedDriveId
+    || config.sharedDriveId
+    || '',
+  ).trim();
   if (!requiredDriveId) {
     state.driveCanonicalRootId = '';
-    setDriveWriteBlock(true, 'Drive preflight failed: sharedDriveId is required for write safety.', 'root_missing');
+    setDriveWriteBlock(true, 'Drive preflight failed: sharedDriveId is required for write safety.', 'scope_unverifiable');
     updateDriveStatusBadge();
     return false;
   }
 
-  const audit = await callDriveEndpoint('root.audit', {
-    sharedDriveId: requiredDriveId,
-    rootFolderName: config.rootFolderName || DRIVE_SYNC_ENTERPRISE_NAME,
-  });
+  const preflightStatus = String((healthState && healthState.preflightStatus) || state.drivePreflightStatus || '').trim();
+  if (preflightStatus && preflightStatus !== 'ok') {
+    const reason = (healthState && healthState.preflightReason) || state.drivePreflightReason || `Drive preflight returned ${preflightStatus}.`;
+    setDriveWriteBlock(true, reason, preflightStatus);
+    updateDriveStatusBadge();
+    return false;
+  }
 
-  const canonical = audit && audit.canonicalRoot ? audit.canonicalRoot : null;
-  const canonicalDriveId = canonical ? String(canonical.driveId || '').trim() : '';
-  const canonicalName = canonical ? String(canonical.name || '').trim() : '';
-  const expectedName = String(config.rootFolderName || DRIVE_SYNC_ENTERPRISE_NAME).trim();
-
-  const rootIsValid = Boolean(
-    canonical
-    && canonicalDriveId
-    && canonicalDriveId === requiredDriveId
-    && canonicalName === expectedName,
-  );
-
-  if (!rootIsValid) {
+  const requiredRootId = String(
+    (healthState && healthState.requiredRootFolderId)
+    || state.driveRequiredRootId
+    || config.rootFolderId
+    || '',
+  ).trim();
+  if (!requiredRootId) {
     state.driveCanonicalRootId = '';
-    const reason = `Drive preflight failed: shared root "${expectedName}" is missing or not bound to shared drive ${requiredDriveId}.`;
-    setDriveWriteBlock(true, reason, 'root_missing');
+    setDriveWriteBlock(true, 'Drive preflight failed: DRIVE_SHARED_ROOT_FOLDER_ID is missing.', 'root_id_missing');
     updateDriveStatusBadge();
     return false;
   }
 
-  state.driveCanonicalRootId = String(canonical.id || '').trim();
+  const resolvedRootId = String(
+    (healthState && healthState.resolvedRootFolderId)
+    || state.driveResolvedRootId
+    || state.driveCanonicalRootId
+    || '',
+  ).trim();
+  if (!resolvedRootId) {
+    state.driveCanonicalRootId = '';
+    setDriveWriteBlock(true, 'Drive preflight failed: shared root folder could not be resolved.', 'root_id_invalid');
+    updateDriveStatusBadge();
+    return false;
+  }
+
+  if (resolvedRootId !== requiredRootId) {
+    state.driveCanonicalRootId = '';
+    setDriveWriteBlock(
+      true,
+      `Drive preflight failed: resolved root (${resolvedRootId}) does not match required root (${requiredRootId}).`,
+      'root_not_in_required_drive',
+    );
+    updateDriveStatusBadge();
+    return false;
+  }
+
+  state.driveRequiredRootId = requiredRootId;
+  state.driveResolvedRootId = resolvedRootId;
+  state.driveCanonicalRootId = resolvedRootId;
   state.drivePreflightStatus = 'ok';
   state.drivePreflightReason = '';
   setDriveWriteBlock(false, '');
@@ -1548,33 +1607,8 @@ async function verifyDriveRootPreflight() {
 }
 
 async function attemptDriveAutoCleanup() {
-  if (!isDriveSyncEnabled()) return;
-  if (!canQueueDriveWrites()) return;
-
-  const meta = getDriveAutoCleanupMeta();
-  const now = Date.now();
-  if (meta.lastAttemptAt && (now - meta.lastAttemptAt) < DRIVE_AUTO_CLEANUP_INTERVAL_MS) {
-    return;
-  }
-
-  try {
-    const result = await callDriveEndpoint('cleanup.apply', {
-      batchSize: 80,
-      maxItems: 5000,
-    });
-    const movedCount = Number(result && result.trashedCount) || 0;
-    setDriveAutoCleanupMeta({
-      lastAttemptAt: now,
-      lastMovedCount: movedCount,
-      lastError: '',
-    });
-  } catch (error) {
-    setDriveAutoCleanupMeta({
-      lastAttemptAt: now,
-      lastMovedCount: 0,
-      lastError: String(error && error.message ? error.message : error),
-    });
-  }
+  // Cleanup is manual and snapshot-gated in production to avoid accidental data loss.
+  return;
 }
 
 function setDriveCleanupStatus(message, isError = false) {
@@ -1586,7 +1620,41 @@ function setDriveCleanupStatus(message, isError = false) {
 function setDriveCleanupButtonState(running, label = '') {
   if (!els.driveCleanupBtn) return;
   els.driveCleanupBtn.disabled = Boolean(running);
-  els.driveCleanupBtn.textContent = label || (running ? 'Cleaning My Drive...' : 'Trash My Drive Artifacts');
+  els.driveCleanupBtn.textContent = label || (running ? 'Running Full Purge...' : 'Preview + Apply Full Purge');
+}
+
+function setDriveSnapshotButtonState(running, label = '') {
+  if (!els.driveSnapshotBtn) return;
+  els.driveSnapshotBtn.disabled = Boolean(running);
+  els.driveSnapshotBtn.textContent = label || (running ? 'Creating Snapshot...' : 'Snapshot');
+}
+
+async function runDriveSnapshot() {
+  if (!isDriveSyncEnabled()) {
+    setDriveCleanupStatus('Drive sync is disabled, so snapshot is unavailable.', true);
+    return null;
+  }
+
+  setDriveSnapshotButtonState(true, 'Creating Snapshot...');
+  try {
+    const snapshot = await callDriveEndpoint('cleanup.snapshot', {
+      maxItems: DRIVE_CLEANUP_MAX_ITEMS,
+    });
+    const fileName = String(snapshot && snapshot.snapshotFileName || '').trim();
+    const fileUrl = String(snapshot && snapshot.snapshotFileUrl || '').trim();
+    setDriveCleanupStatus(
+      fileUrl
+        ? `Snapshot created: ${fileName || 'snapshot file'} (${fileUrl}).`
+        : `Snapshot created: ${fileName || 'cleanup snapshot'}.`,
+    );
+    return snapshot;
+  } catch (error) {
+    const message = String(error && error.message ? error.message : error);
+    setDriveCleanupStatus(`Snapshot failed: ${message}`, true);
+    throw error;
+  } finally {
+    setDriveSnapshotButtonState(false);
+  }
 }
 
 async function runManualDriveCleanup() {
@@ -1597,17 +1665,25 @@ async function runManualDriveCleanup() {
   }
 
   driveCleanupRunning = true;
-  setDriveCleanupButtonState(true, 'Scanning My Drive...');
-  setDriveCleanupStatus('Scanning for app-generated artifacts to trash...');
+  setDriveCleanupButtonState(true, 'Running Snapshot...');
+  setDriveSnapshotButtonState(true, 'Snapshot Locked');
+  setDriveCleanupStatus('Creating safety snapshot before cleanup...');
 
   try {
+    const snapshot = await callDriveEndpoint('cleanup.snapshot', {
+      maxItems: DRIVE_CLEANUP_MAX_ITEMS,
+    });
+    const snapshotLabel = String(snapshot && snapshot.snapshotFileName || '').trim() || 'cleanup snapshot';
+    setDriveCleanupStatus(`Snapshot complete (${snapshotLabel}). Scanning My Drive for cleanup candidates...`);
+
+    setDriveCleanupButtonState(true, 'Scanning My Drive...');
     const preview = await callDriveEndpoint('cleanup.preview', {
-      maxItems: 15000,
+      maxItems: DRIVE_CLEANUP_MAX_ITEMS,
       sampleSize: 20,
     });
     const previewTotal = Number(preview && preview.candidateCount) || 0;
     if (previewTotal <= 0) {
-      setDriveCleanupStatus('No cleanup candidates found in My Drive.');
+      setDriveCleanupStatus(`No cleanup candidates found in My Drive. Snapshot saved: ${snapshotLabel}.`);
       return;
     }
 
@@ -1618,8 +1694,8 @@ async function runManualDriveCleanup() {
       ? summaryGroups.map((entry) => `${entry.key}=${entry.count}`).join(', ')
       : 'no group summary';
     const proceed = window.confirm(
-      `Found ${previewTotal} My Drive cleanup candidates.\n\nTop groups: ${previewSummary}\n\n`
-      + 'Cleanup will TRASH these artifacts in batches. Continue?',
+      `Snapshot: ${snapshotLabel}\n\nFound ${previewTotal} My Drive cleanup candidates.\n\nTop groups: ${previewSummary}\n\n`
+      + 'Apply FULL purge (TRASH) in batches now?',
     );
     if (!proceed) {
       setDriveCleanupStatus('Cleanup canceled.');
@@ -1633,9 +1709,9 @@ async function runManualDriveCleanup() {
     let totalErrors = 0;
 
     for (let batch = 1; batch <= DRIVE_MANUAL_CLEANUP_MAX_ROUNDS * 20; batch += 1) {
-      setDriveCleanupButtonState(true, `Trashing artifacts... (${batch})`);
+      setDriveCleanupButtonState(true, `Applying purge... (${batch})`);
       const applyResult = await callDriveEndpoint('cleanup.apply', {
-        maxItems: 15000,
+        maxItems: DRIVE_CLEANUP_MAX_ITEMS,
         batchSize: DRIVE_CLEANUP_APPLY_BATCH_SIZE,
       });
       const trashedThisBatch = Number(applyResult && applyResult.trashedCount) || 0;
@@ -1659,7 +1735,7 @@ async function runManualDriveCleanup() {
 
     setDriveCleanupButtonState(true, 'Verifying cleanup...');
     const finalPreview = await callDriveEndpoint('cleanup.preview', {
-      maxItems: 15000,
+      maxItems: DRIVE_CLEANUP_MAX_ITEMS,
       sampleSize: 10,
     });
     const finalRemaining = Number(finalPreview && finalPreview.candidateCount) || 0;
@@ -1675,6 +1751,7 @@ async function runManualDriveCleanup() {
     setDriveCleanupStatus(`Cleanup failed: ${message}`, true);
   } finally {
     driveCleanupRunning = false;
+    setDriveSnapshotButtonState(false);
     setDriveCleanupButtonState(false);
   }
 }
@@ -1737,7 +1814,7 @@ async function runDriveSyncCycle(force = false) {
       return;
     }
 
-    const preflightOk = await verifyDriveRootPreflight();
+    const preflightOk = await verifyDriveRootPreflight(healthState);
     if (!preflightOk) {
       throw new Error(state.driveWriteBlockReason || 'Drive root preflight failed.');
     }
@@ -1745,9 +1822,9 @@ async function runDriveSyncCycle(force = false) {
     if (!meta.bootstrapCompleted) {
       const config = getDriveConfig();
       await callDriveEndpoint('bootstrap', {
-        sharedDriveId: config.sharedDriveId,
+        sharedDriveId: state.driveRequiredSharedDriveId || config.sharedDriveId,
         rootFolderName: config.rootFolderName || DRIVE_SYNC_ENTERPRISE_NAME,
-        rootFolderId: state.driveCanonicalRootId || '',
+        rootFolderId: state.driveRequiredRootId || state.driveCanonicalRootId || config.rootFolderId || '',
       });
 
       const nextMeta = getDriveMeta();
@@ -1827,11 +1904,8 @@ function initDriveSync() {
   const cleanupMeta = getDriveAutoCleanupMeta();
   if (cleanupMeta.lastError) {
     setDriveCleanupStatus(`Last cleanup error: ${cleanupMeta.lastError}`, true);
-  } else if (cleanupMeta.lastAttemptAt) {
-    const movedCount = Number(cleanupMeta.lastMovedCount) || 0;
-    setDriveCleanupStatus(`Last auto-cleanup trashed ${movedCount} item(s) on ${new Date(cleanupMeta.lastAttemptAt).toLocaleString()}.`);
   } else {
-    setDriveCleanupStatus('Manual cleanup is available if My Drive becomes cluttered.');
+    setDriveCleanupStatus('Run Snapshot, then Preview + Apply Full Purge when My Drive needs cleanup.');
   }
 
   if (!isDriveSyncEnabled()) {
@@ -3512,7 +3586,7 @@ function normalizeRuntimeFallbackEntry(entry) {
   if (!id || !genericName) return null;
 
   const formulations = Array.isArray(entry.formulations) ? entry.formulations : [];
-  const normalizedForms = formulations.length ? formulations : [{
+  const baseForms = formulations.length ? formulations : [{
     formulation_id: `${id}-fallback-oral`,
     label: 'Fallback oral',
     route: 'oral',
@@ -3531,6 +3605,24 @@ function normalizeRuntimeFallbackEntry(entry) {
     source_links: [],
     active: true,
   }];
+  const normalizedForms = baseForms.map((form, index) => {
+    const formId = String(form && form.formulation_id || '').trim() || `${id}-fallback-${index + 1}`;
+    return {
+      formulation_id: formId,
+      label: String(form && (form.label || form.dosage_form) || 'Formulation').trim() || 'Formulation',
+      route: String(form && form.route || 'oral').trim() || 'oral',
+      dosage_form: String(form && form.dosage_form || 'unknown').trim() || 'unknown',
+      strength_examples: filterAdultMedicationLines(Array.isArray(form && form.strength_examples) ? form.strength_examples : [], 12),
+      common_adult_psych_dosing: normalizeAdultDosing(form && form.common_adult_psych_dosing ? form.common_adult_psych_dosing : {}),
+      titration_notes: filterAdultMedicationLines(Array.isArray(form && form.titration_notes) ? form.titration_notes : [], 8),
+      formulation_specific_pearls: filterAdultMedicationLines(Array.isArray(form && form.formulation_specific_pearls) ? form.formulation_specific_pearls : [], 8),
+      formulation_specific_interactions: filterAdultMedicationLines(Array.isArray(form && form.formulation_specific_interactions) ? form.formulation_specific_interactions : [], 8),
+      formulation_specific_side_effect_notes: filterAdultMedicationLines(Array.isArray(form && form.formulation_specific_side_effect_notes) ? form.formulation_specific_side_effect_notes : [], 8),
+      administration_notes: filterAdultMedicationLines(Array.isArray(form && form.administration_notes) ? form.administration_notes : [], 8),
+      source_links: uniqueTrimmedStrings(Array.isArray(form && form.source_links) ? form.source_links : [], 12),
+      active: form && form.active !== false,
+    };
+  }).slice(0, 20);
 
   return {
     id,
@@ -3540,13 +3632,13 @@ function normalizeRuntimeFallbackEntry(entry) {
     psych_class: String(entry.psych_class || 'Unclassified').trim() || 'Unclassified',
     active: entry.active !== false,
     newer_brand: Boolean(entry.newer_brand),
-    fda_psych_uses: Array.isArray(entry.fda_psych_uses) ? entry.fda_psych_uses.filter(Boolean).slice(0, 12) : [],
-    off_label_psych_uses: Array.isArray(entry.off_label_psych_uses) ? entry.off_label_psych_uses.filter(Boolean).slice(0, 12) : [],
+    fda_psych_uses: filterAdultMedicationLines(Array.isArray(entry.fda_psych_uses) ? entry.fda_psych_uses : [], 12),
+    off_label_psych_uses: filterAdultMedicationLines(Array.isArray(entry.off_label_psych_uses) ? entry.off_label_psych_uses : [], 12),
     moa_summary: String(entry.moa_summary || 'No summary available yet.'),
-    common_side_effects: Array.isArray(entry.common_side_effects) ? entry.common_side_effects.filter(Boolean).slice(0, 20) : [],
-    important_risks: Array.isArray(entry.important_risks) ? entry.important_risks.filter(Boolean).slice(0, 16) : [],
-    psych_interactions: Array.isArray(entry.psych_interactions) ? entry.psych_interactions.filter(Boolean).slice(0, 16) : [],
-    clinical_pearls: Array.isArray(entry.clinical_pearls) ? entry.clinical_pearls.filter(Boolean).slice(0, 16) : [],
+    common_side_effects: filterAdultMedicationLines(Array.isArray(entry.common_side_effects) ? entry.common_side_effects : [], 20),
+    important_risks: filterAdultMedicationLines(Array.isArray(entry.important_risks) ? entry.important_risks : [], 16),
+    psych_interactions: filterAdultMedicationLines(Array.isArray(entry.psych_interactions) ? entry.psych_interactions : [], 16),
+    clinical_pearls: filterAdultMedicationLines(Array.isArray(entry.clinical_pearls) ? entry.clinical_pearls : [], 16),
     source_links: Array.isArray(entry.source_links) ? entry.source_links.filter(Boolean).slice(0, 20) : [],
     source_last_checked: String(entry.source_last_checked || new Date().toISOString()),
     editorial_last_reviewed: entry.editorial_last_reviewed || null,
@@ -4126,7 +4218,7 @@ function renderMedicationResults() {
 }
 
 function listHtml(items, fallback) {
-  const safeItems = filterAdultMedicationLines(Array.isArray(items) ? items.filter(Boolean) : [], 20);
+  const safeItems = filterAdultMedicationLines(Array.isArray(items) ? items.filter(Boolean) : [], 10);
   if (!safeItems.length) {
     return `<p class="helper-text">${escapeHtml(fallback)}</p>`;
   }
@@ -4172,30 +4264,46 @@ function buildMedicationSummaryText(context) {
   const dosing = selectedFormulation && selectedFormulation.common_adult_psych_dosing
     ? normalizeAdultDosing(selectedFormulation.common_adult_psych_dosing)
     : null;
-  const adultFdaUses = filterAdultMedicationLines(medication.fda_psych_uses, 12);
-  const adultOffLabel = filterAdultMedicationLines(medication.off_label_psych_uses, 12);
   const adultSideEffects = filterAdultMedicationLines(medication.common_side_effects, 16);
-  const adultInteractions = filterAdultMedicationLines(medication.psych_interactions, 16);
+  const formLines = (medication.formulations || []).slice(0, 8).map((form) => {
+    const label = String(form.label || form.dosage_form || 'Formulation').trim() || 'Formulation';
+    const strengths = filterAdultMedicationLines(form.strength_examples || [], 8).join(', ');
+    return strengths ? `${label}: ${strengths}` : `${label}: strengths unavailable`;
+  });
 
   const lines = [
     `Medication: ${medication.generic_name}${(medication.brand_names || []).length ? ` (${medication.brand_names.join(', ')})` : ''}`,
     'Population: Adult 18+',
-    `Class: ${medication.psych_class || 'Unclassified'}`,
-    `Reliability: ${reliabilityMeta.compactLabel}`,
-    `FDA psych uses: ${adultFdaUses.join('; ') || 'No adult summary available yet'}`,
-    `Common off-label psych uses: ${adultOffLabel.join('; ') || 'No adult summary available yet'}`,
+    `Class: ${medication.psych_class || 'Unclassified'} | Reliability: ${reliabilityMeta.compactLabel}`,
   ];
 
   if (dosing) {
     lines.push(`Dosing start/target/max: ${dosing.start || 'n/a'} / ${dosing.target || 'n/a'} / ${dosing.max || 'n/a'}`);
   } else {
-    lines.push('Dosing: Select formulation to view formulation-specific psych dosing.');
+    lines.push('Dosing start/target/max: Adult dosing unavailable in sources.');
   }
 
-  lines.push(`Common side effects: ${adultSideEffects.join('; ') || 'No adult summary available yet'}`);
-  lines.push(`Psych interaction guide: ${adultInteractions.join('; ') || 'No adult summary available yet'}`);
+  lines.push(`Formulations/strengths: ${formLines.length ? formLines.join(' | ') : 'No formulation data available.'}`);
+  lines.push(`Common side effects: ${adultSideEffects.join('; ') || 'No adult side-effect summary available.'}`);
+  lines.push(`MOA/NT: ${medication.moa_summary || 'No mechanism summary available.'}`);
 
   return lines.join('\n');
+}
+
+function buildMedicationFormulationQuickRows(formulations = []) {
+  const rows = [];
+  formulations.forEach((form) => {
+    if (!form || form.active === false) return;
+    const label = String(form.label || form.dosage_form || 'Formulation').trim() || 'Formulation';
+    const route = String(form.route || '').trim();
+    const strengths = filterAdultMedicationLines(form.strength_examples || [], 10);
+    rows.push({
+      id: String(form.formulation_id || ''),
+      label: route ? `${label} (${route})` : label,
+      strengths,
+    });
+  });
+  return rows.slice(0, 16);
 }
 
 async function copyMedicationSummary(context) {
@@ -4226,7 +4334,7 @@ function renderMedicationDetail() {
     return;
   }
 
-  const { medication, formulations, selectedFormulation, availableRoutes } = context;
+  const { medication, formulations, selectedFormulation } = context;
   const favorites = new Set(getMedicationFavorites());
   const isFavorite = favorites.has(medication.id);
   const reliabilityMeta = getMedicationReliabilityMeta(medication);
@@ -4235,38 +4343,21 @@ function renderMedicationDetail() {
   const hasMultipleFormulations = formulations.length > 1;
   const shouldPromptForFormulation = hasMultipleFormulations && !selectedFormulation;
   const dosing = selectedFormulation ? normalizeAdultDosing(selectedFormulation.common_adult_psych_dosing || {}) : null;
-  const fdaUses = filterAdultMedicationLines(medication.fda_psych_uses, 14);
-  const offLabelUses = filterAdultMedicationLines(medication.off_label_psych_uses, 14);
+  const formulationRows = buildMedicationFormulationQuickRows(formulations);
+  const mechanism = String(medication.moa_summary || '').trim();
 
   const formulationButtons = formulations.map((form) => {
     const active = selectedFormulation && selectedFormulation.formulation_id === form.formulation_id;
     return `<button type="button" class="med-control-btn${active ? ' active' : ''}" data-formulation-id="${escapeHtml(form.formulation_id)}">${escapeHtml(form.label || form.dosage_form || 'Formulation')}</button>`;
   }).join('');
 
-  const routeButtons = availableRoutes.map((route) => {
-    const active = state.selectedRoute === route;
-    return `<button type="button" class="med-control-btn${active ? ' active' : ''}" data-route="${escapeHtml(route)}">${escapeHtml(route)}</button>`;
-  }).join('');
-
-  const sourceLinks = Array.from(new Set([
-    ...(medication.source_links || []),
-    ...((selectedFormulation && selectedFormulation.source_links) || []),
-  ]));
-
   const sideEffects = filterAdultMedicationLines([
     ...(medication.common_side_effects || []),
     ...((selectedFormulation && selectedFormulation.formulation_specific_side_effect_notes) || []),
   ], 18);
-
-  const interactions = filterAdultMedicationLines([
-    ...(medication.psych_interactions || []),
-    ...((selectedFormulation && selectedFormulation.formulation_specific_interactions) || []),
-  ], 18);
-
-  const pearls = filterAdultMedicationLines([
-    ...(medication.clinical_pearls || []),
-    ...((selectedFormulation && selectedFormulation.formulation_specific_pearls) || []),
-  ], 18);
+  const reliabilityBadge = !reliabilityMeta.isHighReliability
+    ? `<span class="med-badge med-status-badge med-status-badge-${escapeHtml(reliabilityMeta.tone)}">${escapeHtml(reliabilityMeta.compactLabel)}</span>`
+    : '';
 
   els.medDetailContent.innerHTML = `
     <article class="med-card-header">
@@ -4276,87 +4367,47 @@ function renderMedicationDetail() {
           <p class="med-header-sub">${escapeHtml((medication.brand_names || []).join(', ') || 'No brand aliases listed')}</p>
         </div>
         <div class="med-control-row">
-          ${sparseProfile ? `<button type="button" class="med-control-btn" data-action="fetch-supplemental">${medicationFallbackFetchRunning ? 'Refreshing…' : 'Fetch supplemental data'}</button>` : ''}
+          ${sparseProfile ? `<button type="button" class="med-control-btn" data-action="fetch-supplemental">${medicationFallbackFetchRunning ? 'Refreshing…' : 'Fetch fallback'}</button>` : ''}
           <button type="button" class="med-control-btn" data-action="copy-summary">Copy summary</button>
           <button type="button" class="med-control-btn${isFavorite ? ' active' : ''}" data-action="toggle-favorite">${isFavorite ? 'Favorited' : 'Favorite'}</button>
         </div>
       </div>
       <div class="med-badge-row">
-        <span class="med-badge med-status-badge med-status-badge-${escapeHtml(reliabilityMeta.tone)}">${escapeHtml(reliabilityMeta.compactLabel)}</span>
         <span class="med-badge">Adult 18+</span>
         <span class="med-badge">${escapeHtml(medication.psych_class || 'Unclassified')}</span>
-        ${(medication.formulations || []).slice(0, 8).map((form) => `<span class="med-badge">${escapeHtml(form.label || form.dosage_form || 'Formulation')}</span>`).join('')}
-        ${medication.newer_brand ? '<span class="med-badge med-badge-new">Newer brand</span>' : ''}
+        ${reliabilityBadge}
       </div>
-      ${reliabilityMeta.isHighReliability ? '' : '<p class="med-curation-note">This entry has lower confidence source coverage. Validate against official labeling before final decisions.</p>'}
-      ${sparseProfile ? '<p class="med-curation-note">Essential fields are sparse for this medication. Use "Fetch supplemental data" to pull free-source dosing and indication snippets.</p>' : ''}
+      ${reliabilityMeta.isHighReliability ? '' : '<p class="med-curation-note">Low-confidence profile.</p>'}
     </article>
 
     <section class="med-section">
-      <h3>FDA-Approved Psychiatric Uses</h3>
-      ${listHtml(fdaUses, 'No adult (18+) summary available yet.')}
-    </section>
-
-    <section class="med-section">
-      <h3>Common Psychiatric Off-Label Uses</h3>
-      ${listHtml(offLabelUses, 'No adult (18+) summary available yet.')}
-    </section>
-
-    <section class="med-section">
-      <h3>Psych Dosing Guide</h3>
-      ${shouldPromptForFormulation ? '<p>Select formulation to view formulation-specific psych dosing.</p>' : ''}
+      <h3>Adult Dosing (18+)</h3>
+      ${hasMultipleFormulations ? `<div class="med-control-row">${formulationButtons}</div>` : ''}
+      ${shouldPromptForFormulation ? '<p class="helper-text">Select formulation to view adult dosing.</p>' : ''}
       ${dosing ? `
         <div class="med-dosing-grid">
-          <div class="med-dose-card"><div class="med-dose-label">Start</div><div class="med-dose-value">${escapeHtml(dosing.start || 'Verify official source')}</div></div>
-          <div class="med-dose-card"><div class="med-dose-label">Target</div><div class="med-dose-value">${escapeHtml(dosing.target || 'Verify official source')}</div></div>
-          <div class="med-dose-card"><div class="med-dose-label">Max</div><div class="med-dose-value">${escapeHtml(dosing.max || 'Verify official source')}</div></div>
+          <div class="med-dose-card"><div class="med-dose-label">Start</div><div class="med-dose-value">${escapeHtml(dosing.start || 'Adult data unavailable')}</div></div>
+          <div class="med-dose-card"><div class="med-dose-label">Target</div><div class="med-dose-value">${escapeHtml(dosing.target || 'Adult data unavailable')}</div></div>
+          <div class="med-dose-card"><div class="med-dose-label">Max</div><div class="med-dose-value">${escapeHtml(dosing.max || 'Adult data unavailable')}</div></div>
         </div>
-        ${listHtml(selectedFormulation.titration_notes, 'No titration notes available yet.')}
-        ${listHtml(selectedFormulation.administration_notes, 'No administration notes available yet.')}
-      ` : ''}
+      ` : '<p class="helper-text">Adult dosing unavailable for this selection.</p>'}
     </section>
 
     <section class="med-section">
-      <h3>Common Formulations</h3>
-      <div class="med-control-row">${formulationButtons || '<p class="helper-text">No formulation data available.</p>'}</div>
+      <h3>Formulations + Strengths</h3>
+      ${formulationRows.length
+        ? `<ul>${formulationRows.map((row) => `<li><strong>${escapeHtml(row.label)}</strong>: ${escapeHtml(row.strengths.join(', ') || 'strengths unavailable')}</li>`).join('')}</ul>`
+        : '<p class="helper-text">No formulation/strength data available.</p>'}
     </section>
 
     <section class="med-section">
-      <h3>Route</h3>
-      ${availableRoutes.length > 1 ? `<div class="med-control-row">${routeButtons}</div>` : `<p>${escapeHtml(availableRoutes[0] || selectedFormulation?.route || 'Oral')}</p>`}
+      <h3>Common Side Effects</h3>
+      ${listHtml(sideEffects, 'No adult side-effect summary available.')}
     </section>
 
     <section class="med-section">
-      <h3>Psych Interaction Guide</h3>
-      ${listHtml(interactions, 'No adult (18+) interaction summary available yet.')}
-    </section>
-
-    <section class="med-section">
-      <h3>Most Common Side Effects</h3>
-      ${listHtml(sideEffects, 'No adult (18+) side effect summary available yet.')}
-      ${listHtml(filterAdultMedicationLines(medication.important_risks, 16), 'No adult (18+) serious risk summary available yet.')}
-    </section>
-
-    <section class="med-section">
-      <h3>Basic Neurotransmitter / Mechanism Of Action</h3>
-      <p>${escapeHtml(medication.moa_summary || 'No summary available yet.')}</p>
-    </section>
-
-    <section class="med-section">
-      <h3>Clinical Pearls</h3>
-      ${listHtml(pearls, 'No adult (18+) pearl summary available yet.')}
-    </section>
-
-    <section class="med-section">
-      <h3>Source + Freshness</h3>
-      <p>Reliability score: ${escapeHtml(String(reliabilityMeta.score))}/100 (${escapeHtml(reliabilityMeta.label)})</p>
-      <p>Reliability sources: ${escapeHtml(((medication.reliability_sources || []).join(', ')) || 'None captured yet')}</p>
-      <p>Last source sync: ${escapeHtml(medication.source_last_checked || 'Unknown')}</p>
-      <p>Editorial review: ${escapeHtml(medication.editorial_last_reviewed || 'Pending review')}</p>
-      <p>Review state: ${escapeHtml(medication.content_review_status || 'source scored')}</p>
-      <div class="med-links">
-        ${sourceLinks.length ? sourceLinks.map((url) => `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(url)}</a>`).join('') : '<span class="helper-text">No source links yet.</span>'}
-      </div>
+      <h3>MOA / NT</h3>
+      <p>${escapeHtml(mechanism || 'No mechanism summary available.')}</p>
     </section>
   `;
 
@@ -5032,6 +5083,15 @@ async function fetchMedicationFallbackRecord(rawTerm) {
     ...listOrEmpty(bestOpenFda && bestOpenFda.dosage_and_administration),
     ...(dailyMedData && dailyMedData.dosage ? dailyMedData.dosage : []),
   ]);
+  const effectiveAdultIndications = filterAdultMedicationLines(effectiveIndications, 8);
+  const adultReactions = filterAdultMedicationLines(reactions, 8);
+  const adultWarnings = filterAdultMedicationLines(warnings, 8);
+  const adultInteractions = filterAdultMedicationLines(interactions, 8);
+  const adultPearls = filterAdultMedicationLines(trimMedicationSnippets([
+    'Runtime supplemental profile from free public sources. Confirm clinically before prescribing.',
+    medlinePlusData && medlinePlusData.summary ? medlinePlusData.summary : '',
+    ...(dailyMedData && dailyMedData.dosage ? dailyMedData.dosage.slice(0, 1) : []),
+  ], 4), 4);
 
   const sourceSignals = [];
   if (bestOpenFda) sourceSignals.push('openFDA');
@@ -5071,17 +5131,13 @@ async function fetchMedicationFallbackRecord(rawTerm) {
     psych_class: 'Unclassified',
     active: true,
     newer_brand: false,
-    fda_psych_uses: effectiveIndications,
+    fda_psych_uses: effectiveAdultIndications,
     off_label_psych_uses: [],
     moa_summary: mechanism,
-    common_side_effects: reactions,
-    important_risks: warnings,
-    psych_interactions: interactions,
-    clinical_pearls: trimMedicationSnippets([
-      'Runtime supplemental profile from free public sources. Confirm clinically before prescribing.',
-      medlinePlusData && medlinePlusData.summary ? medlinePlusData.summary : '',
-      ...(dailyMedData && dailyMedData.dosage ? dailyMedData.dosage.slice(0, 1) : []),
-    ], 4),
+    common_side_effects: adultReactions,
+    important_risks: adultWarnings,
+    psych_interactions: adultInteractions,
+    clinical_pearls: adultPearls,
     source_links: sourceLinks,
     source_last_checked: new Date().toISOString(),
     editorial_last_reviewed: null,
@@ -5089,7 +5145,7 @@ async function fetchMedicationFallbackRecord(rawTerm) {
     missing_data_flags: uniqueTrimmedStrings([
       'curated psych review pending',
       chooseFirstMeaningful([parsedDosing.start]).toLowerCase().includes('verify') ? 'psych dosing verification required' : '',
-      effectiveIndications.length ? '' : 'indication summary pending',
+      effectiveAdultIndications.length ? '' : 'indication summary pending',
       openFdaError ? 'openFDA unavailable during runtime fetch' : '',
     ], 12),
     reliability_score: reliabilityScore,
@@ -6029,6 +6085,12 @@ function attachEventListeners() {
   if (els.driveCleanupBtn) {
     els.driveCleanupBtn.addEventListener('click', () => {
       runManualDriveCleanup();
+    });
+  }
+
+  if (els.driveSnapshotBtn) {
+    els.driveSnapshotBtn.addEventListener('click', () => {
+      runDriveSnapshot().catch(() => {});
     });
   }
 

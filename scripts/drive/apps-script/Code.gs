@@ -1,6 +1,7 @@
 const APP_ROOT_DEFAULT = 'Note App';
 const MANIFEST_PATH = 'config/drive-manifest.json';
 const MED_REFRESH_QUEUE_PATH = 'logs/sync/med-refresh-requests.json';
+const DRIVE_MED_RUNTIME_FALLBACKS_PATH = 'data/meds/review/runtime-fallbacks.json';
 const PATIENT_DRAFT_CURRENT_PATH = 'data/draft/current.json';
 const PATIENT_DRAFT_RECENT_PATH = 'data/draft/recent-patients.json';
 const PATIENT_DRAFT_USERS_PREFIX = 'data/draft/users/';
@@ -10,17 +11,23 @@ const ROOT_SHARED_DRIVE_ID_PROPERTY = 'DRIVE_ROOT_SHARED_DRIVE_ID';
 const MANIFEST_FILE_ID_PROPERTY = 'DRIVE_MANIFEST_FILE_ID';
 const PATH_INDEX_PROPERTY = 'DRIVE_PATH_INDEX';
 const REQUIRED_SHARED_DRIVE_ID_PROPERTY = 'DRIVE_REQUIRED_SHARED_DRIVE_ID';
+const REQUIRED_SHARED_ROOT_FOLDER_ID_PROPERTY = 'DRIVE_SHARED_ROOT_FOLDER_ID';
 const ALLOWED_USER_EMAILS_PROPERTY = 'DRIVE_ALLOWED_USER_EMAILS';
 const SERVICE_TOKEN_PROPERTY = 'DRIVE_SERVICE_TOKEN';
 const LEGACY_OWNER_TOKEN_PROPERTY = 'DRIVE_OWNER_TOKEN';
-const APP_BUILD_ID = '20260311-drive-reset-v1';
+const APP_BUILD_ID = '20260311-drive-reset-v2';
 const PREFLIGHT_STATUS = {
   OK: 'ok',
   ROOT_MISSING: 'root_missing',
+  ROOT_ID_MISSING: 'root_id_missing',
+  ROOT_ID_INVALID: 'root_id_invalid',
+  ROOT_NOT_IN_REQUIRED_DRIVE: 'root_not_in_required_drive',
+  SCOPE_UNVERIFIABLE: 'scope_unverifiable',
   MANIFEST_MISSING: 'manifest_missing',
   IDENTITY_MISSING: 'identity_missing',
   VERSION_MISMATCH: 'version_mismatch',
 };
+const CLEANUP_SNAPSHOT_DIR = 'backups/cleanup-snapshots';
 const DEFAULT_ALLOWED_USER_EMAILS = [
   'nick@astrapsychiatry.com',
   'kris@astrapsychiatry.com',
@@ -76,6 +83,8 @@ function handleAction_(action, payload) {
       return handleMyDriveCondense_(payload);
     case 'cleanup.preview':
       return handleCleanupPreview_(payload);
+    case 'cleanup.snapshot':
+      return handleCleanupSnapshot_(payload);
     case 'cleanup.apply':
       return handleCleanupApply_(payload);
     case 'manifest.get':
@@ -102,6 +111,7 @@ function enforceOwnerWrite_(action, payload) {
     bootstrap: true,
     'drive.repair': true,
     'mydrive.condense': true,
+    'cleanup.snapshot': true,
     'cleanup.apply': true,
     'file.put': true,
     'backup.append': true,
@@ -142,6 +152,10 @@ function enforceOwnerWrite_(action, payload) {
     return;
   }
 
+  if (action === 'cleanup.snapshot' && isAllowlisted) {
+    return;
+  }
+
   if (action === 'drive.repair' && isAllowlisted) {
     return;
   }
@@ -174,6 +188,7 @@ function handleHealth_(payload) {
   const resolvedUserEmail = normalizeEmail_(resolveEffectiveUserEmail_(payload) || '');
   const rootFolderName = normalizeText_(payload.rootFolderName || APP_ROOT_DEFAULT) || APP_ROOT_DEFAULT;
   const requiredSharedDriveId = getRequiredSharedDriveId_();
+  const requiredRootFolderId = getRequiredSharedRootFolderId_();
   const sharedDriveId = requiredSharedDriveId || normalizeText_(payload.sharedDriveId || '');
   const clientBuildId = normalizeText_((payload.client && payload.client.appBuildId) || payload.clientBuildId || '');
   const preflight = evaluateDrivePreflight_({
@@ -189,9 +204,11 @@ function handleHealth_(payload) {
     tokenConfigured: tokenConfigured,
     appBuildId: APP_BUILD_ID,
     requiredSharedDriveId: requiredSharedDriveId,
+    requiredRootFolderId: requiredRootFolderId,
     resolvedUserEmail: resolvedUserEmail,
     rootFolderName: rootFolderName,
     canonicalRoot: preflight.canonicalRoot || null,
+    resolvedRootFolderId: preflight.resolvedRootFolderId || '',
     preflightStatus: preflight.code || PREFLIGHT_STATUS.ROOT_MISSING,
     preflightReason: preflight.reason || '',
     allowlistedUsers: allowlist,
@@ -203,6 +220,7 @@ function handleDriveRepair_(payload) {
   const sharedDriveId = resolveSharedDriveId_(payload);
   const rootFolderName = normalizeText_(payload.rootFolderName || APP_ROOT_DEFAULT) || APP_ROOT_DEFAULT;
   const repairedBy = resolveAllowlistedUserEmail_(payload);
+  const requiredRootFolderId = getRequiredSharedRootFolderId_();
   resetCachedDrivePointers_();
 
   const bootstrap = handleBootstrap_({
@@ -224,6 +242,8 @@ function handleDriveRepair_(payload) {
     repairedAt: new Date().toISOString(),
     repairedBy: repairedBy,
     appBuildId: APP_BUILD_ID,
+    requiredRootFolderId: requiredRootFolderId,
+    resolvedRootFolderId: preflight.resolvedRootFolderId || '',
     preflightStatus: preflight.code || PREFLIGHT_STATUS.ROOT_MISSING,
     preflightReason: preflight.reason || '',
     canonicalRoot: preflight.canonicalRoot || null,
@@ -237,22 +257,12 @@ function handleBootstrap_(payload) {
   const requestedRootFolderId = normalizeText_(payload.rootFolderId || '');
   ensureDefaultAllowlist_();
 
-  let root = null;
-  if (requestedRootFolderId) {
-    try {
-      const requestedMeta = getFileSafe_(requestedRootFolderId);
-      if (!sharedDriveId || fileBelongsToSharedDrive_(requestedMeta, sharedDriveId)) {
-        root = requestedMeta;
-        saveStoredRootFolder_(root.id, sharedDriveId, rootFolderName);
-      }
-    } catch (error) {
-      // fall through to root discovery/create flow
-    }
-  }
-
-  if (!root) {
-    root = getOrCreateRootFolder_(sharedDriveId, rootFolderName);
-  }
+  const root = resolveConfiguredRootFolder_({
+    sharedDriveId: sharedDriveId,
+    rootFolderName: rootFolderName,
+    requestedRootFolderId: requestedRootFolderId,
+    requireRootId: true,
+  });
   const createdFolders = [];
 
   FOLDER_STRUCTURE.forEach(function (folderPath) {
@@ -288,6 +298,9 @@ function handleBootstrap_(payload) {
 function handleRootAudit_(payload) {
   const sharedDriveId = resolveSharedDriveId_(payload);
   const rootFolderName = normalizeText_(payload.rootFolderName || APP_ROOT_DEFAULT) || APP_ROOT_DEFAULT;
+  const requiredRootFolderId = getRequiredSharedRootFolderId_();
+  const validation = validateRequiredRootBinding_(sharedDriveId, requiredRootFolderId);
+  const resolvedRoot = validation.rootMeta || null;
   const escaped = escapeQueryText_(rootFolderName);
   const query = "trashed=false and mimeType='application/vnd.google-apps.folder' and title='" + escaped + "'";
   const requiredSharedDriveId = getRequiredSharedDriveId_();
@@ -323,13 +336,29 @@ function handleRootAudit_(payload) {
   const expectedMatches = roots.filter(function (item) {
     return item.inExpectedSharedDrive;
   });
-  const canonical = expectedMatches.length ? selectStableRootAuditItem_(expectedMatches) : null;
+  const canonical = resolvedRoot
+    ? {
+      id: String(resolvedRoot.id || ''),
+      name: String(resolvedRoot.title || resolvedRoot.name || ''),
+      driveId: normalizeText_((resolvedRoot.driveId || resolvedRoot.teamDriveId) || ''),
+      parents: getFileParentIds_(resolvedRoot),
+      createdAt: String(resolvedRoot.createdDate || resolvedRoot.createdTime || ''),
+      modifiedAt: String(resolvedRoot.modifiedDate || resolvedRoot.modifiedTime || ''),
+      inExpectedSharedDrive: true,
+      isMyDriveRootCandidate: false,
+      url: toFolderUrl_(resolvedRoot.id),
+    }
+    : (expectedMatches.length ? selectStableRootAuditItem_(expectedMatches) : null);
 
   return {
     rootFolderName: rootFolderName,
     requiredSharedDriveId: requiredSharedDriveId,
+    requiredRootFolderId: requiredRootFolderId,
     expectedSharedDriveId: expectedDriveId,
     canonicalRoot: canonical || null,
+    resolvedRootFolderId: canonical && canonical.id ? canonical.id : '',
+    preflightStatus: validation.code || PREFLIGHT_STATUS.OK,
+    preflightReason: validation.reason || '',
     duplicateRoots: roots.filter(function (item) {
       return canonical ? item.id !== canonical.id : true;
     }),
@@ -342,12 +371,15 @@ function evaluateDrivePreflight_(options) {
   const rootFolderName = normalizeText_((options && options.rootFolderName) || APP_ROOT_DEFAULT) || APP_ROOT_DEFAULT;
   const resolvedUserEmail = normalizeEmail_((options && options.resolvedUserEmail) || '');
   const clientBuildId = normalizeText_((options && options.clientBuildId) || '');
+  const requiredRootFolderId = getRequiredSharedRootFolderId_();
 
   if (!resolvedUserEmail || !isEmailAllowlisted_(resolvedUserEmail)) {
     return {
       code: PREFLIGHT_STATUS.IDENTITY_MISSING,
       reason: 'Active user identity is unavailable or not in DRIVE_ALLOWED_USER_EMAILS.',
       canonicalRoot: null,
+      requiredRootFolderId: requiredRootFolderId,
+      resolvedRootFolderId: '',
     };
   }
 
@@ -356,57 +388,57 @@ function evaluateDrivePreflight_(options) {
       code: PREFLIGHT_STATUS.VERSION_MISMATCH,
       reason: 'Client build does not match Apps Script deployment build.',
       canonicalRoot: null,
+      requiredRootFolderId: requiredRootFolderId,
+      resolvedRootFolderId: '',
     };
   }
 
   if (!sharedDriveId) {
     return {
-      code: PREFLIGHT_STATUS.ROOT_MISSING,
+      code: PREFLIGHT_STATUS.SCOPE_UNVERIFIABLE,
       reason: 'Required shared drive ID is not configured.',
       canonicalRoot: null,
+      requiredRootFolderId: requiredRootFolderId,
+      resolvedRootFolderId: '',
     };
   }
 
-  let audit = null;
-  try {
-    audit = handleRootAudit_({
-      sharedDriveId: sharedDriveId,
-      rootFolderName: rootFolderName,
-    });
-  } catch (error) {
+  const rootValidation = validateRequiredRootBinding_(sharedDriveId, requiredRootFolderId);
+  if (rootValidation.code !== PREFLIGHT_STATUS.OK) {
     return {
-      code: PREFLIGHT_STATUS.ROOT_MISSING,
-      reason: 'Unable to audit shared root: ' + String(error && error.message ? error.message : error),
+      code: rootValidation.code,
+      reason: rootValidation.reason,
+      canonicalRoot: rootValidation.rootMeta || null,
+      requiredRootFolderId: requiredRootFolderId,
+      resolvedRootFolderId: rootValidation.rootMeta && rootValidation.rootMeta.id ? String(rootValidation.rootMeta.id) : '',
+    };
+  }
+
+  const canonicalRootMeta = rootValidation.rootMeta;
+  if (!canonicalRootMeta || !canonicalRootMeta.id) {
+    return {
+      code: PREFLIGHT_STATUS.ROOT_ID_INVALID,
+      reason: 'Configured shared root folder is missing or invalid.',
       canonicalRoot: null,
+      requiredRootFolderId: requiredRootFolderId,
+      resolvedRootFolderId: '',
     };
   }
 
-  const canonicalRoot = audit && audit.canonicalRoot ? audit.canonicalRoot : null;
-  if (!canonicalRoot || !canonicalRoot.id) {
-    return {
-      code: PREFLIGHT_STATUS.ROOT_MISSING,
-      reason: 'Canonical shared root is missing or invalid.',
-      canonicalRoot: null,
-    };
-  }
-
-  let rootMeta = null;
-  try {
-    rootMeta = getRootFolderForRead_(sharedDriveId, rootFolderName);
-  } catch (error) {
-    rootMeta = null;
-  }
-  if (!rootMeta || !rootMeta.id) {
-    return {
-      code: PREFLIGHT_STATUS.ROOT_MISSING,
-      reason: 'Shared root metadata could not be resolved.',
-      canonicalRoot: canonicalRoot,
-    };
-  }
+  saveStoredRootFolder_(canonicalRootMeta.id, sharedDriveId, rootFolderName);
+  const canonicalRoot = {
+    id: String(canonicalRootMeta.id || ''),
+    name: String(canonicalRootMeta.title || canonicalRootMeta.name || rootFolderName || ''),
+    driveId: normalizeText_((canonicalRootMeta.driveId || canonicalRootMeta.teamDriveId) || ''),
+    parents: getFileParentIds_(canonicalRootMeta),
+    createdAt: String(canonicalRootMeta.createdDate || canonicalRootMeta.createdTime || ''),
+    modifiedAt: String(canonicalRootMeta.modifiedDate || canonicalRootMeta.modifiedTime || ''),
+    url: toFolderUrl_(canonicalRootMeta.id),
+  };
 
   let existingManifest = null;
   try {
-    existingManifest = getExistingManifestFile_(rootMeta.id, sharedDriveId);
+    existingManifest = getExistingManifestFile_(canonicalRootMeta.id, sharedDriveId);
   } catch (error) {
     existingManifest = null;
   }
@@ -415,6 +447,8 @@ function evaluateDrivePreflight_(options) {
       code: PREFLIGHT_STATUS.MANIFEST_MISSING,
       reason: 'Drive manifest is missing under canonical shared root.',
       canonicalRoot: canonicalRoot,
+      requiredRootFolderId: requiredRootFolderId,
+      resolvedRootFolderId: canonicalRoot.id,
     };
   }
 
@@ -422,6 +456,8 @@ function evaluateDrivePreflight_(options) {
     code: PREFLIGHT_STATUS.OK,
     reason: '',
     canonicalRoot: canonicalRoot,
+    requiredRootFolderId: requiredRootFolderId,
+    resolvedRootFolderId: canonicalRoot.id,
   };
 }
 
@@ -492,10 +528,10 @@ function handleCleanupPreview_(payload) {
   const sharedDriveId = resolveSharedDriveId_(payload);
   const rootFolderName = normalizeText_(payload.rootFolderName || APP_ROOT_DEFAULT) || APP_ROOT_DEFAULT;
   const requestedBy = resolveAllowlistedUserEmail_(payload);
-  const maxItems = Math.max(1, Math.min(15000, Number(payload && payload.maxItems ? payload.maxItems : 10000) || 10000));
+  const maxItems = Math.max(1, Math.min(60000, Number(payload && payload.maxItems ? payload.maxItems : 20000) || 20000));
   const sampleSize = Math.max(5, Math.min(50, Number(payload && payload.sampleSize ? payload.sampleSize : 20) || 20));
   const protectedIds = buildProtectedDriveIds_(sharedDriveId, rootFolderName);
-  const candidates = findCleanupCandidatesV2_(rootFolderName, maxItems, protectedIds, sharedDriveId);
+  const candidates = findCleanupCandidatesV3_(rootFolderName, maxItems, protectedIds, sharedDriveId);
   const summary = summarizeCleanupCandidates_(candidates);
 
   return {
@@ -509,14 +545,86 @@ function handleCleanupPreview_(payload) {
   };
 }
 
+function handleCleanupSnapshot_(payload) {
+  const sharedDriveId = resolveSharedDriveId_(payload);
+  const rootFolderName = normalizeText_(payload.rootFolderName || APP_ROOT_DEFAULT) || APP_ROOT_DEFAULT;
+  const requestedBy = resolveAllowlistedUserEmail_(payload);
+  const root = resolveConfiguredRootFolder_({
+    sharedDriveId: sharedDriveId,
+    rootFolderName: rootFolderName,
+    requireRootId: true,
+  });
+  const manifestBundle = loadManifest_(root.id, sharedDriveId, rootFolderName, payload.ownerEmail || '');
+  const nowIso = new Date().toISOString();
+  const userKey = userPathKeyFromEmail_(requestedBy);
+  const snapshotName = ('cleanup-snapshot-' + Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyyMMdd-HHmmss') + '-' + sanitizeFileToken_(userKey || 'user') + '.json');
+
+  const scopedCurrentPath = resolveScopedPathForPayload_(PATIENT_DRAFT_CURRENT_PATH, payload);
+  const scopedRecentPath = resolveScopedPathForPayload_(PATIENT_DRAFT_RECENT_PATH, payload);
+  const targetPaths = [
+    scopedCurrentPath,
+    scopedRecentPath,
+    DRIVE_MED_RUNTIME_FALLBACKS_PATH,
+    MANIFEST_PATH,
+  ];
+  const files = [];
+
+  targetPaths.forEach(function (path) {
+    const resolved = resolvePathFile_(manifestBundle.manifest, root.id, path, sharedDriveId, false, false);
+    if (!resolved || !resolved.fileId) {
+      files.push({ path: path, exists: false, id: '', revision: '', checksum: '', content: '' });
+      return;
+    }
+    const meta = getFileMeta_(resolved.fileId);
+    files.push({
+      path: path,
+      exists: true,
+      id: resolved.fileId,
+      revision: String(meta.version || ''),
+      checksum: String(meta.md5Checksum || ''),
+      updatedAt: String(meta.modifiedDate || meta.modifiedTime || ''),
+      content: readFileContent_(resolved.fileId),
+    });
+  });
+
+  const snapshotPayload = {
+    generatedAt: nowIso,
+    generatedBy: requestedBy,
+    appBuildId: APP_BUILD_ID,
+    requiredSharedDriveId: getRequiredSharedDriveId_(),
+    requiredRootFolderId: getRequiredSharedRootFolderId_(),
+    resolvedRootFolderId: root.id,
+    files: files,
+  };
+
+  const snapshotFolderId = ensureFolderPath_(root.id, CLEANUP_SNAPSHOT_DIR, sharedDriveId, []);
+  const created = insertFileSafe_({
+    title: snapshotName,
+    mimeType: 'application/json',
+    parents: [{ id: snapshotFolderId }],
+  }, Utilities.newBlob(JSON.stringify(snapshotPayload, null, 2), 'application/json', snapshotName), sharedDriveId, root.id);
+
+  return {
+    mode: 'snapshot',
+    requestedBy: requestedBy,
+    generatedAt: nowIso,
+    snapshotFileId: String(created.id || ''),
+    snapshotFileName: String(created.title || created.name || snapshotName),
+    snapshotFileUrl: toFileUrl_(created.id),
+    snapshotPath: CLEANUP_SNAPSHOT_DIR + '/' + snapshotName,
+    fileCount: files.filter(function (entry) { return entry.exists; }).length,
+    missingCount: files.filter(function (entry) { return !entry.exists; }).length,
+  };
+}
+
 function handleCleanupApply_(payload) {
   const sharedDriveId = resolveSharedDriveId_(payload);
   const rootFolderName = normalizeText_(payload.rootFolderName || APP_ROOT_DEFAULT) || APP_ROOT_DEFAULT;
   const requestedBy = resolveAllowlistedUserEmail_(payload);
-  const maxItems = Math.max(1, Math.min(15000, Number(payload && payload.maxItems ? payload.maxItems : 10000) || 10000));
+  const maxItems = Math.max(1, Math.min(60000, Number(payload && payload.maxItems ? payload.maxItems : 20000) || 20000));
   const batchSize = Math.max(10, Math.min(500, Number(payload && payload.batchSize ? payload.batchSize : 250) || 250));
   const protectedIds = buildProtectedDriveIds_(sharedDriveId, rootFolderName);
-  const candidates = findCleanupCandidatesV2_(rootFolderName, maxItems, protectedIds, sharedDriveId);
+  const candidates = findCleanupCandidatesV3_(rootFolderName, maxItems, protectedIds, sharedDriveId);
   const batch = candidates.slice(0, batchSize);
   const trashed = [];
   const errors = [];
@@ -542,7 +650,7 @@ function handleCleanupApply_(payload) {
     }
   });
 
-  const remaining = findCleanupCandidatesV2_(rootFolderName, maxItems, protectedIds, sharedDriveId);
+  const remaining = findCleanupCandidatesV3_(rootFolderName, maxItems, protectedIds, sharedDriveId);
   return {
     mode: 'apply',
     requestedBy: requestedBy,
@@ -583,22 +691,79 @@ function buildCleanupProfiles_(rootFolderName) {
   return out;
 }
 
-function findCleanupCandidatesV2_(rootFolderName, maxItems, protectedIds, sharedDriveId) {
+function findCleanupCandidatesV3_(rootFolderName, maxItems, protectedIds, sharedDriveId) {
   const profiles = buildCleanupProfiles_(rootFolderName);
-  const groups = [];
-  const scanTarget = Math.max(200, Math.min(15000, Number(maxItems || 10000) || 10000));
+  const protectedMap = protectedIds || {};
+  const scanTarget = Math.max(500, Math.min(60000, Number(maxItems || 20000) || 20000));
+  const perQueryLimit = Math.max(500, Math.min(5000, scanTarget));
+  const rootGroups = [];
+  const fileGroups = [];
+  const folderRootIds = {};
 
   profiles.forEach(function (profileName) {
-    groups.push(findMyDriveCleanupCandidates_(profileName, '', {
-      includeUntitledFiles: true,
-      includeUntitledFolders: true,
-      maxItems: scanTarget,
-      archiveFolderName: '',
-    }));
+    const escaped = escapeQueryText_(profileName);
+    const exactFolderQuery = "trashed=false and mimeType='application/vnd.google-apps.folder' and title='" + escaped + "'";
+    const containsFolderQuery = "trashed=false and mimeType='application/vnd.google-apps.folder' and title contains '" + escaped + "'";
+    rootGroups.push(listFilesAllSafe_({ q: exactFolderQuery, maxResults: 300 }, '', perQueryLimit));
+    rootGroups.push(listFilesAllSafe_({ q: containsFolderQuery, maxResults: 300 }, '', perQueryLimit));
   });
 
-  const merged = mergeCleanupItemsById_(groups);
-  const protectedMap = protectedIds || {};
+  const appRootFolders = mergeUniqueFilesById_(rootGroups)
+    .map(function (item) {
+      return toCleanupItem_(item);
+    })
+    .filter(function (item) {
+      if (!item || !item.id) return false;
+      if (!isSafeMyDriveCleanupCandidate_(item, sharedDriveId)) return false;
+      if (protectedMap[item.id]) return false;
+      if (item.kind !== 'folder') return false;
+      return isLikelyAppCleanupFolderName_(item.name, rootFolderName) || isLikelyAppRootFolder_(item.id);
+    });
+
+  appRootFolders.forEach(function (item) {
+    folderRootIds[item.id] = true;
+  });
+
+  const broadFileTerms = [
+    'current',
+    'recent-patients',
+    'drive-manifest',
+    'artifact-publish',
+    'note-builder',
+    'app-shell',
+    'astra clinical note builder',
+    'note app',
+  ];
+  broadFileTerms.forEach(function (term) {
+    const escaped = escapeQueryText_(term);
+    const query = "trashed=false and title contains '" + escaped + "'";
+    fileGroups.push(listFilesAllSafe_({ q: query, maxResults: 400 }, '', perQueryLimit));
+  });
+
+  const broadMatched = mergeUniqueFilesById_(fileGroups)
+    .map(function (item) { return toCleanupItem_(item); })
+    .filter(function (item) {
+      if (!item || !item.id) return false;
+      if (protectedMap[item.id]) return false;
+      if (!isSafeMyDriveCleanupCandidate_(item, sharedDriveId)) return false;
+      if (item.kind === 'folder') {
+        if (isLikelyAppCleanupFolderName_(item.name, rootFolderName) || isLikelyAppRootFolder_(item.id)) {
+          folderRootIds[item.id] = true;
+          return true;
+        }
+        return false;
+      }
+      return isLikelyAppCleanupFileName_(item.name)
+        || (isUntitledLikeName_(item.name) && isLikelyAppCleanupFileMime_(item.mimeType));
+    });
+
+  const descendants = collectCleanupDescendants_(Object.keys(folderRootIds), scanTarget, protectedMap, sharedDriveId);
+  const merged = mergeCleanupItemsById_([
+    appRootFolders,
+    broadMatched,
+    descendants,
+  ]);
+
   return merged
     .filter(function (item) {
       return item
@@ -607,6 +772,61 @@ function findCleanupCandidatesV2_(rootFolderName, maxItems, protectedIds, shared
         && isSafeMyDriveCleanupCandidate_(item, sharedDriveId);
     })
     .slice(0, scanTarget);
+}
+
+function toCleanupItem_(item) {
+  if (!item) return null;
+  const mimeType = normalizeText_(item.mimeType || '');
+  const kind = mimeType === 'application/vnd.google-apps.folder' ? 'folder' : 'file';
+  return {
+    id: String(item.id || ''),
+    name: String(item.title || item.name || ''),
+    kind: kind,
+    mimeType: mimeType,
+    driveId: normalizeText_((item.driveId || item.teamDriveId) || ''),
+    parents: resolveFileParentIds_(item),
+    createdAt: String(item.createdDate || item.createdTime || ''),
+    modifiedAt: String(item.modifiedDate || item.modifiedTime || ''),
+    url: kind === 'folder' ? toFolderUrl_(item.id) : toFileUrl_(item.id),
+  };
+}
+
+function collectCleanupDescendants_(rootFolderIds, maxItems, protectedMap, sharedDriveId) {
+  const queue = (rootFolderIds || []).map(function (id) {
+    return normalizeText_(id || '');
+  }).filter(Boolean);
+  const seenFolderIds = {};
+  const seenItemIds = {};
+  const out = [];
+  const limit = Math.max(500, Math.min(60000, Number(maxItems || 20000) || 20000));
+
+  while (queue.length && out.length < limit) {
+    const parentId = queue.shift();
+    if (!parentId || seenFolderIds[parentId]) continue;
+    seenFolderIds[parentId] = true;
+
+    const query = "trashed=false and '" + escapeQueryText_(parentId) + "' in parents";
+    const children = listFilesAllSafe_({
+      q: query,
+      maxResults: 300,
+    }, '', Math.max(200, limit - out.length));
+
+    children.forEach(function (child) {
+      if (!child || !child.id) return;
+      const item = toCleanupItem_(child);
+      if (!item || !item.id) return;
+      if (seenItemIds[item.id]) return;
+      if (protectedMap && protectedMap[item.id]) return;
+      if (!isSafeMyDriveCleanupCandidate_(item, sharedDriveId)) return;
+      seenItemIds[item.id] = true;
+      out.push(item);
+      if (item.kind === 'folder' && !seenFolderIds[item.id]) {
+        queue.push(item.id);
+      }
+    });
+  }
+
+  return out.slice(0, limit);
 }
 
 function isSafeMyDriveCleanupCandidate_(item, sharedDriveId) {
@@ -638,8 +858,8 @@ function isSafeMyDriveCleanupCandidate_(item, sharedDriveId) {
     const meta = getFileSafe_(id);
     return !fileBelongsToSharedDrive_(meta, normalizedSharedDriveId);
   } catch (error) {
-    // Fail-open for cleanup candidate discovery. Shared-drive records are already filtered above.
-    return true;
+    // Fail-closed for safety. Unknown scope items are not purged automatically.
+    return false;
   }
 }
 
@@ -704,7 +924,16 @@ function buildProtectedDriveIds_(sharedDriveId, rootFolderName) {
   const out = {};
   const sharedId = normalizeText_(sharedDriveId || '');
   const rootName = normalizeText_(rootFolderName || APP_ROOT_DEFAULT) || APP_ROOT_DEFAULT;
-  const root = getRootFolderForRead_(sharedId, rootName);
+  let root = null;
+  try {
+    root = resolveConfiguredRootFolder_({
+      sharedDriveId: sharedId,
+      rootFolderName: rootName,
+      requireRootId: true,
+    });
+  } catch (error) {
+    root = null;
+  }
   if (root && root.id) {
     out[String(root.id)] = true;
   }
@@ -1129,7 +1358,7 @@ function handleBackupAppend_(payload) {
     title: fileName,
     mimeType: 'application/json',
     parents: [{ id: backupFolderId }],
-  }, Utilities.newBlob(JSON.stringify(entry, null, 2), 'application/json', fileName), sharedDriveId);
+  }, Utilities.newBlob(JSON.stringify(entry, null, 2), 'application/json', fileName), sharedDriveId, root.id);
 
   return {
     backupId: file.id,
@@ -1331,7 +1560,8 @@ function resolvePathFile_(manifest, rootFolderId, targetPath, sharedDriveId, cre
   if (indexedId) {
     try {
       const indexedMeta = getFileSafe_(indexedId);
-      if (!sharedDriveId || fileBelongsToSharedDrive_(indexedMeta, sharedDriveId)) {
+      if ((!sharedDriveId || fileBelongsToSharedDrive_(indexedMeta, sharedDriveId))
+        && isFileInsideRequiredRootScope_(indexedMeta, rootFolderId, sharedDriveId, {})) {
         return { fileId: indexedId };
       }
       clearPathIndexEntry_(targetPath);
@@ -1345,7 +1575,8 @@ function resolvePathFile_(manifest, rootFolderId, targetPath, sharedDriveId, cre
   if (mapped && mapped.id) {
     try {
       const mappedMeta = getFileSafe_(mapped.id);
-      if (!sharedDriveId || fileBelongsToSharedDrive_(mappedMeta, sharedDriveId)) {
+      if ((!sharedDriveId || fileBelongsToSharedDrive_(mappedMeta, sharedDriveId))
+        && isFileInsideRequiredRootScope_(mappedMeta, rootFolderId, sharedDriveId, {})) {
         setPathIndexEntry_(targetPath, mapped.id);
         return { fileId: mapped.id };
       }
@@ -1385,7 +1616,7 @@ function resolvePathFile_(manifest, rootFolderId, targetPath, sharedDriveId, cre
       title: fileName,
       mimeType: 'text/plain',
       parents: [{ id: folderId }],
-    }, Utilities.newBlob('', 'text/plain', fileName), sharedDriveId);
+    }, Utilities.newBlob('', 'text/plain', fileName), sharedDriveId, rootFolderId);
   }
 
   const resolvedId = file ? String(file.id || '') : '';
@@ -1426,7 +1657,7 @@ function ensureFolderPath_(rootFolderId, folderPath, sharedDriveId, createdFolde
         title: segment,
         mimeType: 'application/vnd.google-apps.folder',
         parents: [{ id: parentId }],
-      }, null, sharedDriveId);
+      }, null, sharedDriveId, rootFolderId);
 
       if (createdFolders) {
         const createdPath = folderPathUntil_(segments, segment);
@@ -1497,59 +1728,108 @@ function findRootFolderCandidates_(rootFolderName, sharedDriveId, maxResults) {
   });
 }
 
-function getRootFolderForRead_(sharedDriveId, rootFolderName) {
-  const storedRoot = getStoredRootFolder_(sharedDriveId, rootFolderName);
-  if (storedRoot) {
-    return storedRoot;
+function validateRequiredRootBinding_(sharedDriveId, rootFolderId) {
+  const requiredRootId = normalizeText_(rootFolderId || '');
+  if (!requiredRootId) {
+    return {
+      code: PREFLIGHT_STATUS.ROOT_ID_MISSING,
+      reason: 'Script property DRIVE_SHARED_ROOT_FOLDER_ID is required.',
+      rootMeta: null,
+    };
   }
 
-  const candidates = findRootFolderCandidates_(rootFolderName, sharedDriveId, 30);
+  let rootMeta = null;
+  try {
+    rootMeta = getFileSafe_(requiredRootId);
+  } catch (error) {
+    return {
+      code: PREFLIGHT_STATUS.ROOT_ID_INVALID,
+      reason: 'Configured DRIVE_SHARED_ROOT_FOLDER_ID is invalid or inaccessible: ' + String(error && error.message ? error.message : error),
+      rootMeta: null,
+    };
+  }
 
-  if (!candidates.length) {
+  if (!rootMeta || rootMeta.mimeType !== 'application/vnd.google-apps.folder') {
+    return {
+      code: PREFLIGHT_STATUS.ROOT_ID_INVALID,
+      reason: 'Configured DRIVE_SHARED_ROOT_FOLDER_ID does not resolve to a folder.',
+      rootMeta: null,
+    };
+  }
+
+  const requiredDriveId = normalizeText_(sharedDriveId || '');
+  if (requiredDriveId) {
+    try {
+      if (!fileBelongsToSharedDrive_(rootMeta, requiredDriveId)) {
+        return {
+          code: PREFLIGHT_STATUS.ROOT_NOT_IN_REQUIRED_DRIVE,
+          reason: 'Configured DRIVE_SHARED_ROOT_FOLDER_ID is not inside DRIVE_REQUIRED_SHARED_DRIVE_ID.',
+          rootMeta: rootMeta,
+        };
+      }
+    } catch (error) {
+      return {
+        code: PREFLIGHT_STATUS.SCOPE_UNVERIFIABLE,
+        reason: 'Unable to verify shared-drive scope for configured root folder: ' + String(error && error.message ? error.message : error),
+        rootMeta: null,
+      };
+    }
+  }
+
+  return {
+    code: PREFLIGHT_STATUS.OK,
+    reason: '',
+    rootMeta: rootMeta,
+  };
+}
+
+function resolveConfiguredRootFolder_(options) {
+  const sharedDriveId = normalizeText_((options && options.sharedDriveId) || '');
+  const rootFolderName = normalizeText_((options && options.rootFolderName) || APP_ROOT_DEFAULT) || APP_ROOT_DEFAULT;
+  const requestedRootFolderId = normalizeText_((options && options.requestedRootFolderId) || '');
+  const requireRootId = !(options && options.requireRootId === false);
+  const configuredRootFolderId = getRequiredSharedRootFolderId_();
+
+  if (configuredRootFolderId && requestedRootFolderId && configuredRootFolderId !== requestedRootFolderId) {
+    throw new Error('Requested root folder does not match configured DRIVE_SHARED_ROOT_FOLDER_ID.');
+  }
+
+  const effectiveRootId = configuredRootFolderId || requestedRootFolderId;
+  if (!effectiveRootId) {
+    if (requireRootId) {
+      throw new Error('DRIVE_SHARED_ROOT_FOLDER_ID is required.');
+    }
     return null;
   }
 
-  const selected = selectStableFolder_(candidates);
-  saveStoredRootFolder_(selected.id, sharedDriveId, rootFolderName);
-  return selected;
+  const validation = validateRequiredRootBinding_(sharedDriveId, effectiveRootId);
+  if (validation.code !== PREFLIGHT_STATUS.OK || !validation.rootMeta || !validation.rootMeta.id) {
+    throw new Error(validation.reason || 'Unable to resolve configured shared root folder.');
+  }
+
+  const rootMeta = validation.rootMeta;
+  saveStoredRootFolder_(String(rootMeta.id), sharedDriveId, rootFolderName || String(rootMeta.title || rootMeta.name || APP_ROOT_DEFAULT));
+  return rootMeta;
+}
+
+function getRootFolderForRead_(sharedDriveId, rootFolderName) {
+  try {
+    return resolveConfiguredRootFolder_({
+      sharedDriveId: sharedDriveId,
+      rootFolderName: rootFolderName,
+      requireRootId: true,
+    });
+  } catch (error) {
+    return null;
+  }
 }
 
 function getOrCreateRootFolder_(sharedDriveId, rootFolderName) {
-  const storedRoot = getRootFolderForRead_(sharedDriveId, rootFolderName);
-  if (storedRoot) {
-    return storedRoot;
-  }
-
-  const candidates = findRootFolderCandidates_(rootFolderName, sharedDriveId, 20);
-
-  if (candidates.length) {
-    const selected = selectStableFolder_(candidates);
-    saveStoredRootFolder_(selected.id, sharedDriveId, rootFolderName);
-    return selected;
-  }
-
-  try {
-    const resource = {
-      title: rootFolderName,
-      mimeType: 'application/vnd.google-apps.folder',
-    };
-
-    if (sharedDriveId) {
-      resource.parents = [{ id: sharedDriveId }];
-    }
-
-    const created = insertFileSafe_(resource, null, sharedDriveId);
-    saveStoredRootFolder_(created.id, sharedDriveId, rootFolderName);
-    return created;
-  } catch (error) {
-    if (sharedDriveId) {
-      throw new Error('Unable to create root folder inside shared drive. Verify DRIVE root shared drive access and ID.');
-    }
-    const fallback = DriveApp.createFolder(rootFolderName);
-    const fallbackMeta = getFileSafe_(fallback.getId());
-    saveStoredRootFolder_(fallbackMeta.id, sharedDriveId, rootFolderName);
-    return fallbackMeta;
-  }
+  return resolveConfiguredRootFolder_({
+    sharedDriveId: sharedDriveId,
+    rootFolderName: rootFolderName,
+    requireRootId: true,
+  });
 }
 
 function findFolderInParent_(parentId, folderName, sharedDriveId) {
@@ -1683,34 +1963,35 @@ function getFileSafe_(fileId) {
   throw lastError || new Error('Unable to fetch Drive file metadata.');
 }
 
-function insertFileSafe_(resource, blobOrNull, sharedDriveId) {
+function insertFileSafe_(resource, blobOrNull, sharedDriveId, expectedRootFolderId) {
   const normalizedResource = normalizeInsertResource_(resource);
   const expectedSharedDriveId = normalizeText_(sharedDriveId || '');
+  const requiredRootId = normalizeText_(expectedRootFolderId || getRequiredSharedRootFolderId_() || '');
   let lastError = null;
 
   if (Drive.Files.insert) {
     try {
       const created = Drive.Files.insert(normalizedResource, blobOrNull, { supportsAllDrives: true });
-      if (isCreatedFileInExpectedDrive_(created, expectedSharedDriveId)) {
+      if (isCreatedFileInExpectedScope_(created, expectedSharedDriveId, requiredRootId)) {
         return created;
       }
       moveFileToTrashSafe_(created && created.id);
-      lastError = new Error('Created file resolved outside expected shared drive.');
+      lastError = new Error('Created file resolved outside expected shared-drive root scope.');
     } catch (allDrivesError) {
       lastError = allDrivesError;
       try {
         const createdLegacy = Drive.Files.insert(normalizedResource, blobOrNull, { supportsTeamDrives: true });
-        if (isCreatedFileInExpectedDrive_(createdLegacy, expectedSharedDriveId)) {
+        if (isCreatedFileInExpectedScope_(createdLegacy, expectedSharedDriveId, requiredRootId)) {
           return createdLegacy;
         }
         moveFileToTrashSafe_(createdLegacy && createdLegacy.id);
-        lastError = new Error('Created file resolved outside expected shared drive.');
+        lastError = new Error('Created file resolved outside expected shared-drive root scope.');
       } catch (teamDriveError) {
         lastError = teamDriveError;
       }
     }
 
-    if (!expectedSharedDriveId) {
+    if (!expectedSharedDriveId && !requiredRootId) {
       try {
         return Drive.Files.insert(normalizedResource, blobOrNull);
       } catch (plainInsertError) {
@@ -1722,26 +2003,26 @@ function insertFileSafe_(resource, blobOrNull, sharedDriveId) {
   if (Drive.Files.create) {
     try {
       const created = Drive.Files.create(normalizedResource, blobOrNull, { supportsAllDrives: true });
-      if (isCreatedFileInExpectedDrive_(created, expectedSharedDriveId)) {
+      if (isCreatedFileInExpectedScope_(created, expectedSharedDriveId, requiredRootId)) {
         return created;
       }
       moveFileToTrashSafe_(created && created.id);
-      lastError = new Error('Created file resolved outside expected shared drive.');
+      lastError = new Error('Created file resolved outside expected shared-drive root scope.');
     } catch (allDrivesError) {
       lastError = allDrivesError;
       try {
         const createdLegacy = Drive.Files.create(normalizedResource, blobOrNull, { supportsTeamDrives: true });
-        if (isCreatedFileInExpectedDrive_(createdLegacy, expectedSharedDriveId)) {
+        if (isCreatedFileInExpectedScope_(createdLegacy, expectedSharedDriveId, requiredRootId)) {
           return createdLegacy;
         }
         moveFileToTrashSafe_(createdLegacy && createdLegacy.id);
-        lastError = new Error('Created file resolved outside expected shared drive.');
+        lastError = new Error('Created file resolved outside expected shared-drive root scope.');
       } catch (teamDriveError) {
         lastError = teamDriveError;
       }
     }
 
-    if (!expectedSharedDriveId) {
+    if (!expectedSharedDriveId && !requiredRootId) {
       try {
         return Drive.Files.create(normalizedResource, blobOrNull);
       } catch (plainCreateError) {
@@ -1750,26 +2031,84 @@ function insertFileSafe_(resource, blobOrNull, sharedDriveId) {
     }
   }
 
-  if (expectedSharedDriveId) {
+  if (expectedSharedDriveId || requiredRootId) {
     throw new Error('Unable to create file in required shared drive scope. ' + String(lastError && lastError.message ? lastError.message : lastError || 'Unknown Drive API error.'));
   }
 
   throw lastError || new Error('No supported Drive file creation method is available.');
 }
 
-function isCreatedFileInExpectedDrive_(file, sharedDriveId) {
-  const expected = normalizeText_(sharedDriveId || '');
-  if (!expected) return true;
+function isCreatedFileInExpectedScope_(file, sharedDriveId, rootFolderId) {
+  const expectedRootId = normalizeText_(rootFolderId || '');
+  const expectedDriveId = normalizeText_(sharedDriveId || '');
+  if (!expectedDriveId && !expectedRootId) return true;
 
   const fileId = normalizeText_((file && file.id) || '');
   if (!fileId) return false;
 
+  let hydrated = null;
   try {
-    const hydrated = getFileSafe_(fileId);
-    return fileBelongsToSharedDrive_(hydrated, expected);
+    hydrated = getFileSafe_(fileId);
   } catch (error) {
     return false;
   }
+
+  if (!isCreatedFileInExpectedDrive_(hydrated, expectedDriveId)) {
+    return false;
+  }
+
+  if (!expectedRootId) {
+    return true;
+  }
+
+  return isFileInsideRequiredRootScope_(hydrated, expectedRootId, expectedDriveId, {});
+}
+
+function isCreatedFileInExpectedDrive_(file, sharedDriveId) {
+  const expected = normalizeText_(sharedDriveId || '');
+  if (!expected) return true;
+
+  return Boolean(file && fileBelongsToSharedDrive_(file, expected));
+}
+
+function isFileInsideRequiredRootScope_(file, requiredRootFolderId, sharedDriveId, visitedIds) {
+  const rootId = normalizeText_(requiredRootFolderId || '');
+  if (!rootId) return true;
+
+  const currentId = normalizeText_((file && file.id) || '');
+  if (!currentId) return false;
+  if (currentId === rootId) return true;
+
+  const seen = visitedIds || {};
+  if (seen[currentId]) return false;
+  seen[currentId] = true;
+
+  const parentIds = getFileParentIds_(file);
+  if (!parentIds.length) {
+    return false;
+  }
+  if (parentIds.indexOf(rootId) >= 0) {
+    return true;
+  }
+
+  for (var i = 0; i < parentIds.length; i += 1) {
+    const parentId = parentIds[i];
+    if (!parentId || seen[parentId]) continue;
+    if (parentId === rootId) return true;
+    try {
+      const parentMeta = getFileSafe_(parentId);
+      if (sharedDriveId && !fileBelongsToSharedDrive_(parentMeta, sharedDriveId)) {
+        continue;
+      }
+      if (isFileInsideRequiredRootScope_(parentMeta, rootId, sharedDriveId, seen)) {
+        return true;
+      }
+    } catch (error) {
+      // best-effort ancestry walk
+    }
+  }
+
+  return false;
 }
 
 function moveFileToTrashSafe_(fileId) {
@@ -1795,6 +2134,36 @@ function normalizeInsertResource_(resource) {
   }
 
   return normalized;
+}
+
+function listFilesAllSafe_(params, sharedDriveId, maxItems) {
+  const limit = Math.max(1, Math.min(60000, Number(maxItems || 20000) || 20000));
+  const base = cloneObject_(params || {});
+  const pageSizeHint = Math.max(50, Math.min(1000, Number(base.maxResults || 250) || 250));
+  delete base.pageToken;
+  const out = [];
+  let pageToken = '';
+
+  while (out.length < limit) {
+    const nextParams = cloneObject_(base);
+    nextParams.maxResults = Math.min(pageSizeHint, limit - out.length);
+    if (pageToken) {
+      nextParams.pageToken = pageToken;
+    }
+
+    const listed = listFilesSafe_(nextParams, sharedDriveId);
+    const items = listed && Array.isArray(listed.items) ? listed.items : [];
+    if (items.length) {
+      out.push.apply(out, items.slice(0, limit - out.length));
+    }
+
+    pageToken = normalizeText_((listed && listed.nextPageToken) || '');
+    if (!pageToken || !items.length) {
+      break;
+    }
+  }
+
+  return out;
 }
 
 function listFilesSafe_(params, sharedDriveId) {
@@ -2054,7 +2423,8 @@ function getExistingManifestFile_(rootFolderId, sharedDriveId) {
       const meta = getFileSafe_(storedManifestId);
       if (meta && meta.mimeType !== 'application/vnd.google-apps.folder') {
         // If a shared drive is configured, prefer same-drive manifest.
-        if (!sharedDriveId || fileBelongsToSharedDrive_(meta, sharedDriveId)) {
+        if ((!sharedDriveId || fileBelongsToSharedDrive_(meta, sharedDriveId))
+          && isFileInsideRequiredRootScope_(meta, rootFolderId, sharedDriveId, {})) {
           return { fileId: storedManifestId };
         }
       }
@@ -2069,7 +2439,8 @@ function getExistingManifestFile_(rootFolderId, sharedDriveId) {
     try {
       const meta = getFileSafe_(indexedManifestId);
       if (meta && meta.mimeType !== 'application/vnd.google-apps.folder') {
-        if (!sharedDriveId || fileBelongsToSharedDrive_(meta, sharedDriveId)) {
+        if ((!sharedDriveId || fileBelongsToSharedDrive_(meta, sharedDriveId))
+          && isFileInsideRequiredRootScope_(meta, rootFolderId, sharedDriveId, {})) {
           rememberManifestFileId_(indexedManifestId);
           return { fileId: indexedManifestId };
         }
@@ -2173,6 +2544,10 @@ function resolveSharedDriveId_(payload) {
 
 function getRequiredSharedDriveId_() {
   return normalizeText_(PropertiesService.getScriptProperties().getProperty(REQUIRED_SHARED_DRIVE_ID_PROPERTY) || '');
+}
+
+function getRequiredSharedRootFolderId_() {
+  return normalizeText_(PropertiesService.getScriptProperties().getProperty(REQUIRED_SHARED_ROOT_FOLDER_ID_PROPERTY) || '');
 }
 
 function getServiceToken_() {

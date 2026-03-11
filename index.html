@@ -13,7 +13,7 @@
   <link rel="apple-touch-icon" href="icons/icon-192.png">
 </head>
 <body
-  data-app-build-id="20260311-drive-reset-v1"
+  data-app-build-id="20260311-drive-reset-v2"
   data-practice="astra"
   data-visit-type="followup"
   data-astra-gpt-url="https://chatgpt.com/g/g-69ac7d1d6f088191a063906d86aee792-astra-note-writer"
@@ -22,6 +22,7 @@
   data-drive-sync-enabled="true"
   data-drive-endpoint-url="https://script.google.com/macros/s/AKfycbyCfdY3aHqLXFcHBE6fXt8UU8D_E7nmUDf-kJzcPo2VGtS4JuVVNI0m4v_SUNaVSeNXKQ/exec"
   data-drive-shared-drive-id="0AHnYqpJA5-6ZUk9PVA"
+  data-drive-root-folder-id="199ZOouP0Sy21NSDHyw_AN4-YgOKW-AbE"
   data-drive-root-folder-name="Note App"
   data-drive-user-email=""
   data-drive-owner-email="nick@astrapsychiatry.com"
@@ -619,10 +620,11 @@
       <section class="backup-tray drive-maintenance-tray" id="driveMaintenanceTray" aria-live="polite">
         <div class="backup-header">
           <span class="backup-title">Drive Maintenance</span>
-          <span class="backup-subtitle">Review diagnostics and trash legacy app artifacts from My Drive.</span>
+          <span class="backup-subtitle">Snapshot current runtime files, preview My Drive clutter, then run full purge.</span>
         </div>
         <div class="action-row drive-maintenance-row">
-          <button id="driveCleanupBtn" type="button">Trash My Drive Artifacts</button>
+          <button id="driveSnapshotBtn" type="button" class="secondary-action-btn">Snapshot</button>
+          <button id="driveCleanupBtn" type="button">Preview + Apply Full Purge</button>
           <button id="driveDiagnosticsBtn" type="button" class="secondary-action-btn">Diagnostics</button>
         </div>
         <p class="helper-text" id="driveCleanupStatus">Manual cleanup is available if My Drive becomes cluttered.</p>
@@ -688,7 +690,9 @@
         <div><dt>Backend Build</dt><dd id="diagBackendBuild">-</dd></div>
         <div><dt>Endpoint</dt><dd id="diagEndpoint">-</dd></div>
         <div><dt>Resolved User</dt><dd id="diagResolvedUser">-</dd></div>
-        <div><dt>Shared Drive</dt><dd id="diagSharedDrive">-</dd></div>
+        <div><dt>Required Shared Drive</dt><dd id="diagSharedDrive">-</dd></div>
+        <div><dt>Required Root ID</dt><dd id="diagRequiredRoot">-</dd></div>
+        <div><dt>Resolved Root ID</dt><dd id="diagResolvedRoot">-</dd></div>
         <div><dt>Canonical Root</dt><dd id="diagCanonicalRoot">-</dd></div>
         <div><dt>Preflight</dt><dd id="diagPreflightStatus">-</dd></div>
         <div><dt>Block Code</dt><dd id="diagBlockCode">-</dd></div>
