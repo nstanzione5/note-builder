@@ -65,10 +65,13 @@ When enabled:
 
 - Startup: health check + bootstrap + manifest pull + draft pull
 - Background: sync cycle every `data-drive-sync-minutes`
+- If `manifest.get` is unavailable, browser Drive writes are hard-blocked to prevent duplicate file churn.
 - Retry queue: pending writes are retried with exponential backoff
 - Conflict handling: revision mismatch triggers pull/merge/retry for draft writes
 - Backups: snapshot appends are non-destructive
 - Patient draft paths are user-scoped in Drive (`data/draft/users/<email-key>/...`)
+- `data-drive-user-email` is required for scoped draft paths; the app no longer falls back to unscoped owner paths.
+- A low-risk My Drive cleanup job runs at most once per day (`mydrive.condense`) to archive duplicate app roots without deleting files.
 
 ## CLI helpers
 

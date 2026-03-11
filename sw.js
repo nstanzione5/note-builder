@@ -1,4 +1,4 @@
-const CACHE_NAME = 'note-builder-shell-v6';
+const CACHE_NAME = 'note-builder-shell-v7';
 const SHELL_ASSETS = [
   './',
   './index.html',

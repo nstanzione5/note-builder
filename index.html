@@ -555,6 +555,14 @@
 
         <div class="field">
           <label>Documentation End <span class="required">*</span></label>
+          <div class="now-plus-group doc-end-plus-row" data-now-plus-target="docEnd" aria-label="Documentation end quick add minutes">
+            <button type="button" class="mini-btn nowPlusBtn" data-plus-minutes="3">+3</button>
+            <button type="button" class="mini-btn nowPlusBtn" data-plus-minutes="5">+5</button>
+            <button type="button" class="mini-btn nowPlusBtn" data-plus-minutes="8">+8</button>
+            <label class="now-plus-custom" for="docEndPlusMinutes">now+</label>
+            <input id="docEndPlusMinutes" class="now-plus-input" type="number" min="1" max="180" step="1" inputmode="numeric" placeholder="min" aria-label="Add custom minutes to documentation end">
+            <button type="button" class="mini-btn nowPlusApplyBtn" data-plus-apply="docEnd">Apply</button>
+          </div>
           <div class="inline-input-row">
             <div class="time-control" data-time-field="docEnd">
               <input class="time-part time-part-hour" type="text" inputmode="numeric" maxlength="2" autocomplete="off" placeholder="HH" aria-label="Documentation end hour" data-time-part="hour">
@@ -568,14 +576,6 @@
               <input id="docEnd" type="hidden" value="">
             </div>
             <button type="button" class="mini-btn nowBtn" data-target="docEnd">Now</button>
-            <div class="now-plus-group" data-now-plus-target="docEnd" aria-label="Documentation end quick add minutes">
-              <button type="button" class="mini-btn nowPlusBtn" data-plus-minutes="5">+5</button>
-              <button type="button" class="mini-btn nowPlusBtn" data-plus-minutes="10">+10</button>
-              <button type="button" class="mini-btn nowPlusBtn" data-plus-minutes="15">+15</button>
-              <label class="now-plus-custom" for="docEndPlusMinutes">now+</label>
-              <input id="docEndPlusMinutes" class="now-plus-input" type="number" min="1" max="180" step="1" inputmode="numeric" placeholder="min" aria-label="Add custom minutes to documentation end">
-              <button type="button" class="mini-btn nowPlusApplyBtn" data-plus-apply="docEnd">Apply</button>
-            </div>
           </div>
         </div>
       </div>

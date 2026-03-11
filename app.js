@@ -176,6 +176,7 @@ const DRIVE_USER_EMAIL_KEY = 'driveSyncUserEmail_v1';
 const DRIVE_QUEUE_KEY = 'driveSyncPendingWrites_v1';
 const DRIVE_META_KEY = 'driveSyncMeta_v1';
 const DRIVE_REVISIONS_KEY = 'driveSyncRevisions_v1';
+const DRIVE_AUTO_CLEANUP_META_KEY = 'driveSyncAutoCleanupMeta_v1';
 const DRIVE_DRAFT_PATH = 'data/draft/current.json';
 const DRIVE_RECENT_PATIENTS_PATH = 'data/draft/recent-patients.json';
 const DRIVE_MED_COMPILED_PATH = 'data/meds/compiled/medications.compiled.json';
@@ -184,6 +185,8 @@ const DRIVE_MED_RUNTIME_FALLBACKS_PATH = 'data/meds/review/runtime-fallbacks.jso
 const DRIVE_SYNC_ENTERPRISE_NAME = 'Note App';
 const DRIVE_MANIFEST_FILE = 'config/drive-manifest.json';
 const DRAFT_PERSIST_IDLE_MS = 3000;
+const RECENT_PATIENTS_DRIVE_MIN_INTERVAL_MS = 90000;
+const DRIVE_AUTO_CLEANUP_INTERVAL_MS = 1000 * 60 * 60 * 24;
 const THERAPY_TIER_MINUTES = {
   '0': 0,
   '>=16': 16,
@@ -208,11 +211,15 @@ let medAutoSyncRunning = false;
 let medicationCatalogLoadError = false;
 let medicationCatalogLoading = false;
 let medicationCatalogLoadPromise = null;
+const medicationSupplementAttempted = new Set();
 let scrollRafScheduled = false;
 let driveQueueTimer = null;
 let driveSyncTimer = null;
 let driveQueueRunning = false;
 let driveSyncRunning = false;
+let pendingRecentPatientsForDrive = null;
+let recentPatientsDriveTimer = null;
+let lastRecentPatientsDriveQueuedAt = 0;
 const driveQueuedChecksums = new Map();
 
 function getEl(id) {
@@ -240,6 +247,50 @@ function isFilled(id) {
 
 function isVisible(element) {
   return Boolean(element) && !element.classList.contains('hidden');
+}
+
+function isElementFocusableInput(el) {
+  if (!el) return false;
+  if (el.disabled || el.readOnly) return false;
+  if (el.type === 'hidden') return false;
+  if (!el.offsetParent) return false;
+  const rootCard = el.closest('.card');
+  if (rootCard && rootCard.classList.contains('hidden')) return false;
+  return true;
+}
+
+function focusFirstClinicalInput() {
+  const isEligible = (el) => isElementFocusableInput(el)
+    && !el.classList.contains('time-part')
+    && !el.closest('.med-drawer');
+  const preferredSelectors = [
+    '#cc',
+    '#notes',
+    'main.app-shell textarea',
+    'main.app-shell input[type="text"]',
+    'main.app-shell input:not([type])',
+  ];
+
+  let target = null;
+  for (let i = 0; i < preferredSelectors.length; i += 1) {
+    const selector = preferredSelectors[i];
+    const candidates = [...document.querySelectorAll(selector)];
+    target = candidates.find((el) => isEligible(el));
+    if (target) break;
+  }
+
+  if (!target) {
+    const fallbackCandidates = [
+      ...document.querySelectorAll('main.app-shell textarea, main.app-shell input, main.app-shell select'),
+    ];
+    target = fallbackCandidates.find((el) => isEligible(el));
+  }
+
+  if (!target || typeof target.focus !== 'function') return;
+  target.focus();
+  if (typeof target.select === 'function' && (target.tagName === 'TEXTAREA' || target.type === 'text')) {
+    target.select();
+  }
 }
 
 function safeShowLogo(imgEl, shouldShow) {
@@ -319,7 +370,7 @@ function getDriveConfig() {
   const queryUserEmail = query ? String(query.get('driveUserEmail') || '').trim().toLowerCase() : '';
   const storedUserEmail = String(getStorageJSON(DRIVE_USER_EMAIL_KEY, '') || '').trim().toLowerCase();
   const datasetUserEmail = String(dataset.driveUserEmail || '').trim().toLowerCase();
-  const userEmail = queryUserEmail || datasetUserEmail || storedUserEmail || String(dataset.driveOwnerEmail || '').trim().toLowerCase();
+  const userEmail = queryUserEmail || datasetUserEmail || storedUserEmail;
   if (userEmail && userEmail !== storedUserEmail) {
     setStorageJSON(DRIVE_USER_EMAIL_KEY, userEmail);
   }
@@ -353,14 +404,14 @@ function driveUserKeyFromEmail(email) {
 function getScopedDriveDraftPath() {
   const config = getDriveConfig();
   const userKey = driveUserKeyFromEmail(config.userEmail);
-  if (!userKey) return DRIVE_DRAFT_PATH;
+  if (!userKey) return '';
   return `data/draft/users/${userKey}/current.json`;
 }
 
 function getScopedDriveRecentPatientsPath() {
   const config = getDriveConfig();
   const userKey = driveUserKeyFromEmail(config.userEmail);
-  if (!userKey) return DRIVE_RECENT_PATIENTS_PATH;
+  if (!userKey) return '';
   return `data/draft/users/${userKey}/recent-patients.json`;
 }
 
@@ -406,6 +457,27 @@ function setDriveMeta(meta) {
   setStorageJSON(DRIVE_META_KEY, meta);
   state.driveConnection = meta.connection || 'local';
   state.driveLastError = meta.lastError || '';
+}
+
+function getDriveAutoCleanupMeta() {
+  const fallback = { lastAttemptAt: 0, lastMovedCount: 0, lastError: '' };
+  const parsed = getStorageJSON(DRIVE_AUTO_CLEANUP_META_KEY, fallback);
+  if (!parsed || typeof parsed !== 'object') return { ...fallback };
+  return {
+    ...fallback,
+    ...parsed,
+    lastAttemptAt: Number(parsed.lastAttemptAt) || 0,
+    lastMovedCount: Number(parsed.lastMovedCount) || 0,
+    lastError: String(parsed.lastError || ''),
+  };
+}
+
+function setDriveAutoCleanupMeta(meta) {
+  setStorageJSON(DRIVE_AUTO_CLEANUP_META_KEY, {
+    lastAttemptAt: Number(meta && meta.lastAttemptAt) || 0,
+    lastMovedCount: Number(meta && meta.lastMovedCount) || 0,
+    lastError: String((meta && meta.lastError) || ''),
+  });
 }
 
 function getDriveRevisions() {
@@ -550,10 +622,20 @@ function enqueueDriveOperation(operation) {
   scheduleDriveQueueFlush(800);
 }
 
+function ensureScopedDrivePath(path, label) {
+  const safePath = String(path || '').trim();
+  if (safePath) return safePath;
+  const reason = `Drive writes paused: ${label} requires a valid drive user email for per-user isolation.`;
+  setDriveWriteBlock(true, reason);
+  updateDriveStatusBadge();
+  return '';
+}
+
 function queueDriveDraftWrite(draft) {
   if (!canQueueDriveWrites() || !draft) return;
 
-  const path = getScopedDriveDraftPath();
+  const path = ensureScopedDrivePath(getScopedDriveDraftPath(), 'current draft path');
+  if (!path) return;
   const revisions = getDriveRevisions();
   const payload = {
     savedAt: draft.savedAt || new Date().toISOString(),
@@ -581,10 +663,12 @@ function queueDriveDraftWrite(draft) {
   driveQueuedChecksums.set(path, checksum);
 }
 
-function queueDriveRecentPatientsWrite(snapshots) {
+function queueDriveRecentPatientsWrite(snapshots, options = {}) {
   if (!canQueueDriveWrites()) return;
+  const { force = false } = options;
 
-  const path = getScopedDriveRecentPatientsPath();
+  const path = ensureScopedDrivePath(getScopedDriveRecentPatientsPath(), 'recent patients path');
+  if (!path) return;
   const normalizedSnapshots = mergeSnapshotCollections(snapshots || [], []);
   const revisions = getDriveRevisions();
   const payload = {
@@ -598,6 +682,26 @@ function queueDriveRecentPatientsWrite(snapshots) {
     return;
   }
 
+  const now = Date.now();
+  if (!force) {
+    const elapsed = now - lastRecentPatientsDriveQueuedAt;
+    if (elapsed < RECENT_PATIENTS_DRIVE_MIN_INTERVAL_MS) {
+      pendingRecentPatientsForDrive = normalizedSnapshots;
+      if (!recentPatientsDriveTimer) {
+        const delay = Math.max(300, RECENT_PATIENTS_DRIVE_MIN_INTERVAL_MS - elapsed);
+        recentPatientsDriveTimer = window.setTimeout(() => {
+          recentPatientsDriveTimer = null;
+          const pending = pendingRecentPatientsForDrive;
+          pendingRecentPatientsForDrive = null;
+          if (pending) {
+            queueDriveRecentPatientsWrite(pending, { force: true });
+          }
+        }, delay);
+      }
+      return;
+    }
+  }
+
   enqueueDriveOperation({
     type: 'file.put',
     path,
@@ -607,6 +711,7 @@ function queueDriveRecentPatientsWrite(snapshots) {
     expectedRevision: revisions[path] || '',
     dedupeKey: `file:${path}`,
   });
+  lastRecentPatientsDriveQueuedAt = now;
   driveQueuedChecksums.set(path, checksum);
 }
 
@@ -818,7 +923,8 @@ async function callDriveEndpoint(action, payload = {}) {
 async function pullDriveDraft(force = false) {
   if (!isDriveSyncEnabled()) return false;
 
-  const path = getScopedDriveDraftPath();
+  const path = ensureScopedDrivePath(getScopedDriveDraftPath(), 'current draft path');
+  if (!path) return false;
   const response = await callDriveEndpoint('file.get', { path });
   const file = response.file || response;
   const content = typeof file.content === 'string' ? file.content : '';
@@ -956,7 +1062,8 @@ async function pullDriveRuntimeFallbacks(force = false) {
 async function pullDriveRecentPatients(force = false) {
   if (!isDriveSyncEnabled()) return false;
 
-  const path = getScopedDriveRecentPatientsPath();
+  const path = ensureScopedDrivePath(getScopedDriveRecentPatientsPath(), 'recent patients path');
+  if (!path) return false;
   const response = await callDriveEndpoint('file.get', { path });
   const file = response.file || response;
   const content = typeof file.content === 'string' ? file.content : '';
@@ -997,6 +1104,16 @@ async function pullDriveManifestAndDraft(force = false) {
 
   const response = await callDriveEndpoint('manifest.get', { path: DRIVE_MANIFEST_FILE });
   const manifest = response.manifest || null;
+  if (!manifest) {
+    const reason = 'Drive manifest unavailable; writes paused to prevent duplicate files.';
+    setDriveWriteBlock(true, reason);
+    const meta = getDriveMeta();
+    meta.connection = navigator.onLine ? 'error' : 'offline';
+    meta.lastError = reason;
+    setDriveMeta(meta);
+    updateDriveStatusBadge(meta);
+    return;
+  }
   const remoteRevision = String(response.revision || (manifest && manifest.revision) || '');
   const remoteChecksum = String(response.checksum || (manifest && manifest.checksum) || '');
 
@@ -1141,6 +1258,13 @@ async function verifyDriveRootPreflight() {
   if (!isDriveSyncEnabled()) return false;
 
   const config = getDriveConfig();
+  const userKey = driveUserKeyFromEmail(config.userEmail);
+  if (!userKey) {
+    setDriveWriteBlock(true, 'Drive preflight failed: drive user email is required for per-user draft isolation.');
+    updateDriveStatusBadge();
+    return false;
+  }
+
   const requiredDriveId = String(config.sharedDriveId || '').trim();
   if (!requiredDriveId) {
     setDriveWriteBlock(true, 'Drive preflight failed: sharedDriveId is required for write safety.');
@@ -1174,6 +1298,39 @@ async function verifyDriveRootPreflight() {
 
   setDriveWriteBlock(false, '');
   return true;
+}
+
+async function attemptDriveAutoCleanup() {
+  if (!isDriveSyncEnabled()) return;
+  if (!canQueueDriveWrites()) return;
+
+  const meta = getDriveAutoCleanupMeta();
+  const now = Date.now();
+  if (meta.lastAttemptAt && (now - meta.lastAttemptAt) < DRIVE_AUTO_CLEANUP_INTERVAL_MS) {
+    return;
+  }
+
+  try {
+    const result = await callDriveEndpoint('mydrive.condense', {
+      rootFolderName: 'Astra Clinical Note Builder',
+      includeUntitledFiles: false,
+      includeUntitledFolders: false,
+      maxItems: 800,
+      dryRun: false,
+      archiveFolderName: `Astra Personal Drive Cleanup ${new Date().toISOString().slice(0, 10).replace(/-/g, '')}`,
+    });
+    setDriveAutoCleanupMeta({
+      lastAttemptAt: now,
+      lastMovedCount: Number(result && result.movedCount) || 0,
+      lastError: '',
+    });
+  } catch (error) {
+    setDriveAutoCleanupMeta({
+      lastAttemptAt: now,
+      lastMovedCount: 0,
+      lastError: String(error && error.message ? error.message : error),
+    });
+  }
 }
 
 async function runDriveSyncCycle(force = false) {
@@ -1214,6 +1371,8 @@ async function runDriveSyncCycle(force = false) {
     if (force || !hasPendingWrites) {
       await pullDriveManifestAndDraft(force);
     }
+
+    await attemptDriveAutoCleanup();
 
     await flushDriveQueue();
 
@@ -2399,7 +2558,7 @@ function queueSnapshot(draft, options = {}) {
     if (!skipDrive) {
       queueDriveRecentPatientsWrite(normalizedSnapshots);
     }
-  }, 350);
+  }, 1200);
 }
 
 function buildDraftPayload() {
@@ -2771,6 +2930,11 @@ function clearAll() {
 
   localStorage.removeItem(STORAGE_KEY);
   clearDraftPersistRuntime();
+  pendingRecentPatientsForDrive = null;
+  if (recentPatientsDriveTimer) {
+    window.clearTimeout(recentPatientsDriveTimer);
+    recentPatientsDriveTimer = null;
+  }
 
   if (isDriveSyncEnabled() && hadPersistedDraft) {
     const clearedDraft = {
@@ -2804,7 +2968,7 @@ function clearAll() {
   }
 
   window.setTimeout(() => {
-    if (els.age) els.age.focus();
+    focusFirstClinicalInput();
   }, 120);
 }
 
@@ -3257,6 +3421,18 @@ function setMedicationSelection(medicationId) {
 
   renderMedicationResults();
   renderMedicationDetail();
+
+  const mergedMedication = mergeMedicationWithRuntimeOverrides(med);
+  if (isSparseMedicationEntry(mergedMedication) && !medicationSupplementAttempted.has(med.id)) {
+    medicationSupplementAttempted.add(med.id);
+    window.setTimeout(() => {
+      if (state.selectedMedicationId !== med.id) return;
+      if (medicationFallbackFetchRunning) return;
+      fetchAndApplySupplementalForSelectedMedication().catch(() => {
+        // keep drawer interactive even if supplemental fetch fails
+      });
+    }, 80);
+  }
 }
 
 function runMedicationSearch(rawQuery) {
@@ -3508,6 +3684,7 @@ function renderMedicationDetail() {
   const favorites = new Set(getMedicationFavorites());
   const isFavorite = favorites.has(medication.id);
   const reliabilityMeta = getMedicationReliabilityMeta(medication);
+  const sparseProfile = isSparseMedicationEntry(medication);
 
   const hasMultipleFormulations = formulations.length > 1;
   const shouldPromptForFormulation = hasMultipleFormulations && !selectedFormulation;
@@ -3551,6 +3728,7 @@ function renderMedicationDetail() {
           <p class="med-header-sub">${escapeHtml((medication.brand_names || []).join(', ') || 'No brand aliases listed')}</p>
         </div>
         <div class="med-control-row">
+          ${sparseProfile ? `<button type="button" class="med-control-btn" data-action="fetch-supplemental">${medicationFallbackFetchRunning ? 'Refreshing…' : 'Fetch supplemental data'}</button>` : ''}
           <button type="button" class="med-control-btn" data-action="copy-summary">Copy summary</button>
           <button type="button" class="med-control-btn${isFavorite ? ' active' : ''}" data-action="toggle-favorite">${isFavorite ? 'Favorited' : 'Favorite'}</button>
         </div>
@@ -3562,6 +3740,7 @@ function renderMedicationDetail() {
         ${medication.newer_brand ? '<span class="med-badge med-badge-new">Newer brand</span>' : ''}
       </div>
       ${reliabilityMeta.isHighReliability ? '' : '<p class="med-curation-note">This entry has lower confidence source coverage. Validate against official labeling before final decisions.</p>'}
+      ${sparseProfile ? '<p class="med-curation-note">Essential fields are sparse for this medication. Use "Fetch supplemental data" to pull free-source dosing and indication snippets.</p>' : ''}
     </article>
 
     <section class="med-section">
@@ -3692,6 +3871,94 @@ function splitSentences(text, maxItems = 6) {
     .slice(0, maxItems);
 }
 
+function stripHtmlToText(value) {
+  const text = String(value || '')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&nbsp;/gi, ' ')
+    .replace(/&amp;/gi, '&')
+    .replace(/\s+/g, ' ')
+    .trim();
+  return text;
+}
+
+function chooseFirstMeaningful(items = []) {
+  for (let i = 0; i < items.length; i += 1) {
+    const token = String(items[i] || '').trim();
+    if (!token) continue;
+    if (/no summary available yet|pending review|verify official source/i.test(token)) continue;
+    return token;
+  }
+  return '';
+}
+
+function parseDoseSummaryFromSnippets(snippets = []) {
+  const combined = listOrEmpty(snippets).map((value) => stripHtmlToText(value)).join(' ');
+  if (!combined) {
+    return {
+      start: 'Verify official source.',
+      target: 'Verify official source.',
+      max: 'Verify official source.',
+      note: '',
+    };
+  }
+
+  const doseMatches = [...combined.matchAll(/(\d+(?:\.\d+)?)\s*(mg|mcg|g|ml)\b/gi)];
+  if (!doseMatches.length) {
+    return {
+      start: 'Verify official source.',
+      target: 'Verify official source.',
+      max: 'Verify official source.',
+      note: splitSentences(combined, 1)[0] || '',
+    };
+  }
+
+  const normalized = doseMatches
+    .map((match) => ({
+      value: Number.parseFloat(match[1]),
+      unit: String(match[2] || '').toLowerCase(),
+    }))
+    .filter((entry) => Number.isFinite(entry.value) && entry.value > 0);
+
+  if (!normalized.length) {
+    return {
+      start: 'Verify official source.',
+      target: 'Verify official source.',
+      max: 'Verify official source.',
+      note: splitSentences(combined, 1)[0] || '',
+    };
+  }
+
+  const unitPreference = ['mg', 'mcg', 'g', 'ml'];
+  let unit = '';
+  for (let i = 0; i < unitPreference.length; i += 1) {
+    const candidate = unitPreference[i];
+    if (normalized.some((entry) => entry.unit === candidate)) {
+      unit = candidate;
+      break;
+    }
+  }
+  unit = unit || normalized[0].unit;
+
+  const values = normalized
+    .filter((entry) => entry.unit === unit)
+    .map((entry) => entry.value)
+    .sort((a, b) => a - b);
+
+  const min = values[0];
+  const max = values[values.length - 1];
+  const maxIsLikelyDaily = /per day|daily|once daily|twice daily|qday|qhs|bid|tid/i.test(combined);
+  const start = `${min} ${unit}`;
+  const target = min !== max ? `${min}-${max} ${unit}${maxIsLikelyDaily ? '/day' : ''}` : `${min} ${unit}`;
+  const maxLabel = `${max} ${unit}${maxIsLikelyDaily ? '/day' : ''}`;
+
+  return {
+    start,
+    target,
+    max: maxLabel,
+    note: splitSentences(combined, 1)[0] || '',
+  };
+}
+
 async function fetchJsonWithTimeout(url, timeoutMs = 12000) {
   const controller = new AbortController();
   const timer = window.setTimeout(() => controller.abort(), timeoutMs);
@@ -3719,7 +3986,90 @@ function scoreOpenFdaRecord(record) {
     + listOrEmpty(record.drug_interactions).length;
 }
 
-function buildFallbackFormulations(fallbackId, dosageForms = [], routes = []) {
+async function fetchClinicalTablesRxTerms(term) {
+  const query = String(term || '').trim();
+  if (!query) return { found: false, doseForms: [], strengthsByDoseForm: new Map(), displayNames: [], sourceUrl: '' };
+
+  const sourceUrl = `https://clinicaltables.nlm.nih.gov/api/rxterms/v3/search?terms=${encodeURIComponent(query)}&maxList=8&df=DISPLAY_NAME&ef=STRENGTHS_AND_FORMS`;
+  const payload = await fetchJsonWithTimeout(sourceUrl, 12000);
+  if (!Array.isArray(payload) || payload.length < 2) {
+    return { found: false, doseForms: [], strengthsByDoseForm: new Map(), displayNames: [], sourceUrl };
+  }
+
+  const displayNames = Array.isArray(payload[1]) ? payload[1].map((item) => String(item || '').trim()).filter(Boolean) : [];
+  const extras = payload[2] && typeof payload[2] === 'object' ? payload[2] : {};
+  const strengthsRaw = Array.isArray(extras.STRENGTHS_AND_FORMS) ? extras.STRENGTHS_AND_FORMS : [];
+
+  const strengthsByDoseForm = new Map();
+  const doseForms = [];
+
+  displayNames.forEach((name, index) => {
+    const formToken = name.match(/\(([^)]+)\)/);
+    const doseForm = formToken ? String(formToken[1] || '').trim() : '';
+    if (doseForm) {
+      doseForms.push(doseForm);
+    }
+
+    const strengths = Array.isArray(strengthsRaw[index])
+      ? strengthsRaw[index].map((item) => String(item || '').trim()).filter(Boolean)
+      : [];
+
+    if (doseForm && strengths.length) {
+      const key = doseForm.toLowerCase();
+      const existing = strengthsByDoseForm.get(key) || [];
+      strengthsByDoseForm.set(key, Array.from(new Set([...existing, ...strengths])).slice(0, 10));
+    }
+  });
+
+  return {
+    found: displayNames.length > 0,
+    doseForms: Array.from(new Set(doseForms)).slice(0, 8),
+    strengthsByDoseForm,
+    displayNames,
+    sourceUrl,
+  };
+}
+
+async function fetchMedlinePlusSummaryByRxcui(rxcui) {
+  const token = String(rxcui || '').trim();
+  if (!token) {
+    return { found: false, summary: '', link: '', title: '', sourceUrl: '' };
+  }
+
+  const params = new URLSearchParams({
+    'mainSearchCriteria.v.cs': '2.16.840.1.113883.6.88',
+    'mainSearchCriteria.v.c': token,
+    knowledgeResponseType: 'application/json',
+    'informationRecipient.languageCode.c': 'en',
+  });
+  const sourceUrl = `https://connect.medlineplus.gov/service?${params.toString()}`;
+  const payload = await fetchJsonWithTimeout(sourceUrl, 12000);
+  const entries = listOrEmpty(payload && payload.feed && payload.feed.entry);
+  const first = entries[0] || {};
+  const summaryRaw = first && first.summary && typeof first.summary === 'object'
+    ? first.summary._value
+    : first.summary;
+  const titleRaw = first && first.title && typeof first.title === 'object'
+    ? first.title._value
+    : first.title;
+  const linkRaw = Array.isArray(first && first.link)
+    ? (first.link[0] && first.link[0].href)
+    : first && first.link && first.link.href;
+
+  return {
+    found: Boolean(first && (summaryRaw || titleRaw)),
+    summary: stripHtmlToText(summaryRaw || ''),
+    title: String(titleRaw || '').trim(),
+    link: String(linkRaw || '').trim(),
+    sourceUrl,
+  };
+}
+
+function buildFallbackFormulations(fallbackId, dosageForms = [], routes = [], options = {}) {
+  const dosingDefaults = options && options.dosingDefaults ? options.dosingDefaults : null;
+  const strengthsByLabel = options && options.strengthsByLabel instanceof Map
+    ? options.strengthsByLabel
+    : new Map();
   const safeDosageForms = dosageForms.length ? dosageForms : ['unknown formulation'];
   const safeRoutes = routes.length ? routes : ['oral'];
   const forms = [];
@@ -3731,17 +4081,17 @@ function buildFallbackFormulations(fallbackId, dosageForms = [], routes = []) {
         label: `${String(dosageForm || 'Formulation').trim()} (${String(route || 'oral').trim()})`,
         route: String(route || 'oral').trim() || 'oral',
         dosage_form: String(dosageForm || 'unknown').trim() || 'unknown',
-        strength_examples: [],
+        strength_examples: listOrEmpty(strengthsByLabel.get(String(dosageForm || '').toLowerCase())).slice(0, 8),
         common_adult_psych_dosing: {
-          start: 'Verify official source.',
-          target: 'Verify official source.',
-          max: 'Verify official source.',
+          start: chooseFirstMeaningful([dosingDefaults && dosingDefaults.start]) || 'Verify official source.',
+          target: chooseFirstMeaningful([dosingDefaults && dosingDefaults.target]) || 'Verify official source.',
+          max: chooseFirstMeaningful([dosingDefaults && dosingDefaults.max]) || 'Verify official source.',
         },
-        titration_notes: ['No source-verified psych dosing summary yet.'],
+        titration_notes: listOrEmpty(dosingDefaults && dosingDefaults.note ? [dosingDefaults.note] : []),
         formulation_specific_pearls: [],
         formulation_specific_interactions: [],
         formulation_specific_side_effect_notes: [],
-        administration_notes: [],
+        administration_notes: listOrEmpty(dosingDefaults && dosingDefaults.note ? [dosingDefaults.note] : []),
         source_links: [],
         active: true,
       });
@@ -3755,15 +4105,15 @@ function buildFallbackFormulations(fallbackId, dosageForms = [], routes = []) {
     dosage_form: 'unknown',
     strength_examples: [],
     common_adult_psych_dosing: {
-      start: 'Verify official source.',
-      target: 'Verify official source.',
-      max: 'Verify official source.',
+      start: chooseFirstMeaningful([dosingDefaults && dosingDefaults.start]) || 'Verify official source.',
+      target: chooseFirstMeaningful([dosingDefaults && dosingDefaults.target]) || 'Verify official source.',
+      max: chooseFirstMeaningful([dosingDefaults && dosingDefaults.max]) || 'Verify official source.',
     },
-    titration_notes: ['No source-verified psych dosing summary yet.'],
+    titration_notes: listOrEmpty(dosingDefaults && dosingDefaults.note ? [dosingDefaults.note] : []),
     formulation_specific_pearls: [],
     formulation_specific_interactions: [],
     formulation_specific_side_effect_notes: [],
-    administration_notes: [],
+    administration_notes: listOrEmpty(dosingDefaults && dosingDefaults.note ? [dosingDefaults.note] : []),
     source_links: [],
     active: true,
   }];
@@ -3779,18 +4129,20 @@ async function fetchMedicationFallbackRecord(rawTerm) {
     `openfda.generic_name:"${query}" OR openfda.brand_name:"${query}" OR openfda.substance_name:"${query}"`,
   );
   const openFdaUrl = `https://api.fda.gov/drug/label.json?search=${searchTerm}&limit=4`;
-  const openFdaPayload = await fetchJsonWithTimeout(openFdaUrl, 12000);
+  let openFdaPayload = null;
+  let openFdaError = '';
+  try {
+    openFdaPayload = await fetchJsonWithTimeout(openFdaUrl, 12000);
+  } catch (error) {
+    openFdaError = String(error && error.message ? error.message : error);
+  }
   const openFdaResults = listOrEmpty(openFdaPayload && openFdaPayload.results);
 
   const bestOpenFda = openFdaResults
     .slice()
     .sort((a, b) => scoreOpenFdaRecord(b) - scoreOpenFdaRecord(a))[0];
 
-  if (!bestOpenFda) {
-    throw new Error('No source match found for fallback fetch.');
-  }
-
-  const openfda = bestOpenFda.openfda || {};
+  const openfda = bestOpenFda && bestOpenFda.openfda ? bestOpenFda.openfda : {};
   const rxnormSeed = String(
     (Array.isArray(openfda.generic_name) && openfda.generic_name[0])
     || (Array.isArray(openfda.substance_name) && openfda.substance_name[0])
@@ -3803,11 +4155,29 @@ async function fetchMedicationFallbackRecord(rawTerm) {
 
   let rxNormPropertiesUrl = '';
   let rxNormProperties = null;
-  if (rxcui) {
-    rxNormPropertiesUrl = `https://rxnav.nlm.nih.gov/REST/rxcui/${encodeURIComponent(rxcui)}/properties.json`;
-    const payload = await fetchJsonWithTimeout(rxNormPropertiesUrl, 10000).catch(() => null);
-    rxNormProperties = payload && payload.properties ? payload.properties : null;
-  }
+  let medlinePlusData = { found: false, summary: '', link: '', title: '', sourceUrl: '' };
+  const [clinicalTablesData] = await Promise.all([
+    fetchClinicalTablesRxTerms(rxnormSeed).catch(() => ({
+      found: false,
+      doseForms: [],
+      strengthsByDoseForm: new Map(),
+      displayNames: [],
+      sourceUrl: '',
+    })),
+    (async () => {
+      if (!rxcui) return;
+      rxNormPropertiesUrl = `https://rxnav.nlm.nih.gov/REST/rxcui/${encodeURIComponent(rxcui)}/properties.json`;
+      const payload = await fetchJsonWithTimeout(rxNormPropertiesUrl, 10000).catch(() => null);
+      rxNormProperties = payload && payload.properties ? payload.properties : null;
+      medlinePlusData = await fetchMedlinePlusSummaryByRxcui(rxcui).catch(() => ({
+        found: false,
+        summary: '',
+        link: '',
+        title: '',
+        sourceUrl: '',
+      }));
+    })(),
+  ]);
 
   const genericName = String(
     (Array.isArray(openfda.generic_name) && openfda.generic_name[0])
@@ -3826,16 +4196,61 @@ async function fetchMedicationFallbackRecord(rawTerm) {
     String(query),
   ].filter(Boolean))).slice(0, 24);
 
-  const dosageForms = listOrEmpty(openfda.dosage_form).map((value) => String(value || '').trim()).filter(Boolean);
+  const dosageForms = Array.from(new Set([
+    ...listOrEmpty(openfda.dosage_form).map((value) => String(value || '').trim()),
+    ...(clinicalTablesData && clinicalTablesData.doseForms ? clinicalTablesData.doseForms.map((value) => String(value || '').trim()) : []),
+  ].filter(Boolean))).slice(0, 8);
+
+  const displayRouteHints = listOrEmpty(clinicalTablesData && clinicalTablesData.displayNames)
+    .join(' ')
+    .toLowerCase();
+
   const routes = listOrEmpty(openfda.route).map((value) => String(value || '').trim()).filter(Boolean);
-  const indications = splitSentences(listOrEmpty(bestOpenFda.indications_and_usage).join(' '), 8);
-  const reactions = splitSentences(listOrEmpty(bestOpenFda.adverse_reactions).join(' '), 8);
-  const interactions = splitSentences(listOrEmpty(bestOpenFda.drug_interactions).join(' '), 8);
+  if (!routes.length) {
+    if (/oral/.test(displayRouteHints)) routes.push('oral');
+    if (/inject|intravenous|intramuscular/.test(displayRouteHints)) routes.push('injectable');
+    if (/transdermal|patch/.test(displayRouteHints)) routes.push('transdermal');
+    if (/nasal/.test(displayRouteHints)) routes.push('nasal');
+  }
+
+  const indications = splitSentences(listOrEmpty(bestOpenFda && bestOpenFda.indications_and_usage).join(' '), 8);
+  const medlineIndications = splitSentences(medlinePlusData.summary, 6);
+  const effectiveIndications = indications.length ? indications : medlineIndications;
+
+  const reactions = splitSentences(listOrEmpty(bestOpenFda && bestOpenFda.adverse_reactions).join(' '), 8);
+  const interactions = splitSentences(listOrEmpty(bestOpenFda && bestOpenFda.drug_interactions).join(' '), 8);
   const warnings = splitSentences([
-    ...listOrEmpty(bestOpenFda.boxed_warning),
-    ...listOrEmpty(bestOpenFda.warnings),
+    ...listOrEmpty(bestOpenFda && bestOpenFda.boxed_warning),
+    ...listOrEmpty(bestOpenFda && bestOpenFda.warnings),
   ].join(' '), 8);
-  const mechanism = splitSentences(listOrEmpty(bestOpenFda.mechanism_of_action).join(' '), 2).join(' ') || 'No summary available yet.';
+  const mechanism = splitSentences(listOrEmpty(bestOpenFda && bestOpenFda.mechanism_of_action).join(' '), 2).join(' ')
+    || (medlinePlusData && medlinePlusData.summary ? splitSentences(medlinePlusData.summary, 1)[0] : '')
+    || 'No summary available yet.';
+  const parsedDosing = parseDoseSummaryFromSnippets(listOrEmpty(bestOpenFda && bestOpenFda.dosage_and_administration));
+  const sourceSignals = [];
+  if (bestOpenFda) sourceSignals.push('openFDA');
+  if (rxNormProperties || rxcui) sourceSignals.push('RxNorm');
+  if (clinicalTablesData && clinicalTablesData.found) sourceSignals.push('RxTerms');
+  if (medlinePlusData && medlinePlusData.found) sourceSignals.push('MedlinePlus');
+  const reliabilityScore = Math.min(68,
+    20
+    + (bestOpenFda ? 24 : 0)
+    + (clinicalTablesData && clinicalTablesData.found ? 10 : 0)
+    + (medlinePlusData && medlinePlusData.found ? 8 : 0)
+    + ((parsedDosing.start || '').toLowerCase().includes('verify') ? 0 : 8));
+  const reliabilityTier = reliabilityScore >= 45 ? 'moderate' : 'low';
+  const sourceLinks = [
+    openFdaUrl,
+    rxNormLookupUrl,
+    rxNormPropertiesUrl,
+    clinicalTablesData && clinicalTablesData.sourceUrl,
+    medlinePlusData && medlinePlusData.sourceUrl,
+    medlinePlusData && medlinePlusData.link,
+  ].filter(Boolean);
+
+  if (!sourceSignals.length) {
+    throw new Error('No source match found for fallback fetch.');
+  }
 
   return normalizeRuntimeFallbackEntry({
     id: fallbackId,
@@ -3845,23 +4260,158 @@ async function fetchMedicationFallbackRecord(rawTerm) {
     psych_class: 'Unclassified',
     active: true,
     newer_brand: false,
-    fda_psych_uses: indications,
+    fda_psych_uses: effectiveIndications,
     off_label_psych_uses: [],
     moa_summary: mechanism,
     common_side_effects: reactions,
     important_risks: warnings,
     psych_interactions: interactions,
-    clinical_pearls: ['Low-confidence runtime fallback. Verify with official labeling before clinical use.'],
-    source_links: [openFdaUrl, rxNormLookupUrl, rxNormPropertiesUrl].filter(Boolean),
+    clinical_pearls: [
+      'Runtime supplemental profile from free public sources. Confirm clinically before prescribing.',
+      medlinePlusData && medlinePlusData.summary ? medlinePlusData.summary : '',
+    ].filter(Boolean),
+    source_links: sourceLinks,
     source_last_checked: new Date().toISOString(),
     editorial_last_reviewed: null,
     content_review_status: 'source scored',
-    missing_data_flags: ['curated psych review pending', 'psych dosing verification required'],
-    reliability_score: 28,
-    reliability_tier: 'low',
-    reliability_sources: ['openFDA', 'RxNorm'],
-    formulations: buildFallbackFormulations(fallbackId, dosageForms, routes),
+    missing_data_flags: [
+      'curated psych review pending',
+      chooseFirstMeaningful([parsedDosing.start]).toLowerCase().includes('verify') ? 'psych dosing verification required' : '',
+      effectiveIndications.length ? '' : 'indication summary pending',
+      openFdaError ? 'openFDA unavailable during runtime fetch' : '',
+    ].filter(Boolean),
+    reliability_score: reliabilityScore,
+    reliability_tier: reliabilityTier,
+    reliability_sources: sourceSignals,
+    formulations: buildFallbackFormulations(fallbackId, dosageForms, routes, {
+      dosingDefaults: parsedDosing,
+      strengthsByLabel: clinicalTablesData && clinicalTablesData.strengthsByDoseForm
+        ? clinicalTablesData.strengthsByDoseForm
+        : new Map(),
+    }),
   });
+}
+
+function isPlaceholderMedicationText(value) {
+  return /no summary available yet|pending review|verify official source|see source dosing text/i.test(String(value || '').trim());
+}
+
+function isSparseMedicationEntry(medication) {
+  if (!medication || typeof medication !== 'object') return true;
+  const hasIndications = listOrEmpty(medication.fda_psych_uses).some((item) => String(item || '').trim() && !isPlaceholderMedicationText(item));
+
+  const forms = listOrEmpty(medication.formulations);
+  const hasMeaningfulForm = forms.some((form) => {
+    const dose = form && form.common_adult_psych_dosing ? form.common_adult_psych_dosing : {};
+    const hasDosing = [dose.start, dose.target, dose.max].some((value) => {
+      const token = String(value || '').trim();
+      return token && !isPlaceholderMedicationText(token);
+    });
+    const hasStrength = listOrEmpty(form && form.strength_examples).some((value) => String(value || '').trim());
+    return hasDosing || hasStrength;
+  });
+
+  return !(hasIndications && hasMeaningfulForm);
+}
+
+function mergeSupplementalFormulations(baseForms = [], supplementalForms = []) {
+  if (!supplementalForms.length) return baseForms;
+  if (!baseForms.length) return supplementalForms;
+
+  return baseForms.map((base) => {
+    const match = supplementalForms.find((form) => {
+      const baseDoseForm = String(base && base.dosage_form || '').trim().toLowerCase();
+      const formDoseForm = String(form && form.dosage_form || '').trim().toLowerCase();
+      const baseLabel = String(base && base.label || '').trim().toLowerCase();
+      const formLabel = String(form && form.label || '').trim().toLowerCase();
+      return (baseDoseForm && formDoseForm && baseDoseForm === formDoseForm)
+        || (baseLabel && formLabel && baseLabel === formLabel)
+        || (baseDoseForm && formLabel.includes(baseDoseForm))
+        || (formDoseForm && baseLabel.includes(formDoseForm));
+    }) || supplementalForms[0];
+
+    const baseDose = base && base.common_adult_psych_dosing ? base.common_adult_psych_dosing : {};
+    const supDose = match && match.common_adult_psych_dosing ? match.common_adult_psych_dosing : {};
+
+    return {
+      ...base,
+      strength_examples: listOrEmpty(base && base.strength_examples).length
+        ? listOrEmpty(base && base.strength_examples)
+        : listOrEmpty(match && match.strength_examples).slice(0, 10),
+      common_adult_psych_dosing: {
+        start: chooseFirstMeaningful([baseDose.start, supDose.start, 'Verify official source.']) || 'Verify official source.',
+        target: chooseFirstMeaningful([baseDose.target, supDose.target, 'Verify official source.']) || 'Verify official source.',
+        max: chooseFirstMeaningful([baseDose.max, supDose.max, 'Verify official source.']) || 'Verify official source.',
+      },
+      titration_notes: listOrEmpty(base && base.titration_notes).length
+        ? listOrEmpty(base && base.titration_notes)
+        : listOrEmpty(match && match.titration_notes).slice(0, 6),
+      administration_notes: listOrEmpty(base && base.administration_notes).length
+        ? listOrEmpty(base && base.administration_notes)
+        : listOrEmpty(match && match.administration_notes).slice(0, 6),
+      source_links: Array.from(new Set([...(base && base.source_links || []), ...(match && match.source_links || [])])).slice(0, 10),
+    };
+  });
+}
+
+function applySupplementalProfileToMedication(medication, supplemental) {
+  if (!medication || !supplemental) return false;
+  const overrides = getRuntimeOverrides();
+
+  const nextOverride = {
+    fda_psych_uses: listOrEmpty(medication.fda_psych_uses).length
+      ? medication.fda_psych_uses
+      : listOrEmpty(supplemental.fda_psych_uses),
+    common_side_effects: listOrEmpty(medication.common_side_effects).length
+      ? medication.common_side_effects
+      : listOrEmpty(supplemental.common_side_effects),
+    important_risks: listOrEmpty(medication.important_risks).length
+      ? medication.important_risks
+      : listOrEmpty(supplemental.important_risks),
+    psych_interactions: listOrEmpty(medication.psych_interactions).length
+      ? medication.psych_interactions
+      : listOrEmpty(supplemental.psych_interactions),
+    moa_summary: chooseFirstMeaningful([medication.moa_summary, supplemental.moa_summary]),
+    formulations: mergeSupplementalFormulations(
+      listOrEmpty(medication.formulations),
+      listOrEmpty(supplemental.formulations),
+    ),
+    source_last_checked: new Date().toISOString(),
+    source_links: Array.from(new Set([...(medication.source_links || []), ...(supplemental.source_links || [])])).slice(0, 20),
+    reliability_score: Math.max(Number(medication.reliability_score || 0), Number(supplemental.reliability_score || 0), 42),
+    reliability_tier: Number(supplemental.reliability_score || 0) >= 45 ? 'moderate' : 'low',
+    reliability_sources: Array.from(new Set([...(medication.reliability_sources || []), ...(supplemental.reliability_sources || [])])).slice(0, 10),
+    content_review_status: medication.content_review_status || 'source scored',
+    missing_data_flags: Array.from(new Set([...(medication.missing_data_flags || []), 'runtime supplemental source'])).slice(0, 10),
+  };
+
+  overrides[medication.id] = nextOverride;
+  saveRuntimeOverrides(overrides);
+  return true;
+}
+
+async function fetchAndApplySupplementalForSelectedMedication() {
+  const med = getMedicationById(state.selectedMedicationId);
+  if (!med || medicationFallbackFetchRunning) return;
+
+  medicationFallbackFetchRunning = true;
+  renderMedicationResults();
+  renderMedicationDetail();
+
+  try {
+    const supplemental = await fetchMedicationFallbackRecord(med.generic_name || med.id || '');
+    const applied = applySupplementalProfileToMedication(med, supplemental);
+    if (!applied) {
+      throw new Error('Unable to apply supplemental medication data.');
+    }
+    renderMedicationRows();
+    runMedicationSearch(els.medSearchInput ? els.medSearchInput.value : '');
+    renderMedicationDetail();
+  } finally {
+    medicationFallbackFetchRunning = false;
+    renderMedicationResults();
+    renderMedicationDetail();
+  }
 }
 
 function upsertRuntimeFallbackEntry(entry, options = {}) {
@@ -4420,6 +4970,13 @@ function attachMedicationListeners() {
       if (actionBtn.dataset.action === 'copy-summary') {
         const context = getSelectedMedicationContext();
         if (context) copyMedicationSummary(context);
+        return;
+      }
+
+      if (actionBtn.dataset.action === 'fetch-supplemental') {
+        fetchAndApplySupplementalForSelectedMedication().catch((error) => {
+          window.alert(`Unable to fetch supplemental medication data: ${String(error && error.message ? error.message : error)}`);
+        });
       }
     });
   }

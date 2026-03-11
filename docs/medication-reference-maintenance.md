@@ -30,6 +30,12 @@ Source reliability is scored with weighted source signals and content coverage:
 Current source weighting order:
 - `DailyMed` > `openFDA` > `Drugs@FDA` > `RxNorm` > `RxClass` > `RxTerms` > `MedlinePlus`
 
+Runtime supplemental fetches (in-drawer) now blend:
+- `openFDA` labeling snippets
+- `RxNorm` lookup/properties
+- `RxTerms` free table API (ClinicalTables)
+- `MedlinePlus Connect` summaries
+
 ## File structure
 
 - `data/meds/source/medications.source.json`: source-derived metadata baseline
@@ -81,4 +87,8 @@ This lets app runtime pick up newly published catalog data without requiring a p
 - Shared canonical catalog updates are performed by owner-side maintenance (`med:refresh-if-stale` or `med:knowledge-check`).
 - Curated psychiatry content should only be edited in curated files/scripts and reviewed clinically.
 - Drive writes are gated by Apps Script allowlist/service token policy.
-- `openFDA` endpoints can rate-limit anonymous traffic (HTTP 429). For better coverage, set `OPENFDA_API_KEY` in your shell before running sync jobs, or add `openfdaApiKey` to `config/drive-sync.local.json`.
+- `openFDA` endpoints can rate-limit sync jobs (HTTP 429). The sync script now defaults to slower openFDA pacing, but you can tune:
+  - `OPENFDA_MIN_INTERVAL_MS` (default `1500`)
+  - `OPENFDA_MAX_TERMS` (default `2`)
+  - `DRUGSFDA_MAX_TERMS` (default `2`)
+- For best coverage, set `OPENFDA_API_KEY` in your shell before running sync jobs, or add `openfdaApiKey` to `config/drive-sync.local.json`.

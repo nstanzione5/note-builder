@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-03-09T20:13:40.534Z",
+  "generated_at": "2026-03-11T00:49:28.439Z",
   "totals": {
     "records": 260,
     "curated": 26,
     "source_scored": 234,
-    "very_high_reliability": 26,
-    "high_reliability": 0,
-    "moderate_reliability": 215,
+    "very_high_reliability": 233,
+    "high_reliability": 1,
+    "moderate_reliability": 7,
     "low_reliability": 19,
-    "missing_fields": 242
+    "missing_fields": 240
   },
   "review_queue": [
     {
@@ -16,216 +16,199 @@
       "generic_name": "citalopram",
       "psych_class": "SSRIs",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:43:11.217Z"
+      "source_last_checked": "2026-03-11T00:27:22.099Z"
     },
     {
       "id": "fluvoxamine",
       "generic_name": "fluvoxamine",
       "psych_class": "SSRIs",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:43:31.899Z"
+      "source_last_checked": "2026-03-11T00:27:25.898Z"
     },
     {
       "id": "paroxetine",
       "generic_name": "paroxetine",
       "psych_class": "SSRIs",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:43:38.743Z"
+      "source_last_checked": "2026-03-11T00:27:27.380Z"
     },
     {
       "id": "vilazodone",
       "generic_name": "vilazodone",
       "psych_class": "SSRIs",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:43:52.536Z"
+      "source_last_checked": "2026-03-11T00:27:30.356Z"
     },
     {
       "id": "vortioxetine",
       "generic_name": "vortioxetine",
       "psych_class": "SSRIs",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:43:59.461Z"
+      "source_last_checked": "2026-03-11T00:27:31.836Z"
     },
     {
       "id": "desvenlafaxine",
       "generic_name": "desvenlafaxine",
       "psych_class": "SNRIs",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:44:13.833Z"
+      "source_last_checked": "2026-03-11T00:27:34.919Z"
     },
     {
       "id": "levomilnacipran",
       "generic_name": "levomilnacipran",
       "psych_class": "SNRIs",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:44:28.450Z"
+      "source_last_checked": "2026-03-11T00:27:37.840Z"
     },
     {
       "id": "milnacipran",
       "generic_name": "milnacipran",
       "psych_class": "SNRIs",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:44:35.521Z"
+      "source_last_checked": "2026-03-11T00:27:39.397Z"
     },
     {
       "id": "atomoxetine",
       "generic_name": "atomoxetine",
       "psych_class": "SNRIs",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:44:42.666Z"
+      "source_last_checked": "2026-03-11T00:27:40.859Z"
     },
     {
       "id": "sibutramine",
       "generic_name": "sibutramine",
       "psych_class": "SNRIs",
       "content_review_status": "source scored",
-      "reliability_score": 21,
+      "reliability_score": 39,
       "reliability_tier": "low",
       "reliability_sources": [
+        "Drugs@FDA",
         "RxNorm",
         "RxClass"
       ],
@@ -237,17 +220,19 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:44:49.828Z"
+      "source_last_checked": "2026-03-11T00:27:42.310Z"
     },
     {
       "id": "dextromethorphan-bupropion",
       "generic_name": "dextromethorphan-bupropion",
       "psych_class": "NDRIs",
       "content_review_status": "curated",
-      "reliability_score": 92,
+      "reliability_score": 100,
       "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
@@ -255,223 +240,215 @@
       "missing_data_flags": [
         "off-label psych uses"
       ],
-      "source_last_checked": "2026-03-09T19:45:04.448Z"
+      "source_last_checked": "2026-03-11T00:27:46.901Z"
     },
     {
       "id": "mirtazapine",
       "generic_name": "mirtazapine",
       "psych_class": "Atypical antidepressants",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:45:12.039Z"
+      "source_last_checked": "2026-03-11T00:27:48.400Z"
     },
     {
       "id": "trazodone",
       "generic_name": "trazodone",
       "psych_class": "Atypical antidepressants",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:45:19.036Z"
+      "source_last_checked": "2026-03-11T00:27:49.886Z"
     },
     {
       "id": "nefazodone",
       "generic_name": "nefazodone",
       "psych_class": "Atypical antidepressants",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:45:26.203Z"
+      "source_last_checked": "2026-03-11T00:27:51.336Z"
     },
     {
       "id": "amitriptyline",
       "generic_name": "amitriptyline",
       "psych_class": "Atypical antidepressants",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:45:32.988Z"
+      "source_last_checked": "2026-03-11T00:27:52.831Z"
     },
     {
       "id": "nortriptyline",
       "generic_name": "nortriptyline",
       "psych_class": "Atypical antidepressants",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
         "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:45:39.699Z"
+      "source_last_checked": "2026-03-11T00:27:54.339Z"
     },
     {
       "id": "desipramine",
       "generic_name": "desipramine",
       "psych_class": "Atypical antidepressants",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
         "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:45:46.590Z"
+      "source_last_checked": "2026-03-11T00:27:55.832Z"
     },
     {
       "id": "imipramine",
       "generic_name": "imipramine",
       "psych_class": "Atypical antidepressants",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:45:53.360Z"
+      "source_last_checked": "2026-03-11T00:27:57.394Z"
     },
     {
       "id": "clomipramine",
       "generic_name": "clomipramine",
       "psych_class": "Atypical antidepressants",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:46:00.263Z"
+      "source_last_checked": "2026-03-11T00:27:58.882Z"
     },
     {
       "id": "doxepin",
       "generic_name": "doxepin",
       "psych_class": "Atypical antidepressants",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:46:07.379Z"
+      "source_last_checked": "2026-03-11T00:28:00.370Z"
     },
     {
       "id": "maprotiline",
       "generic_name": "maprotiline",
       "psych_class": "Atypical antidepressants",
       "content_review_status": "source scored",
-      "reliability_score": 25,
+      "reliability_score": 43,
       "reliability_tier": "low",
       "reliability_sources": [
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
@@ -484,132 +461,128 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:46:14.796Z"
+      "source_last_checked": "2026-03-11T00:28:01.819Z"
     },
     {
       "id": "amoxapine",
       "generic_name": "amoxapine",
       "psych_class": "Atypical antidepressants",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:46:21.949Z"
+      "source_last_checked": "2026-03-11T00:28:03.407Z"
     },
     {
       "id": "trimipramine",
       "generic_name": "trimipramine",
       "psych_class": "Atypical antidepressants",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:46:28.889Z"
+      "source_last_checked": "2026-03-11T00:28:05.303Z"
     },
     {
       "id": "protriptyline",
       "generic_name": "protriptyline",
       "psych_class": "Atypical antidepressants",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
         "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:46:36.104Z"
+      "source_last_checked": "2026-03-11T00:28:06.329Z"
     },
     {
       "id": "phenelzine",
       "generic_name": "phenelzine",
       "psych_class": "Atypical antidepressants",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:46:43.121Z"
+      "source_last_checked": "2026-03-11T00:28:07.878Z"
     },
     {
       "id": "tranylcypromine",
       "generic_name": "tranylcypromine",
       "psych_class": "Atypical antidepressants",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:46:49.951Z"
+      "source_last_checked": "2026-03-11T00:28:09.361Z"
     },
     {
       "id": "isocarboxazid",
       "generic_name": "isocarboxazid",
       "psych_class": "Atypical antidepressants",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 77,
+      "reliability_tier": "high",
       "reliability_sources": [
         "DailyMed",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
@@ -622,63 +595,62 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:46:56.827Z"
+      "source_last_checked": "2026-03-11T00:28:12.323Z"
     },
     {
       "id": "selegiline-transdermal",
       "generic_name": "selegiline transdermal",
       "psych_class": "Atypical antidepressants",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:47:04.404Z"
+      "source_last_checked": "2026-03-11T00:28:13.850Z"
     },
     {
       "id": "zuranolone",
       "generic_name": "zuranolone",
       "psych_class": "Atypical antidepressants",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:47:11.466Z"
+      "source_last_checked": "2026-03-11T00:28:15.339Z"
     },
     {
       "id": "amphetamine-mixed-salts-xr",
       "generic_name": "amphetamine mixed salts XR",
       "psych_class": "Stimulant ADHD medications",
       "content_review_status": "curated",
-      "reliability_score": 92,
+      "reliability_score": 100,
       "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
@@ -686,17 +658,19 @@
       "missing_data_flags": [
         "off-label psych uses"
       ],
-      "source_last_checked": "2026-03-09T19:47:24.848Z"
+      "source_last_checked": "2026-03-11T00:28:17.142Z"
     },
     {
       "id": "lisdexamfetamine",
       "generic_name": "lisdexamfetamine",
       "psych_class": "Stimulant ADHD medications",
       "content_review_status": "curated",
-      "reliability_score": 92,
+      "reliability_score": 100,
       "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
@@ -704,408 +678,383 @@
       "missing_data_flags": [
         "off-label psych uses"
       ],
-      "source_last_checked": "2026-03-09T19:47:32.034Z"
+      "source_last_checked": "2026-03-11T00:28:18.442Z"
     },
     {
       "id": "dextroamphetamine",
       "generic_name": "dextroamphetamine",
       "psych_class": "Stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:47:38.906Z"
+      "source_last_checked": "2026-03-11T00:28:19.858Z"
     },
     {
       "id": "methamphetamine",
       "generic_name": "methamphetamine",
       "psych_class": "Stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:47:45.811Z"
+      "source_last_checked": "2026-03-11T00:28:21.341Z"
     },
     {
       "id": "methylphenidate-ir",
       "generic_name": "methylphenidate IR",
       "psych_class": "Stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:47:53.038Z"
+      "source_last_checked": "2026-03-11T00:28:22.998Z"
     },
     {
       "id": "methylphenidate-er",
       "generic_name": "methylphenidate ER",
       "psych_class": "Stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:47:59.694Z"
+      "source_last_checked": "2026-03-11T00:28:23.280Z"
     },
     {
       "id": "dexmethylphenidate",
       "generic_name": "dexmethylphenidate",
       "psych_class": "Stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:48:06.514Z"
+      "source_last_checked": "2026-03-11T00:28:24.377Z"
     },
     {
       "id": "dexmethylphenidate-xr",
       "generic_name": "dexmethylphenidate XR",
       "psych_class": "Stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:48:13.597Z"
+      "source_last_checked": "2026-03-11T00:28:24.658Z"
     },
     {
       "id": "serdexmethylphenidate-dexmethylphenidate",
       "generic_name": "serdexmethylphenidate-dexmethylphenidate",
       "psych_class": "Stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:48:20.936Z"
+      "source_last_checked": "2026-03-11T00:28:27.338Z"
     },
     {
       "id": "methylphenidate-pm",
       "generic_name": "methylphenidate PM",
       "psych_class": "Stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:48:27.843Z"
+      "source_last_checked": "2026-03-11T00:28:27.619Z"
     },
     {
       "id": "amphetamine-mixed-salts-er",
       "generic_name": "amphetamine mixed salts ER",
       "psych_class": "Stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:48:35.086Z"
+      "source_last_checked": "2026-03-11T00:28:27.901Z"
     },
     {
       "id": "amphetamine-sulfate",
       "generic_name": "amphetamine sulfate",
       "psych_class": "Stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:48:42.144Z"
+      "source_last_checked": "2026-03-11T00:28:28.886Z"
     },
     {
       "id": "amphetamine-xr-odt",
       "generic_name": "amphetamine XR ODT",
       "psych_class": "Stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:48:48.953Z"
+      "source_last_checked": "2026-03-11T00:28:29.168Z"
     },
     {
       "id": "amphetamine-xr-suspension",
       "generic_name": "amphetamine XR suspension",
       "psych_class": "Stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:48:55.704Z"
+      "source_last_checked": "2026-03-11T00:28:29.449Z"
     },
     {
       "id": "methylphenidate-chewable-er",
       "generic_name": "methylphenidate chewable ER",
       "psych_class": "Stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:49:02.666Z"
+      "source_last_checked": "2026-03-11T00:28:29.732Z"
     },
     {
       "id": "methylphenidate-suspension-er",
       "generic_name": "methylphenidate suspension ER",
       "psych_class": "Stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:49:09.474Z"
+      "source_last_checked": "2026-03-11T00:28:30.014Z"
     },
     {
       "id": "methylphenidate-odt-xr",
       "generic_name": "methylphenidate ODT XR",
       "psych_class": "Stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:49:16.319Z"
+      "source_last_checked": "2026-03-11T00:28:30.296Z"
     },
     {
       "id": "methylphenidate-transdermal",
       "generic_name": "methylphenidate transdermal",
       "psych_class": "Stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:49:23.400Z"
+      "source_last_checked": "2026-03-11T00:28:30.579Z"
     },
     {
       "id": "dextroamphetamine-transdermal",
       "generic_name": "dextroamphetamine transdermal",
       "psych_class": "Stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:49:30.320Z"
+      "source_last_checked": "2026-03-11T00:28:30.861Z"
     },
     {
       "id": "viloxazine",
       "generic_name": "viloxazine",
       "psych_class": "Non-stimulant ADHD medications",
       "content_review_status": "curated",
-      "reliability_score": 92,
+      "reliability_score": 100,
       "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
@@ -1113,765 +1062,722 @@
       "missing_data_flags": [
         "off-label psych uses"
       ],
-      "source_last_checked": "2026-03-09T19:49:37.467Z"
+      "source_last_checked": "2026-03-11T00:28:31.822Z"
     },
     {
       "id": "guanfacine-ir",
       "generic_name": "guanfacine IR",
       "psych_class": "Non-stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:49:44.465Z"
+      "source_last_checked": "2026-03-11T00:28:32.879Z"
     },
     {
       "id": "clonidine-ir",
       "generic_name": "clonidine IR",
       "psych_class": "Non-stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:49:58.432Z"
+      "source_last_checked": "2026-03-11T00:28:34.349Z"
     },
     {
       "id": "clonidine-er",
       "generic_name": "clonidine ER",
       "psych_class": "Non-stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:50:05.422Z"
+      "source_last_checked": "2026-03-11T00:28:34.631Z"
     },
     {
       "id": "modafinil",
       "generic_name": "modafinil",
       "psych_class": "Non-stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:50:12.270Z"
+      "source_last_checked": "2026-03-11T00:28:35.867Z"
     },
     {
       "id": "armodafinil",
       "generic_name": "armodafinil",
       "psych_class": "Non-stimulant ADHD medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:50:19.669Z"
+      "source_last_checked": "2026-03-11T00:28:37.389Z"
     },
     {
       "id": "alprazolam",
       "generic_name": "alprazolam",
       "psych_class": "Benzodiazepines",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:50:26.645Z"
+      "source_last_checked": "2026-03-11T00:28:38.882Z"
     },
     {
       "id": "clonazepam",
       "generic_name": "clonazepam",
       "psych_class": "Benzodiazepines",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:50:33.751Z"
+      "source_last_checked": "2026-03-11T00:28:40.396Z"
     },
     {
       "id": "lorazepam",
       "generic_name": "lorazepam",
       "psych_class": "Benzodiazepines",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:50:40.989Z"
+      "source_last_checked": "2026-03-11T00:28:41.865Z"
     },
     {
       "id": "diazepam",
       "generic_name": "diazepam",
       "psych_class": "Benzodiazepines",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:50:47.794Z"
+      "source_last_checked": "2026-03-11T00:28:43.367Z"
     },
     {
       "id": "temazepam",
       "generic_name": "temazepam",
       "psych_class": "Benzodiazepines",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
         "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:50:54.690Z"
+      "source_last_checked": "2026-03-11T00:28:44.940Z"
     },
     {
       "id": "oxazepam",
       "generic_name": "oxazepam",
       "psych_class": "Benzodiazepines",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
         "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:51:01.747Z"
+      "source_last_checked": "2026-03-11T00:28:46.364Z"
     },
     {
       "id": "chlordiazepoxide",
       "generic_name": "chlordiazepoxide",
       "psych_class": "Benzodiazepines",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:51:08.546Z"
+      "source_last_checked": "2026-03-11T00:28:47.978Z"
     },
     {
       "id": "clorazepate",
       "generic_name": "clorazepate",
       "psych_class": "Benzodiazepines",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:51:15.370Z"
+      "source_last_checked": "2026-03-11T00:28:49.364Z"
     },
     {
       "id": "triazolam",
       "generic_name": "triazolam",
       "psych_class": "Benzodiazepines",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:51:22.308Z"
+      "source_last_checked": "2026-03-11T00:28:50.898Z"
     },
     {
       "id": "estazolam",
       "generic_name": "estazolam",
       "psych_class": "Benzodiazepines",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:51:29.466Z"
+      "source_last_checked": "2026-03-11T00:28:52.449Z"
     },
     {
       "id": "flurazepam",
       "generic_name": "flurazepam",
       "psych_class": "Benzodiazepines",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:51:36.463Z"
+      "source_last_checked": "2026-03-11T00:28:53.862Z"
     },
     {
       "id": "quazepam",
       "generic_name": "quazepam",
       "psych_class": "Benzodiazepines",
       "content_review_status": "source scored",
-      "reliability_score": 55,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:51:43.484Z"
+      "source_last_checked": "2026-03-11T00:28:55.418Z"
     },
     {
       "id": "midazolam",
       "generic_name": "midazolam",
       "psych_class": "Benzodiazepines",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:51:50.619Z"
+      "source_last_checked": "2026-03-11T00:28:56.906Z"
     },
     {
       "id": "diazepam-nasal",
       "generic_name": "diazepam nasal",
       "psych_class": "Benzodiazepines",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:51:57.431Z"
+      "source_last_checked": "2026-03-11T00:28:57.187Z"
     },
     {
       "id": "midazolam-nasal",
       "generic_name": "midazolam nasal",
       "psych_class": "Benzodiazepines",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:52:04.369Z"
+      "source_last_checked": "2026-03-11T00:28:57.469Z"
     },
     {
       "id": "zolpidem",
       "generic_name": "zolpidem",
       "psych_class": "Sleep / hypnotic medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:52:11.721Z"
+      "source_last_checked": "2026-03-11T00:28:58.416Z"
     },
     {
       "id": "zolpidem-er",
       "generic_name": "zolpidem ER",
       "psych_class": "Sleep / hypnotic medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:52:18.788Z"
+      "source_last_checked": "2026-03-11T00:28:58.698Z"
     },
     {
       "id": "zaleplon",
       "generic_name": "zaleplon",
       "psych_class": "Sleep / hypnotic medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:52:26.054Z"
+      "source_last_checked": "2026-03-11T00:28:59.885Z"
     },
     {
       "id": "eszopiclone",
       "generic_name": "eszopiclone",
       "psych_class": "Sleep / hypnotic medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:52:33.086Z"
+      "source_last_checked": "2026-03-11T00:29:01.450Z"
     },
     {
       "id": "ramelteon",
       "generic_name": "ramelteon",
       "psych_class": "Sleep / hypnotic medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:52:40.068Z"
+      "source_last_checked": "2026-03-11T00:29:02.941Z"
     },
     {
       "id": "suvorexant",
       "generic_name": "suvorexant",
       "psych_class": "Sleep / hypnotic medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:52:46.847Z"
+      "source_last_checked": "2026-03-11T00:29:04.370Z"
     },
     {
       "id": "lemborexant",
       "generic_name": "lemborexant",
       "psych_class": "Sleep / hypnotic medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:52:53.657Z"
+      "source_last_checked": "2026-03-11T00:29:05.903Z"
     },
     {
       "id": "daridorexant",
       "generic_name": "daridorexant",
       "psych_class": "Sleep / hypnotic medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:53:00.972Z"
+      "source_last_checked": "2026-03-11T00:29:07.478Z"
     },
     {
       "id": "doxepin-low-dose",
       "generic_name": "doxepin low-dose",
       "psych_class": "Sleep / hypnotic medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:53:08.022Z"
+      "source_last_checked": "2026-03-11T00:29:10.426Z"
     },
     {
       "id": "hydroxyzine",
       "generic_name": "hydroxyzine",
       "psych_class": "Sleep / hypnotic medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
         "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:53:15.257Z"
+      "source_last_checked": "2026-03-11T00:29:11.898Z"
     },
     {
       "id": "diphenhydramine",
       "generic_name": "diphenhydramine",
       "psych_class": "Sleep / hypnotic medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:53:22.253Z"
+      "source_last_checked": "2026-03-11T00:29:13.402Z"
     },
     {
       "id": "gabapentin",
       "generic_name": "gabapentin",
       "psych_class": "Sleep / hypnotic medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:53:29.472Z"
+      "source_last_checked": "2026-03-11T00:29:14.946Z"
     },
     {
       "id": "pregabalin",
       "generic_name": "pregabalin",
       "psych_class": "Sleep / hypnotic medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:53:36.616Z"
+      "source_last_checked": "2026-03-11T00:29:16.425Z"
     },
     {
       "id": "melatonin-receptor-agonist",
@@ -1891,76 +1797,71 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:53:44.076Z"
+      "source_last_checked": "2026-03-11T00:29:17.872Z"
     },
     {
       "id": "brexpiprazole",
       "generic_name": "brexpiprazole",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:53:58.634Z"
+      "source_last_checked": "2026-03-11T00:29:20.884Z"
     },
     {
       "id": "cariprazine",
       "generic_name": "cariprazine",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:54:05.640Z"
+      "source_last_checked": "2026-03-11T00:29:22.384Z"
     },
     {
       "id": "olanzapine",
       "generic_name": "olanzapine",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:54:26.862Z"
+      "source_last_checked": "2026-03-11T00:29:25.584Z"
     },
     {
       "id": "olanzapine-fluoxetine",
@@ -1982,1055 +1883,968 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:54:34.207Z"
+      "source_last_checked": "2026-03-11T00:29:28.449Z"
     },
     {
       "id": "olanzapine-samidorphan",
       "generic_name": "olanzapine-samidorphan",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:54:41.449Z"
+      "source_last_checked": "2026-03-11T00:29:31.387Z"
     },
     {
       "id": "risperidone",
       "generic_name": "risperidone",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:54:48.439Z"
+      "source_last_checked": "2026-03-11T00:29:32.940Z"
     },
     {
       "id": "paliperidone-oral",
       "generic_name": "paliperidone oral",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:54:55.431Z"
+      "source_last_checked": "2026-03-11T00:29:34.456Z"
     },
     {
       "id": "ziprasidone",
       "generic_name": "ziprasidone",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:55:03.124Z"
+      "source_last_checked": "2026-03-11T00:29:35.987Z"
     },
     {
       "id": "lurasidone",
       "generic_name": "lurasidone",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:55:10.484Z"
+      "source_last_checked": "2026-03-11T00:29:37.444Z"
     },
     {
       "id": "asenapine-sublingual",
       "generic_name": "asenapine sublingual",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:55:24.847Z"
+      "source_last_checked": "2026-03-11T00:29:41.899Z"
     },
     {
       "id": "iloperidone",
       "generic_name": "iloperidone",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:55:32.030Z"
+      "source_last_checked": "2026-03-11T00:29:43.404Z"
     },
     {
       "id": "haloperidol",
       "generic_name": "haloperidol",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
         "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:55:39.057Z"
+      "source_last_checked": "2026-03-11T00:29:44.915Z"
     },
     {
       "id": "chlorpromazine",
       "generic_name": "chlorpromazine",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
         "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:55:45.775Z"
+      "source_last_checked": "2026-03-11T00:29:46.471Z"
     },
     {
       "id": "perphenazine",
       "generic_name": "perphenazine",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:55:52.628Z"
+      "source_last_checked": "2026-03-11T00:29:47.916Z"
     },
     {
       "id": "trifluoperazine",
       "generic_name": "trifluoperazine",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
         "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:55:59.869Z"
+      "source_last_checked": "2026-03-11T00:29:49.421Z"
     },
     {
       "id": "loxapine",
       "generic_name": "loxapine",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:56:06.886Z"
+      "source_last_checked": "2026-03-11T00:29:50.993Z"
     },
     {
       "id": "molindone",
       "generic_name": "molindone",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:56:13.985Z"
+      "source_last_checked": "2026-03-11T00:29:52.401Z"
     },
     {
       "id": "pimozide",
       "generic_name": "pimozide",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:56:21.253Z"
+      "source_last_checked": "2026-03-11T00:29:53.897Z"
     },
     {
       "id": "thiothixene",
       "generic_name": "thiothixene",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:56:28.498Z"
+      "source_last_checked": "2026-03-11T00:29:55.405Z"
     },
     {
       "id": "thioridazine",
       "generic_name": "thioridazine",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:56:35.507Z"
+      "source_last_checked": "2026-03-11T00:29:56.929Z"
     },
     {
       "id": "fluphenazine",
       "generic_name": "fluphenazine",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
         "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:56:42.655Z"
+      "source_last_checked": "2026-03-11T00:29:58.411Z"
     },
     {
       "id": "xanomeline-trospium",
       "generic_name": "xanomeline-trospium",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:56:49.675Z"
+      "source_last_checked": "2026-03-11T00:30:01.479Z"
     },
     {
       "id": "pimavanserin",
       "generic_name": "pimavanserin",
       "psych_class": "Antipsychotics",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:56:56.995Z"
+      "source_last_checked": "2026-03-11T00:30:02.948Z"
     },
     {
       "id": "lithium-citrate",
       "generic_name": "lithium citrate",
       "psych_class": "Mood stabilizers",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:57:11.370Z"
+      "source_last_checked": "2026-03-11T00:30:05.974Z"
     },
     {
       "id": "valproic-acid",
       "generic_name": "valproic acid",
       "psych_class": "Mood stabilizers",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:57:32.126Z"
+      "source_last_checked": "2026-03-11T00:30:10.607Z"
     },
     {
       "id": "carbamazepine",
       "generic_name": "carbamazepine",
       "psych_class": "Mood stabilizers",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:57:39.180Z"
+      "source_last_checked": "2026-03-11T00:30:11.966Z"
     },
     {
       "id": "oxcarbazepine",
       "generic_name": "oxcarbazepine",
       "psych_class": "Mood stabilizers",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:57:46.005Z"
+      "source_last_checked": "2026-03-11T00:30:13.541Z"
     },
     {
       "id": "topiramate",
       "generic_name": "topiramate",
       "psych_class": "Mood stabilizers",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:57:52.996Z"
+      "source_last_checked": "2026-03-11T00:30:14.961Z"
     },
     {
       "id": "zonisamide",
       "generic_name": "zonisamide",
       "psych_class": "Mood stabilizers",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:58:00.104Z"
+      "source_last_checked": "2026-03-11T00:30:16.683Z"
     },
     {
       "id": "levetiracetam",
       "generic_name": "levetiracetam",
       "psych_class": "Mood stabilizers",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
         "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:58:07.323Z"
+      "source_last_checked": "2026-03-11T00:30:17.943Z"
     },
     {
       "id": "prazosin",
       "generic_name": "prazosin",
       "psych_class": "Alpha agonists",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:58:14.494Z"
+      "source_last_checked": "2026-03-11T00:30:19.473Z"
     },
     {
       "id": "doxazosin",
       "generic_name": "doxazosin",
       "psych_class": "Alpha agonists",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:58:21.949Z"
+      "source_last_checked": "2026-03-11T00:30:20.930Z"
     },
     {
       "id": "terazosin",
       "generic_name": "terazosin",
       "psych_class": "Alpha agonists",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
-      "reliability_sources": [
-        "DailyMed",
-        "RxNorm",
-        "RxClass",
-        "MedlinePlus"
-      ],
-      "missing_data_flags": [
-        "fda psych uses",
-        "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
-      ],
-      "source_last_checked": "2026-03-09T19:58:29.085Z"
-    },
-    {
-      "id": "propranolol",
-      "generic_name": "propranolol",
-      "psych_class": "Beta blockers commonly used in psych",
-      "content_review_status": "curated",
-      "reliability_score": 92,
+      "reliability_score": 100,
       "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses"
+        "off-label psych uses",
+        "clinical pearls",
+        "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:58:36.124Z"
+      "source_last_checked": "2026-03-11T00:30:22.452Z"
     },
     {
       "id": "atenolol",
       "generic_name": "atenolol",
       "psych_class": "Beta blockers commonly used in psych",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
         "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:58:43.335Z"
+      "source_last_checked": "2026-03-11T00:30:25.448Z"
     },
     {
       "id": "metoprolol",
       "generic_name": "metoprolol",
       "psych_class": "Beta blockers commonly used in psych",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:58:50.364Z"
+      "source_last_checked": "2026-03-11T00:30:26.939Z"
     },
     {
       "id": "nadolol",
       "generic_name": "nadolol",
       "psych_class": "Beta blockers commonly used in psych",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:58:57.489Z"
+      "source_last_checked": "2026-03-11T00:30:28.430Z"
     },
     {
       "id": "bisoprolol",
       "generic_name": "bisoprolol",
       "psych_class": "Beta blockers commonly used in psych",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
         "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:59:04.405Z"
+      "source_last_checked": "2026-03-11T00:30:29.960Z"
     },
     {
       "id": "carvedilol",
       "generic_name": "carvedilol",
       "psych_class": "Beta blockers commonly used in psych",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:59:11.366Z"
+      "source_last_checked": "2026-03-11T00:30:31.453Z"
     },
     {
       "id": "cyproheptadine",
       "generic_name": "cyproheptadine",
       "psych_class": "Anxiolytics / anxiety adjuncts",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
-      "reliability_sources": [
-        "DailyMed",
-        "RxNorm",
-        "RxClass",
-        "MedlinePlus"
-      ],
-      "missing_data_flags": [
-        "fda psych uses",
-        "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
-      ],
-      "source_last_checked": "2026-03-09T19:59:24.991Z"
-    },
-    {
-      "id": "naltrexone-oral",
-      "generic_name": "naltrexone oral",
-      "psych_class": "Substance use support medications",
-      "content_review_status": "curated",
-      "reliability_score": 92,
+      "reliability_score": 100,
       "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses"
+        "off-label psych uses",
+        "clinical pearls",
+        "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:59:32.115Z"
+      "source_last_checked": "2026-03-11T00:30:37.553Z"
     },
     {
       "id": "acamprosate",
       "generic_name": "acamprosate",
       "psych_class": "Substance use support medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T19:59:39.954Z"
+      "source_last_checked": "2026-03-11T00:30:39.933Z"
     },
     {
       "id": "disulfiram",
       "generic_name": "disulfiram",
       "psych_class": "Substance use support medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:59:47.105Z"
+      "source_last_checked": "2026-03-11T00:30:41.340Z"
     },
     {
       "id": "naloxone-intranasal",
       "generic_name": "naloxone intranasal",
       "psych_class": "Substance use support medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
         "common side effects",
         "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T19:59:54.375Z"
+      "source_last_checked": "2026-03-11T00:30:44.364Z"
     },
     {
       "id": "nalmefene-intranasal",
       "generic_name": "nalmefene intranasal",
       "psych_class": "Substance use support medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
         "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:00:01.552Z"
+      "source_last_checked": "2026-03-11T00:30:47.348Z"
     },
     {
       "id": "lofexidine",
       "generic_name": "lofexidine",
       "psych_class": "Substance use support medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:00:08.800Z"
+      "source_last_checked": "2026-03-11T00:30:48.871Z"
     },
     {
       "id": "varenicline",
       "generic_name": "varenicline",
       "psych_class": "Substance use support medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:00:15.907Z"
+      "source_last_checked": "2026-03-11T00:30:50.539Z"
     },
     {
       "id": "nicotine-transdermal",
       "generic_name": "nicotine transdermal",
       "psych_class": "Substance use support medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
         "common side effects",
         "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:00:23.148Z"
+      "source_last_checked": "2026-03-11T00:30:53.454Z"
     },
     {
       "id": "nicotine-gum",
       "generic_name": "nicotine gum",
       "psych_class": "Substance use support medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
         "common side effects",
         "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:00:30.305Z"
+      "source_last_checked": "2026-03-11T00:30:55.638Z"
     },
     {
       "id": "nicotine-lozenge",
       "generic_name": "nicotine lozenge",
       "psych_class": "Substance use support medications",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
         "common side effects",
         "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:00:37.538Z"
+      "source_last_checked": "2026-03-11T00:30:57.107Z"
     },
     {
       "id": "bupropion-sr-smoking-cessation",
@@ -3053,30 +2867,28 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:00:44.873Z"
+      "source_last_checked": "2026-03-11T00:31:00.098Z"
     },
     {
       "id": "liothyronine",
       "generic_name": "liothyronine",
       "psych_class": "Antidepressant augmenters",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:00:52.047Z"
+      "source_last_checked": "2026-03-11T00:31:01.772Z"
     },
     {
       "id": "methylfolate",
@@ -3097,329 +2909,310 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:00:59.146Z"
+      "source_last_checked": "2026-03-11T00:31:04.645Z"
     },
     {
       "id": "ketamine-intranasal",
       "generic_name": "ketamine intranasal",
       "psych_class": "Antidepressant augmenters",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:01:06.145Z"
+      "source_last_checked": "2026-03-11T00:31:07.617Z"
     },
     {
       "id": "benztropine",
       "generic_name": "benztropine",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:01:12.877Z"
+      "source_last_checked": "2026-03-11T00:31:09.117Z"
     },
     {
       "id": "trihexyphenidyl",
       "generic_name": "trihexyphenidyl",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:01:19.700Z"
+      "source_last_checked": "2026-03-11T00:31:10.687Z"
     },
     {
       "id": "deutetrabenazine",
       "generic_name": "deutetrabenazine",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:01:26.527Z"
+      "source_last_checked": "2026-03-11T00:31:12.116Z"
     },
     {
       "id": "valbenazine",
       "generic_name": "valbenazine",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:01:33.388Z"
+      "source_last_checked": "2026-03-11T00:31:13.615Z"
     },
     {
       "id": "tetrabenazine",
       "generic_name": "tetrabenazine",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:01:40.676Z"
+      "source_last_checked": "2026-03-11T00:31:15.146Z"
     },
     {
       "id": "memantine",
       "generic_name": "memantine",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:01:47.881Z"
+      "source_last_checked": "2026-03-11T00:31:16.642Z"
     },
     {
       "id": "donepezil",
       "generic_name": "donepezil",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:01:55.130Z"
+      "source_last_checked": "2026-03-11T00:31:18.209Z"
     },
     {
       "id": "rivastigmine",
       "generic_name": "rivastigmine",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:02:02.203Z"
+      "source_last_checked": "2026-03-11T00:31:19.665Z"
     },
     {
       "id": "galantamine",
       "generic_name": "galantamine",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:02:09.378Z"
+      "source_last_checked": "2026-03-11T00:31:21.173Z"
     },
     {
       "id": "amantadine",
       "generic_name": "amantadine",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:02:16.716Z"
+      "source_last_checked": "2026-03-11T00:31:22.632Z"
     },
     {
       "id": "baclofen",
       "generic_name": "baclofen",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
         "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:02:23.788Z"
+      "source_last_checked": "2026-03-11T00:31:24.133Z"
     },
     {
       "id": "tizanidine",
       "generic_name": "tizanidine",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
         "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:02:30.677Z"
+      "source_last_checked": "2026-03-11T00:31:25.635Z"
     },
     {
       "id": "cyclobenzaprine",
       "generic_name": "cyclobenzaprine",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
         "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:02:38.128Z"
+      "source_last_checked": "2026-03-11T00:31:27.138Z"
     },
     {
       "id": "n-acetylcysteine",
@@ -3442,122 +3235,115 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:02:45.161Z"
+      "source_last_checked": "2026-03-11T00:31:28.657Z"
     },
     {
       "id": "ondansetron",
       "generic_name": "ondansetron",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:02:52.189Z"
+      "source_last_checked": "2026-03-11T00:31:30.142Z"
     },
     {
       "id": "metoclopramide",
       "generic_name": "metoclopramide",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
         "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:02:59.187Z"
+      "source_last_checked": "2026-03-11T00:31:31.658Z"
     },
     {
       "id": "lacosamide",
       "generic_name": "lacosamide",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:03:06.271Z"
+      "source_last_checked": "2026-03-11T00:31:33.233Z"
     },
     {
       "id": "tiagabine",
       "generic_name": "tiagabine",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:03:13.450Z"
+      "source_last_checked": "2026-03-11T00:31:34.655Z"
     },
     {
       "id": "rufinamide",
       "generic_name": "rufinamide",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:03:20.595Z"
+      "source_last_checked": "2026-03-11T00:31:36.149Z"
     },
     {
       "id": "zolpidem-sublingual",
@@ -3580,7 +3366,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:03:28.023Z"
+      "source_last_checked": "2026-03-11T00:31:39.146Z"
     },
     {
       "id": "zolpidem-oral-spray",
@@ -3602,53 +3388,51 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:03:35.172Z"
+      "source_last_checked": "2026-03-11T00:31:42.142Z"
     },
     {
       "id": "alprazolam-odt",
       "generic_name": "alprazolam ODT",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:03:42.375Z"
+      "source_last_checked": "2026-03-11T00:31:42.423Z"
     },
     {
       "id": "clonazepam-odt",
       "generic_name": "clonazepam ODT",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:03:49.333Z"
+      "source_last_checked": "2026-03-11T00:31:42.705Z"
     },
     {
       "id": "lorazepam-sublingual",
@@ -3668,30 +3452,28 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:03:56.391Z"
+      "source_last_checked": "2026-03-11T00:31:43.708Z"
     },
     {
       "id": "asenapine-transdermal",
       "generic_name": "asenapine transdermal",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:04:03.593Z"
+      "source_last_checked": "2026-03-11T00:31:45.205Z"
     },
     {
       "id": "lithium-orotate",
@@ -3713,76 +3495,70 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:04:10.805Z"
+      "source_last_checked": "2026-03-11T00:31:46.627Z"
     },
     {
       "id": "dexmedetomidine-sublingual",
       "generic_name": "dexmedetomidine sublingual",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:04:17.645Z"
+      "source_last_checked": "2026-03-11T00:31:49.645Z"
     },
     {
       "id": "viloxazine-er",
       "generic_name": "viloxazine ER",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:04:24.470Z"
+      "source_last_checked": "2026-03-11T00:31:49.927Z"
     },
     {
       "id": "modafinil-oral-suspension",
       "generic_name": "modafinil oral suspension",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:04:31.466Z"
+      "source_last_checked": "2026-03-11T00:31:50.208Z"
     },
     {
       "id": "fluoxetine-weekly",
@@ -3804,306 +3580,282 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:04:38.816Z"
+      "source_last_checked": "2026-03-11T00:31:52.639Z"
     },
     {
       "id": "paroxetine-cr",
       "generic_name": "paroxetine CR",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:04:46.272Z"
+      "source_last_checked": "2026-03-11T00:31:52.923Z"
     },
     {
       "id": "venlafaxine-er",
       "generic_name": "venlafaxine ER",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:04:52.977Z"
+      "source_last_checked": "2026-03-11T00:31:53.205Z"
     },
     {
       "id": "desvenlafaxine-er",
       "generic_name": "desvenlafaxine ER",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:05:00.031Z"
+      "source_last_checked": "2026-03-11T00:31:53.486Z"
     },
     {
       "id": "quetiapine-odt",
       "generic_name": "quetiapine ODT",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:05:06.857Z"
+      "source_last_checked": "2026-03-11T00:31:53.767Z"
     },
     {
       "id": "risperidone-odt",
       "generic_name": "risperidone ODT",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:05:13.645Z"
+      "source_last_checked": "2026-03-11T00:31:54.049Z"
     },
     {
       "id": "olanzapine-odt",
       "generic_name": "olanzapine ODT",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:05:20.848Z"
+      "source_last_checked": "2026-03-11T00:31:54.330Z"
     },
     {
       "id": "lamotrigine-odt",
       "generic_name": "lamotrigine ODT",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:05:27.567Z"
+      "source_last_checked": "2026-03-11T00:31:54.613Z"
     },
     {
       "id": "carbamazepine-er",
       "generic_name": "carbamazepine ER",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:05:34.569Z"
+      "source_last_checked": "2026-03-11T00:31:54.896Z"
     },
     {
       "id": "oxcarbazepine-er",
       "generic_name": "oxcarbazepine ER",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:05:41.380Z"
+      "source_last_checked": "2026-03-11T00:31:55.178Z"
     },
     {
       "id": "topiramate-er",
       "generic_name": "topiramate ER",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:05:48.254Z"
+      "source_last_checked": "2026-03-11T00:31:55.460Z"
     },
     {
       "id": "gabapentin-enacarbil",
       "generic_name": "gabapentin enacarbil",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:05:55.402Z"
+      "source_last_checked": "2026-03-11T00:31:56.539Z"
     },
     {
       "id": "pregabalin-er",
       "generic_name": "pregabalin ER",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:06:02.246Z"
+      "source_last_checked": "2026-03-11T00:31:56.820Z"
     },
     {
       "id": "propranolol-er",
       "generic_name": "propranolol ER",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:06:09.426Z"
+      "source_last_checked": "2026-03-11T00:31:57.103Z"
     },
     {
       "id": "prazosin-bedtime",
@@ -4125,53 +3877,53 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:06:16.768Z"
+      "source_last_checked": "2026-03-11T00:31:57.627Z"
     },
     {
       "id": "hydroxyzine-pamoate",
       "generic_name": "hydroxyzine pamoate",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
         "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:06:23.848Z"
+      "source_last_checked": "2026-03-11T00:31:59.133Z"
     },
     {
       "id": "hydroxyzine-hydrochloride",
       "generic_name": "hydroxyzine hydrochloride",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
         "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:06:31.010Z"
+      "source_last_checked": "2026-03-11T00:32:00.655Z"
     },
     {
       "id": "buspirone-split-dosing",
@@ -4193,7 +3945,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:06:38.348Z"
+      "source_last_checked": "2026-03-11T00:32:02.135Z"
     },
     {
       "id": "naltrexone-low-dose",
@@ -4213,7 +3965,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:06:45.688Z"
+      "source_last_checked": "2026-03-11T00:32:03.639Z"
     },
     {
       "id": "acamprosate-delayed-release",
@@ -4236,7 +3988,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:06:52.747Z"
+      "source_last_checked": "2026-03-11T00:32:06.627Z"
     },
     {
       "id": "disulfiram-supervised",
@@ -4259,53 +4011,49 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:06:59.659Z"
+      "source_last_checked": "2026-03-11T00:32:09.680Z"
     },
     {
       "id": "varenicline-starter-pack",
       "generic_name": "varenicline starter pack",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:07:06.579Z"
+      "source_last_checked": "2026-03-11T00:32:12.757Z"
     },
     {
       "id": "nicotine-inhaler",
       "generic_name": "nicotine inhaler",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:07:13.765Z"
+      "source_last_checked": "2026-03-11T00:32:15.699Z"
     },
     {
       "id": "nicotine-nasal-spray",
@@ -4327,214 +4075,198 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:07:21.108Z"
+      "source_last_checked": "2026-03-11T00:32:18.638Z"
     },
     {
       "id": "guanfacine-patch",
       "generic_name": "guanfacine patch",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:07:28.245Z"
+      "source_last_checked": "2026-03-11T00:32:18.921Z"
     },
     {
       "id": "clonidine-patch",
       "generic_name": "clonidine patch",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:07:35.026Z"
+      "source_last_checked": "2026-03-11T00:32:19.203Z"
     },
     {
       "id": "memantine-er",
       "generic_name": "memantine ER",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:07:42.089Z"
+      "source_last_checked": "2026-03-11T00:32:19.485Z"
     },
     {
       "id": "donepezil-odt",
       "generic_name": "donepezil ODT",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:07:49.186Z"
+      "source_last_checked": "2026-03-11T00:32:19.767Z"
     },
     {
       "id": "rivastigmine-patch",
       "generic_name": "rivastigmine patch",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:07:56.389Z"
+      "source_last_checked": "2026-03-11T00:32:20.049Z"
     },
     {
       "id": "galantamine-er",
       "generic_name": "galantamine ER",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:08:03.013Z"
+      "source_last_checked": "2026-03-11T00:32:20.331Z"
     },
     {
       "id": "armodafinil-tablet",
       "generic_name": "armodafinil tablet",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:08:09.615Z"
+      "source_last_checked": "2026-03-11T00:32:20.613Z"
     },
     {
       "id": "modafinil-tablet",
       "generic_name": "modafinil tablet",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:08:16.700Z"
+      "source_last_checked": "2026-03-11T00:32:20.894Z"
     },
     {
       "id": "eszopiclone-low-dose",
       "generic_name": "eszopiclone low dose",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:08:23.957Z"
+      "source_last_checked": "2026-03-11T00:32:23.039Z"
     },
     {
       "id": "zaleplon-low-dose",
@@ -4557,305 +4289,288 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:08:31.078Z"
+      "source_last_checked": "2026-03-11T00:32:26.399Z"
     },
     {
       "id": "daridorexant-dual-orexin-antagonist",
       "generic_name": "daridorexant dual orexin antagonist",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:08:38.198Z"
+      "source_last_checked": "2026-03-11T00:32:29.027Z"
     },
     {
       "id": "lemborexant-dual-orexin-antagonist",
       "generic_name": "lemborexant dual orexin antagonist",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:08:44.998Z"
+      "source_last_checked": "2026-03-11T00:32:32.165Z"
     },
     {
       "id": "suvorexant-dual-orexin-antagonist",
       "generic_name": "suvorexant dual orexin antagonist",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:08:51.963Z"
+      "source_last_checked": "2026-03-11T00:32:35.101Z"
     },
     {
       "id": "ramelteon-melatonin-agonist",
       "generic_name": "ramelteon melatonin agonist",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:08:59.020Z"
+      "source_last_checked": "2026-03-11T00:32:38.036Z"
     },
     {
       "id": "melatonin-extended-release",
       "generic_name": "melatonin extended release",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 55,
-      "reliability_tier": "moderate",
+      "reliability_score": 92,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
         "RxNorm",
         "RxClass"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
         "common side effects",
         "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:09:05.772Z"
+      "source_last_checked": "2026-03-11T00:32:39.532Z"
     },
     {
       "id": "doxepin-oral-solution",
       "generic_name": "doxepin oral solution",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:09:12.553Z"
+      "source_last_checked": "2026-03-11T00:32:39.814Z"
     },
     {
       "id": "quetiapine-oral-solution",
       "generic_name": "quetiapine oral solution",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:09:19.593Z"
+      "source_last_checked": "2026-03-11T00:32:40.098Z"
     },
     {
       "id": "aripiprazole-oral-solution",
       "generic_name": "aripiprazole oral solution",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:09:26.566Z"
+      "source_last_checked": "2026-03-11T00:32:40.381Z"
     },
     {
       "id": "risperidone-oral-solution",
       "generic_name": "risperidone oral solution",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:09:33.467Z"
+      "source_last_checked": "2026-03-11T00:32:40.664Z"
     },
     {
       "id": "haloperidol-oral-solution",
       "generic_name": "haloperidol oral solution",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
         "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:09:40.495Z"
+      "source_last_checked": "2026-03-11T00:32:40.945Z"
     },
     {
       "id": "chlorpromazine-oral-solution",
       "generic_name": "chlorpromazine oral solution",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
         "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:09:47.417Z"
+      "source_last_checked": "2026-03-11T00:32:41.227Z"
     },
     {
       "id": "perphenazine-oral-solution",
       "generic_name": "perphenazine oral solution",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:09:54.354Z"
+      "source_last_checked": "2026-03-11T00:32:41.508Z"
     },
     {
       "id": "trifluoperazine-oral-solution",
       "generic_name": "trifluoperazine oral solution",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
         "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:10:01.527Z"
+      "source_last_checked": "2026-03-11T00:32:41.790Z"
     },
     {
       "id": "loxapine-inhalation",
@@ -4876,7 +4591,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:10:08.802Z"
+      "source_last_checked": "2026-03-11T00:32:44.158Z"
     },
     {
       "id": "ziprasidone-intramuscular",
@@ -4898,30 +4613,28 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:10:15.850Z"
+      "source_last_checked": "2026-03-11T00:32:47.154Z"
     },
     {
       "id": "olanzapine-intramuscular",
       "generic_name": "olanzapine intramuscular",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:10:22.907Z"
+      "source_last_checked": "2026-03-11T00:32:48.627Z"
     },
     {
       "id": "haloperidol-decanoate-oral-bridge",
@@ -4943,7 +4656,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:10:30.355Z"
+      "source_last_checked": "2026-03-11T00:32:51.590Z"
     },
     {
       "id": "fluphenazine-decanoate-oral-bridge",
@@ -4964,7 +4677,7 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:10:37.529Z"
+      "source_last_checked": "2026-03-11T00:32:54.645Z"
     },
     {
       "id": "paliperidone-oral-bridge",
@@ -4986,224 +4699,209 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:10:44.463Z"
+      "source_last_checked": "2026-03-11T00:32:57.641Z"
     },
     {
       "id": "lurasidone-with-food",
       "generic_name": "lurasidone with food",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:10:51.231Z"
+      "source_last_checked": "2026-03-11T00:33:00.613Z"
     },
     {
       "id": "cariprazine-slow-titration",
       "generic_name": "cariprazine slow titration",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:10:58.047Z"
+      "source_last_checked": "2026-03-11T00:33:03.619Z"
     },
     {
       "id": "lumateperone-once-daily",
       "generic_name": "lumateperone once daily",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:11:05.228Z"
+      "source_last_checked": "2026-03-11T00:33:06.798Z"
     },
     {
       "id": "brexpiprazole-low-start",
       "generic_name": "brexpiprazole low start",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:11:12.475Z"
+      "source_last_checked": "2026-03-11T00:33:09.703Z"
     },
     {
       "id": "aripiprazole-partial-agonist",
       "generic_name": "aripiprazole partial agonist",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:11:19.507Z"
+      "source_last_checked": "2026-03-11T00:33:12.885Z"
     },
     {
       "id": "olanzapine-high-metabolic-risk",
       "generic_name": "olanzapine high metabolic risk",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:11:26.627Z"
+      "source_last_checked": "2026-03-11T00:33:15.674Z"
     },
     {
       "id": "quetiapine-sedating-profile",
       "generic_name": "quetiapine sedating profile",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:11:33.708Z"
+      "source_last_checked": "2026-03-11T00:33:18.881Z"
     },
     {
       "id": "risperidone-prolactin-caution",
       "generic_name": "risperidone prolactin caution",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:11:40.383Z"
+      "source_last_checked": "2026-03-11T00:33:21.759Z"
     },
     {
       "id": "ziprasidone-qtc-caution",
       "generic_name": "ziprasidone qtc caution",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:11:47.166Z"
+      "source_last_checked": "2026-03-11T00:33:24.643Z"
     },
     {
       "id": "lithium-narrow-therapeutic-index",
       "generic_name": "lithium narrow therapeutic index",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
@@ -5211,196 +4909,179 @@
       "missing_data_flags": [
         "fda psych uses",
         "off-label psych uses",
-        "common side effects",
         "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:11:54.024Z"
+      "source_last_checked": "2026-03-11T00:33:27.680Z"
     },
     {
       "id": "lamotrigine-slow-titration-requirement",
       "generic_name": "lamotrigine slow titration requirement",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:12:00.946Z"
+      "source_last_checked": "2026-03-11T00:33:30.675Z"
     },
     {
       "id": "valproate-teratogenic-risk",
       "generic_name": "valproate teratogenic risk",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:12:07.862Z"
+      "source_last_checked": "2026-03-11T00:33:33.677Z"
     },
     {
       "id": "carbamazepine-cyp-inducer",
       "generic_name": "carbamazepine cyp inducer",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:12:15.051Z"
+      "source_last_checked": "2026-03-11T00:33:37.235Z"
     },
     {
       "id": "oxcarbazepine-hyponatremia-caution",
       "generic_name": "oxcarbazepine hyponatremia caution",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:12:22.434Z"
+      "source_last_checked": "2026-03-11T00:33:40.370Z"
     },
     {
       "id": "topiramate-cognitive-side-effects",
       "generic_name": "topiramate cognitive side effects",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:12:29.447Z"
+      "source_last_checked": "2026-03-11T00:33:43.303Z"
     },
     {
       "id": "zonisamide-sulfa-caution",
       "generic_name": "zonisamide sulfa caution",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:12:36.771Z"
+      "source_last_checked": "2026-03-11T00:33:46.298Z"
     },
     {
       "id": "gabapentin-renal-adjustment",
       "generic_name": "gabapentin renal adjustment",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:12:44.079Z"
+      "source_last_checked": "2026-03-11T00:33:48.673Z"
     },
     {
       "id": "pregabalin-edema-caution",
       "generic_name": "pregabalin edema caution",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
-        "clinical pearls",
-        "mechanism summary"
+        "clinical pearls"
       ],
-      "source_last_checked": "2026-03-09T20:12:51.140Z"
+      "source_last_checked": "2026-03-11T00:33:51.727Z"
     },
     {
       "id": "buspirone-delayed-onset",
@@ -5423,30 +5104,29 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:12:58.477Z"
+      "source_last_checked": "2026-03-11T00:33:54.640Z"
     },
     {
       "id": "propranolol-performance-anxiety",
       "generic_name": "propranolol performance anxiety",
       "psych_class": "Other psych agents",
       "content_review_status": "source scored",
-      "reliability_score": 59,
-      "reliability_tier": "moderate",
+      "reliability_score": 100,
+      "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
       ],
       "missing_data_flags": [
-        "fda psych uses",
         "off-label psych uses",
-        "common side effects",
-        "psych interactions",
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:13:05.601Z"
+      "source_last_checked": "2026-03-11T00:33:57.665Z"
     },
     {
       "id": "prazosin-ptsd-nightmares",
@@ -5468,17 +5148,19 @@
         "clinical pearls",
         "mechanism summary"
       ],
-      "source_last_checked": "2026-03-09T20:13:12.687Z"
+      "source_last_checked": "2026-03-11T00:34:00.706Z"
     },
     {
       "id": "amphetamine-mixed-salts",
       "generic_name": "amphetamine mixed salts",
       "psych_class": "Stimulant ADHD medications",
       "content_review_status": "curated",
-      "reliability_score": 92,
+      "reliability_score": 100,
       "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
@@ -5486,17 +5168,19 @@
       "missing_data_flags": [
         "off-label psych uses"
       ],
-      "source_last_checked": "2026-03-09T20:13:19.666Z"
+      "source_last_checked": "2026-03-11T00:34:00.987Z"
     },
     {
       "id": "methylphenidate",
       "generic_name": "methylphenidate",
       "psych_class": "Stimulant ADHD medications",
       "content_review_status": "curated",
-      "reliability_score": 92,
+      "reliability_score": 100,
       "reliability_tier": "very-high",
       "reliability_sources": [
         "DailyMed",
+        "openFDA",
+        "Drugs@FDA",
         "RxNorm",
         "RxClass",
         "MedlinePlus"
@@ -5504,7 +5188,7 @@
       "missing_data_flags": [
         "off-label psych uses"
       ],
-      "source_last_checked": "2026-03-09T20:13:26.260Z"
+      "source_last_checked": "2026-03-11T00:34:01.269Z"
     }
   ]
 }

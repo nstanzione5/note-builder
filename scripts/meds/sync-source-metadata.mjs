@@ -35,7 +35,7 @@ const rateConfig = {
     maxCalls: Number(process.env.DAILYMED_MAX_CALLS || 2400),
   },
   openfda: {
-    minIntervalMs: Number(process.env.OPENFDA_MIN_INTERVAL_MS || 450),
+    minIntervalMs: Number(process.env.OPENFDA_MIN_INTERVAL_MS || 1500),
     maxCalls: Number(process.env.OPENFDA_MAX_CALLS || 900),
   },
   rxnorm: {
@@ -59,6 +59,13 @@ const rateConfig = {
     maxCalls: Number(process.env.DRUGSFDA_MAX_CALLS || 900),
   },
 };
+
+const OPENFDA_MAX_TERMS = Number.isFinite(Number(process.env.OPENFDA_MAX_TERMS))
+  ? Math.max(1, Math.floor(Number(process.env.OPENFDA_MAX_TERMS)))
+  : 2;
+const DRUGSFDA_MAX_TERMS = Number.isFinite(Number(process.env.DRUGSFDA_MAX_TERMS))
+  ? Math.max(1, Math.floor(Number(process.env.DRUGSFDA_MAX_TERMS)))
+  : 2;
 
 const sourcePayload = JSON.parse(fs.readFileSync(sourcePath, 'utf8'));
 const meds = Array.isArray(sourcePayload.medications) ? sourcePayload.medications : [];
@@ -520,9 +527,9 @@ for (const med of syncTargets) {
 
     const [dailyMedResolved, openFdaResolved, rxNormResolved, drugsFdaResolved, rxClassResolved, rxTermsResolved, medlinePlusResolved] = await Promise.all([
       resolveSourceAcrossTerms(fetchDailyMedCached, sourceTerms, { maxTerms: 3 }),
-      resolveSourceAcrossTerms(fetchOpenFdaCached, sourceTerms, { maxTerms: 4 }),
+      resolveSourceAcrossTerms(fetchOpenFdaCached, sourceTerms, { maxTerms: OPENFDA_MAX_TERMS }),
       resolveSourceAcrossTerms(fetchRxNormApproximateCached, sourceTerms, { maxTerms: 3 }),
-      resolveSourceAcrossTerms(fetchDrugsFdaCached, sourceTerms, { maxTerms: 3 }),
+      resolveSourceAcrossTerms(fetchDrugsFdaCached, sourceTerms, { maxTerms: DRUGSFDA_MAX_TERMS }),
       resolveSourceByRxcui(fetchRxClassCached, primaryRxcui),
       resolveSourceByRxcui(fetchRxTermsCached, primaryRxcui),
       resolveSourceByRxcui(fetchMedlinePlusCached, primaryRxcui),
