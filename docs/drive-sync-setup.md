@@ -27,10 +27,16 @@ It also creates/updates `config/drive-manifest.json` with revision/checksum/path
 5. Set script property `DRIVE_ALLOWED_USER_EMAILS` (comma-separated), e.g. `nick@astrapsychiatry.com,kris@astrapsychiatry.com`.
 6. Set script property `DRIVE_SERVICE_TOKEN` to a long random secret for CLI/service automation.
 7. Optional legacy compatibility: `DRIVE_OWNER_EMAIL`.
-8. Deploy as web app:
-   - Execute as: **Me**
+8. For one-time pointer reset before first stabilized rollout, clear:
+   - `DRIVE_ROOT_FOLDER_ID`
+   - `DRIVE_ROOT_FOLDER_NAME`
+   - `DRIVE_ROOT_SHARED_DRIVE_ID`
+   - `DRIVE_MANIFEST_FILE_ID`
+   - `DRIVE_PATH_INDEX`
+9. Deploy as web app:
+   - Execute as: **User accessing the web app**
    - Access: **Anyone** (required for cross-origin browser + CLI calls)
-9. Copy the deployment URL.
+10. Copy the deployment URL.
 
 ## Local configuration
 
@@ -56,7 +62,7 @@ In `index.html` `<body>` data attributes:
 - `data-drive-endpoint-url="..."`
 - `data-drive-shared-drive-id="..."`
 - `data-drive-root-folder-name="Note App"`
-- `data-drive-user-email="nick@astrapsychiatry.com"` (or `?driveUserEmail=...` query override)
+- `data-drive-user-email=""` (leave blank in production; optional `?driveUserEmail=...` override for troubleshooting only)
 - `data-drive-owner-email="..."`
 - `data-drive-service-token=""` (blank in browser; service token belongs in local automation config)
 - `data-drive-sync-minutes="30"`
@@ -70,15 +76,15 @@ When enabled:
 - Conflict handling: revision mismatch triggers pull/merge/retry for draft writes
 - Backups: snapshot appends are non-destructive
 - Patient draft paths are user-scoped in Drive (`data/draft/users/<email-key>/...`)
-- `data-drive-user-email` is required for scoped draft paths; the app no longer falls back to unscoped owner paths.
-- A low-risk My Drive cleanup job runs at most once per day (`mydrive.condense`) to archive duplicate app roots without deleting files.
+- Scoped draft paths are keyed by backend-resolved user identity from `health`; if identity cannot be resolved, writes are blocked with `identity_missing` (fail-safe against cross-user leakage).
+- A low-frequency My Drive cleanup pass can run at most once per day (`cleanup.apply`) to trash known legacy app artifacts.
 
 ## CLI helpers
 
 - `npm run drive:bootstrap` -> ensure folders + manifest
 - `npm run drive:audit-roots` -> report canonical vs duplicate root folders
-- `npm run drive:cleanup:dry-run` -> preview archive-only cleanup candidates for duplicate My Drive clutter
-- `npm run drive:cleanup:apply` -> move duplicate My Drive clutter into an archive folder (no delete)
+- `npm run drive:cleanup:dry-run` -> preview high-volume direct-trash cleanup candidates (`cleanup.preview`)
+- `npm run drive:cleanup:apply` -> apply batched direct-trash cleanup (`cleanup.apply`)
 - `npm run drive:publish` -> push med artifacts + manifest (skips unchanged files by checksum)
 - `npm run drive:pull` -> pull med artifacts + manifest to local workspace
 - `npm run med:knowledge-check` -> full med source refresh + compile + review + Drive publish
@@ -91,3 +97,5 @@ When enabled:
 - `noteBuilderSnapshots_v1` remains local snapshot history (last 3).
 - `clear` only clears the current draft; snapshots stay intact by design.
 - During each Drive sync cycle, the app also pulls `data/meds/compiled/medications.compiled.json` so medication reference updates published to Drive can appear in runtime without rebuilding the app shell.
+- Health now includes `appBuildId`, `resolvedUserEmail`, and explicit preflight status codes (`ok`, `root_missing`, `manifest_missing`, `identity_missing`, `version_mismatch`).
+- Cleanup now uses direct trash batches (`cleanup.preview` / `cleanup.apply`) instead of archive-only condense for large-scale My Drive artifact removal.

@@ -3,37 +3,43 @@ import { callDriveAction, loadDriveConfig } from './drive-client.mjs';
 
 const args = process.argv.slice(2);
 const apply = args.includes('--apply');
-const archiveArg = args.find((arg) => arg.startsWith('--archive='));
 const rootArg = args.find((arg) => arg.startsWith('--root='));
 const maxArg = args.find((arg) => arg.startsWith('--max='));
-const noFiles = args.includes('--no-files');
-const noFolders = args.includes('--no-folders');
-const archiveFolderName = archiveArg ? archiveArg.slice('--archive='.length).trim() : '';
+const batchArg = args.find((arg) => arg.startsWith('--batch='));
 const rootFolderName = rootArg ? rootArg.slice('--root='.length).trim() : '';
 const maxItems = maxArg ? Number(maxArg.slice('--max='.length)) : NaN;
+const batchSize = batchArg ? Number(batchArg.slice('--batch='.length)) : NaN;
 
 async function main() {
   const config = await loadDriveConfig();
-  const result = await callDriveAction('mydrive.condense', {
-    dryRun: !apply,
-    archiveFolderName: archiveFolderName || undefined,
+  const action = apply ? 'cleanup.apply' : 'cleanup.preview';
+  const result = await callDriveAction(action, {
     rootFolderName: rootFolderName || config.rootFolderName,
-    includeUntitledFiles: !noFiles,
-    includeUntitledFolders: !noFolders,
     maxItems: Number.isFinite(maxItems) && maxItems > 0 ? Math.floor(maxItems) : undefined,
+    batchSize: Number.isFinite(batchSize) && batchSize > 0 ? Math.floor(batchSize) : undefined,
+    sampleSize: 20,
   }, { config });
+
+  if (!apply) {
+    console.log(JSON.stringify({
+      ok: true,
+      mode: 'preview',
+      candidateCount: Number(result.candidateCount || 0),
+      summary: result.summary || { totals: { files: 0, folders: 0 }, topGroups: [] },
+      sample: result.sample || [],
+      protectedIdCount: Number(result.protectedIdCount || 0),
+    }, null, 2));
+    return;
+  }
 
   console.log(JSON.stringify({
     ok: true,
-    dryRun: Boolean(result.dryRun),
-    archiveFolderName: result.archiveFolderName || '',
-    archiveFolderId: result.archiveFolderId || '',
-    archiveFolderUrl: result.archiveFolderUrl || '',
-    candidateCount: Number(result.candidateCount || 0),
-    movedCount: Number(result.movedCount || 0),
-    movedByType: result.movedByType || { files: 0, folders: 0 },
-    candidates: result.candidates || [],
-    moved: result.moved || [],
+    mode: 'apply',
+    processedCount: Number(result.processedCount || 0),
+    trashedCount: Number(result.trashedCount || 0),
+    remainingCount: Number(result.remainingCount || 0),
+    done: Boolean(result.done),
+    checkpoint: result.checkpoint || null,
     errors: result.errors || [],
   }, null, 2));
 }

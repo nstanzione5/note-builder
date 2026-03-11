@@ -453,8 +453,10 @@ h3 {
 }
 
 .drive-sync-status {
+  appearance: none;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   border-radius: var(--radius-pill);
   padding: 4px 10px;
   border: 1px solid rgba(148, 163, 184, 0.45);
@@ -464,6 +466,15 @@ h3 {
   font-weight: 800;
   background: rgba(255, 255, 255, 0.76);
   color: var(--ink-soft);
+  cursor: pointer;
+  transition: box-shadow 120ms ease, transform 120ms ease;
+}
+
+.drive-sync-status:hover,
+.drive-sync-status:focus-visible {
+  box-shadow: 0 6px 14px rgba(30, 41, 59, 0.16);
+  transform: translateY(-1px);
+  outline: none;
 }
 
 .drive-sync-status-online {
@@ -1047,6 +1058,7 @@ textarea:disabled {
 
 .drive-maintenance-row {
   margin-top: 8px;
+  gap: 8px;
 }
 
 #driveCleanupBtn {
@@ -1060,6 +1072,82 @@ textarea:disabled {
 
 #driveCleanupStatus.drive-cleanup-error {
   color: #991b1b;
+}
+
+.secondary-action-btn {
+  background: rgba(255, 255, 255, 0.9) !important;
+  color: #1e3a8a !important;
+  border: 1px solid rgba(30, 58, 138, 0.3) !important;
+}
+
+.drive-diagnostics-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(15, 23, 42, 0.34);
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+
+.drive-diagnostics-panel {
+  width: min(740px, 96vw);
+  max-height: 88vh;
+  overflow: auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(148, 163, 184, 0.38);
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.25);
+  padding: 14px;
+}
+
+.drive-diagnostics-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.drive-diagnostics-header h3 {
+  margin: 0;
+  font-size: 15px;
+  letter-spacing: 0.03em;
+  color: var(--ink-body);
+}
+
+.drive-diagnostics-grid {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 8px;
+}
+
+.drive-diagnostics-grid div {
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  border-radius: 10px;
+  padding: 8px;
+  background: rgba(248, 250, 252, 0.88);
+}
+
+.drive-diagnostics-grid dt {
+  margin: 0;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--ink-soft);
+  font-weight: 700;
+}
+
+.drive-diagnostics-grid dd {
+  margin: 6px 0 0;
+  font-size: 12px;
+  line-height: 1.35;
+  color: var(--ink-body);
+  word-break: break-word;
+}
+
+.drive-diagnostics-actions {
+  margin-top: 12px;
 }
 
 .topbar .brand-title-row,
@@ -1245,22 +1333,37 @@ textarea:disabled {
   align-items: flex-start;
 }
 
+.med-result-top > div {
+  min-width: 0;
+}
+
 .med-result-name {
   font-size: 13px;
   font-weight: 800;
   color: var(--ink-strong);
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  line-height: 1.28;
 }
 
 .med-result-sub {
   font-size: 11px;
   color: var(--ink-soft);
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  line-height: 1.28;
 }
 
 .med-result-meta {
   display: flex;
   justify-content: space-between;
   gap: 8px;
-  align-items: center;
+  align-items: flex-start;
+}
+
+.med-result-meta .med-result-sub {
+  min-width: 0;
+  flex: 1;
 }
 
 .med-status-chip {
@@ -1271,7 +1374,10 @@ textarea:disabled {
   text-transform: uppercase;
   font-weight: 700;
   border: 1px solid rgba(148, 163, 184, 0.34);
-  white-space: nowrap;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-align: right;
+  max-width: 130px;
 }
 
 .med-status-chip-curated {
@@ -1383,14 +1489,22 @@ textarea:disabled {
   align-items: flex-start;
 }
 
+.med-header-title-row > div:first-child {
+  min-width: 0;
+}
+
 .med-header-title {
   font-size: 20px;
   color: var(--ink-strong);
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .med-header-sub {
   color: var(--ink-muted);
   font-size: 12px;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .med-badge-row {
@@ -1486,12 +1600,21 @@ textarea:disabled {
   color: var(--ink-body);
   font-size: 13px;
   line-height: 1.36;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.med-section li {
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .med-section p {
   color: var(--ink-body);
   font-size: 13px;
   line-height: 1.36;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .med-section .helper-text {
@@ -1541,6 +1664,8 @@ textarea:disabled {
   font-weight: 700;
   padding: 6px 10px;
   cursor: pointer;
+  white-space: normal;
+  line-height: 1.24;
 }
 
 .med-control-btn.active {
@@ -1558,6 +1683,8 @@ textarea:disabled {
 .med-links a {
   color: var(--accent-600);
   font-size: 12px;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .med-drawer-footer {

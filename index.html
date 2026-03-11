@@ -13,6 +13,7 @@
   <link rel="apple-touch-icon" href="icons/icon-192.png">
 </head>
 <body
+  data-app-build-id="20260311-drive-reset-v1"
   data-practice="astra"
   data-visit-type="followup"
   data-astra-gpt-url="https://chatgpt.com/g/g-69ac7d1d6f088191a063906d86aee792-astra-note-writer"
@@ -22,7 +23,7 @@
   data-drive-endpoint-url="https://script.google.com/macros/s/AKfycbyCfdY3aHqLXFcHBE6fXt8UU8D_E7nmUDf-kJzcPo2VGtS4JuVVNI0m4v_SUNaVSeNXKQ/exec"
   data-drive-shared-drive-id="0AHnYqpJA5-6ZUk9PVA"
   data-drive-root-folder-name="Note App"
-  data-drive-user-email="nick@astrapsychiatry.com"
+  data-drive-user-email=""
   data-drive-owner-email="nick@astrapsychiatry.com"
   data-drive-service-token=""
   data-drive-owner-token=""
@@ -89,7 +90,7 @@
 
         <div class="toolbar-meta-row">
           <p class="toolbar-hint">Dock app: Safari → File → Add to Dock</p>
-          <span class="drive-sync-status drive-sync-status-local" id="driveSyncStatus" role="status" aria-live="polite">Drive: Local only</span>
+          <button class="drive-sync-status drive-sync-status-local" id="driveSyncStatus" type="button" aria-live="polite" title="Open Drive diagnostics">Drive: Local only</button>
         </div>
       </section>
     </div>
@@ -617,11 +618,12 @@
 
       <section class="backup-tray drive-maintenance-tray" id="driveMaintenanceTray" aria-live="polite">
         <div class="backup-header">
-          <span class="backup-title">Drive Cleanup</span>
-          <span class="backup-subtitle">Moves duplicate app artifacts from My Drive into a dated archive folder.</span>
+          <span class="backup-title">Drive Maintenance</span>
+          <span class="backup-subtitle">Review diagnostics and trash legacy app artifacts from My Drive.</span>
         </div>
         <div class="action-row drive-maintenance-row">
-          <button id="driveCleanupBtn" type="button">Clean My Drive Artifacts</button>
+          <button id="driveCleanupBtn" type="button">Trash My Drive Artifacts</button>
+          <button id="driveDiagnosticsBtn" type="button" class="secondary-action-btn">Diagnostics</button>
         </div>
         <p class="helper-text" id="driveCleanupStatus">Manual cleanup is available if My Drive becomes cluttered.</p>
       </section>
@@ -633,7 +635,7 @@
     <header class="med-drawer-header">
       <div>
         <p class="med-drawer-kicker">Psych Prescribing Support</p>
-        <h2>Medication Reference</h2>
+        <h2>Medication Reference (Adult 18+)</h2>
       </div>
       <div class="med-drawer-header-actions">
         <button type="button" class="med-inline-btn" id="medPinBtn" aria-pressed="false">Pin</button>
@@ -674,6 +676,30 @@
       <button type="button" class="med-inline-btn" id="medExportMissingBtn">Export Missing Requests JSON</button>
     </footer>
   </aside>
+
+  <div class="drive-diagnostics-modal hidden" id="driveDiagnosticsModal" aria-hidden="true">
+    <section class="drive-diagnostics-panel" role="dialog" aria-modal="true" aria-label="Drive diagnostics panel">
+      <header class="drive-diagnostics-header">
+        <h3>Drive Diagnostics</h3>
+        <button id="driveCloseDiagnosticsBtn" type="button" class="secondary-action-btn">Close</button>
+      </header>
+      <dl class="drive-diagnostics-grid">
+        <div><dt>Client Build</dt><dd id="diagClientBuild">-</dd></div>
+        <div><dt>Backend Build</dt><dd id="diagBackendBuild">-</dd></div>
+        <div><dt>Endpoint</dt><dd id="diagEndpoint">-</dd></div>
+        <div><dt>Resolved User</dt><dd id="diagResolvedUser">-</dd></div>
+        <div><dt>Shared Drive</dt><dd id="diagSharedDrive">-</dd></div>
+        <div><dt>Canonical Root</dt><dd id="diagCanonicalRoot">-</dd></div>
+        <div><dt>Preflight</dt><dd id="diagPreflightStatus">-</dd></div>
+        <div><dt>Block Code</dt><dd id="diagBlockCode">-</dd></div>
+        <div><dt>Block Reason</dt><dd id="diagBlockReason">-</dd></div>
+        <div><dt>Last Error</dt><dd id="diagLastError">-</dd></div>
+      </dl>
+      <div class="action-row drive-diagnostics-actions">
+        <button id="driveRunRepairBtn" type="button">Run Drive Repair</button>
+      </div>
+    </section>
+  </div>
 
   <script src="app.js"></script>
 </body>

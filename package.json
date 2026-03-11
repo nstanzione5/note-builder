@@ -21,8 +21,8 @@
     "drive:inspect": "node scripts/drive/inspect-drive.mjs",
     "drive:publish": "node scripts/drive/publish-to-drive.mjs",
     "drive:pull": "node scripts/drive/pull-from-drive.mjs",
-    "drive:cleanup:dry-run": "node scripts/drive/condense-mydrive.mjs --root='Astra Clinical Note Builder' --max=1200",
-    "drive:cleanup:apply": "node scripts/drive/condense-mydrive.mjs --apply --root='Astra Clinical Note Builder' --max=1200"
+    "drive:cleanup:dry-run": "node scripts/drive/condense-mydrive.mjs --max=15000",
+    "drive:cleanup:apply": "node scripts/drive/condense-mydrive.mjs --apply --max=15000 --batch=250"
   },
   "repository": {
     "type": "git",
