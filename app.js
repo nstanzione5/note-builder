@@ -19,6 +19,7 @@ const state = {
   driveConnection: 'local',
   driveLastError: '',
   pendingDriveWrites: 0,
+  driveCanonicalRootId: '',
   saveUnlocked: false,
   driveWritesBlocked: true,
   driveWriteBlockReason: 'Drive preflight pending.',
@@ -112,6 +113,8 @@ const els = {
   medExportMissingBtn: document.getElementById('medExportMissingBtn'),
   medMissingCount: document.getElementById('medMissingCount'),
   driveSyncStatus: document.getElementById('driveSyncStatus'),
+  driveCleanupBtn: document.getElementById('driveCleanupBtn'),
+  driveCleanupStatus: document.getElementById('driveCleanupStatus'),
   docEndPlusMinutes: document.getElementById('docEndPlusMinutes'),
 };
 
@@ -183,10 +186,13 @@ const DRIVE_MED_COMPILED_PATH = 'data/meds/compiled/medications.compiled.json';
 const DRIVE_MED_REFRESH_QUEUE_PATH = 'logs/sync/med-refresh-requests.json';
 const DRIVE_MED_RUNTIME_FALLBACKS_PATH = 'data/meds/review/runtime-fallbacks.json';
 const DRIVE_SYNC_ENTERPRISE_NAME = 'Note App';
+const DRIVE_CLEANUP_LEGACY_ROOT = 'Astra Clinical Note Builder';
+const DRIVE_CLEANUP_ARCHIVE_PREFIX = 'Astra Personal Drive Cleanup';
 const DRIVE_MANIFEST_FILE = 'config/drive-manifest.json';
 const DRAFT_PERSIST_IDLE_MS = 3000;
 const RECENT_PATIENTS_DRIVE_MIN_INTERVAL_MS = 90000;
 const DRIVE_AUTO_CLEANUP_INTERVAL_MS = 1000 * 60 * 60 * 24;
+const DRIVE_MANUAL_CLEANUP_MAX_ITEMS = 1200;
 const THERAPY_TIER_MINUTES = {
   '0': 0,
   '>=16': 16,
@@ -221,6 +227,7 @@ let pendingRecentPatientsForDrive = null;
 let recentPatientsDriveTimer = null;
 let lastRecentPatientsDriveQueuedAt = 0;
 const driveQueuedChecksums = new Map();
+let driveCleanupRunning = false;
 
 function getEl(id) {
   return document.getElementById(id);
@@ -570,6 +577,11 @@ function setDriveWriteBlock(blocked, reason = '') {
   state.driveWriteBlockReason = nextBlocked ? String(reason || 'Drive writes are blocked by preflight validation.') : '';
 
   if (!nextBlocked) {
+    const meta = getDriveMeta();
+    if (meta.lastError) {
+      meta.lastError = '';
+      setDriveMeta(meta);
+    }
     return;
   }
 
@@ -1260,6 +1272,7 @@ async function verifyDriveRootPreflight() {
   const config = getDriveConfig();
   const userKey = driveUserKeyFromEmail(config.userEmail);
   if (!userKey) {
+    state.driveCanonicalRootId = '';
     setDriveWriteBlock(true, 'Drive preflight failed: drive user email is required for per-user draft isolation.');
     updateDriveStatusBadge();
     return false;
@@ -1267,6 +1280,7 @@ async function verifyDriveRootPreflight() {
 
   const requiredDriveId = String(config.sharedDriveId || '').trim();
   if (!requiredDriveId) {
+    state.driveCanonicalRootId = '';
     setDriveWriteBlock(true, 'Drive preflight failed: sharedDriveId is required for write safety.');
     updateDriveStatusBadge();
     return false;
@@ -1290,13 +1304,16 @@ async function verifyDriveRootPreflight() {
   );
 
   if (!rootIsValid) {
+    state.driveCanonicalRootId = '';
     const reason = `Drive preflight failed: shared root "${expectedName}" is missing or not bound to shared drive ${requiredDriveId}.`;
     setDriveWriteBlock(true, reason);
     updateDriveStatusBadge();
     return false;
   }
 
+  state.driveCanonicalRootId = String(canonical.id || '').trim();
   setDriveWriteBlock(false, '');
+  updateDriveStatusBadge();
   return true;
 }
 
@@ -1312,12 +1329,12 @@ async function attemptDriveAutoCleanup() {
 
   try {
     const result = await callDriveEndpoint('mydrive.condense', {
-      rootFolderName: 'Astra Clinical Note Builder',
+      rootFolderName: DRIVE_CLEANUP_LEGACY_ROOT,
       includeUntitledFiles: false,
       includeUntitledFolders: false,
       maxItems: 800,
       dryRun: false,
-      archiveFolderName: `Astra Personal Drive Cleanup ${new Date().toISOString().slice(0, 10).replace(/-/g, '')}`,
+      archiveFolderName: `${DRIVE_CLEANUP_ARCHIVE_PREFIX} ${new Date().toISOString().slice(0, 10).replace(/-/g, '')}`,
     });
     setDriveAutoCleanupMeta({
       lastAttemptAt: now,
@@ -1330,6 +1347,117 @@ async function attemptDriveAutoCleanup() {
       lastMovedCount: 0,
       lastError: String(error && error.message ? error.message : error),
     });
+  }
+}
+
+function setDriveCleanupStatus(message, isError = false) {
+  if (!els.driveCleanupStatus) return;
+  els.driveCleanupStatus.textContent = String(message || '');
+  els.driveCleanupStatus.classList.toggle('drive-cleanup-error', Boolean(isError));
+}
+
+function setDriveCleanupButtonState(running, label = '') {
+  if (!els.driveCleanupBtn) return;
+  els.driveCleanupBtn.disabled = Boolean(running);
+  els.driveCleanupBtn.textContent = label || (running ? 'Cleaning My Drive...' : 'Clean My Drive Artifacts');
+}
+
+function getCleanupArchiveName() {
+  return `${DRIVE_CLEANUP_ARCHIVE_PREFIX} ${new Date().toISOString().slice(0, 10).replace(/-/g, '')}`;
+}
+
+async function runManualDriveCleanup() {
+  if (driveCleanupRunning) return;
+  if (!isDriveSyncEnabled()) {
+    setDriveCleanupStatus('Drive sync is disabled, so cleanup is unavailable.', true);
+    return;
+  }
+
+  driveCleanupRunning = true;
+  setDriveCleanupButtonState(true, 'Scanning My Drive...');
+  setDriveCleanupStatus('Scanning for app-generated duplicate artifacts...');
+
+  try {
+    const archiveFolderName = getCleanupArchiveName();
+    const [legacyPreview, sharedPreview] = await Promise.all([
+      callDriveEndpoint('mydrive.condense', {
+        rootFolderName: DRIVE_CLEANUP_LEGACY_ROOT,
+        includeUntitledFiles: true,
+        includeUntitledFolders: true,
+        maxItems: DRIVE_MANUAL_CLEANUP_MAX_ITEMS,
+        dryRun: true,
+        archiveFolderName,
+      }),
+      callDriveEndpoint('mydrive.condense', {
+        rootFolderName: DRIVE_SYNC_ENTERPRISE_NAME,
+        includeUntitledFiles: false,
+        includeUntitledFolders: false,
+        maxItems: DRIVE_MANUAL_CLEANUP_MAX_ITEMS,
+        dryRun: true,
+        archiveFolderName,
+      }),
+    ]);
+
+    const previewLegacyCount = Number(legacyPreview && legacyPreview.candidateCount) || 0;
+    const previewSharedCount = Number(sharedPreview && sharedPreview.candidateCount) || 0;
+    const previewTotal = previewLegacyCount + previewSharedCount;
+
+    if (!previewTotal) {
+      setDriveCleanupStatus('No cleanup candidates found in My Drive.');
+      return;
+    }
+
+    const proceed = window.confirm(
+      `Found ${previewTotal} My Drive cleanup candidates (${previewLegacyCount} legacy + ${previewSharedCount} Note App root).\n\n`
+      + 'These items will be MOVED to an archive folder (not deleted). Continue cleanup?',
+    );
+    if (!proceed) {
+      setDriveCleanupStatus('Cleanup canceled.');
+      return;
+    }
+
+    setDriveCleanupButtonState(true, 'Cleaning My Drive...');
+    const [legacyApply, sharedApply] = await Promise.all([
+      callDriveEndpoint('mydrive.condense', {
+        rootFolderName: DRIVE_CLEANUP_LEGACY_ROOT,
+        includeUntitledFiles: true,
+        includeUntitledFolders: true,
+        maxItems: DRIVE_MANUAL_CLEANUP_MAX_ITEMS,
+        dryRun: false,
+        archiveFolderName,
+      }),
+      callDriveEndpoint('mydrive.condense', {
+        rootFolderName: DRIVE_SYNC_ENTERPRISE_NAME,
+        includeUntitledFiles: false,
+        includeUntitledFolders: false,
+        maxItems: DRIVE_MANUAL_CLEANUP_MAX_ITEMS,
+        dryRun: false,
+        archiveFolderName,
+      }),
+    ]);
+
+    const movedLegacy = Number(legacyApply && legacyApply.movedCount) || 0;
+    const movedShared = Number(sharedApply && sharedApply.movedCount) || 0;
+    const movedTotal = movedLegacy + movedShared;
+    const archiveId = String(
+      (legacyApply && legacyApply.archiveFolderId)
+      || (sharedApply && sharedApply.archiveFolderId)
+      || '',
+    ).trim();
+
+    setDriveCleanupStatus(
+      movedTotal
+        ? `Cleanup complete: moved ${movedTotal} item(s) to archive folder ${archiveId || archiveFolderName}.`
+        : 'Cleanup completed with no moves.',
+    );
+
+    runWhenIdle(() => runDriveSyncCycle(false));
+  } catch (error) {
+    const message = String(error && error.message ? error.message : error);
+    setDriveCleanupStatus(`Cleanup failed: ${message}`, true);
+  } finally {
+    driveCleanupRunning = false;
+    setDriveCleanupButtonState(false);
   }
 }
 
@@ -1359,6 +1487,7 @@ async function runDriveSyncCycle(force = false) {
       await callDriveEndpoint('bootstrap', {
         sharedDriveId: config.sharedDriveId,
         rootFolderName: config.rootFolderName || DRIVE_SYNC_ENTERPRISE_NAME,
+        rootFolderId: state.driveCanonicalRootId || '',
       });
 
       const nextMeta = getDriveMeta();
@@ -1424,6 +1553,15 @@ function startDriveSync() {
 function initDriveSync() {
   state.pendingDriveWrites = getDriveQueue().length;
   updateDriveStatusBadge();
+  const cleanupMeta = getDriveAutoCleanupMeta();
+  if (cleanupMeta.lastError) {
+    setDriveCleanupStatus(`Last cleanup error: ${cleanupMeta.lastError}`, true);
+  } else if (cleanupMeta.lastAttemptAt) {
+    const movedCount = Number(cleanupMeta.lastMovedCount) || 0;
+    setDriveCleanupStatus(`Last auto-cleanup moved ${movedCount} item(s) on ${new Date(cleanupMeta.lastAttemptAt).toLocaleString()}.`);
+  } else {
+    setDriveCleanupStatus('Manual cleanup is available if My Drive becomes cluttered.');
+  }
 
   if (!isDriveSyncEnabled()) {
     return;
@@ -5170,6 +5308,12 @@ function attachEventListeners() {
       if (window.confirm('Clear the current note draft? Current draft will clear, but backup snapshots will be kept.')) {
         clearAll();
       }
+    });
+  }
+
+  if (els.driveCleanupBtn) {
+    els.driveCleanupBtn.addEventListener('click', () => {
+      runManualDriveCleanup();
     });
   }
 

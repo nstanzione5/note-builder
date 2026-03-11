@@ -1,4 +1,4 @@
-<body data-practice="astra" data-visit-type="followup" data-astra-gpt-url="https://chatgpt.com/g/g-69ac7d1d6f088191a063906d86aee792-astra-note-writer" data-ebh-intake-gpt-url="https://chatgpt.com/g/g-69ac70d034e081918d72603828d45799-ebh-intake-note" data-ebh-followup-gpt-url="https://chatgpt.com/g/g-69ac76b8246c8191b4474e7d24d53476-ebh-follow-up-note" data-drive-sync-enabled="true" data-drive-endpoint-url="https://script.google.com/macros/s/AKfycbyCfdY3aHqLXFcHBE6fXt8UU8D_E7nmUDf-kJzcPo2VGtS4JuVVNI0m4v_SUNaVSeNXKQ/exec" data-drive-shared-drive-id="0AHnYqpJA5-6ZUk9PVA" data-drive-root-folder-name="Astra Clinical Note Builder" data-drive-owner-email="nick@astrapsychiatry.com" data-drive-owner-token="c89576337a2a46019681146573c09b30" data-drive-sync-minutes="30">
+<body data-practice="astra" data-visit-type="followup" data-astra-gpt-url="https://chatgpt.com/g/g-69ac7d1d6f088191a063906d86aee792-astra-note-writer" data-ebh-intake-gpt-url="https://chatgpt.com/g/g-69ac70d034e081918d72603828d45799-ebh-intake-note" data-ebh-followup-gpt-url="https://chatgpt.com/g/g-69ac76b8246c8191b4474e7d24d53476-ebh-follow-up-note" data-drive-sync-enabled="true" data-drive-endpoint-url="https://script.google.com/macros/s/AKfycbyCfdY3aHqLXFcHBE6fXt8UU8D_E7nmUDf-kJzcPo2VGtS4JuVVNI0m4v_SUNaVSeNXKQ/exec" data-drive-shared-drive-id="0AHnYqpJA5-6ZUk9PVA" data-drive-root-folder-name="Note App" data-drive-user-email="nick@astrapsychiatry.com" data-drive-owner-email="nick@astrapsychiatry.com" data-drive-service-token="" data-drive-owner-token="" data-drive-sync-minutes="30">
   <header class="topbar" id="topbar" style="--condense-progress: 0.000;">
     <div class="topbar-inner">
       <section class="brand-panel">
@@ -60,7 +60,7 @@
 
         <div class="toolbar-meta-row">
           <p class="toolbar-hint">Dock app: Safari → File → Add to Dock</p>
-          <span class="drive-sync-status drive-sync-status-syncing" id="driveSyncStatus" role="status" aria-live="polite" title="Drive: Syncing (0 queued)">Drive: Syncing (0 queued)</span>
+          <span class="drive-sync-status drive-sync-status-error" id="driveSyncStatus" role="status" aria-live="polite" title="Drive preflight pending.">Drive: Writes blocked</span>
         </div>
       </section>
     </div>
@@ -526,6 +526,14 @@
 
         <div class="field">
           <label>Documentation End <span class="required">*</span></label>
+          <div class="now-plus-group doc-end-plus-row" data-now-plus-target="docEnd" aria-label="Documentation end quick add minutes">
+            <button type="button" class="mini-btn nowPlusBtn" data-plus-minutes="3">+3</button>
+            <button type="button" class="mini-btn nowPlusBtn" data-plus-minutes="5">+5</button>
+            <button type="button" class="mini-btn nowPlusBtn" data-plus-minutes="8">+8</button>
+            <label class="now-plus-custom" for="docEndPlusMinutes">now+</label>
+            <input id="docEndPlusMinutes" class="now-plus-input" type="number" min="1" max="180" step="1" inputmode="numeric" placeholder="min" aria-label="Add custom minutes to documentation end">
+            <button type="button" class="mini-btn nowPlusApplyBtn" data-plus-apply="docEnd">Apply</button>
+          </div>
           <div class="inline-input-row">
             <div class="time-control" data-time-field="docEnd">
               <input class="time-part time-part-hour" type="text" inputmode="numeric" maxlength="2" autocomplete="off" placeholder="HH" aria-label="Documentation end hour" data-time-part="hour">
@@ -607,7 +615,79 @@
 
     <div class="med-drawer-body" id="medDrawerBody">
       <section class="med-results-panel" aria-label="Medication results">
-        <ul class="med-result-list" id="medResultList"><button type="button" class="med-result-item" data-med-id="amphetamine-mixed-salts" data-result-index="0">
+        <ul class="med-result-list" id="medResultList"><button type="button" class="med-result-item" data-med-id="acamprosate" data-result-index="0">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">acamprosate</div>
+          <div class="med-result-sub">Campral, acamprosate calcium</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Substance use support medications</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="alprazolam" data-result-index="1">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">alprazolam</div>
+          <div class="med-result-sub">Xanax, Alprazolam</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Benzodiazepines</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="alprazolam-odt" data-result-index="2">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">alprazolam ODT</div>
+          <div class="med-result-sub">Niravam, Alprazolam</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Other psych agents</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="amantadine" data-result-index="3">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">amantadine</div>
+          <div class="med-result-sub">Gocovri, amantadine hydrochloride</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Other psych agents</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="amitriptyline" data-result-index="4">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">amitriptyline</div>
+          <div class="med-result-sub">Elavil, Amitriptyline Hydrochloride</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Atypical antidepressants</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="amoxapine" data-result-index="5">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">amoxapine</div>
+          <div class="med-result-sub">Amoxapine, AMOXAPINE</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Atypical antidepressants</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="amphetamine-mixed-salts" data-result-index="6">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">amphetamine mixed salts</div>
@@ -617,45 +697,249 @@
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Stimulant ADHD medications</div>
-        <span class="med-status-chip med-status-chip-very-high">Very High • 92/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="amphetamine-mixed-salts-ir" data-result-index="1">
+    </button><button type="button" class="med-result-item" data-med-id="amphetamine-mixed-salts-er" data-result-index="7">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">amphetamine mixed salts ER</div>
+          <div class="med-result-sub">Mydayis, Amphetamine Sulfate</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Stimulant ADHD medications</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="amphetamine-mixed-salts-ir" data-result-index="8">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">amphetamine mixed salts IR</div>
-          <div class="med-result-sub">Adderall</div>
+          <div class="med-result-sub">Adderall, Amphetamine Sulfate</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Stimulant ADHD medications</div>
-        <span class="med-status-chip med-status-chip-very-high">Very High • 92/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="amphetamine-mixed-salts-xr" data-result-index="2">
+    </button><button type="button" class="med-result-item" data-med-id="amphetamine-mixed-salts-xr" data-result-index="9">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">amphetamine mixed salts XR</div>
-          <div class="med-result-sub">Adderall XR</div>
+          <div class="med-result-sub">Adderall XR, Amphetamine Sulfate</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Stimulant ADHD medications</div>
-        <span class="med-status-chip med-status-chip-very-high">Very High • 92/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="aripiprazole" data-result-index="3">
+    </button><button type="button" class="med-result-item" data-med-id="amphetamine-sulfate" data-result-index="10">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">amphetamine sulfate</div>
+          <div class="med-result-sub">Evekeo, Amphetamine Sulfate</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Stimulant ADHD medications</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="amphetamine-xr-odt" data-result-index="11">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">amphetamine XR ODT</div>
+          <div class="med-result-sub">Adzenys XR-ODT, Amphetamine Sulfate</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Stimulant ADHD medications</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="amphetamine-xr-suspension" data-result-index="12">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">amphetamine XR suspension</div>
+          <div class="med-result-sub">Dyanavel XR, Amphetamine Sulfate</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Stimulant ADHD medications</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="aripiprazole" data-result-index="13">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">aripiprazole</div>
-          <div class="med-result-sub">Abilify</div>
+          <div class="med-result-sub">Abilify, Aripiprazole</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Antipsychotics</div>
-        <span class="med-status-chip med-status-chip-very-high">Very High • 92/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="bupropion" data-result-index="4">
+    </button><button type="button" class="med-result-item" data-med-id="aripiprazole-oral-solution" data-result-index="14">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">aripiprazole oral solution</div>
+          <div class="med-result-sub">Abilify Oral Solution, Aripiprazole</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Other psych agents</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="aripiprazole-partial-agonist" data-result-index="15">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">aripiprazole partial agonist</div>
+          <div class="med-result-sub">Abilify, ABILIFY</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Other psych agents</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="armodafinil" data-result-index="16">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">armodafinil</div>
+          <div class="med-result-sub">Nuvigil, NUVIGIL</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Non-stimulant ADHD medications</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="armodafinil-tablet" data-result-index="17">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">armodafinil tablet</div>
+          <div class="med-result-sub">Nuvigil, NUVIGIL</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Other psych agents</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="asenapine-sublingual" data-result-index="18">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">asenapine sublingual</div>
+          <div class="med-result-sub">Saphris, SAPHRIS</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Antipsychotics</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="asenapine-transdermal" data-result-index="19">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">asenapine transdermal</div>
+          <div class="med-result-sub">Secuado, Asenapine</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Other psych agents</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="atenolol" data-result-index="20">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">atenolol</div>
+          <div class="med-result-sub">Tenormin, Atenolol</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Beta blockers commonly used in psych</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="atomoxetine" data-result-index="21">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">atomoxetine</div>
+          <div class="med-result-sub">Strattera, Atomoxetine</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">SNRIs</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="baclofen" data-result-index="22">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">baclofen</div>
+          <div class="med-result-sub">Lioresal, BACLOFEN</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Other psych agents</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="benztropine" data-result-index="23">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">benztropine</div>
+          <div class="med-result-sub">Cogentin, Benztropine Mesylate</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Other psych agents</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="bisoprolol" data-result-index="24">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">bisoprolol</div>
+          <div class="med-result-sub">Zebeta, Bisoprolol fumarate</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Beta blockers commonly used in psych</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="brexpiprazole" data-result-index="25">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">brexpiprazole</div>
+          <div class="med-result-sub">Rexulti, BREXPIPRAZOLE</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Antipsychotics</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="brexpiprazole-low-start" data-result-index="26">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">brexpiprazole low start</div>
+          <div class="med-result-sub">Rexulti, REXULTI</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Other psych agents</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="bupropion" data-result-index="27">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">bupropion</div>
@@ -665,897 +949,357 @@
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">NDRIs</div>
-        <span class="med-status-chip med-status-chip-very-high">Very High • 92/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="buspirone" data-result-index="5">
+    </button><button type="button" class="med-result-item" data-med-id="buspirone" data-result-index="28">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">buspirone</div>
-          <div class="med-result-sub">Buspar</div>
+          <div class="med-result-sub">Buspar, Buspirone Hydrochloride</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Anxiolytics / anxiety adjuncts</div>
-        <span class="med-status-chip med-status-chip-very-high">Very High • 92/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="dextromethorphan-bupropion" data-result-index="6">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">dextromethorphan-bupropion</div>
-          <div class="med-result-sub">Auvelity</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">NDRIs</div>
-        <span class="med-status-chip med-status-chip-very-high">Very High • 92/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="divalproex" data-result-index="7">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">divalproex</div>
-          <div class="med-result-sub">Depakote</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Mood stabilizers</div>
-        <span class="med-status-chip med-status-chip-very-high">Very High • 92/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="duloxetine" data-result-index="8">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">duloxetine</div>
-          <div class="med-result-sub">Cymbalta</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">SNRIs</div>
-        <span class="med-status-chip med-status-chip-very-high">Very High • 92/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="escitalopram" data-result-index="9">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">escitalopram</div>
-          <div class="med-result-sub">Lexapro</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">SSRIs</div>
-        <span class="med-status-chip med-status-chip-very-high">Very High • 92/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="fluoxetine" data-result-index="10">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">fluoxetine</div>
-          <div class="med-result-sub">Prozac, Sarafem</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">SSRIs</div>
-        <span class="med-status-chip med-status-chip-very-high">Very High • 92/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="guanfacine" data-result-index="11">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">guanfacine</div>
-          <div class="med-result-sub">Tenex, Intuniv</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Non-stimulant ADHD medications</div>
-        <span class="med-status-chip med-status-chip-very-high">Very High • 92/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="guanfacine-er" data-result-index="12">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">guanfacine ER</div>
-          <div class="med-result-sub">Intuniv</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Non-stimulant ADHD medications</div>
-        <span class="med-status-chip med-status-chip-very-high">Very High • 92/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="lamotrigine" data-result-index="13">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">lamotrigine</div>
-          <div class="med-result-sub">Lamictal</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Mood stabilizers</div>
-        <span class="med-status-chip med-status-chip-very-high">Very High • 92/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="lisdexamfetamine" data-result-index="14">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">lisdexamfetamine</div>
-          <div class="med-result-sub">Vyvanse</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Stimulant ADHD medications</div>
-        <span class="med-status-chip med-status-chip-very-high">Very High • 92/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="lithium-carbonate" data-result-index="15">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">lithium carbonate</div>
-          <div class="med-result-sub">Lithobid, Eskalith</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Mood stabilizers</div>
-        <span class="med-status-chip med-status-chip-very-high">Very High • 92/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="lumateperone" data-result-index="16">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">lumateperone</div>
-          <div class="med-result-sub">Caplyta</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Antipsychotics</div>
-        <span class="med-status-chip med-status-chip-very-high">Very High • 92/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="methylphenidate" data-result-index="17">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">methylphenidate</div>
-          <div class="med-result-sub">Ritalin, Concerta</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Stimulant ADHD medications</div>
-        <span class="med-status-chip med-status-chip-very-high">Very High • 92/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="naltrexone-oral" data-result-index="18">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">naltrexone oral</div>
-          <div class="med-result-sub">Revia</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Substance use support medications</div>
-        <span class="med-status-chip med-status-chip-very-high">Very High • 92/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="propranolol" data-result-index="19">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">propranolol</div>
-          <div class="med-result-sub">Inderal</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Beta blockers commonly used in psych</div>
-        <span class="med-status-chip med-status-chip-very-high">Very High • 92/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="quetiapine" data-result-index="20">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">quetiapine</div>
-          <div class="med-result-sub">Seroquel, Seroquel XR</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Antipsychotics</div>
-        <span class="med-status-chip med-status-chip-very-high">Very High • 92/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="quetiapine-ir" data-result-index="21">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">quetiapine IR</div>
-          <div class="med-result-sub">Seroquel</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Antipsychotics</div>
-        <span class="med-status-chip med-status-chip-very-high">Very High • 92/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="quetiapine-xr" data-result-index="22">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">quetiapine XR</div>
-          <div class="med-result-sub">Seroquel XR</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Antipsychotics</div>
-        <span class="med-status-chip med-status-chip-very-high">Very High • 92/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="sertraline" data-result-index="23">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">sertraline</div>
-          <div class="med-result-sub">Zoloft</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">SSRIs</div>
-        <span class="med-status-chip med-status-chip-very-high">Very High • 92/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="venlafaxine" data-result-index="24">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">venlafaxine</div>
-          <div class="med-result-sub">Effexor XR</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">SNRIs</div>
-        <span class="med-status-chip med-status-chip-very-high">Very High • 92/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="viloxazine" data-result-index="25">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">viloxazine</div>
-          <div class="med-result-sub">Qelbree</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Non-stimulant ADHD medications</div>
-        <span class="med-status-chip med-status-chip-very-high">Very High • 92/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="acamprosate" data-result-index="26">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">acamprosate</div>
-          <div class="med-result-sub">Campral</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Substance use support medications</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="acamprosate-delayed-release" data-result-index="27">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">acamprosate delayed-release</div>
-          <div class="med-result-sub">Campral</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="alprazolam" data-result-index="28">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">alprazolam</div>
-          <div class="med-result-sub">Xanax</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Benzodiazepines</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="alprazolam-odt" data-result-index="29">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">alprazolam ODT</div>
-          <div class="med-result-sub">Niravam</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="amantadine" data-result-index="30">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">amantadine</div>
-          <div class="med-result-sub">Gocovri</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="amitriptyline" data-result-index="31">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">amitriptyline</div>
-          <div class="med-result-sub">Elavil</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Atypical antidepressants</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="amoxapine" data-result-index="32">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">amoxapine</div>
-          <div class="med-result-sub">No brand aliases listed</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Atypical antidepressants</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="amphetamine-mixed-salts-er" data-result-index="33">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">amphetamine mixed salts ER</div>
-          <div class="med-result-sub">Mydayis</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Stimulant ADHD medications</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="amphetamine-sulfate" data-result-index="34">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">amphetamine sulfate</div>
-          <div class="med-result-sub">Evekeo</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Stimulant ADHD medications</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="amphetamine-xr-odt" data-result-index="35">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">amphetamine XR ODT</div>
-          <div class="med-result-sub">Adzenys XR-ODT</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Stimulant ADHD medications</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="amphetamine-xr-suspension" data-result-index="36">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">amphetamine XR suspension</div>
-          <div class="med-result-sub">Dyanavel XR</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Stimulant ADHD medications</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="aripiprazole-oral-solution" data-result-index="37">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">aripiprazole oral solution</div>
-          <div class="med-result-sub">Abilify Oral Solution</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="aripiprazole-partial-agonist" data-result-index="38">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">aripiprazole partial agonist</div>
-          <div class="med-result-sub">Abilify</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="armodafinil" data-result-index="39">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">armodafinil</div>
-          <div class="med-result-sub">Nuvigil</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Non-stimulant ADHD medications</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="armodafinil-tablet" data-result-index="40">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">armodafinil tablet</div>
-          <div class="med-result-sub">Nuvigil</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="asenapine-sublingual" data-result-index="41">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">asenapine sublingual</div>
-          <div class="med-result-sub">Saphris</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Antipsychotics</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="asenapine-transdermal" data-result-index="42">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">asenapine transdermal</div>
-          <div class="med-result-sub">Secuado</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="atenolol" data-result-index="43">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">atenolol</div>
-          <div class="med-result-sub">Tenormin</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Beta blockers commonly used in psych</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="atomoxetine" data-result-index="44">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">atomoxetine</div>
-          <div class="med-result-sub">Strattera</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">SNRIs</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="baclofen" data-result-index="45">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">baclofen</div>
-          <div class="med-result-sub">Lioresal</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="benztropine" data-result-index="46">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">benztropine</div>
-          <div class="med-result-sub">Cogentin</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="bisoprolol" data-result-index="47">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">bisoprolol</div>
-          <div class="med-result-sub">Zebeta</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Beta blockers commonly used in psych</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="brexpiprazole" data-result-index="48">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">brexpiprazole</div>
-          <div class="med-result-sub">Rexulti</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Antipsychotics</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="brexpiprazole-low-start" data-result-index="49">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">brexpiprazole low start</div>
-          <div class="med-result-sub">Rexulti</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="buspirone-delayed-onset" data-result-index="50">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">buspirone delayed onset</div>
-          <div class="med-result-sub">Buspar</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="carbamazepine" data-result-index="51">
+    </button><button type="button" class="med-result-item" data-med-id="carbamazepine" data-result-index="29">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">carbamazepine</div>
-          <div class="med-result-sub">Tegretol</div>
+          <div class="med-result-sub">Tegretol, Carbamazepine</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Mood stabilizers</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="carbamazepine-cyp-inducer" data-result-index="52">
+    </button><button type="button" class="med-result-item" data-med-id="carbamazepine-cyp-inducer" data-result-index="30">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">carbamazepine cyp inducer</div>
-          <div class="med-result-sub">Tegretol</div>
+          <div class="med-result-sub">Tegretol, Tegretol XR</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="carbamazepine-er" data-result-index="53">
+    </button><button type="button" class="med-result-item" data-med-id="carbamazepine-er" data-result-index="31">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">carbamazepine ER</div>
-          <div class="med-result-sub">Tegretol XR</div>
+          <div class="med-result-sub">Tegretol XR, Carbamazepine</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="cariprazine" data-result-index="54">
+    </button><button type="button" class="med-result-item" data-med-id="cariprazine" data-result-index="32">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">cariprazine</div>
-          <div class="med-result-sub">Vraylar</div>
+          <div class="med-result-sub">Vraylar, CARIPRAZINE HYDROCHLORIDE</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Antipsychotics</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="cariprazine-slow-titration" data-result-index="55">
+    </button><button type="button" class="med-result-item" data-med-id="cariprazine-slow-titration" data-result-index="33">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">cariprazine slow titration</div>
-          <div class="med-result-sub">Vraylar</div>
+          <div class="med-result-sub">Vraylar, VRAYLAR</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="carvedilol" data-result-index="56">
+    </button><button type="button" class="med-result-item" data-med-id="carvedilol" data-result-index="34">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">carvedilol</div>
-          <div class="med-result-sub">Coreg</div>
+          <div class="med-result-sub">Coreg, Carvedilol</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Beta blockers commonly used in psych</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="chlordiazepoxide" data-result-index="57">
+    </button><button type="button" class="med-result-item" data-med-id="chlordiazepoxide" data-result-index="35">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">chlordiazepoxide</div>
-          <div class="med-result-sub">Librium</div>
+          <div class="med-result-sub">Librium, Chlordiazepoxide Hydrochloride and Clidinium Bromide</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Benzodiazepines</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="chlorpromazine" data-result-index="58">
+    </button><button type="button" class="med-result-item" data-med-id="chlorpromazine" data-result-index="36">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">chlorpromazine</div>
-          <div class="med-result-sub">Thorazine</div>
+          <div class="med-result-sub">Thorazine, Chlorpromazine Hydrochloride</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Antipsychotics</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="chlorpromazine-oral-solution" data-result-index="59">
+    </button><button type="button" class="med-result-item" data-med-id="chlorpromazine-oral-solution" data-result-index="37">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">chlorpromazine oral solution</div>
-          <div class="med-result-sub">No brand aliases listed</div>
+          <div class="med-result-sub">Chlorpromazine Hydrochloride, CHLORPROMAZINE HYDROCHLORIDE</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="citalopram" data-result-index="60">
+    </button><button type="button" class="med-result-item" data-med-id="citalopram" data-result-index="38">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">citalopram</div>
-          <div class="med-result-sub">Celexa</div>
+          <div class="med-result-sub">Celexa, Citalopram</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">SSRIs</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="clomipramine" data-result-index="61">
+    </button><button type="button" class="med-result-item" data-med-id="clomipramine" data-result-index="39">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">clomipramine</div>
-          <div class="med-result-sub">Anafranil</div>
+          <div class="med-result-sub">Anafranil, CLOMIPRAMINE HYDROCHLORIDE</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Atypical antidepressants</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="clonazepam" data-result-index="62">
+    </button><button type="button" class="med-result-item" data-med-id="clonazepam" data-result-index="40">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">clonazepam</div>
-          <div class="med-result-sub">Klonopin</div>
+          <div class="med-result-sub">Klonopin, Clonazepam</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Benzodiazepines</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="clonazepam-odt" data-result-index="63">
+    </button><button type="button" class="med-result-item" data-med-id="clonazepam-odt" data-result-index="41">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">clonazepam ODT</div>
-          <div class="med-result-sub">Klonopin ODT</div>
+          <div class="med-result-sub">Klonopin ODT, Clonazepam</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="clonidine-er" data-result-index="64">
+    </button><button type="button" class="med-result-item" data-med-id="clonidine-er" data-result-index="42">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">clonidine ER</div>
-          <div class="med-result-sub">Kapvay</div>
+          <div class="med-result-sub">Kapvay, Clonidine Hydrochloride</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Non-stimulant ADHD medications</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="clonidine-ir" data-result-index="65">
+    </button><button type="button" class="med-result-item" data-med-id="clonidine-ir" data-result-index="43">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">clonidine IR</div>
-          <div class="med-result-sub">Catapres</div>
+          <div class="med-result-sub">Catapres, Clonidine Hydrochloride</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Non-stimulant ADHD medications</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="clonidine-patch" data-result-index="66">
+    </button><button type="button" class="med-result-item" data-med-id="clonidine-patch" data-result-index="44">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">clonidine patch</div>
-          <div class="med-result-sub">Catapres-TTS</div>
+          <div class="med-result-sub">Catapres-TTS, Clonidine Hydrochloride</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="clorazepate" data-result-index="67">
+    </button><button type="button" class="med-result-item" data-med-id="clorazepate" data-result-index="45">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">clorazepate</div>
-          <div class="med-result-sub">Tranxene</div>
+          <div class="med-result-sub">Tranxene, Clorazepate Dipotassium</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Benzodiazepines</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="cyclobenzaprine" data-result-index="68">
+    </button><button type="button" class="med-result-item" data-med-id="cyclobenzaprine" data-result-index="46">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">cyclobenzaprine</div>
-          <div class="med-result-sub">Flexeril</div>
+          <div class="med-result-sub">Flexeril, CYCLOBENZAPRINE HYDROCHLORIDE</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="cyproheptadine" data-result-index="69">
+    </button><button type="button" class="med-result-item" data-med-id="cyproheptadine" data-result-index="47">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">cyproheptadine</div>
-          <div class="med-result-sub">Periactin</div>
+          <div class="med-result-sub">Periactin, CYPROHEPTADINE HYDROCHLORIDE</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Anxiolytics / anxiety adjuncts</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="daridorexant" data-result-index="70">
+    </button><button type="button" class="med-result-item" data-med-id="daridorexant" data-result-index="48">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">daridorexant</div>
-          <div class="med-result-sub">Quviviq</div>
+          <div class="med-result-sub">Quviviq, QUVIVIQ</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Sleep / hypnotic medications</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="daridorexant-dual-orexin-antagonist" data-result-index="71">
+    </button><button type="button" class="med-result-item" data-med-id="daridorexant-dual-orexin-antagonist" data-result-index="49">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">daridorexant dual orexin antagonist</div>
-          <div class="med-result-sub">Quviviq</div>
+          <div class="med-result-sub">Quviviq, QUVIVIQ</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="desipramine" data-result-index="72">
+    </button><button type="button" class="med-result-item" data-med-id="desipramine" data-result-index="50">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">desipramine</div>
-          <div class="med-result-sub">Norpramin</div>
+          <div class="med-result-sub">Norpramin, Desipramine Hydrochloride</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Atypical antidepressants</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="desvenlafaxine" data-result-index="73">
+    </button><button type="button" class="med-result-item" data-med-id="desvenlafaxine" data-result-index="51">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">desvenlafaxine</div>
-          <div class="med-result-sub">Pristiq</div>
+          <div class="med-result-sub">Pristiq, Pristiq Extended-Release</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">SNRIs</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="desvenlafaxine-er" data-result-index="74">
+    </button><button type="button" class="med-result-item" data-med-id="desvenlafaxine-er" data-result-index="52">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">desvenlafaxine ER</div>
-          <div class="med-result-sub">Pristiq</div>
+          <div class="med-result-sub">Pristiq, Pristiq Extended-Release</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="deutetrabenazine" data-result-index="75">
+    </button><button type="button" class="med-result-item" data-med-id="deutetrabenazine" data-result-index="53">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">deutetrabenazine</div>
-          <div class="med-result-sub">Austedo</div>
+          <div class="med-result-sub">Austedo, AUSTEDO</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="dexmedetomidine-sublingual" data-result-index="76">
+    </button><button type="button" class="med-result-item" data-med-id="dexmedetomidine-sublingual" data-result-index="54">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">dexmedetomidine sublingual</div>
-          <div class="med-result-sub">Igalmi</div>
+          <div class="med-result-sub">Igalmi, IGALMI</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="dexmethylphenidate" data-result-index="77">
+    </button><button type="button" class="med-result-item" data-med-id="dexmethylphenidate" data-result-index="55">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">dexmethylphenidate</div>
-          <div class="med-result-sub">Focalin</div>
+          <div class="med-result-sub">Focalin, AZSTARYS</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Stimulant ADHD medications</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="dexmethylphenidate-xr" data-result-index="78">
+    </button><button type="button" class="med-result-item" data-med-id="dexmethylphenidate-xr" data-result-index="56">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">dexmethylphenidate XR</div>
-          <div class="med-result-sub">Focalin XR</div>
+          <div class="med-result-sub">Focalin XR, AZSTARYS</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Stimulant ADHD medications</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="dextroamphetamine" data-result-index="79">
+    </button><button type="button" class="med-result-item" data-med-id="dextroamphetamine" data-result-index="57">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">dextroamphetamine</div>
@@ -1565,333 +1309,405 @@
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Stimulant ADHD medications</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="dextroamphetamine-transdermal" data-result-index="80">
+    </button><button type="button" class="med-result-item" data-med-id="dextroamphetamine-transdermal" data-result-index="58">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">dextroamphetamine transdermal</div>
-          <div class="med-result-sub">Xelstrym</div>
+          <div class="med-result-sub">Xelstrym, DEXTROAMPHETAMINE SACCHARATE, AMPHETAMINE ASPARTATE, DEXTROAMPHETAMINE SULFATE…</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Stimulant ADHD medications</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="diazepam" data-result-index="81">
+    </button><button type="button" class="med-result-item" data-med-id="dextromethorphan-bupropion" data-result-index="59">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">dextromethorphan-bupropion</div>
+          <div class="med-result-sub">Auvelity, AUVELITY</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">NDRIs</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="diazepam" data-result-index="60">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">diazepam</div>
-          <div class="med-result-sub">Valium</div>
+          <div class="med-result-sub">Valium, Diazepam</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Benzodiazepines</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="diazepam-nasal" data-result-index="82">
+    </button><button type="button" class="med-result-item" data-med-id="diazepam-nasal" data-result-index="61">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">diazepam nasal</div>
-          <div class="med-result-sub">Valtoco</div>
+          <div class="med-result-sub">Valtoco, Diazepam</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Benzodiazepines</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="diphenhydramine" data-result-index="83">
+    </button><button type="button" class="med-result-item" data-med-id="diphenhydramine" data-result-index="62">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">diphenhydramine</div>
-          <div class="med-result-sub">Benadryl</div>
+          <div class="med-result-sub">Benadryl, Diphenhydramine</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Sleep / hypnotic medications</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="disulfiram" data-result-index="84">
+    </button><button type="button" class="med-result-item" data-med-id="disulfiram" data-result-index="63">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">disulfiram</div>
-          <div class="med-result-sub">Antabuse</div>
+          <div class="med-result-sub">Antabuse, Disulfiram</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Substance use support medications</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="disulfiram-supervised" data-result-index="85">
+    </button><button type="button" class="med-result-item" data-med-id="divalproex" data-result-index="64">
       <div class="med-result-top">
         <div>
-          <div class="med-result-name">disulfiram supervised</div>
-          <div class="med-result-sub">Antabuse</div>
+          <div class="med-result-name">divalproex</div>
+          <div class="med-result-sub">Depakote, Divalproex Sodium</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
-        <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <div class="med-result-sub">Mood stabilizers</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="donepezil" data-result-index="86">
+    </button><button type="button" class="med-result-item" data-med-id="donepezil" data-result-index="65">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">donepezil</div>
-          <div class="med-result-sub">Aricept</div>
+          <div class="med-result-sub">Aricept, DONEPEZIL HYDROCHLORIDE</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="donepezil-odt" data-result-index="87">
+    </button><button type="button" class="med-result-item" data-med-id="donepezil-odt" data-result-index="66">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">donepezil ODT</div>
-          <div class="med-result-sub">Aricept ODT</div>
+          <div class="med-result-sub">Aricept ODT, DONEPEZIL HYDROCHLORIDE</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="doxazosin" data-result-index="88">
+    </button><button type="button" class="med-result-item" data-med-id="doxazosin" data-result-index="67">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">doxazosin</div>
-          <div class="med-result-sub">Cardura</div>
+          <div class="med-result-sub">Cardura, Doxazosin</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Alpha agonists</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="doxepin" data-result-index="89">
+    </button><button type="button" class="med-result-item" data-med-id="doxepin" data-result-index="68">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">doxepin</div>
-          <div class="med-result-sub">Silenor</div>
+          <div class="med-result-sub">Silenor, DOXEPIN HYDROCHLORIDE</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Atypical antidepressants</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="doxepin-low-dose" data-result-index="90">
+    </button><button type="button" class="med-result-item" data-med-id="doxepin-low-dose" data-result-index="69">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">doxepin low-dose</div>
-          <div class="med-result-sub">Silenor</div>
+          <div class="med-result-sub">Silenor, SILENOR</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Sleep / hypnotic medications</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="doxepin-oral-solution" data-result-index="91">
+    </button><button type="button" class="med-result-item" data-med-id="doxepin-oral-solution" data-result-index="70">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">doxepin oral solution</div>
-          <div class="med-result-sub">No brand aliases listed</div>
+          <div class="med-result-sub">DOXEPIN HYDROCHLORIDE</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="estazolam" data-result-index="92">
+    </button><button type="button" class="med-result-item" data-med-id="duloxetine" data-result-index="71">
       <div class="med-result-top">
         <div>
-          <div class="med-result-name">estazolam</div>
-          <div class="med-result-sub">ProSom</div>
+          <div class="med-result-name">duloxetine</div>
+          <div class="med-result-sub">Cymbalta, Duloxetine Delayed-Release</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
-        <div class="med-result-sub">Benzodiazepines</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <div class="med-result-sub">SNRIs</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="eszopiclone" data-result-index="93">
+    </button><button type="button" class="med-result-item" data-med-id="escitalopram" data-result-index="72">
       <div class="med-result-top">
         <div>
-          <div class="med-result-name">eszopiclone</div>
-          <div class="med-result-sub">Lunesta</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Sleep / hypnotic medications</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="eszopiclone-low-dose" data-result-index="94">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">eszopiclone low dose</div>
-          <div class="med-result-sub">Lunesta</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="fluphenazine" data-result-index="95">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">fluphenazine</div>
-          <div class="med-result-sub">Prolixin</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Antipsychotics</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="flurazepam" data-result-index="96">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">flurazepam</div>
-          <div class="med-result-sub">Dalmane</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Benzodiazepines</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="fluvoxamine" data-result-index="97">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">fluvoxamine</div>
-          <div class="med-result-sub">Luvox</div>
+          <div class="med-result-name">escitalopram</div>
+          <div class="med-result-sub">Lexapro, Escitalopram Oral Solution</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">SSRIs</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="gabapentin" data-result-index="98">
+    </button><button type="button" class="med-result-item" data-med-id="estazolam" data-result-index="73">
       <div class="med-result-top">
         <div>
-          <div class="med-result-name">gabapentin</div>
-          <div class="med-result-sub">Neurontin</div>
+          <div class="med-result-name">estazolam</div>
+          <div class="med-result-sub">ProSom, Estazolam</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Benzodiazepines</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="eszopiclone" data-result-index="74">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">eszopiclone</div>
+          <div class="med-result-sub">Lunesta, ESZOPICLONE</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Sleep / hypnotic medications</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="gabapentin-enacarbil" data-result-index="99">
+    </button><button type="button" class="med-result-item" data-med-id="eszopiclone-low-dose" data-result-index="75">
       <div class="med-result-top">
         <div>
-          <div class="med-result-name">gabapentin enacarbil</div>
-          <div class="med-result-sub">Horizant</div>
+          <div class="med-result-name">eszopiclone low dose</div>
+          <div class="med-result-sub">Lunesta, LUNESTA</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="gabapentin-renal-adjustment" data-result-index="100">
+    </button><button type="button" class="med-result-item" data-med-id="fluoxetine" data-result-index="76">
       <div class="med-result-top">
         <div>
-          <div class="med-result-name">gabapentin renal adjustment</div>
-          <div class="med-result-sub">Neurontin</div>
+          <div class="med-result-name">fluoxetine</div>
+          <div class="med-result-sub">Prozac, Sarafem</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
-        <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <div class="med-result-sub">SSRIs</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="galantamine" data-result-index="101">
+    </button><button type="button" class="med-result-item" data-med-id="fluphenazine" data-result-index="77">
       <div class="med-result-top">
         <div>
-          <div class="med-result-name">galantamine</div>
-          <div class="med-result-sub">Razadyne</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="galantamine-er" data-result-index="102">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">galantamine ER</div>
-          <div class="med-result-sub">Razadyne ER</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="guanfacine-ir" data-result-index="103">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">guanfacine IR</div>
-          <div class="med-result-sub">Tenex</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Non-stimulant ADHD medications</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="guanfacine-patch" data-result-index="104">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">guanfacine patch</div>
-          <div class="med-result-sub">No brand aliases listed</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="haloperidol" data-result-index="105">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">haloperidol</div>
-          <div class="med-result-sub">Haldol</div>
+          <div class="med-result-name">fluphenazine</div>
+          <div class="med-result-sub">Prolixin, Fluphenazine Hydrochloride</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Antipsychotics</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="haloperidol-oral-solution" data-result-index="106">
+    </button><button type="button" class="med-result-item" data-med-id="flurazepam" data-result-index="78">
       <div class="med-result-top">
         <div>
-          <div class="med-result-name">haloperidol oral solution</div>
-          <div class="med-result-sub">No brand aliases listed</div>
+          <div class="med-result-name">flurazepam</div>
+          <div class="med-result-sub">Dalmane, Flurazepam Hydrochloride</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Benzodiazepines</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="fluvoxamine" data-result-index="79">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">fluvoxamine</div>
+          <div class="med-result-sub">Luvox, Fluvoxamine Maleate</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">SSRIs</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="gabapentin" data-result-index="80">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">gabapentin</div>
+          <div class="med-result-sub">Neurontin, Gabapentin</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Sleep / hypnotic medications</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="gabapentin-enacarbil" data-result-index="81">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">gabapentin enacarbil</div>
+          <div class="med-result-sub">Horizant, HORIZANT</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="hydroxyzine" data-result-index="107">
+    </button><button type="button" class="med-result-item" data-med-id="gabapentin-renal-adjustment" data-result-index="82">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">gabapentin renal adjustment</div>
+          <div class="med-result-sub">Neurontin, NEURONTIN</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Other psych agents</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="galantamine" data-result-index="83">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">galantamine</div>
+          <div class="med-result-sub">Razadyne, Galantamine Hydrobromide</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Other psych agents</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="galantamine-er" data-result-index="84">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">galantamine ER</div>
+          <div class="med-result-sub">Razadyne ER, Galantamine Hydrobromide</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Other psych agents</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="guanfacine" data-result-index="85">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">guanfacine</div>
+          <div class="med-result-sub">Tenex, Intuniv</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Non-stimulant ADHD medications</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="guanfacine-er" data-result-index="86">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">guanfacine ER</div>
+          <div class="med-result-sub">Intuniv, Guanfacine</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Non-stimulant ADHD medications</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="guanfacine-ir" data-result-index="87">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">guanfacine IR</div>
+          <div class="med-result-sub">Tenex, Guanfacine</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Non-stimulant ADHD medications</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="guanfacine-patch" data-result-index="88">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">guanfacine patch</div>
+          <div class="med-result-sub">Guanfacine, GUANFACINE HYDROCHLORIDE</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Other psych agents</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="haloperidol" data-result-index="89">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">haloperidol</div>
+          <div class="med-result-sub">Haldol, Haloperidol</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Antipsychotics</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="haloperidol-oral-solution" data-result-index="90">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">haloperidol oral solution</div>
+          <div class="med-result-sub">Haloperidol, HALOPERIDOL</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Other psych agents</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="hydroxyzine" data-result-index="91">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">hydroxyzine</div>
@@ -1901,156 +1717,349 @@
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Sleep / hypnotic medications</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="hydroxyzine-hydrochloride" data-result-index="108">
+    </button><button type="button" class="med-result-item" data-med-id="hydroxyzine-hydrochloride" data-result-index="92">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">hydroxyzine hydrochloride</div>
-          <div class="med-result-sub">Atarax</div>
+          <div class="med-result-sub">Atarax, Hydroxyzine hydrochloride</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="hydroxyzine-pamoate" data-result-index="109">
+    </button><button type="button" class="med-result-item" data-med-id="hydroxyzine-pamoate" data-result-index="93">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">hydroxyzine pamoate</div>
-          <div class="med-result-sub">Vistaril</div>
+          <div class="med-result-sub">Vistaril, hydroxyzine pamoate</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="iloperidone" data-result-index="110">
+    </button><button type="button" class="med-result-item" data-med-id="iloperidone" data-result-index="94">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">iloperidone</div>
-          <div class="med-result-sub">Fanapt</div>
+          <div class="med-result-sub">Fanapt, FANAPT</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Antipsychotics</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="imipramine" data-result-index="111">
+    </button><button type="button" class="med-result-item" data-med-id="imipramine" data-result-index="95">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">imipramine</div>
-          <div class="med-result-sub">Tofranil</div>
+          <div class="med-result-sub">Tofranil, Imipramine Hydrochloride</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Atypical antidepressants</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="isocarboxazid" data-result-index="112">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">isocarboxazid</div>
-          <div class="med-result-sub">Marplan</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Atypical antidepressants</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="ketamine-intranasal" data-result-index="113">
+    </button><button type="button" class="med-result-item" data-med-id="ketamine-intranasal" data-result-index="96">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">ketamine intranasal</div>
-          <div class="med-result-sub">Spravato</div>
+          <div class="med-result-sub">Spravato, SPRAVATO</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Antidepressant augmenters</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="lacosamide" data-result-index="114">
+    </button><button type="button" class="med-result-item" data-med-id="lacosamide" data-result-index="97">
       <div class="med-result-top">
         <div>
           <div class="med-result-name">lacosamide</div>
-          <div class="med-result-sub">Vimpat</div>
+          <div class="med-result-sub">Vimpat, LACOSAMIDE</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
-    </button><button type="button" class="med-result-item" data-med-id="lamotrigine-odt" data-result-index="115">
+    </button><button type="button" class="med-result-item" data-med-id="lamotrigine" data-result-index="98">
       <div class="med-result-top">
         <div>
-          <div class="med-result-name">lamotrigine ODT</div>
-          <div class="med-result-sub">No brand aliases listed</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="lamotrigine-slow-titration-requirement" data-result-index="116">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">lamotrigine slow titration requirement</div>
-          <div class="med-result-sub">Lamictal</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="lemborexant" data-result-index="117">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">lemborexant</div>
-          <div class="med-result-sub">Dayvigo</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Sleep / hypnotic medications</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="lemborexant-dual-orexin-antagonist" data-result-index="118">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">lemborexant dual orexin antagonist</div>
-          <div class="med-result-sub">Dayvigo</div>
-        </div>
-        <span aria-hidden="true">☆</span>
-      </div>
-      <div class="med-result-meta">
-        <div class="med-result-sub">Other psych agents</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
-      </div>
-    </button><button type="button" class="med-result-item" data-med-id="levetiracetam" data-result-index="119">
-      <div class="med-result-top">
-        <div>
-          <div class="med-result-name">levetiracetam</div>
-          <div class="med-result-sub">Keppra</div>
+          <div class="med-result-name">lamotrigine</div>
+          <div class="med-result-sub">Lamictal, Lamotrigine</div>
         </div>
         <span aria-hidden="true">☆</span>
       </div>
       <div class="med-result-meta">
         <div class="med-result-sub">Mood stabilizers</div>
-        <span class="med-status-chip med-status-chip-moderate">Moderate • 50/100</span>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="lamotrigine-odt" data-result-index="99">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">lamotrigine ODT</div>
+          <div class="med-result-sub">Lamotrigine, LAMOTRIGINE</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Other psych agents</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="lamotrigine-slow-titration-requirement" data-result-index="100">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">lamotrigine slow titration requirement</div>
+          <div class="med-result-sub">Lamictal, LAMICTAL XR</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Other psych agents</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="lemborexant" data-result-index="101">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">lemborexant</div>
+          <div class="med-result-sub">Dayvigo, DAYVIGO</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Sleep / hypnotic medications</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="lemborexant-dual-orexin-antagonist" data-result-index="102">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">lemborexant dual orexin antagonist</div>
+          <div class="med-result-sub">Dayvigo, DAYVIGO</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Other psych agents</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="levetiracetam" data-result-index="103">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">levetiracetam</div>
+          <div class="med-result-sub">Keppra, Levetiracetam</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Mood stabilizers</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="levomilnacipran" data-result-index="104">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">levomilnacipran</div>
+          <div class="med-result-sub">Fetzima, LEVOMILNACIPRAN</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">SNRIs</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="liothyronine" data-result-index="105">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">liothyronine</div>
+          <div class="med-result-sub">Cytomel, Liothyronine Sodium</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Antidepressant augmenters</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="lisdexamfetamine" data-result-index="106">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">lisdexamfetamine</div>
+          <div class="med-result-sub">Vyvanse, Lisdexamfetamine Dimesylate</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Stimulant ADHD medications</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="lithium-carbonate" data-result-index="107">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">lithium carbonate</div>
+          <div class="med-result-sub">Lithobid, Eskalith</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Mood stabilizers</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="lithium-citrate" data-result-index="108">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">lithium citrate</div>
+          <div class="med-result-sub">Cibalith-S, Lithium</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Mood stabilizers</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="lithium-narrow-therapeutic-index" data-result-index="109">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">lithium narrow therapeutic index</div>
+          <div class="med-result-sub">Lithobid, LITHOBID</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Other psych agents</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="lofexidine" data-result-index="110">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">lofexidine</div>
+          <div class="med-result-sub">Lucemyra, lofexidine hydrochloride</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Substance use support medications</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="lorazepam" data-result-index="111">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">lorazepam</div>
+          <div class="med-result-sub">Ativan, Lorazepam</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Benzodiazepines</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="loxapine" data-result-index="112">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">loxapine</div>
+          <div class="med-result-sub">Loxitane, Loxapine</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Antipsychotics</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="lumateperone" data-result-index="113">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">lumateperone</div>
+          <div class="med-result-sub">Caplyta, CAPLYTA</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Antipsychotics</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="lumateperone-once-daily" data-result-index="114">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">lumateperone once daily</div>
+          <div class="med-result-sub">Caplyta, CAPLYTA</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Other psych agents</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="lurasidone" data-result-index="115">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">lurasidone</div>
+          <div class="med-result-sub">Latuda, Lurasidone Hydrochloride</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Antipsychotics</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="lurasidone-with-food" data-result-index="116">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">lurasidone with food</div>
+          <div class="med-result-sub">Latuda, LATUDA</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Other psych agents</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="memantine" data-result-index="117">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">memantine</div>
+          <div class="med-result-sub">Namenda, Memantine hydrochloride</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Other psych agents</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="memantine-er" data-result-index="118">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">memantine ER</div>
+          <div class="med-result-sub">Namenda XR, Memantine hydrochloride</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Other psych agents</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
+      </div>
+    </button><button type="button" class="med-result-item" data-med-id="methamphetamine" data-result-index="119">
+      <div class="med-result-top">
+        <div>
+          <div class="med-result-name">methamphetamine</div>
+          <div class="med-result-sub">Desoxyn, Methamphetamine Hydrochloride</div>
+        </div>
+        <span aria-hidden="true">☆</span>
+      </div>
+      <div class="med-result-meta">
+        <div class="med-result-sub">Stimulant ADHD medications</div>
+        <span class="med-status-chip med-status-chip-very-high">Very High • 100/100</span>
       </div>
     </button></ul>
         <div class="med-empty-state hidden" id="medEmptyState">
           <p>No medication found for this search.</p>
           <button type="button" id="medRequestBtn">Request this medication</button>
+          <button type="button" id="medFetchFallbackBtn">Fetch low-confidence fallback</button>
         </div>
       </section>
 

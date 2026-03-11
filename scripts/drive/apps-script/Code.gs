@@ -160,9 +160,25 @@ function handleHealth_(payload) {
 function handleBootstrap_(payload) {
   const sharedDriveId = resolveSharedDriveId_(payload);
   const rootFolderName = normalizeText_(payload.rootFolderName || APP_ROOT_DEFAULT) || APP_ROOT_DEFAULT;
+  const requestedRootFolderId = normalizeText_(payload.rootFolderId || '');
   ensureDefaultAllowlist_();
 
-  const root = getOrCreateRootFolder_(sharedDriveId, rootFolderName);
+  let root = null;
+  if (requestedRootFolderId) {
+    try {
+      const requestedMeta = getFileSafe_(requestedRootFolderId);
+      if (!sharedDriveId || fileBelongsToSharedDrive_(requestedMeta, sharedDriveId)) {
+        root = requestedMeta;
+        saveStoredRootFolder_(root.id, sharedDriveId, rootFolderName);
+      }
+    } catch (error) {
+      // fall through to root discovery/create flow
+    }
+  }
+
+  if (!root) {
+    root = getOrCreateRootFolder_(sharedDriveId, rootFolderName);
+  }
   const createdFolders = [];
 
   FOLDER_STRUCTURE.forEach(function (folderPath) {
@@ -317,18 +333,19 @@ function findMyDriveCleanupCandidates_(rootFolderName, archiveFolderId, options)
   const includeUntitledFiles = options ? Boolean(options.includeUntitledFiles) : true;
   const includeUntitledFolders = options ? Boolean(options.includeUntitledFolders) : true;
   const escapedRootName = escapeQueryText_(rootFolderName);
+  const archiveFilter = archiveFolderId ? " and not '" + escapeQueryText_(archiveFolderId) + "' in parents" : '';
 
   const groups = [];
-  const rootByNameQuery = "trashed=false and mimeType='application/vnd.google-apps.folder' and title='" + escapedRootName + "'";
+  const rootByNameQuery = "trashed=false and mimeType='application/vnd.google-apps.folder' and title='" + escapedRootName + "'" + archiveFilter;
   groups.push((listFilesSafe_({ q: rootByNameQuery, maxResults: 200 }, '') || {}).items || []);
 
   if (includeUntitledFolders) {
-    const untitledFoldersQuery = "trashed=false and mimeType='application/vnd.google-apps.folder' and title contains 'Untitled'";
+    const untitledFoldersQuery = "trashed=false and mimeType='application/vnd.google-apps.folder' and title contains 'Untitled'" + archiveFilter;
     groups.push((listFilesSafe_({ q: untitledFoldersQuery, maxResults: 1000 }, '') || {}).items || []);
   }
 
   if (includeUntitledFiles) {
-    const untitledFilesQuery = "trashed=false and mimeType!='application/vnd.google-apps.folder' and title contains 'Untitled'";
+    const untitledFilesQuery = "trashed=false and mimeType!='application/vnd.google-apps.folder' and title contains 'Untitled'" + archiveFilter;
     groups.push((listFilesSafe_({ q: untitledFilesQuery, maxResults: 1000 }, '') || {}).items || []);
   }
 
@@ -357,17 +374,26 @@ function findMyDriveCleanupCandidates_(rootFolderName, archiveFolderId, options)
       if (!item.id || item.id === archiveFolderId) return false;
       if (item.parents.indexOf(archiveFolderId) >= 0) return false;
 
-      if (item.kind === 'folder' && normalizeText_(item.name) === normalizeText_(rootFolderName)) {
-        return true;
+      if (item.kind === 'folder') {
+        if (isLikelyAppCleanupFolderName_(item.name, rootFolderName)) {
+          return true;
+        }
+        if (isLikelyAppRootFolder_(item.id)) {
+          return true;
+        }
+        if (includeUntitledFolders && isUntitledLikeName_(item.name)) {
+          return isLikelyAppRootFolder_(item.id);
+        }
+        return false;
       }
 
-      if (isUntitledLikeName_(item.name)) {
-        if (item.kind === 'folder' && includeUntitledFolders) return true;
-        if (item.kind === 'file' && includeUntitledFiles) return true;
-      }
-
-      if (item.kind === 'folder' && isLikelyAppRootFolder_(item.id)) {
-        return true;
+      if (item.kind === 'file') {
+        if (isLikelyAppCleanupFileName_(item.name)) {
+          return true;
+        }
+        if (includeUntitledFiles && isUntitledLikeName_(item.name)) {
+          return isLikelyAppCleanupFileMime_(item.mimeType);
+        }
       }
 
       return false;
@@ -395,6 +421,32 @@ function isUntitledLikeName_(name) {
     || normalized === 'untitled document'
     || normalized.indexOf('untitled ') === 0
     || normalized.indexOf('untitled-') === 0;
+}
+
+function isLikelyAppCleanupFolderName_(name, rootFolderName) {
+  const normalized = normalizeText_(name || '').toLowerCase();
+  const normalizedRoot = normalizeText_(rootFolderName || '').toLowerCase();
+  if (!normalized) return false;
+  if (normalizedRoot) {
+    if (normalized === normalizedRoot) return true;
+    if (normalized.indexOf(normalizedRoot + ' (') === 0 && normalized.slice(-1) === ')') return true;
+  }
+  return /^app-shell(?: \(\d+\))?$/.test(normalized)
+    || /^astra clinical note builder(?: \(\d+\))?$/.test(normalized)
+    || /^note app(?: \(\d+\))?$/.test(normalized);
+}
+
+function isLikelyAppCleanupFileName_(name) {
+  const normalized = normalizeText_(name || '').toLowerCase();
+  if (!normalized) return false;
+  return /^(?:current|recent-patients|drive-manifest)(?: \(\d+\))?\.json$/.test(normalized)
+    || /artifact-publish\.json$/.test(normalized)
+    || /^note-builder(?:[-_. ].*)?\.json$/.test(normalized);
+}
+
+function isLikelyAppCleanupFileMime_(mimeType) {
+  const normalized = normalizeText_(mimeType || '').toLowerCase();
+  return normalized === 'application/json' || normalized === 'text/plain';
 }
 
 function getFileParentIds_(file) {
@@ -923,22 +975,47 @@ function folderPathUntil_(segments, segment) {
   return segments.slice(0, index + 1).join('/');
 }
 
+function findRootFolderCandidates_(rootFolderName, sharedDriveId, maxResults) {
+  const escaped = escapeQueryText_(rootFolderName);
+  const query = "trashed=false and mimeType='application/vnd.google-apps.folder' and title='" + escaped + "'";
+  const limit = Math.max(10, Number(maxResults || 20) || 20);
+  const groups = [];
+
+  try {
+    const scoped = listFilesSafe_({
+      q: query,
+      maxResults: limit,
+    }, sharedDriveId);
+    groups.push((scoped && scoped.items) ? scoped.items : []);
+  } catch (error) {
+    groups.push([]);
+  }
+
+  if (sharedDriveId) {
+    try {
+      const unscoped = listFilesSafe_({
+        q: query,
+        maxResults: limit,
+      }, '');
+      groups.push((unscoped && unscoped.items) ? unscoped.items : []);
+    } catch (error) {
+      groups.push([]);
+    }
+  }
+
+  const merged = mergeUniqueFilesById_(groups);
+  return merged.filter(function (item) {
+    return !sharedDriveId || fileBelongsToSharedDrive_(item, sharedDriveId);
+  });
+}
+
 function getRootFolderForRead_(sharedDriveId, rootFolderName) {
   const storedRoot = getStoredRootFolder_(sharedDriveId, rootFolderName);
   if (storedRoot) {
     return storedRoot;
   }
 
-  const escaped = escapeQueryText_(rootFolderName);
-  const query = "trashed=false and mimeType='application/vnd.google-apps.folder' and title='" + escaped + "'";
-
-  const listed = listFilesSafe_({
-    q: query,
-    maxResults: 20,
-  }, sharedDriveId);
-  const candidates = (listed.items || []).filter(function (item) {
-    return !sharedDriveId || fileBelongsToSharedDrive_(item, sharedDriveId);
-  });
+  const candidates = findRootFolderCandidates_(rootFolderName, sharedDriveId, 30);
 
   if (!candidates.length) {
     return null;
@@ -955,18 +1032,7 @@ function getOrCreateRootFolder_(sharedDriveId, rootFolderName) {
     return storedRoot;
   }
 
-  const escaped = escapeQueryText_(rootFolderName);
-  const query = "trashed=false and mimeType='application/vnd.google-apps.folder' and title='" + escaped + "'";
-
-  const params = {
-    q: query,
-    maxResults: 10,
-  };
-
-  const listed = listFilesSafe_(params, sharedDriveId);
-  const candidates = (listed.items || []).filter(function (item) {
-    return !sharedDriveId || fileBelongsToSharedDrive_(item, sharedDriveId);
-  });
+  const candidates = findRootFolderCandidates_(rootFolderName, sharedDriveId, 20);
 
   if (candidates.length) {
     const selected = selectStableFolder_(candidates);
@@ -1007,13 +1073,13 @@ function findFolderInParent_(parentId, folderName, sharedDriveId) {
     maxResults: 1,
   };
 
-  const listed = listFilesSafe_(params, sharedDriveId);
-  if (listed.items && listed.items.length) {
-    return listed.items[0];
-  }
-
-  if (sharedDriveId) {
-    return null;
+  try {
+    const listed = listFilesSafe_(params, sharedDriveId);
+    if (listed.items && listed.items.length) {
+      return listed.items[0];
+    }
+  } catch (error) {
+    // fall through to DriveApp fallback
   }
 
   return findFolderViaDriveApp_(parentId, folderName);
@@ -1028,13 +1094,13 @@ function findFileInFolder_(folderId, fileName, sharedDriveId) {
     maxResults: 1,
   };
 
-  const listed = listFilesSafe_(params, sharedDriveId);
-  if (listed.items && listed.items.length) {
-    return listed.items[0];
-  }
-
-  if (sharedDriveId) {
-    return null;
+  try {
+    const listed = listFilesSafe_(params, sharedDriveId);
+    if (listed.items && listed.items.length) {
+      return listed.items[0];
+    }
+  } catch (error) {
+    // fall through to DriveApp fallback
   }
 
   return findFileViaDriveApp_(folderId, fileName);
