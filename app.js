@@ -230,6 +230,7 @@ const SCRIPT_PANEL_HEIGHT_KEY = 'noteBuilderScriptPanelHeight_v1';
 const SCRIPT_PANEL_DEFAULT_HEIGHT = 760;
 const SCRIPT_PANEL_MIN_HEIGHT = 260;
 const SCRIPT_PANEL_VIEWPORT_BOTTOM_GAP = 220;
+const MANUAL_DRAFT_RESTORE_ONLY_DEFAULT = true;
 const MEDICATION_TERM_QUALIFIER_REGEX = /\b(?:xr|er|sr|dr|ir|odt|xl|hcl|hydrochloride|fumarate|succinate|maleate|tartrate|mesylate|sodium|phosphate|capsule|capsules|tablet|tablets|solution|extended release|immediate release)\b/gi;
 const MEDICATION_PEDIATRIC_TEXT_REGEX = /\b(?:pediatric|paediatric|child|children|adolescent|adolescents|teen|teenager|teenagers|infant|infants|neonate|neonates|newborn|newborns|under\s*18|younger than 18|ages?\s*\d{1,2}\s*(?:-|to)\s*\d{1,2}|mg\/kg|mcg\/kg|mg\/kg\/day|mcg\/kg\/day)\b/i;
 const THERAPY_TIER_MINUTES = {
@@ -662,6 +663,10 @@ function applyRemoteDraftPayload(remoteDraft, options = {}) {
 }
 
 function tryApplyPendingRemoteDraft() {
+  if (isManualDraftRestoreOnlyMode()) {
+    pendingRemoteDraft = null;
+    return false;
+  }
   if (!pendingRemoteDraft || applyingPendingRemoteDraft) return false;
   if (shouldDeferRemoteDraftApply()) return false;
 
@@ -709,6 +714,13 @@ function getDriveConfig() {
     ownerToken: String(dataset.driveOwnerToken || '').trim(),
     syncIntervalMs: syncIntervalMinutes * 60 * 1000,
   };
+}
+
+function isManualDraftRestoreOnlyMode() {
+  const dataset = els.body ? els.body.dataset : {};
+  const raw = String(dataset.manualDraftRestore || '').trim().toLowerCase();
+  if (!raw) return MANUAL_DRAFT_RESTORE_ONLY_DEFAULT;
+  return raw !== 'false';
 }
 
 function driveUserKeyFromEmail(email) {
@@ -1129,7 +1141,15 @@ function renderDriveDiagnostics() {
   if (els.diagClientBuild) els.diagClientBuild.textContent = APP_BUILD_ID || 'n/a';
   if (els.diagBackendBuild) els.diagBackendBuild.textContent = state.driveBackendBuildId || 'unknown';
   if (els.diagEndpoint) els.diagEndpoint.textContent = config.endpointUrl || 'not configured';
-  if (els.diagResolvedUser) els.diagResolvedUser.textContent = state.driveResolvedUserEmail || config.userEmail || 'unknown';
+  if (els.diagResolvedUser) {
+    const resolved = state.driveResolvedUserEmail || '';
+    const configured = config.userEmail || '';
+    if (resolved && configured && resolved !== configured) {
+      els.diagResolvedUser.textContent = `${resolved} (configured: ${configured})`;
+    } else {
+      els.diagResolvedUser.textContent = resolved || configured || 'unknown';
+    }
+  }
   if (els.diagSharedDrive) els.diagSharedDrive.textContent = state.driveRequiredSharedDriveId || config.sharedDriveId || 'not configured';
   if (els.diagRequiredRoot) els.diagRequiredRoot.textContent = state.driveRequiredRootId || config.rootFolderId || 'not configured';
   if (els.diagResolvedRoot) els.diagResolvedRoot.textContent = state.driveResolvedRootId || 'unknown';
@@ -1581,6 +1601,17 @@ async function pullDriveDraft(force = false) {
   }
 
   const remoteSavedAtIso = String(payload.savedAt || remoteDraft.savedAt || new Date().toISOString());
+  if (isManualDraftRestoreOnlyMode()) {
+    promoteDraftToSnapshots(remoteDraft, {
+      savedAt: remoteSavedAtIso,
+      practice: payload.practice || '',
+      visitType: payload.visitType || '',
+      render: true,
+    });
+    if (file.revision) setDriveRevisionForPath(path, file.revision);
+    return false;
+  }
+
   if (shouldDeferRemoteDraftApply()) {
     queuePendingRemoteDraft(remoteDraft, {
       path,
@@ -1833,11 +1864,19 @@ async function flushDriveQueue() {
                 const remotePayload = parseJsonOrNull(response.currentContent || merged.content || '');
                 const remoteDraft = remotePayload ? (remotePayload.draft || remotePayload) : null;
                 if (remoteDraft && remoteDraft.inputs) {
-                  queuePendingRemoteDraft(remoteDraft, {
-                    path: item.path,
-                    revision: response.currentRevision || '',
-                    savedAt: (remotePayload && remotePayload.savedAt) || '',
-                  });
+                  if (isManualDraftRestoreOnlyMode()) {
+                    promoteDraftToSnapshots(remoteDraft, {
+                      savedAt: (remotePayload && remotePayload.savedAt) || '',
+                      practice: remotePayload && remotePayload.practice ? remotePayload.practice : '',
+                      visitType: remotePayload && remotePayload.visitType ? remotePayload.visitType : '',
+                    });
+                  } else {
+                    queuePendingRemoteDraft(remoteDraft, {
+                      path: item.path,
+                      revision: response.currentRevision || '',
+                      savedAt: (remotePayload && remotePayload.savedAt) || '',
+                    });
+                  }
                 }
                 if (response.currentRevision) {
                   revisions[item.path] = String(response.currentRevision);
@@ -1845,7 +1884,9 @@ async function flushDriveQueue() {
                 }
                 queue.shift();
                 setDriveQueue(queue);
-                tryApplyPendingRemoteDraft();
+                if (!isManualDraftRestoreOnlyMode()) {
+                  tryApplyPendingRemoteDraft();
+                }
                 continue;
               }
             } else if (isRecentPatientsPath(item.path)) {
@@ -2178,6 +2219,27 @@ async function runDriveSyncCycle(force = false) {
   try {
     const health = await callDriveEndpoint('health', {});
     const healthState = applyDriveHealthState(health);
+    const configuredUser = getConfiguredDriveUserEmail();
+    const allowlistedUsers = Array.isArray(health && health.allowlistedUsers)
+      ? health.allowlistedUsers.map((entry) => String(entry || '').trim().toLowerCase()).filter(Boolean)
+      : [];
+
+    if (configuredUser && !isValidEmailFormat(configuredUser)) {
+      const reason = `Configured Drive email is invalid (${configuredUser}).`;
+      maybePromptForDriveUserEmail(reason, { force: true });
+      setDriveWriteBlock(true, reason, 'identity_invalid');
+      updateDriveStatusBadge();
+      return;
+    }
+
+    if (configuredUser && allowlistedUsers.length && !allowlistedUsers.includes(configuredUser)) {
+      const reason = `Configured Drive email (${configuredUser}) is not in the allowlist.`;
+      maybePromptForDriveUserEmail(reason);
+      setDriveWriteBlock(true, reason, 'identity_not_allowlisted');
+      updateDriveStatusBadge();
+      return;
+    }
+
     const backendBuild = String(healthState.backendBuild || '').trim();
     if (backendBuild && backendBuild !== APP_BUILD_ID) {
       const reason = `Client update required (client ${APP_BUILD_ID} vs backend ${backendBuild}).`;
@@ -2343,7 +2405,8 @@ function initDriveSync() {
     return;
   }
 
-  if (!getConfiguredDriveUserEmail()) {
+  const configuredUser = getConfiguredDriveUserEmail();
+  if (!configuredUser || !isValidEmailFormat(configuredUser)) {
     maybePromptForDriveUserEmail('Drive sync requires your work email for per-user draft isolation.', { force: true });
   }
 
@@ -3400,6 +3463,32 @@ function mergeSnapshotCollections(primaryList, secondaryList) {
     .slice(0, MAX_SNAPSHOTS);
 }
 
+function promoteDraftToSnapshots(draft, options = {}) {
+  if (!draft || typeof draft !== 'object' || !draft.inputs) return false;
+  const {
+    savedAt = '',
+    practice = '',
+    visitType = '',
+    render = true,
+  } = options;
+
+  const snapshot = normalizeSnapshotEntry({
+    savedAt: savedAt || draft.savedAt || new Date().toISOString(),
+    practice: practice || (draft.state ? draft.state.practice : state.practice),
+    visitType: visitType || (draft.state ? draft.state.visitType : state.visitType),
+    draft,
+  });
+  if (!snapshot) return false;
+
+  const existing = loadSnapshotsFromStorage();
+  const merged = mergeSnapshotCollections([snapshot], existing);
+  saveSnapshotsToStorage(merged);
+  if (render) {
+    renderBackupHistory();
+  }
+  return true;
+}
+
 function getLatestSnapshotTimestamp(snapshots) {
   return (snapshots || []).reduce((latest, entry) => {
     const timestamp = Date.parse(entry && entry.savedAt ? entry.savedAt : '') || 0;
@@ -3659,6 +3748,27 @@ function loadInitialData() {
     const parsedDraft = rawDraft ? parseJsonOrNull(rawDraft) : null;
     const shadowPayload = getStorageJSON(getDraftShadowStorageKey(), null);
     const shadowDraft = shadowPayload && shadowPayload.draft ? shadowPayload.draft : null;
+    const manualRestoreOnly = isManualDraftRestoreOnlyMode();
+
+    if (manualRestoreOnly) {
+      if (parsedDraft && parsedDraft.inputs) {
+        promoteDraftToSnapshots(parsedDraft, { render: false });
+      }
+      if (shadowDraft && shadowDraft.inputs) {
+        promoteDraftToSnapshots(shadowDraft, {
+          savedAt: shadowPayload && shadowPayload.savedAt ? shadowPayload.savedAt : '',
+          render: false,
+        });
+      }
+      if (rawDraft) {
+        localStorage.removeItem(getDraftStorageKey());
+      }
+      if (shadowPayload) {
+        localStorage.removeItem(getDraftShadowStorageKey());
+      }
+      return 'none';
+    }
+
     const draftTs = getDraftSavedAtMs(parsedDraft);
     const shadowTs = Math.max(
       Date.parse(String(shadowPayload && shadowPayload.savedAt ? shadowPayload.savedAt : '')) || 0,
