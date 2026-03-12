@@ -1086,28 +1086,6 @@ body.script-resize-active * {
   box-shadow: 0 5px 12px rgba(15, 23, 42, 0.12);
 }
 
-.drive-maintenance-tray {
-  background: rgba(238, 246, 255, 0.82);
-}
-
-.drive-maintenance-row {
-  margin-top: 8px;
-  gap: 8px;
-}
-
-#driveCleanupBtn {
-  background: linear-gradient(145deg, #1d4ed8, #1e40af);
-}
-
-#driveCleanupBtn:disabled {
-  cursor: progress;
-  filter: saturate(0.75);
-}
-
-#driveCleanupStatus.drive-cleanup-error {
-  color: #991b1b;
-}
-
 .secondary-action-btn {
   background: rgba(255, 255, 255, 0.9) !important;
   color: #1e3a8a !important;

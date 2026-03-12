@@ -121,10 +121,6 @@ const els = {
   medExportMissingBtn: document.getElementById('medExportMissingBtn'),
   medMissingCount: document.getElementById('medMissingCount'),
   driveSyncStatus: document.getElementById('driveSyncStatus'),
-  driveDiagnosticsBtn: document.getElementById('driveDiagnosticsBtn'),
-  driveSnapshotBtn: document.getElementById('driveSnapshotBtn'),
-  driveCleanupBtn: document.getElementById('driveCleanupBtn'),
-  driveCleanupStatus: document.getElementById('driveCleanupStatus'),
   driveDiagnosticsModal: document.getElementById('driveDiagnosticsModal'),
   driveCloseDiagnosticsBtn: document.getElementById('driveCloseDiagnosticsBtn'),
   driveRunRepairBtn: document.getElementById('driveRunRepairBtn'),
@@ -209,7 +205,6 @@ const DRIVE_USER_PROMPT_META_KEY = 'driveUserPromptMeta_v1';
 const DRIVE_QUEUE_KEY = 'driveSyncPendingWrites_v1';
 const DRIVE_META_KEY = 'driveSyncMeta_v1';
 const DRIVE_REVISIONS_KEY = 'driveSyncRevisions_v1';
-const DRIVE_AUTO_CLEANUP_META_KEY = 'driveSyncAutoCleanupMeta_v1';
 const DRIVE_DRAFT_PATH = 'data/draft/current.json';
 const DRIVE_RECENT_PATIENTS_PATH = 'data/draft/recent-patients.json';
 const DRIVE_MED_COMPILED_PATH = 'data/meds/compiled/medications.compiled.json';
@@ -220,10 +215,6 @@ const DRIVE_MANIFEST_FILE = 'config/drive-manifest.json';
 const DRAFT_PERSIST_IDLE_MS = 3000;
 const REMOTE_DRAFT_APPLY_TYPING_GRACE_MS = 1800;
 const RECENT_PATIENTS_DRIVE_MIN_INTERVAL_MS = 90000;
-const DRIVE_AUTO_CLEANUP_INTERVAL_MS = 1000 * 60 * 60 * 24;
-const DRIVE_MANUAL_CLEANUP_MAX_ROUNDS = 8;
-const DRIVE_CLEANUP_APPLY_BATCH_SIZE = 250;
-const DRIVE_CLEANUP_MAX_ITEMS = 60000;
 const DRIVE_AUTO_REPAIR_COOLDOWN_MS = 1000 * 60 * 5;
 const MEDICATION_FALLBACK_CACHE_TTL_MS = 1000 * 60 * 60 * 6;
 const SCRIPT_PANEL_HEIGHT_KEY = 'noteBuilderScriptPanelHeight_v1';
@@ -268,7 +259,6 @@ let pendingRecentPatientsForDrive = null;
 let recentPatientsDriveTimer = null;
 let lastRecentPatientsDriveQueuedAt = 0;
 const driveQueuedChecksums = new Map();
-let driveCleanupRunning = false;
 let driveRepairRunning = false;
 let draftLocalDirty = false;
 let draftLocalLastInputAt = 0;
@@ -958,27 +948,6 @@ function ensureDriveIdentityAligned(healthState = null) {
   setDriveMeta(meta);
   updateDriveStatusBadge(meta);
   return false;
-}
-
-function getDriveAutoCleanupMeta() {
-  const fallback = { lastAttemptAt: 0, lastMovedCount: 0, lastError: '' };
-  const parsed = getStorageJSON(DRIVE_AUTO_CLEANUP_META_KEY, fallback);
-  if (!parsed || typeof parsed !== 'object') return { ...fallback };
-  return {
-    ...fallback,
-    ...parsed,
-    lastAttemptAt: Number(parsed.lastAttemptAt) || 0,
-    lastMovedCount: Number(parsed.lastMovedCount) || 0,
-    lastError: String(parsed.lastError || ''),
-  };
-}
-
-function setDriveAutoCleanupMeta(meta) {
-  setStorageJSON(DRIVE_AUTO_CLEANUP_META_KEY, {
-    lastAttemptAt: Number(meta && meta.lastAttemptAt) || 0,
-    lastMovedCount: Number(meta && meta.lastMovedCount) || 0,
-    lastError: String((meta && meta.lastError) || ''),
-  });
 }
 
 function getDriveRevisions() {
@@ -2052,154 +2021,10 @@ async function verifyDriveRootPreflight(healthState = null) {
   return true;
 }
 
-async function attemptDriveAutoCleanup() {
-  // Cleanup is manual and snapshot-gated in production to avoid accidental data loss.
-  return;
-}
-
 function setDriveCleanupStatus(message, isError = false) {
   if (!els.driveCleanupStatus) return;
   els.driveCleanupStatus.textContent = String(message || '');
   els.driveCleanupStatus.classList.toggle('drive-cleanup-error', Boolean(isError));
-}
-
-function setDriveCleanupButtonState(running, label = '') {
-  if (!els.driveCleanupBtn) return;
-  els.driveCleanupBtn.disabled = Boolean(running);
-  els.driveCleanupBtn.textContent = label || (running ? 'Running Full Purge...' : 'Preview + Apply Full Purge');
-}
-
-function setDriveSnapshotButtonState(running, label = '') {
-  if (!els.driveSnapshotBtn) return;
-  els.driveSnapshotBtn.disabled = Boolean(running);
-  els.driveSnapshotBtn.textContent = label || (running ? 'Creating Snapshot...' : 'Snapshot');
-}
-
-async function runDriveSnapshot() {
-  if (!isDriveSyncEnabled()) {
-    setDriveCleanupStatus('Drive sync is disabled, so snapshot is unavailable.', true);
-    return null;
-  }
-
-  setDriveSnapshotButtonState(true, 'Creating Snapshot...');
-  try {
-    const snapshot = await callDriveEndpoint('cleanup.snapshot', {
-      maxItems: DRIVE_CLEANUP_MAX_ITEMS,
-    });
-    const fileName = String(snapshot && snapshot.snapshotFileName || '').trim();
-    const fileUrl = String(snapshot && snapshot.snapshotFileUrl || '').trim();
-    setDriveCleanupStatus(
-      fileUrl
-        ? `Snapshot created: ${fileName || 'snapshot file'} (${fileUrl}).`
-        : `Snapshot created: ${fileName || 'cleanup snapshot'}.`,
-    );
-    return snapshot;
-  } catch (error) {
-    const message = String(error && error.message ? error.message : error);
-    setDriveCleanupStatus(`Snapshot failed: ${message}`, true);
-    throw error;
-  } finally {
-    setDriveSnapshotButtonState(false);
-  }
-}
-
-async function runManualDriveCleanup() {
-  if (driveCleanupRunning) return;
-  if (!isDriveSyncEnabled()) {
-    setDriveCleanupStatus('Drive sync is disabled, so cleanup is unavailable.', true);
-    return;
-  }
-
-  driveCleanupRunning = true;
-  setDriveCleanupButtonState(true, 'Running Snapshot...');
-  setDriveSnapshotButtonState(true, 'Snapshot Locked');
-  setDriveCleanupStatus('Creating safety snapshot before cleanup...');
-
-  try {
-    const snapshot = await callDriveEndpoint('cleanup.snapshot', {
-      maxItems: DRIVE_CLEANUP_MAX_ITEMS,
-    });
-    const snapshotLabel = String(snapshot && snapshot.snapshotFileName || '').trim() || 'cleanup snapshot';
-    setDriveCleanupStatus(`Snapshot complete (${snapshotLabel}). Scanning My Drive for cleanup candidates...`);
-
-    setDriveCleanupButtonState(true, 'Scanning My Drive...');
-    const preview = await callDriveEndpoint('cleanup.preview', {
-      maxItems: DRIVE_CLEANUP_MAX_ITEMS,
-      sampleSize: 20,
-    });
-    const previewTotal = Number(preview && preview.candidateCount) || 0;
-    if (previewTotal <= 0) {
-      setDriveCleanupStatus(`No cleanup candidates found in My Drive. Snapshot saved: ${snapshotLabel}.`);
-      return;
-    }
-
-    const summaryGroups = preview && preview.summary && Array.isArray(preview.summary.topGroups)
-      ? preview.summary.topGroups.slice(0, 5)
-      : [];
-    const previewSummary = summaryGroups.length
-      ? summaryGroups.map((entry) => `${entry.key}=${entry.count}`).join(', ')
-      : 'no group summary';
-    const proceed = window.confirm(
-      `Snapshot: ${snapshotLabel}\n\nFound ${previewTotal} My Drive cleanup candidates.\n\nTop groups: ${previewSummary}\n\n`
-      + 'Apply FULL purge (TRASH) in batches now?',
-    );
-    if (!proceed) {
-      setDriveCleanupStatus('Cleanup canceled.');
-      return;
-    }
-
-    let trashedTotal = 0;
-    let processedTotal = 0;
-    let batchCount = 0;
-    let remainingCount = previewTotal;
-    let totalErrors = 0;
-
-    for (let batch = 1; batch <= DRIVE_MANUAL_CLEANUP_MAX_ROUNDS * 20; batch += 1) {
-      setDriveCleanupButtonState(true, `Applying purge... (${batch})`);
-      const applyResult = await callDriveEndpoint('cleanup.apply', {
-        maxItems: DRIVE_CLEANUP_MAX_ITEMS,
-        batchSize: DRIVE_CLEANUP_APPLY_BATCH_SIZE,
-      });
-      const trashedThisBatch = Number(applyResult && applyResult.trashedCount) || 0;
-      const processedThisBatch = Number(applyResult && applyResult.processedCount) || 0;
-      remainingCount = Number(applyResult && applyResult.remainingCount) || 0;
-      const errorsThisBatch = Array.isArray(applyResult && applyResult.errors) ? applyResult.errors.length : 0;
-      batchCount = batch;
-      trashedTotal += trashedThisBatch;
-      processedTotal += processedThisBatch;
-      totalErrors += errorsThisBatch;
-
-      setDriveCleanupStatus(
-        `Cleanup batch ${batch}: trashed ${trashedThisBatch}, processed ${processedThisBatch}, remaining ${remainingCount}${errorsThisBatch ? `, errors ${errorsThisBatch}` : ''}.`,
-        errorsThisBatch > 0,
-      );
-
-      if (remainingCount <= 0 || processedThisBatch <= 0) {
-        break;
-      }
-    }
-
-    setDriveCleanupButtonState(true, 'Verifying cleanup...');
-    const finalPreview = await callDriveEndpoint('cleanup.preview', {
-      maxItems: DRIVE_CLEANUP_MAX_ITEMS,
-      sampleSize: 10,
-    });
-    const finalRemaining = Number(finalPreview && finalPreview.candidateCount) || 0;
-
-    setDriveCleanupStatus(
-      `Cleanup complete: trashed ${trashedTotal} item(s) in ${batchCount} batch(es), processed ${processedTotal}. Remaining candidates: ${finalRemaining}.${totalErrors ? ` Errors: ${totalErrors}.` : ''}`,
-      totalErrors > 0,
-    );
-
-    runWhenIdle(() => runDriveSyncCycle(false));
-  } catch (error) {
-    const message = String(error && error.message ? error.message : error);
-    setDriveCleanupStatus(`Cleanup failed: ${message}`, true);
-  } finally {
-    driveCleanupRunning = false;
-    setDriveSnapshotButtonState(false);
-    setDriveCleanupButtonState(false);
-  }
 }
 
 async function runDriveSyncCycle(force = false) {
@@ -2330,8 +2155,6 @@ async function runDriveSyncCycle(force = false) {
       await pullDriveManifestAndDraft(force);
     }
 
-    await attemptDriveAutoCleanup();
-
     await flushDriveQueue();
     tryApplyPendingRemoteDraft();
 
@@ -2394,12 +2217,6 @@ function initDriveSync() {
   state.driveResolvedUserEmail = String(getStorageJSON(DRIVE_RESOLVED_USER_EMAIL_KEY, '') || '').trim().toLowerCase();
   updateDriveStatusBadge();
   renderDriveDiagnostics();
-  const cleanupMeta = getDriveAutoCleanupMeta();
-  if (cleanupMeta.lastError) {
-    setDriveCleanupStatus(`Last cleanup error: ${cleanupMeta.lastError}`, true);
-  } else {
-    setDriveCleanupStatus('Run Snapshot, then Preview + Apply Full Purge when My Drive needs cleanup.');
-  }
 
   if (!isDriveSyncEnabled()) {
     return;
@@ -6662,24 +6479,6 @@ function attachEventListeners() {
       if (window.confirm('Clear the current note draft? Current draft will clear, but backup snapshots will be kept.')) {
         clearAll();
       }
-    });
-  }
-
-  if (els.driveCleanupBtn) {
-    els.driveCleanupBtn.addEventListener('click', () => {
-      runManualDriveCleanup();
-    });
-  }
-
-  if (els.driveSnapshotBtn) {
-    els.driveSnapshotBtn.addEventListener('click', () => {
-      runDriveSnapshot().catch(() => {});
-    });
-  }
-
-  if (els.driveDiagnosticsBtn) {
-    els.driveDiagnosticsBtn.addEventListener('click', () => {
-      openDriveDiagnostics();
     });
   }
 
