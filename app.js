@@ -683,9 +683,8 @@ function getDriveConfig() {
   const query = typeof window !== 'undefined' ? new URLSearchParams(window.location.search || '') : null;
   const queryUserEmail = query ? String(query.get('driveUserEmail') || '').trim().toLowerCase() : '';
   const storedUserEmail = String(getStorageJSON(DRIVE_USER_EMAIL_KEY, '') || '').trim().toLowerCase();
-  const resolvedUserEmail = String(getStorageJSON(DRIVE_RESOLVED_USER_EMAIL_KEY, '') || '').trim().toLowerCase();
-  // Respect explicit runtime identity first (query or stored). Resolved identity is advisory.
-  const userEmail = queryUserEmail || storedUserEmail || resolvedUserEmail || '';
+  // Never source the write identity from backend-resolved identity.
+  const userEmail = queryUserEmail || storedUserEmail || '';
   if (userEmail && userEmail !== storedUserEmail) {
     setStorageJSON(DRIVE_USER_EMAIL_KEY, userEmail);
   }
@@ -726,12 +725,7 @@ function driveUserKeyFromEmail(email) {
 
 function getScopedStorageUserKey() {
   const config = getDriveConfig();
-  const effectiveEmail = String(
-    config.userEmail
-    || state.driveResolvedUserEmail
-    || getStorageJSON(DRIVE_RESOLVED_USER_EMAIL_KEY, '')
-    || '',
-  ).trim().toLowerCase();
+  const effectiveEmail = String(config.userEmail || '').trim().toLowerCase();
   return driveUserKeyFromEmail(effectiveEmail) || 'anonymous';
 }
 
@@ -869,10 +863,6 @@ function setResolvedDriveUserEmail(email) {
   }
 
   setStorageJSON(DRIVE_RESOLVED_USER_EMAIL_KEY, normalized);
-  const configuredUser = getConfiguredDriveUserEmail();
-  if (!configuredUser) {
-    setStorageJSON(DRIVE_USER_EMAIL_KEY, normalized);
-  }
   state.driveResolvedUserEmail = normalized;
   return true;
 }
