@@ -141,6 +141,7 @@ const els = {
   diagBlockReason: document.getElementById('diagBlockReason'),
   diagLastError: document.getElementById('diagLastError'),
   docEndPlusMinutes: document.getElementById('docEndPlusMinutes'),
+  scriptResizeHandle: document.getElementById('scriptResizeHandle'),
 };
 
 const inputIds = [
@@ -185,6 +186,7 @@ const brandConfig = {
 };
 
 const STORAGE_KEY = 'noteBuilderDraft_v1';
+const DRAFT_SHADOW_KEY = 'noteBuilderDraftShadow_v1';
 const SNAPSHOT_KEY = 'noteBuilderSnapshots_v1';
 const MAX_SNAPSHOTS = 10;
 const CONDENSE_START_Y = 36;
@@ -203,6 +205,7 @@ const MED_AUTOSYNC_META_KEY = 'medDrawerAutoSyncMeta_v1';
 const MED_CATALOG_CHECKSUM_KEY = 'medCatalogChecksum_v1';
 const DRIVE_USER_EMAIL_KEY = 'driveSyncUserEmail_v1';
 const DRIVE_RESOLVED_USER_EMAIL_KEY = 'driveSyncResolvedUserEmail_v1';
+const DRIVE_USER_PROMPT_META_KEY = 'driveUserPromptMeta_v1';
 const DRIVE_QUEUE_KEY = 'driveSyncPendingWrites_v1';
 const DRIVE_META_KEY = 'driveSyncMeta_v1';
 const DRIVE_REVISIONS_KEY = 'driveSyncRevisions_v1';
@@ -215,6 +218,7 @@ const DRIVE_MED_RUNTIME_FALLBACKS_PATH = 'data/meds/review/runtime-fallbacks.jso
 const DRIVE_SYNC_ENTERPRISE_NAME = 'Note App';
 const DRIVE_MANIFEST_FILE = 'config/drive-manifest.json';
 const DRAFT_PERSIST_IDLE_MS = 3000;
+const REMOTE_DRAFT_APPLY_TYPING_GRACE_MS = 1800;
 const RECENT_PATIENTS_DRIVE_MIN_INTERVAL_MS = 90000;
 const DRIVE_AUTO_CLEANUP_INTERVAL_MS = 1000 * 60 * 60 * 24;
 const DRIVE_MANUAL_CLEANUP_MAX_ROUNDS = 8;
@@ -222,6 +226,10 @@ const DRIVE_CLEANUP_APPLY_BATCH_SIZE = 250;
 const DRIVE_CLEANUP_MAX_ITEMS = 60000;
 const DRIVE_AUTO_REPAIR_COOLDOWN_MS = 1000 * 60 * 5;
 const MEDICATION_FALLBACK_CACHE_TTL_MS = 1000 * 60 * 60 * 6;
+const SCRIPT_PANEL_HEIGHT_KEY = 'noteBuilderScriptPanelHeight_v1';
+const SCRIPT_PANEL_DEFAULT_HEIGHT = 760;
+const SCRIPT_PANEL_MIN_HEIGHT = 260;
+const SCRIPT_PANEL_VIEWPORT_BOTTOM_GAP = 220;
 const MEDICATION_TERM_QUALIFIER_REGEX = /\b(?:xr|er|sr|dr|ir|odt|xl|hcl|hydrochloride|fumarate|succinate|maleate|tartrate|mesylate|sodium|phosphate|capsule|capsules|tablet|tablets|solution|extended release|immediate release)\b/gi;
 const MEDICATION_PEDIATRIC_TEXT_REGEX = /\b(?:pediatric|paediatric|child|children|adolescent|adolescents|teen|teenager|teenagers|infant|infants|neonate|neonates|newborn|newborns|under\s*18|younger than 18|ages?\s*\d{1,2}\s*(?:-|to)\s*\d{1,2}|mg\/kg|mcg\/kg|mg\/kg\/day|mcg\/kg\/day)\b/i;
 const THERAPY_TIER_MINUTES = {
@@ -261,6 +269,12 @@ let lastRecentPatientsDriveQueuedAt = 0;
 const driveQueuedChecksums = new Map();
 let driveCleanupRunning = false;
 let driveRepairRunning = false;
+let draftLocalDirty = false;
+let draftLocalLastInputAt = 0;
+let pendingRemoteDraft = null;
+let applyingPendingRemoteDraft = false;
+let driveIdentityPromptRunning = false;
+let scriptResizeState = null;
 
 function getEl(id) {
   return document.getElementById(id);
@@ -344,6 +358,93 @@ function clamp(value, min, max) {
   return Math.min(max, Math.max(min, num));
 }
 
+function getScriptPanelMaxHeight() {
+  const viewportHeight = Number(window.innerHeight) || 0;
+  return Math.max(SCRIPT_PANEL_MIN_HEIGHT, viewportHeight - SCRIPT_PANEL_VIEWPORT_BOTTOM_GAP);
+}
+
+function applyScriptPanelHeight(height, options = {}) {
+  if (!els.scriptPanel) return;
+  const { persist = true } = options;
+  const clampedHeight = Math.round(clamp(height, SCRIPT_PANEL_MIN_HEIGHT, getScriptPanelMaxHeight()));
+  els.scriptPanel.style.setProperty('--script-panel-height', `${clampedHeight}px`);
+  if (persist) {
+    setStorageJSON(SCRIPT_PANEL_HEIGHT_KEY, clampedHeight);
+  }
+}
+
+function hydrateScriptPanelHeightPreference() {
+  const stored = Number(getStorageJSON(SCRIPT_PANEL_HEIGHT_KEY, SCRIPT_PANEL_DEFAULT_HEIGHT));
+  const preferred = Number.isFinite(stored) && stored > 0 ? stored : SCRIPT_PANEL_DEFAULT_HEIGHT;
+  applyScriptPanelHeight(preferred, { persist: false });
+}
+
+function clearScriptResizeState() {
+  if (!scriptResizeState) return;
+  const handle = els.scriptResizeHandle;
+  if (handle && scriptResizeState.pointerId != null && typeof handle.releasePointerCapture === 'function') {
+    try {
+      handle.releasePointerCapture(scriptResizeState.pointerId);
+    } catch (error) {
+      // no-op
+    }
+  }
+  scriptResizeState = null;
+  document.body.classList.remove('script-resize-active');
+}
+
+function initScriptPanelResizer() {
+  if (!els.scriptPanel) return;
+
+  hydrateScriptPanelHeightPreference();
+  const handle = els.scriptResizeHandle;
+  if (!handle) return;
+
+  handle.addEventListener('pointerdown', (event) => {
+    if (event.pointerType !== 'touch' && event.button !== 0) return;
+    const scriptBody = els.scriptPanel ? els.scriptPanel.querySelector('.script-body') : null;
+    if (!scriptBody) return;
+    const startHeight = scriptBody.getBoundingClientRect().height;
+    scriptResizeState = {
+      pointerId: event.pointerId,
+      startY: event.clientY,
+      startHeight,
+    };
+    if (typeof handle.setPointerCapture === 'function') {
+      handle.setPointerCapture(event.pointerId);
+    }
+    document.body.classList.add('script-resize-active');
+    event.preventDefault();
+  });
+
+  handle.addEventListener('pointermove', (event) => {
+    if (!scriptResizeState || event.pointerId !== scriptResizeState.pointerId) return;
+    const delta = event.clientY - scriptResizeState.startY;
+    applyScriptPanelHeight(scriptResizeState.startHeight + delta, { persist: true });
+    event.preventDefault();
+  });
+
+  handle.addEventListener('pointerup', (event) => {
+    if (!scriptResizeState || event.pointerId !== scriptResizeState.pointerId) return;
+    clearScriptResizeState();
+  });
+
+  handle.addEventListener('pointercancel', () => {
+    clearScriptResizeState();
+  });
+
+  handle.addEventListener('dblclick', () => {
+    localStorage.removeItem(SCRIPT_PANEL_HEIGHT_KEY);
+    applyScriptPanelHeight(SCRIPT_PANEL_DEFAULT_HEIGHT, { persist: false });
+  });
+
+  window.addEventListener('resize', () => {
+    const stored = Number(getStorageJSON(SCRIPT_PANEL_HEIGHT_KEY, SCRIPT_PANEL_DEFAULT_HEIGHT));
+    const preferred = Number.isFinite(stored) && stored > 0 ? stored : SCRIPT_PANEL_DEFAULT_HEIGHT;
+    applyScriptPanelHeight(preferred, { persist: false });
+  });
+}
+
 function setActiveByData(selector, key, value) {
   document.querySelectorAll(selector).forEach((btn) => {
     const isActive = btn.dataset[key] === value;
@@ -404,15 +505,192 @@ function setStorageJSON(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
 }
 
+function isValidEmailFormat(value) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || '').trim().toLowerCase());
+}
+
+function getConfiguredDriveUserEmail() {
+  return String(getStorageJSON(DRIVE_USER_EMAIL_KEY, '') || '').trim().toLowerCase();
+}
+
+function getDrivePromptMeta() {
+  const fallback = {
+    lastPromptAt: 0,
+    lastCancelAt: 0,
+    lastInvalidAt: 0,
+    lastProvidedAt: 0,
+    lastProvidedEmail: '',
+  };
+  const parsed = getStorageJSON(DRIVE_USER_PROMPT_META_KEY, fallback);
+  if (!parsed || typeof parsed !== 'object') return { ...fallback };
+  return { ...fallback, ...parsed };
+}
+
+function setDrivePromptMeta(meta) {
+  setStorageJSON(DRIVE_USER_PROMPT_META_KEY, meta && typeof meta === 'object' ? meta : {});
+}
+
+function maybePromptForDriveUserEmail(reason = '', options = {}) {
+  const { force = false } = options;
+  if (driveIdentityPromptRunning) return false;
+
+  const meta = getDrivePromptMeta();
+  const now = Date.now();
+  if (!force && meta.lastPromptAt && (now - meta.lastPromptAt) < 45000) {
+    return false;
+  }
+
+  driveIdentityPromptRunning = true;
+  try {
+    const message = `${reason ? `${reason}\n\n` : ''}Enter your work email to enable per-user Drive draft sync:`;
+    const existing = getConfiguredDriveUserEmail() || state.driveResolvedUserEmail || '';
+    const raw = window.prompt(message, existing);
+    const nextMeta = { ...meta, lastPromptAt: now };
+
+    if (raw == null) {
+      nextMeta.lastCancelAt = now;
+      setDrivePromptMeta(nextMeta);
+      return false;
+    }
+
+    const normalized = String(raw || '').trim().toLowerCase();
+    if (!isValidEmailFormat(normalized)) {
+      nextMeta.lastInvalidAt = now;
+      setDrivePromptMeta(nextMeta);
+      window.alert('A valid work email is required for Drive sync.');
+      return false;
+    }
+
+    setStorageJSON(DRIVE_USER_EMAIL_KEY, normalized);
+    if (state.driveResolvedUserEmail && state.driveResolvedUserEmail !== normalized) {
+      clearResolvedDriveUserEmail();
+    }
+    nextMeta.lastProvidedAt = now;
+    nextMeta.lastProvidedEmail = normalized;
+    setDrivePromptMeta(nextMeta);
+    return true;
+  } finally {
+    driveIdentityPromptRunning = false;
+  }
+}
+
+function getDraftSavedAtMs(payload) {
+  if (!payload || typeof payload !== 'object') return 0;
+  const topLevel = Date.parse(String(payload.savedAt || '')) || 0;
+  const nested = payload.draft && typeof payload.draft === 'object'
+    ? (Date.parse(String(payload.draft.savedAt || '')) || 0)
+    : 0;
+  return Math.max(topLevel, nested);
+}
+
+function getDraftShadowTimestampMs() {
+  const shadow = getStorageJSON(getDraftShadowStorageKey(), null);
+  if (!shadow || typeof shadow !== 'object') return 0;
+  return Math.max(
+    Date.parse(String(shadow.savedAt || '')) || 0,
+    getDraftSavedAtMs(shadow.draft || null),
+  );
+}
+
+function getLatestLocalDraftTimestampMs() {
+  const localDraft = getStorageJSON(getDraftStorageKey(), null);
+  return Math.max(getDraftSavedAtMs(localDraft), getDraftShadowTimestampMs());
+}
+
+function markDraftLocalMutation() {
+  draftLocalDirty = true;
+  draftLocalLastInputAt = Date.now();
+}
+
+function clearDraftLocalMutation() {
+  draftLocalDirty = false;
+  draftLocalLastInputAt = 0;
+}
+
+function hasPendingDraftWriteInQueue() {
+  const queue = getDriveQueue();
+  return queue.some((item) => item && item.type === 'file.put' && isDraftPath(item.path));
+}
+
+function shouldDeferRemoteDraftApply() {
+  if (draftLocalDirty) return true;
+  if (draftPersistTimer) return true;
+  if (hasPendingDraftWriteInQueue()) return true;
+  if (draftLocalLastInputAt && (Date.now() - draftLocalLastInputAt) < REMOTE_DRAFT_APPLY_TYPING_GRACE_MS) return true;
+  return false;
+}
+
+function setDriveRevisionForPath(path, revision) {
+  const safePath = String(path || '').trim();
+  const safeRevision = String(revision || '').trim();
+  if (!safePath || !safeRevision) return;
+  const revisions = getDriveRevisions();
+  revisions[safePath] = safeRevision;
+  setDriveRevisions(revisions);
+}
+
+function queuePendingRemoteDraft(remoteDraft, options = {}) {
+  if (!remoteDraft || typeof remoteDraft !== 'object' || !remoteDraft.inputs) return;
+  const safeDraft = JSON.parse(JSON.stringify(remoteDraft));
+  const savedAtIso = String(options.savedAt || safeDraft.savedAt || new Date().toISOString());
+  pendingRemoteDraft = {
+    draft: safeDraft,
+    savedAtIso,
+    savedAtMs: Date.parse(savedAtIso) || 0,
+    path: String(options.path || '').trim(),
+    revision: String(options.revision || '').trim(),
+  };
+  window.setTimeout(() => {
+    tryApplyPendingRemoteDraft();
+  }, REMOTE_DRAFT_APPLY_TYPING_GRACE_MS + 120);
+}
+
+function applyRemoteDraftPayload(remoteDraft, options = {}) {
+  if (!remoteDraft || typeof remoteDraft !== 'object' || !remoteDraft.inputs) return false;
+  applyDraft(remoteDraft);
+  syncToggleStates();
+  refreshUI(false);
+  clearDraftLocalMutation();
+  localStorage.removeItem(getDraftShadowStorageKey());
+  state.saveUnlocked = hasValidStartTimeForSaveUnlock();
+  saveDraft({ skipDrive: true, flush: true, force: true, markDirty: false });
+  if (options.path && options.revision) {
+    setDriveRevisionForPath(options.path, options.revision);
+  }
+  pendingRemoteDraft = null;
+  return true;
+}
+
+function tryApplyPendingRemoteDraft() {
+  if (!pendingRemoteDraft || applyingPendingRemoteDraft) return false;
+  if (shouldDeferRemoteDraftApply()) return false;
+
+  const localSavedAt = getLatestLocalDraftTimestampMs();
+  const remoteSavedAt = pendingRemoteDraft.savedAtMs || 0;
+  if (!pendingRemoteDraft.draft || (localSavedAt && remoteSavedAt && remoteSavedAt <= localSavedAt)) {
+    pendingRemoteDraft = null;
+    return false;
+  }
+
+  applyingPendingRemoteDraft = true;
+  try {
+    return applyRemoteDraftPayload(pendingRemoteDraft.draft, {
+      path: pendingRemoteDraft.path,
+      revision: pendingRemoteDraft.revision,
+    });
+  } finally {
+    applyingPendingRemoteDraft = false;
+  }
+}
+
 function getDriveConfig() {
   const dataset = els.body ? els.body.dataset : {};
   const query = typeof window !== 'undefined' ? new URLSearchParams(window.location.search || '') : null;
   const queryUserEmail = query ? String(query.get('driveUserEmail') || '').trim().toLowerCase() : '';
   const storedUserEmail = String(getStorageJSON(DRIVE_USER_EMAIL_KEY, '') || '').trim().toLowerCase();
   const resolvedUserEmail = String(getStorageJSON(DRIVE_RESOLVED_USER_EMAIL_KEY, '') || '').trim().toLowerCase();
-  // Do not trust static HTML dataset identity in production. Use resolved/session identity
-  // first, with optional explicit query override for break-glass troubleshooting.
-  const userEmail = resolvedUserEmail || queryUserEmail || storedUserEmail || '';
+  // Respect explicit runtime identity first (query or stored). Resolved identity is advisory.
+  const userEmail = queryUserEmail || storedUserEmail || resolvedUserEmail || '';
   if (userEmail && userEmail !== storedUserEmail) {
     setStorageJSON(DRIVE_USER_EMAIL_KEY, userEmail);
   }
@@ -447,8 +725,8 @@ function driveUserKeyFromEmail(email) {
 function getScopedStorageUserKey() {
   const config = getDriveConfig();
   const effectiveEmail = String(
-    state.driveResolvedUserEmail
-    || config.userEmail
+    config.userEmail
+    || state.driveResolvedUserEmail
     || getStorageJSON(DRIVE_RESOLVED_USER_EMAIL_KEY, '')
     || '',
   ).trim().toLowerCase();
@@ -457,6 +735,10 @@ function getScopedStorageUserKey() {
 
 function getDraftStorageKey() {
   return `${STORAGE_KEY}:${getScopedStorageUserKey()}`;
+}
+
+function getDraftShadowStorageKey() {
+  return `${DRAFT_SHADOW_KEY}:${getScopedStorageUserKey()}`;
 }
 
 function getSnapshotStorageKey() {
@@ -490,8 +772,10 @@ function migrateAnonymousScopedStorageToResolvedUser() {
   }
 
   const anonymousDraftKey = `${STORAGE_KEY}:anonymous`;
+  const anonymousShadowDraftKey = `${DRAFT_SHADOW_KEY}:anonymous`;
   const anonymousSnapshotKey = `${SNAPSHOT_KEY}:anonymous`;
   const resolvedDraftKey = getDraftStorageKey();
+  const resolvedShadowDraftKey = getDraftShadowStorageKey();
   const resolvedSnapshotKey = getSnapshotStorageKey();
 
   const anonymousDraft = localStorage.getItem(anonymousDraftKey);
@@ -504,7 +788,13 @@ function migrateAnonymousScopedStorageToResolvedUser() {
     localStorage.setItem(resolvedSnapshotKey, anonymousSnapshots);
   }
 
+  const anonymousShadowDraft = localStorage.getItem(anonymousShadowDraftKey);
+  if (anonymousShadowDraft && !localStorage.getItem(resolvedShadowDraftKey)) {
+    localStorage.setItem(resolvedShadowDraftKey, anonymousShadowDraft);
+  }
+
   localStorage.removeItem(anonymousDraftKey);
+  localStorage.removeItem(anonymousShadowDraftKey);
   localStorage.removeItem(anonymousSnapshotKey);
 }
 
@@ -577,18 +867,17 @@ function setResolvedDriveUserEmail(email) {
   }
 
   setStorageJSON(DRIVE_RESOLVED_USER_EMAIL_KEY, normalized);
-  setStorageJSON(DRIVE_USER_EMAIL_KEY, normalized);
+  const configuredUser = getConfiguredDriveUserEmail();
+  if (!configuredUser) {
+    setStorageJSON(DRIVE_USER_EMAIL_KEY, normalized);
+  }
   state.driveResolvedUserEmail = normalized;
   return true;
 }
 
 function clearResolvedDriveUserEmail() {
   const previous = String(getStorageJSON(DRIVE_RESOLVED_USER_EMAIL_KEY, '') || '').trim().toLowerCase();
-  const previousStored = String(getStorageJSON(DRIVE_USER_EMAIL_KEY, '') || '').trim().toLowerCase();
   localStorage.removeItem(DRIVE_RESOLVED_USER_EMAIL_KEY);
-  if (previousStored && previousStored === previous) {
-    localStorage.removeItem(DRIVE_USER_EMAIL_KEY);
-  }
   state.driveResolvedUserEmail = '';
   return Boolean(previous);
 }
@@ -634,6 +923,29 @@ function applyDriveHealthState(healthPayload) {
     canonicalRootId,
     userChanged,
   };
+}
+
+function ensureDriveIdentityAligned(healthState = null) {
+  const configuredUser = String(getDriveConfig().userEmail || '').trim().toLowerCase();
+  const resolvedUser = String(
+    (healthState && healthState.resolvedUser)
+    || state.driveResolvedUserEmail
+    || '',
+  ).trim().toLowerCase();
+
+  if (!configuredUser || !resolvedUser || configuredUser === resolvedUser) {
+    return true;
+  }
+
+  const reason = `Drive identity mismatch: configured user (${configuredUser}) differs from backend resolved user (${resolvedUser}). Redeploy Apps Script as "User accessing the web app" or sign into the correct account.`;
+  pendingRemoteDraft = null;
+  setDriveWriteBlock(true, reason, 'identity_mismatch');
+  const meta = getDriveMeta();
+  meta.connection = navigator.onLine ? 'error' : 'offline';
+  meta.lastError = reason;
+  setDriveMeta(meta);
+  updateDriveStatusBadge(meta);
+  return false;
 }
 
 function getDriveAutoCleanupMeta() {
@@ -736,6 +1048,19 @@ function updateDriveStatusBadge(meta = getDriveMeta()) {
 
   if (meta.connection === 'error') {
     setDriveStatusBadge(`Drive: Sync error (${queued} queued)`, 'error', meta.lastError || 'Drive endpoint unavailable.');
+    renderDriveDiagnostics();
+    return;
+  }
+
+  if (pendingRemoteDraft) {
+    const remoteLabel = pendingRemoteDraft.savedAtIso
+      ? new Date(pendingRemoteDraft.savedAtIso).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      : 'unknown';
+    setDriveStatusBadge(
+      'Drive: Remote update queued',
+      'syncing',
+      `A newer remote draft (${remoteLabel}) is queued and will apply after local edits settle.`,
+    );
     renderDriveDiagnostics();
     return;
   }
@@ -1095,40 +1420,36 @@ function parseJsonOrNull(text) {
 function mergeDraftConflictPayload(localContent, remoteContent) {
   const localPayload = parseJsonOrNull(localContent);
   const remotePayload = parseJsonOrNull(remoteContent);
-  if (!localPayload || !remotePayload) return null;
-
-  const localDraft = localPayload.draft || localPayload;
-  const remoteDraft = remotePayload.draft || remotePayload;
-
-  if (!localDraft || !remoteDraft || !localDraft.inputs || !remoteDraft.inputs) {
-    return null;
+  if (!localPayload && !remotePayload) return null;
+  if (!localPayload && remotePayload) {
+    const content = String(remoteContent || '').trim() ? String(remoteContent) : JSON.stringify(remotePayload, null, 2);
+    return {
+      content,
+      checksum: hashStringChecksum(content),
+      winner: 'remote',
+    };
+  }
+  if (localPayload && !remotePayload) {
+    const content = String(localContent || '').trim() ? String(localContent) : JSON.stringify(localPayload, null, 2);
+    return {
+      content,
+      checksum: hashStringChecksum(content),
+      winner: 'local',
+    };
   }
 
-  const merged = {
-    savedAt: new Date().toISOString(),
-    draft: {
-      state: {
-        ...(remoteDraft.state || {}),
-        ...(localDraft.state || {}),
-      },
-      inputs: {
-        ...(remoteDraft.inputs || {}),
-      },
-    },
-    mergedAt: new Date().toISOString(),
-    mergedBy: 'note-builder-conflict-merge',
-  };
+  const localTs = getDraftSavedAtMs(localPayload);
+  const remoteTs = getDraftSavedAtMs(remotePayload);
+  const winner = remoteTs > localTs ? 'remote' : 'local';
+  const winnerPayload = winner === 'remote' ? remotePayload : localPayload;
+  const winnerContent = winner === 'remote'
+    ? (String(remoteContent || '').trim() ? String(remoteContent) : JSON.stringify(winnerPayload, null, 2))
+    : (String(localContent || '').trim() ? String(localContent) : JSON.stringify(winnerPayload, null, 2));
 
-  inputIds.forEach((id) => {
-    const localValue = Object.prototype.hasOwnProperty.call(localDraft.inputs, id) ? localDraft.inputs[id] : '';
-    const remoteValue = Object.prototype.hasOwnProperty.call(remoteDraft.inputs, id) ? remoteDraft.inputs[id] : '';
-    merged.draft.inputs[id] = localValue !== '' && localValue != null ? localValue : (remoteValue || '');
-  });
-
-  const mergedContent = JSON.stringify(merged, null, 2);
   return {
-    content: mergedContent,
-    checksum: hashStringChecksum(mergedContent),
+    content: winnerContent,
+    checksum: hashStringChecksum(winnerContent),
+    winner,
   };
 }
 
@@ -1251,30 +1572,29 @@ async function pullDriveDraft(force = false) {
   const remoteDraft = payload.draft || payload;
   if (!remoteDraft || typeof remoteDraft !== 'object' || !remoteDraft.inputs) return false;
 
-  const localDraft = getStorageJSON(getDraftStorageKey(), null);
-  const localSavedAt = localDraft && localDraft.savedAt ? Date.parse(localDraft.savedAt) : 0;
-  const remoteSavedAt = payload.savedAt ? Date.parse(payload.savedAt) : 0;
+  const localSavedAt = getLatestLocalDraftTimestampMs();
+  const remoteSavedAt = getDraftSavedAtMs(payload);
 
   if (!force && localSavedAt && remoteSavedAt && remoteSavedAt <= localSavedAt) {
-    if (file.revision) {
-      const revisions = getDriveRevisions();
-      revisions[path] = String(file.revision);
-      setDriveRevisions(revisions);
-    }
+    if (file.revision) setDriveRevisionForPath(path, file.revision);
     return false;
   }
 
-  applyDraft(remoteDraft);
-  syncToggleStates();
-  refreshUI(false);
-  state.saveUnlocked = hasValidStartTimeForSaveUnlock();
-  saveDraft({ skipDrive: true, flush: true, force: true });
-
-  if (file.revision) {
-    const revisions = getDriveRevisions();
-    revisions[path] = String(file.revision);
-    setDriveRevisions(revisions);
+  const remoteSavedAtIso = String(payload.savedAt || remoteDraft.savedAt || new Date().toISOString());
+  if (shouldDeferRemoteDraftApply()) {
+    queuePendingRemoteDraft(remoteDraft, {
+      path,
+      revision: file.revision || '',
+      savedAt: remoteSavedAtIso,
+    });
+    if (file.revision) setDriveRevisionForPath(path, file.revision);
+    return false;
   }
+
+  applyRemoteDraftPayload(remoteDraft, {
+    path,
+    revision: file.revision || '',
+  });
 
   return true;
 }
@@ -1509,6 +1829,25 @@ async function flushDriveQueue() {
             let merged = null;
             if (isDraftPath(item.path)) {
               merged = mergeDraftConflictPayload(item.content, response.currentContent || '');
+              if (merged && merged.winner === 'remote') {
+                const remotePayload = parseJsonOrNull(response.currentContent || merged.content || '');
+                const remoteDraft = remotePayload ? (remotePayload.draft || remotePayload) : null;
+                if (remoteDraft && remoteDraft.inputs) {
+                  queuePendingRemoteDraft(remoteDraft, {
+                    path: item.path,
+                    revision: response.currentRevision || '',
+                    savedAt: (remotePayload && remotePayload.savedAt) || '',
+                  });
+                }
+                if (response.currentRevision) {
+                  revisions[item.path] = String(response.currentRevision);
+                  setDriveRevisions(revisions);
+                }
+                queue.shift();
+                setDriveQueue(queue);
+                tryApplyPendingRemoteDraft();
+                continue;
+              }
             } else if (isRecentPatientsPath(item.path)) {
               merged = mergeRecentPatientsConflictPayload(item.content, response.currentContent || '');
             } else if (isRuntimeFallbacksPath(item.path)) {
@@ -1558,6 +1897,7 @@ async function flushDriveQueue() {
         updatedMeta.lastError = '';
         setDriveMeta(updatedMeta);
         updateDriveStatusBadge(updatedMeta);
+        tryApplyPendingRemoteDraft();
       } catch (error) {
         queue[0] = {
           ...item,
@@ -1581,6 +1921,7 @@ async function flushDriveQueue() {
     }
   } finally {
     driveQueueRunning = false;
+    tryApplyPendingRemoteDraft();
   }
 }
 
@@ -1854,13 +2195,36 @@ async function runDriveSyncCycle(force = false) {
       setDriveQueue([]);
       setDriveRevisions({});
       driveQueuedChecksums.clear();
+      pendingRemoteDraft = null;
+      clearDraftLocalMutation();
       migrateAnonymousScopedStorageToResolvedUser();
       renderBackupHistory();
+    }
+
+    if (!ensureDriveIdentityAligned(healthState)) {
+      return;
     }
 
     const preflightStatus = String(healthState.preflightStatus || '').trim();
     if (preflightStatus && preflightStatus !== 'ok') {
       const reason = healthState.preflightReason || `Drive preflight returned ${preflightStatus}.`;
+
+      if (preflightStatus === 'identity_missing') {
+        const prompted = maybePromptForDriveUserEmail(reason);
+        if (prompted) {
+          const pendingMeta = getDriveMeta();
+          pendingMeta.connection = 'local';
+          pendingMeta.lastError = '';
+          setDriveMeta(pendingMeta);
+          setDriveWriteBlock(true, 'Drive identity captured. Retrying sync...', 'identity_retry');
+          updateDriveStatusBadge(pendingMeta);
+          window.setTimeout(() => {
+            runWhenIdle(() => runDriveSyncCycle(true));
+          }, 250);
+          return;
+        }
+      }
+
       setDriveWriteBlock(true, reason, preflightStatus);
 
       const now = Date.now();
@@ -1907,6 +2271,7 @@ async function runDriveSyncCycle(force = false) {
     await attemptDriveAutoCleanup();
 
     await flushDriveQueue();
+    tryApplyPendingRemoteDraft();
 
     if (state.driveWritesBlocked) {
       const blockedMeta = getDriveMeta();
@@ -1976,6 +2341,10 @@ function initDriveSync() {
 
   if (!isDriveSyncEnabled()) {
     return;
+  }
+
+  if (!getConfiguredDriveUserEmail()) {
+    maybePromptForDriveUserEmail('Drive sync requires your work email for per-user draft isolation.', { force: true });
   }
 
   setDriveWriteBlock(true, 'Drive preflight pending.', 'preflight_pending');
@@ -2557,6 +2926,7 @@ function attachTimeControlListeners() {
 
       commitTimeControlValue(id, { validateStrict: true, notify: true });
       saveDraft({ flush: true });
+      tryApplyPendingRemoteDraft();
     };
 
     hourInput.addEventListener('input', (event) => handlePartInput('hour', event));
@@ -3153,17 +3523,26 @@ function unlockSaveGateIfReady() {
 
 function persistDraftNow(options = {}) {
   const { skipDrive = false, force = false } = options;
+  const draft = buildDraftPayload();
+  const contentHash = getDraftContentHash(draft);
+
   if (!force && !unlockSaveGateIfReady()) {
+    setStorageJSON(getDraftShadowStorageKey(), {
+      savedAt: new Date().toISOString(),
+      draft,
+    });
     return false;
   }
 
-  const draft = buildDraftPayload();
-  const contentHash = getDraftContentHash(draft);
   if (!force && contentHash && latestDraftHash && contentHash === latestDraftHash) {
+    localStorage.removeItem(getDraftShadowStorageKey());
+    clearDraftLocalMutation();
+    tryApplyPendingRemoteDraft();
     return false;
   }
 
   setStorageJSON(getDraftStorageKey(), draft);
+  localStorage.removeItem(getDraftShadowStorageKey());
   queueSnapshot(draft, { skipDrive });
 
   if (!skipDrive) {
@@ -3171,6 +3550,8 @@ function persistDraftNow(options = {}) {
   }
 
   latestDraftHash = contentHash || latestDraftHash;
+  clearDraftLocalMutation();
+  tryApplyPendingRemoteDraft();
   return true;
 }
 
@@ -3188,9 +3569,6 @@ function flushDraftPersist(options = {}) {
 
 function scheduleDraftPersist(options = {}) {
   const { skipDrive = false, force = false } = options;
-  if (!force && !unlockSaveGateIfReady()) {
-    return false;
-  }
 
   pendingDraftPersistSkipDrive = Boolean(skipDrive);
 
@@ -3213,7 +3591,12 @@ function saveDraft(options = {}) {
     skipDrive = false,
     flush = false,
     force = false,
+    markDirty = false,
   } = options;
+
+  if (markDirty) {
+    markDraftLocalMutation();
+  }
 
   if (flush) {
     return flushDraftPersist({ skipDrive, force });
@@ -3230,6 +3613,9 @@ function clearDraftPersistRuntime() {
   pendingDraftPersistSkipDrive = false;
   latestDraftHash = '';
   state.saveUnlocked = false;
+  localStorage.removeItem(getDraftShadowStorageKey());
+  clearDraftLocalMutation();
+  pendingRemoteDraft = null;
 }
 
 function applyDraft(draft) {
@@ -3270,10 +3656,25 @@ function loadInitialData() {
   try {
     migrateLegacyDraftStorageToScoped();
     const rawDraft = localStorage.getItem(getDraftStorageKey());
+    const parsedDraft = rawDraft ? parseJsonOrNull(rawDraft) : null;
+    const shadowPayload = getStorageJSON(getDraftShadowStorageKey(), null);
+    const shadowDraft = shadowPayload && shadowPayload.draft ? shadowPayload.draft : null;
+    const draftTs = getDraftSavedAtMs(parsedDraft);
+    const shadowTs = Math.max(
+      Date.parse(String(shadowPayload && shadowPayload.savedAt ? shadowPayload.savedAt : '')) || 0,
+      getDraftSavedAtMs(shadowDraft),
+    );
 
-    if (rawDraft) {
-      applyDraft(JSON.parse(rawDraft));
+    if (parsedDraft && (!shadowDraft || draftTs >= shadowTs)) {
+      applyDraft(parsedDraft);
       return 'draft';
+    }
+
+    if (shadowDraft) {
+      applyDraft(shadowDraft);
+      draftLocalDirty = true;
+      draftLocalLastInputAt = Date.now();
+      return 'shadow';
     }
 
     const snapshots = loadSnapshotsFromStorage();
@@ -3294,9 +3695,10 @@ function restoreSnapshot(index) {
   if (!selected || !selected.draft) return;
 
   applyDraft(selected.draft);
+  markDraftLocalMutation();
   syncToggleStates();
   refreshUI(false);
-  saveDraft();
+  saveDraft({ markDirty: false });
 }
 
 function setCurrentModality(value, button) {
@@ -3385,7 +3787,7 @@ function setFollowupWeeks(weeks) {
   updateFollowupSchedulingUI();
   updateCompletionIndicators();
   updateExport();
-  saveDraft();
+  saveDraft({ markDirty: true });
 }
 
 function setPrnFollowup() {
@@ -3402,13 +3804,13 @@ function setPrnFollowup() {
   updateFollowupSchedulingUI();
   updateCompletionIndicators();
   updateExport();
-  saveDraft();
+  saveDraft({ markDirty: true });
 }
 
 function setPractice(practice) {
   state.practice = practice;
   setActiveByData('#practiceToggle .seg-btn', 'practice', practice);
-  refreshUI();
+  refreshUI(true, { markDirty: true });
 }
 
 function setVisitType(visitType) {
@@ -3423,7 +3825,7 @@ function setVisitType(visitType) {
     if (els.scriptToggle) els.scriptToggle.checked = false;
   }
 
-  refreshUI();
+  refreshUI(true, { markDirty: true });
 }
 
 function syncToggleStates() {
@@ -3438,7 +3840,8 @@ function syncToggleStates() {
   }
 }
 
-function refreshUI(persist = true) {
+function refreshUI(persist = true, options = {}) {
+  const { markDirty = false } = options;
   updateBranding();
   updatePracticeSections();
   updateScriptVisibility();
@@ -3451,7 +3854,7 @@ function refreshUI(persist = true) {
   renderBackupHistory();
 
   if (persist) {
-    saveDraft();
+    saveDraft({ markDirty });
   }
 }
 
@@ -3556,9 +3959,10 @@ function handleFieldMutation(id) {
     state.followModality = getValue('followModality');
   }
 
+  markDraftLocalMutation();
   updateCompletionIndicators();
   updateExport();
-  saveDraft();
+  saveDraft({ markDirty: false });
 }
 
 function attachInputListeners() {
@@ -3574,6 +3978,7 @@ function attachInputListeners() {
     element.addEventListener('change', syncFieldState);
     element.addEventListener('blur', () => {
       saveDraft({ flush: true });
+      tryApplyPendingRemoteDraft();
     });
   });
 }
@@ -6047,9 +6452,10 @@ function attachEventListeners() {
   if (els.scriptToggle) {
     els.scriptToggle.addEventListener('change', (event) => {
       state.scriptVisible = Boolean(event.target.checked);
+      markDraftLocalMutation();
       updateScriptVisibility();
       scheduleTopbarStateUpdate(true);
-      saveDraft();
+      saveDraft({ markDirty: false });
     });
   }
 
@@ -6244,6 +6650,7 @@ function init() {
   attachTimeControlListeners();
   attachInputListeners();
   attachLogoFallbacks();
+  initScriptPanelResizer();
   attachEventListeners();
   attachKeyboardShortcuts();
 
@@ -6261,7 +6668,7 @@ function init() {
   refreshUI(false);
   state.saveUnlocked = hasValidStartTimeForSaveUnlock();
 
-  if (loadedFrom !== 'none') {
+  if (loadedFrom !== 'none' && loadedFrom !== 'shadow') {
     latestDraftHash = getDraftContentHash(buildDraftPayload());
   }
 
