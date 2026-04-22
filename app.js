@@ -58,6 +58,8 @@ const els = {
   astraScreeners: document.getElementById('astraScreeners'),
   astraScreenersCompletionStatus: document.getElementById('astraScreenersCompletionStatus'),
   astraScreenersFields: document.getElementById('astraScreenersFields'),
+  astraScreeningInfo: document.getElementById('astraScreeningInfo'),
+  astraScreeningInfoCompletionStatus: document.getElementById('astraScreeningInfoCompletionStatus'),
   ebhTests: document.getElementById('ebhTests'),
   ebhTestsCompletionStatus: document.getElementById('ebhTestsCompletionStatus'),
   currentModality: document.getElementById('currentModality'),
@@ -155,6 +157,7 @@ const inputIds = [
   'pcl5',
   'mdq',
   'otherScreener',
+  'screeningInfo',
   'testDump',
   'notes',
   'followModality',
@@ -167,6 +170,7 @@ const inputIds = [
 
 const SCREENER_IDS = ['phq9', 'gad7', 'asrsA', 'asrsB', 'pcl5', 'mdq', 'otherScreener'];
 const TIME_FIELD_IDS = ['scheduledStart', 'startTime', 'followTime', 'endTime', 'docEnd'];
+const DEFAULT_APPOINTMENT_MODALITY = 'Telehealth';
 
 const brandConfig = {
   astra: {
@@ -2226,6 +2230,7 @@ function updateBranding() {
   const brand = brandConfig[state.practice];
   const isAstra = state.practice === 'astra';
   const isIntake = state.visitType === 'intake';
+  const astraGptLabel = isIntake ? 'Astra Intake GPT' : 'Astra Follow-Up GPT';
 
   els.body.dataset.practice = state.practice;
   els.body.dataset.visitType = state.visitType;
@@ -2235,7 +2240,7 @@ function updateBranding() {
 
   if (els.brandSubtitle) {
     els.brandSubtitle.textContent = isAstra
-      ? 'Readable intake/follow-up capture with a consistent Astra export format.'
+      ? `Readable intake/follow-up capture with a dedicated ${astraGptLabel} handoff.`
       : isIntake
         ? 'Readable intake capture for EBH with imported pre-visit screening support.'
         : 'Readable EBH follow-up capture with prior-plan context first.';
@@ -2272,7 +2277,7 @@ function updateBranding() {
     els.practiceModeBanner.classList.remove('hidden');
     els.practiceModeKicker.textContent = isAstra ? 'Astra Mode' : 'EBH Mode';
     els.practiceModeText.textContent = isAstra
-      ? 'Astra mode active: one GPT route for intake and follow-up with section-level completion.'
+      ? 'Astra mode active: intake and follow-up each route to their own Astra GPT with section-level completion.'
       : isIntake
         ? 'EBH intake mode active: paste imported screening output first, then document intake.'
         : 'EBH follow-up mode active: prior plan first, then follow-up note capture and handoff.';
@@ -2285,7 +2290,7 @@ function updateBranding() {
   if (els.practiceContextLabelPrimary && els.practiceContextTextPrimary) {
     els.practiceContextLabelPrimary.textContent = isAstra ? 'Astra note flow' : 'EBH note flow';
     els.practiceContextTextPrimary.textContent = isAstra
-      ? 'Astra routes both intake and follow-up exports into one GPT destination.'
+      ? `Astra routes this workflow into the ${astraGptLabel}.`
       : isIntake
         ? 'EBH intake uses imported pre-visit data before chief complaint and live notes.'
         : 'EBH follow-up uses prior-plan context before visit setup and note capture.';
@@ -2326,7 +2331,7 @@ function updateBranding() {
 
   if (els.exportSectionCopy) {
     els.exportSectionCopy.textContent = isAstra
-      ? 'Preview the structured Astra raw input live, then copy or open your target GPT.'
+      ? `Preview the structured Astra raw input live, then copy or open the ${astraGptLabel}.`
       : isIntake
         ? 'Preview the structured EBH intake raw input live, then copy or open EBH Intake GPT.'
         : 'Preview the structured EBH follow-up raw input live, then copy or open EBH Follow-Up GPT.';
@@ -2375,6 +2380,10 @@ function updatePracticeSections() {
     els.astraScreeners.classList.toggle('hidden', !(isAstra && isIntake));
   }
 
+  if (els.astraScreeningInfo) {
+    els.astraScreeningInfo.classList.toggle('hidden', !(isAstra && isIntake));
+  }
+
   if (els.ebhTests) {
     els.ebhTests.classList.toggle('hidden', !(!isAstra && isIntake));
   }
@@ -2417,10 +2426,14 @@ function scheduleTopbarStateUpdate(forceRecalc = false) {
 
 function updateActiveGptUrl() {
   let url = '';
+  const isAstra = state.practice === 'astra';
+  const isIntake = state.visitType === 'intake';
 
-  if (state.practice === 'astra') {
-    url = els.body.dataset.astraGptUrl || '';
-  } else if (state.visitType === 'intake') {
+  if (isAstra && isIntake) {
+    url = els.body.dataset.astraIntakeGptUrl || '';
+  } else if (isAstra) {
+    url = els.body.dataset.astraFollowupGptUrl || '';
+  } else if (isIntake) {
     url = els.body.dataset.ebhIntakeGptUrl || '';
   } else {
     url = els.body.dataset.ebhFollowupGptUrl || '';
@@ -2431,11 +2444,37 @@ function updateActiveGptUrl() {
   }
 
   if (els.exportHelper) {
-    els.exportHelper.textContent = state.practice === 'astra'
-      ? 'Astra mode routes to your Astra GPT for both intake and follow-up.'
-      : state.visitType === 'intake'
+    els.exportHelper.textContent = isAstra
+      ? isIntake
+        ? 'Astra intake mode routes to your Astra Intake GPT.'
+        : 'Astra follow-up mode routes to your Astra Follow-Up GPT.'
+      : isIntake
         ? 'EBH intake mode routes to your EBH Intake GPT.'
         : 'EBH follow-up mode routes to your EBH Follow-Up GPT.';
+  }
+}
+
+function getDefaultAppointmentModality() {
+  return DEFAULT_APPOINTMENT_MODALITY;
+}
+
+function applyDefaultModalities() {
+  const defaultModality = getDefaultAppointmentModality();
+
+  const currentModality = getValue('currentModality');
+  if (currentModality) {
+    state.currentModality = currentModality;
+  } else {
+    state.currentModality = defaultModality;
+    setValue('currentModality', defaultModality);
+  }
+
+  const followModality = getValue('followModality');
+  if (followModality) {
+    state.followModality = followModality;
+  } else {
+    state.followModality = defaultModality;
+    setValue('followModality', defaultModality);
   }
 }
 
@@ -2913,6 +2952,11 @@ function buildScreenersText() {
   return lines.length ? lines.join('\n') : 'No screener data entered.';
 }
 
+function buildScreeningInformationText() {
+  if (state.practice !== 'astra' || state.visitType !== 'intake') return '';
+  return getValue('screeningInfo') || 'No screening information entered.';
+}
+
 function buildVisitDetails() {
   const cc = getValue('cc');
   const ccText = cc ? `"${cc}"` : '';
@@ -2955,6 +2999,7 @@ function buildExport() {
   const notes = getValue('notes');
   const ebhTests = getValue('testDump');
   const screeners = buildScreenersText();
+  const screeningInfo = buildScreeningInformationText();
 
   if (state.practice === 'astra' && state.visitType === 'followup') {
     return [
@@ -2979,6 +3024,9 @@ function buildExport() {
       '',
       'SCREENERS',
       screeners,
+      '',
+      'SCREENING INFORMATION',
+      screeningInfo,
       '',
       'INTAKE NOTES',
       notes,
@@ -3064,6 +3112,7 @@ function evaluateCompletion() {
 
 function updateCompletionIndicators() {
   const { previsitComplete, setupComplete, notesComplete, closingComplete } = evaluateCompletion();
+  const screeningInfoComplete = isFilled('screeningInfo');
 
   setSectionCompletion(els.setupCompletionStatus, els.setupSection, setupComplete);
   setSectionCompletion(els.notesCompletionStatus, els.notesSection, notesComplete);
@@ -3079,6 +3128,12 @@ function updateCompletionIndicators() {
     setSectionCompletion(els.astraScreenersCompletionStatus, els.astraScreeners, previsitComplete);
   } else {
     setSectionCompletion(els.astraScreenersCompletionStatus, els.astraScreeners, false);
+  }
+
+  if (isVisible(els.astraScreeningInfo)) {
+    setSectionCompletion(els.astraScreeningInfoCompletionStatus, els.astraScreeningInfo, screeningInfoComplete);
+  } else {
+    setSectionCompletion(els.astraScreeningInfoCompletionStatus, els.astraScreeningInfo, false);
   }
 
   if (isVisible(els.ebhTests)) {
@@ -3761,6 +3816,8 @@ function refreshUI(persist = true, options = {}) {
   const { markDirty = false } = options;
   updateBranding();
   updatePracticeSections();
+  applyDefaultModalities();
+  syncToggleStates();
   updateScriptVisibility();
   updateActiveGptUrl();
   updateFollowupSchedulingUI();
@@ -4427,6 +4484,10 @@ function setMedicationSelection(medicationId) {
   if (!med) return;
 
   state.selectedMedicationId = med.id;
+  const selectedIndex = medicationSearchResults.findIndex((entry) => entry.id === med.id);
+  if (selectedIndex >= 0) {
+    medicationFocusedResultIndex = selectedIndex;
+  }
   addMedicationRecent(med.id);
 
   const activeFormulations = (med.formulations || []).filter((form) => form.active !== false);
@@ -4576,13 +4637,19 @@ function renderMedicationResults() {
     button.dataset.resultIndex = String(index);
 
     const isSelected = state.selectedMedicationId === med.id;
+    const isFocused = index === medicationFocusedResultIndex;
     if (isSelected) {
       button.classList.add('is-selected');
+    }
+    if (isFocused) {
+      button.classList.add('is-focused');
     }
 
     const favoriteFlag = favorites.has(med.id) ? '★' : '☆';
     const brandPreview = (med.brand_names || []).slice(0, 2).join(', ');
     const reliabilityMeta = getMedicationReliabilityMeta(med);
+
+    button.setAttribute('aria-current', isFocused ? 'true' : 'false');
 
     button.innerHTML = `
       <div class="med-result-top">
@@ -5751,11 +5818,14 @@ async function fetchAndPersistMedicationFallback(rawTerm) {
   }
 }
 
-function focusMedicationSearch() {
+function focusMedicationSearch(options = {}) {
   if (!els.medSearchInput) return;
+  const { selectText = false } = options;
   window.setTimeout(() => {
     els.medSearchInput.focus();
-    els.medSearchInput.select();
+    if (selectText) {
+      els.medSearchInput.select();
+    }
   }, 40);
 }
 
@@ -5794,7 +5864,9 @@ function setMedicationDrawerOpen(isOpen, options = {}) {
     renderMedicationDetail();
   }
 
-  focusMedicationSearch();
+  focusMedicationSearch({
+    selectText: Boolean(query) || !String(els.medSearchInput ? els.medSearchInput.value : '').trim(),
+  });
 }
 
 function toggleMedicationDrawerPin() {
@@ -5807,35 +5879,41 @@ function toggleMedicationDrawerPin() {
 }
 
 function handleMedicationResultsKeyboard(event) {
+  if (event.key === 'Escape') {
+    event.preventDefault();
+    setMedicationDrawerOpen(false);
+    return;
+  }
+
   if (!medicationSearchResults.length) return;
 
   if (event.key === 'ArrowDown') {
     event.preventDefault();
     medicationFocusedResultIndex = Math.min(medicationSearchResults.length - 1, medicationFocusedResultIndex + 1);
+    renderMedicationResults();
   }
 
   if (event.key === 'ArrowUp') {
     event.preventDefault();
     medicationFocusedResultIndex = Math.max(0, medicationFocusedResultIndex - 1);
+    renderMedicationResults();
   }
 
   if (event.key === 'Enter') {
     event.preventDefault();
     const med = medicationSearchResults[medicationFocusedResultIndex] || medicationSearchResults[0];
-    if (med) setMedicationSelection(med.id);
-  }
-
-  if (event.key === 'Escape') {
-    event.preventDefault();
-    setMedicationDrawerOpen(false);
+    if (med) {
+      setMedicationSelection(med.id);
+    }
+    return;
   }
 
   const focusBtn = els.medResultList
     ? els.medResultList.querySelector(`button[data-result-index="${medicationFocusedResultIndex}"]`)
     : null;
 
-  if (focusBtn) {
-    focusBtn.focus();
+  if (focusBtn && typeof focusBtn.scrollIntoView === 'function') {
+    focusBtn.scrollIntoView({ block: 'nearest' });
   }
 }
 

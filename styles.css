@@ -1331,6 +1331,7 @@ body.script-resize-active * {
 }
 
 .med-result-item.is-selected,
+.med-result-item.is-focused,
 .med-result-item:focus-visible,
 .med-result-item:hover {
   border-color: var(--accent-border);

@@ -16,7 +16,8 @@
   data-app-build-id="20260311-drive-reset-v2"
   data-practice="astra"
   data-visit-type="followup"
-  data-astra-gpt-url="https://chatgpt.com/g/g-69ac7d1d6f088191a063906d86aee792-astra-note-writer"
+  data-astra-intake-gpt-url="https://chatgpt.com/g/g-69e904adeaa08191b4dfacb5b1fe9040-astra-note-writer-intake"
+  data-astra-followup-gpt-url="https://chatgpt.com/g/g-69e90b22ee3c81919cfadd1ad62c0ba2-astra-note-writer-follow-up"
   data-ebh-intake-gpt-url="https://chatgpt.com/g/g-69ac70d034e081918d72603828d45799-ebh-intake-note"
   data-ebh-followup-gpt-url="https://chatgpt.com/g/g-69ac76b8246c8191b4474e7d24d53476-ebh-follow-up-note"
   data-drive-sync-enabled="true"
@@ -102,7 +103,7 @@
     <section class="practice-mode-banner hidden" id="practiceModeBanner" aria-live="polite">
       <div>
         <span class="practice-mode-kicker" id="practiceModeKicker">Astra Mode</span>
-        <p class="practice-mode-text" id="practiceModeText">Astra workflow active: individual screeners for intake and a unified Astra GPT route.</p>
+        <p class="practice-mode-text" id="practiceModeText">Astra workflow active: intake and follow-up each route to their own Astra GPT.</p>
       </div>
     </section>
 
@@ -117,7 +118,7 @@
     <section class="practice-context-panel hidden" id="practiceContextPanel" aria-live="polite">
       <article class="practice-context-card">
         <span class="practice-context-label" id="practiceContextLabelPrimary">Astra note flow</span>
-        <p class="practice-context-text" id="practiceContextTextPrimary">Astra uses one GPT for both intake and follow-up workflows.</p>
+        <p class="practice-context-text" id="practiceContextTextPrimary">Astra uses separate GPT destinations for intake and follow-up workflows.</p>
       </article>
       <article class="practice-context-card">
         <span class="practice-context-label" id="practiceContextLabelSecondary">Documentation emphasis</span>
@@ -196,6 +197,27 @@
           </div>
           <textarea id="otherScreener" rows="4" placeholder="Additional screener data..."></textarea>
         </div>
+      </div>
+    </section>
+
+    <section class="card hidden" id="astraScreeningInfo" data-section="previsit">
+      <div class="section-heading">
+        <div>
+          <h2>Screening Information</h2>
+          <p>Document relevant pre-appointment information that should inform the intake, even if it is later confirmed during the visit.</p>
+        </div>
+        <div class="section-heading-right">
+          <span class="section-status completion-status-pending" id="astraScreeningInfoCompletionStatus">Pending</span>
+          <div class="section-mini-badge">Astra intake</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="screeningInfo">Screening Information</label>
+        <div class="field-header-actions">
+          <button type="button" class="med-context-btn" data-med-context-field="screeningInfo" aria-label="Open medication reference from screening information">🧠 Med info</button>
+        </div>
+        <textarea id="screeningInfo" rows="5" placeholder="Summarize pertinent pre-visit screening information that should carry into the intake..."></textarea>
       </div>
     </section>
 
