@@ -209,6 +209,7 @@ const DRIVE_USER_PROMPT_META_KEY = 'driveUserPromptMeta_v1';
 const DRIVE_QUEUE_KEY = 'driveSyncPendingWrites_v1';
 const DRIVE_META_KEY = 'driveSyncMeta_v1';
 const DRIVE_REVISIONS_KEY = 'driveSyncRevisions_v1';
+const DRIVE_BACKUP_SIGNATURES_KEY = 'driveSyncBackupAppendSignatures_v1';
 const DRIVE_DRAFT_PATH = 'data/draft/current.json';
 const DRIVE_RECENT_PATIENTS_PATH = 'data/draft/recent-patients.json';
 const DRIVE_MED_COMPILED_PATH = 'data/meds/compiled/medications.compiled.json';
@@ -965,6 +966,43 @@ function setDriveQueue(queue) {
   state.pendingDriveWrites = safeQueue.length;
 }
 
+function getDriveBackupAppendSignatures() {
+  const parsed = getStorageJSON(DRIVE_BACKUP_SIGNATURES_KEY, {});
+  if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) return {};
+  return parsed;
+}
+
+function setDriveBackupAppendSignatures(signatures) {
+  const safe = signatures && typeof signatures === 'object' && !Array.isArray(signatures)
+    ? signatures
+    : {};
+  setStorageJSON(DRIVE_BACKUP_SIGNATURES_KEY, safe);
+}
+
+function getDriveBackupAppendKey(snapshotEntry) {
+  return String((snapshotEntry && (snapshotEntry.patientKey || snapshotEntry.id)) || '').trim();
+}
+
+function getDriveBackupAppendSignature(snapshotEntry) {
+  if (!snapshotEntry) return '';
+  return hashStringChecksum(JSON.stringify({
+    savedAt: snapshotEntry.savedAt || '',
+    signature: snapshotEntry.signature || '',
+    practice: snapshotEntry.practice || '',
+    visitType: snapshotEntry.visitType || '',
+  }));
+}
+
+function markDriveBackupAppendSynced(snapshotEntry, backupSignature = '') {
+  const backupKey = getDriveBackupAppendKey(snapshotEntry);
+  const signature = backupSignature || getDriveBackupAppendSignature(snapshotEntry);
+  if (!backupKey || !signature) return;
+
+  const signatures = getDriveBackupAppendSignatures();
+  signatures[backupKey] = signature;
+  setDriveBackupAppendSignatures(signatures);
+}
+
 function setDriveStatusBadge(message, status, title = '') {
   if (!els.driveSyncStatus) return;
 
@@ -1092,6 +1130,9 @@ function handleDriveRecovered() {
   const snapshots = loadSnapshotsFromStorage();
   if (Array.isArray(snapshots) && snapshots.length) {
     queueDriveRecentPatientsWrite(snapshots, { force: true });
+    snapshots.forEach((snapshotEntry) => {
+      queueDriveBackupAppend(snapshotEntry);
+    });
   }
   scheduleDriveQueueFlush(450);
 }
@@ -1365,17 +1406,29 @@ function queueDriveRuntimeFallbacksWrite(fallbackMap) {
 function queueDriveBackupAppend(snapshotEntry) {
   if (!canQueueDriveWrites() || !snapshotEntry) return;
 
+  const backupKey = getDriveBackupAppendKey(snapshotEntry);
+  const backupSignature = getDriveBackupAppendSignature(snapshotEntry);
+  if (!backupKey || !backupSignature) return;
+
+  const syncedSignatures = getDriveBackupAppendSignatures();
+  if (syncedSignatures[backupKey] === backupSignature) {
+    return;
+  }
+
   enqueueDriveOperation({
     type: 'backup.append',
+    backupSignature,
     entry: {
       id: snapshotEntry.id,
+      patientKey: snapshotEntry.patientKey,
+      signature: snapshotEntry.signature,
       savedAt: snapshotEntry.savedAt,
       label: formatSnapshotLabel(snapshotEntry),
       practice: snapshotEntry.practice,
       visitType: snapshotEntry.visitType,
       draft: snapshotEntry.draft,
     },
-    dedupeKey: `backup:${snapshotEntry.id}`,
+    dedupeKey: `backup:${backupKey}`,
   });
 }
 
@@ -1890,6 +1943,7 @@ async function flushDriveQueue() {
           }
         } else if (item.type === 'backup.append') {
           await callDriveEndpoint('backup.append', { entry: item.entry });
+          markDriveBackupAppendSynced(item.entry, item.backupSignature || '');
         }
 
         queue.shift();
@@ -3427,6 +3481,7 @@ function queueSnapshot(draft, options = {}) {
 
     if (!skipDrive) {
       queueDriveRecentPatientsWrite(normalizedSnapshots);
+      queueDriveBackupAppend(snapshotEntry);
     }
   }, 1200);
 }
