@@ -7,6 +7,9 @@ const state = {
   followupMode: 'scheduled',
   selectedInterval: '',
   therapyInterwovenTier: '0',
+  astraSupportingDocsUploaded: false,
+  astraSupportingDocTypes: [],
+  astraFollowupContextMode: 'previousPlan',
   topbarCondensed: false,
   topbarCondenseProgress: 0,
   medDrawerOpen: false,
@@ -54,7 +57,13 @@ const els = {
   ebhLogo: document.getElementById('ebhLogo'),
   brandLogoFallback: document.getElementById('brandLogoFallback'),
   previousPlanCard: document.getElementById('previousPlanCard'),
+  previousPlanField: document.getElementById('previousPlanField'),
   previousPlanCompletionStatus: document.getElementById('previousPlanCompletionStatus'),
+  astraFollowupContextModeGroup: document.getElementById('astraFollowupContextModeGroup'),
+  astraSupportingDocsControl: document.getElementById('astraSupportingDocsControl'),
+  astraSupportingDocsUploaded: document.getElementById('astraSupportingDocsUploaded'),
+  astraSupportingDocTypes: document.getElementById('astraSupportingDocTypes'),
+  astraSupportingDocsHint: document.getElementById('astraSupportingDocsHint'),
   astraScreeners: document.getElementById('astraScreeners'),
   astraScreenersCompletionStatus: document.getElementById('astraScreenersCompletionStatus'),
   astraScreenersFields: document.getElementById('astraScreenersFields'),
@@ -171,6 +180,11 @@ const inputIds = [
 const SCREENER_IDS = ['phq9', 'gad7', 'asrsA', 'asrsB', 'pcl5', 'mdq', 'otherScreener'];
 const TIME_FIELD_IDS = ['scheduledStart', 'startTime', 'followTime', 'endTime', 'docEnd'];
 const DEFAULT_APPOINTMENT_MODALITY = 'Telehealth';
+const ASTRA_SUPPORTING_DOC_TYPE_LABELS = {
+  labs: 'lab results',
+  genesight: 'GeneSight report',
+  other: 'other supporting documentation',
+};
 
 const brandConfig = {
   astra: {
@@ -2365,7 +2379,9 @@ function updateBranding() {
 
   if (els.previousPlanSectionCopy) {
     els.previousPlanSectionCopy.textContent = isAstra
-      ? 'Paste prior treatment context before starting setup and chief complaint.'
+      ? state.astraFollowupContextMode === 'uploadedPreviousNote'
+        ? 'Upload the full previous note directly to the GPT; no prior plan paste is needed here.'
+        : 'Paste prior treatment context before starting setup and chief complaint.'
       : 'Paste prior EBH treatment context before setup and chief complaint.';
   }
 
@@ -2392,7 +2408,11 @@ function updateBranding() {
   }
 
   if (els.setupMiniBadge) els.setupMiniBadge.textContent = 'Visit setup';
-  if (els.previousPlanMiniBadge) els.previousPlanMiniBadge.textContent = 'Pre-visit context';
+  if (els.previousPlanMiniBadge) {
+    els.previousPlanMiniBadge.textContent = isAstra && !isIntake && state.astraFollowupContextMode === 'uploadedPreviousNote'
+      ? 'Previous note upload'
+      : 'Pre-visit context';
+  }
   if (els.notesMiniBadge) els.notesMiniBadge.textContent = isIntake ? 'Intake narrative' : 'Live note capture';
   if (els.scriptMiniBadge) els.scriptMiniBadge.textContent = 'Verbatim script';
   if (els.closingMiniBadge) els.closingMiniBadge.textContent = 'Follow-up + close';
@@ -2425,9 +2445,23 @@ function updateScriptVisibility() {
 function updatePracticeSections() {
   const isAstra = state.practice === 'astra';
   const isIntake = state.visitType === 'intake';
+  const isAstraFollowup = isAstra && !isIntake;
+  const usesUploadedPreviousNote = isAstraFollowup && state.astraFollowupContextMode === 'uploadedPreviousNote';
 
   if (els.previousPlanCard) {
     els.previousPlanCard.classList.toggle('hidden', isIntake);
+  }
+
+  if (els.astraFollowupContextModeGroup) {
+    els.astraFollowupContextModeGroup.classList.toggle('hidden', !isAstraFollowup);
+  }
+
+  if (els.previousPlanField) {
+    els.previousPlanField.classList.toggle('hidden', usesUploadedPreviousNote);
+  }
+
+  if (els.astraSupportingDocsControl) {
+    els.astraSupportingDocsControl.classList.toggle('hidden', !isAstra);
   }
 
   if (els.astraScreeners) {
@@ -2634,6 +2668,10 @@ function normalizeMeridiemToken(value, fallback = 'AM') {
   return fallback === 'PM' ? 'PM' : 'AM';
 }
 
+function getCurrentMeridiemDefault() {
+  return new Date().getHours() < 12 ? 'AM' : 'PM';
+}
+
 function setMeridiemControl(control, meridiem) {
   if (!control) return;
 
@@ -2809,11 +2847,11 @@ function attachTimeControlListeners() {
       minuteInput,
       meridiemInput,
       meridiemButtons,
-      activeMeridiem: 'AM',
+      activeMeridiem: id === 'scheduledStart' ? getCurrentMeridiemDefault() : 'AM',
     };
 
     timeControlMap.set(id, control);
-    setMeridiemControl(control, 'AM');
+    setMeridiemControl(control, control.activeMeridiem);
 
     const handleMeridiemShortcut = (event, options = {}) => {
       if (event.ctrlKey || event.metaKey || event.altKey) return false;
@@ -3011,6 +3049,29 @@ function buildScreeningInformationText() {
   return getValue('screeningInfo') || 'No screening information entered.';
 }
 
+function getAstraSupportingDocLabels() {
+  const labels = [];
+  if (state.practice === 'astra' && state.visitType === 'intake') {
+    labels.push('pre-appointment intake screener document');
+  }
+
+  state.astraSupportingDocTypes.forEach((type) => {
+    const label = ASTRA_SUPPORTING_DOC_TYPE_LABELS[type];
+    if (label && !labels.includes(label)) {
+      labels.push(label);
+    }
+  });
+
+  return labels;
+}
+
+function buildAstraSupportingDocumentsText() {
+  if (state.practice !== 'astra' || !state.astraSupportingDocsUploaded) return '';
+  const labels = getAstraSupportingDocLabels();
+  const detail = labels.length ? ` (${labels.join(', ')})` : '';
+  return `SUPPORTING DOCUMENTS: Supporting documents${detail} will be uploaded directly to the GPT and should be considered with the current encounter data.`;
+}
+
 function buildVisitDetails() {
   const cc = getValue('cc');
   const ccText = cc ? `"${cc}"` : '';
@@ -3054,14 +3115,25 @@ function buildExport() {
   const ebhTests = getValue('testDump');
   const screeners = buildScreenersText();
   const screeningInfo = buildScreeningInformationText();
+  const supportingDocuments = buildAstraSupportingDocumentsText();
 
   if (state.practice === 'astra' && state.visitType === 'followup') {
+    const priorContextBlock = state.astraFollowupContextMode === 'uploadedPreviousNote'
+      ? [
+        'PREVIOUS NOTE',
+        'A full copy of the previous note will be uploaded directly to the GPT. Use it as prior context in addition to the current encounter data below.',
+      ]
+      : [
+        'PREVIOUS PLAN',
+        previousPlan,
+      ];
+
     return [
       'VISIT DETAILS',
       visitDetails,
       '',
-      'PREVIOUS PLAN',
-      previousPlan,
+      ...priorContextBlock,
+      ...(supportingDocuments ? ['', supportingDocuments] : []),
       '',
       'FREEFORM APPOINTMENT NOTES',
       notes,
@@ -3081,6 +3153,7 @@ function buildExport() {
       '',
       'SCREENING INFORMATION',
       screeningInfo,
+      ...(supportingDocuments ? ['', supportingDocuments] : []),
       '',
       'INTAKE NOTES',
       notes,
@@ -3129,7 +3202,9 @@ function updateExport() {
 function evaluateCompletion() {
   let previsitComplete = false;
   if (isVisible(els.previousPlanCard)) {
-    previsitComplete = isFilled('previousPlan');
+    previsitComplete = state.practice === 'astra' && state.visitType === 'followup' && state.astraFollowupContextMode === 'uploadedPreviousNote'
+      ? true
+      : isFilled('previousPlan');
   } else if (isVisible(els.astraScreeners)) {
     previsitComplete = SCREENER_IDS.some((id) => isFilled(id));
   } else if (isVisible(els.ebhTests)) {
@@ -3498,6 +3573,9 @@ function buildDraftPayload() {
       followupMode: state.followupMode,
       selectedInterval: state.selectedInterval,
       therapyInterwovenTier: state.therapyInterwovenTier,
+      astraSupportingDocsUploaded: state.astraSupportingDocsUploaded,
+      astraSupportingDocTypes: normalizeAstraSupportingDocTypes(state.astraSupportingDocTypes),
+      astraFollowupContextMode: state.astraFollowupContextMode,
     },
     inputs: {},
   };
@@ -3636,6 +3714,11 @@ function applyDraft(draft) {
     state.followupMode = draft.state.followupMode || 'scheduled';
     state.selectedInterval = draft.state.selectedInterval || '';
     state.therapyInterwovenTier = draft.state.therapyInterwovenTier || '0';
+    state.astraSupportingDocsUploaded = Boolean(draft.state.astraSupportingDocsUploaded);
+    state.astraSupportingDocTypes = normalizeAstraSupportingDocTypes(draft.state.astraSupportingDocTypes);
+    state.astraFollowupContextMode = draft.state.astraFollowupContextMode === 'uploadedPreviousNote'
+      ? 'uploadedPreviousNote'
+      : 'previousPlan';
   }
 
   if (draft.inputs) {
@@ -3752,6 +3835,55 @@ function setTherapyTier(value, button) {
   handleFieldMutation('therapyInterwoven');
 }
 
+function normalizeAstraSupportingDocTypes(types) {
+  if (!Array.isArray(types)) return [];
+  const allowedTypes = Object.keys(ASTRA_SUPPORTING_DOC_TYPE_LABELS);
+  return types.filter((type, index) => allowedTypes.includes(type) && types.indexOf(type) === index);
+}
+
+function applyAstraIntakeSupportingDocsDefault() {
+  if (state.practice === 'astra' && state.visitType === 'intake') {
+    state.astraSupportingDocsUploaded = true;
+  }
+}
+
+function setAstraFollowupContextMode(value, button) {
+  state.astraFollowupContextMode = value === 'uploadedPreviousNote' ? 'uploadedPreviousNote' : 'previousPlan';
+  setActiveByData('#astraFollowupContextModeToggle .seg-btn', 'astraFollowupContextMode', state.astraFollowupContextMode);
+  if (button) setActiveButtons('#astraFollowupContextModeToggle', button);
+  refreshUI(true, { markDirty: true });
+}
+
+function setAstraSupportingDocsUploaded(value) {
+  state.astraSupportingDocsUploaded = Boolean(value);
+  if (els.astraSupportingDocsUploaded) {
+    els.astraSupportingDocsUploaded.checked = state.astraSupportingDocsUploaded;
+  }
+  syncAstraSupportingDocsControls();
+  markDraftLocalMutation();
+  updateExport();
+  saveDraft({ markDirty: false });
+}
+
+function toggleAstraSupportingDocType(type) {
+  const normalizedType = Object.prototype.hasOwnProperty.call(ASTRA_SUPPORTING_DOC_TYPE_LABELS, type) ? type : '';
+  if (!normalizedType) return;
+
+  const currentTypes = normalizeAstraSupportingDocTypes(state.astraSupportingDocTypes);
+  state.astraSupportingDocTypes = currentTypes.includes(normalizedType)
+    ? currentTypes.filter((entry) => entry !== normalizedType)
+    : [...currentTypes, normalizedType];
+
+  if (state.astraSupportingDocTypes.length) {
+    state.astraSupportingDocsUploaded = true;
+  }
+
+  syncAstraSupportingDocsControls();
+  markDraftLocalMutation();
+  updateExport();
+  saveDraft({ markDirty: false });
+}
+
 function setTimeNow(targetId) {
   const now = new Date();
   setValue(targetId, format12Hour(now.getHours(), now.getMinutes()));
@@ -3836,12 +3968,14 @@ function setPrnFollowup() {
 
 function setPractice(practice) {
   state.practice = practice;
+  applyAstraIntakeSupportingDocsDefault();
   setActiveByData('#practiceToggle .seg-btn', 'practice', practice);
   refreshUI(true, { markDirty: true });
 }
 
 function setVisitType(visitType) {
   state.visitType = visitType;
+  applyAstraIntakeSupportingDocsDefault();
   setActiveByData('#visitTypeToggle .seg-btn', 'visitType', visitType);
 
   if (visitType === 'intake') {
@@ -3861,9 +3995,34 @@ function syncToggleStates() {
   setActiveByData('#currentModalityToggle .seg-btn', 'currentModality', state.currentModality);
   setActiveByData('#followModalityToggle .seg-btn', 'followModality', state.followModality);
   setActiveByData('#therapyInterwovenToggle .seg-btn', 'therapyTier', state.therapyInterwovenTier);
+  setActiveByData('#astraFollowupContextModeToggle .seg-btn', 'astraFollowupContextMode', state.astraFollowupContextMode);
 
   if (els.scriptToggle) {
     els.scriptToggle.checked = Boolean(state.scriptVisible);
+  }
+
+  syncAstraSupportingDocsControls();
+}
+
+function syncAstraSupportingDocsControls() {
+  state.astraSupportingDocTypes = normalizeAstraSupportingDocTypes(state.astraSupportingDocTypes);
+
+  if (els.astraSupportingDocsUploaded) {
+    els.astraSupportingDocsUploaded.checked = Boolean(state.astraSupportingDocsUploaded);
+  }
+
+  document.querySelectorAll('#astraSupportingDocTypes .doc-type-btn').forEach((btn) => {
+    const type = btn.dataset.supportingDocType || '';
+    const isActive = state.astraSupportingDocTypes.includes(type);
+    btn.classList.toggle('active', isActive);
+    btn.setAttribute('aria-pressed', String(isActive));
+    btn.disabled = !state.astraSupportingDocsUploaded;
+  });
+
+  if (els.astraSupportingDocsHint) {
+    els.astraSupportingDocsHint.textContent = state.practice === 'astra' && state.visitType === 'intake'
+      ? 'Astra intake includes the pre-appointment intake screener by default.'
+      : 'Select one or more types when supporting documents will be uploaded.';
   }
 }
 
@@ -3898,16 +4057,23 @@ function clearAll() {
   state.selectedInterval = '';
   state.therapyInterwovenTier = '0';
   state.scriptVisible = false;
+  state.astraSupportingDocsUploaded = false;
+  state.astraSupportingDocTypes = [];
+  state.astraFollowupContextMode = 'previousPlan';
 
   setValue('therapyInterwoven', '0');
 
-  document.querySelectorAll('#currentModalityToggle .seg-btn, #followModalityToggle .seg-btn, #therapyInterwovenToggle .seg-btn, .interval-btn').forEach((btn) => {
+  document.querySelectorAll('#currentModalityToggle .seg-btn, #followModalityToggle .seg-btn, #therapyInterwovenToggle .seg-btn, #astraFollowupContextModeToggle .seg-btn, .interval-btn').forEach((btn) => {
     btn.classList.remove('active');
     btn.setAttribute('aria-pressed', 'false');
   });
 
   if (els.scriptToggle) {
     els.scriptToggle.checked = false;
+  }
+
+  if (els.astraSupportingDocsUploaded) {
+    els.astraSupportingDocsUploaded.checked = false;
   }
 
   localStorage.removeItem(getDraftStorageKey());
@@ -3930,6 +4096,9 @@ function clearAll() {
         followupMode: 'scheduled',
         selectedInterval: '',
         therapyInterwovenTier: '0',
+        astraSupportingDocsUploaded: false,
+        astraSupportingDocTypes: [],
+        astraFollowupContextMode: 'previousPlan',
       },
       inputs: {},
     };
@@ -6519,6 +6688,20 @@ function attachEventListeners() {
 
   document.querySelectorAll('#therapyInterwovenToggle .seg-btn').forEach((btn) => {
     btn.addEventListener('click', () => setTherapyTier(btn.dataset.therapyTier, btn));
+  });
+
+  document.querySelectorAll('#astraFollowupContextModeToggle .seg-btn').forEach((btn) => {
+    btn.addEventListener('click', () => setAstraFollowupContextMode(btn.dataset.astraFollowupContextMode, btn));
+  });
+
+  if (els.astraSupportingDocsUploaded) {
+    els.astraSupportingDocsUploaded.addEventListener('change', (event) => {
+      setAstraSupportingDocsUploaded(event.target.checked);
+    });
+  }
+
+  document.querySelectorAll('#astraSupportingDocTypes .doc-type-btn').forEach((btn) => {
+    btn.addEventListener('click', () => toggleAstraSupportingDocType(btn.dataset.supportingDocType));
   });
 
   document.querySelectorAll('.nowBtn').forEach((btn) => {

@@ -25,6 +25,7 @@ async function createAppDom(options = {}) {
   const {
     seedLocalStorage = {},
     htmlTransform,
+    mockNow,
   } = options;
 
   const virtualConsole = new VirtualConsole();
@@ -43,6 +44,32 @@ async function createAppDom(options = {}) {
     pretendToBeVisual: true,
     virtualConsole,
     beforeParse(window) {
+      if (mockNow) {
+        const RealDate = window.Date;
+        const fixedTime = new RealDate(mockNow).getTime();
+        window.Date = class extends RealDate {
+          constructor(...args) {
+            if (args.length === 0) {
+              super(fixedTime);
+            } else {
+              super(...args);
+            }
+          }
+
+          static now() {
+            return fixedTime;
+          }
+
+          static parse(value) {
+            return RealDate.parse(value);
+          }
+
+          static UTC(...args) {
+            return RealDate.UTC(...args);
+          }
+        };
+      }
+
       window.alert = () => {};
       window.confirm = () => true;
       window.scrollTo = () => {};
@@ -74,7 +101,7 @@ async function testAstraGptRouting() {
 
   assert.equal(
     document.getElementById('activeGptUrl').value,
-    'https://chatgpt.com/g/g-69e90b22ee3c81919cfadd1ad62c0ba2-astra-note-writer-follow-up',
+    'https://chatgpt.com/g/g-69f246601ad08191bc5f7522948c06ef-astra-follow-up-note',
     'Astra follow-up should default to the Astra follow-up GPT URL',
   );
 
@@ -82,7 +109,7 @@ async function testAstraGptRouting() {
 
   assert.equal(
     document.getElementById('activeGptUrl').value,
-    'https://chatgpt.com/g/g-69e904adeaa08191b4dfacb5b1fe9040-astra-note-writer-intake',
+    'https://chatgpt.com/g/g-69f246d6fe4c819189f727c1c236e4c8-astra-intake-note',
     'Astra intake should route to the Astra intake GPT URL',
   );
   assert.match(document.getElementById('exportHelper').textContent, /Astra Intake GPT/i);
@@ -91,10 +118,26 @@ async function testAstraGptRouting() {
 
   assert.equal(
     document.getElementById('activeGptUrl').value,
-    'https://chatgpt.com/g/g-69e90b22ee3c81919cfadd1ad62c0ba2-astra-note-writer-follow-up',
+    'https://chatgpt.com/g/g-69f246601ad08191bc5f7522948c06ef-astra-follow-up-note',
     'Astra follow-up should route back to the Astra follow-up GPT URL',
   );
   assert.match(document.getElementById('exportHelper').textContent, /Astra Follow-Up GPT/i);
+
+  document.getElementById('ebhBtn').click();
+
+  assert.equal(
+    document.getElementById('activeGptUrl').value,
+    'https://chatgpt.com/g/g-69f2450c4b648191b3b2ed94e74cf369-ebh-follow-up-note',
+    'EBH follow-up should route to the EBH follow-up GPT URL',
+  );
+
+  document.getElementById('intakeBtn').click();
+
+  assert.equal(
+    document.getElementById('activeGptUrl').value,
+    'https://chatgpt.com/g/g-69f245e113008191823124c55e26ec7f-ebh-intake-note',
+    'EBH intake should route to the EBH intake GPT URL',
+  );
 
   dom.window.close();
 }
@@ -118,6 +161,196 @@ async function testAstraIntakeExportIncludesScreeningInformation() {
     exportText.indexOf('SCREENERS') < exportText.indexOf('SCREENING INFORMATION')
       && exportText.indexOf('SCREENING INFORMATION') < exportText.indexOf('INTAKE NOTES'),
     'Screening information should appear between screeners and intake notes',
+  );
+
+  dom.window.close();
+}
+
+async function testAstraSupportingDocumentsInstruction() {
+  const dom = await createAppDom();
+  const { window } = dom;
+  const { document } = window;
+
+  assert.equal(document.getElementById('astraSupportingDocsCard'), null);
+  assert.ok(!document.getElementById('astraSupportingDocsControl').classList.contains('hidden'));
+  assert.ok(!document.getElementById('astraSupportingDocsUploaded').checked);
+
+  document.getElementById('ebhBtn').click();
+  assert.ok(document.getElementById('astraSupportingDocsControl').classList.contains('hidden'));
+  document.getElementById('astraBtn').click();
+
+  document.getElementById('intakeBtn').click();
+
+  let exportText = document.getElementById('exportBox').value;
+  assert.ok(document.getElementById('astraSupportingDocsUploaded').checked);
+  assert.match(exportText, /pre-appointment intake screener document/);
+
+  document.querySelector('[data-supporting-doc-type="labs"]').click();
+  document.querySelector('[data-supporting-doc-type="genesight"]').click();
+  exportText = document.getElementById('exportBox').value;
+  assert.match(
+    exportText,
+    /SUPPORTING DOCUMENTS: Supporting documents \(pre-appointment intake screener document, lab results, GeneSight report\) will be uploaded directly to the GPT and should be considered with the current encounter data\./,
+  );
+  assert.ok(
+    exportText.indexOf('SCREENING INFORMATION') < exportText.indexOf('SUPPORTING DOCUMENTS:')
+      && exportText.indexOf('SUPPORTING DOCUMENTS:') < exportText.indexOf('INTAKE NOTES'),
+    'Supporting document instruction should appear before intake notes',
+  );
+
+  dom.window.close();
+}
+
+async function testAstraFollowupUploadedPreviousNoteMode() {
+  const dom = await createAppDom();
+  const { document } = dom.window;
+
+  assert.ok(!document.getElementById('previousPlanField').classList.contains('hidden'));
+  assert.equal(document.getElementById('previousPlanCompletionStatus').textContent, 'Pending');
+
+  document.querySelector('[data-astra-followup-context-mode="uploadedPreviousNote"]').click();
+
+  assert.ok(document.getElementById('previousPlanField').classList.contains('hidden'));
+  assert.equal(document.getElementById('previousPlanCompletionStatus').textContent, 'Complete');
+
+  let exportText = document.getElementById('exportBox').value;
+  assert.match(
+    exportText,
+    /PREVIOUS NOTE\nA full copy of the previous note will be uploaded directly to the GPT\. Use it as prior context in addition to the current encounter data below\./,
+  );
+  assert.doesNotMatch(exportText, /PREVIOUS PLAN/);
+
+  assert.ok(!document.getElementById('astraSupportingDocsUploaded').checked);
+  document.getElementById('astraSupportingDocsUploaded').click();
+  document.querySelector('[data-supporting-doc-type="labs"]').click();
+  document.querySelector('[data-supporting-doc-type="genesight"]').click();
+  exportText = document.getElementById('exportBox').value;
+  assert.match(exportText, /SUPPORTING DOCUMENTS: Supporting documents \(lab results, GeneSight report\)/);
+  assert.ok(
+    exportText.indexOf('PREVIOUS NOTE') < exportText.indexOf('SUPPORTING DOCUMENTS:')
+      && exportText.indexOf('SUPPORTING DOCUMENTS:') < exportText.indexOf('FREEFORM APPOINTMENT NOTES'),
+    'Astra follow-up supporting document instruction should combine with previous note upload mode',
+  );
+
+  document.querySelector('[data-astra-followup-context-mode="previousPlan"]').click();
+  assert.ok(!document.getElementById('previousPlanField').classList.contains('hidden'));
+  assert.equal(document.getElementById('previousPlanCompletionStatus').textContent, 'Pending');
+
+  dom.window.close();
+}
+
+async function testAstraWorkflowTogglesDraftRestore() {
+  const firstDom = await createAppDom();
+  const firstWindow = firstDom.window;
+  const firstDocument = firstWindow.document;
+
+  firstDocument.querySelector('[data-astra-followup-context-mode="uploadedPreviousNote"]').click();
+  firstDocument.getElementById('astraSupportingDocsUploaded').click();
+  firstDocument.querySelector('[data-supporting-doc-type="other"]').click();
+  firstWindow.eval(`
+    setValue('startTime', '9:00 AM');
+    handleFieldMutation('startTime');
+    saveDraft({ flush: true });
+  `);
+
+  const draftKey = 'noteBuilderDraft_v1:anonymous';
+  const storedDraft = firstWindow.localStorage.getItem(draftKey);
+  assert.ok(storedDraft, 'Expected a persisted draft to be saved');
+  firstDom.window.close();
+
+  const secondDom = await createAppDom({
+    seedLocalStorage: {
+      [draftKey]: storedDraft,
+    },
+  });
+
+  const secondDocument = secondDom.window.document;
+  assert.ok(secondDocument.getElementById('astraSupportingDocsUploaded').checked);
+  assert.ok(secondDocument.querySelector('[data-astra-followup-context-mode="uploadedPreviousNote"]').classList.contains('active'));
+  assert.ok(secondDocument.querySelector('[data-supporting-doc-type="other"]').classList.contains('active'));
+  assert.ok(secondDocument.getElementById('previousPlanField').classList.contains('hidden'));
+
+  secondDom.window.close();
+}
+
+async function testScheduledStartMeridiemDefaultsFromCurrentTime() {
+  const morningDom = await createAppDom({ mockNow: '2026-04-29T09:15:00' });
+  assert.ok(
+    morningDom.window.document.querySelector('.time-control[data-time-field="scheduledStart"] .time-meridiem-btn[data-meridiem="AM"]').classList.contains('active'),
+    'Scheduled Start should default to AM before noon',
+  );
+  assert.ok(
+    morningDom.window.document.querySelector('.time-control[data-time-field="followTime"] .time-meridiem-btn[data-meridiem="AM"]').classList.contains('active'),
+    'Other time fields should keep their existing AM default',
+  );
+  morningDom.window.close();
+
+  const afternoonDom = await createAppDom({ mockNow: '2026-04-29T13:15:00' });
+  assert.ok(
+    afternoonDom.window.document.querySelector('.time-control[data-time-field="scheduledStart"] .time-meridiem-btn[data-meridiem="PM"]').classList.contains('active'),
+    'Scheduled Start should default to PM at or after noon',
+  );
+  assert.ok(
+    afternoonDom.window.document.querySelector('.time-control[data-time-field="followTime"] .time-meridiem-btn[data-meridiem="AM"]').classList.contains('active'),
+    'Only Scheduled Start should use the current-time meridiem default',
+  );
+  afternoonDom.window.close();
+}
+
+async function testScheduledStartDraftValueIsNotOverwritten() {
+  const storedDraft = JSON.stringify({
+    savedAt: new Date().toISOString(),
+    state: {
+      practice: 'astra',
+      visitType: 'followup',
+      currentModality: 'Telehealth',
+      followModality: 'Telehealth',
+      scriptVisible: false,
+      followupMode: 'scheduled',
+      selectedInterval: '',
+      therapyInterwovenTier: '0',
+      astraSupportingDocsUploaded: false,
+      astraSupportingDocTypes: [],
+      astraFollowupContextMode: 'previousPlan',
+    },
+    inputs: {
+      age: '',
+      gender: '',
+      scheduledStart: '3:30 PM',
+      currentModality: 'Telehealth',
+      startTime: '',
+      cc: '',
+      previousPlan: '',
+      phq9: '',
+      gad7: '',
+      asrsA: '',
+      asrsB: '',
+      pcl5: '',
+      mdq: '',
+      otherScreener: '',
+      screeningInfo: '',
+      testDump: '',
+      notes: '',
+      followModality: 'Telehealth',
+      followDate: '',
+      followTime: '',
+      therapyInterwoven: '0',
+      endTime: '',
+      docEnd: '',
+    },
+  });
+
+  const dom = await createAppDom({
+    mockNow: '2026-04-29T09:15:00',
+    seedLocalStorage: {
+      'noteBuilderDraft_v1:anonymous': storedDraft,
+    },
+  });
+
+  assert.equal(dom.window.document.getElementById('scheduledStart').value, '3:30 PM');
+  assert.ok(
+    dom.window.document.querySelector('.time-control[data-time-field="scheduledStart"] .time-meridiem-btn[data-meridiem="PM"]').classList.contains('active'),
+    'Restored Scheduled Start meridiem should not be overwritten by morning default',
   );
 
   dom.window.close();
@@ -177,6 +410,9 @@ async function testTelehealthDefaultsRespectBlankAndManualState() {
       followupMode: 'scheduled',
       selectedInterval: '',
       therapyInterwovenTier: '0',
+      astraSupportingDocsUploaded: false,
+      astraSupportingDocTypes: [],
+      astraFollowupContextMode: 'previousPlan',
     },
     inputs: {
       age: '',
@@ -290,6 +526,11 @@ async function testMedicationDrawerKeyboardKeepsSearchEditable() {
 async function run() {
   await testAstraGptRouting();
   await testAstraIntakeExportIncludesScreeningInformation();
+  await testAstraSupportingDocumentsInstruction();
+  await testAstraFollowupUploadedPreviousNoteMode();
+  await testAstraWorkflowTogglesDraftRestore();
+  await testScheduledStartMeridiemDefaultsFromCurrentTime();
+  await testScheduledStartDraftValueIsNotOverwritten();
   await testScreeningInformationDraftRestore();
   await testTelehealthDefaultsRespectBlankAndManualState();
   await testMedicationDrawerKeyboardKeepsSearchEditable();

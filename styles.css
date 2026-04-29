@@ -691,6 +691,68 @@ h3 {
   justify-content: flex-end;
 }
 
+.astra-followup-context-mode {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.astra-followup-context-mode .segmented-control {
+  width: fit-content;
+  max-width: 100%;
+}
+
+.astra-supporting-docs-switch {
+  width: fit-content;
+  max-width: 100%;
+}
+
+.astra-supporting-docs-inline {
+  display: grid;
+  grid-template-columns: minmax(220px, auto) minmax(0, 1fr);
+  align-items: center;
+  gap: 8px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(148, 163, 184, 0.32);
+  background: rgba(255, 255, 255, 0.62);
+  padding: 10px;
+}
+
+.astra-supporting-doc-type-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.doc-type-btn {
+  border: 1px solid rgba(148, 163, 184, 0.45);
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.84);
+  color: var(--ink-muted);
+  font-size: 12px;
+  font-weight: 750;
+  padding: 7px 11px;
+  cursor: pointer;
+  transition: background 120ms ease, color 120ms ease, box-shadow 120ms ease;
+}
+
+.doc-type-btn.active,
+.doc-type-btn[aria-pressed="true"] {
+  color: #fff;
+  border-color: transparent;
+  background: linear-gradient(145deg, var(--accent-500), var(--accent-600));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.38), 0 4px 12px rgba(29, 78, 216, 0.22);
+}
+
+.doc-type-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+}
+
+.astra-supporting-docs-inline .helper-text {
+  grid-column: 1 / -1;
+}
+
 label {
   font-size: 12px;
   font-weight: 700;

@@ -16,10 +16,10 @@
   data-app-build-id="20260311-drive-reset-v2"
   data-practice="astra"
   data-visit-type="followup"
-  data-astra-intake-gpt-url="https://chatgpt.com/g/g-69e904adeaa08191b4dfacb5b1fe9040-astra-note-writer-intake"
-  data-astra-followup-gpt-url="https://chatgpt.com/g/g-69e90b22ee3c81919cfadd1ad62c0ba2-astra-note-writer-follow-up"
-  data-ebh-intake-gpt-url="https://chatgpt.com/g/g-69ac70d034e081918d72603828d45799-ebh-intake-note"
-  data-ebh-followup-gpt-url="https://chatgpt.com/g/g-69ac76b8246c8191b4474e7d24d53476-ebh-follow-up-note"
+  data-astra-intake-gpt-url="https://chatgpt.com/g/g-69f246d6fe4c819189f727c1c236e4c8-astra-intake-note"
+  data-astra-followup-gpt-url="https://chatgpt.com/g/g-69f246601ad08191bc5f7522948c06ef-astra-follow-up-note"
+  data-ebh-intake-gpt-url="https://chatgpt.com/g/g-69f245e113008191823124c55e26ec7f-ebh-intake-note"
+  data-ebh-followup-gpt-url="https://chatgpt.com/g/g-69f2450c4b648191b3b2ed94e74cf369-ebh-follow-up-note"
   data-drive-sync-enabled="true"
   data-drive-endpoint-url="https://script.google.com/macros/s/AKfycbyCfdY3aHqLXFcHBE6fXt8UU8D_E7nmUDf-kJzcPo2VGtS4JuVVNI0m4v_SUNaVSeNXKQ/exec"
   data-drive-shared-drive-id="0AHnYqpJA5-6ZUk9PVA"
@@ -138,7 +138,15 @@
         </div>
       </div>
 
-      <div class="field">
+      <div class="astra-followup-context-mode hidden" id="astraFollowupContextModeGroup">
+        <label>Prior Context Source</label>
+        <div class="segmented-control segmented-control-form" id="astraFollowupContextModeToggle" role="group" aria-label="Prior context source">
+          <button type="button" class="seg-btn" data-astra-followup-context-mode="previousPlan">Paste Previous Plan</button>
+          <button type="button" class="seg-btn" data-astra-followup-context-mode="uploadedPreviousNote">Upload Full Previous Note</button>
+        </div>
+      </div>
+
+      <div class="field" id="previousPlanField">
         <label for="previousPlan">Previous Plan <span class="required">*</span></label>
         <div class="field-header-actions">
           <button type="button" class="med-context-btn" data-med-context-field="previousPlan" aria-label="Open medication reference from previous plan">🧠 Med info</button>
@@ -547,6 +555,20 @@
             <input id="followTime" type="hidden" value="">
           </div>
         </div>
+      </div>
+
+      <div class="astra-supporting-docs-inline hidden top-gap" id="astraSupportingDocsControl">
+        <label class="script-switch astra-supporting-docs-switch" for="astraSupportingDocsUploaded">
+          <input type="checkbox" id="astraSupportingDocsUploaded">
+          <span class="switch-track" aria-hidden="true"></span>
+          <span class="switch-label">Supporting docs uploaded</span>
+        </label>
+        <div class="astra-supporting-doc-type-row" id="astraSupportingDocTypes" role="group" aria-label="Supporting document types">
+          <button type="button" class="doc-type-btn" data-supporting-doc-type="labs" aria-pressed="false">Labs</button>
+          <button type="button" class="doc-type-btn" data-supporting-doc-type="genesight" aria-pressed="false">GeneSight</button>
+          <button type="button" class="doc-type-btn" data-supporting-doc-type="other" aria-pressed="false">Other</button>
+        </div>
+        <p class="helper-text" id="astraSupportingDocsHint">Astra intake includes the pre-appointment intake screener by default.</p>
       </div>
 
       <div class="field top-gap">
