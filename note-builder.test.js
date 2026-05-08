@@ -101,27 +101,27 @@ async function testAstraGptRouting() {
 
   assert.equal(
     document.getElementById('activeGptUrl').value,
-    'https://chatgpt.com/g/g-69f246601ad08191bc5f7522948c06ef-astra-follow-up-note',
-    'Astra follow-up should default to the Astra follow-up GPT URL',
+    'https://chatgpt.com/g/g-69f246601ad08191bc5f7522948c06ef-astra-note',
+    'Astra follow-up should default to the universal Astra GPT URL',
   );
 
   document.getElementById('intakeBtn').click();
 
   assert.equal(
     document.getElementById('activeGptUrl').value,
-    'https://chatgpt.com/g/g-69f246d6fe4c819189f727c1c236e4c8-astra-intake-note',
-    'Astra intake should route to the Astra intake GPT URL',
+    'https://chatgpt.com/g/g-69f246601ad08191bc5f7522948c06ef-astra-note',
+    'Astra intake should route to the universal Astra GPT URL',
   );
-  assert.match(document.getElementById('exportHelper').textContent, /Astra Intake GPT/i);
+  assert.match(document.getElementById('exportHelper').textContent, /universal Astra GPT/i);
 
   document.getElementById('followBtn').click();
 
   assert.equal(
     document.getElementById('activeGptUrl').value,
-    'https://chatgpt.com/g/g-69f246601ad08191bc5f7522948c06ef-astra-follow-up-note',
-    'Astra follow-up should route back to the Astra follow-up GPT URL',
+    'https://chatgpt.com/g/g-69f246601ad08191bc5f7522948c06ef-astra-note',
+    'Astra follow-up should route back to the universal Astra GPT URL',
   );
-  assert.match(document.getElementById('exportHelper').textContent, /Astra Follow-Up GPT/i);
+  assert.match(document.getElementById('exportHelper').textContent, /universal Astra GPT/i);
 
   document.getElementById('ebhBtn').click();
 
@@ -154,13 +154,14 @@ async function testAstraIntakeExportIncludesScreeningInformation() {
   setField(window, 'notes', 'Discussed mood, anxiety, and treatment goals.');
 
   const exportText = document.getElementById('exportBox').value;
-  assert.match(exportText, /SCREENERS/);
-  assert.match(exportText, /SCREENING INFORMATION/);
+  assert.match(exportText, /ASTRA RAW GPT INPUT/);
+  assert.match(exportText, /PRE-VISIT SCREENERS/);
+  assert.match(exportText, /SCREENING DOCUMENTATION/);
   assert.match(exportText, /Pre-visit forms reported chronic sleep disruption and recent panic symptoms\./);
   assert.ok(
-    exportText.indexOf('SCREENERS') < exportText.indexOf('SCREENING INFORMATION')
-      && exportText.indexOf('SCREENING INFORMATION') < exportText.indexOf('INTAKE NOTES'),
-    'Screening information should appear between screeners and intake notes',
+    exportText.indexOf('PRE-VISIT SCREENERS') < exportText.indexOf('SCREENING DOCUMENTATION')
+      && exportText.indexOf('SCREENING DOCUMENTATION') < exportText.indexOf('CLINICAL NOTES'),
+    'Screening documentation should appear between screeners and clinical notes',
   );
 
   dom.window.close();
@@ -182,20 +183,22 @@ async function testAstraSupportingDocumentsInstruction() {
   document.getElementById('intakeBtn').click();
 
   let exportText = document.getElementById('exportBox').value;
-  assert.ok(document.getElementById('astraSupportingDocsUploaded').checked);
-  assert.match(exportText, /pre-appointment intake screener document/);
+  assert.ok(!document.getElementById('astraSupportingDocsUploaded').checked);
+  assert.match(exportText, /Uploaded Documents: None selected in app/);
+  assert.match(exportText, /UPLOADED SUPPORTING DOCUMENTS\nNone selected in app\./);
 
+  document.querySelector('[data-supporting-doc-type="intakeScreening"]').click();
   document.querySelector('[data-supporting-doc-type="labs"]').click();
   document.querySelector('[data-supporting-doc-type="genesight"]').click();
   exportText = document.getElementById('exportBox').value;
   assert.match(
     exportText,
-    /SUPPORTING DOCUMENTS: Supporting documents \(pre-appointment intake screener document, lab results, GeneSight report\) will be uploaded directly to the GPT and should be considered with the current encounter data\./,
+    /Uploaded directly to GPT: intake\/screening documentation, lab results, GeneSight report\. Use uploaded documents as supporting context with the current encounter data\./,
   );
   assert.ok(
-    exportText.indexOf('SCREENING INFORMATION') < exportText.indexOf('SUPPORTING DOCUMENTS:')
-      && exportText.indexOf('SUPPORTING DOCUMENTS:') < exportText.indexOf('INTAKE NOTES'),
-    'Supporting document instruction should appear before intake notes',
+    exportText.indexOf('SCREENING DOCUMENTATION') < exportText.indexOf('UPLOADED SUPPORTING DOCUMENTS')
+      && exportText.indexOf('UPLOADED SUPPORTING DOCUMENTS') < exportText.indexOf('CLINICAL NOTES'),
+    'Supporting document instruction should appear before clinical notes',
   );
 
   dom.window.close();
@@ -225,10 +228,10 @@ async function testAstraFollowupUploadedPreviousNoteMode() {
   document.querySelector('[data-supporting-doc-type="labs"]').click();
   document.querySelector('[data-supporting-doc-type="genesight"]').click();
   exportText = document.getElementById('exportBox').value;
-  assert.match(exportText, /SUPPORTING DOCUMENTS: Supporting documents \(lab results, GeneSight report\)/);
+  assert.match(exportText, /Uploaded directly to GPT: lab results, GeneSight report\./);
   assert.ok(
-    exportText.indexOf('PREVIOUS NOTE') < exportText.indexOf('SUPPORTING DOCUMENTS:')
-      && exportText.indexOf('SUPPORTING DOCUMENTS:') < exportText.indexOf('FREEFORM APPOINTMENT NOTES'),
+    exportText.indexOf('PREVIOUS NOTE') < exportText.indexOf('UPLOADED SUPPORTING DOCUMENTS')
+      && exportText.indexOf('UPLOADED SUPPORTING DOCUMENTS') < exportText.indexOf('CLINICAL NOTES'),
     'Astra follow-up supporting document instruction should combine with previous note upload mode',
   );
 
@@ -523,6 +526,34 @@ async function testMedicationDrawerKeyboardKeepsSearchEditable() {
   dom.window.close();
 }
 
+async function testIncompletePatientBackupsDoNotUseQuestionMarkLabels() {
+  const dom = await createAppDom();
+  const { window } = dom;
+
+  const incomplete = window.eval(`
+    normalizeSnapshotEntry({
+      draft: {
+        state: { practice: 'astra', visitType: 'followup' },
+        inputs: { age: '', gender: 'Male' }
+      }
+    })
+  `);
+  assert.equal(incomplete, null, 'Drafts without age should not become recent-patient backup entries');
+
+  const ageOnly = window.eval(`
+    normalizeSnapshotEntry({
+      draft: {
+        state: { practice: 'astra', visitType: 'followup' },
+        inputs: { age: '34', gender: '' }
+      }
+    })
+  `);
+  assert.equal(ageOnly.patientLabel, '34 unknown gender');
+  assert.doesNotMatch(ageOnly.patientLabel, /\?/);
+
+  dom.window.close();
+}
+
 async function run() {
   await testAstraGptRouting();
   await testAstraIntakeExportIncludesScreeningInformation();
@@ -534,6 +565,7 @@ async function run() {
   await testScreeningInformationDraftRestore();
   await testTelehealthDefaultsRespectBlankAndManualState();
   await testMedicationDrawerKeyboardKeepsSearchEditable();
+  await testIncompletePatientBackupsDoNotUseQuestionMarkLabels();
   console.log('All note-builder tests passed.');
 }
 

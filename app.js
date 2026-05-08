@@ -181,10 +181,12 @@ const SCREENER_IDS = ['phq9', 'gad7', 'asrsA', 'asrsB', 'pcl5', 'mdq', 'otherScr
 const TIME_FIELD_IDS = ['scheduledStart', 'startTime', 'followTime', 'endTime', 'docEnd'];
 const DEFAULT_APPOINTMENT_MODALITY = 'Telehealth';
 const ASTRA_SUPPORTING_DOC_TYPE_LABELS = {
+  intakeScreening: 'intake/screening documentation',
   labs: 'lab results',
   genesight: 'GeneSight report',
   other: 'other supporting documentation',
 };
+const ASTRA_UNIVERSAL_GPT_LABEL = 'Universal Astra Note GPT';
 
 const brandConfig = {
   astra: {
@@ -2298,7 +2300,7 @@ function updateBranding() {
   const brand = brandConfig[state.practice];
   const isAstra = state.practice === 'astra';
   const isIntake = state.visitType === 'intake';
-  const astraGptLabel = isIntake ? 'Astra Intake GPT' : 'Astra Follow-Up GPT';
+  const astraGptLabel = ASTRA_UNIVERSAL_GPT_LABEL;
 
   els.body.dataset.practice = state.practice;
   els.body.dataset.visitType = state.visitType;
@@ -2308,7 +2310,7 @@ function updateBranding() {
 
   if (els.brandSubtitle) {
     els.brandSubtitle.textContent = isAstra
-      ? `Readable intake/follow-up capture with a dedicated ${astraGptLabel} handoff.`
+      ? `Readable intake/follow-up capture with a ${astraGptLabel} handoff.`
       : isIntake
         ? 'Readable intake capture for EBH with imported pre-visit screening support.'
         : 'Readable EBH follow-up capture with prior-plan context first.';
@@ -2345,20 +2347,20 @@ function updateBranding() {
     els.practiceModeBanner.classList.remove('hidden');
     els.practiceModeKicker.textContent = isAstra ? 'Astra Mode' : 'EBH Mode';
     els.practiceModeText.textContent = isAstra
-      ? 'Astra mode active: intake and follow-up each route to their own Astra GPT with section-level completion.'
+      ? 'Astra mode active: intake and follow-up both route to one universal Astra GPT.'
       : isIntake
         ? 'EBH intake mode active: paste imported screening output first, then document intake.'
         : 'EBH follow-up mode active: prior plan first, then follow-up note capture and handoff.';
   }
 
   if (els.practiceContextPanel) {
-    els.practiceContextPanel.classList.remove('hidden');
+    els.practiceContextPanel.classList.toggle('hidden', isAstra);
   }
 
   if (els.practiceContextLabelPrimary && els.practiceContextTextPrimary) {
     els.practiceContextLabelPrimary.textContent = isAstra ? 'Astra note flow' : 'EBH note flow';
     els.practiceContextTextPrimary.textContent = isAstra
-      ? `Astra routes this workflow into the ${astraGptLabel}.`
+      ? `Astra routes both visit formats into the ${astraGptLabel}.`
       : isIntake
         ? 'EBH intake uses imported pre-visit data before chief complaint and live notes.'
         : 'EBH follow-up uses prior-plan context before visit setup and note capture.';
@@ -2401,7 +2403,7 @@ function updateBranding() {
 
   if (els.exportSectionCopy) {
     els.exportSectionCopy.textContent = isAstra
-      ? `Preview the structured Astra raw input live, then copy or open the ${astraGptLabel}.`
+      ? `Preview the structured Astra raw input live, then copy or open the ${ASTRA_UNIVERSAL_GPT_LABEL}.`
       : isIntake
         ? 'Preview the structured EBH intake raw input live, then copy or open EBH Intake GPT.'
         : 'Preview the structured EBH follow-up raw input live, then copy or open EBH Follow-Up GPT.';
@@ -2533,9 +2535,7 @@ function updateActiveGptUrl() {
 
   if (els.exportHelper) {
     els.exportHelper.textContent = isAstra
-      ? isIntake
-        ? 'Astra intake mode routes to your Astra Intake GPT.'
-        : 'Astra follow-up mode routes to your Astra Follow-Up GPT.'
+      ? `Astra ${isIntake ? 'intake' : 'follow-up'} routes to the universal Astra GPT.`
       : isIntake
         ? 'EBH intake mode routes to your EBH Intake GPT.'
         : 'EBH follow-up mode routes to your EBH Follow-Up GPT.';
@@ -3041,20 +3041,16 @@ function buildScreenersText() {
     .filter(([, value]) => value)
     .map(([label, value]) => `- ${label}: ${value}`);
 
-  return lines.length ? lines.join('\n') : 'No screener data entered.';
+  return lines.length ? lines.join('\n') : 'Not entered';
 }
 
 function buildScreeningInformationText() {
   if (state.practice !== 'astra' || state.visitType !== 'intake') return '';
-  return getValue('screeningInfo') || 'No screening information entered.';
+  return getValue('screeningInfo') || 'Not entered';
 }
 
 function getAstraSupportingDocLabels() {
   const labels = [];
-  if (state.practice === 'astra' && state.visitType === 'intake') {
-    labels.push('pre-appointment intake screener document');
-  }
-
   state.astraSupportingDocTypes.forEach((type) => {
     const label = ASTRA_SUPPORTING_DOC_TYPE_LABELS[type];
     if (label && !labels.includes(label)) {
@@ -3068,27 +3064,49 @@ function getAstraSupportingDocLabels() {
 function buildAstraSupportingDocumentsText() {
   if (state.practice !== 'astra' || !state.astraSupportingDocsUploaded) return '';
   const labels = getAstraSupportingDocLabels();
-  const detail = labels.length ? ` (${labels.join(', ')})` : '';
-  return `SUPPORTING DOCUMENTS: Supporting documents${detail} will be uploaded directly to the GPT and should be considered with the current encounter data.`;
+  const detail = labels.length ? labels.join(', ') : 'documents uploaded, type not specified';
+  return `Uploaded directly to GPT: ${detail}. Use uploaded documents as supporting context with the current encounter data.`;
+}
+
+function displayEntered(value, fallback = 'Not entered') {
+  const text = String(value || '').trim();
+  return text || fallback;
+}
+
+function buildAstraRawHeader() {
+  if (state.practice !== 'astra') return '';
+  const isIntake = state.visitType === 'intake';
+  const uploadedDocs = state.astraSupportingDocsUploaded
+    ? (getAstraSupportingDocLabels().join(', ') || 'documents uploaded, type not specified')
+    : 'None selected in app';
+
+  return [
+    'ASTRA RAW GPT INPUT',
+    `Practice: Astra Psychiatry`,
+    `Visit Type: ${isIntake ? 'Intake' : 'Follow-Up'}`,
+    `GPT Target: ${ASTRA_UNIVERSAL_GPT_LABEL}`,
+    `Uploaded Documents: ${uploadedDocs}`,
+    'Conversion Instruction: Convert this raw structured input into the appropriate Astra clinical note. Use uploaded documents only when they are listed above and actually attached in GPT. Do not invent missing data.',
+  ].join('\n');
 }
 
 function buildVisitDetails() {
   const cc = getValue('cc');
-  const ccText = cc ? `"${cc}"` : '';
+  const ccText = cc ? `"${cc}"` : 'Not entered';
 
   return [
-    `Age: ${getValue('age')}`,
-    `Gender: ${getValue('gender')}`,
-    `Scheduled Start: ${getValue('scheduledStart')}`,
-    `Current Encounter Modality: ${getValue('currentModality')}`,
-    `Face-to-Face Start: ${getValue('startTime')}`,
+    `Age: ${displayEntered(getValue('age'))}`,
+    `Gender: ${displayEntered(getValue('gender'))}`,
+    `Scheduled Start: ${displayEntered(getValue('scheduledStart'))}`,
+    `Current Encounter Modality: ${displayEntered(getValue('currentModality'))}`,
+    `Face-to-Face Start: ${displayEntered(getValue('startTime'))}`,
     `Chief Complaint: ${ccText}`,
   ].join('\n');
 }
 
 function buildFollowupDetails() {
   const lines = [
-    `Follow-Up Modality: ${getValue('followModality')}`,
+    `Follow-Up Modality: ${displayEntered(getValue('followModality'))}`,
   ];
 
   if (state.followupMode === 'prn') {
@@ -3096,13 +3114,13 @@ function buildFollowupDetails() {
     lines.push('No follow-up appointment was scheduled during this encounter.');
     lines.push('Patient is not ready to schedule a follow-up appointment yet and will reach out later to schedule.');
   } else {
-    lines.push(`Follow-Up Date: ${getValue('followDate')}`);
-    lines.push(`Follow-Up Time: ${getValue('followTime')}`);
+    lines.push(`Follow-Up Date: ${displayEntered(getValue('followDate'))}`);
+    lines.push(`Follow-Up Time: ${displayEntered(getValue('followTime'))}`);
   }
 
   lines.push(`Therapy Interwoven: ${getValue('therapyInterwoven') || '0'}`);
-  lines.push(`Face-to-Face End: ${getValue('endTime')}`);
-  lines.push(`Documentation End: ${getValue('docEnd')}`);
+  lines.push(`Face-to-Face End: ${displayEntered(getValue('endTime'))}`);
+  lines.push(`Documentation End: ${displayEntered(getValue('docEnd'))}`);
 
   return lines.join('\n');
 }
@@ -3125,40 +3143,48 @@ function buildExport() {
       ]
       : [
         'PREVIOUS PLAN',
-        previousPlan,
+        displayEntered(previousPlan),
       ];
 
     return [
+      buildAstraRawHeader(),
+      '',
       'VISIT DETAILS',
       visitDetails,
       '',
       ...priorContextBlock,
-      ...(supportingDocuments ? ['', supportingDocuments] : []),
       '',
-      'FREEFORM APPOINTMENT NOTES',
-      notes,
+      'UPLOADED SUPPORTING DOCUMENTS',
+      supportingDocuments || 'None selected in app.',
       '',
-      'FOLLOW-UP',
+      'CLINICAL NOTES',
+      displayEntered(notes),
+      '',
+      'FOLLOW-UP / CLOSE',
       followupDetails,
     ].join('\n');
   }
 
   if (state.practice === 'astra' && state.visitType === 'intake') {
     return [
+      buildAstraRawHeader(),
+      '',
       'VISIT DETAILS',
       visitDetails,
       '',
-      'SCREENERS',
+      'PRE-VISIT SCREENERS',
       screeners,
       '',
-      'SCREENING INFORMATION',
+      'SCREENING DOCUMENTATION',
       screeningInfo,
-      ...(supportingDocuments ? ['', supportingDocuments] : []),
       '',
-      'INTAKE NOTES',
-      notes,
+      'UPLOADED SUPPORTING DOCUMENTS',
+      supportingDocuments || 'None selected in app.',
       '',
-      'FOLLOW-UP',
+      'CLINICAL NOTES',
+      displayEntered(notes),
+      '',
+      'FOLLOW-UP / CLOSE',
       followupDetails,
     ].join('\n');
   }
@@ -3382,8 +3408,9 @@ function formatSnapshotLabel(entry) {
 
   const age = entry && entry.draft && entry.draft.inputs ? String(entry.draft.inputs.age || '').trim() : '';
   const gender = entry && entry.draft && entry.draft.inputs ? String(entry.draft.inputs.gender || '').trim() : '';
-  const ageText = age || '?';
-  const genderText = gender ? gender.charAt(0).toUpperCase() : '?';
+  if (!age) return 'Incomplete patient';
+  const ageText = age;
+  const genderText = gender ? gender.charAt(0).toUpperCase() : 'unknown gender';
   return `${ageText} ${genderText}`;
 }
 
@@ -3393,16 +3420,16 @@ function getDraftPatientIdentity(draft) {
   const genderRaw = String(inputs.gender || '').trim();
   const genderInitial = genderRaw ? genderRaw.charAt(0).toUpperCase() : '';
 
-  if (!age && !genderInitial) {
+  if (!age) {
     return {
-      key: 'patient-unknown',
-      label: 'Unknown patient',
+      key: '',
+      label: '',
     };
   }
 
-  const safeAge = age || '?';
-  const safeGender = genderInitial || '?';
-  const ageToken = age ? age.toLowerCase() : 'unknown-age';
+  const safeAge = age;
+  const safeGender = genderInitial || 'unknown gender';
+  const ageToken = age.toLowerCase();
   const genderToken = genderInitial ? genderInitial.toLowerCase() : 'unknown-gender';
   const key = `patient-${ageToken}-${genderToken}`
     .replace(/[^a-z0-9-]+/g, '-')
@@ -3419,6 +3446,7 @@ function normalizeSnapshotEntry(entry) {
   if (!entry || !entry.draft) return null;
 
   const identity = getDraftPatientIdentity(entry.draft);
+  if (!identity.key) return null;
   const savedAt = entry.savedAt || new Date().toISOString();
 
   return {
@@ -3543,6 +3571,9 @@ function queueSnapshot(draft, options = {}) {
       signature,
       draft,
     });
+    if (!snapshotEntry) {
+      return;
+    }
 
     const nextSnapshots = snapshots.slice();
     if (existingIndex >= 0) {
@@ -3841,12 +3872,6 @@ function normalizeAstraSupportingDocTypes(types) {
   return types.filter((type, index) => allowedTypes.includes(type) && types.indexOf(type) === index);
 }
 
-function applyAstraIntakeSupportingDocsDefault() {
-  if (state.practice === 'astra' && state.visitType === 'intake') {
-    state.astraSupportingDocsUploaded = true;
-  }
-}
-
 function setAstraFollowupContextMode(value, button) {
   state.astraFollowupContextMode = value === 'uploadedPreviousNote' ? 'uploadedPreviousNote' : 'previousPlan';
   setActiveByData('#astraFollowupContextModeToggle .seg-btn', 'astraFollowupContextMode', state.astraFollowupContextMode);
@@ -3856,6 +3881,9 @@ function setAstraFollowupContextMode(value, button) {
 
 function setAstraSupportingDocsUploaded(value) {
   state.astraSupportingDocsUploaded = Boolean(value);
+  if (!state.astraSupportingDocsUploaded) {
+    state.astraSupportingDocTypes = [];
+  }
   if (els.astraSupportingDocsUploaded) {
     els.astraSupportingDocsUploaded.checked = state.astraSupportingDocsUploaded;
   }
@@ -3968,14 +3996,12 @@ function setPrnFollowup() {
 
 function setPractice(practice) {
   state.practice = practice;
-  applyAstraIntakeSupportingDocsDefault();
   setActiveByData('#practiceToggle .seg-btn', 'practice', practice);
   refreshUI(true, { markDirty: true });
 }
 
 function setVisitType(visitType) {
   state.visitType = visitType;
-  applyAstraIntakeSupportingDocsDefault();
   setActiveByData('#visitTypeToggle .seg-btn', 'visitType', visitType);
 
   if (visitType === 'intake') {
@@ -4016,12 +4042,12 @@ function syncAstraSupportingDocsControls() {
     const isActive = state.astraSupportingDocTypes.includes(type);
     btn.classList.toggle('active', isActive);
     btn.setAttribute('aria-pressed', String(isActive));
-    btn.disabled = !state.astraSupportingDocsUploaded;
+    btn.disabled = false;
   });
 
   if (els.astraSupportingDocsHint) {
     els.astraSupportingDocsHint.textContent = state.practice === 'astra' && state.visitType === 'intake'
-      ? 'Astra intake includes the pre-appointment intake screener by default.'
+      ? 'Choose Screening Docs when intake or pre-appointment documentation will be uploaded to GPT.'
       : 'Select one or more types when supporting documents will be uploaded.';
   }
 }

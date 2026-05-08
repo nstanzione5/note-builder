@@ -16,8 +16,8 @@
   data-app-build-id="20260311-drive-reset-v2"
   data-practice="astra"
   data-visit-type="followup"
-  data-astra-intake-gpt-url="https://chatgpt.com/g/g-69f246d6fe4c819189f727c1c236e4c8-astra-intake-note"
-  data-astra-followup-gpt-url="https://chatgpt.com/g/g-69f246601ad08191bc5f7522948c06ef-astra-follow-up-note"
+  data-astra-intake-gpt-url="https://chatgpt.com/g/g-69f246601ad08191bc5f7522948c06ef-astra-note"
+  data-astra-followup-gpt-url="https://chatgpt.com/g/g-69f246601ad08191bc5f7522948c06ef-astra-note"
   data-ebh-intake-gpt-url="https://chatgpt.com/g/g-69f245e113008191823124c55e26ec7f-ebh-intake-note"
   data-ebh-followup-gpt-url="https://chatgpt.com/g/g-69f2450c4b648191b3b2ed94e74cf369-ebh-follow-up-note"
   data-drive-sync-enabled="true"
@@ -103,7 +103,7 @@
     <section class="practice-mode-banner hidden" id="practiceModeBanner" aria-live="polite">
       <div>
         <span class="practice-mode-kicker" id="practiceModeKicker">Astra Mode</span>
-        <p class="practice-mode-text" id="practiceModeText">Astra workflow active: intake and follow-up each route to their own Astra GPT.</p>
+        <p class="practice-mode-text" id="practiceModeText">Astra workflow active: intake and follow-up route to one universal Astra GPT.</p>
       </div>
     </section>
 
@@ -118,7 +118,7 @@
     <section class="practice-context-panel hidden" id="practiceContextPanel" aria-live="polite">
       <article class="practice-context-card">
         <span class="practice-context-label" id="practiceContextLabelPrimary">Astra note flow</span>
-        <p class="practice-context-text" id="practiceContextTextPrimary">Astra uses separate GPT destinations for intake and follow-up workflows.</p>
+        <p class="practice-context-text" id="practiceContextTextPrimary">Astra uses one GPT destination for intake and follow-up workflows.</p>
       </article>
       <article class="practice-context-card">
         <span class="practice-context-label" id="practiceContextLabelSecondary">Documentation emphasis</span>
@@ -564,11 +564,12 @@
           <span class="switch-label">Supporting docs uploaded</span>
         </label>
         <div class="astra-supporting-doc-type-row" id="astraSupportingDocTypes" role="group" aria-label="Supporting document types">
+          <button type="button" class="doc-type-btn" data-supporting-doc-type="intakeScreening" aria-pressed="false">Screening Docs</button>
           <button type="button" class="doc-type-btn" data-supporting-doc-type="labs" aria-pressed="false">Labs</button>
           <button type="button" class="doc-type-btn" data-supporting-doc-type="genesight" aria-pressed="false">GeneSight</button>
           <button type="button" class="doc-type-btn" data-supporting-doc-type="other" aria-pressed="false">Other</button>
         </div>
-        <p class="helper-text" id="astraSupportingDocsHint">Astra intake includes the pre-appointment intake screener by default.</p>
+        <p class="helper-text" id="astraSupportingDocsHint">Select this only when documents will also be uploaded to the GPT.</p>
       </div>
 
       <div class="field top-gap">
@@ -648,7 +649,7 @@
       </div>
 
       <p class="helper-text export-helper" id="exportHelper">The correct GPT can be opened automatically based on selected practice and appointment type.</p>
-      <p class="shortcut-guide" id="shortcutGuide">Shortcuts: Cmd/Ctrl+Shift+C copy, Cmd/Ctrl+Shift+O copy+open, Cmd/Ctrl+Shift+G open GPT, Cmd/Ctrl+Shift+M open Med Reference.</p>
+      <p class="shortcut-guide" id="shortcutGuide">Shortcuts: copy, copy+open, open GPT, Med Reference use Cmd/Ctrl+Shift+C/O/G/M.</p>
 
       <div class="field top-gap">
         <label for="exportBox">Export Preview</label>
