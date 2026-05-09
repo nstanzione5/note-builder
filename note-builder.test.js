@@ -392,6 +392,176 @@ async function testScreeningInformationDraftRestore() {
   secondDom.window.close();
 }
 
+async function testAstraLetterProviderConfigAndStateFiltering() {
+  const dom = await createAppDom();
+  const { window } = dom;
+  const { document } = window;
+
+  document.getElementById('letterGeneratorTab').click();
+
+  assert.ok(!document.getElementById('letterGeneratorShell').classList.contains('hidden'));
+  assert.equal(document.getElementById('letterProviderSelect').options.length, 2);
+  assert.equal(document.getElementById('letterStateSelect').options.length, 3);
+
+  window.eval(`
+    applyAstraProviderConfig({
+      providers: [
+        {
+          id: 'active_provider',
+          active: true,
+          displayName: 'Active Provider',
+          credentials: 'PMHNP',
+          title: 'Psychiatric Nurse Practitioner',
+          licenses: { NY: 'NY License #: 123', NJ: 'NJ License #: 456' },
+          defaultSignatureBlock: 'Active Provider, PMHNP\\nAstra Psychiatry',
+          sortOrder: 1
+        },
+        {
+          id: 'inactive_provider',
+          active: false,
+          displayName: 'Inactive Provider',
+          credentials: 'PMHNP',
+          licenses: { CT: 'CT License #: 789' },
+          defaultSignatureBlock: 'Inactive Provider, PMHNP\\nAstra Psychiatry',
+          sortOrder: 2
+        }
+      ]
+    }, 'test');
+  `);
+
+  const providerSelect = document.getElementById('letterProviderSelect');
+  const stateSelect = document.getElementById('letterStateSelect');
+
+  assert.equal(providerSelect.options.length, 1, 'Inactive providers should be hidden');
+  assert.equal(providerSelect.value, 'active_provider');
+  assert.deepEqual(
+    Array.from(stateSelect.options).map((option) => option.value),
+    ['NJ', 'NY'],
+    'State dropdown should only show states available for the selected provider',
+  );
+
+  dom.window.close();
+}
+
+async function testAstraLetterPacketValidationAndPriorNoteInstructions() {
+  const dom = await createAppDom();
+  const { window } = dom;
+  const { document } = window;
+
+  document.getElementById('letterGeneratorTab').click();
+  document.getElementById('generateLetterPacketBtn').click();
+
+  assert.match(
+    document.getElementById('letterValidationMessage').textContent,
+    /brief description/i,
+    'Brief description should be required before generating a GPT packet',
+  );
+
+  setField(window, 'letterBriefDescription', 'Draft a concise treatment verification letter for continuity of care.');
+  document.getElementById('letterPriorNoteUpload').click();
+  document.getElementById('generateLetterPacketBtn').click();
+
+  const packet = document.getElementById('letterOutputBox').value;
+  assert.match(packet, /ASTRA DOCUMENT GENERATOR GPT PACKET/);
+  assert.match(packet, /Document type: General Clinical Letter/);
+  assert.match(packet, /Provider: Nick Stanzione/);
+  assert.match(packet, /Selected state license line: Connecticut License #: \[EDIT IN GOOGLE CONFIG\]|Delaware License #: \[EDIT IN GOOGLE CONFIG\]|New York License #: \[EDIT IN GOOGLE CONFIG\]/);
+  assert.match(packet, /Do not invent facts\./);
+  assert.match(packet, /Provider Verification Needed:/);
+  assert.match(packet, /Review the uploaded prior note and extract only clinically relevant information/);
+  assert.equal(
+    window.eval('getLetterGptUrl()'),
+    'https://chatgpt.com/g/g-69ff5644fd80819182ccbb07dfee15fa-astra-document-generator',
+    'Letter generator should use the permanent Astra Document Generator GPT URL',
+  );
+
+  dom.window.close();
+}
+
+async function testAstraLetterCustomGptHtmlAndSignatureFallback() {
+  const dom = await createAppDom();
+  const { window } = dom;
+  const { document } = window;
+
+  document.getElementById('letterGeneratorTab').click();
+
+  window.eval(`
+    applyAstraProviderConfig({
+      providers: [
+        {
+          id: 'typed_signature_provider',
+          active: true,
+          displayName: 'Typed Signature Provider',
+          credentials: 'PMHNP',
+          title: 'Psychiatric Nurse Practitioner',
+          signatureImage: '',
+          licenses: { NY: 'NY License #: 321' },
+          defaultSignatureBlock: 'Typed Signature Provider, PMHNP\\nAstra Psychiatry',
+          sortOrder: 1
+        }
+      ]
+    }, 'test');
+  `);
+
+  setField(window, 'letterBriefDescription', 'Create a body-only accommodation letter draft.');
+  document.getElementById('exportCustomGptBtn').click();
+  const customGpt = document.getElementById('letterOutputBox').value;
+  assert.match(customGpt, /Astra Clinical Letter Assistant/);
+  assert.match(customGpt, /Generated GPT output may contain PHI/);
+  assert.match(customGpt, /Conversation starters:/);
+
+  document.getElementById('copyBlankTemplateBtn').click();
+  assert.match(document.getElementById('letterOutputBox').value, /ASTRA PSYCHIATRY/);
+  assert.match(document.getElementById('letterOutputBox').value, /NY License #: 321/);
+
+  window.eval('updateLetterPreview()');
+  assert.match(
+    document.querySelector('.provider-typed-signature').textContent,
+    /Typed Signature Provider, PMHNP/,
+    'Missing signature image should fall back to the typed signature block',
+  );
+
+  const html = window.eval('buildLetterHtmlDocument()');
+  assert.match(html, /AstraPsychiatry\.com/);
+  assert.match(html, /Typed Signature Provider, PMHNP/);
+
+  dom.window.close();
+}
+
+async function testAstraIntakeScreeningInformationButtonStates() {
+  const dom = await createAppDom();
+  const { window } = dom;
+  const { document } = window;
+
+  document.getElementById('addScreeningInfoBtn').click();
+  assert.match(
+    document.getElementById('screeningInfoUploadStatus').textContent,
+    /Switch to Astra Intake/i,
+  );
+
+  document.getElementById('intakeBtn').click();
+  document.getElementById('addScreeningInfoBtn').click();
+  assert.match(
+    document.getElementById('screeningInfoUploadStatus').textContent,
+    /Enter screening information/i,
+  );
+
+  setField(window, 'screeningInfo', 'Pre-visit forms report attention symptoms and sleep disruption.');
+  document.getElementById('addScreeningInfoBtn').click();
+  assert.equal(document.getElementById('addScreeningInfoBtn').textContent, 'Uploading screening information...');
+  assert.match(document.getElementById('screeningInfoUploadStatus').textContent, /Uploading screening information/);
+
+  await new Promise((resolve) => setTimeout(resolve, 520));
+
+  assert.equal(document.getElementById('addScreeningInfoBtn').textContent, 'Add Screening Information');
+  assert.match(
+    document.getElementById('screeningInfoUploadStatus').textContent,
+    /Screening information added to Astra Intake/,
+  );
+
+  dom.window.close();
+}
+
 async function testTelehealthDefaultsRespectBlankAndManualState() {
   const blankDom = await createAppDom();
   const blankDocument = blankDom.window.document;
@@ -563,6 +733,10 @@ async function run() {
   await testScheduledStartMeridiemDefaultsFromCurrentTime();
   await testScheduledStartDraftValueIsNotOverwritten();
   await testScreeningInformationDraftRestore();
+  await testAstraLetterProviderConfigAndStateFiltering();
+  await testAstraLetterPacketValidationAndPriorNoteInstructions();
+  await testAstraLetterCustomGptHtmlAndSignatureFallback();
+  await testAstraIntakeScreeningInformationButtonStates();
   await testTelehealthDefaultsRespectBlankAndManualState();
   await testMedicationDrawerKeyboardKeepsSearchEditable();
   await testIncompletePatientBackupsDoNotUseQuestionMarkLabels();

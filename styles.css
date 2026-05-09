@@ -1081,6 +1081,20 @@ body.script-resize-active * {
   background: linear-gradient(145deg, #e11d48, #be123c);
 }
 
+#generateLetterPacketBtn,
+#copyLetterPacketBtn,
+#openLetterGptBtn,
+#copyOpenLetterGptBtn,
+#exportCustomGptBtn,
+#copyCustomGptBtn,
+#copyBlankTemplateBtn,
+#previewLetterBtn,
+#printLetterBtn,
+#downloadLetterHtmlBtn,
+#addScreeningInfoBtn {
+  background: linear-gradient(145deg, var(--accent-500), var(--accent-600));
+}
+
 .action-row button:hover {
   transform: translateY(-1px);
   filter: brightness(1.03);
@@ -1101,6 +1115,213 @@ body.script-resize-active * {
   font-size: 12px;
   line-height: 1.38;
   background: rgba(255, 255, 255, 0.92);
+}
+
+.screening-upload-btn {
+  border: 0;
+  border-radius: var(--radius-pill);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 8px 11px;
+  cursor: pointer;
+}
+
+.screening-upload-btn:disabled {
+  cursor: progress;
+  opacity: 0.72;
+}
+
+.screening-upload-status {
+  min-height: 18px;
+}
+
+.screening-upload-success {
+  color: var(--success-500);
+}
+
+.screening-upload-error {
+  color: var(--danger-500);
+}
+
+.screening-upload-loading {
+  color: var(--ink-muted);
+}
+
+.letter-generator-shell {
+  display: grid;
+  gap: 14px;
+}
+
+.letter-workflow-ribbon {
+  border-color: rgba(47, 127, 232, 0.28);
+}
+
+.phi-warning-panel {
+  border: 1px solid rgba(180, 83, 9, 0.24);
+  border-radius: var(--radius-md);
+  background: rgba(255, 251, 235, 0.88);
+  color: #713f12;
+  padding: 12px 14px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  box-shadow: var(--glass-shadow-soft);
+}
+
+.letter-generator-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 0.82fr);
+  gap: 14px;
+  align-items: start;
+}
+
+.letter-form-card {
+  min-width: 0;
+}
+
+.letter-prior-note-switch {
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(148, 163, 184, 0.34);
+  background: rgba(255, 255, 255, 0.72);
+  padding: 10px;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.letter-security-note {
+  margin-top: 8px;
+}
+
+.letter-validation-message {
+  margin-top: 8px;
+  min-height: 18px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.letter-validation-error {
+  color: var(--danger-500);
+}
+
+.letter-validation-success {
+  color: var(--success-500);
+}
+
+.letter-action-row button {
+  flex: 1 1 160px;
+}
+
+#letterOutputBox {
+  font-family: "SF Mono", "Menlo", "Monaco", monospace;
+  font-size: 12px;
+  line-height: 1.38;
+  min-height: 280px;
+  background: rgba(255, 255, 255, 0.94);
+}
+
+.letter-preview-wrap {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  position: sticky;
+  top: 148px;
+}
+
+.letter-preview-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--ink-muted);
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.letter-preview-size {
+  color: var(--accent-600);
+}
+
+.astra-letter-page {
+  width: min(100%, 8.5in);
+  min-height: 11in;
+  margin: 0 auto;
+  background: #fff;
+  color: #142033;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  border-radius: 6px;
+  box-shadow: 0 18px 44px rgba(15, 23, 42, 0.18);
+  padding: 0.62in 0.7in;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.astra-letter-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  border-bottom: 2px solid var(--accent-500);
+  padding-bottom: 14px;
+  margin-bottom: 30px;
+}
+
+.astra-letter-logo {
+  width: 104px;
+  height: 104px;
+  object-fit: contain;
+}
+
+.astra-letter-contact {
+  display: grid;
+  gap: 3px;
+  color: #38516b;
+  font-family: var(--body-font);
+  font-size: 12px;
+  line-height: 1.25;
+}
+
+.astra-letter-contact strong {
+  color: #102033;
+  font-size: 18px;
+  letter-spacing: 0.09em;
+}
+
+.astra-letter-body {
+  font-size: 12.5pt;
+  line-height: 1.48;
+}
+
+.astra-letter-body p {
+  margin: 0 0 14px;
+}
+
+.letter-meta-block {
+  margin-bottom: 20px;
+}
+
+.letter-correspondence {
+  min-height: 240px;
+}
+
+.letter-signature-block {
+  margin-top: 28px;
+}
+
+.provider-signature-image {
+  display: block;
+  max-width: 190px;
+  max-height: 70px;
+  object-fit: contain;
+  margin: 6px 0 8px;
+}
+
+.provider-typed-signature {
+  margin: 10px 0 10px;
+  font-family: "Brush Script MT", "Segoe Script", cursive;
+  font-size: 22px;
+  color: #102033;
 }
 
 .backup-tray {
@@ -1792,6 +2013,14 @@ body.script-resize-active * {
   .grid-4 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .letter-generator-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .letter-preview-wrap {
+    position: static;
+  }
 }
 
 @media (max-width: 960px) {
@@ -1840,6 +2069,24 @@ body.script-resize-active * {
 
   .action-row button {
     width: 100%;
+  }
+
+  .phi-warning-panel {
+    display: grid;
+  }
+
+  .astra-letter-page {
+    padding: 0.42in;
+    min-height: auto;
+  }
+
+  .astra-letter-header {
+    align-items: flex-start;
+  }
+
+  .astra-letter-logo {
+    width: 76px;
+    height: 76px;
   }
 
   .script-body {
@@ -1891,5 +2138,51 @@ body.script-resize-active * {
   .time-control {
     width: 100%;
     justify-content: center;
+  }
+}
+
+@page {
+  size: letter;
+  margin: 0;
+}
+
+@media print {
+  body {
+    background: #fff !important;
+  }
+
+  body:not([data-active-workspace="letter"]) .letter-generator-shell {
+    display: none !important;
+  }
+
+  body[data-active-workspace="letter"]::before,
+  body[data-active-workspace="letter"] .topbar,
+  body[data-active-workspace="letter"] #noteBuilderShell,
+  body[data-active-workspace="letter"] .letter-generator-shell > .workflow-ribbon,
+  body[data-active-workspace="letter"] .phi-warning-panel,
+  body[data-active-workspace="letter"] .letter-form-card,
+  body[data-active-workspace="letter"] .letter-preview-toolbar,
+  body[data-active-workspace="letter"] .med-drawer,
+  body[data-active-workspace="letter"] .med-drawer-backdrop,
+  body[data-active-workspace="letter"] .drive-diagnostics-modal {
+    display: none !important;
+  }
+
+  body[data-active-workspace="letter"] .letter-generator-shell,
+  body[data-active-workspace="letter"] .letter-generator-grid,
+  body[data-active-workspace="letter"] .letter-preview-wrap {
+    display: block !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  body[data-active-workspace="letter"] .astra-letter-page {
+    width: 8.5in;
+    min-height: 11in;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 0;
+    padding: 0.62in 0.7in;
   }
 }

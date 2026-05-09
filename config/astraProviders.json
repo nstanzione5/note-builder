@@ -1,0 +1,34 @@
+{
+  "providers": [
+    {
+      "id": "nick_stanzione",
+      "active": true,
+      "displayName": "Nick Stanzione",
+      "credentials": "PMHNP",
+      "title": "Psychiatric Nurse Practitioner",
+      "signatureImage": "/signatures/nick-stanzione.png",
+      "licenses": {
+        "NY": "New York License #: [EDIT IN GOOGLE CONFIG]",
+        "CT": "Connecticut License #: [EDIT IN GOOGLE CONFIG]",
+        "DE": "Delaware License #: [EDIT IN GOOGLE CONFIG]"
+      },
+      "defaultSignatureBlock": "Nick Stanzione, PMHNP\nAstra Psychiatry",
+      "sortOrder": 10
+    },
+    {
+      "id": "kris_generales",
+      "active": true,
+      "displayName": "Kris Generales",
+      "credentials": "PMHNP",
+      "title": "Psychiatric Nurse Practitioner",
+      "signatureImage": "/signatures/kris-generales.png",
+      "licenses": {
+        "NY": "New York License #: [EDIT IN GOOGLE CONFIG]",
+        "CT": "Connecticut License #: [EDIT IN GOOGLE CONFIG]",
+        "DE": "Delaware License #: [EDIT IN GOOGLE CONFIG]"
+      },
+      "defaultSignatureBlock": "Kris Generales, PMHNP\nAstra Psychiatry",
+      "sortOrder": 20
+    }
+  ]
+}

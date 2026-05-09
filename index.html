@@ -13,11 +13,12 @@
   <link rel="apple-touch-icon" href="icons/icon-192.png">
 </head>
 <body
-  data-app-build-id="20260311-drive-reset-v2"
+  data-app-build-id="20260509-astra-letter-generator"
   data-practice="astra"
   data-visit-type="followup"
   data-astra-intake-gpt-url="https://chatgpt.com/g/g-69f246601ad08191bc5f7522948c06ef-astra-note"
   data-astra-followup-gpt-url="https://chatgpt.com/g/g-69f246601ad08191bc5f7522948c06ef-astra-note"
+  data-astra-letter-gpt-url="https://chatgpt.com/g/g-69ff5644fd80819182ccbb07dfee15fa-astra-document-generator"
   data-ebh-intake-gpt-url="https://chatgpt.com/g/g-69f245e113008191823124c55e26ec7f-ebh-intake-note"
   data-ebh-followup-gpt-url="https://chatgpt.com/g/g-69f2450c4b648191b3b2ed94e74cf369-ebh-follow-up-note"
   data-drive-sync-enabled="true"
@@ -83,6 +84,14 @@
           </div>
         </div>
 
+        <div class="toolbar-group toolbar-group-workspace">
+          <span class="toggle-label">Workspace</span>
+          <div class="segmented-control" id="workspaceToggle" role="group" aria-label="Workspace">
+            <button type="button" class="seg-btn active" id="noteBuilderTab" data-workspace="note">Note Builder</button>
+            <button type="button" class="seg-btn" id="letterGeneratorTab" data-workspace="letter">Astra Letter Generator</button>
+          </div>
+        </div>
+
         <div class="toggle-card hidden" id="scriptToggleCard">
           <label class="script-switch" for="scriptToggle">
             <input type="checkbox" id="scriptToggle">
@@ -99,7 +108,7 @@
     </div>
   </header>
 
-  <main class="app-shell">
+  <main class="app-shell" id="noteBuilderShell">
     <section class="practice-mode-banner hidden" id="practiceModeBanner" aria-live="polite">
       <div>
         <span class="practice-mode-kicker" id="practiceModeKicker">Astra Mode</span>
@@ -223,9 +232,11 @@
       <div class="field">
         <label for="screeningInfo">Screening Information</label>
         <div class="field-header-actions">
+          <button type="button" class="screening-upload-btn" id="addScreeningInfoBtn">Add Screening Information</button>
           <button type="button" class="med-context-btn" data-med-context-field="screeningInfo" aria-label="Open medication reference from screening information">🧠 Med info</button>
         </div>
         <textarea id="screeningInfo" rows="5" placeholder="Summarize pertinent pre-visit screening information that should carry into the intake..."></textarea>
+        <p class="helper-text screening-upload-status" id="screeningInfoUploadStatus" aria-live="polite"></p>
       </div>
     </section>
 
@@ -666,6 +677,139 @@
         <p class="helper-text" id="backupEmpty">No patient drafts yet.</p>
       </section>
 
+    </section>
+  </main>
+
+  <main class="app-shell letter-generator-shell hidden" id="letterGeneratorShell" aria-labelledby="letterGeneratorTitle">
+    <section class="workflow-ribbon letter-workflow-ribbon">
+      <div class="workflow-ribbon-left">
+        <div class="section-chip">Astra Letter Generator</div>
+        <p class="workflow-ribbon-copy">Select provider details, describe the letter, then copy or open the Astra Document Generator GPT.</p>
+      </div>
+      <div class="workflow-ribbon-right">Letter + packet workflow</div>
+    </section>
+
+    <section class="phi-warning-panel" id="letterPhiWarning">
+      <strong>Generated GPT output may contain PHI.</strong>
+      <span>Use only within approved secure clinical workflows. Do not paste sensitive content into unapproved tools.</span>
+    </section>
+
+    <section class="letter-generator-grid">
+      <section class="card letter-form-card">
+        <div class="section-heading">
+          <div>
+            <h2 id="letterGeneratorTitle">Astra Letter Generator</h2>
+            <p>Dropdowns, a brief description, and copy/export. The app controls branding and provider details; GPT drafts the clinical wording.</p>
+          </div>
+          <div class="section-mini-badge">Astra documents</div>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="field">
+            <label for="letterDocumentType">Document Type <span class="required">*</span></label>
+            <div class="select-shell">
+              <select id="letterDocumentType">
+                <option value="general_clinical_letter">General Clinical Letter</option>
+                <option value="accommodation_letter">Accommodation Letter</option>
+                <option value="return_to_work_school">Return-to-Work / School Letter</option>
+                <option value="treatment_summary">Treatment Summary</option>
+                <option value="diagnosis_treatment_verification">Diagnosis / Treatment Verification</option>
+                <option value="medication_letter">Medication Letter</option>
+                <option value="emotional_support_animal">Emotional Support Animal Letter</option>
+                <option value="body_only_draft">Body-Only Draft</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="letterProviderSelect">Provider <span class="required">*</span></label>
+            <div class="select-shell">
+              <select id="letterProviderSelect">
+                <option value="">Loading providers...</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="letterStateSelect">State <span class="required">*</span></label>
+            <div class="select-shell">
+              <select id="letterStateSelect">
+                <option value="">Select provider first</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="letterOutputMode">Output Mode</label>
+            <div class="select-shell">
+              <select id="letterOutputMode">
+                <option value="gpt_packet">GPT Packet</option>
+                <option value="custom_gpt_instructions">Custom GPT Instructions Export</option>
+                <option value="blank_template">Blank Astra Template</option>
+                <option value="printable_preview">Printable Preview</option>
+                <option value="html_export">HTML Export</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="field top-gap">
+          <label for="letterBriefDescription">Brief Description <span class="required">*</span></label>
+          <textarea id="letterBriefDescription" rows="5" placeholder="Example: Draft a concise accommodation letter for a patient requesting reduced distraction testing due to ADHD symptoms."></textarea>
+        </div>
+
+        <div class="field top-gap">
+          <label for="letterRawOutput">Optional Raw Astra Note Generator Output</label>
+          <textarea id="letterRawOutput" rows="5" placeholder="Optional: paste raw app output or structured note text that should inform the GPT packet."></textarea>
+        </div>
+
+        <label class="script-switch letter-prior-note-switch top-gap" for="letterPriorNoteUpload">
+          <input type="checkbox" id="letterPriorNoteUpload">
+          <span class="switch-track" aria-hidden="true"></span>
+          <span class="switch-label">I will upload a prior patient note to GPT</span>
+        </label>
+
+        <p class="helper-text letter-security-note">The letter generator does not automatically upload files. It only creates copyable packets, templates, previews, and local HTML downloads.</p>
+        <p class="letter-validation-message" id="letterValidationMessage" aria-live="polite"></p>
+
+        <div class="action-row letter-action-row top-gap">
+          <button id="generateLetterPacketBtn" type="button">Generate GPT Packet</button>
+          <button id="copyLetterPacketBtn" type="button">Copy GPT Packet</button>
+          <button id="openLetterGptBtn" type="button">Open GPT</button>
+          <button id="copyOpenLetterGptBtn" type="button">Copy &amp; Open GPT</button>
+          <button id="exportCustomGptBtn" type="button">Export Custom GPT Instructions</button>
+          <button id="copyCustomGptBtn" type="button">Copy Custom GPT Instructions</button>
+          <button id="copyBlankTemplateBtn" type="button">Copy Blank Template</button>
+          <button id="previewLetterBtn" type="button">Preview Letter</button>
+          <button id="printLetterBtn" type="button">Print / Save as PDF</button>
+          <button id="downloadLetterHtmlBtn" type="button">Download HTML</button>
+        </div>
+
+        <div class="field top-gap">
+          <label for="letterOutputBox">Generated Output</label>
+          <textarea id="letterOutputBox" rows="14" readonly placeholder="Generated GPT packet, Custom GPT instructions, or template output will appear here."></textarea>
+        </div>
+      </section>
+
+      <aside class="letter-preview-wrap" aria-label="Astra printable preview">
+        <div class="letter-preview-toolbar">
+          <span>Printable Preview</span>
+          <span class="letter-preview-size">8.5 x 11</span>
+        </div>
+        <section class="astra-letter-page" id="astraLetterPreview">
+          <header class="astra-letter-header">
+            <img class="astra-letter-logo" src="a_digital_vector_logo_features_an_uppercase_letter.png" alt="Astra Psychiatry logo">
+            <div class="astra-letter-contact">
+              <strong>ASTRA PSYCHIATRY</strong>
+              <span>AstraPsychiatry.com</span>
+              <span>clientservices@astrapsychiatry.com</span>
+              <span>Phone: (914) 764-2954</span>
+              <span>Fax: (914) 259-5363</span>
+            </div>
+          </header>
+          <div class="astra-letter-body" id="astraLetterPreviewBody"></div>
+        </section>
+      </aside>
     </section>
   </main>
 

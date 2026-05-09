@@ -1,4 +1,4 @@
-const APP_BUILD_ID = '20260311-drive-reset-v2';
+const APP_BUILD_ID = '20260509-astra-letter-generator';
 const CACHE_PREFIX = 'note-builder-shell-';
 const CACHE_NAME = `${CACHE_PREFIX}${APP_BUILD_ID}`;
 const SHELL_ASSETS = [
@@ -17,6 +17,7 @@ const SHELL_ASSETS = [
   './docs/medication-reference-maintenance.md',
   './docs/drive-sync-setup.md',
   './config/drive-manifest.json',
+  './config/astraProviders.json',
 ];
 
 const NETWORK_FIRST_PATHS = new Set([
@@ -24,6 +25,7 @@ const NETWORK_FIRST_PATHS = new Set([
   '/styles.css',
   '/app.js',
   '/manifest.json',
+  '/config/astraProviders.json',
 ]);
 
 self.addEventListener('install', (event) => {
