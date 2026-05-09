@@ -91,6 +91,7 @@ const els = {
   copyOpenBtn: document.getElementById('copyOpenBtn'),
   openGptBtn: document.getElementById('openGptBtn'),
   clearBtn: document.getElementById('clearBtn'),
+  generateLetterBtn: document.getElementById('generateLetterBtn'),
   exportHelper: document.getElementById('exportHelper'),
   activeGptUrl: document.getElementById('activeGptUrl'),
   followDate: document.getElementById('followDate'),
@@ -178,6 +179,8 @@ const els = {
   copyCustomGptBtn: document.getElementById('copyCustomGptBtn'),
   clearLetterBtn: document.getElementById('clearLetterBtn'),
   addScreeningInfoBtn: document.getElementById('addScreeningInfoBtn'),
+  uploadPreviousNoteBtn: document.getElementById('uploadPreviousNoteBtn'),
+  uploadSupportingDocsBtn: document.getElementById('uploadSupportingDocsBtn'),
   screeningInfoUploadStatus: document.getElementById('screeningInfoUploadStatus'),
 };
 
@@ -1188,10 +1191,43 @@ function addScreeningInformationToAstraIntake() {
 
   window.setTimeout(() => {
     els.addScreeningInfoBtn.disabled = false;
-    els.addScreeningInfoBtn.textContent = 'Add Screening Information';
+    els.addScreeningInfoBtn.textContent = 'Upload Screening Info';
     setScreeningInfoUploadStatus('Screening information added to Astra Intake', 'success');
     updateCompletionIndicators();
     updateExport();
+  }, 450);
+}
+
+function uploadPreviousNote() {
+  if (!els.uploadPreviousNoteBtn) return;
+
+  if (!(state.practice === 'astra' && state.visitType === 'followup')) {
+    // Perhaps show error
+    return;
+  }
+
+  els.uploadPreviousNoteBtn.disabled = true;
+  els.uploadPreviousNoteBtn.textContent = 'Uploading...';
+
+  window.setTimeout(() => {
+    els.uploadPreviousNoteBtn.disabled = false;
+    els.uploadPreviousNoteBtn.textContent = 'Upload Previous Note';
+    setAstraFollowupContextMode('uploadedPreviousNote');
+    refreshUI(true, { markDirty: true });
+  }, 450);
+}
+
+function uploadSupportingDocs() {
+  if (!els.uploadSupportingDocsBtn) return;
+
+  els.uploadSupportingDocsBtn.disabled = true;
+  els.uploadSupportingDocsBtn.textContent = 'Uploading...';
+
+  window.setTimeout(() => {
+    els.uploadSupportingDocsBtn.disabled = false;
+    els.uploadSupportingDocsBtn.textContent = 'Upload Supporting Docs';
+    setAstraSupportingDocsUploaded(true);
+    refreshUI(true, { markDirty: true });
   }, 450);
 }
 
@@ -3132,7 +3168,8 @@ function updateScriptVisibility() {
   }
 
   if (els.workspaceGrid && els.scriptPanel) {
-    els.workspaceGrid.classList.toggle('workspace-grid-single', els.scriptPanel.classList.contains('hidden'));
+    const shouldBeSingle = !isIntake || els.scriptPanel.classList.contains('hidden');
+    els.workspaceGrid.classList.toggle('workspace-grid-single', shouldBeSingle);
   }
 }
 
@@ -3160,6 +3197,10 @@ function updatePracticeSections() {
 
   if (els.astraSupportingDocsControl) {
     els.astraSupportingDocsControl.classList.toggle('hidden', !isAstra);
+  }
+
+  if (els.generateLetterBtn) {
+    els.generateLetterBtn.classList.toggle('hidden', !isAstra);
   }
 
   if (els.astraScreeners) {
@@ -7473,6 +7514,14 @@ function attachEventListeners() {
     els.addScreeningInfoBtn.addEventListener('click', addScreeningInformationToAstraIntake);
   }
 
+  if (els.uploadPreviousNoteBtn) {
+    els.uploadPreviousNoteBtn.addEventListener('click', uploadPreviousNote);
+  }
+
+  if (els.uploadSupportingDocsBtn) {
+    els.uploadSupportingDocsBtn.addEventListener('click', uploadSupportingDocs);
+  }
+
   if (els.astraBtn) els.astraBtn.addEventListener('click', () => setPractice('astra'));
   if (els.ebhBtn) els.ebhBtn.addEventListener('click', () => setPractice('ebh'));
   if (els.followBtn) els.followBtn.addEventListener('click', () => setVisitType('followup'));
@@ -7599,6 +7648,12 @@ function attachEventListeners() {
       if (window.confirm('Clear the current note draft? Current draft will clear, but backup snapshots will be kept.')) {
         clearAll();
       }
+    });
+  }
+
+  if (els.generateLetterBtn) {
+    els.generateLetterBtn.addEventListener('click', () => {
+      setActiveWorkspace('letter');
     });
   }
 

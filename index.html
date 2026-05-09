@@ -160,6 +160,7 @@
         <label for="previousPlan">Previous Plan <span class="required">*</span></label>
         <div class="field-header-actions">
           <button type="button" class="med-context-btn" data-med-context-field="previousPlan" aria-label="Open medication reference from previous plan">🧠 Med info</button>
+          <button type="button" id="uploadPreviousNoteBtn" class="upload-btn">Upload Previous Note</button>
         </div>
         <textarea id="previousPlan" rows="6" placeholder="Paste the previous plan here..."></textarea>
       </div>
@@ -182,6 +183,10 @@
           <button type="button" class="seg-btn" data-astra-intake-context-mode="none">No Supporting Docs</button>
           <button type="button" class="seg-btn" data-astra-intake-context-mode="upload">Upload Supporting Docs</button>
         </div>
+      </div>
+
+      <div class="field-header-actions" style="margin-bottom: 12px;">
+        <button type="button" id="addScreeningInfoBtn" class="upload-btn">Upload Screening Info</button>
       </div>
 
       <div class="grid grid-2" id="astraScreenersFields">
@@ -635,6 +640,9 @@
       </div>
 
       <div class="astra-supporting-docs-inline hidden top-gap" id="astraSupportingDocsControl">
+        <div class="field-header-actions" style="margin-bottom: 8px;">
+          <button type="button" id="uploadSupportingDocsBtn" class="upload-btn">Upload Supporting Docs</button>
+        </div>
         <label class="script-switch astra-supporting-docs-switch" for="astraSupportingDocsUploaded">
           <input type="checkbox" id="astraSupportingDocsUploaded">
           <span class="switch-track" aria-hidden="true"></span>
@@ -664,6 +672,7 @@
         <button id="copyOpenBtn" type="button">Copy &amp; Open GPT</button>
         <button id="openGptBtn" type="button">Open GPT</button>
         <button id="clearBtn" type="button">Clear</button>
+        <button id="generateLetterBtn" type="button" class="hidden">Generate Letter Packet</button>
       </div>
 
       <p class="helper-text export-helper" id="exportHelper">The correct GPT can be opened automatically based on selected practice and appointment type.</p>
