@@ -17,7 +17,9 @@ const SHELL_ASSETS = [
   './docs/medication-reference-maintenance.md',
   './docs/drive-sync-setup.md',
   './config/drive-manifest.json',
-  './config/astraProviders.json',
+  './src/config/astraProviders.json',
+  './src/config/astraDocumentTypes.json',
+  './src/config/astraBranding.json',
 ];
 
 const NETWORK_FIRST_PATHS = new Set([
@@ -25,7 +27,9 @@ const NETWORK_FIRST_PATHS = new Set([
   '/styles.css',
   '/app.js',
   '/manifest.json',
-  '/config/astraProviders.json',
+  '/src/config/astraProviders.json',
+  '/src/config/astraDocumentTypes.json',
+  '/src/config/astraBranding.json',
 ]);
 
 self.addEventListener('install', (event) => {

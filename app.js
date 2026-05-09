@@ -9,7 +9,7 @@ const state = {
   therapyInterwovenTier: '0',
   astraSupportingDocsUploaded: false,
   astraSupportingDocTypes: [],
-  astraFollowupContextMode: 'previousPlan',
+  astraFollowupContextMode: 'uploadedPreviousNote',
   topbarCondensed: false,
   topbarCondenseProgress: 0,
   medDrawerOpen: false,
@@ -36,11 +36,14 @@ const state = {
   drivePreflightReason: '',
   activeWorkspace: 'note',
   astraProviders: [],
+  astraDocumentTypes: [],
+  astraBranding: null,
   astraProviderConfigSource: 'fallback',
+  astraConfigErrors: [],
   selectedLetterProviderId: '',
   selectedLetterState: '',
+  selectedLetterDocumentTypeId: '',
   letterGeneratedOutput: '',
-  letterLastOutputMode: 'gpt_packet',
 };
 
 const els = {
@@ -163,24 +166,15 @@ const els = {
   letterDocumentType: document.getElementById('letterDocumentType'),
   letterProviderSelect: document.getElementById('letterProviderSelect'),
   letterStateSelect: document.getElementById('letterStateSelect'),
-  letterOutputMode: document.getElementById('letterOutputMode'),
   letterBriefDescription: document.getElementById('letterBriefDescription'),
   letterRawOutput: document.getElementById('letterRawOutput'),
-  letterPriorNoteUpload: document.getElementById('letterPriorNoteUpload'),
+  letterConfigMessage: document.getElementById('letterConfigMessage'),
   letterValidationMessage: document.getElementById('letterValidationMessage'),
   letterOutputBox: document.getElementById('letterOutputBox'),
-  astraLetterPreview: document.getElementById('astraLetterPreview'),
-  astraLetterPreviewBody: document.getElementById('astraLetterPreviewBody'),
   generateLetterPacketBtn: document.getElementById('generateLetterPacketBtn'),
   copyLetterPacketBtn: document.getElementById('copyLetterPacketBtn'),
-  openLetterGptBtn: document.getElementById('openLetterGptBtn'),
-  copyOpenLetterGptBtn: document.getElementById('copyOpenLetterGptBtn'),
-  exportCustomGptBtn: document.getElementById('exportCustomGptBtn'),
   copyCustomGptBtn: document.getElementById('copyCustomGptBtn'),
-  copyBlankTemplateBtn: document.getElementById('copyBlankTemplateBtn'),
-  previewLetterBtn: document.getElementById('previewLetterBtn'),
-  printLetterBtn: document.getElementById('printLetterBtn'),
-  downloadLetterHtmlBtn: document.getElementById('downloadLetterHtmlBtn'),
+  clearLetterBtn: document.getElementById('clearLetterBtn'),
   addScreeningInfoBtn: document.getElementById('addScreeningInfoBtn'),
   screeningInfoUploadStatus: document.getElementById('screeningInfoUploadStatus'),
 };
@@ -222,58 +216,10 @@ const ASTRA_SUPPORTING_DOC_TYPE_LABELS = {
 };
 const ASTRA_UNIVERSAL_GPT_LABEL = 'Universal Astra Note GPT';
 const ASTRA_LETTER_GPT_LABEL = 'Astra Document Generator GPT';
-const ASTRA_PROVIDER_CONFIG_URL = './config/astraProviders.json';
-const ASTRA_PRACTICE_NAME = 'Astra Psychiatry';
-const ASTRA_LETTER_CONTACT_LINES = [
-  'AstraPsychiatry.com',
-  'clientservices@astrapsychiatry.com',
-  'Phone: (914) 764-2954',
-  'Fax: (914) 259-5363',
-];
-const ASTRA_LETTER_DOCUMENT_TYPES = {
-  general_clinical_letter: 'General Clinical Letter',
-  accommodation_letter: 'Accommodation Letter',
-  return_to_work_school: 'Return-to-Work / School Letter',
-  treatment_summary: 'Treatment Summary',
-  diagnosis_treatment_verification: 'Diagnosis / Treatment Verification',
-  medication_letter: 'Medication Letter',
-  emotional_support_animal: 'Emotional Support Animal Letter',
-  body_only_draft: 'Body-Only Draft',
-};
-const ASTRA_PROVIDER_CONFIG_FALLBACK = {
-  providers: [
-    {
-      id: 'nick_stanzione',
-      active: true,
-      displayName: 'Nick Stanzione',
-      credentials: 'PMHNP',
-      title: 'Psychiatric Nurse Practitioner',
-      signatureImage: '/signatures/nick-stanzione.png',
-      licenses: {
-        NY: 'New York License #: [EDIT IN GOOGLE CONFIG]',
-        CT: 'Connecticut License #: [EDIT IN GOOGLE CONFIG]',
-        DE: 'Delaware License #: [EDIT IN GOOGLE CONFIG]',
-      },
-      defaultSignatureBlock: 'Nick Stanzione, PMHNP\nAstra Psychiatry',
-      sortOrder: 10,
-    },
-    {
-      id: 'kris_generales',
-      active: true,
-      displayName: 'Kris Generales',
-      credentials: 'PMHNP',
-      title: 'Psychiatric Nurse Practitioner',
-      signatureImage: '/signatures/kris-generales.png',
-      licenses: {
-        NY: 'New York License #: [EDIT IN GOOGLE CONFIG]',
-        CT: 'Connecticut License #: [EDIT IN GOOGLE CONFIG]',
-        DE: 'Delaware License #: [EDIT IN GOOGLE CONFIG]',
-      },
-      defaultSignatureBlock: 'Kris Generales, PMHNP\nAstra Psychiatry',
-      sortOrder: 20,
-    },
-  ],
-};
+const ASTRA_PROVIDER_CONFIG_URL = './src/config/astraProviders.json';
+const ASTRA_DOCUMENT_TYPES_CONFIG_URL = './src/config/astraDocumentTypes.json';
+const ASTRA_BRANDING_CONFIG_URL = './src/config/astraBranding.json';
+const ASTRA_CONFIG_HELP = 'Edit src/config/astraProviders.json, src/config/astraDocumentTypes.json, and src/config/astraBranding.json. Place assets under public/astra/ and public/signatures/. See README.md > Where to Upload Astra Files.';
 
 const brandConfig = {
   astra: {
@@ -679,12 +625,66 @@ function groupGoogleSheetProviderRows(rows) {
   return { providers: Array.from(grouped.values()) };
 }
 
-function applyAstraProviderConfig(config, source = 'local') {
-  const providers = normalizeAstraProviderConfig(config);
-  state.astraProviders = providers.length
-    ? providers
-    : normalizeAstraProviderConfig(ASTRA_PROVIDER_CONFIG_FALLBACK);
-  state.astraProviderConfigSource = providers.length ? source : 'fallback';
+function normalizeAstraDocumentTypeRecord(entry) {
+  if (!entry || typeof entry !== 'object') return null;
+  const id = String(entry.id || '').trim();
+  const label = String(entry.label || '').trim();
+  if (!id || !label) return null;
+  return {
+    id,
+    label,
+    description: String(entry.description || '').trim(),
+    gptGuidance: String(entry.gptGuidance || entry.gpt_guidance || '').trim(),
+    suggestedPlaceholders: Array.isArray(entry.suggestedPlaceholders)
+      ? entry.suggestedPlaceholders.map((value) => String(value || '').trim()).filter(Boolean)
+      : [],
+  };
+}
+
+function normalizeAstraDocumentTypesConfig(config) {
+  const types = Array.isArray(config && config.documentTypes) ? config.documentTypes : [];
+  return types.map(normalizeAstraDocumentTypeRecord).filter(Boolean);
+}
+
+function normalizeAstraBrandingConfig(config) {
+  if (!config || typeof config !== 'object') return null;
+  const practiceName = String(config.practiceName || '').trim();
+  if (!practiceName) return null;
+  const colors = config.colors && typeof config.colors === 'object' ? config.colors : {};
+  return {
+    practiceName,
+    website: String(config.website || '').trim(),
+    email: String(config.email || '').trim(),
+    phone: String(config.phone || '').trim(),
+    fax: String(config.fax || '').trim(),
+    logoPath: String(config.logoPath || '').trim(),
+    letterheadBackgroundPath: String(config.letterheadBackgroundPath || '').trim(),
+    colors: {
+      primary: String(colors.primary || '#0B3D67').trim(),
+      secondary: String(colors.secondary || '#5BA6D9').trim(),
+      accent: String(colors.accent || '#5BA6D9').trim(),
+      background: String(colors.background || '#ffffff').trim(),
+      text: String(colors.text || '#1f2937').trim(),
+    },
+  };
+}
+
+function resolveAstraAssetPath(pathValue, fallback = '[not configured]') {
+  const value = String(pathValue || '').trim();
+  if (!value) return fallback;
+  if (/^https?:\/\//i.test(value)) return value;
+  if (value.startsWith('/astra/') || value.startsWith('/signatures/')) {
+    return `public${value}`;
+  }
+  return value;
+}
+
+function applyAstraProviderConfig(config, source = 'local-json') {
+  state.astraProviders = normalizeAstraProviderConfig(config);
+  state.astraProviderConfigSource = source;
+  if (!state.astraProviders.length) {
+    addAstraConfigError('Provider config could not be loaded or has no active providers. ' + ASTRA_CONFIG_HELP);
+  }
 
   if (!state.astraProviders.some((provider) => provider.id === state.selectedLetterProviderId)) {
     state.selectedLetterProviderId = state.astraProviders[0] ? state.astraProviders[0].id : '';
@@ -697,38 +697,81 @@ function applyAstraProviderConfig(config, source = 'local') {
   }
 
   renderLetterProviderControls();
-  updateLetterPreview();
 }
 
-async function loadAstraProviderConfig() {
-  // TODO: Google Drive-hosted JSON config.
-  // TODO: Editable admin settings panel.
-  // TODO: Drive template upload/download.
-  // TODO: Optional DOCX export.
-  // TODO: Optional secure backend for PHI handling.
-  // TODO: Optional audit logging if deployed in a HIPAA-compliant environment.
-  // TODO: Optional role-based access controls.
-  // TODO: Optional encrypted storage.
+function applyAstraDocumentTypesConfig(config) {
+  state.astraDocumentTypes = normalizeAstraDocumentTypesConfig(config);
+  if (!state.astraDocumentTypes.length) {
+    addAstraConfigError('Document type config could not be loaded. ' + ASTRA_CONFIG_HELP);
+  }
+  if (!state.astraDocumentTypes.some((type) => type.id === state.selectedLetterDocumentTypeId)) {
+    state.selectedLetterDocumentTypeId = state.astraDocumentTypes[0] ? state.astraDocumentTypes[0].id : '';
+  }
+  renderLetterDocumentTypeControls();
+}
+
+function applyAstraBrandingConfig(config) {
+  state.astraBranding = normalizeAstraBrandingConfig(config);
+  if (!state.astraBranding) {
+    addAstraConfigError('Branding config could not be loaded. ' + ASTRA_CONFIG_HELP);
+  }
+  applyAstraBrandingStyles();
+}
+
+function addAstraConfigError(message) {
+  if (!message || state.astraConfigErrors.includes(message)) return;
+  state.astraConfigErrors.push(message);
+  renderAstraConfigMessage();
+}
+
+function clearAstraConfigErrors() {
+  state.astraConfigErrors = [];
+  renderAstraConfigMessage();
+}
+
+function renderAstraConfigMessage() {
+  if (!els.letterConfigMessage) return;
+  const text = state.astraConfigErrors.join(' ');
+  els.letterConfigMessage.textContent = text;
+  els.letterConfigMessage.classList.toggle('hidden', !text);
+}
+
+async function fetchJsonConfig(url, label) {
   if (typeof fetch !== 'function') {
-    applyAstraProviderConfig(ASTRA_PROVIDER_CONFIG_FALLBACK, 'fallback');
-    return;
+    throw new Error(`${label} fetch unavailable`);
   }
-
-  try {
-    const response = await fetch(`${ASTRA_PROVIDER_CONFIG_URL}?v=${encodeURIComponent(APP_BUILD_ID)}`, { cache: 'no-store' });
-    if (!response || !response.ok) {
-      throw new Error('Provider config unavailable');
-    }
-    const config = await response.json();
-    applyAstraProviderConfig(config, 'local-json');
-  } catch (error) {
-    applyAstraProviderConfig(ASTRA_PROVIDER_CONFIG_FALLBACK, 'fallback');
+  const response = await fetch(`${url}?v=${encodeURIComponent(APP_BUILD_ID)}`, { cache: 'no-store' });
+  if (!response || !response.ok) {
+    throw new Error(`${label} unavailable`);
   }
+  return response.json();
 }
 
-function initializeAstraProviders() {
-  applyAstraProviderConfig(ASTRA_PROVIDER_CONFIG_FALLBACK, 'fallback');
-  loadAstraProviderConfig();
+async function initializeAstraProviders() {
+  clearAstraConfigErrors();
+  // TODO: Future read-only Google Drive or Google Sheet config can replace these static JSON fetches.
+  // TODO: Add a read-only Google Drive-hosted JSON provider/branding/document-type source.
+  // TODO: Add an editable admin settings panel that writes only through an approved secure backend.
+  // TODO: Add Drive template upload/download sync if a compliant read/write integration is approved.
+  // TODO: Add optional DOCX export outside this GPT-packet-only v1.
+  // TODO: Add optional secure backend support for PHI handling when intentionally deployed.
+  // TODO: Add audit logging only if deployed in a HIPAA-compliant environment.
+  // TODO: Add role-based access controls and encrypted storage only with a compliant backend.
+  // TODO: Keep Drive writes out of this flow unless a secure backend is intentionally added later.
+  try {
+    const [providersConfig, documentTypesConfig, brandingConfig] = await Promise.all([
+      fetchJsonConfig(ASTRA_PROVIDER_CONFIG_URL, 'Provider config'),
+      fetchJsonConfig(ASTRA_DOCUMENT_TYPES_CONFIG_URL, 'Document type config'),
+      fetchJsonConfig(ASTRA_BRANDING_CONFIG_URL, 'Branding config'),
+    ]);
+    applyAstraProviderConfig(providersConfig);
+    applyAstraDocumentTypesConfig(documentTypesConfig);
+    applyAstraBrandingConfig(brandingConfig);
+  } catch (error) {
+    addAstraConfigError(`Astra Letter Generator config failed to load. ${ASTRA_CONFIG_HELP}`);
+    renderLetterProviderControls();
+    renderLetterDocumentTypeControls();
+  }
 }
 
 function getSelectedLetterProvider() {
@@ -745,8 +788,12 @@ function getLetterGptUrl() {
 }
 
 function getLetterDocumentTypeLabel() {
-  const value = els.letterDocumentType ? els.letterDocumentType.value : 'general_clinical_letter';
-  return ASTRA_LETTER_DOCUMENT_TYPES[value] || 'General Clinical Letter';
+  const type = getSelectedLetterDocumentType();
+  return type ? type.label : '';
+}
+
+function getSelectedLetterDocumentType() {
+  return state.astraDocumentTypes.find((type) => type.id === state.selectedLetterDocumentTypeId) || null;
 }
 
 function getLetterStateLicenseLine(provider = getSelectedLetterProvider(), stateCode = state.selectedLetterState) {
@@ -776,6 +823,25 @@ function renderLetterProviderControls() {
   }
 }
 
+function renderLetterDocumentTypeControls() {
+  if (!els.letterDocumentType) return;
+  els.letterDocumentType.innerHTML = state.astraDocumentTypes.length
+    ? state.astraDocumentTypes
+      .map((type) => `<option value="${escapeHtml(type.id)}">${escapeHtml(type.label)}</option>`)
+      .join('')
+    : '<option value="">No document types configured</option>';
+  els.letterDocumentType.value = state.selectedLetterDocumentTypeId;
+  els.letterDocumentType.disabled = !state.astraDocumentTypes.length;
+}
+
+function applyAstraBrandingStyles() {
+  if (!state.astraBranding || !els.body) return;
+  const colors = state.astraBranding.colors || {};
+  els.body.style.setProperty('--astra-letter-primary', colors.primary || '#0B3D67');
+  els.body.style.setProperty('--astra-letter-secondary', colors.secondary || '#5BA6D9');
+  els.body.style.setProperty('--astra-letter-accent', colors.accent || '#5BA6D9');
+}
+
 function setLetterValidationMessage(message, isError = true) {
   if (!els.letterValidationMessage) return;
   els.letterValidationMessage.textContent = message || '';
@@ -786,12 +852,23 @@ function setLetterValidationMessage(message, isError = true) {
 function validateLetterGenerator(options = {}) {
   const { requireBrief = false } = options;
   const provider = getSelectedLetterProvider();
+  const documentType = getSelectedLetterDocumentType();
   const stateCode = state.selectedLetterState;
   const licenseLine = getLetterStateLicenseLine(provider, stateCode);
   const brief = String(els.letterBriefDescription ? els.letterBriefDescription.value : '').trim();
 
+  if (!state.astraBranding) {
+    setLetterValidationMessage('Astra branding config is missing. ' + ASTRA_CONFIG_HELP);
+    return null;
+  }
+
+  if (!documentType) {
+    setLetterValidationMessage('Select a document type before generating the GPT packet.');
+    return null;
+  }
+
   if (!provider) {
-    setLetterValidationMessage('Select a provider before generating this output.');
+    setLetterValidationMessage('Select a provider before generating the GPT packet.');
     return null;
   }
 
@@ -813,43 +890,50 @@ function validateLetterGenerator(options = {}) {
   setLetterValidationMessage('');
   return {
     provider,
+    documentType,
     stateCode,
     licenseLine,
     brief,
     rawOutput: String(els.letterRawOutput ? els.letterRawOutput.value : '').trim(),
-    priorNoteUpload: Boolean(els.letterPriorNoteUpload && els.letterPriorNoteUpload.checked),
-    documentType: getLetterDocumentTypeLabel(),
+    branding: state.astraBranding,
   };
 }
 
 function buildProviderSignatureBlock(provider) {
   if (!provider) return '{{PROVIDER_SIGNATURE}}';
   return provider.defaultSignatureBlock
-    || `${provider.displayName}${provider.credentials ? `, ${provider.credentials}` : ''}\n${ASTRA_PRACTICE_NAME}`;
+    || `${provider.displayName}${provider.credentials ? `, ${provider.credentials}` : ''}\n${state.astraBranding ? state.astraBranding.practiceName : 'Astra Psychiatry'}`;
 }
 
 function buildDefaultAstraLetterTemplate(context = {}) {
-  const provider = context.provider || null;
-  const licenseLine = context.licenseLine || '{{STATE_LICENSE_LINE}}';
-  const providerName = provider ? provider.displayName : '{{PROVIDER_NAME}}';
-  const credentials = provider ? provider.credentials : '{{PROVIDER_CREDENTIALS}}';
-  const signature = provider ? buildProviderSignatureBlock(provider) : '{{PROVIDER_SIGNATURE}}';
-
+  const branding = context.branding || state.astraBranding || {};
   return [
-    'ASTRA PSYCHIATRY',
-    ...ASTRA_LETTER_CONTACT_LINES,
+    '[ASTRA LOGO / LETTERHEAD]',
+    '',
+    String(branding.practiceName || 'Astra Psychiatry').toUpperCase(),
+    branding.website || 'AstraPsychiatry.com',
+    branding.email || 'clientservices@astrapsychiatry.com',
+    `Phone: ${branding.phone || '(914) 764-2954'}`,
+    `Fax: ${branding.fax || '(914) 259-5363'}`,
     '',
     '{{DATE}}',
+    '',
     '{{RECIPIENT_NAME}}',
     '{{RECIPIENT_ADDRESS}}',
+    '',
     'RE: {{SUBJECT}}',
+    '',
     '{{GREETING}}',
+    '',
     '{{BODY}}',
+    '',
     'Sincerely,',
-    signature,
-    `${providerName}, ${credentials}`,
-    licenseLine,
-    ASTRA_PRACTICE_NAME,
+    '',
+    '{{PROVIDER_SIGNATURE_IMAGE}}',
+    '',
+    '{{PROVIDER_NAME}}, {{PROVIDER_CREDENTIALS}}',
+    '{{STATE_LICENSE_LINE}}',
+    branding.practiceName || 'Astra Psychiatry',
   ].join('\n');
 }
 
@@ -861,7 +945,25 @@ function buildProviderVerificationBlock() {
     '- Diagnoses:',
     '- Current medications:',
     '- Allergies:',
+    '- Relevant clinical history:',
+    '- Relevant screening/test scores:',
+    '- Requested document type:',
+    '- Provider:',
+    '- State/license:',
+    '- Missing or uncertain details:',
+  ].join('\n');
+}
+
+function buildCustomGptProviderVerificationBlock() {
+  return [
+    'Provider Verification Needed:',
+    '- Patient name:',
+    '- DOB:',
+    '- Diagnoses:',
+    '- Current medications:',
+    '- Allergies:',
     '- Relevant prior treatment plan:',
+    '- Relevant screening/test scores:',
     '- State/license:',
     '- Provider:',
     '- Missing or uncertain details:',
@@ -874,61 +976,62 @@ function buildAstraLetterGptPacket() {
 
   const {
     provider,
+    documentType,
     stateCode,
     licenseLine,
     brief,
     rawOutput,
-    priorNoteUpload,
-    documentType,
+    branding,
   } = context;
 
   const lines = [
-    'ASTRA DOCUMENT GENERATOR GPT PACKET',
+    'ASTRA CLINICAL LETTER GPT PACKET',
     '',
-    `Document type: ${documentType}`,
-    `Provider: ${provider.displayName}`,
-    `Provider credentials: ${provider.credentials || '[Credentials not configured]'}`,
-    `Provider title: ${provider.title || '[Title not configured]'}`,
-    `Selected state: ${stateCode}`,
-    `Selected state license line: ${licenseLine}`,
-    `Provider signature placeholder: ${buildProviderSignatureBlock(provider)}`,
-    `Practice: ${ASTRA_PRACTICE_NAME}`,
+    'Astra Branding:',
+    `Practice: ${branding.practiceName}`,
+    `Website: ${branding.website}`,
+    `Email: ${branding.email}`,
+    `Phone: ${branding.phone}`,
+    `Fax: ${branding.fax}`,
+    `Logo: ${resolveAstraAssetPath(branding.logoPath, '[No asset configured; use text-based Astra header.]')}`,
+    `Letterhead: ${resolveAstraAssetPath(branding.letterheadBackgroundPath, '[No letterhead background configured; use text-based Astra header.]')}`,
     '',
-    'Brief description from clinician:',
+    'Document Type:',
+    documentType.label,
+    'Guidance:',
+    documentType.gptGuidance || documentType.description || '[No document type guidance configured.]',
+    `Suggested placeholders: ${(documentType.suggestedPlaceholders || []).join(', ') || '[none configured]'}`,
+    '',
+    'Selected Provider:',
+    `Name: ${provider.displayName}`,
+    `Credentials: ${provider.credentials || '[Credentials not configured]'}`,
+    `Title: ${provider.title || '[Title not configured]'}`,
+    `State: ${stateCode}`,
+    `License line: ${licenseLine}`,
+    `Signature image: ${resolveAstraAssetPath(provider.signatureImage, '[No signature image configured; use fallback signature block.]')}`,
+    'Fallback signature block:',
+    buildProviderSignatureBlock(provider),
+    '',
+    'Provider Description:',
     brief,
     '',
-    'Raw Astra Note Generator output, if provided:',
+    'Raw Astra App Output:',
     rawOutput || '[No raw Astra Note Generator output provided.]',
     '',
-    `Prior patient note will be uploaded to GPT: ${priorNoteUpload ? 'Yes' : 'No'}`,
+    'Required instruction to GPT:',
+    'Use the uploaded most recent patient note as the main clinical source when available. Extract patient name, DOB, diagnoses, current medications, allergies, relevant history, treatment plan, and screening/test scores only if clearly supported. Do not invent facts. Do not silently carry forward outdated information. Flag missing or uncertain information in brackets.',
     '',
-    'Astra formatting instructions:',
-    buildDefaultAstraLetterTemplate({ provider, licenseLine }),
+    'Before final document, output:',
     '',
-    'Drafting instructions:',
-    '- Use the selected Astra document type.',
-    '- Use the selected provider, credentials, title, and license information exactly as provided.',
-    '- Use the Astra Psychiatry format and produce output ready to paste into the Astra-branded template.',
-    '- Use only information provided by the clinician and any uploaded prior note.',
-    '- Do not invent facts.',
-    '- Do not silently carry forward outdated diagnoses, medications, or clinical claims.',
-    '- Flag missing or uncertain information in brackets.',
-    '- Preserve a professional, concise, clinically appropriate psychiatric documentation tone.',
-    '- Include PHI when appropriate and when provided by the clinician or extracted from the uploaded prior note.',
-    '- Final output must be ready for provider review, not automatically final for chart use.',
+    buildProviderVerificationBlock(),
+    '',
+    'Then generate the final Astra-formatted document:',
+    '',
+    buildDefaultAstraLetterTemplate({ branding }),
+    '',
+    'Important:',
+    'The final GPT output may contain PHI. Use only within approved secure clinical workflows. Provider must review before clinical use.',
   ];
-
-  if (priorNoteUpload) {
-    lines.push(
-      '',
-      'Prior note workflow:',
-      'Review the uploaded prior note and extract only clinically relevant information needed for this document, including patient name, DOB, diagnoses, medications, allergies, prior treatment plan, and relevant history if clearly present. Do not invent missing facts. Do not silently carry forward outdated information. Present extracted information in a Provider Verification Needed section before generating the final document.',
-      '',
-      buildProviderVerificationBlock(),
-      '',
-      'After presenting the verification summary, generate the final document only after the provider has reviewed the extracted details or if the provider explicitly asks you to proceed.',
-    );
-  }
 
   return lines.join('\n');
 }
@@ -939,202 +1042,77 @@ function buildCustomGptInstructionsExport() {
     'Astra Clinical Letter Assistant',
     '',
     'GPT description:',
-    'Assists Astra Psychiatry providers in drafting professional Astra-branded clinical letters using provider-selected template details, uploaded prior notes, and raw Astra Note Generator output. Requires provider verification before clinical use.',
+    'Assists Astra Psychiatry providers in drafting professional Astra-branded clinical letters using uploaded prior notes, raw Astra Note Generator output, provider/state/license details, and Astra formatting. Requires provider verification before clinical use.',
     '',
-    'Full instruction block:',
+    'Custom GPT instructions:',
     'You are Astra Clinical Letter Assistant, a documentation assistant for Astra Psychiatry providers.',
+    '',
     'Your role is to draft professional psychiatric letters and clinical documents using:',
-    "- the provider's selected document type",
-    "- the provider's selected state/license information",
-    '- the Astra Psychiatry format',
+    '- the provider-selected document type',
+    '- provider name, credentials, state, and license information supplied by the user or Astra app',
     '- uploaded prior patient notes when provided',
     '- raw Astra Note Generator output when provided',
-    "- the clinician's brief description of the letter/document needed",
+    "- the clinician's brief description",
+    '- Astra Psychiatry format and tone',
     '',
-    'You may produce outputs containing PHI when PHI is provided by the clinician or extracted from an uploaded prior note. Treat all PHI as sensitive. Do not invent facts. Do not add unsupported diagnoses, medications, dates, or clinical claims.',
+    'You may produce output containing PHI when PHI is provided by the clinician or extracted from uploaded clinical documents. Treat PHI as sensitive.',
+    '',
+    'Primary rules:',
+    '- Do not invent facts.',
+    '- Do not fabricate diagnoses, medications, symptoms, impairments, dates, treatment history, risk factors, or functional limitations.',
+    '- Do not silently carry forward outdated diagnoses, medications, or plans.',
+    '- If information is missing or uncertain, use bracketed placeholders.',
+    '- If there is conflicting information, flag it for provider review.',
+    '- The final document is for provider review and must not be treated as automatically final for chart use.',
     '',
     'When a prior note is uploaded:',
-    '1. Extract relevant patient information only if clearly present.',
-    '2. Identify patient name, DOB, diagnoses, medications, allergies, prior treatment plan, relevant clinical history, and screening scores when available.',
-    '3. Do not silently carry forward outdated diagnoses, medications, or plans.',
-    '4. Flag missing or uncertain information in brackets.',
-    '5. Present a Provider Verification Needed section before the final letter.',
+    '1. Extract only clearly supported information relevant to the requested document.',
+    '2. Identify patient name, DOB, diagnoses, current medications, allergies, relevant history, prior treatment plan, and screening scores when available.',
+    '3. First produce:',
     '',
-    buildProviderVerificationBlock(),
+    buildCustomGptProviderVerificationBlock(),
     '',
-    'After the verification section, generate the final document in Astra format unless the provider requests body-only output.',
-    '',
-    'Default output format:',
-    '{{DATE}}',
-    '{{RECIPIENT_NAME}}',
-    '{{RECIPIENT_ADDRESS}}',
-    'RE: {{SUBJECT}}',
-    '{{GREETING}}',
-    '{{BODY}}',
-    'Sincerely,',
-    '{{PROVIDER_SIGNATURE}}',
-    '{{PROVIDER_NAME}}, {{PROVIDER_CREDENTIALS}}',
-    '{{STATE_LICENSE_LINE}}',
-    'Astra Psychiatry',
+    '4. Then generate the requested letter/document.',
     '',
     'Tone:',
     '- professional',
     '- concise',
+    '- warm but not casual',
     '- clinically appropriate',
-    '- warm but not overly casual',
-    '- suitable for psychiatric documentation',
-    '- medically accurate',
+    '- psychiatric documentation style',
     '- audit-conscious',
+    '- medically accurate',
     '- avoids exaggerated or unsupported claims',
     '',
-    'Rules:',
-    '- Do not invent facts.',
-    '- Do not fabricate diagnoses.',
-    '- Do not fabricate functional limitations.',
-    '- Do not fabricate treatment history.',
-    '- Do not add legal conclusions unless directly requested and supported.',
-    '- Do not imply certainty when the note only supports possibility.',
-    '- Use bracketed placeholders for missing information.',
-    '- Preserve the selected provider, credentials, and license line exactly as provided.',
-    '- If there is conflicting information, flag it for provider review.',
-    '- Final output must be ready for provider review, not automatically final for chart use.',
+    'Final output format:',
+    'Use Astra Psychiatry letterhead format with date, recipient, RE line, greeting, body, sincerely, signature placeholder/image reference, provider name/credentials, state license line, and Astra Psychiatry.',
     '',
     'Conversation starters:',
-    '- "Draft an Astra letter from this prior note and raw app output."',
+    '- "Draft an Astra-formatted clinical letter from this prior note and raw app output."',
     '- "Create a body-only version for an accommodation letter."',
     '- "Extract patient details from this prior note and prepare the Provider Verification section."',
-    '- "Generate a professional Astra-formatted letter using the selected provider and state license."',
+    '- "Generate a professional Astra letter using the selected provider and state license line."',
     '',
-    'Knowledge file recommendations:',
+    'Knowledge files to upload to GPT:',
     '- Astra official letterhead/template',
-    '- provider/license configuration reference',
-    '- common Astra letter types',
-    '- internal style/tone guide',
-    '- any approved clinical letter templates',
+    '- Astra logo',
+    '- Provider/license config',
+    '- Provider signature images',
+    '- Astra document type guide',
+    '- Astra tone/style guide',
     '',
-    'Safety/PHI workflow rules:',
+    'PHI handling rules:',
     '- Generated GPT output may contain PHI. Use only within approved secure clinical workflows.',
-    '- Do not claim that all outputs are PHI-free.',
-    '- Do not save PHI in localStorage.',
-    '- Do not save PHI in sessionStorage.',
-    '- Do not put PHI in URL parameters.',
-    '- Do not send PHI to analytics.',
-    '- Do not log PHI to console.',
-    '- Do not persist uploaded prior notes unless a secure backend is intentionally added in the future.',
-    '- If preview/export contains PHI, treat it as sensitive.',
-    '- Do not automatically upload files anywhere.',
+    '- Provider must review before clinical use.',
+    '- Do not invent or silently carry forward unsupported information.',
   ].join('\n');
 }
 
-function letterTextToHtml(text) {
-  const safe = escapeHtml(text || '');
-  return safe
-    .split(/\n{2,}/)
-    .map((paragraph) => `<p>${paragraph.replace(/\n/g, '<br>')}</p>`)
-    .join('');
-}
-
-function buildLetterPreviewBodyHtml() {
-  const context = validateLetterGenerator({ requireBrief: false });
-  const provider = context ? context.provider : getSelectedLetterProvider();
-  const licenseLine = context ? context.licenseLine : getLetterStateLicenseLine(provider, state.selectedLetterState);
-  const bodySource = String(els.letterBriefDescription ? els.letterBriefDescription.value : '').trim()
-    || '{{BODY}}';
-  const signatureBlock = provider ? buildProviderSignatureBlock(provider) : '{{PROVIDER_SIGNATURE}}';
-  const signatureLines = signatureBlock.split('\n').filter(Boolean);
-  const providerName = provider ? provider.displayName : '{{PROVIDER_NAME}}';
-  const providerCredentials = provider ? provider.credentials : '{{PROVIDER_CREDENTIALS}}';
-
-  return [
-    '<div class="letter-meta-block">',
-    '<p>{{DATE}}</p>',
-    '<p>{{RECIPIENT_NAME}}<br>{{RECIPIENT_ADDRESS}}</p>',
-    '<p><strong>RE:</strong> {{SUBJECT}}</p>',
-    '<p>{{GREETING}}</p>',
-    '</div>',
-    '<div class="letter-correspondence">',
-    letterTextToHtml(bodySource),
-    '</div>',
-    '<div class="letter-signature-block">',
-    '<p>Sincerely,</p>',
-    provider && provider.signatureImage
-      ? `<img class="provider-signature-image" src="${escapeHtml(provider.signatureImage)}" alt="${escapeHtml(provider.displayName)} signature" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');">`
-      : '',
-    `<div class="provider-typed-signature${provider && provider.signatureImage ? ' hidden' : ''}">${signatureLines.map(escapeHtml).join('<br>')}</div>`,
-    `<p><strong>${escapeHtml(providerName)}, ${escapeHtml(providerCredentials)}</strong><br>${escapeHtml(licenseLine || '{{STATE_LICENSE_LINE}}')}<br>${ASTRA_PRACTICE_NAME}</p>`,
-    '</div>',
-  ].join('');
-}
-
-function buildLetterHtmlDocument() {
-  const previewBody = buildLetterPreviewBodyHtml();
-  return [
-    '<!DOCTYPE html>',
-    '<html lang="en">',
-    '<head>',
-    '<meta charset="UTF-8">',
-    '<meta name="viewport" content="width=device-width, initial-scale=1.0">',
-    '<title>Astra Letter Export</title>',
-    '<style>',
-    'body{margin:0;background:#eef3f9;font-family:Arial,Helvetica,sans-serif;color:#132033;}',
-    '.page{width:8.5in;min-height:11in;margin:24px auto;background:#fff;padding:.65in .72in;box-sizing:border-box;}',
-    '.header{display:flex;gap:18px;align-items:center;border-bottom:2px solid #2f7fe8;padding-bottom:14px;margin-bottom:32px;}',
-    '.header img{width:112px;height:112px;object-fit:contain;}',
-    '.contact{display:grid;gap:3px;font-size:12px;color:#36506b}.contact strong{font-size:18px;color:#102033;letter-spacing:.08em}',
-    '.body{font-size:12.5pt;line-height:1.48}.body p{margin:0 0 14px}.signature{margin-top:28px}.provider-signature-image{max-width:190px;max-height:70px;object-fit:contain}.hidden{display:none!important}',
-    '@page{size:letter;margin:0}@media print{body{background:#fff}.page{margin:0;width:auto;min-height:11in;box-shadow:none}}',
-    '</style>',
-    '</head>',
-    '<body>',
-    '<main class="page">',
-    '<header class="header">',
-    '<img src="a_digital_vector_logo_features_an_uppercase_letter.png" alt="Astra Psychiatry logo">',
-    '<div class="contact"><strong>ASTRA PSYCHIATRY</strong>',
-    ASTRA_LETTER_CONTACT_LINES.map((line) => `<span>${escapeHtml(line)}</span>`).join(''),
-    '</div></header>',
-    `<section class="body">${previewBody}</section>`,
-    '</main>',
-    '</body>',
-    '</html>',
-  ].join('');
-}
-
-function updateLetterPreview() {
-  if (!els.astraLetterPreviewBody) return;
-  els.astraLetterPreviewBody.innerHTML = buildLetterPreviewBodyHtml();
-}
-
-function setLetterOutput(text, mode) {
+function setLetterOutput(text) {
   state.letterGeneratedOutput = text || '';
-  state.letterLastOutputMode = mode || (els.letterOutputMode ? els.letterOutputMode.value : 'gpt_packet');
   if (els.letterOutputBox) {
     els.letterOutputBox.value = state.letterGeneratedOutput;
   }
-}
-
-function generateLetterOutputForMode(mode) {
-  const selectedMode = mode || (els.letterOutputMode ? els.letterOutputMode.value : 'gpt_packet');
-  if (selectedMode === 'custom_gpt_instructions') {
-    return buildCustomGptInstructionsExport();
-  }
-
-  if (selectedMode === 'blank_template') {
-    const context = validateLetterGenerator({ requireBrief: false });
-    if (!context) return '';
-    return buildDefaultAstraLetterTemplate(context);
-  }
-
-  if (selectedMode === 'printable_preview') {
-    updateLetterPreview();
-    return 'Printable preview refreshed. Use Print / Save as PDF to export the Astra-branded page.';
-  }
-
-  if (selectedMode === 'html_export') {
-    validateLetterGenerator({ requireBrief: false });
-    return buildLetterHtmlDocument();
-  }
-
-  return buildAstraLetterGptPacket();
 }
 
 async function copyTextWithButtonFeedback(text, button, fallbackMessage) {
@@ -1152,43 +1130,6 @@ async function copyTextWithButtonFeedback(text, button, fallbackMessage) {
     window.alert(fallbackMessage || 'Copy failed. Please copy manually from the output box.');
     return false;
   }
-}
-
-function openLetterGpt() {
-  const url = getLetterGptUrl();
-  if (!url) {
-    window.alert('No Astra Document Generator GPT link is configured.');
-    return;
-  }
-  window.location.assign(url);
-}
-
-function downloadLetterHtml() {
-  const context = validateLetterGenerator({ requireBrief: false });
-  if (!context) return;
-
-  const html = buildLetterHtmlDocument();
-  setLetterOutput(html, 'html_export');
-  const blob = new Blob([html], { type: 'text/html' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `astra-letter-${new Date().toISOString().slice(0, 10)}.html`;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  window.setTimeout(() => URL.revokeObjectURL(url), 1000);
-}
-
-function refreshLetterOutputFromMode() {
-  const mode = els.letterOutputMode ? els.letterOutputMode.value : 'gpt_packet';
-  if (mode === 'printable_preview') {
-    updateLetterPreview();
-    setLetterOutput('Printable preview refreshed. Use Print / Save as PDF to export the Astra-branded page.', mode);
-    return;
-  }
-  const text = generateLetterOutputForMode(mode);
-  if (text) setLetterOutput(text, mode);
 }
 
 function setActiveWorkspace(workspace) {
@@ -1211,7 +1152,6 @@ function updateWorkspaceVisibility() {
     els.body.dataset.activeWorkspace = state.activeWorkspace;
   }
   setActiveByData('#workspaceToggle .seg-btn', 'workspace', state.activeWorkspace);
-  if (isLetter) updateLetterPreview();
 }
 
 function hasScreeningInformationContent() {
@@ -3046,7 +2986,7 @@ function updateBranding() {
     if (els.brandKicker) els.brandKicker.textContent = 'Astra Psychiatry';
     if (els.brandTitle) els.brandTitle.textContent = 'Astra Letter Generator';
     if (els.brandSubtitle) {
-      els.brandSubtitle.textContent = `Provider-mapped letters, templates, and ${ASTRA_LETTER_GPT_LABEL} handoffs.`;
+      els.brandSubtitle.textContent = `Astra-only GPT packet generation for the ${ASTRA_LETTER_GPT_LABEL}.`;
     }
     if (els.brandModePill) els.brandModePill.textContent = 'Letter Workflow';
     if (els.brandLogoFallback) els.brandLogoFallback.textContent = 'A';
@@ -4497,9 +4437,9 @@ function applyDraft(draft) {
     state.therapyInterwovenTier = draft.state.therapyInterwovenTier || '0';
     state.astraSupportingDocsUploaded = Boolean(draft.state.astraSupportingDocsUploaded);
     state.astraSupportingDocTypes = normalizeAstraSupportingDocTypes(draft.state.astraSupportingDocTypes);
-    state.astraFollowupContextMode = draft.state.astraFollowupContextMode === 'uploadedPreviousNote'
-      ? 'uploadedPreviousNote'
-      : 'previousPlan';
+    state.astraFollowupContextMode = Object.prototype.hasOwnProperty.call(draft.state, 'astraFollowupContextMode')
+      ? (draft.state.astraFollowupContextMode === 'previousPlan' ? 'previousPlan' : 'uploadedPreviousNote')
+      : 'uploadedPreviousNote';
   }
 
   if (draft.inputs) {
@@ -4836,7 +4776,7 @@ function clearAll() {
   state.scriptVisible = false;
   state.astraSupportingDocsUploaded = false;
   state.astraSupportingDocTypes = [];
-  state.astraFollowupContextMode = 'previousPlan';
+  state.astraFollowupContextMode = 'uploadedPreviousNote';
 
   setValue('therapyInterwoven', '0');
 
@@ -4875,7 +4815,7 @@ function clearAll() {
         therapyInterwovenTier: '0',
         astraSupportingDocsUploaded: false,
         astraSupportingDocTypes: [],
-        astraFollowupContextMode: 'previousPlan',
+        astraFollowupContextMode: 'uploadedPreviousNote',
       },
       inputs: {},
     };
@@ -7450,43 +7390,29 @@ function attachEventListeners() {
       const states = provider ? Object.keys(provider.licenses).sort() : [];
       state.selectedLetterState = states[0] || '';
       renderLetterProviderControls();
-      updateLetterPreview();
-      if (state.letterGeneratedOutput) refreshLetterOutputFromMode();
     });
   }
 
   if (els.letterStateSelect) {
     els.letterStateSelect.addEventListener('change', () => {
       state.selectedLetterState = els.letterStateSelect.value;
-      updateLetterPreview();
-      if (state.letterGeneratedOutput) refreshLetterOutputFromMode();
     });
   }
 
-  [
-    els.letterDocumentType,
-    els.letterOutputMode,
-    els.letterBriefDescription,
-    els.letterRawOutput,
-    els.letterPriorNoteUpload,
-  ].forEach((element) => {
+  [els.letterDocumentType, els.letterBriefDescription, els.letterRawOutput].forEach((element) => {
     if (!element) return;
-    const eventName = element.tagName === 'SELECT' || element.type === 'checkbox' ? 'change' : 'input';
+    const eventName = element.tagName === 'SELECT' ? 'change' : 'input';
     element.addEventListener(eventName, () => {
-      updateLetterPreview();
-      if (element === els.letterOutputMode) {
-        refreshLetterOutputFromMode();
+      if (element === els.letterDocumentType) {
+        state.selectedLetterDocumentTypeId = els.letterDocumentType.value;
       }
     });
-    if (eventName !== 'change') {
-      element.addEventListener('change', updateLetterPreview);
-    }
   });
 
   if (els.generateLetterPacketBtn) {
     els.generateLetterPacketBtn.addEventListener('click', () => {
       const packet = buildAstraLetterGptPacket();
-      if (packet) setLetterOutput(packet, 'gpt_packet');
+      if (packet) setLetterOutput(packet);
     });
   }
 
@@ -7494,69 +7420,26 @@ function attachEventListeners() {
     els.copyLetterPacketBtn.addEventListener('click', async () => {
       const packet = buildAstraLetterGptPacket();
       if (!packet) return;
-      setLetterOutput(packet, 'gpt_packet');
+      setLetterOutput(packet);
       await copyTextWithButtonFeedback(packet, els.copyLetterPacketBtn, 'Copy failed. Please copy the GPT packet manually.');
-    });
-  }
-
-  if (els.openLetterGptBtn) {
-    els.openLetterGptBtn.addEventListener('click', openLetterGpt);
-  }
-
-  if (els.copyOpenLetterGptBtn) {
-    els.copyOpenLetterGptBtn.addEventListener('click', async () => {
-      const packet = buildAstraLetterGptPacket();
-      if (!packet) return;
-      setLetterOutput(packet, 'gpt_packet');
-      const copied = await copyTextWithButtonFeedback(packet, els.copyOpenLetterGptBtn, 'Copy failed. Please copy the GPT packet manually.');
-      if (copied) openLetterGpt();
-    });
-  }
-
-  if (els.exportCustomGptBtn) {
-    els.exportCustomGptBtn.addEventListener('click', () => {
-      setLetterOutput(buildCustomGptInstructionsExport(), 'custom_gpt_instructions');
     });
   }
 
   if (els.copyCustomGptBtn) {
     els.copyCustomGptBtn.addEventListener('click', async () => {
       const instructions = buildCustomGptInstructionsExport();
-      setLetterOutput(instructions, 'custom_gpt_instructions');
+      setLetterOutput(instructions);
       await copyTextWithButtonFeedback(instructions, els.copyCustomGptBtn, 'Copy failed. Please copy the Custom GPT instructions manually.');
     });
   }
 
-  if (els.copyBlankTemplateBtn) {
-    els.copyBlankTemplateBtn.addEventListener('click', async () => {
-      const context = validateLetterGenerator({ requireBrief: false });
-      if (!context) return;
-      const template = buildDefaultAstraLetterTemplate(context);
-      setLetterOutput(template, 'blank_template');
-      await copyTextWithButtonFeedback(template, els.copyBlankTemplateBtn, 'Copy failed. Please copy the blank template manually.');
+  if (els.clearLetterBtn) {
+    els.clearLetterBtn.addEventListener('click', () => {
+      if (els.letterBriefDescription) els.letterBriefDescription.value = '';
+      if (els.letterRawOutput) els.letterRawOutput.value = '';
+      setLetterOutput('');
+      setLetterValidationMessage('');
     });
-  }
-
-  if (els.previewLetterBtn) {
-    els.previewLetterBtn.addEventListener('click', () => {
-      const context = validateLetterGenerator({ requireBrief: false });
-      if (!context) return;
-      updateLetterPreview();
-      setLetterOutput('Printable preview refreshed. Use Print / Save as PDF to export the Astra-branded page.', 'printable_preview');
-    });
-  }
-
-  if (els.printLetterBtn) {
-    els.printLetterBtn.addEventListener('click', () => {
-      const context = validateLetterGenerator({ requireBrief: false });
-      if (!context) return;
-      updateLetterPreview();
-      window.print();
-    });
-  }
-
-  if (els.downloadLetterHtmlBtn) {
-    els.downloadLetterHtmlBtn.addEventListener('click', downloadLetterHtml);
   }
 
   if (els.addScreeningInfoBtn) {

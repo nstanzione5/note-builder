@@ -568,21 +568,6 @@
         </div>
       </div>
 
-      <div class="astra-supporting-docs-inline hidden top-gap" id="astraSupportingDocsControl">
-        <label class="script-switch astra-supporting-docs-switch" for="astraSupportingDocsUploaded">
-          <input type="checkbox" id="astraSupportingDocsUploaded">
-          <span class="switch-track" aria-hidden="true"></span>
-          <span class="switch-label">Supporting docs uploaded</span>
-        </label>
-        <div class="astra-supporting-doc-type-row" id="astraSupportingDocTypes" role="group" aria-label="Supporting document types">
-          <button type="button" class="doc-type-btn" data-supporting-doc-type="intakeScreening" aria-pressed="false">Screening Docs</button>
-          <button type="button" class="doc-type-btn" data-supporting-doc-type="labs" aria-pressed="false">Labs</button>
-          <button type="button" class="doc-type-btn" data-supporting-doc-type="genesight" aria-pressed="false">GeneSight</button>
-          <button type="button" class="doc-type-btn" data-supporting-doc-type="other" aria-pressed="false">Other</button>
-        </div>
-        <p class="helper-text" id="astraSupportingDocsHint">Select this only when documents will also be uploaded to the GPT.</p>
-      </div>
-
       <div class="field top-gap">
         <label>Therapy Interwoven Minutes</label>
         <div class="segmented-control segmented-control-form" id="therapyInterwovenToggle" role="group" aria-label="Therapy interwoven minutes">
@@ -641,6 +626,21 @@
           </div>
         </div>
       </div>
+
+      <div class="astra-supporting-docs-inline hidden top-gap" id="astraSupportingDocsControl">
+        <label class="script-switch astra-supporting-docs-switch" for="astraSupportingDocsUploaded">
+          <input type="checkbox" id="astraSupportingDocsUploaded">
+          <span class="switch-track" aria-hidden="true"></span>
+          <span class="switch-label">Supporting docs uploaded</span>
+        </label>
+        <div class="astra-supporting-doc-type-row" id="astraSupportingDocTypes" role="group" aria-label="Supporting document types">
+          <button type="button" class="doc-type-btn" data-supporting-doc-type="intakeScreening" aria-pressed="false">Screening Docs</button>
+          <button type="button" class="doc-type-btn" data-supporting-doc-type="labs" aria-pressed="false">Labs</button>
+          <button type="button" class="doc-type-btn" data-supporting-doc-type="genesight" aria-pressed="false">GeneSight</button>
+          <button type="button" class="doc-type-btn" data-supporting-doc-type="other" aria-pressed="false">Other</button>
+        </div>
+        <p class="helper-text" id="astraSupportingDocsHint">Select this only when documents will also be uploaded to the GPT.</p>
+      </div>
     </section>
 
     <section class="card export-card" data-section="export">
@@ -694,29 +694,24 @@
       <span>Use only within approved secure clinical workflows. Do not paste sensitive content into unapproved tools.</span>
     </section>
 
-    <section class="letter-generator-grid">
+    <section class="letter-generator-panel">
       <section class="card letter-form-card">
         <div class="section-heading">
           <div>
             <h2 id="letterGeneratorTitle">Astra Letter Generator</h2>
-            <p>Dropdowns, a brief description, and copy/export. The app controls branding and provider details; GPT drafts the clinical wording.</p>
+            <p>Create a clean GPT packet with Astra branding, provider details, state licensure, and concise instructions.</p>
           </div>
-          <div class="section-mini-badge">Astra documents</div>
+          <div class="section-mini-badge">GPT packet only</div>
         </div>
 
-        <div class="grid grid-2">
+        <p class="letter-config-message" id="letterConfigMessage" aria-live="polite"></p>
+
+        <div class="grid grid-3 letter-selector-grid">
           <div class="field">
             <label for="letterDocumentType">Document Type <span class="required">*</span></label>
             <div class="select-shell">
               <select id="letterDocumentType">
-                <option value="general_clinical_letter">General Clinical Letter</option>
-                <option value="accommodation_letter">Accommodation Letter</option>
-                <option value="return_to_work_school">Return-to-Work / School Letter</option>
-                <option value="treatment_summary">Treatment Summary</option>
-                <option value="diagnosis_treatment_verification">Diagnosis / Treatment Verification</option>
-                <option value="medication_letter">Medication Letter</option>
-                <option value="emotional_support_animal">Emotional Support Animal Letter</option>
-                <option value="body_only_draft">Body-Only Draft</option>
+                <option value="">Loading document types...</option>
               </select>
             </div>
           </div>
@@ -738,24 +733,11 @@
               </select>
             </div>
           </div>
-
-          <div class="field">
-            <label for="letterOutputMode">Output Mode</label>
-            <div class="select-shell">
-              <select id="letterOutputMode">
-                <option value="gpt_packet">GPT Packet</option>
-                <option value="custom_gpt_instructions">Custom GPT Instructions Export</option>
-                <option value="blank_template">Blank Astra Template</option>
-                <option value="printable_preview">Printable Preview</option>
-                <option value="html_export">HTML Export</option>
-              </select>
-            </div>
-          </div>
         </div>
 
         <div class="field top-gap">
-          <label for="letterBriefDescription">Brief Description <span class="required">*</span></label>
-          <textarea id="letterBriefDescription" rows="5" placeholder="Example: Draft a concise accommodation letter for a patient requesting reduced distraction testing due to ADHD symptoms."></textarea>
+          <label for="letterBriefDescription">What should the GPT incorporate into this letter? <span class="required">*</span></label>
+          <textarea id="letterBriefDescription" rows="5" placeholder="Briefly describe the purpose of the letter, key points to include, and any special wording needed."></textarea>
         </div>
 
         <div class="field top-gap">
@@ -763,53 +745,25 @@
           <textarea id="letterRawOutput" rows="5" placeholder="Optional: paste raw app output or structured note text that should inform the GPT packet."></textarea>
         </div>
 
-        <label class="script-switch letter-prior-note-switch top-gap" for="letterPriorNoteUpload">
-          <input type="checkbox" id="letterPriorNoteUpload">
-          <span class="switch-track" aria-hidden="true"></span>
-          <span class="switch-label">I will upload a prior patient note to GPT</span>
-        </label>
+        <section class="letter-reminder-panel">
+          Upload the patient's most recent note directly to the Astra Clinical Letter GPT before pasting this packet. For intakes, you may also upload screening documents or test score summaries if available.
+        </section>
 
-        <p class="helper-text letter-security-note">The letter generator does not automatically upload files. It only creates copyable packets, templates, previews, and local HTML downloads.</p>
+        <p class="helper-text letter-security-note">This tool only creates copyable GPT packets. It does not create final documents, upload files, or write to Google Drive.</p>
         <p class="letter-validation-message" id="letterValidationMessage" aria-live="polite"></p>
 
         <div class="action-row letter-action-row top-gap">
-          <button id="generateLetterPacketBtn" type="button">Generate GPT Packet</button>
+          <button id="generateLetterPacketBtn" type="button">Generate Letter GPT Packet</button>
           <button id="copyLetterPacketBtn" type="button">Copy GPT Packet</button>
-          <button id="openLetterGptBtn" type="button">Open GPT</button>
-          <button id="copyOpenLetterGptBtn" type="button">Copy &amp; Open GPT</button>
-          <button id="exportCustomGptBtn" type="button">Export Custom GPT Instructions</button>
-          <button id="copyCustomGptBtn" type="button">Copy Custom GPT Instructions</button>
-          <button id="copyBlankTemplateBtn" type="button">Copy Blank Template</button>
-          <button id="previewLetterBtn" type="button">Preview Letter</button>
-          <button id="printLetterBtn" type="button">Print / Save as PDF</button>
-          <button id="downloadLetterHtmlBtn" type="button">Download HTML</button>
+          <button id="clearLetterBtn" type="button">Clear</button>
+          <button id="copyCustomGptBtn" type="button">Copy Custom GPT Setup Instructions</button>
         </div>
 
         <div class="field top-gap">
-          <label for="letterOutputBox">Generated Output</label>
-          <textarea id="letterOutputBox" rows="14" readonly placeholder="Generated GPT packet, Custom GPT instructions, or template output will appear here."></textarea>
+          <label for="letterOutputBox">GPT Packet for Astra Clinical Letter Assistant</label>
+          <textarea id="letterOutputBox" rows="16" readonly placeholder="Generate a packet to copy into the Astra Clinical Letter GPT."></textarea>
         </div>
       </section>
-
-      <aside class="letter-preview-wrap" aria-label="Astra printable preview">
-        <div class="letter-preview-toolbar">
-          <span>Printable Preview</span>
-          <span class="letter-preview-size">8.5 x 11</span>
-        </div>
-        <section class="astra-letter-page" id="astraLetterPreview">
-          <header class="astra-letter-header">
-            <img class="astra-letter-logo" src="a_digital_vector_logo_features_an_uppercase_letter.png" alt="Astra Psychiatry logo">
-            <div class="astra-letter-contact">
-              <strong>ASTRA PSYCHIATRY</strong>
-              <span>AstraPsychiatry.com</span>
-              <span>clientservices@astrapsychiatry.com</span>
-              <span>Phone: (914) 764-2954</span>
-              <span>Fax: (914) 259-5363</span>
-            </div>
-          </header>
-          <div class="astra-letter-body" id="astraLetterPreviewBody"></div>
-        </section>
-      </aside>
     </section>
   </main>
 

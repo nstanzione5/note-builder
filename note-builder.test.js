@@ -26,6 +26,7 @@ async function createAppDom(options = {}) {
     seedLocalStorage = {},
     htmlTransform,
     mockNow,
+    failAstraConfigFetch = false,
   } = options;
 
   const virtualConsole = new VirtualConsole();
@@ -73,7 +74,35 @@ async function createAppDom(options = {}) {
       window.alert = () => {};
       window.confirm = () => true;
       window.scrollTo = () => {};
-      window.fetch = undefined;
+      window.fetch = async (resource) => {
+        const requested = String(resource || '');
+        const pathname = new URL(requested, 'http://localhost:8000/').pathname.replace(/^\//, '');
+        if (failAstraConfigFetch && pathname.startsWith('src/config/')) {
+          return {
+            ok: false,
+            status: 404,
+            json: async () => ({}),
+            text: async () => '',
+          };
+        }
+        const localPath = path.join(ROOT, pathname);
+        if (pathname.startsWith('src/config/') || pathname.startsWith('data/') || pathname === 'config/drive-manifest.json') {
+          if (fs.existsSync(localPath)) {
+            return {
+              ok: true,
+              status: 200,
+              json: async () => JSON.parse(fs.readFileSync(localPath, 'utf8')),
+              text: async () => fs.readFileSync(localPath, 'utf8'),
+            };
+          }
+        }
+        return {
+          ok: false,
+          status: 404,
+          json: async () => ({}),
+          text: async () => '',
+        };
+      };
       window.requestAnimationFrame = (callback) => window.setTimeout(callback, 0);
       window.cancelAnimationFrame = (id) => window.clearTimeout(id);
       window.requestIdleCallback = (callback) => window.setTimeout(() => callback({ didTimeout: false, timeRemaining: () => 50 }), 0);
@@ -175,6 +204,10 @@ async function testAstraSupportingDocumentsInstruction() {
   assert.equal(document.getElementById('astraSupportingDocsCard'), null);
   assert.ok(!document.getElementById('astraSupportingDocsControl').classList.contains('hidden'));
   assert.ok(!document.getElementById('astraSupportingDocsUploaded').checked);
+  assert.ok(
+    Boolean(document.getElementById('docEnd').compareDocumentPosition(document.getElementById('astraSupportingDocsControl')) & window.Node.DOCUMENT_POSITION_FOLLOWING),
+    'Supporting docs control should appear after time collection fields',
+  );
 
   document.getElementById('ebhBtn').click();
   assert.ok(document.getElementById('astraSupportingDocsControl').classList.contains('hidden'));
@@ -208,13 +241,10 @@ async function testAstraFollowupUploadedPreviousNoteMode() {
   const dom = await createAppDom();
   const { document } = dom.window;
 
-  assert.ok(!document.getElementById('previousPlanField').classList.contains('hidden'));
-  assert.equal(document.getElementById('previousPlanCompletionStatus').textContent, 'Pending');
-
-  document.querySelector('[data-astra-followup-context-mode="uploadedPreviousNote"]').click();
-
+  assert.ok(document.querySelector('[data-astra-followup-context-mode="uploadedPreviousNote"]').classList.contains('active'));
   assert.ok(document.getElementById('previousPlanField').classList.contains('hidden'));
   assert.equal(document.getElementById('previousPlanCompletionStatus').textContent, 'Complete');
+  assert.match(document.getElementById('previousPlanSectionCopy').textContent, /Upload the full previous note directly to the GPT/i);
 
   let exportText = document.getElementById('exportBox').value;
   assert.match(
@@ -400,8 +430,16 @@ async function testAstraLetterProviderConfigAndStateFiltering() {
   document.getElementById('letterGeneratorTab').click();
 
   assert.ok(!document.getElementById('letterGeneratorShell').classList.contains('hidden'));
+  assert.equal(document.body.dataset.activeWorkspace, 'letter');
+  assert.match(document.getElementById('brandSubtitle').textContent, /GPT packet generation/i);
+  assert.equal(document.getElementById('letterOutputMode'), null, 'Letter Generator should not include output mode controls');
+  assert.equal(document.getElementById('previewLetterBtn'), null, 'Letter Generator should not include preview controls');
+  assert.equal(document.getElementById('printLetterBtn'), null, 'Letter Generator should not include print controls');
+  assert.equal(document.getElementById('downloadLetterHtmlBtn'), null, 'Letter Generator should not include HTML export controls');
+  assert.equal(document.getElementById('letterPriorNoteUpload'), null, 'Letter Generator should use a static upload reminder, not a prior-note toggle');
   assert.equal(document.getElementById('letterProviderSelect').options.length, 2);
   assert.equal(document.getElementById('letterStateSelect').options.length, 3);
+  assert.equal(document.getElementById('letterDocumentType').options.length, 13);
 
   window.eval(`
     applyAstraProviderConfig({
@@ -443,7 +481,7 @@ async function testAstraLetterProviderConfigAndStateFiltering() {
   dom.window.close();
 }
 
-async function testAstraLetterPacketValidationAndPriorNoteInstructions() {
+async function testAstraLetterPacketGenerationAndSecurity() {
   const dom = await createAppDom();
   const { window } = dom;
   const { document } = window;
@@ -458,27 +496,48 @@ async function testAstraLetterPacketValidationAndPriorNoteInstructions() {
   );
 
   setField(window, 'letterBriefDescription', 'Draft a concise treatment verification letter for continuity of care.');
-  document.getElementById('letterPriorNoteUpload').click();
+  setField(window, 'letterRawOutput', 'Astra raw output: patient is stable on current regimen per clinician note.');
   document.getElementById('generateLetterPacketBtn').click();
 
   const packet = document.getElementById('letterOutputBox').value;
-  assert.match(packet, /ASTRA DOCUMENT GENERATOR GPT PACKET/);
-  assert.match(packet, /Document type: General Clinical Letter/);
-  assert.match(packet, /Provider: Nick Stanzione/);
-  assert.match(packet, /Selected state license line: Connecticut License #: \[EDIT IN GOOGLE CONFIG\]|Delaware License #: \[EDIT IN GOOGLE CONFIG\]|New York License #: \[EDIT IN GOOGLE CONFIG\]/);
+  assert.match(packet, /ASTRA CLINICAL LETTER GPT PACKET/);
+  assert.match(packet, /Practice: Astra Psychiatry/);
+  assert.match(packet, /Logo: public\/astra\/logo\.png/);
+  assert.match(packet, /Letterhead: public\/astra\/letterhead-background\.png/);
+  assert.match(packet, /General Clinical Letter/);
+  assert.match(packet, /Name: Nick Stanzione/);
+  assert.match(packet, /License line: Connecticut License #: \[ENTER LICENSE\]|Delaware License #: \[ENTER LICENSE\]|New York License #: \[ENTER LICENSE\]/);
+  assert.match(packet, /Signature image: public\/signatures\/nick-stanzione\.png/);
+  assert.match(packet, /Astra raw output: patient is stable/);
   assert.match(packet, /Do not invent facts\./);
   assert.match(packet, /Provider Verification Needed:/);
-  assert.match(packet, /Review the uploaded prior note and extract only clinically relevant information/);
+  assert.match(packet, /Use the uploaded most recent patient note as the main clinical source when available/);
+  assert.match(packet, /The final GPT output may contain PHI/);
   assert.equal(
     window.eval('getLetterGptUrl()'),
     'https://chatgpt.com/g/g-69ff5644fd80819182ccbb07dfee15fa-astra-document-generator',
     'Letter generator should use the permanent Astra Document Generator GPT URL',
   );
 
+  window.eval(`
+    setValue('startTime', '9:00 AM');
+    handleFieldMutation('startTime');
+    saveDraft({ flush: true });
+  `);
+  const storedDraft = JSON.parse(window.localStorage.getItem('noteBuilderDraft_v1:anonymous'));
+  assert.ok(!Object.prototype.hasOwnProperty.call(storedDraft.inputs, 'letterBriefDescription'));
+  assert.ok(!Object.prototype.hasOwnProperty.call(storedDraft.inputs, 'letterRawOutput'));
+  assert.doesNotMatch(JSON.stringify(storedDraft), /treatment verification letter|Astra raw output/);
+
+  document.getElementById('clearLetterBtn').click();
+  assert.equal(document.getElementById('letterBriefDescription').value, '');
+  assert.equal(document.getElementById('letterRawOutput').value, '');
+  assert.equal(document.getElementById('letterOutputBox').value, '');
+
   dom.window.close();
 }
 
-async function testAstraLetterCustomGptHtmlAndSignatureFallback() {
+async function testAstraLetterCustomGptSetupAndFallbacks() {
   const dom = await createAppDom();
   const { window } = dom;
   const { document } = window;
@@ -504,26 +563,53 @@ async function testAstraLetterCustomGptHtmlAndSignatureFallback() {
   `);
 
   setField(window, 'letterBriefDescription', 'Create a body-only accommodation letter draft.');
-  document.getElementById('exportCustomGptBtn').click();
+  document.getElementById('copyCustomGptBtn').click();
   const customGpt = document.getElementById('letterOutputBox').value;
   assert.match(customGpt, /Astra Clinical Letter Assistant/);
-  assert.match(customGpt, /Generated GPT output may contain PHI/);
+  assert.match(customGpt, /You may produce output containing PHI/);
   assert.match(customGpt, /Conversation starters:/);
+  assert.match(customGpt, /Knowledge files to upload to GPT:/);
+  assert.match(customGpt, /Relevant prior treatment plan:/);
 
-  document.getElementById('copyBlankTemplateBtn').click();
-  assert.match(document.getElementById('letterOutputBox').value, /ASTRA PSYCHIATRY/);
-  assert.match(document.getElementById('letterOutputBox').value, /NY License #: 321/);
+  document.getElementById('generateLetterPacketBtn').click();
+  const packet = document.getElementById('letterOutputBox').value;
+  assert.match(packet, /Signature image: \[No signature image configured; use fallback signature block\.\]/);
+  assert.match(packet, /Typed Signature Provider, PMHNP\nAstra Psychiatry/);
+  assert.match(packet, /NY License #: 321/);
 
-  window.eval('updateLetterPreview()');
+  window.eval(`
+    applyAstraBrandingConfig({
+      practiceName: 'Astra Psychiatry',
+      website: 'AstraPsychiatry.com',
+      email: 'clientservices@astrapsychiatry.com',
+      phone: '(914) 764-2954',
+      fax: '(914) 259-5363',
+      logoPath: '',
+      letterheadBackgroundPath: '',
+      colors: { primary: '#0B3D67', secondary: '#5BA6D9', accent: '#5BA6D9', background: '#ffffff', text: '#1f2937' }
+    });
+  `);
+  document.getElementById('generateLetterPacketBtn').click();
+  const missingLogoPacket = document.getElementById('letterOutputBox').value;
+  assert.match(missingLogoPacket, /Logo: \[No asset configured; use text-based Astra header\.\]/);
+
+  dom.window.close();
+}
+
+async function testAstraLetterMissingConfigMessage() {
+  const dom = await createAppDom({ failAstraConfigFetch: true });
+  const { document } = dom.window;
+
+  document.getElementById('letterGeneratorTab').click();
+
   assert.match(
-    document.querySelector('.provider-typed-signature').textContent,
-    /Typed Signature Provider, PMHNP/,
-    'Missing signature image should fall back to the typed signature block',
+    document.getElementById('letterConfigMessage').textContent,
+    /config failed to load/i,
+    'Missing config should show a clear Letter Generator error',
   );
-
-  const html = window.eval('buildLetterHtmlDocument()');
-  assert.match(html, /AstraPsychiatry\.com/);
-  assert.match(html, /Typed Signature Provider, PMHNP/);
+  assert.match(document.getElementById('letterConfigMessage').textContent, /src\/config\/astraProviders\.json/);
+  assert.equal(document.getElementById('letterProviderSelect').value, '');
+  assert.equal(document.getElementById('letterDocumentType').value, '');
 
   dom.window.close();
 }
@@ -734,8 +820,9 @@ async function run() {
   await testScheduledStartDraftValueIsNotOverwritten();
   await testScreeningInformationDraftRestore();
   await testAstraLetterProviderConfigAndStateFiltering();
-  await testAstraLetterPacketValidationAndPriorNoteInstructions();
-  await testAstraLetterCustomGptHtmlAndSignatureFallback();
+  await testAstraLetterPacketGenerationAndSecurity();
+  await testAstraLetterCustomGptSetupAndFallbacks();
+  await testAstraLetterMissingConfigMessage();
   await testAstraIntakeScreeningInformationButtonStates();
   await testTelehealthDefaultsRespectBlankAndManualState();
   await testMedicationDrawerKeyboardKeepsSearchEditable();
