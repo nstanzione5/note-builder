@@ -89,7 +89,7 @@
           <span class="toggle-label">Workspace</span>
           <div class="segmented-control" id="workspaceToggle" role="group" aria-label="Workspace">
             <button type="button" class="seg-btn active" id="noteBuilderTab" data-workspace="note">Note Builder</button>
-            <button type="button" class="seg-btn" id="letterGeneratorTab" data-workspace="letter">Astra Letter Generator</button>
+            <button type="button" class="seg-btn letter-tab" id="letterGeneratorTab" data-workspace="letter">Letter</button>
           </div>
         </div>
 
@@ -169,11 +169,18 @@
       <div class="section-heading">
         <div>
           <h2>Pre-Visit Screening Results (Astra Intake)</h2>
-          <p>Paste or enter available intake screener results before documentation begins.</p>
         </div>
         <div class="section-heading-right">
           <span class="section-status completion-status-pending" id="astraScreenersCompletionStatus">Pending</span>
           <div class="section-mini-badge">Astra only</div>
+        </div>
+      </div>
+
+      <div class="astra-intake-context-mode hidden" id="astraIntakeContextModeGroup">
+        <label>Supporting Documentation</label>
+        <div class="segmented-control segmented-control-form" id="astraIntakeContextModeToggle" role="group" aria-label="Supporting documentation">
+          <button type="button" class="seg-btn" data-astra-intake-context-mode="none">No Supporting Docs</button>
+          <button type="button" class="seg-btn" data-astra-intake-context-mode="upload">Upload Supporting Docs</button>
         </div>
       </div>
 
@@ -245,7 +252,6 @@
       <div class="section-heading">
         <div>
           <h2>Pre-Visit Imported Results (EBH Intake)</h2>
-          <p>Paste imported tests / screeners before visit setup and chief complaint capture.</p>
         </div>
         <div class="section-heading-right">
           <span class="section-status completion-status-pending" id="ebhTestsCompletionStatus">Pending</span>

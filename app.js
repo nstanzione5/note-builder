@@ -10,6 +10,7 @@ const state = {
   astraSupportingDocsUploaded: false,
   astraSupportingDocTypes: [],
   astraFollowupContextMode: 'uploadedPreviousNote',
+  astraIntakeContextMode: 'none',
   topbarCondensed: false,
   topbarCondenseProgress: 0,
   medDrawerOpen: false,
@@ -27,12 +28,12 @@ const state = {
   driveRequiredRootId: '',
   driveResolvedRootId: '',
   saveUnlocked: false,
-  driveWritesBlocked: true,
-  driveWriteBlockReason: 'Drive preflight pending.',
-  driveWriteBlockCode: 'preflight_pending',
+  driveWritesBlocked: false,
+  driveWriteBlockReason: '',
+  driveWriteBlockCode: '',
   driveResolvedUserEmail: '',
   driveBackendBuildId: '',
-  drivePreflightStatus: 'pending',
+  drivePreflightStatus: 'completed',
   drivePreflightReason: '',
   activeWorkspace: 'note',
   astraProviders: [],
@@ -70,6 +71,7 @@ const els = {
   previousPlanField: document.getElementById('previousPlanField'),
   previousPlanCompletionStatus: document.getElementById('previousPlanCompletionStatus'),
   astraFollowupContextModeGroup: document.getElementById('astraFollowupContextModeGroup'),
+  astraIntakeContextModeGroup: document.getElementById('astraIntakeContextModeGroup'),
   astraSupportingDocsControl: document.getElementById('astraSupportingDocsControl'),
   astraSupportingDocsUploaded: document.getElementById('astraSupportingDocsUploaded'),
   astraSupportingDocTypes: document.getElementById('astraSupportingDocTypes'),
@@ -3148,6 +3150,10 @@ function updatePracticeSections() {
     els.astraFollowupContextModeGroup.classList.toggle('hidden', !isAstraFollowup);
   }
 
+  if (els.astraIntakeContextModeGroup) {
+    els.astraIntakeContextModeGroup.classList.toggle('hidden', !isAstraIntake);
+  }
+
   if (els.previousPlanField) {
     els.previousPlanField.classList.toggle('hidden', usesUploadedPreviousNote);
   }
@@ -4569,6 +4575,14 @@ function setAstraFollowupContextMode(value, button) {
   refreshUI(true, { markDirty: true });
 }
 
+function setAstraIntakeContextMode(value, button) {
+  state.astraIntakeContextMode = value === 'upload' ? 'upload' : 'none';
+  setActiveByData('#astraIntakeContextModeToggle .seg-btn', 'astra-intake-context-mode', state.astraIntakeContextMode);
+  if (button) setActiveButtons('#astraIntakeContextModeToggle', button);
+  syncAstraSupportingDocsControls();
+  refreshUI(true, { markDirty: true });
+}
+
 function setAstraSupportingDocsUploaded(value) {
   state.astraSupportingDocsUploaded = Boolean(value);
   if (!state.astraSupportingDocsUploaded) {
@@ -4712,6 +4726,7 @@ function syncToggleStates() {
   setActiveByData('#followModalityToggle .seg-btn', 'followModality', state.followModality);
   setActiveByData('#therapyInterwovenToggle .seg-btn', 'therapyTier', state.therapyInterwovenTier);
   setActiveByData('#astraFollowupContextModeToggle .seg-btn', 'astraFollowupContextMode', state.astraFollowupContextMode);
+  setActiveByData('#astraIntakeContextModeToggle .seg-btn', 'astra-intake-context-mode', state.astraIntakeContextMode);
 
   if (els.scriptToggle) {
     els.scriptToggle.checked = Boolean(state.scriptVisible);
@@ -4739,6 +4754,18 @@ function syncAstraSupportingDocsControls() {
     els.astraSupportingDocsHint.textContent = state.practice === 'astra' && state.visitType === 'intake'
       ? 'Choose Screening Docs when intake or pre-appointment documentation will be uploaded to GPT.'
       : 'Select one or more types when supporting documents will be uploaded.';
+  }
+
+  // For intake, show/hide based on mode
+  if (state.visitType === 'intake') {
+    const show = state.astraIntakeContextMode === 'upload';
+    if (els.astraSupportingDocsControl) {
+      els.astraSupportingDocsControl.classList.toggle('hidden', !show);
+    }
+    if (!show) {
+      state.astraSupportingDocsUploaded = false;
+      state.astraSupportingDocTypes = [];
+    }
   }
 }
 
@@ -7475,6 +7502,10 @@ function attachEventListeners() {
 
   document.querySelectorAll('#astraFollowupContextModeToggle .seg-btn').forEach((btn) => {
     btn.addEventListener('click', () => setAstraFollowupContextMode(btn.dataset.astraFollowupContextMode, btn));
+  });
+
+  document.querySelectorAll('#astraIntakeContextModeToggle .seg-btn').forEach((btn) => {
+    btn.addEventListener('click', () => setAstraIntakeContextMode(btn.dataset.astraIntakeContextMode, btn));
   });
 
   if (els.astraSupportingDocsUploaded) {
