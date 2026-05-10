@@ -10,7 +10,9 @@ const state = {
   astraSupportingDocsUploaded: false,
   astraSupportingDocTypes: [],
   astraFollowupContextMode: 'uploadedPreviousNote',
-  astraIntakeContextMode: 'none',
+  astraIntakeScreeningMode: 'uploadToGpt',
+  patientLettersOpen: false,
+  selectedLetterType: 'workSchoolNote',
   topbarCondensed: false,
   topbarCondenseProgress: 0,
   medDrawerOpen: false,
@@ -28,23 +30,13 @@ const state = {
   driveRequiredRootId: '',
   driveResolvedRootId: '',
   saveUnlocked: false,
-  driveWritesBlocked: false,
-  driveWriteBlockReason: '',
-  driveWriteBlockCode: '',
+  driveWritesBlocked: true,
+  driveWriteBlockReason: 'Drive preflight pending.',
+  driveWriteBlockCode: 'preflight_pending',
   driveResolvedUserEmail: '',
   driveBackendBuildId: '',
-  drivePreflightStatus: 'completed',
+  drivePreflightStatus: 'pending',
   drivePreflightReason: '',
-  activeWorkspace: 'note',
-  astraProviders: [],
-  astraDocumentTypes: [],
-  astraBranding: null,
-  astraProviderConfigSource: 'fallback',
-  astraConfigErrors: [],
-  selectedLetterProviderId: '',
-  selectedLetterState: '',
-  selectedLetterDocumentTypeId: '',
-  letterGeneratedOutput: '',
 };
 
 const els = {
@@ -71,7 +63,8 @@ const els = {
   previousPlanField: document.getElementById('previousPlanField'),
   previousPlanCompletionStatus: document.getElementById('previousPlanCompletionStatus'),
   astraFollowupContextModeGroup: document.getElementById('astraFollowupContextModeGroup'),
-  astraIntakeContextModeGroup: document.getElementById('astraIntakeContextModeGroup'),
+  astraIntakeScreeningModeGroup: document.getElementById('astraIntakeScreeningModeGroup'),
+  astraIntakeScreeningModeHint: document.getElementById('astraIntakeScreeningModeHint'),
   astraSupportingDocsControl: document.getElementById('astraSupportingDocsControl'),
   astraSupportingDocsUploaded: document.getElementById('astraSupportingDocsUploaded'),
   astraSupportingDocTypes: document.getElementById('astraSupportingDocTypes'),
@@ -91,7 +84,6 @@ const els = {
   copyOpenBtn: document.getElementById('copyOpenBtn'),
   openGptBtn: document.getElementById('openGptBtn'),
   clearBtn: document.getElementById('clearBtn'),
-  generateLetterBtn: document.getElementById('generateLetterBtn'),
   exportHelper: document.getElementById('exportHelper'),
   activeGptUrl: document.getElementById('activeGptUrl'),
   followDate: document.getElementById('followDate'),
@@ -126,6 +118,18 @@ const els = {
   exportMiniBadge: document.getElementById('exportMiniBadge'),
   backupList: document.getElementById('backupList'),
   backupEmpty: document.getElementById('backupEmpty'),
+  patientLettersBtn: document.getElementById('patientLettersBtn'),
+  patientLettersWorkspace: document.getElementById('patientLettersWorkspace'),
+  letterTypeGrid: document.getElementById('letterTypeGrid'),
+  letterSpecificFields: document.getElementById('letterSpecificFields'),
+  letterConsentWarning: document.getElementById('letterConsentWarning'),
+  letterManualContextField: document.getElementById('letterManualContextField'),
+  letterExportBox: document.getElementById('letterExportBox'),
+  buildLetterPacketBtn: document.getElementById('buildLetterPacketBtn'),
+  copyLetterPacketBtn: document.getElementById('copyLetterPacketBtn'),
+  copyOpenLetterGptBtn: document.getElementById('copyOpenLetterGptBtn'),
+  openLetterGptBtn: document.getElementById('openLetterGptBtn'),
+  clearLetterFieldsBtn: document.getElementById('clearLetterFieldsBtn'),
   medDrawerBtn: document.getElementById('medDrawerBtn'),
   medDrawer: document.getElementById('medDrawer'),
   medDrawerBackdrop: document.getElementById('medDrawerBackdrop'),
@@ -162,26 +166,6 @@ const els = {
   diagLastError: document.getElementById('diagLastError'),
   docEndPlusMinutes: document.getElementById('docEndPlusMinutes'),
   scriptResizeHandle: document.getElementById('scriptResizeHandle'),
-  noteBuilderShell: document.getElementById('noteBuilderShell'),
-  letterGeneratorShell: document.getElementById('letterGeneratorShell'),
-  noteBuilderTab: document.getElementById('noteBuilderTab'),
-  letterGeneratorTab: document.getElementById('letterGeneratorTab'),
-  letterDocumentType: document.getElementById('letterDocumentType'),
-  letterProviderSelect: document.getElementById('letterProviderSelect'),
-  letterStateSelect: document.getElementById('letterStateSelect'),
-  letterBriefDescription: document.getElementById('letterBriefDescription'),
-  letterRawOutput: document.getElementById('letterRawOutput'),
-  letterConfigMessage: document.getElementById('letterConfigMessage'),
-  letterValidationMessage: document.getElementById('letterValidationMessage'),
-  letterOutputBox: document.getElementById('letterOutputBox'),
-  generateLetterPacketBtn: document.getElementById('generateLetterPacketBtn'),
-  copyLetterPacketBtn: document.getElementById('copyLetterPacketBtn'),
-  copyCustomGptBtn: document.getElementById('copyCustomGptBtn'),
-  clearLetterBtn: document.getElementById('clearLetterBtn'),
-  addScreeningInfoBtn: document.getElementById('addScreeningInfoBtn'),
-  uploadPreviousNoteBtn: document.getElementById('uploadPreviousNoteBtn'),
-  uploadSupportingDocsBtn: document.getElementById('uploadSupportingDocsBtn'),
-  screeningInfoUploadStatus: document.getElementById('screeningInfoUploadStatus'),
 };
 
 const inputIds = [
@@ -220,11 +204,116 @@ const ASTRA_SUPPORTING_DOC_TYPE_LABELS = {
   other: 'other supporting documentation',
 };
 const ASTRA_UNIVERSAL_GPT_LABEL = 'Universal Astra Note GPT';
-const ASTRA_LETTER_GPT_LABEL = 'Astra Document Generator GPT';
-const ASTRA_PROVIDER_CONFIG_URL = './src/config/astraProviders.json';
-const ASTRA_DOCUMENT_TYPES_CONFIG_URL = './src/config/astraDocumentTypes.json';
-const ASTRA_BRANDING_CONFIG_URL = './src/config/astraBranding.json';
-const ASTRA_CONFIG_HELP = 'Edit src/config/astraProviders.json, src/config/astraDocumentTypes.json, and src/config/astraBranding.json. Place assets under public/astra/ and public/signatures/. See README.md > Where to Upload Astra Files.';
+const PATIENT_LETTERS_STORAGE_KEY = 'patientLettersDraft_v1';
+const LETTER_DEFAULTS = {
+  letterClinicianName: 'Nick Stanzione',
+  letterClinicianTitle: 'PMHNP',
+  letterSignatureBlock: 'Nick Stanzione, PMHNP',
+  letterIncludeTreatmentDates: true,
+};
+const LETTER_TYPE_LABELS = {
+  workSchoolNote: 'Work / School Note',
+  returnToWorkSchool: 'Return to Work / School',
+  treatmentVerification: 'Treatment Verification',
+  accommodation: 'Accommodation Letter',
+  esa: 'Emotional Support Animal Letter',
+  medicationTreatmentSummary: 'Medication / Treatment Summary',
+  medicalNecessity: 'Medical Necessity / Prior Authorization Support',
+  custom: 'Custom Letter',
+};
+const LETTER_DISCLOSURE_DEFAULTS = {
+  letterConsentConfirmed: false,
+  letterIncludeDiagnosis: false,
+  letterIncludeMedications: false,
+  letterIncludeDetailedSymptoms: false,
+  letterIncludeTreatmentDates: true,
+  letterIncludeFunctionalLimitations: false,
+  letterIncludeSafetyRisk: false,
+};
+const LETTER_FUNCTIONAL_LIMITATION_TYPES = ['accommodation', 'esa', 'medicalNecessity'];
+const LETTER_FIELD_IDS = [
+  'letterPatientName',
+  'letterPatientDobAge',
+  'letterDate',
+  'letterRecipient',
+  'letterRecipientAddress',
+  'letterPurpose',
+  'letterRequestedDateRange',
+  'letterReturnDate',
+  'letterClinicianName',
+  'letterClinicianTitle',
+  'letterSignatureBlock',
+  'letterAdditionalInstructions',
+  'letterManualContext',
+  'letterAttachmentManifest',
+];
+const LETTER_CHECKBOX_IDS = [
+  'letterConsentConfirmed',
+  'letterIncludeDiagnosis',
+  'letterIncludeMedications',
+  'letterIncludeDetailedSymptoms',
+  'letterIncludeTreatmentDates',
+  'letterIncludeFunctionalLimitations',
+  'letterIncludeSafetyRisk',
+  'letterIncludeCurrentNote',
+  'letterPreviousNoteUploaded',
+  'letterScreeningUploaded',
+  'letterSupportingDocsUploaded',
+  'letterIncludeManualContext',
+];
+const LETTER_SPECIFIC_FIELD_CONFIG = {
+  workSchoolNote: [
+    ['letterExcusedDates', 'Excused dates', 'input'],
+    ['letterSpecificReturnDate', 'Return date', 'input'],
+    ['letterRestrictionsLimitations', 'Restrictions or limitations', 'textarea'],
+    ['letterDiagnosisDisclosureNote', 'Whether diagnosis should be disclosed', 'select', ['No', 'Yes']],
+  ],
+  returnToWorkSchool: [
+    ['letterSpecificReturnDate', 'Return date', 'input'],
+    ['letterRestrictions', 'Restrictions', 'textarea'],
+    ['letterDutyStatus', 'Full duty vs modified duty', 'select', ['Full duty', 'Modified duty']],
+    ['letterRestrictionDuration', 'Duration of restrictions', 'input'],
+  ],
+  treatmentVerification: [
+    ['letterUnderCareSince', 'Under care since', 'input'],
+    ['letterVisitFrequency', 'Visit frequency, optional', 'input'],
+    ['letterActiveTreatment', 'Currently active in treatment', 'select', ['Yes', 'No']],
+    ['letterDiagnosisDisclosureNote', 'Diagnosis disclosure', 'select', ['No', 'Yes']],
+  ],
+  accommodation: [
+    ['letterAccommodationSetting', 'Setting', 'select', ['Work', 'School', 'Housing', 'Other']],
+    ['letterRequestedAccommodation', 'Requested accommodation', 'textarea'],
+    ['letterFunctionalLimitations', 'Functional limitation language', 'textarea'],
+    ['letterAccommodationDuration', 'Duration', 'select', ['Temporary', 'Ongoing', 'Date range']],
+    ['letterDiagnosisDisclosureNote', 'Diagnosis disclosure', 'select', ['No', 'Yes']],
+  ],
+  esa: [
+    ['letterHousingContext', 'Housing context', 'textarea'],
+    ['letterAnimalTypeName', 'Animal type/name, optional', 'input'],
+    ['letterDisabilityNeedLanguage', 'Disability-related need language', 'textarea'],
+    ['letterClinicalAppropriateness', 'Clinical appropriateness confirmation', 'checkbox'],
+    ['letterDiagnosisDisclosureNote', 'Diagnosis disclosure', 'select', ['No', 'Yes']],
+  ],
+  medicationTreatmentSummary: [
+    ['letterCurrentMedicationsSummary', 'Current medications summary', 'textarea'],
+    ['letterTreatmentPlanSummary', 'Treatment plan summary', 'textarea'],
+    ['letterResponseProgressSummary', 'Response/progress summary', 'textarea'],
+    ['letterFollowupPlan', 'Follow-up plan', 'textarea'],
+    ['letterDiagnosisDisclosureNote', 'Diagnosis disclosure', 'select', ['No', 'Yes']],
+  ],
+  medicalNecessity: [
+    ['letterRequestedMedicationService', 'Requested medication/service', 'input'],
+    ['letterClinicalRationale', 'Clinical rationale', 'textarea'],
+    ['letterPriorTrialsFailures', 'Prior trials/failures', 'textarea'],
+    ['letterRelevantDiagnosesSymptoms', 'Relevant diagnoses/symptoms if allowed', 'textarea'],
+    ['letterSupportingDocumentsReferenced', 'Supporting documents referenced', 'textarea'],
+  ],
+  custom: [
+    ['letterFreeformPurpose', 'Freeform letter purpose', 'textarea'],
+    ['letterKeyPoints', 'Key points to include', 'textarea'],
+    ['letterDoNotInclude', 'Do-not-include instructions', 'textarea'],
+  ],
+};
 
 const brandConfig = {
   astra: {
@@ -249,7 +338,7 @@ const CONDENSE_CLASS_ENTER = 0.86;
 const CONDENSE_CLASS_EXIT = 0.62;
 
 const MED_CATALOG_URL = './data/meds/compiled/medications.compiled.json';
-const APP_BUILD_ID = String((els.body && els.body.dataset && els.body.dataset.appBuildId) || '20260509-astra-letter-generator').trim() || '20260509-astra-letter-generator';
+const APP_BUILD_ID = String((els.body && els.body.dataset && els.body.dataset.appBuildId) || '20260311-drive-reset-v2').trim() || '20260311-drive-reset-v2';
 const MED_FAVORITES_KEY = 'medDrawerFavorites_v1';
 const MED_RECENTS_KEY = 'medDrawerRecents_v1';
 const MED_MISSING_REQUESTS_KEY = 'medDrawerMissingRequests_v1';
@@ -553,682 +642,6 @@ function getStorageJSON(key, fallback) {
 
 function setStorageJSON(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
-}
-
-function normalizeAstraProviderRecord(provider) {
-  if (!provider || typeof provider !== 'object') return null;
-
-  const id = String(provider.id || provider.provider_id || '').trim();
-  const displayName = String(provider.displayName || provider.display_name || '').trim();
-  if (!id || !displayName) return null;
-
-  const rawLicenses = provider.licenses && typeof provider.licenses === 'object' ? provider.licenses : {};
-  const licenses = Object.entries(rawLicenses).reduce((acc, [stateCode, licenseLine]) => {
-    const key = String(stateCode || '').trim().toUpperCase();
-    const value = String(licenseLine || '').trim();
-    if (key && value) acc[key] = value;
-    return acc;
-  }, {});
-
-  return {
-    id,
-    active: provider.active !== false && String(provider.active || 'true').toLowerCase() !== 'false',
-    displayName,
-    credentials: String(provider.credentials || '').trim(),
-    title: String(provider.title || '').trim(),
-    signatureImage: String(provider.signatureImage || provider.signature_image_url || '').trim(),
-    licenses,
-    npi: String(provider.npi || provider.NPI || '').trim(),
-    defaultSignatureBlock: String(provider.defaultSignatureBlock || provider.default_signature_block || '').trim(),
-    sortOrder: Number.isFinite(Number(provider.sortOrder ?? provider.sort_order))
-      ? Number(provider.sortOrder ?? provider.sort_order)
-      : 999,
-  };
-}
-
-function normalizeAstraProviderConfig(config) {
-  const providers = Array.isArray(config && config.providers)
-    ? config.providers
-    : [];
-
-  return providers
-    .map(normalizeAstraProviderRecord)
-    .filter((provider) => provider && provider.active && Object.keys(provider.licenses).length)
-    .sort((a, b) => a.sortOrder - b.sortOrder || a.displayName.localeCompare(b.displayName));
-}
-
-function groupGoogleSheetProviderRows(rows) {
-  // TODO: Google Sheet provider/license config. Accept columns:
-  // provider_id, active, display_name, credentials, title, signature_image_url,
-  // state, license_line, default_signature_block, sort_order.
-  const grouped = new Map();
-  (Array.isArray(rows) ? rows : []).forEach((row) => {
-    const providerId = String(row.provider_id || '').trim();
-    const stateCode = String(row.state || '').trim().toUpperCase();
-    const licenseLine = String(row.license_line || '').trim();
-    if (!providerId) return;
-
-    const current = grouped.get(providerId) || {
-      id: providerId,
-      active: row.active,
-      displayName: row.display_name,
-      credentials: row.credentials,
-      title: row.title,
-      signatureImage: row.signature_image_url,
-      defaultSignatureBlock: row.default_signature_block,
-      sortOrder: row.sort_order,
-      licenses: {},
-    };
-
-    if (stateCode && licenseLine) {
-      current.licenses[stateCode] = licenseLine;
-    }
-
-    grouped.set(providerId, current);
-  });
-
-  return { providers: Array.from(grouped.values()) };
-}
-
-function normalizeAstraDocumentTypeRecord(entry) {
-  if (!entry || typeof entry !== 'object') return null;
-  const id = String(entry.id || '').trim();
-  const label = String(entry.label || '').trim();
-  if (!id || !label) return null;
-  return {
-    id,
-    label,
-    description: String(entry.description || '').trim(),
-    gptGuidance: String(entry.gptGuidance || entry.gpt_guidance || '').trim(),
-    suggestedPlaceholders: Array.isArray(entry.suggestedPlaceholders)
-      ? entry.suggestedPlaceholders.map((value) => String(value || '').trim()).filter(Boolean)
-      : [],
-  };
-}
-
-function normalizeAstraDocumentTypesConfig(config) {
-  const types = Array.isArray(config && config.documentTypes) ? config.documentTypes : [];
-  return types.map(normalizeAstraDocumentTypeRecord).filter(Boolean);
-}
-
-function normalizeAstraBrandingConfig(config) {
-  if (!config || typeof config !== 'object') return null;
-  const practiceName = String(config.practiceName || '').trim();
-  if (!practiceName) return null;
-  const colors = config.colors && typeof config.colors === 'object' ? config.colors : {};
-  return {
-    practiceName,
-    website: String(config.website || '').trim(),
-    email: String(config.email || '').trim(),
-    phone: String(config.phone || '').trim(),
-    fax: String(config.fax || '').trim(),
-    logoPath: String(config.logoPath || '').trim(),
-    letterheadBackgroundPath: String(config.letterheadBackgroundPath || '').trim(),
-    colors: {
-      primary: String(colors.primary || '#0B3D67').trim(),
-      secondary: String(colors.secondary || '#5BA6D9').trim(),
-      accent: String(colors.accent || '#5BA6D9').trim(),
-      background: String(colors.background || '#ffffff').trim(),
-      text: String(colors.text || '#1f2937').trim(),
-    },
-  };
-}
-
-function resolveAstraAssetPath(pathValue, fallback = '[not configured]') {
-  const value = String(pathValue || '').trim();
-  if (!value) return fallback;
-  if (/^https?:\/\//i.test(value)) return value;
-  if (value.startsWith('/astra/') || value.startsWith('/signatures/')) {
-    return `public${value}`;
-  }
-  return value;
-}
-
-function applyAstraProviderConfig(config, source = 'local-json') {
-  state.astraProviders = normalizeAstraProviderConfig(config);
-  state.astraProviderConfigSource = source;
-  if (!state.astraProviders.length) {
-    addAstraConfigError('Provider config could not be loaded or has no active providers. ' + ASTRA_CONFIG_HELP);
-  }
-
-  if (!state.astraProviders.some((provider) => provider.id === state.selectedLetterProviderId)) {
-    state.selectedLetterProviderId = state.astraProviders[0] ? state.astraProviders[0].id : '';
-  }
-
-  const selectedProvider = getSelectedLetterProvider();
-  const availableStates = selectedProvider ? Object.keys(selectedProvider.licenses) : [];
-  if (!availableStates.includes(state.selectedLetterState)) {
-    state.selectedLetterState = availableStates[0] || '';
-  }
-
-  renderLetterProviderControls();
-}
-
-function applyAstraDocumentTypesConfig(config) {
-  state.astraDocumentTypes = normalizeAstraDocumentTypesConfig(config);
-  if (!state.astraDocumentTypes.length) {
-    addAstraConfigError('Document type config could not be loaded. ' + ASTRA_CONFIG_HELP);
-  }
-  if (!state.astraDocumentTypes.some((type) => type.id === state.selectedLetterDocumentTypeId)) {
-    state.selectedLetterDocumentTypeId = state.astraDocumentTypes[0] ? state.astraDocumentTypes[0].id : '';
-  }
-  renderLetterDocumentTypeControls();
-}
-
-function applyAstraBrandingConfig(config) {
-  state.astraBranding = normalizeAstraBrandingConfig(config);
-  if (!state.astraBranding) {
-    addAstraConfigError('Branding config could not be loaded. ' + ASTRA_CONFIG_HELP);
-  }
-  applyAstraBrandingStyles();
-}
-
-function addAstraConfigError(message) {
-  if (!message || state.astraConfigErrors.includes(message)) return;
-  state.astraConfigErrors.push(message);
-  renderAstraConfigMessage();
-}
-
-function clearAstraConfigErrors() {
-  state.astraConfigErrors = [];
-  renderAstraConfigMessage();
-}
-
-function renderAstraConfigMessage() {
-  if (!els.letterConfigMessage) return;
-  const text = state.astraConfigErrors.join(' ');
-  els.letterConfigMessage.textContent = text;
-  els.letterConfigMessage.classList.toggle('hidden', !text);
-}
-
-async function fetchJsonConfig(url, label) {
-  if (typeof fetch !== 'function') {
-    throw new Error(`${label} fetch unavailable`);
-  }
-  const response = await fetch(`${url}?v=${encodeURIComponent(APP_BUILD_ID)}`, { cache: 'no-store' });
-  if (!response || !response.ok) {
-    throw new Error(`${label} unavailable`);
-  }
-  return response.json();
-}
-
-async function initializeAstraProviders() {
-  clearAstraConfigErrors();
-  // TODO: Future read-only Google Drive or Google Sheet config can replace these static JSON fetches.
-  // TODO: Add a read-only Google Drive-hosted JSON provider/branding/document-type source.
-  // TODO: Add an editable admin settings panel that writes only through an approved secure backend.
-  // TODO: Add Drive template upload/download sync if a compliant read/write integration is approved.
-  // TODO: Add optional DOCX export outside this GPT-packet-only v1.
-  // TODO: Add optional secure backend support for PHI handling when intentionally deployed.
-  // TODO: Add audit logging only if deployed in a HIPAA-compliant environment.
-  // TODO: Add role-based access controls and encrypted storage only with a compliant backend.
-  // TODO: Keep Drive writes out of this flow unless a secure backend is intentionally added later.
-  try {
-    const [providersConfig, documentTypesConfig, brandingConfig] = await Promise.all([
-      fetchJsonConfig(ASTRA_PROVIDER_CONFIG_URL, 'Provider config'),
-      fetchJsonConfig(ASTRA_DOCUMENT_TYPES_CONFIG_URL, 'Document type config'),
-      fetchJsonConfig(ASTRA_BRANDING_CONFIG_URL, 'Branding config'),
-    ]);
-    applyAstraProviderConfig(providersConfig);
-    applyAstraDocumentTypesConfig(documentTypesConfig);
-    applyAstraBrandingConfig(brandingConfig);
-  } catch (error) {
-    addAstraConfigError(`Astra Letter Generator config failed to load. ${ASTRA_CONFIG_HELP}`);
-    renderLetterProviderControls();
-    renderLetterDocumentTypeControls();
-  }
-}
-
-function getSelectedLetterProvider() {
-  return state.astraProviders.find((provider) => provider.id === state.selectedLetterProviderId) || null;
-}
-
-function getLetterGptUrl() {
-  return String(
-    (els.body && els.body.dataset && els.body.dataset.astraLetterGptUrl)
-      || (els.body && els.body.dataset && els.body.dataset.astraFollowupGptUrl)
-      || (els.body && els.body.dataset && els.body.dataset.astraIntakeGptUrl)
-      || '',
-  ).trim();
-}
-
-function getLetterDocumentTypeLabel() {
-  const type = getSelectedLetterDocumentType();
-  return type ? type.label : '';
-}
-
-function getSelectedLetterDocumentType() {
-  return state.astraDocumentTypes.find((type) => type.id === state.selectedLetterDocumentTypeId) || null;
-}
-
-function getLetterStateLicenseLine(provider = getSelectedLetterProvider(), stateCode = state.selectedLetterState) {
-  if (!provider || !stateCode) return '';
-  return String(provider.licenses[stateCode] || '').trim();
-}
-
-function renderLetterProviderControls() {
-  if (els.letterProviderSelect) {
-    els.letterProviderSelect.innerHTML = state.astraProviders.length
-      ? state.astraProviders
-        .map((provider) => `<option value="${escapeHtml(provider.id)}">${escapeHtml(provider.displayName)}, ${escapeHtml(provider.credentials)}</option>`)
-        .join('')
-      : '<option value="">No active providers configured</option>';
-    els.letterProviderSelect.value = state.selectedLetterProviderId;
-  }
-
-  const provider = getSelectedLetterProvider();
-  const states = provider ? Object.keys(provider.licenses).sort() : [];
-
-  if (els.letterStateSelect) {
-    els.letterStateSelect.innerHTML = states.length
-      ? states.map((stateCode) => `<option value="${escapeHtml(stateCode)}">${escapeHtml(stateCode)} - ${escapeHtml(provider.licenses[stateCode])}</option>`).join('')
-      : '<option value="">No state licenses configured</option>';
-    els.letterStateSelect.value = state.selectedLetterState;
-    els.letterStateSelect.disabled = !states.length;
-  }
-}
-
-function renderLetterDocumentTypeControls() {
-  if (!els.letterDocumentType) return;
-  els.letterDocumentType.innerHTML = state.astraDocumentTypes.length
-    ? state.astraDocumentTypes
-      .map((type) => `<option value="${escapeHtml(type.id)}">${escapeHtml(type.label)}</option>`)
-      .join('')
-    : '<option value="">No document types configured</option>';
-  els.letterDocumentType.value = state.selectedLetterDocumentTypeId;
-  els.letterDocumentType.disabled = !state.astraDocumentTypes.length;
-}
-
-function applyAstraBrandingStyles() {
-  if (!state.astraBranding || !els.body) return;
-  const colors = state.astraBranding.colors || {};
-  els.body.style.setProperty('--astra-letter-primary', colors.primary || '#0B3D67');
-  els.body.style.setProperty('--astra-letter-secondary', colors.secondary || '#5BA6D9');
-  els.body.style.setProperty('--astra-letter-accent', colors.accent || '#5BA6D9');
-}
-
-function setLetterValidationMessage(message, isError = true) {
-  if (!els.letterValidationMessage) return;
-  els.letterValidationMessage.textContent = message || '';
-  els.letterValidationMessage.classList.toggle('letter-validation-error', Boolean(message && isError));
-  els.letterValidationMessage.classList.toggle('letter-validation-success', Boolean(message && !isError));
-}
-
-function validateLetterGenerator(options = {}) {
-  const { requireBrief = false } = options;
-  const provider = getSelectedLetterProvider();
-  const documentType = getSelectedLetterDocumentType();
-  const stateCode = state.selectedLetterState;
-  const licenseLine = getLetterStateLicenseLine(provider, stateCode);
-  const brief = String(els.letterBriefDescription ? els.letterBriefDescription.value : '').trim();
-
-  if (!state.astraBranding) {
-    setLetterValidationMessage('Astra branding config is missing. ' + ASTRA_CONFIG_HELP);
-    return null;
-  }
-
-  if (!documentType) {
-    setLetterValidationMessage('Select a document type before generating the GPT packet.');
-    return null;
-  }
-
-  if (!provider) {
-    setLetterValidationMessage('Select a provider before generating the GPT packet.');
-    return null;
-  }
-
-  if (!stateCode) {
-    setLetterValidationMessage('Select a state before generating this output.');
-    return null;
-  }
-
-  if (!licenseLine) {
-    setLetterValidationMessage('The selected provider does not have a license line for this state.');
-    return null;
-  }
-
-  if (requireBrief && !brief) {
-    setLetterValidationMessage('Enter a brief description before generating the GPT packet.');
-    return null;
-  }
-
-  setLetterValidationMessage('');
-  return {
-    provider,
-    documentType,
-    stateCode,
-    licenseLine,
-    brief,
-    rawOutput: String(els.letterRawOutput ? els.letterRawOutput.value : '').trim(),
-    branding: state.astraBranding,
-  };
-}
-
-function buildProviderSignatureBlock(provider) {
-  if (!provider) return '{{PROVIDER_SIGNATURE}}';
-  return provider.defaultSignatureBlock
-    || `${provider.displayName}${provider.credentials ? `, ${provider.credentials}` : ''}\n${state.astraBranding ? state.astraBranding.practiceName : 'Astra Psychiatry'}`;
-}
-
-function buildDefaultAstraLetterTemplate(context = {}) {
-  const branding = context.branding || state.astraBranding || {};
-  return [
-    '[ASTRA LOGO / LETTERHEAD]',
-    '',
-    String(branding.practiceName || 'Astra Psychiatry').toUpperCase(),
-    branding.website || 'AstraPsychiatry.com',
-    branding.email || 'clientservices@astrapsychiatry.com',
-    `Phone: ${branding.phone || '(914) 764-2954'}`,
-    `Fax: ${branding.fax || '(914) 259-5363'}`,
-    '',
-    '{{DATE}}',
-    '',
-    '{{RECIPIENT_NAME}}',
-    '{{RECIPIENT_ADDRESS}}',
-    '',
-    'RE: {{SUBJECT}}',
-    '',
-    '{{GREETING}}',
-    '',
-    '{{BODY}}',
-    '',
-    'Sincerely,',
-    '',
-    '{{PROVIDER_SIGNATURE_IMAGE}}',
-    '',
-    '{{PROVIDER_NAME}}, {{PROVIDER_CREDENTIALS}}',
-    '{{STATE_LICENSE_LINE}}',
-    branding.practiceName || 'Astra Psychiatry',
-  ].join('\n');
-}
-
-function buildProviderVerificationBlock() {
-  return [
-    'Provider Verification Needed:',
-    '- Patient name:',
-    '- DOB:',
-    '- Diagnoses:',
-    '- Current medications:',
-    '- Allergies:',
-    '- Relevant clinical history:',
-    '- Relevant screening/test scores:',
-    '- Requested document type:',
-    '- Provider:',
-    '- State/license:',
-    '- Missing or uncertain details:',
-  ].join('\n');
-}
-
-function buildCustomGptProviderVerificationBlock() {
-  return [
-    'Provider Verification Needed:',
-    '- Patient name:',
-    '- DOB:',
-    '- Diagnoses:',
-    '- Current medications:',
-    '- Allergies:',
-    '- Relevant prior treatment plan:',
-    '- Relevant screening/test scores:',
-    '- State/license:',
-    '- Provider:',
-    '- Missing or uncertain details:',
-  ].join('\n');
-}
-
-function buildAstraLetterGptPacket() {
-  const context = validateLetterGenerator({ requireBrief: true });
-  if (!context) return '';
-
-  const {
-    provider,
-    documentType,
-    stateCode,
-    licenseLine,
-    brief,
-    rawOutput,
-    branding,
-  } = context;
-
-  const lines = [
-    'ASTRA CLINICAL LETTER GPT PACKET',
-    '',
-    'Astra Branding:',
-    `Practice: ${branding.practiceName}`,
-    `Website: ${branding.website}`,
-    `Email: ${branding.email}`,
-    `Phone: ${branding.phone}`,
-    `Fax: ${branding.fax}`,
-    `Logo: ${resolveAstraAssetPath(branding.logoPath, '[No asset configured; use text-based Astra header.]')}`,
-    `Letterhead: ${resolveAstraAssetPath(branding.letterheadBackgroundPath, '[No letterhead background configured; use text-based Astra header.]')}`,
-    '',
-    'Document Type:',
-    documentType.label,
-    'Guidance:',
-    documentType.gptGuidance || documentType.description || '[No document type guidance configured.]',
-    `Suggested placeholders: ${(documentType.suggestedPlaceholders || []).join(', ') || '[none configured]'}`,
-    '',
-    'Selected Provider:',
-    `Name: ${provider.displayName}`,
-    `Credentials: ${provider.credentials || '[Credentials not configured]'}`,
-    `Title: ${provider.title || '[Title not configured]'}`,
-    `State: ${stateCode}`,
-    `License line: ${licenseLine}`,
-    `Signature image: ${resolveAstraAssetPath(provider.signatureImage, '[No signature image configured; use fallback signature block.]')}`,
-    'Fallback signature block:',
-    buildProviderSignatureBlock(provider),
-    '',
-    'Provider Description:',
-    brief,
-    '',
-    'Raw Astra App Output:',
-    rawOutput || '[No raw Astra Note Generator output provided.]',
-    '',
-    'Required instruction to GPT:',
-    'Use the uploaded most recent patient note as the main clinical source when available. Extract patient name, DOB, diagnoses, current medications, allergies, relevant history, treatment plan, and screening/test scores only if clearly supported. Do not invent facts. Do not silently carry forward outdated information. Flag missing or uncertain information in brackets.',
-    '',
-    'Before final document, output:',
-    '',
-    buildProviderVerificationBlock(),
-    '',
-    'Then generate the final Astra-formatted document:',
-    '',
-    buildDefaultAstraLetterTemplate({ branding }),
-    '',
-    'Important:',
-    'The final GPT output may contain PHI. Use only within approved secure clinical workflows. Provider must review before clinical use.',
-  ];
-
-  return lines.join('\n');
-}
-
-function buildCustomGptInstructionsExport() {
-  return [
-    'GPT name suggestion:',
-    'Astra Clinical Letter Assistant',
-    '',
-    'GPT description:',
-    'Assists Astra Psychiatry providers in drafting professional Astra-branded clinical letters using uploaded prior notes, raw Astra Note Generator output, provider/state/license details, and Astra formatting. Requires provider verification before clinical use.',
-    '',
-    'Custom GPT instructions:',
-    'You are Astra Clinical Letter Assistant, a documentation assistant for Astra Psychiatry providers.',
-    '',
-    'Your role is to draft professional psychiatric letters and clinical documents using:',
-    '- the provider-selected document type',
-    '- provider name, credentials, state, and license information supplied by the user or Astra app',
-    '- uploaded prior patient notes when provided',
-    '- raw Astra Note Generator output when provided',
-    "- the clinician's brief description",
-    '- Astra Psychiatry format and tone',
-    '',
-    'You may produce output containing PHI when PHI is provided by the clinician or extracted from uploaded clinical documents. Treat PHI as sensitive.',
-    '',
-    'Primary rules:',
-    '- Do not invent facts.',
-    '- Do not fabricate diagnoses, medications, symptoms, impairments, dates, treatment history, risk factors, or functional limitations.',
-    '- Do not silently carry forward outdated diagnoses, medications, or plans.',
-    '- If information is missing or uncertain, use bracketed placeholders.',
-    '- If there is conflicting information, flag it for provider review.',
-    '- The final document is for provider review and must not be treated as automatically final for chart use.',
-    '',
-    'When a prior note is uploaded:',
-    '1. Extract only clearly supported information relevant to the requested document.',
-    '2. Identify patient name, DOB, diagnoses, current medications, allergies, relevant history, prior treatment plan, and screening scores when available.',
-    '3. First produce:',
-    '',
-    buildCustomGptProviderVerificationBlock(),
-    '',
-    '4. Then generate the requested letter/document.',
-    '',
-    'Tone:',
-    '- professional',
-    '- concise',
-    '- warm but not casual',
-    '- clinically appropriate',
-    '- psychiatric documentation style',
-    '- audit-conscious',
-    '- medically accurate',
-    '- avoids exaggerated or unsupported claims',
-    '',
-    'Final output format:',
-    'Use Astra Psychiatry letterhead format with date, recipient, RE line, greeting, body, sincerely, signature placeholder/image reference, provider name/credentials, state license line, and Astra Psychiatry.',
-    '',
-    'Conversation starters:',
-    '- "Draft an Astra-formatted clinical letter from this prior note and raw app output."',
-    '- "Create a body-only version for an accommodation letter."',
-    '- "Extract patient details from this prior note and prepare the Provider Verification section."',
-    '- "Generate a professional Astra letter using the selected provider and state license line."',
-    '',
-    'Knowledge files to upload to GPT:',
-    '- Astra official letterhead/template',
-    '- Astra logo',
-    '- Provider/license config',
-    '- Provider signature images',
-    '- Astra document type guide',
-    '- Astra tone/style guide',
-    '',
-    'PHI handling rules:',
-    '- Generated GPT output may contain PHI. Use only within approved secure clinical workflows.',
-    '- Provider must review before clinical use.',
-    '- Do not invent or silently carry forward unsupported information.',
-  ].join('\n');
-}
-
-function setLetterOutput(text) {
-  state.letterGeneratedOutput = text || '';
-  if (els.letterOutputBox) {
-    els.letterOutputBox.value = state.letterGeneratedOutput;
-  }
-}
-
-async function copyTextWithButtonFeedback(text, button, fallbackMessage) {
-  try {
-    await navigator.clipboard.writeText(text);
-    if (button) {
-      const original = button.textContent;
-      button.textContent = 'Copied';
-      window.setTimeout(() => {
-        button.textContent = original;
-      }, 1200);
-    }
-    return true;
-  } catch (error) {
-    window.alert(fallbackMessage || 'Copy failed. Please copy manually from the output box.');
-    return false;
-  }
-}
-
-function setActiveWorkspace(workspace) {
-  state.activeWorkspace = workspace === 'letter' ? 'letter' : 'note';
-  setActiveByData('#workspaceToggle .seg-btn', 'workspace', state.activeWorkspace);
-  updateWorkspaceVisibility();
-  updateBranding();
-  updateTopbarState(true);
-}
-
-function updateWorkspaceVisibility() {
-  const isLetter = state.activeWorkspace === 'letter';
-  if (els.noteBuilderShell) {
-    els.noteBuilderShell.classList.toggle('hidden', isLetter);
-  }
-  if (els.letterGeneratorShell) {
-    els.letterGeneratorShell.classList.toggle('hidden', !isLetter);
-  }
-  if (els.body) {
-    els.body.dataset.activeWorkspace = state.activeWorkspace;
-  }
-  setActiveByData('#workspaceToggle .seg-btn', 'workspace', state.activeWorkspace);
-}
-
-function hasScreeningInformationContent() {
-  if (String(getValue('screeningInfo') || '').trim()) return true;
-  return SCREENER_IDS.some((id) => String(getValue(id) || '').trim());
-}
-
-function setScreeningInfoUploadStatus(message, tone = '') {
-  if (!els.screeningInfoUploadStatus) return;
-  els.screeningInfoUploadStatus.textContent = message || '';
-  els.screeningInfoUploadStatus.classList.toggle('screening-upload-success', tone === 'success');
-  els.screeningInfoUploadStatus.classList.toggle('screening-upload-error', tone === 'error');
-  els.screeningInfoUploadStatus.classList.toggle('screening-upload-loading', tone === 'loading');
-}
-
-function addScreeningInformationToAstraIntake() {
-  if (!els.addScreeningInfoBtn) return;
-
-  if (!(state.practice === 'astra' && state.visitType === 'intake')) {
-    setScreeningInfoUploadStatus('Switch to Astra Intake before adding screening information.', 'error');
-    return;
-  }
-
-  if (!hasScreeningInformationContent()) {
-    setScreeningInfoUploadStatus('Enter screening information or screener results before adding them to Astra Intake.', 'error');
-    return;
-  }
-
-  els.addScreeningInfoBtn.disabled = true;
-  els.addScreeningInfoBtn.textContent = 'Uploading screening information...';
-  setScreeningInfoUploadStatus('Uploading screening information...', 'loading');
-
-  window.setTimeout(() => {
-    els.addScreeningInfoBtn.disabled = false;
-    els.addScreeningInfoBtn.textContent = 'Upload Screening Info';
-    setScreeningInfoUploadStatus('Screening information added to Astra Intake', 'success');
-    updateCompletionIndicators();
-    updateExport();
-  }, 450);
-}
-
-function uploadPreviousNote() {
-  if (!els.uploadPreviousNoteBtn) return;
-
-  if (!(state.practice === 'astra' && state.visitType === 'followup')) {
-    // Perhaps show error
-    return;
-  }
-
-  els.uploadPreviousNoteBtn.disabled = true;
-  els.uploadPreviousNoteBtn.textContent = 'Uploading...';
-
-  window.setTimeout(() => {
-    els.uploadPreviousNoteBtn.disabled = false;
-    els.uploadPreviousNoteBtn.textContent = 'Upload Previous Note';
-    setAstraFollowupContextMode('uploadedPreviousNote');
-    refreshUI(true, { markDirty: true });
-  }, 450);
-}
-
-function uploadSupportingDocs() {
-  if (!els.uploadSupportingDocsBtn) return;
-
-  els.uploadSupportingDocsBtn.disabled = true;
-  els.uploadSupportingDocsBtn.textContent = 'Uploading...';
-
-  window.setTimeout(() => {
-    els.uploadSupportingDocsBtn.disabled = false;
-    els.uploadSupportingDocsBtn.textContent = 'Upload Supporting Docs';
-    setAstraSupportingDocsUploaded(true);
-    refreshUI(true, { markDirty: true });
-  }, 450);
 }
 
 function isValidEmailFormat(value) {
@@ -3018,30 +2431,16 @@ function updateBranding() {
 
   els.body.dataset.practice = state.practice;
   els.body.dataset.visitType = state.visitType;
-  els.body.dataset.activeWorkspace = state.activeWorkspace;
-
-  if (state.activeWorkspace === 'letter') {
-    if (els.brandKicker) els.brandKicker.textContent = 'Astra Psychiatry';
-    if (els.brandTitle) els.brandTitle.textContent = 'Astra Letter Generator';
-    if (els.brandSubtitle) {
-      els.brandSubtitle.textContent = `Astra-only GPT packet generation for the ${ASTRA_LETTER_GPT_LABEL}.`;
-    }
-    if (els.brandModePill) els.brandModePill.textContent = 'Letter Workflow';
-    if (els.brandLogoFallback) els.brandLogoFallback.textContent = 'A';
-    safeShowLogo(els.astraLogo, true);
-    safeShowLogo(els.ebhLogo, false);
-    return;
-  }
 
   if (els.brandKicker) els.brandKicker.textContent = brand.kicker;
   if (els.brandTitle) els.brandTitle.textContent = 'Clinical Note Builder';
 
   if (els.brandSubtitle) {
     els.brandSubtitle.textContent = isAstra
-      ? `Readable intake/follow-up capture with a ${astraGptLabel} handoff.`
+      ? `Astra capture with ${astraGptLabel} handoff.`
       : isIntake
-        ? 'Readable intake capture for EBH with imported pre-visit screening support.'
-        : 'Readable EBH follow-up capture with prior-plan context first.';
+        ? 'EBH intake capture with imported screening support.'
+        : 'EBH follow-up capture with prior-plan context.';
   }
 
   if (els.brandLogoFallback) {
@@ -3065,20 +2464,20 @@ function updateBranding() {
 
   if (els.workflowRibbonCopy) {
     els.workflowRibbonCopy.textContent = isAstra
-      ? 'A high-clarity workflow designed for fast Astra handoff and reliable section completion.'
+      ? 'Structured capture for Astra handoff.'
       : isIntake
-        ? 'A pre-visit-first intake workflow designed for imported EBH screening data.'
-        : 'A pre-visit-first follow-up workflow designed for prior-plan continuity.';
+        ? 'EBH intake with imported pre-visit data.'
+        : 'EBH follow-up with prior-plan continuity.';
   }
 
   if (els.practiceModeBanner && els.practiceModeKicker && els.practiceModeText) {
     els.practiceModeBanner.classList.remove('hidden');
     els.practiceModeKicker.textContent = isAstra ? 'Astra Mode' : 'EBH Mode';
     els.practiceModeText.textContent = isAstra
-      ? 'Astra mode active: intake and follow-up both route to one universal Astra GPT.'
+      ? 'Astra intake and follow-up route to one note GPT.'
       : isIntake
-        ? 'EBH intake mode active: paste imported screening output first, then document intake.'
-        : 'EBH follow-up mode active: prior plan first, then follow-up note capture and handoff.';
+        ? 'EBH intake mode active.'
+        : 'EBH follow-up mode active.';
   }
 
   if (els.practiceContextPanel) {
@@ -3090,51 +2489,51 @@ function updateBranding() {
     els.practiceContextTextPrimary.textContent = isAstra
       ? `Astra routes both visit formats into the ${astraGptLabel}.`
       : isIntake
-        ? 'EBH intake uses imported pre-visit data before chief complaint and live notes.'
-        : 'EBH follow-up uses prior-plan context before visit setup and note capture.';
+        ? 'EBH intake uses imported pre-visit data.'
+        : 'EBH follow-up uses prior-plan context.';
   }
 
   if (els.practiceContextLabelSecondary && els.practiceContextTextSecondary) {
     els.practiceContextLabelSecondary.textContent = 'Workflow emphasis';
     els.practiceContextTextSecondary.textContent = isAstra
-      ? 'Pre-visit context first, then setup, notes, and closing with follow-up scheduling before close times.'
-      : 'Pre-visit context first, then setup, notes, and closing with schedule-first sequencing.';
+      ? 'Context, setup, notes, closing.'
+      : 'Context, setup, notes, closing.';
   }
 
   if (els.setupSectionCopy) {
     els.setupSectionCopy.textContent = isAstra
-      ? 'Capture setup after pre-visit context so chief complaint and timing align with live encounter flow.'
-      : 'Capture setup after pre-visit context so imported data and chief complaint stay in sequence.';
+      ? 'Core visit details.'
+      : 'Core visit details.';
   }
 
   if (els.previousPlanSectionCopy) {
     els.previousPlanSectionCopy.textContent = isAstra
       ? state.astraFollowupContextMode === 'uploadedPreviousNote'
         ? 'Upload the full previous note directly to the GPT; no prior plan paste is needed here.'
-        : 'Paste prior treatment context before starting setup and chief complaint.'
-      : 'Paste prior EBH treatment context before setup and chief complaint.';
+        : 'Paste prior treatment context.'
+      : 'Paste prior EBH treatment context.';
   }
 
   if (els.notesSectionCopy) {
     els.notesSectionCopy.textContent = isAstra
-      ? 'Write freeform notes as the encounter unfolds; export formatting is handled automatically.'
-      : 'Write freeform notes as the encounter unfolds; export formatting is handled automatically.';
+      ? 'Freeform encounter notes.'
+      : 'Freeform encounter notes.';
   }
 
   if (els.scriptSectionCopy) {
-    els.scriptSectionCopy.textContent = 'Verbatim intake interview prompts are available during intake workflows.';
+    els.scriptSectionCopy.textContent = 'Interview prompts for intake.';
   }
 
   if (els.closingSectionCopy) {
-    els.closingSectionCopy.textContent = 'Schedule follow-up first, then capture therapy interwoven tier and closing times.';
+    els.closingSectionCopy.textContent = 'Schedule, close, and document timing.';
   }
 
   if (els.exportSectionCopy) {
     els.exportSectionCopy.textContent = isAstra
-      ? `Preview the structured Astra raw input live, then copy or open the ${ASTRA_UNIVERSAL_GPT_LABEL}.`
+      ? `Copy or open the ${ASTRA_UNIVERSAL_GPT_LABEL}.`
       : isIntake
-        ? 'Preview the structured EBH intake raw input live, then copy or open EBH Intake GPT.'
-        : 'Preview the structured EBH follow-up raw input live, then copy or open EBH Follow-Up GPT.';
+        ? 'Copy or open EBH Intake GPT.'
+        : 'Copy or open EBH Follow-Up GPT.';
   }
 
   if (els.setupMiniBadge) els.setupMiniBadge.textContent = 'Visit setup';
@@ -3168,8 +2567,7 @@ function updateScriptVisibility() {
   }
 
   if (els.workspaceGrid && els.scriptPanel) {
-    const shouldBeSingle = !isIntake || els.scriptPanel.classList.contains('hidden');
-    els.workspaceGrid.classList.toggle('workspace-grid-single', shouldBeSingle);
+    els.workspaceGrid.classList.toggle('workspace-grid-single', els.scriptPanel.classList.contains('hidden'));
   }
 }
 
@@ -3178,6 +2576,7 @@ function updatePracticeSections() {
   const isIntake = state.visitType === 'intake';
   const isAstraFollowup = isAstra && !isIntake;
   const usesUploadedPreviousNote = isAstraFollowup && state.astraFollowupContextMode === 'uploadedPreviousNote';
+  const usesManualScreening = isAstra && isIntake && state.astraIntakeScreeningMode === 'enterManually';
 
   if (els.previousPlanCard) {
     els.previousPlanCard.classList.toggle('hidden', isIntake);
@@ -3185,10 +2584,6 @@ function updatePracticeSections() {
 
   if (els.astraFollowupContextModeGroup) {
     els.astraFollowupContextModeGroup.classList.toggle('hidden', !isAstraFollowup);
-  }
-
-  if (els.astraIntakeContextModeGroup) {
-    els.astraIntakeContextModeGroup.classList.toggle('hidden', !isAstraIntake);
   }
 
   if (els.previousPlanField) {
@@ -3199,20 +2594,40 @@ function updatePracticeSections() {
     els.astraSupportingDocsControl.classList.toggle('hidden', !isAstra);
   }
 
-  if (els.generateLetterBtn) {
-    els.generateLetterBtn.classList.toggle('hidden', !isAstra);
-  }
-
   if (els.astraScreeners) {
     els.astraScreeners.classList.toggle('hidden', !(isAstra && isIntake));
   }
 
+  if (els.astraIntakeScreeningModeGroup) {
+    els.astraIntakeScreeningModeGroup.classList.toggle('hidden', !(isAstra && isIntake));
+  }
+
+  if (els.astraScreenersFields) {
+    els.astraScreenersFields.classList.toggle('hidden', !usesManualScreening);
+  }
+
+  if (els.astraIntakeScreeningModeHint) {
+    els.astraIntakeScreeningModeHint.textContent = usesManualScreening
+      ? 'Enter available screening scores below.'
+      : 'Patient screening data will be uploaded separately to the Astra GPT.';
+  }
+
   if (els.astraScreeningInfo) {
-    els.astraScreeningInfo.classList.toggle('hidden', !(isAstra && isIntake));
+    els.astraScreeningInfo.classList.toggle('hidden', !usesManualScreening);
   }
 
   if (els.ebhTests) {
     els.ebhTests.classList.toggle('hidden', !(!isAstra && isIntake));
+  }
+
+  if (els.patientLettersWorkspace) {
+    els.patientLettersWorkspace.classList.toggle('hidden', !(isAstra && state.patientLettersOpen));
+  }
+
+  if (els.patientLettersBtn) {
+    els.patientLettersBtn.classList.toggle('active', isAstra && state.patientLettersOpen);
+    els.patientLettersBtn.setAttribute('aria-pressed', String(isAstra && state.patientLettersOpen));
+    els.patientLettersBtn.classList.toggle('hidden', !isAstra);
   }
 }
 
@@ -3765,6 +3180,9 @@ function attachTimeControlListeners() {
 
 function buildScreenersText() {
   if (state.practice !== 'astra' || state.visitType !== 'intake') return '';
+  if (state.astraIntakeScreeningMode !== 'enterManually') {
+    return 'Patient screening data will be uploaded separately to the Astra GPT.';
+  }
 
   const lines = [
     ['PHQ-9', getValue('phq9')],
@@ -3783,6 +3201,9 @@ function buildScreenersText() {
 
 function buildScreeningInformationText() {
   if (state.practice !== 'astra' || state.visitType !== 'intake') return '';
+  if (state.astraIntakeScreeningMode !== 'enterManually') {
+    return '';
+  }
   return getValue('screeningInfo') || 'Not entered';
 }
 
@@ -3903,17 +3324,26 @@ function buildExport() {
   }
 
   if (state.practice === 'astra' && state.visitType === 'intake') {
+    const screeningBlocks = state.astraIntakeScreeningMode === 'enterManually'
+      ? [
+        'PRE-VISIT SCREENERS',
+        screeners,
+        '',
+        'SCREENING DOCUMENTATION',
+        screeningInfo,
+      ]
+      : [
+        'PRE-VISIT SCREENERS',
+        'Patient screening data will be uploaded separately to the Astra GPT.',
+      ];
+
     return [
       buildAstraRawHeader(),
       '',
       'VISIT DETAILS',
       visitDetails,
       '',
-      'PRE-VISIT SCREENERS',
-      screeners,
-      '',
-      'SCREENING DOCUMENTATION',
-      screeningInfo,
+      ...screeningBlocks,
       '',
       'UPLOADED SUPPORTING DOCUMENTS',
       supportingDocuments || 'None selected in app.',
@@ -3969,7 +3399,9 @@ function evaluateCompletion() {
       ? true
       : isFilled('previousPlan');
   } else if (isVisible(els.astraScreeners)) {
-    previsitComplete = SCREENER_IDS.some((id) => isFilled(id));
+    previsitComplete = state.astraIntakeScreeningMode === 'uploadToGpt'
+      ? true
+      : SCREENER_IDS.some((id) => isFilled(id));
   } else if (isVisible(els.ebhTests)) {
     previsitComplete = isFilled('testDump');
   }
@@ -4004,7 +3436,7 @@ function evaluateCompletion() {
 
 function updateCompletionIndicators() {
   const { previsitComplete, setupComplete, notesComplete, closingComplete } = evaluateCompletion();
-  const screeningInfoComplete = isFilled('screeningInfo');
+  const screeningInfoComplete = state.astraIntakeScreeningMode === 'uploadToGpt' || isFilled('screeningInfo');
 
   setSectionCompletion(els.setupCompletionStatus, els.setupSection, setupComplete);
   setSectionCompletion(els.notesCompletionStatus, els.notesSection, notesComplete);
@@ -4344,6 +3776,7 @@ function buildDraftPayload() {
       astraSupportingDocsUploaded: state.astraSupportingDocsUploaded,
       astraSupportingDocTypes: normalizeAstraSupportingDocTypes(state.astraSupportingDocTypes),
       astraFollowupContextMode: state.astraFollowupContextMode,
+      astraIntakeScreeningMode: state.astraIntakeScreeningMode,
     },
     inputs: {},
   };
@@ -4484,9 +3917,12 @@ function applyDraft(draft) {
     state.therapyInterwovenTier = draft.state.therapyInterwovenTier || '0';
     state.astraSupportingDocsUploaded = Boolean(draft.state.astraSupportingDocsUploaded);
     state.astraSupportingDocTypes = normalizeAstraSupportingDocTypes(draft.state.astraSupportingDocTypes);
-    state.astraFollowupContextMode = Object.prototype.hasOwnProperty.call(draft.state, 'astraFollowupContextMode')
-      ? (draft.state.astraFollowupContextMode === 'previousPlan' ? 'previousPlan' : 'uploadedPreviousNote')
+    state.astraFollowupContextMode = draft.state.astraFollowupContextMode === 'previousPlan'
+      ? 'previousPlan'
       : 'uploadedPreviousNote';
+    state.astraIntakeScreeningMode = draft.state.astraIntakeScreeningMode === 'enterManually'
+      ? 'enterManually'
+      : 'uploadToGpt';
   }
 
   if (draft.inputs) {
@@ -4616,11 +4052,10 @@ function setAstraFollowupContextMode(value, button) {
   refreshUI(true, { markDirty: true });
 }
 
-function setAstraIntakeContextMode(value, button) {
-  state.astraIntakeContextMode = value === 'upload' ? 'upload' : 'none';
-  setActiveByData('#astraIntakeContextModeToggle .seg-btn', 'astra-intake-context-mode', state.astraIntakeContextMode);
-  if (button) setActiveButtons('#astraIntakeContextModeToggle', button);
-  syncAstraSupportingDocsControls();
+function setAstraIntakeScreeningMode(value, button) {
+  state.astraIntakeScreeningMode = value === 'enterManually' ? 'enterManually' : 'uploadToGpt';
+  setActiveByData('#astraIntakeScreeningModeToggle .seg-btn', 'astraIntakeScreeningMode', state.astraIntakeScreeningMode);
+  if (button) setActiveButtons('#astraIntakeScreeningModeToggle', button);
   refreshUI(true, { markDirty: true });
 }
 
@@ -4767,13 +4202,15 @@ function syncToggleStates() {
   setActiveByData('#followModalityToggle .seg-btn', 'followModality', state.followModality);
   setActiveByData('#therapyInterwovenToggle .seg-btn', 'therapyTier', state.therapyInterwovenTier);
   setActiveByData('#astraFollowupContextModeToggle .seg-btn', 'astraFollowupContextMode', state.astraFollowupContextMode);
-  setActiveByData('#astraIntakeContextModeToggle .seg-btn', 'astra-intake-context-mode', state.astraIntakeContextMode);
+  setActiveByData('#astraIntakeScreeningModeToggle .seg-btn', 'astraIntakeScreeningMode', state.astraIntakeScreeningMode);
+  setActiveByData('#letterTypeGrid .letter-type-btn', 'letterType', state.selectedLetterType);
 
   if (els.scriptToggle) {
     els.scriptToggle.checked = Boolean(state.scriptVisible);
   }
 
   syncAstraSupportingDocsControls();
+  syncPatientLettersControls();
 }
 
 function syncAstraSupportingDocsControls() {
@@ -4796,23 +4233,374 @@ function syncAstraSupportingDocsControls() {
       ? 'Choose Screening Docs when intake or pre-appointment documentation will be uploaded to GPT.'
       : 'Select one or more types when supporting documents will be uploaded.';
   }
+}
 
-  // For intake, show/hide based on mode
-  if (state.visitType === 'intake') {
-    const show = state.astraIntakeContextMode === 'upload';
-    if (els.astraSupportingDocsControl) {
-      els.astraSupportingDocsControl.classList.toggle('hidden', !show);
-    }
-    if (!show) {
-      state.astraSupportingDocsUploaded = false;
-      state.astraSupportingDocTypes = [];
-    }
+function getLetterGptUrl() {
+  return String((els.body && els.body.dataset && els.body.dataset.astraLetterGptUrl) || '').trim();
+}
+
+function getLetterCheckboxValue(id) {
+  const el = getEl(id);
+  return Boolean(el && el.checked);
+}
+
+function setLetterCheckboxValue(id, value) {
+  const el = getEl(id);
+  if (el) el.checked = Boolean(value);
+}
+
+function getLetterFieldValue(id) {
+  const el = getEl(id);
+  if (!el) return '';
+  if (el.type === 'checkbox') return el.checked ? 'Yes' : 'No';
+  return String(el.value || '').trim();
+}
+
+function setLetterFieldValue(id, value) {
+  const el = getEl(id);
+  if (!el) return;
+  if (el.type === 'checkbox') {
+    el.checked = Boolean(value);
+    return;
   }
+  el.value = value == null ? '' : String(value);
+}
+
+function getAllLetterFieldIds() {
+  const specificIds = Object.values(LETTER_SPECIFIC_FIELD_CONFIG)
+    .flat()
+    .map(([id]) => id);
+  return [...new Set([...LETTER_FIELD_IDS, ...specificIds])];
+}
+
+function getLetterSpecificFieldIds() {
+  return (LETTER_SPECIFIC_FIELD_CONFIG[state.selectedLetterType] || []).map(([id]) => id);
+}
+
+function applyLetterDisclosureDefaults() {
+  Object.entries(LETTER_DISCLOSURE_DEFAULTS).forEach(([id, value]) => {
+    setLetterCheckboxValue(id, value);
+  });
+  setLetterCheckboxValue(
+    'letterIncludeFunctionalLimitations',
+    LETTER_FUNCTIONAL_LIMITATION_TYPES.includes(state.selectedLetterType),
+  );
+}
+
+function renderLetterSpecificFields() {
+  if (!els.letterSpecificFields) return;
+  const fields = LETTER_SPECIFIC_FIELD_CONFIG[state.selectedLetterType] || [];
+  const caution = state.selectedLetterType === 'esa'
+    ? '<p class="letter-caution">Use only when clinically appropriate and within scope.</p>'
+    : '';
+
+  els.letterSpecificFields.innerHTML = `${caution}<div class="grid grid-2 top-gap">${fields.map(([id, label, type, options]) => {
+    if (type === 'textarea') {
+      return `<div class="field field-full"><label for="${escapeHtml(id)}">${escapeHtml(label)}</label><textarea id="${escapeHtml(id)}" data-letter-specific-field rows="3"></textarea></div>`;
+    }
+    if (type === 'select') {
+      const optionHtml = (options || []).map((option) => `<option value="${escapeHtml(option)}">${escapeHtml(option)}</option>`).join('');
+      return `<div class="field"><label for="${escapeHtml(id)}">${escapeHtml(label)}</label><div class="select-shell"><select id="${escapeHtml(id)}" data-letter-specific-field>${optionHtml}</select></div></div>`;
+    }
+    if (type === 'checkbox') {
+      return `<label class="script-switch letter-specific-checkbox" for="${escapeHtml(id)}"><input id="${escapeHtml(id)}" data-letter-specific-field type="checkbox"><span class="switch-track" aria-hidden="true"></span><span class="switch-label">${escapeHtml(label)}</span></label>`;
+    }
+    return `<div class="field"><label for="${escapeHtml(id)}">${escapeHtml(label)}</label><input id="${escapeHtml(id)}" data-letter-specific-field type="text"></div>`;
+  }).join('')}</div>`;
+
+  els.letterSpecificFields.querySelectorAll('[data-letter-specific-field]').forEach((field) => {
+    field.addEventListener('input', handleLetterMutation);
+    field.addEventListener('change', handleLetterMutation);
+    field.addEventListener('blur', savePatientLettersDraft);
+  });
+}
+
+function syncPatientLettersControls() {
+  setActiveByData('#letterTypeGrid .letter-type-btn', 'letterType', state.selectedLetterType);
+
+  if (els.letterConsentWarning) {
+    const hasRecipient = Boolean(getLetterFieldValue('letterRecipient') || getLetterFieldValue('letterRecipientAddress'));
+    els.letterConsentWarning.classList.toggle('hidden', getLetterCheckboxValue('letterConsentConfirmed') || !hasRecipient);
+  }
+
+  if (els.letterManualContextField) {
+    els.letterManualContextField.classList.toggle('hidden', !getLetterCheckboxValue('letterIncludeManualContext'));
+  }
+
+  const hasLetterUrl = Boolean(getLetterGptUrl());
+  [els.openLetterGptBtn, els.copyOpenLetterGptBtn].forEach((btn) => {
+    if (btn) btn.disabled = !hasLetterUrl;
+  });
+}
+
+function buildPatientLettersDraftPayload() {
+  const fields = {};
+  getAllLetterFieldIds().forEach((id) => {
+    const el = getEl(id);
+    if (el) fields[id] = getLetterFieldValue(id);
+  });
+
+  const checkboxes = {};
+  LETTER_CHECKBOX_IDS.forEach((id) => {
+    checkboxes[id] = getLetterCheckboxValue(id);
+  });
+
+  return {
+    savedAt: new Date().toISOString(),
+    selectedLetterType: state.selectedLetterType,
+    fields,
+    checkboxes,
+    output: els.letterExportBox ? els.letterExportBox.value : '',
+  };
+}
+
+function savePatientLettersDraft() {
+  setStorageJSON(PATIENT_LETTERS_STORAGE_KEY, buildPatientLettersDraftPayload());
+}
+
+function applyPatientLettersDraft(draft) {
+  const payload = draft && typeof draft === 'object' ? draft : {};
+  state.selectedLetterType = Object.prototype.hasOwnProperty.call(LETTER_TYPE_LABELS, payload.selectedLetterType)
+    ? payload.selectedLetterType
+    : 'workSchoolNote';
+
+  renderLetterSpecificFields();
+
+  Object.entries(LETTER_DEFAULTS).forEach(([id, value]) => setLetterFieldValue(id, value));
+  applyLetterDisclosureDefaults();
+
+  if (payload.fields && typeof payload.fields === 'object') {
+    Object.entries(payload.fields).forEach(([id, value]) => setLetterFieldValue(id, value));
+  }
+
+  if (!getLetterFieldValue('letterDate')) {
+    const now = new Date();
+    const yyyy = now.getFullYear();
+    const mm = String(now.getMonth() + 1).padStart(2, '0');
+    const dd = String(now.getDate()).padStart(2, '0');
+    setLetterFieldValue('letterDate', `${yyyy}-${mm}-${dd}`);
+  }
+
+  if (!getLetterFieldValue('letterPatientDobAge') && getValue('age')) {
+    setLetterFieldValue('letterPatientDobAge', getValue('age'));
+  }
+
+  if (payload.checkboxes && typeof payload.checkboxes === 'object') {
+    Object.entries(payload.checkboxes).forEach(([id, value]) => setLetterCheckboxValue(id, value));
+  }
+
+  if (els.letterExportBox) {
+    els.letterExportBox.value = payload.output || '';
+  }
+
+  syncPatientLettersControls();
+}
+
+function loadPatientLettersDraft() {
+  applyPatientLettersDraft(getStorageJSON(PATIENT_LETTERS_STORAGE_KEY, null));
+}
+
+function handleLetterMutation() {
+  syncPatientLettersControls();
+  savePatientLettersDraft();
+}
+
+function setPatientLettersOpen(value) {
+  state.patientLettersOpen = Boolean(value);
+  updatePracticeSections();
+  syncPatientLettersControls();
+  if (state.patientLettersOpen && state.practice === 'astra') {
+    window.setTimeout(() => {
+      if (els.patientLettersWorkspace && typeof els.patientLettersWorkspace.scrollIntoView === 'function') {
+        els.patientLettersWorkspace.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 0);
+  }
+}
+
+function setLetterType(type) {
+  state.selectedLetterType = Object.prototype.hasOwnProperty.call(LETTER_TYPE_LABELS, type) ? type : 'workSchoolNote';
+  const currentDraft = buildPatientLettersDraftPayload();
+  renderLetterSpecificFields();
+  Object.entries(currentDraft.fields || {}).forEach(([id, value]) => setLetterFieldValue(id, value));
+  applyLetterDisclosureDefaults();
+  savePatientLettersDraft();
+  syncPatientLettersControls();
+}
+
+function yesNo(value) {
+  return value ? 'Yes' : 'No';
+}
+
+function letterValue(id, fallback = '[Not provided]') {
+  return displayEntered(getLetterFieldValue(id), fallback);
+}
+
+function buildLetterSpecificDetailsText() {
+  const fields = LETTER_SPECIFIC_FIELD_CONFIG[state.selectedLetterType] || [];
+  const lines = fields.map(([id, label]) => `${label}: ${letterValue(id)}`);
+  return lines.length ? lines.join('\n') : '[No letter-specific details entered]';
+}
+
+function buildCurrentNoteContextForLetter() {
+  const lines = [
+    'Clinical context for GPT reasoning only; disclose only if permitted above.',
+    `Practice: ${state.practice === 'astra' ? 'Astra' : 'EBH'}`,
+    `Visit type: ${state.visitType === 'intake' ? 'Intake' : 'Follow-Up'}`,
+    `Age: ${displayEntered(getValue('age'))}`,
+    `Gender: ${displayEntered(getValue('gender'))}`,
+    `Encounter modality: ${displayEntered(getValue('currentModality'))}`,
+    `Chief complaint: ${displayEntered(getValue('cc'))}`,
+    `Prior context mode: ${state.astraFollowupContextMode === 'uploadedPreviousNote' ? 'Upload Full Previous Note' : 'Paste Previous Plan'}`,
+    `Screening mode: ${state.astraIntakeScreeningMode === 'uploadToGpt' ? 'Upload Screening Data to GPT' : 'Enter Screening Data'}`,
+    `Supporting docs status/types: ${state.astraSupportingDocsUploaded ? (getAstraSupportingDocLabels().join(', ') || 'uploaded, type not specified') : 'None selected in app'}`,
+    `Follow-up date/time: ${state.followupMode === 'prn' ? 'PRN' : `${displayEntered(getValue('followDate'))} ${displayEntered(getValue('followTime'))}`}`,
+    '',
+    'Appointment notes:',
+    getLetterCheckboxValue('letterIncludeDetailedSymptoms')
+      ? displayEntered(getValue('notes'))
+      : 'Detailed symptoms are not authorized for disclosure. Use notes only for reasoning and keep final letter minimal.',
+  ];
+
+  return lines.join('\n');
+}
+
+function buildPatientLetterPacket() {
+  const hasRecipient = Boolean(getLetterFieldValue('letterRecipient') || getLetterFieldValue('letterRecipientAddress'));
+  const consentConfirmed = getLetterCheckboxValue('letterConsentConfirmed');
+  const currentNoteIncluded = getLetterCheckboxValue('letterIncludeCurrentNote');
+  const manualContextIncluded = getLetterCheckboxValue('letterIncludeManualContext');
+  const attachmentManifest = displayEntered(getLetterFieldValue('letterAttachmentManifest'), '[No files/images listed]');
+  const manualContext = manualContextIncluded
+    ? displayEntered(getLetterFieldValue('letterManualContext'), '[No manual context entered]')
+    : '[Not included]';
+  const consentWarning = hasRecipient && !consentConfirmed
+    ? '\nWARNING:\nPatient consent/release has not been confirmed. Do not finalize or send this third-party letter until consent is confirmed.\n'
+    : '';
+
+  return [
+    'ASTRA PATIENT LETTER REQUEST',
+    consentWarning.trim(),
+    '',
+    'LETTER TYPE:',
+    LETTER_TYPE_LABELS[state.selectedLetterType] || LETTER_TYPE_LABELS.workSchoolNote,
+    '',
+    'PATIENT:',
+    `Name: ${letterValue('letterPatientName')}`,
+    `DOB/Age: ${letterValue('letterPatientDobAge')}`,
+    '',
+    'LETTER DATE:',
+    letterValue('letterDate'),
+    '',
+    'RECIPIENT:',
+    `Organization/recipient: ${letterValue('letterRecipient')}`,
+    `Address/fax: ${letterValue('letterRecipientAddress', '[Optional, not provided]')}`,
+    '',
+    'PURPOSE:',
+    letterValue('letterPurpose'),
+    `Requested date range: ${letterValue('letterRequestedDateRange', '[Optional, not provided]')}`,
+    `Return date: ${letterValue('letterReturnDate', '[Optional, not provided]')}`,
+    '',
+    'DISCLOSURE CONTROLS:',
+    `Patient consent/release confirmed: ${yesNo(consentConfirmed)}`,
+    `Include diagnosis: ${yesNo(getLetterCheckboxValue('letterIncludeDiagnosis'))}`,
+    `Include medications: ${yesNo(getLetterCheckboxValue('letterIncludeMedications'))}`,
+    `Include detailed symptoms: ${yesNo(getLetterCheckboxValue('letterIncludeDetailedSymptoms'))}`,
+    `Include treatment dates: ${yesNo(getLetterCheckboxValue('letterIncludeTreatmentDates'))}`,
+    `Include functional limitations: ${yesNo(getLetterCheckboxValue('letterIncludeFunctionalLimitations'))}`,
+    `Include safety/risk details: ${yesNo(getLetterCheckboxValue('letterIncludeSafetyRisk'))}`,
+    '',
+    'LETTER-SPECIFIC DETAILS:',
+    buildLetterSpecificDetailsText(),
+    '',
+    'SOURCE CONTEXT:',
+    `Current note context included: ${yesNo(currentNoteIncluded)}`,
+    `Previous note uploaded separately: ${yesNo(getLetterCheckboxValue('letterPreviousNoteUploaded'))}`,
+    `Screening data uploaded separately: ${yesNo(getLetterCheckboxValue('letterScreeningUploaded'))}`,
+    `Supporting documents uploaded separately: ${yesNo(getLetterCheckboxValue('letterSupportingDocsUploaded'))}`,
+    '',
+    'CURRENT NOTE CONTEXT:',
+    currentNoteIncluded ? buildCurrentNoteContextForLetter() : '[Not included]',
+    '',
+    'MANUAL CONTEXT:',
+    manualContext,
+    '',
+    'FILES / IMAGES TO UPLOAD WITH THIS REQUEST:',
+    attachmentManifest,
+    '',
+    'The clinician will upload the listed files/images to the Letter GPT with this packet. Review uploaded files only for the stated purpose. Do not include image/file contents unless clinically relevant and allowed by disclosure settings.',
+    '',
+    'CLINICIAN / SIGNATURE:',
+    `Clinician/provider name: ${letterValue('letterClinicianName')}`,
+    `Clinician title: ${letterValue('letterClinicianTitle')}`,
+    `Signature block:\n${letterValue('letterSignatureBlock')}`,
+    `Additional clinician instructions: ${letterValue('letterAdditionalInstructions', '[None]')}`,
+    '',
+    'CLINICIAN INSTRUCTIONS TO LETTER GPT:',
+    'Write a polished, clinically appropriate Astra Psychiatry letter.',
+    'Use Astra branding and professional formatting.',
+    'Use the provided letter type, details, disclosure controls, and source context.',
+    'Do not disclose diagnosis, medications, detailed symptoms, safety/risk information, or other sensitive clinical details unless explicitly allowed above.',
+    'If patient consent/release is not confirmed, clearly warn that the letter should not be finalized or sent until consent is confirmed.',
+    'Use placeholders for missing required information rather than inventing facts.',
+    'Do not overstate certainty.',
+    'Avoid legal conclusions.',
+    'Do not claim disability, impairment, need, or accommodation beyond what is clinically supported by the provided information.',
+    'If uploaded files/images are referenced, review them only for the stated purpose.',
+    'Produce a final letter ready for clinician review, editing, and signature.',
+  ].filter((line, index, arr) => !(line === '' && arr[index - 1] === '')).join('\n');
+}
+
+function buildLetterPacket() {
+  if (!els.letterExportBox) return '';
+  const packet = buildPatientLetterPacket();
+  els.letterExportBox.value = packet;
+  savePatientLettersDraft();
+  return packet;
+}
+
+async function copyLetterPacket() {
+  const packet = buildLetterPacket();
+  try {
+    await navigator.clipboard.writeText(packet);
+    if (els.copyLetterPacketBtn) {
+      const original = els.copyLetterPacketBtn.textContent;
+      els.copyLetterPacketBtn.textContent = 'Copied';
+      window.setTimeout(() => {
+        els.copyLetterPacketBtn.textContent = original;
+      }, 1200);
+    }
+    return true;
+  } catch (error) {
+    console.error(error);
+    window.alert('Copy failed. Please copy manually from the letter export preview.');
+    return false;
+  }
+}
+
+function openLetterGpt() {
+  const url = getLetterGptUrl();
+  if (!url) {
+    window.alert('No Letter GPT link is configured yet.');
+    return;
+  }
+  window.location.assign(url);
+}
+
+function clearLetterFields() {
+  getAllLetterFieldIds().forEach((id) => setLetterFieldValue(id, ''));
+  Object.entries(LETTER_DEFAULTS).forEach(([id, value]) => setLetterFieldValue(id, value));
+  state.selectedLetterType = 'workSchoolNote';
+  renderLetterSpecificFields();
+  applyLetterDisclosureDefaults();
+  if (els.letterExportBox) els.letterExportBox.value = '';
+  localStorage.removeItem(PATIENT_LETTERS_STORAGE_KEY);
+  savePatientLettersDraft();
+  syncPatientLettersControls();
 }
 
 function refreshUI(persist = true, options = {}) {
   const { markDirty = false } = options;
-  updateWorkspaceVisibility();
   updateBranding();
   updatePracticeSections();
   applyDefaultModalities();
@@ -4845,10 +4633,11 @@ function clearAll() {
   state.astraSupportingDocsUploaded = false;
   state.astraSupportingDocTypes = [];
   state.astraFollowupContextMode = 'uploadedPreviousNote';
+  state.astraIntakeScreeningMode = 'uploadToGpt';
 
   setValue('therapyInterwoven', '0');
 
-  document.querySelectorAll('#currentModalityToggle .seg-btn, #followModalityToggle .seg-btn, #therapyInterwovenToggle .seg-btn, #astraFollowupContextModeToggle .seg-btn, .interval-btn').forEach((btn) => {
+  document.querySelectorAll('#currentModalityToggle .seg-btn, #followModalityToggle .seg-btn, #therapyInterwovenToggle .seg-btn, #astraFollowupContextModeToggle .seg-btn, #astraIntakeScreeningModeToggle .seg-btn, .interval-btn').forEach((btn) => {
     btn.classList.remove('active');
     btn.setAttribute('aria-pressed', 'false');
   });
@@ -4884,6 +4673,7 @@ function clearAll() {
         astraSupportingDocsUploaded: false,
         astraSupportingDocTypes: [],
         astraFollowupContextMode: 'uploadedPreviousNote',
+        astraIntakeScreeningMode: 'uploadToGpt',
       },
       inputs: {},
     };
@@ -7448,80 +7238,6 @@ function openActiveGpt() {
 }
 
 function attachEventListeners() {
-  if (els.noteBuilderTab) els.noteBuilderTab.addEventListener('click', () => setActiveWorkspace('note'));
-  if (els.letterGeneratorTab) els.letterGeneratorTab.addEventListener('click', () => setActiveWorkspace('letter'));
-
-  if (els.letterProviderSelect) {
-    els.letterProviderSelect.addEventListener('change', () => {
-      state.selectedLetterProviderId = els.letterProviderSelect.value;
-      const provider = getSelectedLetterProvider();
-      const states = provider ? Object.keys(provider.licenses).sort() : [];
-      state.selectedLetterState = states[0] || '';
-      renderLetterProviderControls();
-    });
-  }
-
-  if (els.letterStateSelect) {
-    els.letterStateSelect.addEventListener('change', () => {
-      state.selectedLetterState = els.letterStateSelect.value;
-    });
-  }
-
-  [els.letterDocumentType, els.letterBriefDescription, els.letterRawOutput].forEach((element) => {
-    if (!element) return;
-    const eventName = element.tagName === 'SELECT' ? 'change' : 'input';
-    element.addEventListener(eventName, () => {
-      if (element === els.letterDocumentType) {
-        state.selectedLetterDocumentTypeId = els.letterDocumentType.value;
-      }
-    });
-  });
-
-  if (els.generateLetterPacketBtn) {
-    els.generateLetterPacketBtn.addEventListener('click', () => {
-      const packet = buildAstraLetterGptPacket();
-      if (packet) setLetterOutput(packet);
-    });
-  }
-
-  if (els.copyLetterPacketBtn) {
-    els.copyLetterPacketBtn.addEventListener('click', async () => {
-      const packet = buildAstraLetterGptPacket();
-      if (!packet) return;
-      setLetterOutput(packet);
-      await copyTextWithButtonFeedback(packet, els.copyLetterPacketBtn, 'Copy failed. Please copy the GPT packet manually.');
-    });
-  }
-
-  if (els.copyCustomGptBtn) {
-    els.copyCustomGptBtn.addEventListener('click', async () => {
-      const instructions = buildCustomGptInstructionsExport();
-      setLetterOutput(instructions);
-      await copyTextWithButtonFeedback(instructions, els.copyCustomGptBtn, 'Copy failed. Please copy the Custom GPT instructions manually.');
-    });
-  }
-
-  if (els.clearLetterBtn) {
-    els.clearLetterBtn.addEventListener('click', () => {
-      if (els.letterBriefDescription) els.letterBriefDescription.value = '';
-      if (els.letterRawOutput) els.letterRawOutput.value = '';
-      setLetterOutput('');
-      setLetterValidationMessage('');
-    });
-  }
-
-  if (els.addScreeningInfoBtn) {
-    els.addScreeningInfoBtn.addEventListener('click', addScreeningInformationToAstraIntake);
-  }
-
-  if (els.uploadPreviousNoteBtn) {
-    els.uploadPreviousNoteBtn.addEventListener('click', uploadPreviousNote);
-  }
-
-  if (els.uploadSupportingDocsBtn) {
-    els.uploadSupportingDocsBtn.addEventListener('click', uploadSupportingDocs);
-  }
-
   if (els.astraBtn) els.astraBtn.addEventListener('click', () => setPractice('astra'));
   if (els.ebhBtn) els.ebhBtn.addEventListener('click', () => setPractice('ebh'));
   if (els.followBtn) els.followBtn.addEventListener('click', () => setVisitType('followup'));
@@ -7553,8 +7269,8 @@ function attachEventListeners() {
     btn.addEventListener('click', () => setAstraFollowupContextMode(btn.dataset.astraFollowupContextMode, btn));
   });
 
-  document.querySelectorAll('#astraIntakeContextModeToggle .seg-btn').forEach((btn) => {
-    btn.addEventListener('click', () => setAstraIntakeContextMode(btn.dataset.astraIntakeContextMode, btn));
+  document.querySelectorAll('#astraIntakeScreeningModeToggle .seg-btn').forEach((btn) => {
+    btn.addEventListener('click', () => setAstraIntakeScreeningMode(btn.dataset.astraIntakeScreeningMode, btn));
   });
 
   if (els.astraSupportingDocsUploaded) {
@@ -7651,9 +7367,46 @@ function attachEventListeners() {
     });
   }
 
-  if (els.generateLetterBtn) {
-    els.generateLetterBtn.addEventListener('click', () => {
-      setActiveWorkspace('letter');
+  if (els.patientLettersBtn) {
+    els.patientLettersBtn.addEventListener('click', () => setPatientLettersOpen(!state.patientLettersOpen));
+  }
+
+  document.querySelectorAll('#letterTypeGrid .letter-type-btn').forEach((btn) => {
+    btn.addEventListener('click', () => setLetterType(btn.dataset.letterType));
+  });
+
+  document.querySelectorAll('[data-letter-field], [data-letter-checkbox]').forEach((field) => {
+    field.addEventListener('input', handleLetterMutation);
+    field.addEventListener('change', handleLetterMutation);
+    field.addEventListener('blur', savePatientLettersDraft);
+  });
+
+  if (els.buildLetterPacketBtn) {
+    els.buildLetterPacketBtn.addEventListener('click', buildLetterPacket);
+  }
+
+  if (els.copyLetterPacketBtn) {
+    els.copyLetterPacketBtn.addEventListener('click', () => {
+      copyLetterPacket();
+    });
+  }
+
+  if (els.copyOpenLetterGptBtn) {
+    els.copyOpenLetterGptBtn.addEventListener('click', async () => {
+      const copied = await copyLetterPacket();
+      if (copied) openLetterGpt();
+    });
+  }
+
+  if (els.openLetterGptBtn) {
+    els.openLetterGptBtn.addEventListener('click', openLetterGpt);
+  }
+
+  if (els.clearLetterFieldsBtn) {
+    els.clearLetterFieldsBtn.addEventListener('click', () => {
+      if (window.confirm('Clear Patient Letters fields only? Current note draft will be kept.')) {
+        clearLetterFields();
+      }
     });
   }
 
@@ -7735,11 +7488,11 @@ function init() {
   attachInputListeners();
   attachLogoFallbacks();
   initScriptPanelResizer();
-  initializeAstraProviders();
   attachEventListeners();
   attachKeyboardShortcuts();
 
   const loadedFrom = loadInitialData();
+  loadPatientLettersDraft();
 
   if (!state.therapyInterwovenTier) {
     state.therapyInterwovenTier = '0';

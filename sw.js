@@ -1,4 +1,4 @@
-const APP_BUILD_ID = '20260509-astra-letter-generator';
+const APP_BUILD_ID = '20260510-patient-letters';
 const CACHE_PREFIX = 'note-builder-shell-';
 const CACHE_NAME = `${CACHE_PREFIX}${APP_BUILD_ID}`;
 const SHELL_ASSETS = [
@@ -17,9 +17,6 @@ const SHELL_ASSETS = [
   './docs/medication-reference-maintenance.md',
   './docs/drive-sync-setup.md',
   './config/drive-manifest.json',
-  './src/config/astraProviders.json',
-  './src/config/astraDocumentTypes.json',
-  './src/config/astraBranding.json',
 ];
 
 const NETWORK_FIRST_PATHS = new Set([
@@ -27,9 +24,6 @@ const NETWORK_FIRST_PATHS = new Set([
   '/styles.css',
   '/app.js',
   '/manifest.json',
-  '/src/config/astraProviders.json',
-  '/src/config/astraDocumentTypes.json',
-  '/src/config/astraBranding.json',
 ]);
 
 self.addEventListener('install', (event) => {
