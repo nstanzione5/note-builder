@@ -13,7 +13,7 @@
   <link rel="apple-touch-icon" href="icons/icon-192.png">
 </head>
 <body
-  data-app-build-id="20260510-patient-letters"
+  data-app-build-id="20260510-letter-page"
   data-practice="astra"
   data-visit-type="followup"
   data-astra-intake-gpt-url="https://chatgpt.com/g/g-69f246601ad08191bc5f7522948c06ef-astra-note"
@@ -61,12 +61,12 @@
           <a class="brand-tool-btn" href="https://mhmeatnpotatoes.com/antidepressant-switching-tool" target="_blank" rel="noopener noreferrer" title="Antidepressant cross-titration tool" data-tooltip="Antidepressant Cross-Titration" aria-label="Antidepressant cross-titration tool">
             <span class="tool-emoji" aria-hidden="true">🔁</span>
           </a>
-          <button class="brand-tool-btn med-launch-btn" id="medDrawerBtn" type="button" data-tooltip="Medication Reference" aria-label="Open medication reference drawer">
+          <button class="brand-tool-btn med-launch-btn" id="medDrawerBtn" type="button" data-tooltip="Medication Reference" aria-label="Open medication reference drawer" aria-pressed="false">
             <span class="tool-emoji" aria-hidden="true">🧠</span>
           </button>
-          <button class="brand-tool-btn letter-launch-btn" id="patientLettersBtn" type="button" data-tooltip="Patient Letters" aria-label="Open Patient Letters workspace" aria-pressed="false">
+          <a class="brand-tool-btn letter-launch-btn" id="patientLettersBtn" href="letter.html" data-tooltip="Patient Letters" aria-label="Open Patient Letters page">
             <span class="tool-emoji" aria-hidden="true">📄</span>
-          </button>
+          </a>
         </nav>
       </section>
 
@@ -163,21 +163,12 @@
       <div class="section-heading">
         <div>
           <h2>Pre-Visit Screening Results (Astra Intake)</h2>
-          <p>Choose how screening data will reach GPT.</p>
+          <p>Enter scores when not uploading screening docs.</p>
         </div>
         <div class="section-heading-right">
           <span class="section-status completion-status-pending" id="astraScreenersCompletionStatus">Pending</span>
           <div class="section-mini-badge">Astra only</div>
         </div>
-      </div>
-
-      <div class="astra-intake-screening-mode" id="astraIntakeScreeningModeGroup">
-        <label>Screening Source</label>
-        <div class="segmented-control segmented-control-form" id="astraIntakeScreeningModeToggle" role="group" aria-label="Screening source">
-          <button type="button" class="seg-btn" data-astra-intake-screening-mode="enterManually">Enter Screening Data</button>
-          <button type="button" class="seg-btn" data-astra-intake-screening-mode="uploadToGpt">Upload Screening Data to GPT</button>
-        </div>
-        <p class="helper-text" id="astraIntakeScreeningModeHint">Patient screening data will be uploaded separately to the Astra GPT.</p>
       </div>
 
       <div class="grid grid-2" id="astraScreenersFields">
@@ -225,7 +216,7 @@
       <div class="section-heading">
         <div>
           <h2>Screening Information</h2>
-          <p>Brief pre-appointment context.</p>
+          <p>Screening source for Astra intake.</p>
         </div>
         <div class="section-heading-right">
           <span class="section-status completion-status-pending" id="astraScreeningInfoCompletionStatus">Pending</span>
@@ -233,7 +224,16 @@
         </div>
       </div>
 
-      <div class="field">
+      <div class="astra-intake-screening-mode" id="astraIntakeScreeningModeGroup">
+        <label>Screening Source</label>
+        <div class="segmented-control segmented-control-form" id="astraIntakeScreeningModeToggle" role="group" aria-label="Screening source">
+          <button type="button" class="seg-btn" data-astra-intake-screening-mode="enterManually">Enter Screening Data</button>
+          <button type="button" class="seg-btn" data-astra-intake-screening-mode="uploadToGpt">Upload Screening Data to GPT</button>
+        </div>
+        <p class="helper-text" id="astraIntakeScreeningModeHint">Patient screening data will be uploaded separately to the Astra GPT.</p>
+      </div>
+
+      <div class="field" id="screeningInfoField">
         <label for="screeningInfo">Screening Information</label>
         <div class="field-header-actions">
           <button type="button" class="med-context-btn" data-med-context-field="screeningInfo" aria-label="Open medication reference from screening information">🧠 Med info</button>
@@ -583,7 +583,7 @@
         <input type="hidden" id="therapyInterwoven" value="0">
       </div>
 
-      <div class="grid grid-2 top-gap">
+      <div class="grid grid-2 top-gap closing-time-grid">
         <div class="field">
           <label>Face-to-Face End <span class="required">*</span></label>
           <div class="inline-input-row">
@@ -630,138 +630,6 @@
       </div>
     </section>
 
-    <section class="card patient-letters-card hidden" id="patientLettersWorkspace" aria-labelledby="patientLettersTitle">
-      <div class="section-heading">
-        <div>
-          <h2 id="patientLettersTitle">Patient Letters</h2>
-          <p>Build a structured packet for the Astra letter GPT.</p>
-        </div>
-        <div class="section-mini-badge">Astra letters</div>
-      </div>
-
-      <section class="letter-builder-section">
-        <h3>Letter Type</h3>
-        <div class="letter-type-grid" id="letterTypeGrid" role="group" aria-label="Letter type">
-          <button type="button" class="letter-type-btn" data-letter-type="workSchoolNote">Work / School Note</button>
-          <button type="button" class="letter-type-btn" data-letter-type="returnToWorkSchool">Return to Work / School</button>
-          <button type="button" class="letter-type-btn" data-letter-type="treatmentVerification">Treatment Verification</button>
-          <button type="button" class="letter-type-btn" data-letter-type="accommodation">Accommodation Letter</button>
-          <button type="button" class="letter-type-btn" data-letter-type="esa">Emotional Support Animal Letter</button>
-          <button type="button" class="letter-type-btn" data-letter-type="medicationTreatmentSummary">Medication / Treatment Summary</button>
-          <button type="button" class="letter-type-btn" data-letter-type="medicalNecessity">Medical Necessity / Prior Authorization Support</button>
-          <button type="button" class="letter-type-btn" data-letter-type="custom">Custom Letter</button>
-        </div>
-      </section>
-
-      <section class="letter-builder-section">
-        <h3>Letter Details</h3>
-        <div class="grid grid-3">
-          <div class="field">
-            <label for="letterPatientName">Patient name</label>
-            <input id="letterPatientName" data-letter-field type="text">
-          </div>
-          <div class="field">
-            <label for="letterPatientDobAge">Patient DOB or age</label>
-            <input id="letterPatientDobAge" data-letter-field type="text">
-          </div>
-          <div class="field">
-            <label for="letterDate">Letter date</label>
-            <input id="letterDate" data-letter-field type="date">
-          </div>
-          <div class="field">
-            <label for="letterRecipient">Recipient / organization</label>
-            <input id="letterRecipient" data-letter-field type="text">
-          </div>
-          <div class="field field-span-2">
-            <label for="letterRecipientAddress">Recipient address or fax, optional</label>
-            <input id="letterRecipientAddress" data-letter-field type="text">
-          </div>
-          <div class="field field-full">
-            <label for="letterPurpose">Purpose / reason for letter</label>
-            <textarea id="letterPurpose" data-letter-field rows="3"></textarea>
-          </div>
-          <div class="field">
-            <label for="letterRequestedDateRange">Requested date range, optional</label>
-            <input id="letterRequestedDateRange" data-letter-field type="text">
-          </div>
-          <div class="field">
-            <label for="letterReturnDate">Return date, optional</label>
-            <input id="letterReturnDate" data-letter-field type="text">
-          </div>
-          <div class="field">
-            <label for="letterClinicianName">Clinician/provider name</label>
-            <input id="letterClinicianName" data-letter-field type="text" value="Nick Stanzione">
-          </div>
-          <div class="field">
-            <label for="letterClinicianTitle">Clinician title</label>
-            <input id="letterClinicianTitle" data-letter-field type="text" value="PMHNP">
-          </div>
-          <div class="field field-span-2">
-            <label for="letterSignatureBlock">Signature block</label>
-            <textarea id="letterSignatureBlock" data-letter-field rows="3">Nick Stanzione, PMHNP</textarea>
-          </div>
-          <div class="field field-full">
-            <label for="letterAdditionalInstructions">Additional clinician instructions</label>
-            <textarea id="letterAdditionalInstructions" data-letter-field rows="3"></textarea>
-          </div>
-        </div>
-
-        <div class="letter-specific-fields" id="letterSpecificFields"></div>
-      </section>
-
-      <section class="letter-builder-section">
-        <h3>Disclosure Controls</h3>
-        <div class="letter-toggle-grid">
-          <label class="script-switch" for="letterConsentConfirmed"><input id="letterConsentConfirmed" data-letter-checkbox type="checkbox"><span class="switch-track" aria-hidden="true"></span><span class="switch-label">Patient consent/release confirmed</span></label>
-          <label class="script-switch" for="letterIncludeDiagnosis"><input id="letterIncludeDiagnosis" data-letter-checkbox type="checkbox"><span class="switch-track" aria-hidden="true"></span><span class="switch-label">Include diagnosis</span></label>
-          <label class="script-switch" for="letterIncludeMedications"><input id="letterIncludeMedications" data-letter-checkbox type="checkbox"><span class="switch-track" aria-hidden="true"></span><span class="switch-label">Include medications</span></label>
-          <label class="script-switch" for="letterIncludeDetailedSymptoms"><input id="letterIncludeDetailedSymptoms" data-letter-checkbox type="checkbox"><span class="switch-track" aria-hidden="true"></span><span class="switch-label">Include detailed symptoms</span></label>
-          <label class="script-switch" for="letterIncludeTreatmentDates"><input id="letterIncludeTreatmentDates" data-letter-checkbox type="checkbox" checked><span class="switch-track" aria-hidden="true"></span><span class="switch-label">Include treatment dates</span></label>
-          <label class="script-switch" for="letterIncludeFunctionalLimitations"><input id="letterIncludeFunctionalLimitations" data-letter-checkbox type="checkbox"><span class="switch-track" aria-hidden="true"></span><span class="switch-label">Include functional limitations</span></label>
-          <label class="script-switch" for="letterIncludeSafetyRisk"><input id="letterIncludeSafetyRisk" data-letter-checkbox type="checkbox"><span class="switch-track" aria-hidden="true"></span><span class="switch-label">Include safety/risk details</span></label>
-        </div>
-        <p class="letter-warning hidden" id="letterConsentWarning">Patient consent/release has not been confirmed. Do not finalize or send this third-party letter until consent is confirmed.</p>
-      </section>
-
-      <section class="letter-builder-section">
-        <h3>Source Context</h3>
-        <div class="letter-toggle-grid">
-          <label class="script-switch" for="letterIncludeCurrentNote"><input id="letterIncludeCurrentNote" data-letter-checkbox type="checkbox"><span class="switch-track" aria-hidden="true"></span><span class="switch-label">Include current note context</span></label>
-          <label class="script-switch" for="letterPreviousNoteUploaded"><input id="letterPreviousNoteUploaded" data-letter-checkbox type="checkbox"><span class="switch-track" aria-hidden="true"></span><span class="switch-label">Previous note will be uploaded separately to GPT</span></label>
-          <label class="script-switch" for="letterScreeningUploaded"><input id="letterScreeningUploaded" data-letter-checkbox type="checkbox"><span class="switch-track" aria-hidden="true"></span><span class="switch-label">Screening data will be uploaded separately to GPT</span></label>
-          <label class="script-switch" for="letterSupportingDocsUploaded"><input id="letterSupportingDocsUploaded" data-letter-checkbox type="checkbox"><span class="switch-track" aria-hidden="true"></span><span class="switch-label">Supporting documents will be uploaded separately to GPT</span></label>
-          <label class="script-switch" for="letterIncludeManualContext"><input id="letterIncludeManualContext" data-letter-checkbox type="checkbox"><span class="switch-track" aria-hidden="true"></span><span class="switch-label">Include manually entered context</span></label>
-        </div>
-        <div class="field top-gap" id="letterManualContextField">
-          <label for="letterManualContext">Additional context for letter GPT</label>
-          <textarea id="letterManualContext" data-letter-field rows="4"></textarea>
-        </div>
-      </section>
-
-      <section class="letter-builder-section">
-        <h3>Attachments / Images</h3>
-        <div class="field">
-          <label for="letterAttachmentManifest">Files/images to upload with this request</label>
-          <textarea id="letterAttachmentManifest" data-letter-field rows="4" placeholder="List files/images you will upload to the GPT, e.g. employer form, school form, Astra letterhead, GeneSight report."></textarea>
-        </div>
-      </section>
-
-      <section class="letter-builder-section">
-        <h3>Raw Export</h3>
-        <div class="action-row letter-action-row">
-          <button id="buildLetterPacketBtn" type="button">Build Letter Packet</button>
-          <button id="copyLetterPacketBtn" type="button">Copy Letter Packet</button>
-          <button id="copyOpenLetterGptBtn" type="button">Copy &amp; Open Letter GPT</button>
-          <button id="openLetterGptBtn" type="button">Open Letter GPT</button>
-          <button id="clearLetterFieldsBtn" type="button">Clear Letter Fields</button>
-        </div>
-        <div class="field top-gap">
-          <label for="letterExportBox">Letter Export Preview</label>
-          <textarea id="letterExportBox" rows="16" readonly placeholder="Build a packet to copy into the Astra Letter GPT."></textarea>
-        </div>
-      </section>
-    </section>
-
     <div class="astra-supporting-docs-inline hidden" id="astraSupportingDocsControl">
       <label class="script-switch astra-supporting-docs-switch" for="astraSupportingDocsUploaded">
         <input type="checkbox" id="astraSupportingDocsUploaded">
@@ -769,7 +637,6 @@
         <span class="switch-label">Supporting docs uploaded</span>
       </label>
       <div class="astra-supporting-doc-type-row" id="astraSupportingDocTypes" role="group" aria-label="Supporting document types">
-        <button type="button" class="doc-type-btn" data-supporting-doc-type="intakeScreening" aria-pressed="false">Screening Docs</button>
         <button type="button" class="doc-type-btn" data-supporting-doc-type="labs" aria-pressed="false">Labs</button>
         <button type="button" class="doc-type-btn" data-supporting-doc-type="genesight" aria-pressed="false">GeneSight</button>
         <button type="button" class="doc-type-btn" data-supporting-doc-type="other" aria-pressed="false">Other</button>

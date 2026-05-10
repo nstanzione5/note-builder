@@ -303,7 +303,8 @@ h3 {
   transform: translate(-50%, 0);
 }
 
-.med-launch-btn {
+.med-launch-btn.active,
+.med-launch-btn[aria-pressed="true"] {
   border: 1px solid var(--accent-border);
   background: linear-gradient(150deg, rgba(255, 255, 255, 0.94), var(--accent-weak));
 }
@@ -898,6 +899,23 @@ textarea:disabled {
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 8px;
   align-items: center;
+}
+
+.closing-time-grid {
+  align-items: start;
+}
+
+.closing-time-grid .field {
+  align-content: start;
+}
+
+.closing-time-grid .inline-input-row {
+  min-height: 42px;
+}
+
+.closing-time-grid .time-control {
+  width: 100%;
+  justify-content: center;
 }
 
 .now-plus-group {
@@ -1877,6 +1895,81 @@ body.script-resize-active * {
   align-items: center;
 }
 
+.letter-page-shell {
+  padding-top: 28px;
+}
+
+.letter-hero {
+  margin-bottom: 18px;
+  grid-template-columns: 88px minmax(0, 1fr) auto;
+}
+
+.letter-hero .brand-copy h1 {
+  font-size: clamp(32px, 5vw, 54px);
+}
+
+.letter-nav {
+  justify-content: end;
+}
+
+.letter-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(360px, 0.9fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.letter-form-card,
+.letter-preview-card {
+  min-width: 0;
+}
+
+.letter-builder-section {
+  padding-top: 18px;
+  margin-top: 18px;
+  border-top: 1px solid rgba(148, 163, 184, 0.24);
+}
+
+.letter-builder-section:first-of-type {
+  margin-top: 4px;
+}
+
+.letter-builder-section h3 {
+  margin: 0 0 12px;
+  font-size: 13px;
+  letter-spacing: 0;
+  color: var(--ink-strong);
+}
+
+.clinician-meta {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.clinician-meta span {
+  border: 1px solid rgba(148, 163, 184, 0.32);
+  background: rgba(255, 255, 255, 0.58);
+  border-radius: var(--radius-pill);
+  padding: 6px 10px;
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.letter-toggle-grid-compact {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.letter-preview-card {
+  position: sticky;
+  top: 18px;
+}
+
+.letter-preview-card textarea {
+  min-height: 640px;
+}
+
 @media (max-width: 1260px) {
   .topbar-inner {
     grid-template-columns: 1fr;
@@ -1911,7 +2004,8 @@ body.script-resize-active * {
   .grid-2,
   .grid-3,
   .grid-4,
-  .workspace-grid {
+  .workspace-grid,
+  .letter-layout {
     grid-template-columns: 1fr;
   }
 
@@ -1920,8 +2014,26 @@ body.script-resize-active * {
   }
 
   .letter-type-grid,
-  .letter-toggle-grid {
+  .letter-toggle-grid,
+  .letter-toggle-grid-compact {
     grid-template-columns: 1fr;
+  }
+
+  .letter-hero {
+    grid-template-columns: 64px minmax(0, 1fr);
+  }
+
+  .letter-nav {
+    grid-column: 1 / -1;
+    justify-content: start;
+  }
+
+  .letter-preview-card {
+    position: static;
+  }
+
+  .letter-preview-card textarea {
+    min-height: 420px;
   }
 
   .brand-panel {

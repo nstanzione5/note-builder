@@ -11,8 +11,6 @@ const state = {
   astraSupportingDocTypes: [],
   astraFollowupContextMode: 'uploadedPreviousNote',
   astraIntakeScreeningMode: 'uploadToGpt',
-  patientLettersOpen: false,
-  selectedLetterType: 'workSchoolNote',
   topbarCondensed: false,
   topbarCondenseProgress: 0,
   medDrawerOpen: false,
@@ -73,6 +71,7 @@ const els = {
   astraScreenersCompletionStatus: document.getElementById('astraScreenersCompletionStatus'),
   astraScreenersFields: document.getElementById('astraScreenersFields'),
   astraScreeningInfo: document.getElementById('astraScreeningInfo'),
+  screeningInfoField: document.getElementById('screeningInfoField'),
   astraScreeningInfoCompletionStatus: document.getElementById('astraScreeningInfoCompletionStatus'),
   ebhTests: document.getElementById('ebhTests'),
   ebhTestsCompletionStatus: document.getElementById('ebhTestsCompletionStatus'),
@@ -119,17 +118,6 @@ const els = {
   backupList: document.getElementById('backupList'),
   backupEmpty: document.getElementById('backupEmpty'),
   patientLettersBtn: document.getElementById('patientLettersBtn'),
-  patientLettersWorkspace: document.getElementById('patientLettersWorkspace'),
-  letterTypeGrid: document.getElementById('letterTypeGrid'),
-  letterSpecificFields: document.getElementById('letterSpecificFields'),
-  letterConsentWarning: document.getElementById('letterConsentWarning'),
-  letterManualContextField: document.getElementById('letterManualContextField'),
-  letterExportBox: document.getElementById('letterExportBox'),
-  buildLetterPacketBtn: document.getElementById('buildLetterPacketBtn'),
-  copyLetterPacketBtn: document.getElementById('copyLetterPacketBtn'),
-  copyOpenLetterGptBtn: document.getElementById('copyOpenLetterGptBtn'),
-  openLetterGptBtn: document.getElementById('openLetterGptBtn'),
-  clearLetterFieldsBtn: document.getElementById('clearLetterFieldsBtn'),
   medDrawerBtn: document.getElementById('medDrawerBtn'),
   medDrawer: document.getElementById('medDrawer'),
   medDrawerBackdrop: document.getElementById('medDrawerBackdrop'),
@@ -198,122 +186,11 @@ const SCREENER_IDS = ['phq9', 'gad7', 'asrsA', 'asrsB', 'pcl5', 'mdq', 'otherScr
 const TIME_FIELD_IDS = ['scheduledStart', 'startTime', 'followTime', 'endTime', 'docEnd'];
 const DEFAULT_APPOINTMENT_MODALITY = 'Telehealth';
 const ASTRA_SUPPORTING_DOC_TYPE_LABELS = {
-  intakeScreening: 'intake/screening documentation',
   labs: 'lab results',
   genesight: 'GeneSight report',
   other: 'other supporting documentation',
 };
 const ASTRA_UNIVERSAL_GPT_LABEL = 'Universal Astra Note GPT';
-const PATIENT_LETTERS_STORAGE_KEY = 'patientLettersDraft_v1';
-const LETTER_DEFAULTS = {
-  letterClinicianName: 'Nick Stanzione',
-  letterClinicianTitle: 'PMHNP',
-  letterSignatureBlock: 'Nick Stanzione, PMHNP',
-  letterIncludeTreatmentDates: true,
-};
-const LETTER_TYPE_LABELS = {
-  workSchoolNote: 'Work / School Note',
-  returnToWorkSchool: 'Return to Work / School',
-  treatmentVerification: 'Treatment Verification',
-  accommodation: 'Accommodation Letter',
-  esa: 'Emotional Support Animal Letter',
-  medicationTreatmentSummary: 'Medication / Treatment Summary',
-  medicalNecessity: 'Medical Necessity / Prior Authorization Support',
-  custom: 'Custom Letter',
-};
-const LETTER_DISCLOSURE_DEFAULTS = {
-  letterConsentConfirmed: false,
-  letterIncludeDiagnosis: false,
-  letterIncludeMedications: false,
-  letterIncludeDetailedSymptoms: false,
-  letterIncludeTreatmentDates: true,
-  letterIncludeFunctionalLimitations: false,
-  letterIncludeSafetyRisk: false,
-};
-const LETTER_FUNCTIONAL_LIMITATION_TYPES = ['accommodation', 'esa', 'medicalNecessity'];
-const LETTER_FIELD_IDS = [
-  'letterPatientName',
-  'letterPatientDobAge',
-  'letterDate',
-  'letterRecipient',
-  'letterRecipientAddress',
-  'letterPurpose',
-  'letterRequestedDateRange',
-  'letterReturnDate',
-  'letterClinicianName',
-  'letterClinicianTitle',
-  'letterSignatureBlock',
-  'letterAdditionalInstructions',
-  'letterManualContext',
-  'letterAttachmentManifest',
-];
-const LETTER_CHECKBOX_IDS = [
-  'letterConsentConfirmed',
-  'letterIncludeDiagnosis',
-  'letterIncludeMedications',
-  'letterIncludeDetailedSymptoms',
-  'letterIncludeTreatmentDates',
-  'letterIncludeFunctionalLimitations',
-  'letterIncludeSafetyRisk',
-  'letterIncludeCurrentNote',
-  'letterPreviousNoteUploaded',
-  'letterScreeningUploaded',
-  'letterSupportingDocsUploaded',
-  'letterIncludeManualContext',
-];
-const LETTER_SPECIFIC_FIELD_CONFIG = {
-  workSchoolNote: [
-    ['letterExcusedDates', 'Excused dates', 'input'],
-    ['letterSpecificReturnDate', 'Return date', 'input'],
-    ['letterRestrictionsLimitations', 'Restrictions or limitations', 'textarea'],
-    ['letterDiagnosisDisclosureNote', 'Whether diagnosis should be disclosed', 'select', ['No', 'Yes']],
-  ],
-  returnToWorkSchool: [
-    ['letterSpecificReturnDate', 'Return date', 'input'],
-    ['letterRestrictions', 'Restrictions', 'textarea'],
-    ['letterDutyStatus', 'Full duty vs modified duty', 'select', ['Full duty', 'Modified duty']],
-    ['letterRestrictionDuration', 'Duration of restrictions', 'input'],
-  ],
-  treatmentVerification: [
-    ['letterUnderCareSince', 'Under care since', 'input'],
-    ['letterVisitFrequency', 'Visit frequency, optional', 'input'],
-    ['letterActiveTreatment', 'Currently active in treatment', 'select', ['Yes', 'No']],
-    ['letterDiagnosisDisclosureNote', 'Diagnosis disclosure', 'select', ['No', 'Yes']],
-  ],
-  accommodation: [
-    ['letterAccommodationSetting', 'Setting', 'select', ['Work', 'School', 'Housing', 'Other']],
-    ['letterRequestedAccommodation', 'Requested accommodation', 'textarea'],
-    ['letterFunctionalLimitations', 'Functional limitation language', 'textarea'],
-    ['letterAccommodationDuration', 'Duration', 'select', ['Temporary', 'Ongoing', 'Date range']],
-    ['letterDiagnosisDisclosureNote', 'Diagnosis disclosure', 'select', ['No', 'Yes']],
-  ],
-  esa: [
-    ['letterHousingContext', 'Housing context', 'textarea'],
-    ['letterAnimalTypeName', 'Animal type/name, optional', 'input'],
-    ['letterDisabilityNeedLanguage', 'Disability-related need language', 'textarea'],
-    ['letterClinicalAppropriateness', 'Clinical appropriateness confirmation', 'checkbox'],
-    ['letterDiagnosisDisclosureNote', 'Diagnosis disclosure', 'select', ['No', 'Yes']],
-  ],
-  medicationTreatmentSummary: [
-    ['letterCurrentMedicationsSummary', 'Current medications summary', 'textarea'],
-    ['letterTreatmentPlanSummary', 'Treatment plan summary', 'textarea'],
-    ['letterResponseProgressSummary', 'Response/progress summary', 'textarea'],
-    ['letterFollowupPlan', 'Follow-up plan', 'textarea'],
-    ['letterDiagnosisDisclosureNote', 'Diagnosis disclosure', 'select', ['No', 'Yes']],
-  ],
-  medicalNecessity: [
-    ['letterRequestedMedicationService', 'Requested medication/service', 'input'],
-    ['letterClinicalRationale', 'Clinical rationale', 'textarea'],
-    ['letterPriorTrialsFailures', 'Prior trials/failures', 'textarea'],
-    ['letterRelevantDiagnosesSymptoms', 'Relevant diagnoses/symptoms if allowed', 'textarea'],
-    ['letterSupportingDocumentsReferenced', 'Supporting documents referenced', 'textarea'],
-  ],
-  custom: [
-    ['letterFreeformPurpose', 'Freeform letter purpose', 'textarea'],
-    ['letterKeyPoints', 'Key points to include', 'textarea'],
-    ['letterDoNotInclude', 'Do-not-include instructions', 'textarea'],
-  ],
-};
 
 const brandConfig = {
   astra: {
@@ -2606,6 +2483,10 @@ function updatePracticeSections() {
     els.astraScreenersFields.classList.toggle('hidden', !usesManualScreening);
   }
 
+  if (els.screeningInfoField) {
+    els.screeningInfoField.classList.toggle('hidden', !usesManualScreening);
+  }
+
   if (els.astraIntakeScreeningModeHint) {
     els.astraIntakeScreeningModeHint.textContent = usesManualScreening
       ? 'Enter available screening scores below.'
@@ -2613,20 +2494,14 @@ function updatePracticeSections() {
   }
 
   if (els.astraScreeningInfo) {
-    els.astraScreeningInfo.classList.toggle('hidden', !usesManualScreening);
+    els.astraScreeningInfo.classList.toggle('hidden', !(isAstra && isIntake));
   }
 
   if (els.ebhTests) {
     els.ebhTests.classList.toggle('hidden', !(!isAstra && isIntake));
   }
 
-  if (els.patientLettersWorkspace) {
-    els.patientLettersWorkspace.classList.toggle('hidden', !(isAstra && state.patientLettersOpen));
-  }
-
   if (els.patientLettersBtn) {
-    els.patientLettersBtn.classList.toggle('active', isAstra && state.patientLettersOpen);
-    els.patientLettersBtn.setAttribute('aria-pressed', String(isAstra && state.patientLettersOpen));
     els.patientLettersBtn.classList.toggle('hidden', !isAstra);
   }
 }
@@ -4203,14 +4078,12 @@ function syncToggleStates() {
   setActiveByData('#therapyInterwovenToggle .seg-btn', 'therapyTier', state.therapyInterwovenTier);
   setActiveByData('#astraFollowupContextModeToggle .seg-btn', 'astraFollowupContextMode', state.astraFollowupContextMode);
   setActiveByData('#astraIntakeScreeningModeToggle .seg-btn', 'astraIntakeScreeningMode', state.astraIntakeScreeningMode);
-  setActiveByData('#letterTypeGrid .letter-type-btn', 'letterType', state.selectedLetterType);
 
   if (els.scriptToggle) {
     els.scriptToggle.checked = Boolean(state.scriptVisible);
   }
 
   syncAstraSupportingDocsControls();
-  syncPatientLettersControls();
 }
 
 function syncAstraSupportingDocsControls() {
@@ -4229,374 +4102,8 @@ function syncAstraSupportingDocsControls() {
   });
 
   if (els.astraSupportingDocsHint) {
-    els.astraSupportingDocsHint.textContent = state.practice === 'astra' && state.visitType === 'intake'
-      ? 'Choose Screening Docs when intake or pre-appointment documentation will be uploaded to GPT.'
-      : 'Select one or more types when supporting documents will be uploaded.';
+    els.astraSupportingDocsHint.textContent = 'Select non-screening docs uploaded to GPT.';
   }
-}
-
-function getLetterGptUrl() {
-  return String((els.body && els.body.dataset && els.body.dataset.astraLetterGptUrl) || '').trim();
-}
-
-function getLetterCheckboxValue(id) {
-  const el = getEl(id);
-  return Boolean(el && el.checked);
-}
-
-function setLetterCheckboxValue(id, value) {
-  const el = getEl(id);
-  if (el) el.checked = Boolean(value);
-}
-
-function getLetterFieldValue(id) {
-  const el = getEl(id);
-  if (!el) return '';
-  if (el.type === 'checkbox') return el.checked ? 'Yes' : 'No';
-  return String(el.value || '').trim();
-}
-
-function setLetterFieldValue(id, value) {
-  const el = getEl(id);
-  if (!el) return;
-  if (el.type === 'checkbox') {
-    el.checked = Boolean(value);
-    return;
-  }
-  el.value = value == null ? '' : String(value);
-}
-
-function getAllLetterFieldIds() {
-  const specificIds = Object.values(LETTER_SPECIFIC_FIELD_CONFIG)
-    .flat()
-    .map(([id]) => id);
-  return [...new Set([...LETTER_FIELD_IDS, ...specificIds])];
-}
-
-function getLetterSpecificFieldIds() {
-  return (LETTER_SPECIFIC_FIELD_CONFIG[state.selectedLetterType] || []).map(([id]) => id);
-}
-
-function applyLetterDisclosureDefaults() {
-  Object.entries(LETTER_DISCLOSURE_DEFAULTS).forEach(([id, value]) => {
-    setLetterCheckboxValue(id, value);
-  });
-  setLetterCheckboxValue(
-    'letterIncludeFunctionalLimitations',
-    LETTER_FUNCTIONAL_LIMITATION_TYPES.includes(state.selectedLetterType),
-  );
-}
-
-function renderLetterSpecificFields() {
-  if (!els.letterSpecificFields) return;
-  const fields = LETTER_SPECIFIC_FIELD_CONFIG[state.selectedLetterType] || [];
-  const caution = state.selectedLetterType === 'esa'
-    ? '<p class="letter-caution">Use only when clinically appropriate and within scope.</p>'
-    : '';
-
-  els.letterSpecificFields.innerHTML = `${caution}<div class="grid grid-2 top-gap">${fields.map(([id, label, type, options]) => {
-    if (type === 'textarea') {
-      return `<div class="field field-full"><label for="${escapeHtml(id)}">${escapeHtml(label)}</label><textarea id="${escapeHtml(id)}" data-letter-specific-field rows="3"></textarea></div>`;
-    }
-    if (type === 'select') {
-      const optionHtml = (options || []).map((option) => `<option value="${escapeHtml(option)}">${escapeHtml(option)}</option>`).join('');
-      return `<div class="field"><label for="${escapeHtml(id)}">${escapeHtml(label)}</label><div class="select-shell"><select id="${escapeHtml(id)}" data-letter-specific-field>${optionHtml}</select></div></div>`;
-    }
-    if (type === 'checkbox') {
-      return `<label class="script-switch letter-specific-checkbox" for="${escapeHtml(id)}"><input id="${escapeHtml(id)}" data-letter-specific-field type="checkbox"><span class="switch-track" aria-hidden="true"></span><span class="switch-label">${escapeHtml(label)}</span></label>`;
-    }
-    return `<div class="field"><label for="${escapeHtml(id)}">${escapeHtml(label)}</label><input id="${escapeHtml(id)}" data-letter-specific-field type="text"></div>`;
-  }).join('')}</div>`;
-
-  els.letterSpecificFields.querySelectorAll('[data-letter-specific-field]').forEach((field) => {
-    field.addEventListener('input', handleLetterMutation);
-    field.addEventListener('change', handleLetterMutation);
-    field.addEventListener('blur', savePatientLettersDraft);
-  });
-}
-
-function syncPatientLettersControls() {
-  setActiveByData('#letterTypeGrid .letter-type-btn', 'letterType', state.selectedLetterType);
-
-  if (els.letterConsentWarning) {
-    const hasRecipient = Boolean(getLetterFieldValue('letterRecipient') || getLetterFieldValue('letterRecipientAddress'));
-    els.letterConsentWarning.classList.toggle('hidden', getLetterCheckboxValue('letterConsentConfirmed') || !hasRecipient);
-  }
-
-  if (els.letterManualContextField) {
-    els.letterManualContextField.classList.toggle('hidden', !getLetterCheckboxValue('letterIncludeManualContext'));
-  }
-
-  const hasLetterUrl = Boolean(getLetterGptUrl());
-  [els.openLetterGptBtn, els.copyOpenLetterGptBtn].forEach((btn) => {
-    if (btn) btn.disabled = !hasLetterUrl;
-  });
-}
-
-function buildPatientLettersDraftPayload() {
-  const fields = {};
-  getAllLetterFieldIds().forEach((id) => {
-    const el = getEl(id);
-    if (el) fields[id] = getLetterFieldValue(id);
-  });
-
-  const checkboxes = {};
-  LETTER_CHECKBOX_IDS.forEach((id) => {
-    checkboxes[id] = getLetterCheckboxValue(id);
-  });
-
-  return {
-    savedAt: new Date().toISOString(),
-    selectedLetterType: state.selectedLetterType,
-    fields,
-    checkboxes,
-    output: els.letterExportBox ? els.letterExportBox.value : '',
-  };
-}
-
-function savePatientLettersDraft() {
-  setStorageJSON(PATIENT_LETTERS_STORAGE_KEY, buildPatientLettersDraftPayload());
-}
-
-function applyPatientLettersDraft(draft) {
-  const payload = draft && typeof draft === 'object' ? draft : {};
-  state.selectedLetterType = Object.prototype.hasOwnProperty.call(LETTER_TYPE_LABELS, payload.selectedLetterType)
-    ? payload.selectedLetterType
-    : 'workSchoolNote';
-
-  renderLetterSpecificFields();
-
-  Object.entries(LETTER_DEFAULTS).forEach(([id, value]) => setLetterFieldValue(id, value));
-  applyLetterDisclosureDefaults();
-
-  if (payload.fields && typeof payload.fields === 'object') {
-    Object.entries(payload.fields).forEach(([id, value]) => setLetterFieldValue(id, value));
-  }
-
-  if (!getLetterFieldValue('letterDate')) {
-    const now = new Date();
-    const yyyy = now.getFullYear();
-    const mm = String(now.getMonth() + 1).padStart(2, '0');
-    const dd = String(now.getDate()).padStart(2, '0');
-    setLetterFieldValue('letterDate', `${yyyy}-${mm}-${dd}`);
-  }
-
-  if (!getLetterFieldValue('letterPatientDobAge') && getValue('age')) {
-    setLetterFieldValue('letterPatientDobAge', getValue('age'));
-  }
-
-  if (payload.checkboxes && typeof payload.checkboxes === 'object') {
-    Object.entries(payload.checkboxes).forEach(([id, value]) => setLetterCheckboxValue(id, value));
-  }
-
-  if (els.letterExportBox) {
-    els.letterExportBox.value = payload.output || '';
-  }
-
-  syncPatientLettersControls();
-}
-
-function loadPatientLettersDraft() {
-  applyPatientLettersDraft(getStorageJSON(PATIENT_LETTERS_STORAGE_KEY, null));
-}
-
-function handleLetterMutation() {
-  syncPatientLettersControls();
-  savePatientLettersDraft();
-}
-
-function setPatientLettersOpen(value) {
-  state.patientLettersOpen = Boolean(value);
-  updatePracticeSections();
-  syncPatientLettersControls();
-  if (state.patientLettersOpen && state.practice === 'astra') {
-    window.setTimeout(() => {
-      if (els.patientLettersWorkspace && typeof els.patientLettersWorkspace.scrollIntoView === 'function') {
-        els.patientLettersWorkspace.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }, 0);
-  }
-}
-
-function setLetterType(type) {
-  state.selectedLetterType = Object.prototype.hasOwnProperty.call(LETTER_TYPE_LABELS, type) ? type : 'workSchoolNote';
-  const currentDraft = buildPatientLettersDraftPayload();
-  renderLetterSpecificFields();
-  Object.entries(currentDraft.fields || {}).forEach(([id, value]) => setLetterFieldValue(id, value));
-  applyLetterDisclosureDefaults();
-  savePatientLettersDraft();
-  syncPatientLettersControls();
-}
-
-function yesNo(value) {
-  return value ? 'Yes' : 'No';
-}
-
-function letterValue(id, fallback = '[Not provided]') {
-  return displayEntered(getLetterFieldValue(id), fallback);
-}
-
-function buildLetterSpecificDetailsText() {
-  const fields = LETTER_SPECIFIC_FIELD_CONFIG[state.selectedLetterType] || [];
-  const lines = fields.map(([id, label]) => `${label}: ${letterValue(id)}`);
-  return lines.length ? lines.join('\n') : '[No letter-specific details entered]';
-}
-
-function buildCurrentNoteContextForLetter() {
-  const lines = [
-    'Clinical context for GPT reasoning only; disclose only if permitted above.',
-    `Practice: ${state.practice === 'astra' ? 'Astra' : 'EBH'}`,
-    `Visit type: ${state.visitType === 'intake' ? 'Intake' : 'Follow-Up'}`,
-    `Age: ${displayEntered(getValue('age'))}`,
-    `Gender: ${displayEntered(getValue('gender'))}`,
-    `Encounter modality: ${displayEntered(getValue('currentModality'))}`,
-    `Chief complaint: ${displayEntered(getValue('cc'))}`,
-    `Prior context mode: ${state.astraFollowupContextMode === 'uploadedPreviousNote' ? 'Upload Full Previous Note' : 'Paste Previous Plan'}`,
-    `Screening mode: ${state.astraIntakeScreeningMode === 'uploadToGpt' ? 'Upload Screening Data to GPT' : 'Enter Screening Data'}`,
-    `Supporting docs status/types: ${state.astraSupportingDocsUploaded ? (getAstraSupportingDocLabels().join(', ') || 'uploaded, type not specified') : 'None selected in app'}`,
-    `Follow-up date/time: ${state.followupMode === 'prn' ? 'PRN' : `${displayEntered(getValue('followDate'))} ${displayEntered(getValue('followTime'))}`}`,
-    '',
-    'Appointment notes:',
-    getLetterCheckboxValue('letterIncludeDetailedSymptoms')
-      ? displayEntered(getValue('notes'))
-      : 'Detailed symptoms are not authorized for disclosure. Use notes only for reasoning and keep final letter minimal.',
-  ];
-
-  return lines.join('\n');
-}
-
-function buildPatientLetterPacket() {
-  const hasRecipient = Boolean(getLetterFieldValue('letterRecipient') || getLetterFieldValue('letterRecipientAddress'));
-  const consentConfirmed = getLetterCheckboxValue('letterConsentConfirmed');
-  const currentNoteIncluded = getLetterCheckboxValue('letterIncludeCurrentNote');
-  const manualContextIncluded = getLetterCheckboxValue('letterIncludeManualContext');
-  const attachmentManifest = displayEntered(getLetterFieldValue('letterAttachmentManifest'), '[No files/images listed]');
-  const manualContext = manualContextIncluded
-    ? displayEntered(getLetterFieldValue('letterManualContext'), '[No manual context entered]')
-    : '[Not included]';
-  const consentWarning = hasRecipient && !consentConfirmed
-    ? '\nWARNING:\nPatient consent/release has not been confirmed. Do not finalize or send this third-party letter until consent is confirmed.\n'
-    : '';
-
-  return [
-    'ASTRA PATIENT LETTER REQUEST',
-    consentWarning.trim(),
-    '',
-    'LETTER TYPE:',
-    LETTER_TYPE_LABELS[state.selectedLetterType] || LETTER_TYPE_LABELS.workSchoolNote,
-    '',
-    'PATIENT:',
-    `Name: ${letterValue('letterPatientName')}`,
-    `DOB/Age: ${letterValue('letterPatientDobAge')}`,
-    '',
-    'LETTER DATE:',
-    letterValue('letterDate'),
-    '',
-    'RECIPIENT:',
-    `Organization/recipient: ${letterValue('letterRecipient')}`,
-    `Address/fax: ${letterValue('letterRecipientAddress', '[Optional, not provided]')}`,
-    '',
-    'PURPOSE:',
-    letterValue('letterPurpose'),
-    `Requested date range: ${letterValue('letterRequestedDateRange', '[Optional, not provided]')}`,
-    `Return date: ${letterValue('letterReturnDate', '[Optional, not provided]')}`,
-    '',
-    'DISCLOSURE CONTROLS:',
-    `Patient consent/release confirmed: ${yesNo(consentConfirmed)}`,
-    `Include diagnosis: ${yesNo(getLetterCheckboxValue('letterIncludeDiagnosis'))}`,
-    `Include medications: ${yesNo(getLetterCheckboxValue('letterIncludeMedications'))}`,
-    `Include detailed symptoms: ${yesNo(getLetterCheckboxValue('letterIncludeDetailedSymptoms'))}`,
-    `Include treatment dates: ${yesNo(getLetterCheckboxValue('letterIncludeTreatmentDates'))}`,
-    `Include functional limitations: ${yesNo(getLetterCheckboxValue('letterIncludeFunctionalLimitations'))}`,
-    `Include safety/risk details: ${yesNo(getLetterCheckboxValue('letterIncludeSafetyRisk'))}`,
-    '',
-    'LETTER-SPECIFIC DETAILS:',
-    buildLetterSpecificDetailsText(),
-    '',
-    'SOURCE CONTEXT:',
-    `Current note context included: ${yesNo(currentNoteIncluded)}`,
-    `Previous note uploaded separately: ${yesNo(getLetterCheckboxValue('letterPreviousNoteUploaded'))}`,
-    `Screening data uploaded separately: ${yesNo(getLetterCheckboxValue('letterScreeningUploaded'))}`,
-    `Supporting documents uploaded separately: ${yesNo(getLetterCheckboxValue('letterSupportingDocsUploaded'))}`,
-    '',
-    'CURRENT NOTE CONTEXT:',
-    currentNoteIncluded ? buildCurrentNoteContextForLetter() : '[Not included]',
-    '',
-    'MANUAL CONTEXT:',
-    manualContext,
-    '',
-    'FILES / IMAGES TO UPLOAD WITH THIS REQUEST:',
-    attachmentManifest,
-    '',
-    'The clinician will upload the listed files/images to the Letter GPT with this packet. Review uploaded files only for the stated purpose. Do not include image/file contents unless clinically relevant and allowed by disclosure settings.',
-    '',
-    'CLINICIAN / SIGNATURE:',
-    `Clinician/provider name: ${letterValue('letterClinicianName')}`,
-    `Clinician title: ${letterValue('letterClinicianTitle')}`,
-    `Signature block:\n${letterValue('letterSignatureBlock')}`,
-    `Additional clinician instructions: ${letterValue('letterAdditionalInstructions', '[None]')}`,
-    '',
-    'CLINICIAN INSTRUCTIONS TO LETTER GPT:',
-    'Write a polished, clinically appropriate Astra Psychiatry letter.',
-    'Use Astra branding and professional formatting.',
-    'Use the provided letter type, details, disclosure controls, and source context.',
-    'Do not disclose diagnosis, medications, detailed symptoms, safety/risk information, or other sensitive clinical details unless explicitly allowed above.',
-    'If patient consent/release is not confirmed, clearly warn that the letter should not be finalized or sent until consent is confirmed.',
-    'Use placeholders for missing required information rather than inventing facts.',
-    'Do not overstate certainty.',
-    'Avoid legal conclusions.',
-    'Do not claim disability, impairment, need, or accommodation beyond what is clinically supported by the provided information.',
-    'If uploaded files/images are referenced, review them only for the stated purpose.',
-    'Produce a final letter ready for clinician review, editing, and signature.',
-  ].filter((line, index, arr) => !(line === '' && arr[index - 1] === '')).join('\n');
-}
-
-function buildLetterPacket() {
-  if (!els.letterExportBox) return '';
-  const packet = buildPatientLetterPacket();
-  els.letterExportBox.value = packet;
-  savePatientLettersDraft();
-  return packet;
-}
-
-async function copyLetterPacket() {
-  const packet = buildLetterPacket();
-  try {
-    await navigator.clipboard.writeText(packet);
-    if (els.copyLetterPacketBtn) {
-      const original = els.copyLetterPacketBtn.textContent;
-      els.copyLetterPacketBtn.textContent = 'Copied';
-      window.setTimeout(() => {
-        els.copyLetterPacketBtn.textContent = original;
-      }, 1200);
-    }
-    return true;
-  } catch (error) {
-    console.error(error);
-    window.alert('Copy failed. Please copy manually from the letter export preview.');
-    return false;
-  }
-}
-
-function openLetterGpt() {
-  const url = getLetterGptUrl();
-  if (!url) {
-    window.alert('No Letter GPT link is configured yet.');
-    return;
-  }
-  window.location.assign(url);
-}
-
-function clearLetterFields() {
-  getAllLetterFieldIds().forEach((id) => setLetterFieldValue(id, ''));
-  Object.entries(LETTER_DEFAULTS).forEach(([id, value]) => setLetterFieldValue(id, value));
-  state.selectedLetterType = 'workSchoolNote';
-  renderLetterSpecificFields();
-  applyLetterDisclosureDefaults();
-  if (els.letterExportBox) els.letterExportBox.value = '';
-  localStorage.removeItem(PATIENT_LETTERS_STORAGE_KEY);
-  savePatientLettersDraft();
-  syncPatientLettersControls();
 }
 
 function refreshUI(persist = true, options = {}) {
@@ -6641,6 +6148,10 @@ function setMedicationDrawerOpen(isOpen, options = {}) {
   els.medDrawer.classList.toggle('hidden', !isOpen);
   els.medDrawerBackdrop.classList.toggle('hidden', !isOpen);
   els.medDrawer.setAttribute('aria-hidden', String(!isOpen));
+  if (els.medDrawerBtn) {
+    els.medDrawerBtn.classList.toggle('active', isOpen);
+    els.medDrawerBtn.setAttribute('aria-pressed', String(isOpen));
+  }
 
   if (!isOpen) return;
 
@@ -7367,49 +6878,6 @@ function attachEventListeners() {
     });
   }
 
-  if (els.patientLettersBtn) {
-    els.patientLettersBtn.addEventListener('click', () => setPatientLettersOpen(!state.patientLettersOpen));
-  }
-
-  document.querySelectorAll('#letterTypeGrid .letter-type-btn').forEach((btn) => {
-    btn.addEventListener('click', () => setLetterType(btn.dataset.letterType));
-  });
-
-  document.querySelectorAll('[data-letter-field], [data-letter-checkbox]').forEach((field) => {
-    field.addEventListener('input', handleLetterMutation);
-    field.addEventListener('change', handleLetterMutation);
-    field.addEventListener('blur', savePatientLettersDraft);
-  });
-
-  if (els.buildLetterPacketBtn) {
-    els.buildLetterPacketBtn.addEventListener('click', buildLetterPacket);
-  }
-
-  if (els.copyLetterPacketBtn) {
-    els.copyLetterPacketBtn.addEventListener('click', () => {
-      copyLetterPacket();
-    });
-  }
-
-  if (els.copyOpenLetterGptBtn) {
-    els.copyOpenLetterGptBtn.addEventListener('click', async () => {
-      const copied = await copyLetterPacket();
-      if (copied) openLetterGpt();
-    });
-  }
-
-  if (els.openLetterGptBtn) {
-    els.openLetterGptBtn.addEventListener('click', openLetterGpt);
-  }
-
-  if (els.clearLetterFieldsBtn) {
-    els.clearLetterFieldsBtn.addEventListener('click', () => {
-      if (window.confirm('Clear Patient Letters fields only? Current note draft will be kept.')) {
-        clearLetterFields();
-      }
-    });
-  }
-
   if (els.driveSyncStatus) {
     els.driveSyncStatus.setAttribute('role', 'button');
     els.driveSyncStatus.setAttribute('tabindex', '0');
@@ -7492,7 +6960,6 @@ function init() {
   attachKeyboardShortcuts();
 
   const loadedFrom = loadInitialData();
-  loadPatientLettersDraft();
 
   if (!state.therapyInterwovenTier) {
     state.therapyInterwovenTier = '0';

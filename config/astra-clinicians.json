@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "clinicians": [
+    {
+      "id": "nick-stanzione",
+      "displayName": "Nick Stanzione",
+      "credentials": "PMHNP",
+      "title": "Psychiatric Mental Health Nurse Practitioner",
+      "states": {
+        "NY": {
+          "license": "",
+          "address": "",
+          "signatureBlock": "Nick Stanzione, PMHNP",
+          "signatureAsset": ""
+        },
+        "CT": {
+          "license": "",
+          "address": "",
+          "signatureBlock": "Nick Stanzione, PMHNP",
+          "signatureAsset": ""
+        },
+        "DE": {
+          "license": "",
+          "address": "",
+          "signatureBlock": "Nick Stanzione, PMHNP",
+          "signatureAsset": ""
+        }
+      }
+    }
+  ]
+}

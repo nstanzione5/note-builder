@@ -1,11 +1,13 @@
-const APP_BUILD_ID = '20260510-patient-letters';
+const APP_BUILD_ID = '20260510-letter-page';
 const CACHE_PREFIX = 'note-builder-shell-';
 const CACHE_NAME = `${CACHE_PREFIX}${APP_BUILD_ID}`;
 const SHELL_ASSETS = [
   './',
   './index.html',
+  './letter.html',
   './styles.css',
   './app.js',
+  './letter.js',
   './manifest.json',
   './icons/icon-192.png',
   './icons/icon-512.png',
@@ -17,12 +19,15 @@ const SHELL_ASSETS = [
   './docs/medication-reference-maintenance.md',
   './docs/drive-sync-setup.md',
   './config/drive-manifest.json',
+  './config/astra-clinicians.json',
 ];
 
 const NETWORK_FIRST_PATHS = new Set([
   '/index.html',
+  '/letter.html',
   '/styles.css',
   '/app.js',
+  '/letter.js',
   '/manifest.json',
 ]);
 
@@ -54,14 +59,15 @@ self.addEventListener('fetch', (event) => {
   const isNetworkFirst = NETWORK_FIRST_PATHS.has(pathname) || pathname.endsWith('/index.html') || pathname.endsWith('/app.js') || pathname.endsWith('/styles.css');
 
   if (request.mode === 'navigate') {
+    const fallbackPage = pathname.endsWith('/letter.html') ? './letter.html' : './index.html';
     event.respondWith(
       fetch(request)
         .then((response) => {
           const copy = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put('./index.html', copy));
+          caches.open(CACHE_NAME).then((cache) => cache.put(fallbackPage, copy));
           return response;
         })
-        .catch(() => caches.match('./index.html'))
+        .catch(() => caches.match(fallbackPage))
     );
     return;
   }

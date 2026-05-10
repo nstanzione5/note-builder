@@ -6,12 +6,20 @@ const { JSDOM, VirtualConsole } = require('jsdom');
 const ROOT = __dirname;
 const HTML_PATH = path.join(ROOT, 'index.html');
 const APP_PATH = path.join(ROOT, 'app.js');
+const LETTER_HTML_PATH = path.join(ROOT, 'letter.html');
+const LETTER_JS_PATH = path.join(ROOT, 'letter.js');
 
 const html = fs.readFileSync(HTML_PATH, 'utf8');
 const js = fs.readFileSync(APP_PATH, 'utf8');
+const letterHtml = fs.readFileSync(LETTER_HTML_PATH, 'utf8');
+const letterJs = fs.readFileSync(LETTER_JS_PATH, 'utf8');
 
 function inlineApp(sourceHtml) {
   return sourceHtml.replace('<script src="app.js"></script>', `<script>\n${js}\n</script>`);
+}
+
+function inlineLetterApp(sourceHtml) {
+  return sourceHtml.replace('<script src="letter.js"></script>', `<script>\n${letterJs}\n</script>`);
 }
 
 function setField(window, id, value, eventName = 'input') {
@@ -95,6 +103,89 @@ async function createAppDom(options = {}) {
   return dom;
 }
 
+async function createLetterDom(options = {}) {
+  const {
+    seedLocalStorage = {},
+    mockNow,
+    clinicianConfig = {
+      version: 1,
+      clinicians: [
+        {
+          id: 'nick-stanzione',
+          displayName: 'Nick Stanzione',
+          credentials: 'PMHNP',
+          title: 'Psychiatric Mental Health Nurse Practitioner',
+          states: {
+            NY: { license: 'NY-123', address: 'Astra NY Address', signatureBlock: 'Nick Stanzione, PMHNP - NY', signatureAsset: 'nick-ny-signature.png' },
+            CT: { license: 'CT-456', address: 'Astra CT Address', signatureBlock: 'Nick Stanzione, PMHNP - CT', signatureAsset: 'nick-ct-signature.png' },
+            DE: { license: 'DE-789', address: 'Astra DE Address', signatureBlock: 'Nick Stanzione, PMHNP - DE', signatureAsset: 'nick-de-signature.png' },
+          },
+        },
+      ],
+    },
+  } = options;
+
+  const virtualConsole = new VirtualConsole();
+  virtualConsole.on('error', (error) => {
+    throw error instanceof Error ? error : new Error(String(error));
+  });
+
+  const baseHtml = letterHtml.replace('data-drive-sync-enabled="true"', 'data-drive-sync-enabled="false"');
+  const dom = new JSDOM(inlineLetterApp(baseHtml), {
+    runScripts: 'dangerously',
+    resources: 'usable',
+    url: 'http://localhost:8000/letter.html',
+    pretendToBeVisual: true,
+    virtualConsole,
+    beforeParse(window) {
+      if (mockNow) {
+        const RealDate = window.Date;
+        const fixedTime = new RealDate(mockNow).getTime();
+        window.Date = class extends RealDate {
+          constructor(...args) {
+            if (args.length === 0) {
+              super(fixedTime);
+            } else {
+              super(...args);
+            }
+          }
+
+          static now() {
+            return fixedTime;
+          }
+
+          static parse(value) {
+            return RealDate.parse(value);
+          }
+
+          static UTC(...args) {
+            return RealDate.UTC(...args);
+          }
+        };
+      }
+
+      window.alert = () => {};
+      window.confirm = () => true;
+      window.fetch = async () => ({
+        ok: true,
+        json: async () => clinicianConfig,
+      });
+      window.navigator.clipboard = {
+        writeText: async (text) => {
+          window.__copiedText = text;
+        },
+      };
+
+      Object.entries(seedLocalStorage).forEach(([key, value]) => {
+        window.localStorage.setItem(key, value);
+      });
+    },
+  });
+
+  await new Promise((resolve) => setTimeout(resolve, 120));
+  return dom;
+}
+
 async function testAstraGptRouting() {
   const dom = await createAppDom();
   const { document } = dom.window;
@@ -150,8 +241,10 @@ async function testAstraIntakeExportIncludesScreeningInformation() {
   document.getElementById('intakeBtn').click();
 
   assert.ok(document.querySelector('[data-astra-intake-screening-mode="uploadToGpt"]').classList.contains('active'));
+  assert.equal(document.getElementById('astraIntakeScreeningModeGroup').closest('#astraScreeningInfo').id, 'astraScreeningInfo');
   assert.ok(document.getElementById('astraScreenersFields').classList.contains('hidden'));
-  assert.ok(document.getElementById('astraScreeningInfo').classList.contains('hidden'));
+  assert.ok(!document.getElementById('astraScreeningInfo').classList.contains('hidden'));
+  assert.ok(document.getElementById('screeningInfoField').classList.contains('hidden'));
   assert.equal(document.getElementById('astraScreenersCompletionStatus').textContent, 'Complete');
   assert.match(
     document.getElementById('exportBox').value,
@@ -161,6 +254,7 @@ async function testAstraIntakeExportIncludesScreeningInformation() {
   document.querySelector('[data-astra-intake-screening-mode="enterManually"]').click();
   assert.ok(!document.getElementById('astraScreenersFields').classList.contains('hidden'));
   assert.ok(!document.getElementById('astraScreeningInfo').classList.contains('hidden'));
+  assert.ok(!document.getElementById('screeningInfoField').classList.contains('hidden'));
 
   setField(window, 'phq9', '14, moderate');
   setField(window, 'screeningInfo', 'Pre-visit forms reported chronic sleep disruption and recent panic symptoms.');
@@ -199,20 +293,22 @@ async function testAstraSupportingDocumentsInstruction() {
 
   document.getElementById('intakeBtn').click();
   document.querySelector('[data-astra-intake-screening-mode="enterManually"]').click();
+  assert.equal(document.querySelector('[data-supporting-doc-type="intakeScreening"]'), null);
 
   let exportText = document.getElementById('exportBox').value;
   assert.ok(!document.getElementById('astraSupportingDocsUploaded').checked);
   assert.match(exportText, /Uploaded Documents: None selected in app/);
   assert.match(exportText, /UPLOADED SUPPORTING DOCUMENTS\nNone selected in app\./);
 
-  document.querySelector('[data-supporting-doc-type="intakeScreening"]').click();
   document.querySelector('[data-supporting-doc-type="labs"]').click();
   document.querySelector('[data-supporting-doc-type="genesight"]').click();
+  document.querySelector('[data-supporting-doc-type="other"]').click();
   exportText = document.getElementById('exportBox').value;
   assert.match(
     exportText,
-    /Uploaded directly to GPT: intake\/screening documentation, lab results, GeneSight report\. Use uploaded documents as supporting context with the current encounter data\./,
+    /Uploaded directly to GPT: lab results, GeneSight report, other supporting documentation\. Use uploaded documents as supporting context with the current encounter data\./,
   );
+  assert.doesNotMatch(exportText, /intake\/screening documentation/);
   assert.ok(
     exportText.indexOf('SCREENING DOCUMENTATION') < exportText.indexOf('UPLOADED SUPPORTING DOCUMENTS')
       && exportText.indexOf('UPLOADED SUPPORTING DOCUMENTS') < exportText.indexOf('CLINICAL NOTES'),
@@ -290,6 +386,17 @@ async function testAstraWorkflowTogglesDraftRestore() {
   assert.ok(!secondDocument.getElementById('astraScreenersFields').classList.contains('hidden'));
 
   secondDom.window.close();
+}
+
+async function testClosingTimeRowsUseLevelGrid() {
+  const dom = await createAppDom();
+  const { document } = dom.window;
+  const grid = document.querySelector('.closing-time-grid');
+  assert.ok(grid, 'Closing time controls should share the level closing-time-grid');
+  assert.ok(grid.querySelector('.time-control[data-time-field="endTime"]'));
+  assert.ok(grid.querySelector('.time-control[data-time-field="docEnd"]'));
+  assert.ok(grid.querySelector('.doc-end-plus-row'), 'Documentation quick-add controls should remain under the doc end row');
+  dom.window.close();
 }
 
 async function testScheduledStartMeridiemDefaultsFromCurrentTime() {
@@ -512,7 +619,11 @@ async function testMedicationDrawerKeyboardKeepsSearchEditable() {
     }, { force: true });
   `);
 
+  assert.ok(!document.getElementById('medDrawerBtn').classList.contains('active'));
+  assert.equal(document.getElementById('medDrawerBtn').getAttribute('aria-pressed'), 'false');
   document.getElementById('medDrawerBtn').click();
+  assert.ok(document.getElementById('medDrawerBtn').classList.contains('active'));
+  assert.equal(document.getElementById('medDrawerBtn').getAttribute('aria-pressed'), 'true');
   const searchInput = document.getElementById('medSearchInput');
   searchInput.focus();
   searchInput.value = 'ser';
@@ -544,31 +655,26 @@ async function testMedicationDrawerKeyboardKeepsSearchEditable() {
 }
 
 async function testPatientLettersPacketBuilderAndPersistence() {
-  const firstDom = await createAppDom({ mockNow: '2026-05-10T10:00:00' });
+  const navDom = await createAppDom();
+  const navDocument = navDom.window.document;
+  assert.equal(navDocument.getElementById('patientLettersWorkspace'), null);
+  assert.equal(navDocument.getElementById('patientLettersBtn').getAttribute('href'), 'letter.html');
+  navDom.window.close();
+
+  const firstDom = await createLetterDom({ mockNow: '2026-05-10T10:00:00' });
   const { window } = firstDom;
   const { document } = window;
 
-  assert.ok(document.getElementById('patientLettersWorkspace').classList.contains('hidden'));
-  document.getElementById('patientLettersBtn').click();
-  assert.ok(!document.getElementById('patientLettersWorkspace').classList.contains('hidden'));
+  assert.equal(document.getElementById('clinicianSelect').value, 'nick-stanzione');
+  assert.match(document.getElementById('clinicianMeta').textContent, /NY-123/);
+  document.querySelector('[data-clinician-state="CT"]').click();
+  assert.match(document.getElementById('clinicianMeta').textContent, /CT-456/);
 
-  document.querySelector('[data-letter-type="accommodation"]').click();
-  assert.ok(document.getElementById('letterRequestedAccommodation'));
+  setField(window, 'letterType', 'accommodation', 'change');
   assert.ok(document.getElementById('letterIncludeFunctionalLimitations').checked);
-
-  setField(window, 'age', '34');
-  setField(window, 'gender', 'Female', 'change');
-  setField(window, 'cc', 'work stress');
-  setField(window, 'notes', 'Patient reports anxiety symptoms affecting work schedule.');
-
-  setField(window, 'letterPatientName', 'Jordan Patient');
   setField(window, 'letterRecipient', 'HR Department');
-  setField(window, 'letterPurpose', 'Request schedule flexibility.');
-  setField(window, 'letterRequestedAccommodation', 'Flexible start time twice weekly.');
-  document.getElementById('letterIncludeCurrentNote').click();
-  document.getElementById('letterIncludeManualContext').click();
-  setField(window, 'letterManualContext', 'Use minimal disclosure and avoid diagnosis.');
-  setField(window, 'letterAttachmentManifest', 'Employer accommodation form - complete only requested fields.');
+  setField(window, 'letterPurpose', 'Request schedule flexibility. Use the uploaded prior note for demographics and clinical context.');
+  setField(window, 'letterAttachmentManifest', 'Prior note; employer accommodation form; Astra letterhead; Nick CT signature image.');
 
   document.getElementById('buildLetterPacketBtn').click();
   const packet = document.getElementById('letterExportBox').value;
@@ -576,10 +682,14 @@ async function testPatientLettersPacketBuilderAndPersistence() {
   assert.match(packet, /Accommodation Letter/);
   assert.match(packet, /Patient consent\/release confirmed: No/);
   assert.match(packet, /Patient consent\/release has not been confirmed/);
-  assert.match(packet, /Clinical context for GPT reasoning only; disclose only if permitted above\./);
-  assert.match(packet, /Flexible start time twice weekly\./);
-  assert.match(packet, /Employer accommodation form/);
-  assert.match(packet, /Do not disclose diagnosis, medications, detailed symptoms, safety\/risk information/);
+  assert.match(packet, /Clinician: Nick Stanzione/);
+  assert.match(packet, /Selected state: CT/);
+  assert.match(packet, /License number: CT-456/);
+  assert.match(packet, /Signature block: Nick Stanzione, PMHNP - CT/);
+  assert.match(packet, /Signature asset label\/path: nick-ct-signature\.png/);
+  assert.match(packet, /Use the uploaded prior note for patient demographics, background, and clinically relevant context\./);
+  assert.match(packet, /Incorporate the proper clinician signature/);
+  assert.match(packet, /Prior note; employer accommodation form/);
   assert.equal(
     document.body.dataset.astraLetterGptUrl,
     'https://chatgpt.com/g/g-69ff5644fd80819182ccbb07dfee15fa-astra-document-generator',
@@ -592,22 +702,21 @@ async function testPatientLettersPacketBuilderAndPersistence() {
   assert.ok(stored, 'Expected Patient Letters draft to persist separately');
   const noteDraftBeforeClear = window.localStorage.getItem('noteBuilderDraft_v1:anonymous');
   document.getElementById('clearLetterFieldsBtn').click();
-  assert.equal(document.getElementById('letterPatientName').value, '');
+  assert.equal(document.getElementById('letterPurpose').value, '');
   assert.equal(document.getElementById('letterExportBox').value, '');
   assert.equal(window.localStorage.getItem('noteBuilderDraft_v1:anonymous'), noteDraftBeforeClear);
 
   firstDom.window.close();
 
-  const secondDom = await createAppDom({
+  const secondDom = await createLetterDom({
     seedLocalStorage: {
       patientLettersDraft_v1: stored,
     },
   });
   const secondDocument = secondDom.window.document;
-  secondDocument.getElementById('patientLettersBtn').click();
-  assert.ok(secondDocument.querySelector('[data-letter-type="accommodation"]').classList.contains('active'));
-  assert.equal(secondDocument.getElementById('letterPatientName').value, 'Jordan Patient');
-  assert.equal(secondDocument.getElementById('letterRequestedAccommodation').value, 'Flexible start time twice weekly.');
+  assert.equal(secondDocument.getElementById('letterType').value, 'accommodation');
+  assert.equal(secondDocument.querySelector('[data-clinician-state="CT"]').classList.contains('active'), true);
+  assert.match(secondDocument.getElementById('letterPurpose').value, /Request schedule flexibility/);
   secondDom.window.close();
 }
 
@@ -645,6 +754,7 @@ async function run() {
   await testAstraSupportingDocumentsInstruction();
   await testAstraFollowupUploadedPreviousNoteMode();
   await testAstraWorkflowTogglesDraftRestore();
+  await testClosingTimeRowsUseLevelGrid();
   await testScheduledStartMeridiemDefaultsFromCurrentTime();
   await testScheduledStartDraftValueIsNotOverwritten();
   await testScreeningInformationDraftRestore();
