@@ -12,19 +12,19 @@
           "license": "407579",
           "address": "800 Westchester Ave, STE N641, Rye Brook, NY 10573",
           "signatureBlock": "Nick Stanzione, PMHNP",
-          "signatureAsset": "assets/signatures/nick-stanzione-signature.png"
+          "signatureAsset": "Nick Stanzione signature"
         },
         "CT": {
           "license": "14872",
           "address": "243 Tresser Blvd, 17th Floor, Stamford, CT 06901",
           "signatureBlock": "Nick Stanzione, PMHNP",
-          "signatureAsset": "assets/signatures/nick-stanzione-signature.png"
+          "signatureAsset": "Nick Stanzione signature"
         },
         "DE": {
           "license": "L8-0010876",
           "address": "34545 DuPont Blvd, Building F, Unit 11, Frankford, DE 19945",
           "signatureBlock": "Nick Stanzione, PMHNP",
-          "signatureAsset": "assets/signatures/nick-stanzione-signature.png"
+          "signatureAsset": "Nick Stanzione signature"
         }
       }
     },

@@ -15,7 +15,8 @@ const REQUIRED_SHARED_ROOT_FOLDER_ID_PROPERTY = 'DRIVE_SHARED_ROOT_FOLDER_ID';
 const ALLOWED_USER_EMAILS_PROPERTY = 'DRIVE_ALLOWED_USER_EMAILS';
 const SERVICE_TOKEN_PROPERTY = 'DRIVE_SERVICE_TOKEN';
 const LEGACY_OWNER_TOKEN_PROPERTY = 'DRIVE_OWNER_TOKEN';
-const APP_BUILD_ID = '20260311-drive-reset-v2';
+const LAST_ERROR_PROPERTY = 'DRIVE_LAST_ERROR';
+const APP_BUILD_ID = '20260510-letter-page';
 const PREFLIGHT_STATUS = {
   OK: 'ok',
   ROOT_MISSING: 'root_missing',
@@ -47,14 +48,20 @@ const FOLDER_STRUCTURE = [
 ];
 
 function doGet(e) {
+  const wantsUi = Boolean(e && e.parameter && e.parameter.ui);
   try {
     const action = e && e.parameter ? (e.parameter.action || 'health') : 'health';
     const payload = e && e.parameter ? e.parameter : {};
     enforceOwnerWrite_(action, payload);
     const result = handleAction_(action, payload);
+    if (wantsUi) {
+      return htmlResponse_(buildStatusHtml_({ ok: true, action: action, ...result }));
+    }
     return jsonResponse_({ ok: true, action: action, ...result });
   } catch (error) {
-    return jsonResponse_({ ok: false, error: String(error.message || error) });
+    const payload = errorPayload_(error);
+    if (wantsUi) return htmlResponse_(buildStatusHtml_(payload));
+    return jsonResponse_(payload);
   }
 }
 
@@ -69,7 +76,7 @@ function doPost(e) {
     const result = handleAction_(action, payload);
     return jsonResponse_({ ok: true, action: action, ...result });
   } catch (error) {
-    return jsonResponse_({ ok: false, error: String(error.message || error) });
+    return jsonResponse_(errorPayload_(error));
   }
 }
 
@@ -2774,6 +2781,93 @@ function escapeQueryText_(value) {
 
 function normalizeText_(value) {
   return String(value || '').trim();
+}
+
+function errorPayload_(error) {
+  const message = String(error && error.message ? error.message : error);
+  const payload = {
+    ok: false,
+    error: message,
+    appBuildId: APP_BUILD_ID,
+    timestamp: new Date().toISOString(),
+  };
+  try {
+    PropertiesService.getScriptProperties().setProperty(LAST_ERROR_PROPERTY, JSON.stringify(payload));
+  } catch (writeError) {
+    // Best-effort diagnostic storage only.
+  }
+  return payload;
+}
+
+function getLastErrorPayload_() {
+  try {
+    const raw = PropertiesService.getScriptProperties().getProperty(LAST_ERROR_PROPERTY) || '';
+    return raw ? JSON.parse(raw) : null;
+  } catch (error) {
+    return null;
+  }
+}
+
+function htmlResponse_(html) {
+  return HtmlService
+    .createHtmlOutput(html)
+    .setTitle('Astra Drive Sync Status');
+}
+
+function htmlEscape_(value) {
+  return String(value == null ? '' : value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function buildStatusHtml_(payload) {
+  const lastError = getLastErrorPayload_();
+  const rows = [
+    ['Status', payload.ok === false ? 'Error' : 'Ready'],
+    ['Action', payload.action || 'health'],
+    ['Backend build', payload.appBuildId || APP_BUILD_ID],
+    ['Preflight', payload.preflightStatus || 'unknown'],
+    ['Preflight reason', payload.preflightReason || ''],
+    ['Required root folder id', payload.requiredRootFolderId || ''],
+    ['Resolved root folder id', payload.resolvedRootFolderId || ''],
+    ['Resolved user', payload.resolvedUserEmail || ''],
+    ['Manifest status', payload.preflightStatus === PREFLIGHT_STATUS.MANIFEST_MISSING ? 'missing' : 'available or not checked'],
+    ['Current error', payload.error || ''],
+    ['Last recorded error', lastError ? `${lastError.timestamp || ''} ${lastError.error || ''}` : 'None recorded'],
+  ];
+  const rowHtml = rows.map(function (row) {
+    return `<dt>${htmlEscape_(row[0])}</dt><dd>${htmlEscape_(row[1]) || '&nbsp;'}</dd>`;
+  }).join('');
+
+  return `<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Astra Drive Sync Status</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 0; padding: 28px; background: #f8fafc; color: #0f172a; }
+    main { max-width: 760px; margin: 0 auto; background: rgba(255,255,255,.86); border: 1px solid #dbe3ef; border-radius: 18px; padding: 22px; box-shadow: 0 20px 48px rgba(15,23,42,.12); }
+    h1 { margin: 0 0 4px; font-size: 24px; }
+    p { color: #64748b; margin: 0 0 18px; }
+    dl { display: grid; grid-template-columns: minmax(160px, .45fr) 1fr; gap: 10px 14px; }
+    dt { font-weight: 750; color: #334155; }
+    dd { margin: 0; word-break: break-word; color: #0f172a; }
+    .ok { color: #047857; }
+    .error { color: #b91c1c; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Astra Drive Sync Status</h1>
+    <p class="${payload.ok === false ? 'error' : 'ok'}">${payload.ok === false ? 'The endpoint returned an error.' : 'The endpoint is responding.'}</p>
+    <dl>${rowHtml}</dl>
+  </main>
+</body>
+</html>`;
 }
 
 function jsonResponse_(payload) {

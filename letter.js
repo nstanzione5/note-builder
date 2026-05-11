@@ -18,7 +18,6 @@ const DISCLOSURE_DEFAULTS = {
   letterPreviousNoteUploaded: true,
   letterIncludeDiagnosis: false,
   letterIncludeMedications: false,
-  letterIncludeSymptoms: false,
   letterIncludeFunctionalLimitations: false,
 };
 
@@ -34,9 +33,9 @@ const fallbackClinicianConfig = {
       credentials: 'PMHNP',
       title: 'Psychiatric Mental Health Nurse Practitioner',
       states: {
-        NY: { license: '', address: '', signatureBlock: 'Nick Stanzione, PMHNP', signatureAsset: '' },
-        CT: { license: '', address: '', signatureBlock: 'Nick Stanzione, PMHNP', signatureAsset: '' },
-        DE: { license: '', address: '', signatureBlock: 'Nick Stanzione, PMHNP', signatureAsset: '' },
+        NY: { license: '', address: '', signatureBlock: 'Nick Stanzione, PMHNP', signatureAsset: 'Nick Stanzione signature' },
+        CT: { license: '', address: '', signatureBlock: 'Nick Stanzione, PMHNP', signatureAsset: 'Nick Stanzione signature' },
+        DE: { license: '', address: '', signatureBlock: 'Nick Stanzione, PMHNP', signatureAsset: 'Nick Stanzione signature' },
       },
     },
   ],
@@ -51,6 +50,7 @@ const state = {
 
 const els = {
   configStatus: document.getElementById('clinicianConfigStatus'),
+  refreshCliniciansBtn: document.getElementById('refreshCliniciansBtn'),
   clinicianSelect: document.getElementById('clinicianSelect'),
   stateToggle: document.getElementById('clinicianStateToggle'),
   clinicianMeta: document.getElementById('clinicianMeta'),
@@ -59,9 +59,7 @@ const els = {
   letterRecipient: document.getElementById('letterRecipient'),
   letterRecipientAddress: document.getElementById('letterRecipientAddress'),
   letterPurpose: document.getElementById('letterPurpose'),
-  letterAttachmentManifest: document.getElementById('letterAttachmentManifest'),
   letterExportBox: document.getElementById('letterExportBox'),
-  buildBtn: document.getElementById('buildLetterPacketBtn'),
   copyBtn: document.getElementById('copyLetterPacketBtn'),
   copyOpenBtn: document.getElementById('copyOpenLetterGptBtn'),
   openBtn: document.getElementById('openLetterGptBtn'),
@@ -77,7 +75,6 @@ const fieldIds = [
   'letterRecipient',
   'letterRecipientAddress',
   'letterPurpose',
-  'letterAttachmentManifest',
 ];
 
 const checkboxIds = Object.keys(DISCLOSURE_DEFAULTS);
@@ -220,24 +217,30 @@ function normalizeClinicianConfig(config) {
   };
 }
 
-async function loadClinicianConfig() {
+async function loadClinicianConfig(options = {}) {
+  const { preferDrive = true } = options;
+  if (els.configStatus) els.configStatus.textContent = 'Loading clinicians';
+  if (els.refreshCliniciansBtn) els.refreshCliniciansBtn.disabled = true;
+
   try {
+    if (!preferDrive) throw new Error('Drive refresh skipped.');
     const driveConfig = await callDriveFileGet(CLINICIAN_CONFIG_PATH);
     state.clinicianConfig = normalizeClinicianConfig(driveConfig);
-    state.configSource = 'Drive';
+    state.configSource = 'drive';
   } catch (driveError) {
     try {
       const localConfig = await loadLocalClinicianConfig();
       state.clinicianConfig = normalizeClinicianConfig(localConfig);
       state.configSource = 'local';
     } catch (localError) {
-      console.error('Unable to load clinician config:', driveError, localError);
+      console.warn('Unable to load clinician config:', driveError, localError);
       state.clinicianConfig = fallbackClinicianConfig;
       state.configSource = 'fallback';
     }
   }
 
   renderClinicianOptions();
+  if (els.refreshCliniciansBtn) els.refreshCliniciansBtn.disabled = false;
 }
 
 function getSelectedClinician() {
@@ -281,9 +284,12 @@ function updateClinicianMeta() {
   updateStateToggle();
 
   if (els.configStatus) {
-    els.configStatus.textContent = state.configSource === 'Drive'
+    const label = state.configSource === 'drive'
       ? 'Clinicians from Drive'
-      : 'Clinicians from local config';
+      : state.configSource === 'fallback'
+        ? 'Drive config unavailable'
+        : 'Using local fallback';
+    els.configStatus.textContent = label;
   }
 
   if (els.clinicianMeta) {
@@ -405,6 +411,7 @@ function buildLetterPacketText() {
   ].join('\n');
   const hasRecipient = Boolean(getValue('letterRecipient') || getValue('letterRecipientAddress'));
   const consentConfirmed = getChecked('letterConsentConfirmed');
+  const priorNoteUploaded = getChecked('letterPreviousNoteUploaded');
   const consentWarning = hasRecipient && !consentConfirmed
     ? 'WARNING:\nPatient consent/release has not been confirmed. Do not finalize or send this third-party letter until consent is confirmed.\n'
     : '';
@@ -437,21 +444,19 @@ function buildLetterPacketText() {
     '',
     'DISCLOSURE CONTROLS:',
     `Patient consent/release confirmed: ${yesNo(consentConfirmed)}`,
-    `Prior note uploaded separately: ${yesNo(getChecked('letterPreviousNoteUploaded'))}`,
     `Include diagnosis: ${yesNo(getChecked('letterIncludeDiagnosis'))}`,
     `Include medications: ${yesNo(getChecked('letterIncludeMedications'))}`,
-    `Include detailed symptoms: ${yesNo(getChecked('letterIncludeSymptoms'))}`,
     `Include functional limitations: ${yesNo(getChecked('letterIncludeFunctionalLimitations'))}`,
     '',
-    'FILES / IMAGES TO UPLOAD WITH THIS REQUEST:',
-    display(getValue('letterAttachmentManifest'), '[No files/images listed]'),
-    '',
-    'The clinician will upload the listed files/images to the Letter GPT with this packet. Review uploaded files only for the stated purpose. Do not include image/file contents unless clinically relevant and allowed by disclosure settings.',
+    'SOURCE CONTEXT:',
+    `Prior note uploaded separately: ${yesNo(priorNoteUploaded)}`,
+    'Use the uploaded prior note for patient demographics and background only when it is available in this GPT chat.',
+    'Use GPT Knowledge for Astra branding and the selected clinician signature asset.',
     '',
     'CLINICIAN INSTRUCTIONS TO LETTER GPT:',
     'Write a polished, clinically appropriate Astra Psychiatry letter.',
     'Use Astra branding and professional formatting.',
-    'Use the uploaded prior note for patient demographics, background, and clinically relevant context.',
+    'Use the uploaded prior note for patient demographics, background, and clinically relevant context when the prior note is provided.',
     'Use the selected clinician, state, license, address, and signature metadata above.',
     'Incorporate the proper clinician signature or uploaded signature asset when available.',
     'Do not disclose diagnosis, medications, detailed symptoms, functional limitations, or other sensitive clinical details unless explicitly allowed above.',
@@ -460,7 +465,7 @@ function buildLetterPacketText() {
     'Do not overstate certainty.',
     'Avoid legal conclusions.',
     'Do not claim disability, impairment, need, or accommodation beyond what is clinically supported by the provided information.',
-    'If uploaded files/images are referenced, review them only for the stated purpose.',
+    'If uploaded knowledge files, branding references, or signature assets are referenced, review them only for the stated purpose.',
     'Produce a final letter ready for clinician review, editing, and signature.',
   ].filter((line, index, arr) => !(line === '' && arr[index - 1] === '')).join('\n');
 }
@@ -486,7 +491,7 @@ async function copyLetterPacket() {
     return true;
   } catch (error) {
     console.error(error);
-    window.alert('Copy failed. Please copy manually from the preview.');
+    window.alert('Copy failed. Please try Copy Packet again.');
     return false;
   }
 }
@@ -538,7 +543,6 @@ function attachEventListeners() {
     });
   });
 
-  if (els.buildBtn) els.buildBtn.addEventListener('click', buildLetterPacket);
   if (els.copyBtn) els.copyBtn.addEventListener('click', copyLetterPacket);
   if (els.copyOpenBtn) {
     els.copyOpenBtn.addEventListener('click', async () => {
@@ -549,6 +553,14 @@ function attachEventListeners() {
   [els.openBtn, els.openRailBtn].forEach((btn) => {
     if (btn) btn.addEventListener('click', openLetterGpt);
   });
+  if (els.refreshCliniciansBtn) {
+    els.refreshCliniciansBtn.addEventListener('click', async () => {
+      await loadClinicianConfig({ preferDrive: true });
+      applyDraft(getStoredDraft());
+      syncControls();
+      saveDraft();
+    });
+  }
   if (els.clearBtn) {
     els.clearBtn.addEventListener('click', () => {
       if (window.confirm('Clear letter fields only?')) clearLetterFields();

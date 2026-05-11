@@ -99,3 +99,20 @@ When enabled:
 - During each Drive sync cycle, the app also pulls `data/meds/compiled/medications.compiled.json` so medication reference updates published to Drive can appear in runtime without rebuilding the app shell.
 - Health now includes `appBuildId`, `resolvedUserEmail`, and explicit preflight status codes (`ok`, `root_missing`, `manifest_missing`, `identity_missing`, `version_mismatch`).
 - Cleanup now uses direct trash batches (`cleanup.preview` / `cleanup.apply`) instead of archive-only condense for large-scale My Drive artifact removal.
+
+## Apps Script troubleshooting
+
+If the Apps Script web app page shows a repeating Google message such as "There was a problem" or "Something went wrong":
+
+1. Open the deployment URL with `?action=health`. It should return JSON.
+2. Open the deployment URL with `?ui=1`. It should show the Astra Drive Sync Status page.
+3. In Apps Script, open **Executions** and inspect the latest failed run.
+4. Confirm **Advanced Drive API** is enabled in the Apps Script project.
+5. Confirm the web app deployment is:
+   - Execute as: **User accessing the web app**
+   - Access: **Anyone**
+6. Confirm `APP_BUILD_ID` in `scripts/drive/apps-script/Code.gs` matches the browser `data-app-build-id`.
+7. Redeploy as a new web app version after changing Apps Script code.
+8. Run `npm run drive:bootstrap` only after `?action=health` responds.
+
+`version_mismatch` means the browser is newer than the deployed Apps Script backend. This is a safety block. Redeploy Apps Script rather than removing the block.

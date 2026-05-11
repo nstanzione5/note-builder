@@ -26,17 +26,16 @@
   data-drive-owner-token=""
 >
   <main class="app-shell letter-page-shell">
-    <section class="brand-panel letter-hero">
-      <div class="brand-logo-wrap" aria-hidden="true">
-        <img class="brand-logo-img" src="a_digital_vector_logo_features_an_uppercase_letter.png" alt="Astra Psychiatry logo">
+    <section class="brand-panel letter-hero letter-hero-compact">
+      <div class="letter-compact-mark" aria-hidden="true">
+        <img src="a_digital_vector_logo_features_an_uppercase_letter.png" alt="">
       </div>
       <div class="brand-copy">
         <span class="brand-kicker">Astra Psychiatry</span>
         <div class="brand-title-row">
           <h1>Letter Writer</h1>
-          <span class="brand-mode-pill">Document GPT Packet</span>
+          <span class="brand-mode-pill">GPT Handoff</span>
         </div>
-        <p>Build a clean packet, upload the prior note, and let the Astra Document GPT format the final letter.</p>
       </div>
       <nav class="brand-tools-rail letter-nav" aria-label="Letter tools">
         <a class="brand-tool-btn" href="index.html" data-tooltip="Back to Notes" aria-label="Back to note generator">
@@ -48,14 +47,17 @@
       </nav>
     </section>
 
-    <section class="letter-layout">
-      <section class="card letter-form-card" aria-labelledby="letterWriterTitle">
+    <section class="letter-layout letter-layout-single">
+      <section class="card letter-form-card letter-form-card-compact" aria-labelledby="letterWriterTitle">
         <div class="section-heading">
           <div>
             <h2 id="letterWriterTitle">Patient Letter Packet</h2>
             <p>Minimal inputs for the Astra Document GPT.</p>
           </div>
-          <div class="section-mini-badge" id="clinicianConfigStatus">Loading clinicians</div>
+          <div class="letter-status-actions">
+            <div class="section-mini-badge" id="clinicianConfigStatus">Loading clinicians</div>
+            <button class="mini-btn" id="refreshCliniciansBtn" type="button">Refresh Clinicians</button>
+          </div>
         </div>
 
         <div class="letter-builder-section">
@@ -121,47 +123,31 @@
         </div>
 
         <div class="letter-builder-section">
+          <h3>Source</h3>
+          <div class="letter-toggle-grid letter-toggle-grid-compact">
+            <label class="script-switch" for="letterPreviousNoteUploaded"><input id="letterPreviousNoteUploaded" data-letter-checkbox type="checkbox" checked><span class="switch-track" aria-hidden="true"></span><span class="switch-label">Prior note will be uploaded to GPT</span></label>
+          </div>
+        </div>
+
+        <div class="letter-builder-section">
           <h3>Disclosure</h3>
           <div class="letter-toggle-grid letter-toggle-grid-compact">
             <label class="script-switch" for="letterConsentConfirmed"><input id="letterConsentConfirmed" data-letter-checkbox type="checkbox"><span class="switch-track" aria-hidden="true"></span><span class="switch-label">Consent/release confirmed</span></label>
-            <label class="script-switch" for="letterPreviousNoteUploaded"><input id="letterPreviousNoteUploaded" data-letter-checkbox type="checkbox" checked><span class="switch-track" aria-hidden="true"></span><span class="switch-label">Prior note uploaded to GPT</span></label>
             <label class="script-switch" for="letterIncludeDiagnosis"><input id="letterIncludeDiagnosis" data-letter-checkbox type="checkbox"><span class="switch-track" aria-hidden="true"></span><span class="switch-label">Allow diagnosis</span></label>
             <label class="script-switch" for="letterIncludeMedications"><input id="letterIncludeMedications" data-letter-checkbox type="checkbox"><span class="switch-track" aria-hidden="true"></span><span class="switch-label">Allow medications</span></label>
-            <label class="script-switch" for="letterIncludeSymptoms"><input id="letterIncludeSymptoms" data-letter-checkbox type="checkbox"><span class="switch-track" aria-hidden="true"></span><span class="switch-label">Allow symptoms</span></label>
             <label class="script-switch" for="letterIncludeFunctionalLimitations"><input id="letterIncludeFunctionalLimitations" data-letter-checkbox type="checkbox"><span class="switch-track" aria-hidden="true"></span><span class="switch-label">Allow functional limits</span></label>
           </div>
           <p class="letter-warning hidden" id="letterConsentWarning">Consent has not been confirmed. Do not finalize or send a third-party letter until consent is confirmed.</p>
         </div>
 
-        <div class="letter-builder-section">
-          <h3>Files / Images</h3>
-          <div class="field">
-            <label for="letterAttachmentManifest">Upload Manifest</label>
-            <textarea id="letterAttachmentManifest" data-letter-field rows="4" placeholder="Prior note, employer form, school form, Astra letterhead, signature image, GeneSight report..."></textarea>
-          </div>
-        </div>
-
         <div class="action-row letter-action-row">
-          <button id="buildLetterPacketBtn" type="button">Build Packet</button>
           <button id="copyLetterPacketBtn" type="button">Copy Packet</button>
           <button id="copyOpenLetterGptBtn" type="button">Copy &amp; Open GPT</button>
           <button id="openLetterGptBtn" type="button">Open GPT</button>
           <button id="clearLetterFieldsBtn" type="button">Clear</button>
         </div>
+        <textarea id="letterExportBox" class="hidden" readonly aria-hidden="true" tabindex="-1"></textarea>
       </section>
-
-      <aside class="card letter-preview-card">
-        <div class="section-heading">
-          <div>
-            <h2>Packet Preview</h2>
-            <p>Raw handoff for the Astra Document GPT.</p>
-          </div>
-        </div>
-        <div class="field">
-          <label for="letterExportBox">Export</label>
-          <textarea id="letterExportBox" rows="28" readonly placeholder="Build a packet to preview it here."></textarea>
-        </div>
-      </aside>
     </section>
   </main>
 

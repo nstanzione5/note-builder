@@ -8,11 +8,13 @@ const HTML_PATH = path.join(ROOT, 'index.html');
 const APP_PATH = path.join(ROOT, 'app.js');
 const LETTER_HTML_PATH = path.join(ROOT, 'letter.html');
 const LETTER_JS_PATH = path.join(ROOT, 'letter.js');
+const APPS_SCRIPT_PATH = path.join(ROOT, 'scripts/drive/apps-script/Code.gs');
 
 const html = fs.readFileSync(HTML_PATH, 'utf8');
 const js = fs.readFileSync(APP_PATH, 'utf8');
 const letterHtml = fs.readFileSync(LETTER_HTML_PATH, 'utf8');
 const letterJs = fs.readFileSync(LETTER_JS_PATH, 'utf8');
+const appsScript = fs.readFileSync(APPS_SCRIPT_PATH, 'utf8');
 
 function inlineApp(sourceHtml) {
   return sourceHtml.replace('<script src="app.js"></script>', `<script>\n${js}\n</script>`);
@@ -107,6 +109,8 @@ async function createLetterDom(options = {}) {
   const {
     seedLocalStorage = {},
     mockNow,
+    driveEnabled = false,
+    localConfigFails = false,
     clinicianConfig = {
       version: 1,
       clinicians: [
@@ -130,7 +134,9 @@ async function createLetterDom(options = {}) {
     throw error instanceof Error ? error : new Error(String(error));
   });
 
-  const baseHtml = letterHtml.replace('data-drive-sync-enabled="true"', 'data-drive-sync-enabled="false"');
+  const baseHtml = driveEnabled
+    ? letterHtml
+    : letterHtml.replace('data-drive-sync-enabled="true"', 'data-drive-sync-enabled="false"');
   const dom = new JSDOM(inlineLetterApp(baseHtml), {
     runScripts: 'dangerously',
     resources: 'usable',
@@ -166,10 +172,25 @@ async function createLetterDom(options = {}) {
 
       window.alert = () => {};
       window.confirm = () => true;
-      window.fetch = async () => ({
-        ok: true,
-        json: async () => clinicianConfig,
-      });
+      window.fetch = async (url, fetchOptions = {}) => {
+        if (fetchOptions && fetchOptions.method === 'POST') {
+          return {
+            ok: true,
+            json: async () => ({ ok: true, file: { content: JSON.stringify(clinicianConfig) } }),
+          };
+        }
+        if (localConfigFails) {
+          return {
+            ok: false,
+            status: 404,
+            json: async () => ({}),
+          };
+        }
+        return {
+          ok: true,
+          json: async () => clinicianConfig,
+        };
+      };
       window.navigator.clipboard = {
         writeText: async (text) => {
           window.__copiedText = text;
@@ -661,12 +682,21 @@ async function testPatientLettersPacketBuilderAndPersistence() {
   assert.equal(navDocument.getElementById('patientLettersBtn').getAttribute('href'), 'letter.html');
   navDom.window.close();
 
-  const firstDom = await createLetterDom({ mockNow: '2026-05-10T10:00:00' });
+  const firstDom = await createLetterDom({ mockNow: '2026-05-10T10:00:00', driveEnabled: true });
   const { window } = firstDom;
   const { document } = window;
 
+  assert.equal(document.querySelector('.letter-preview-card'), null);
+  assert.equal(document.getElementById('buildLetterPacketBtn'), null);
+  assert.equal(document.getElementById('letterAttachmentManifest'), null);
+  assert.equal(document.getElementById('letterIncludeSymptoms'), null);
+  assert.ok(document.getElementById('letterExportBox').classList.contains('hidden'));
+  assert.match(document.getElementById('clinicianConfigStatus').textContent, /Clinicians from Drive/);
   assert.equal(document.getElementById('clinicianSelect').value, 'nick-stanzione');
   assert.match(document.getElementById('clinicianMeta').textContent, /NY-123/);
+  document.getElementById('refreshCliniciansBtn').click();
+  await new Promise((resolve) => setTimeout(resolve, 0));
+  assert.match(document.getElementById('clinicianConfigStatus').textContent, /Clinicians from Drive/);
   document.querySelector('[data-clinician-state="CT"]').click();
   assert.match(document.getElementById('clinicianMeta').textContent, /CT-456/);
 
@@ -674,9 +704,9 @@ async function testPatientLettersPacketBuilderAndPersistence() {
   assert.ok(document.getElementById('letterIncludeFunctionalLimitations').checked);
   setField(window, 'letterRecipient', 'HR Department');
   setField(window, 'letterPurpose', 'Request schedule flexibility. Use the uploaded prior note for demographics and clinical context.');
-  setField(window, 'letterAttachmentManifest', 'Prior note; employer accommodation form; Astra letterhead; Nick CT signature image.');
 
-  document.getElementById('buildLetterPacketBtn').click();
+  document.getElementById('copyLetterPacketBtn').click();
+  await new Promise((resolve) => setTimeout(resolve, 0));
   const packet = document.getElementById('letterExportBox').value;
   assert.match(packet, /ASTRA PATIENT LETTER REQUEST/);
   assert.match(packet, /Accommodation Letter/);
@@ -687,16 +717,15 @@ async function testPatientLettersPacketBuilderAndPersistence() {
   assert.match(packet, /License number: CT-456/);
   assert.match(packet, /Signature block: Nick Stanzione, PMHNP - CT/);
   assert.match(packet, /Signature asset label\/path: nick-ct-signature\.png/);
-  assert.match(packet, /Use the uploaded prior note for patient demographics, background, and clinically relevant context\./);
+  assert.match(packet, /Prior note uploaded separately: Yes/);
+  assert.match(packet, /Use the uploaded prior note for patient demographics, background, and clinically relevant context when the prior note is provided\./);
   assert.match(packet, /Incorporate the proper clinician signature/);
-  assert.match(packet, /Prior note; employer accommodation form/);
+  assert.doesNotMatch(packet, /FILES \/ IMAGES TO UPLOAD WITH THIS REQUEST/);
+  assert.equal(window.__copiedText, packet);
   assert.equal(
     document.body.dataset.astraLetterGptUrl,
     'https://chatgpt.com/g/g-69ff5644fd80819182ccbb07dfee15fa-astra-document-generator',
   );
-
-  document.getElementById('copyLetterPacketBtn').click();
-  await new Promise((resolve) => setTimeout(resolve, 0));
 
   const stored = window.localStorage.getItem('patientLettersDraft_v1');
   assert.ok(stored, 'Expected Patient Letters draft to persist separately');
@@ -718,6 +747,16 @@ async function testPatientLettersPacketBuilderAndPersistence() {
   assert.equal(secondDocument.querySelector('[data-clinician-state="CT"]').classList.contains('active'), true);
   assert.match(secondDocument.getElementById('letterPurpose').value, /Request schedule flexibility/);
   secondDom.window.close();
+}
+
+async function testPatientLettersLocalFallbackStatus() {
+  const dom = await createLetterDom({ driveEnabled: false });
+  assert.match(dom.window.document.getElementById('clinicianConfigStatus').textContent, /Using local fallback/);
+  dom.window.close();
+
+  const fallbackDom = await createLetterDom({ driveEnabled: false, localConfigFails: true });
+  assert.match(fallbackDom.window.document.getElementById('clinicianConfigStatus').textContent, /Drive config unavailable/);
+  fallbackDom.window.close();
 }
 
 async function testIncompletePatientBackupsDoNotUseQuestionMarkLabels() {
@@ -748,6 +787,13 @@ async function testIncompletePatientBackupsDoNotUseQuestionMarkLabels() {
   dom.window.close();
 }
 
+function testAppsScriptDiagnosticsAndBuildId() {
+  assert.match(appsScript, /const APP_BUILD_ID = '20260510-letter-page';/);
+  assert.match(appsScript, /function buildStatusHtml_/);
+  assert.match(appsScript, /function htmlResponse_/);
+  assert.match(appsScript, /DRIVE_LAST_ERROR/);
+}
+
 async function run() {
   await testAstraGptRouting();
   await testAstraIntakeExportIncludesScreeningInformation();
@@ -761,7 +807,9 @@ async function run() {
   await testTelehealthDefaultsRespectBlankAndManualState();
   await testMedicationDrawerKeyboardKeepsSearchEditable();
   await testPatientLettersPacketBuilderAndPersistence();
+  await testPatientLettersLocalFallbackStatus();
   await testIncompletePatientBackupsDoNotUseQuestionMarkLabels();
+  testAppsScriptDiagnosticsAndBuildId();
   console.log('All note-builder tests passed.');
 }
 
