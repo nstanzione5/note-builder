@@ -2025,11 +2025,14 @@ function getFileMeta_(fileId) {
 
 function getFileSafe_(fileId) {
   assertAdvancedDriveService_('Drive.Files.get');
-  const fields = 'id,title,name,mimeType,parents,driveId,teamDriveId,createdDate,createdTime,modifiedDate,modifiedTime,version,md5Checksum';
+  const v2Fields = 'id,title,name,mimeType,parents,driveId,teamDriveId,createdDate,createdTime,modifiedDate,modifiedTime,version,md5Checksum';
+  const v3Fields = 'id,name,mimeType,parents,driveId,createdTime,modifiedTime,version,md5Checksum';
   const variants = [
-    { supportsAllDrives: true, fields: fields },
-    { supportsTeamDrives: true, fields: fields },
-    { fields: fields },
+    { supportsAllDrives: true, fields: v3Fields },
+    { fields: v3Fields },
+    { supportsAllDrives: true, fields: v2Fields },
+    { supportsTeamDrives: true, fields: v2Fields },
+    { fields: v2Fields },
     { supportsAllDrives: true },
     { supportsTeamDrives: true },
     {},
@@ -2038,7 +2041,7 @@ function getFileSafe_(fileId) {
   let lastError = null;
   for (var i = 0; i < variants.length; i += 1) {
     try {
-      return Drive.Files.get(fileId, variants[i]);
+      return normalizeDriveFileMeta_(Drive.Files.get(fileId, variants[i]));
     } catch (error) {
       lastError = error;
     }
@@ -2053,6 +2056,7 @@ function getFileSafe_(fileId) {
 
 function insertFileSafe_(resource, blobOrNull, sharedDriveId, expectedRootFolderId) {
   const normalizedResource = normalizeInsertResource_(resource);
+  const createResource = normalizeCreateResource_(resource);
   const expectedSharedDriveId = normalizeText_(sharedDriveId || '');
   const requiredRootId = normalizeText_(expectedRootFolderId || getRequiredSharedRootFolderId_() || '');
   let lastError = null;
@@ -2090,18 +2094,18 @@ function insertFileSafe_(resource, blobOrNull, sharedDriveId, expectedRootFolder
 
   if (Drive.Files.create) {
     try {
-      const created = Drive.Files.create(normalizedResource, blobOrNull, { supportsAllDrives: true });
+      const created = Drive.Files.create(createResource, blobOrNull, { supportsAllDrives: true });
       if (isCreatedFileInExpectedScope_(created, expectedSharedDriveId, requiredRootId)) {
-        return created;
+        return normalizeDriveFileMeta_(created);
       }
       moveFileToTrashSafe_(created && created.id);
       lastError = new Error('Created file resolved outside expected shared-drive root scope.');
     } catch (allDrivesError) {
       lastError = allDrivesError;
       try {
-        const createdLegacy = Drive.Files.create(normalizedResource, blobOrNull, { supportsTeamDrives: true });
+        const createdLegacy = Drive.Files.create(createResource, blobOrNull, { supportsTeamDrives: true });
         if (isCreatedFileInExpectedScope_(createdLegacy, expectedSharedDriveId, requiredRootId)) {
-          return createdLegacy;
+          return normalizeDriveFileMeta_(createdLegacy);
         }
         moveFileToTrashSafe_(createdLegacy && createdLegacy.id);
         lastError = new Error('Created file resolved outside expected shared-drive root scope.');
@@ -2112,7 +2116,7 @@ function insertFileSafe_(resource, blobOrNull, sharedDriveId, expectedRootFolder
 
     if (!expectedSharedDriveId && !requiredRootId) {
       try {
-        return Drive.Files.create(normalizedResource, blobOrNull);
+        return normalizeDriveFileMeta_(Drive.Files.create(createResource, blobOrNull));
       } catch (plainCreateError) {
         lastError = plainCreateError;
       }
@@ -2221,6 +2225,20 @@ function normalizeInsertResource_(resource) {
     normalized.title = name;
   }
 
+  return normalized;
+}
+
+function normalizeCreateResource_(resource) {
+  const normalized = normalizeInsertResource_(resource);
+  const parents = normalized.parents;
+  if (Array.isArray(parents)) {
+    normalized.parents = parents.map(function (parent) {
+      return typeof parent === 'string' ? parent : normalizeText_((parent && parent.id) || '');
+    }).filter(Boolean);
+  }
+  if (normalized.name && normalized.title) {
+    delete normalized.title;
+  }
   return normalized;
 }
 
@@ -2368,7 +2386,27 @@ function normalizeListResult_(result) {
   if (!result.items) {
     result.items = [];
   }
+  result.items = result.items.map(function (item) {
+    return normalizeDriveFileMeta_(item);
+  });
   return result;
+}
+
+function normalizeDriveFileMeta_(file) {
+  if (!file || typeof file !== 'object') return file;
+  if (file.name && !file.title) {
+    file.title = file.name;
+  }
+  if (file.title && !file.name) {
+    file.name = file.title;
+  }
+  if (file.createdTime && !file.createdDate) {
+    file.createdDate = file.createdTime;
+  }
+  if (file.modifiedTime && !file.modifiedDate) {
+    file.modifiedDate = file.modifiedTime;
+  }
+  return file;
 }
 
 function selectStableFolder_(items) {
