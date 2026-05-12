@@ -792,6 +792,8 @@ function testAppsScriptDiagnosticsAndBuildId() {
   assert.match(appsScript, /function buildStatusHtml_/);
   assert.match(appsScript, /function htmlResponse_/);
   assert.match(appsScript, /DRIVE_LAST_ERROR/);
+  assert.match(appsScript, /function getAdvancedDriveStatus_/);
+  assert.match(appsScript, /Advanced Drive API/);
 }
 
 async function run() {

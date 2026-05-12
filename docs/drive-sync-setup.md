@@ -107,7 +107,11 @@ If the Apps Script web app page shows a repeating Google message such as "There 
 1. Open the deployment URL with `?action=health`. It should return JSON.
 2. Open the deployment URL with `?ui=1`. It should show the Astra Drive Sync Status page.
 3. In Apps Script, open **Executions** and inspect the latest failed run.
-4. Confirm **Advanced Drive API** is enabled in the Apps Script project.
+4. Confirm **Advanced Drive API** is enabled in the Apps Script project:
+   - Open **Services** in Apps Script.
+   - Add **Drive API**.
+   - Confirm the identifier is exactly `Drive`.
+   - Open the linked Google Cloud project and confirm **Google Drive API** is enabled there too.
 5. Confirm the web app deployment is:
    - Execute as: **User accessing the web app**
    - Access: **Anyone**
@@ -116,3 +120,7 @@ If the Apps Script web app page shows a repeating Google message such as "There 
 8. Run `npm run drive:bootstrap` only after `?action=health` responds.
 
 `version_mismatch` means the browser is newer than the deployed Apps Script backend. This is a safety block. Redeploy Apps Script rather than removing the block.
+
+If an execution error points at `Drive.Files.get`, the script reached the Advanced Drive metadata call. That is usually one of three things: the Advanced Drive API service is missing, the linked Google Cloud Drive API is disabled, or the executing user cannot access the configured root/file. The health UI reports this as **Advanced Drive API** plus a detail message.
+
+If `?action=health` still returns an old `appBuildId`, the Apps Script editor may have the new code but the public web app deployment is still old. Use **Deploy > Manage deployments > Edit > Version > New version > Deploy**, then reload the exact `/exec?action=health` URL.

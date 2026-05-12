@@ -200,6 +200,7 @@ function handleHealth_(payload) {
   const requiredRootFolderId = getRequiredSharedRootFolderId_();
   const sharedDriveId = requiredSharedDriveId || normalizeText_(payload.sharedDriveId || '');
   const clientBuildId = normalizeText_((payload.client && payload.client.appBuildId) || payload.clientBuildId || '');
+  const advancedDrive = getAdvancedDriveStatus_();
   const preflight = evaluateDrivePreflight_({
     sharedDriveId: sharedDriveId,
     rootFolderName: rootFolderName,
@@ -220,6 +221,8 @@ function handleHealth_(payload) {
     resolvedRootFolderId: preflight.resolvedRootFolderId || '',
     preflightStatus: preflight.code || PREFLIGHT_STATUS.ROOT_MISSING,
     preflightReason: preflight.reason || '',
+    advancedDriveStatus: advancedDrive.status,
+    advancedDriveReason: advancedDrive.reason,
     allowlistedUsers: allowlist,
     runtime: 'google-apps-script',
   };
@@ -2021,6 +2024,7 @@ function getFileMeta_(fileId) {
 }
 
 function getFileSafe_(fileId) {
+  assertAdvancedDriveService_('Drive.Files.get');
   const fields = 'id,title,name,mimeType,parents,driveId,teamDriveId,createdDate,createdTime,modifiedDate,modifiedTime,version,md5Checksum';
   const variants = [
     { supportsAllDrives: true, fields: fields },
@@ -2040,7 +2044,11 @@ function getFileSafe_(fileId) {
     }
   }
 
-  throw lastError || new Error('Unable to fetch Drive file metadata.');
+  throw new Error(
+    'Drive.Files.get failed for file id "' + String(fileId || '') + '". ' +
+    formatDriveServiceError_(lastError) + ' ' +
+    'Confirm the Advanced Drive API service is enabled in Apps Script, the Google Drive API is enabled in the linked Google Cloud project, and the executing user can access this file.'
+  );
 }
 
 function insertFileSafe_(resource, blobOrNull, sharedDriveId, expectedRootFolderId) {
@@ -2247,6 +2255,7 @@ function listFilesAllSafe_(params, sharedDriveId, maxItems) {
 }
 
 function listFilesSafe_(params, sharedDriveId) {
+  assertAdvancedDriveService_('Drive.Files.list');
   const base = {};
   Object.keys(params || {}).forEach(function (key) {
     base[key] = params[key];
@@ -2305,7 +2314,11 @@ function listFilesSafe_(params, sharedDriveId) {
     return firstSuccess;
   }
 
-  throw lastError || new Error('Unable to list files with provided parameters.');
+  throw new Error(
+    'Drive.Files.list failed. ' +
+    formatDriveServiceError_(lastError) + ' ' +
+    'Confirm the Advanced Drive API service is enabled in Apps Script, the Google Drive API is enabled in the linked Google Cloud project, and the executing user can access the configured shared drive/root.'
+  );
 }
 
 function cloneObject_(source) {
@@ -2808,6 +2821,29 @@ function getLastErrorPayload_() {
   }
 }
 
+function getAdvancedDriveStatus_() {
+  try {
+    assertAdvancedDriveService_('Drive.Files');
+    return { status: 'available', reason: '' };
+  } catch (error) {
+    return { status: 'unavailable', reason: String(error && error.message ? error.message : error) };
+  }
+}
+
+function assertAdvancedDriveService_(operation) {
+  if (typeof Drive === 'undefined' || !Drive || !Drive.Files) {
+    throw new Error(
+      operation + ' is unavailable because the Advanced Drive API service is not enabled for this Apps Script project. ' +
+      'In Apps Script, open Services, add Drive API, select identifier "Drive", and redeploy the web app as a new version.'
+    );
+  }
+}
+
+function formatDriveServiceError_(error) {
+  if (!error) return 'No detailed Drive error was returned.';
+  return 'Last Drive error: ' + String(error && error.message ? error.message : error);
+}
+
 function htmlResponse_(html) {
   return HtmlService
     .createHtmlOutput(html)
@@ -2831,6 +2867,8 @@ function buildStatusHtml_(payload) {
     ['Backend build', payload.appBuildId || APP_BUILD_ID],
     ['Preflight', payload.preflightStatus || 'unknown'],
     ['Preflight reason', payload.preflightReason || ''],
+    ['Advanced Drive API', payload.advancedDriveStatus || 'unknown'],
+    ['Advanced Drive detail', payload.advancedDriveReason || ''],
     ['Required root folder id', payload.requiredRootFolderId || ''],
     ['Resolved root folder id', payload.resolvedRootFolderId || ''],
     ['Resolved user', payload.resolvedUserEmail || ''],
