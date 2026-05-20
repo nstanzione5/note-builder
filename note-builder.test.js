@@ -253,7 +253,7 @@ async function testAstraGptRouting() {
   );
   assert.match(document.getElementById('exportHelper').textContent, /universal Astra GPT/i);
 
-  assert.equal(document.getElementById('practiceToggle'), null, 'Practice toggle should be removed for Astra-only routing');
+  assert.equal(document.getElementById('practiceToggle'), null, 'Practice toggle should be removed for the single routing path');
 
   dom.window.close();
 }
@@ -267,14 +267,13 @@ async function testAstraIntakeExportIncludesScreeningInformation() {
 
   assert.ok(document.querySelector('[data-astra-intake-screening-mode="uploadToGpt"]').classList.contains('active'));
   assert.equal(document.getElementById('astraIntakeScreeningModeGroup').closest('#astraScreeningInfo').id, 'astraScreeningInfo');
-  assert.ok(document.getElementById('astraScreenersFields').classList.contains('hidden'));
+  assert.ok(!document.getElementById('astraScreenersFields').classList.contains('hidden'));
   assert.ok(!document.getElementById('astraScreeningInfo').classList.contains('hidden'));
-  assert.ok(document.getElementById('screeningInfoField').classList.contains('hidden'));
+  assert.ok(!document.getElementById('screeningInfoField').classList.contains('hidden'));
+  assert.ok(document.getElementById('astraSupportingDocsUploaded').checked);
+  assert.ok(document.querySelector('[data-supporting-doc-type="intakeScreener"]').classList.contains('active'));
   assert.equal(document.getElementById('astraScreenersCompletionStatus').textContent, 'Complete');
-  assert.match(
-    document.getElementById('exportBox').value,
-    /Patient screening data will be uploaded separately to the Astra GPT\./,
-  );
+  assert.match(document.getElementById('exportBox').value, /Uploaded Documents: intake screener packet/);
 
   document.querySelector('[data-astra-intake-screening-mode="enterManually"]').click();
   assert.ok(!document.getElementById('astraScreenersFields').classList.contains('hidden'));
@@ -314,7 +313,7 @@ async function testAstraSupportingDocumentsInstruction() {
 
   document.getElementById('intakeBtn').click();
   document.querySelector('[data-astra-intake-screening-mode="enterManually"]').click();
-  assert.equal(document.querySelector('[data-supporting-doc-type="intakeScreening"]'), null);
+  assert.ok(document.querySelector('[data-supporting-doc-type="intakeScreener"]'));
 
   let exportText = document.getElementById('exportBox').value;
   assert.ok(!document.getElementById('astraSupportingDocsUploaded').checked);
@@ -786,7 +785,7 @@ async function testIncompletePatientBackupsDoNotUseQuestionMarkLabels() {
 }
 
 function testAppsScriptDiagnosticsAndBuildId() {
-  assert.match(appsScript, /const APP_BUILD_ID = '20260520-astra-drive-scripts';/);
+  assert.match(appsScript, /const APP_BUILD_ID = '20260520-intake-screeners-ui';/);
   assert.match(appsScript, /function buildStatusHtml_/);
   assert.match(appsScript, /function htmlResponse_/);
   assert.match(appsScript, /DRIVE_LAST_ERROR/);

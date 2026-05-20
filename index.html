@@ -13,7 +13,7 @@
   <link rel="apple-touch-icon" href="icons/icon-192.png">
 </head>
 <body
-  data-app-build-id="20260520-astra-drive-scripts"
+  data-app-build-id="20260520-intake-screeners-ui"
   data-practice="astra"
   data-visit-type="followup"
   data-astra-intake-gpt-url="https://chatgpt.com/g/g-69f246601ad08191bc5f7522948c06ef-astra-note"
@@ -43,26 +43,26 @@
           <span class="brand-kicker" id="brandKicker">Astra Psychiatry</span>
           <div class="brand-title-row">
             <h1 id="brandTitle">Clinical Note Builder</h1>
-            <span class="brand-mode-pill" id="brandModePill">Astra Workflow</span>
+            <span class="brand-mode-pill" id="brandModePill">Drive Synced</span>
           </div>
           <p id="brandSubtitle">Structured raw-input capture for psychiatric documentation workflows.</p>
         </div>
 
         <nav class="brand-tools-rail" aria-label="Clinical tools">
           <a class="brand-tool-btn" href="https://www.mdcalc.com/calc/10091/benzodiazepine-conversion-calculator" target="_blank" rel="noopener noreferrer" title="Benzo conversion calculator" data-tooltip="Benzo Conversion Calculator" aria-label="Benzo conversion calculator">
-            <span class="tool-emoji" aria-hidden="true">Rx</span>
+            <span class="tool-label" aria-hidden="true">Benzo</span>
           </a>
           <a class="brand-tool-btn" href="https://alpenglowbh.com/medication-calculator/" target="_blank" rel="noopener noreferrer" title="Stimulant medication calculator" data-tooltip="Stimulant Calculator" aria-label="Stimulant medication calculator">
-            <span class="tool-emoji" aria-hidden="true">S</span>
+            <span class="tool-label" aria-hidden="true">Stim</span>
           </a>
           <a class="brand-tool-btn" href="https://mhmeatnpotatoes.com/antidepressant-switching-tool" target="_blank" rel="noopener noreferrer" title="Antidepressant cross-titration tool" data-tooltip="Antidepressant Cross-Titration" aria-label="Antidepressant cross-titration tool">
-            <span class="tool-emoji" aria-hidden="true">&#8644;</span>
+            <span class="tool-label" aria-hidden="true">Switch</span>
           </a>
           <button class="brand-tool-btn med-launch-btn" id="medDrawerBtn" type="button" data-tooltip="Medication Reference" aria-label="Open medication reference drawer" aria-pressed="false">
-            <span class="tool-emoji" aria-hidden="true">M</span>
+            <span class="tool-label" aria-hidden="true">Meds</span>
           </button>
           <a class="brand-tool-btn letter-launch-btn" id="patientLettersBtn" href="letter.html" data-tooltip="Patient Letters" aria-label="Open Patient Letters page">
-            <span class="tool-emoji" aria-hidden="true">L</span>
+            <span class="tool-label" aria-hidden="true">Letters</span>
           </a>
         </nav>
       </section>
@@ -93,30 +93,12 @@
   </header>
 
   <main class="app-shell">
-    <section class="practice-mode-banner hidden" id="practiceModeBanner" aria-live="polite">
-      <div>
-        <span class="practice-mode-kicker" id="practiceModeKicker">Astra Mode</span>
-        <p class="practice-mode-text" id="practiceModeText">Astra workflow active: intake and follow-up route to one universal Astra GPT.</p>
-      </div>
-    </section>
-
     <section class="workflow-ribbon">
       <div class="workflow-ribbon-left">
-        <div class="section-chip" id="workflowChip">Astra Follow-Up</div>
-        <p class="workflow-ribbon-copy" id="workflowRibbonCopy">Structured capture for Astra handoff.</p>
+        <div class="section-chip" id="workflowChip">Follow-Up</div>
+        <p class="workflow-ribbon-copy" id="workflowRibbonCopy">Structured capture for GPT handoff.</p>
       </div>
       <div class="workflow-ribbon-right">Live Structured Capture</div>
-    </section>
-
-    <section class="practice-context-panel hidden" id="practiceContextPanel" aria-live="polite">
-      <article class="practice-context-card">
-        <span class="practice-context-label" id="practiceContextLabelPrimary">Astra note flow</span>
-        <p class="practice-context-text" id="practiceContextTextPrimary">Astra uses one note GPT for intake and follow-up.</p>
-      </article>
-      <article class="practice-context-card">
-        <span class="practice-context-label" id="practiceContextLabelSecondary">Documentation emphasis</span>
-        <p class="practice-context-text" id="practiceContextTextSecondary">Keep context clear before note capture.</p>
-      </article>
     </section>
 
     <section class="card" id="previousPlanCard" data-section="previsit">
@@ -151,12 +133,12 @@
     <section class="card hidden" id="astraScreeners" data-section="previsit">
       <div class="section-heading">
         <div>
-          <h2>Pre-Visit Screening Results (Astra Intake)</h2>
-          <p>Enter scores when not uploading screening docs.</p>
+          <h2>Pre-Visit Screening Results</h2>
+          <p>Type the scored testing details here, even when the intake screener packet is uploaded as background context.</p>
         </div>
         <div class="section-heading-right">
           <span class="section-status completion-status-pending" id="astraScreenersCompletionStatus">Pending</span>
-          <div class="section-mini-badge">Astra only</div>
+          <div class="section-mini-badge">Testing</div>
         </div>
       </div>
 
@@ -205,21 +187,21 @@
       <div class="section-heading">
         <div>
           <h2>Screening Information</h2>
-          <p>Screening source for Astra intake.</p>
+          <p>Use the upload option for background packet context while keeping scored testing in the fields above.</p>
         </div>
         <div class="section-heading-right">
           <span class="section-status completion-status-pending" id="astraScreeningInfoCompletionStatus">Pending</span>
-          <div class="section-mini-badge">Astra intake</div>
+          <div class="section-mini-badge">Intake</div>
         </div>
       </div>
 
       <div class="astra-intake-screening-mode" id="astraIntakeScreeningModeGroup">
         <label>Screening Source</label>
         <div class="segmented-control segmented-control-form" id="astraIntakeScreeningModeToggle" role="group" aria-label="Screening source">
-          <button type="button" class="seg-btn" data-astra-intake-screening-mode="enterManually">Enter Screening Data</button>
-          <button type="button" class="seg-btn" data-astra-intake-screening-mode="uploadToGpt">Upload Screening Data to GPT</button>
+          <button type="button" class="seg-btn" data-astra-intake-screening-mode="enterManually">Typed Only</button>
+          <button type="button" class="seg-btn" data-astra-intake-screening-mode="uploadToGpt">Typed + Uploaded Packet</button>
         </div>
-        <p class="helper-text" id="astraIntakeScreeningModeHint">Patient screening data will be uploaded separately to the Astra GPT.</p>
+        <p class="helper-text" id="astraIntakeScreeningModeHint">Type available scores here and attach the intake screener packet to the GPT for background context.</p>
       </div>
 
       <div class="field" id="screeningInfoField">
@@ -485,6 +467,7 @@
         <span class="switch-label">Supporting docs uploaded</span>
       </label>
       <div class="astra-supporting-doc-type-row" id="astraSupportingDocTypes" role="group" aria-label="Supporting document types">
+        <button type="button" class="doc-type-btn" data-supporting-doc-type="intakeScreener" aria-pressed="false">Intake Screener</button>
         <button type="button" class="doc-type-btn" data-supporting-doc-type="labs" aria-pressed="false">Labs</button>
         <button type="button" class="doc-type-btn" data-supporting-doc-type="genesight" aria-pressed="false">GeneSight</button>
         <button type="button" class="doc-type-btn" data-supporting-doc-type="other" aria-pressed="false">Other</button>

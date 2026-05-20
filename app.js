@@ -176,6 +176,7 @@ const SCREENER_IDS = ['phq9', 'gad7', 'asrsA', 'asrsB', 'pcl5', 'mdq', 'otherScr
 const TIME_FIELD_IDS = ['scheduledStart', 'startTime', 'followTime', 'endTime', 'docEnd'];
 const DEFAULT_APPOINTMENT_MODALITY = 'Telehealth';
 const ASTRA_SUPPORTING_DOC_TYPE_LABELS = {
+  intakeScreener: 'intake screener packet',
   labs: 'lab results',
   genesight: 'GeneSight report',
   other: 'other supporting documentation',
@@ -2447,10 +2448,10 @@ function updateBranding() {
   safeShowLogo(els.astraLogo, true);
 
   if (els.workflowChip) {
-    els.workflowChip.textContent = `Astra ${isIntake ? 'Intake' : 'Follow-Up'}`;
+    els.workflowChip.textContent = isIntake ? 'Intake' : 'Follow-Up';
   }
-  if (els.brandModePill) els.brandModePill.textContent = 'Astra Workflow';
-  if (els.workflowRibbonCopy) els.workflowRibbonCopy.textContent = 'Structured capture for Astra handoff.';
+  if (els.brandModePill) els.brandModePill.textContent = 'Drive Synced';
+  if (els.workflowRibbonCopy) els.workflowRibbonCopy.textContent = 'Structured capture for GPT handoff.';
   if (els.setupSectionCopy) els.setupSectionCopy.textContent = 'Core visit details.';
   if (els.previousPlanSectionCopy) {
     els.previousPlanSectionCopy.textContent = state.astraFollowupContextMode === 'uploadedPreviousNote'
@@ -2500,7 +2501,12 @@ function updatePracticeSections() {
   const isIntake = state.visitType === 'intake';
   const isAstraFollowup = !isIntake;
   const usesUploadedPreviousNote = isAstraFollowup && state.astraFollowupContextMode === 'uploadedPreviousNote';
-  const usesManualScreening = isIntake && state.astraIntakeScreeningMode === 'enterManually';
+  const includesUploadedScreenerPacket = isIntake && state.astraIntakeScreeningMode === 'uploadToGpt';
+
+  if (includesUploadedScreenerPacket && !state.astraSupportingDocTypes.includes('intakeScreener')) {
+    state.astraSupportingDocTypes = ['intakeScreener', ...normalizeAstraSupportingDocTypes(state.astraSupportingDocTypes)];
+    state.astraSupportingDocsUploaded = true;
+  }
 
   if (els.previousPlanCard) els.previousPlanCard.classList.toggle('hidden', isIntake);
   if (els.astraFollowupContextModeGroup) els.astraFollowupContextModeGroup.classList.toggle('hidden', !isAstraFollowup);
@@ -2508,12 +2514,12 @@ function updatePracticeSections() {
   if (els.astraSupportingDocsControl) els.astraSupportingDocsControl.classList.remove('hidden');
   if (els.astraScreeners) els.astraScreeners.classList.toggle('hidden', !isIntake);
   if (els.astraIntakeScreeningModeGroup) els.astraIntakeScreeningModeGroup.classList.toggle('hidden', !isIntake);
-  if (els.astraScreenersFields) els.astraScreenersFields.classList.toggle('hidden', !usesManualScreening);
-  if (els.screeningInfoField) els.screeningInfoField.classList.toggle('hidden', !usesManualScreening);
+  if (els.astraScreenersFields) els.astraScreenersFields.classList.remove('hidden');
+  if (els.screeningInfoField) els.screeningInfoField.classList.toggle('hidden', !isIntake);
   if (els.astraIntakeScreeningModeHint) {
-    els.astraIntakeScreeningModeHint.textContent = usesManualScreening
-      ? 'Enter available screening scores below.'
-      : 'Patient screening data will be uploaded separately to the Astra GPT.';
+    els.astraIntakeScreeningModeHint.textContent = includesUploadedScreenerPacket
+      ? 'Type available testing scores here and upload the intake screener packet to the GPT for background context.'
+      : 'Type available testing scores and screening notes below.';
   }
   if (els.astraScreeningInfo) els.astraScreeningInfo.classList.toggle('hidden', !isIntake);
   if (els.patientLettersBtn) els.patientLettersBtn.classList.remove('hidden');
@@ -3052,9 +3058,6 @@ function attachTimeControlListeners() {
 
 function buildScreenersText() {
   if (state.practice !== 'astra' || state.visitType !== 'intake') return '';
-  if (state.astraIntakeScreeningMode !== 'enterManually') {
-    return 'Patient screening data will be uploaded separately to the Astra GPT.';
-  }
 
   const lines = [
     ['PHQ-9', getValue('phq9')],
@@ -3073,9 +3076,6 @@ function buildScreenersText() {
 
 function buildScreeningInformationText() {
   if (state.practice !== 'astra' || state.visitType !== 'intake') return '';
-  if (state.astraIntakeScreeningMode !== 'enterManually') {
-    return '';
-  }
   return getValue('screeningInfo') || 'Not entered';
 }
 
@@ -3194,18 +3194,13 @@ function buildExport() {
     ].join('\n');
   }
 
-  const screeningBlocks = state.astraIntakeScreeningMode === 'enterManually'
-    ? [
-      'PRE-VISIT SCREENERS',
-      screeners,
-      '',
-      'SCREENING DOCUMENTATION',
-      screeningInfo,
-    ]
-    : [
-      'PRE-VISIT SCREENERS',
-      'Patient screening data will be uploaded separately to the Astra GPT.',
-    ];
+  const screeningBlocks = [
+    'PRE-VISIT SCREENERS',
+    screeners,
+    '',
+    'SCREENING DOCUMENTATION',
+    screeningInfo,
+  ];
 
   return [
     buildAstraRawHeader(),
@@ -3268,7 +3263,9 @@ function evaluateCompletion() {
 
 function updateCompletionIndicators() {
   const { previsitComplete, setupComplete, notesComplete, closingComplete } = evaluateCompletion();
-  const screeningInfoComplete = state.astraIntakeScreeningMode === 'uploadToGpt' || isFilled('screeningInfo');
+  const hasTypedScreenerData = SCREENER_IDS.some((id) => isFilled(id));
+  const hasUploadedScreenerPacket = state.astraSupportingDocsUploaded && state.astraSupportingDocTypes.includes('intakeScreener');
+  const screeningInfoComplete = isFilled('screeningInfo') || hasTypedScreenerData || hasUploadedScreenerPacket;
 
   setSectionCompletion(els.setupCompletionStatus, els.setupSection, setupComplete);
   setSectionCompletion(els.notesCompletionStatus, els.notesSection, notesComplete);
@@ -3880,6 +3877,17 @@ function setAstraFollowupContextMode(value, button) {
 
 function setAstraIntakeScreeningMode(value, button) {
   state.astraIntakeScreeningMode = value === 'enterManually' ? 'enterManually' : 'uploadToGpt';
+  if (state.astraIntakeScreeningMode === 'uploadToGpt') {
+    const types = normalizeAstraSupportingDocTypes(state.astraSupportingDocTypes);
+    state.astraSupportingDocTypes = types.includes('intakeScreener') ? types : ['intakeScreener', ...types];
+    state.astraSupportingDocsUploaded = true;
+  } else {
+    state.astraSupportingDocTypes = normalizeAstraSupportingDocTypes(state.astraSupportingDocTypes)
+      .filter((type) => type !== 'intakeScreener');
+    if (!state.astraSupportingDocTypes.length) {
+      state.astraSupportingDocsUploaded = false;
+    }
+  }
   setActiveByData('#astraIntakeScreeningModeToggle .seg-btn', 'astraIntakeScreeningMode', state.astraIntakeScreeningMode);
   if (button) setActiveButtons('#astraIntakeScreeningModeToggle', button);
   refreshUI(true, { markDirty: true });
@@ -3910,6 +3918,13 @@ function toggleAstraSupportingDocType(type) {
 
   if (state.astraSupportingDocTypes.length) {
     state.astraSupportingDocsUploaded = true;
+  }
+
+  if (normalizedType === 'intakeScreener') {
+    state.astraIntakeScreeningMode = state.astraSupportingDocTypes.includes('intakeScreener')
+      ? 'uploadToGpt'
+      : 'enterManually';
+    setActiveByData('#astraIntakeScreeningModeToggle .seg-btn', 'astraIntakeScreeningMode', state.astraIntakeScreeningMode);
   }
 
   syncAstraSupportingDocsControls();
@@ -4050,7 +4065,7 @@ function syncAstraSupportingDocsControls() {
   });
 
   if (els.astraSupportingDocsHint) {
-    els.astraSupportingDocsHint.textContent = 'Select non-screening docs uploaded to GPT.';
+    els.astraSupportingDocsHint.textContent = 'Select the files you will attach to GPT with this export.';
   }
 }
 
