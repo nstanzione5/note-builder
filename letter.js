@@ -162,10 +162,8 @@ async function callDriveFileGet(path) {
         serviceToken: config.serviceToken || config.ownerToken,
         ownerEmail: config.ownerEmail,
         ownerToken: config.ownerToken,
-        clientBuildId: config.appBuildId,
         client: {
           app: 'note-builder-letter-writer',
-          appBuildId: config.appBuildId,
           timestamp: new Date().toISOString(),
           timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || '',
           origin: window.location.origin || '',

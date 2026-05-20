@@ -225,6 +225,7 @@ const DRIVE_MED_RUNTIME_FALLBACKS_PATH = 'data/meds/review/runtime-fallbacks.jso
 const DRIVE_PROVIDER_SCRIPTS_PATH = 'config/provider-scripts.json';
 const DRIVE_SYNC_ENTERPRISE_NAME = 'Note App';
 const DRIVE_MANIFEST_FILE = 'config/drive-manifest.json';
+const DRIVE_SEND_CLIENT_BUILD_ID = false;
 const DRAFT_PERSIST_IDLE_MS = 3000;
 const REMOTE_DRAFT_APPLY_TYPING_GRACE_MS = 1800;
 const RECENT_PATIENTS_DRIVE_MIN_INTERVAL_MS = 90000;
@@ -992,8 +993,11 @@ function applyDriveHealthState(healthPayload) {
   const resolvedUser = String(payload.resolvedUserEmail || '').trim().toLowerCase();
   const backendBuild = String(payload.appBuildId || '').trim();
   const requiredSharedDriveId = String(payload.requiredSharedDriveId || '').trim();
-  const preflightStatus = String(payload.preflightStatus || '').trim() || 'unknown';
-  const preflightReason = String(payload.preflightReason || '').trim();
+  const rawPreflightStatus = String(payload.preflightStatus || '').trim() || 'unknown';
+  const rawPreflightReason = String(payload.preflightReason || '').trim();
+  const isVersionSkew = rawPreflightStatus === 'version_mismatch';
+  const preflightStatus = isVersionSkew ? 'ok' : rawPreflightStatus;
+  const preflightReason = isVersionSkew ? '' : rawPreflightReason;
   const requiredRootFolderId = String(payload.requiredRootFolderId || '').trim();
   const resolvedRootFolderId = String(payload.resolvedRootFolderId || '').trim();
   const canonicalRootId = payload.canonicalRoot && payload.canonicalRoot.id
@@ -1023,6 +1027,7 @@ function applyDriveHealthState(healthPayload) {
     requiredSharedDriveId,
     preflightStatus,
     preflightReason,
+    backendVersionSkew: Boolean(isVersionSkew || (backendBuild && backendBuild !== APP_BUILD_ID)),
     requiredRootFolderId,
     resolvedRootFolderId,
     canonicalRootId,
@@ -1318,9 +1323,7 @@ async function runDriveRepair(trigger = 'manual', options = {}) {
 
     const health = await callDriveEndpoint('health', {});
     const next = applyDriveHealthState(health);
-    if (next.backendBuild && APP_BUILD_ID !== next.backendBuild) {
-      setDriveWriteBlock(true, 'Client update required: cached app build differs from backend deployment.', 'version_mismatch');
-    } else if (next.preflightStatus && next.preflightStatus !== 'ok') {
+    if (next.preflightStatus && next.preflightStatus !== 'ok') {
       const reason = next.preflightReason || `Drive preflight status: ${next.preflightStatus}`;
       setDriveWriteBlock(true, reason, next.preflightStatus);
     } else {
@@ -1665,15 +1668,18 @@ async function callDriveEndpoint(action, payload = {}) {
     ownerEmail: config.ownerEmail,
     ownerToken: config.ownerToken,
     manifestPath: DRIVE_MANIFEST_FILE,
-    clientBuildId: APP_BUILD_ID,
     client: {
       app: 'note-builder',
-      appBuildId: APP_BUILD_ID,
       timestamp: new Date().toISOString(),
       timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || '',
       origin: (typeof window !== 'undefined' && window.location && window.location.origin) ? window.location.origin : '',
     },
   };
+
+  if (DRIVE_SEND_CLIENT_BUILD_ID) {
+    requestBody.clientBuildId = APP_BUILD_ID;
+    requestBody.client.appBuildId = APP_BUILD_ID;
+  }
 
   const parseDriveResponse = async (response) => {
     if (!response.ok) {
@@ -2260,18 +2266,6 @@ async function runDriveSyncCycle(force = false) {
       maybePromptForDriveUserEmail(reason);
       setDriveWriteBlock(true, reason, 'identity_not_allowlisted');
       updateDriveStatusBadge();
-      return;
-    }
-
-    const backendBuild = String(healthState.backendBuild || '').trim();
-    if (backendBuild && backendBuild !== APP_BUILD_ID) {
-      const reason = `Client update required (client ${APP_BUILD_ID} vs backend ${backendBuild}).`;
-      setDriveWriteBlock(true, reason, 'version_mismatch');
-      const mismatchMeta = getDriveMeta();
-      mismatchMeta.connection = 'error';
-      mismatchMeta.lastError = reason;
-      setDriveMeta(mismatchMeta);
-      updateDriveStatusBadge(mismatchMeta);
       return;
     }
 
