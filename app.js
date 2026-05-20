@@ -35,18 +35,20 @@ const state = {
   driveBackendBuildId: '',
   drivePreflightStatus: 'pending',
   drivePreflightReason: '',
+  providerScripts: null,
+  providerScriptsSource: 'loading',
+  providerScriptsUpdatedAt: '',
 };
 
 const els = {
   body: document.body,
   topbar: document.getElementById('topbar'),
-  astraBtn: document.getElementById('astraBtn'),
-  ebhBtn: document.getElementById('ebhBtn'),
   followBtn: document.getElementById('followBtn'),
   intakeBtn: document.getElementById('intakeBtn'),
   scriptToggle: document.getElementById('scriptToggle'),
   scriptToggleCard: document.getElementById('scriptToggleCard'),
   scriptPanel: document.getElementById('scriptPanel'),
+  scriptBody: document.getElementById('scriptBody'),
   workspaceGrid: document.getElementById('workspaceGrid'),
   workflowChip: document.getElementById('workflowChip'),
   workflowRibbonCopy: document.getElementById('workflowRibbonCopy'),
@@ -55,7 +57,6 @@ const els = {
   brandSubtitle: document.getElementById('brandSubtitle'),
   brandModePill: document.getElementById('brandModePill'),
   astraLogo: document.getElementById('astraLogo'),
-  ebhLogo: document.getElementById('ebhLogo'),
   brandLogoFallback: document.getElementById('brandLogoFallback'),
   previousPlanCard: document.getElementById('previousPlanCard'),
   previousPlanField: document.getElementById('previousPlanField'),
@@ -73,8 +74,6 @@ const els = {
   astraScreeningInfo: document.getElementById('astraScreeningInfo'),
   screeningInfoField: document.getElementById('screeningInfoField'),
   astraScreeningInfoCompletionStatus: document.getElementById('astraScreeningInfoCompletionStatus'),
-  ebhTests: document.getElementById('ebhTests'),
-  ebhTestsCompletionStatus: document.getElementById('ebhTestsCompletionStatus'),
   currentModality: document.getElementById('currentModality'),
   followModality: document.getElementById('followModality'),
   therapyInterwoven: document.getElementById('therapyInterwoven'),
@@ -89,14 +88,6 @@ const els = {
   prnHelperText: document.getElementById('prnHelperText'),
   therapyInterwovenHint: document.getElementById('therapyInterwovenHint'),
   age: document.getElementById('age'),
-  practiceModeBanner: document.getElementById('practiceModeBanner'),
-  practiceModeKicker: document.getElementById('practiceModeKicker'),
-  practiceModeText: document.getElementById('practiceModeText'),
-  practiceContextPanel: document.getElementById('practiceContextPanel'),
-  practiceContextLabelPrimary: document.getElementById('practiceContextLabelPrimary'),
-  practiceContextTextPrimary: document.getElementById('practiceContextTextPrimary'),
-  practiceContextLabelSecondary: document.getElementById('practiceContextLabelSecondary'),
-  practiceContextTextSecondary: document.getElementById('practiceContextTextSecondary'),
   setupCompletionStatus: document.getElementById('setupCompletionStatus'),
   notesCompletionStatus: document.getElementById('notesCompletionStatus'),
   closingCompletionStatus: document.getElementById('closingCompletionStatus'),
@@ -172,7 +163,6 @@ const inputIds = [
   'mdq',
   'otherScreener',
   'screeningInfo',
-  'testDump',
   'notes',
   'followModality',
   'followDate',
@@ -198,11 +188,6 @@ const brandConfig = {
     subtitle: 'Structured, readable capture for Astra psychiatric note workflows.',
     fallback: 'A',
   },
-  ebh: {
-    kicker: 'Evolve Brain Health',
-    subtitle: 'Structured, readable capture for EBH intake and follow-up documentation.',
-    fallback: 'E',
-  },
 };
 
 const STORAGE_KEY = 'noteBuilderDraft_v1';
@@ -215,6 +200,7 @@ const CONDENSE_CLASS_ENTER = 0.86;
 const CONDENSE_CLASS_EXIT = 0.62;
 
 const MED_CATALOG_URL = './data/meds/compiled/medications.compiled.json';
+const PROVIDER_SCRIPTS_URL = './config/provider-scripts.json';
 const APP_BUILD_ID = String((els.body && els.body.dataset && els.body.dataset.appBuildId) || '20260311-drive-reset-v2').trim() || '20260311-drive-reset-v2';
 const MED_FAVORITES_KEY = 'medDrawerFavorites_v1';
 const MED_RECENTS_KEY = 'medDrawerRecents_v1';
@@ -235,6 +221,7 @@ const DRIVE_RECENT_PATIENTS_PATH = 'data/draft/recent-patients.json';
 const DRIVE_MED_COMPILED_PATH = 'data/meds/compiled/medications.compiled.json';
 const DRIVE_MED_REFRESH_QUEUE_PATH = 'logs/sync/med-refresh-requests.json';
 const DRIVE_MED_RUNTIME_FALLBACKS_PATH = 'data/meds/review/runtime-fallbacks.json';
+const DRIVE_PROVIDER_SCRIPTS_PATH = 'config/provider-scripts.json';
 const DRIVE_SYNC_ENTERPRISE_NAME = 'Note App';
 const DRIVE_MANIFEST_FILE = 'config/drive-manifest.json';
 const DRAFT_PERSIST_IDLE_MS = 3000;
@@ -514,6 +501,106 @@ function getStorageJSON(key, fallback) {
     return parsed == null ? fallback : parsed;
   } catch (error) {
     return fallback;
+  }
+}
+
+function normalizeProviderScriptsPayload(payload) {
+  if (!payload || payload.schema !== 'astra-provider-scripts-v1' || !Array.isArray(payload.scripts)) {
+    return null;
+  }
+
+  const scripts = payload.scripts
+    .map((script) => ({
+      id: String(script.id || '').trim(),
+      title: String(script.title || '').trim(),
+      visitType: String(script.visitType || '').trim(),
+      sections: Array.isArray(script.sections)
+        ? script.sections
+            .map((section) => ({
+              title: String(section.title || '').trim(),
+              prompts: Array.isArray(section.prompts)
+                ? section.prompts.map((prompt) => String(prompt || '').trim()).filter(Boolean)
+                : [],
+            }))
+            .filter((section) => section.title && section.prompts.length)
+        : [],
+    }))
+    .filter((script) => script.id && script.title && script.sections.length);
+
+  if (!scripts.length) return null;
+
+  return {
+    schema: 'astra-provider-scripts-v1',
+    updatedAt: String(payload.updatedAt || '').trim(),
+    scripts,
+  };
+}
+
+function applyProviderScriptsPayload(payload, source) {
+  const normalized = normalizeProviderScriptsPayload(payload);
+  if (!normalized) return false;
+
+  state.providerScripts = normalized;
+  state.providerScriptsSource = source || 'bundled';
+  state.providerScriptsUpdatedAt = normalized.updatedAt || '';
+  renderProviderScript();
+  return true;
+}
+
+function getActiveProviderScript() {
+  const scripts = state.providerScripts && Array.isArray(state.providerScripts.scripts)
+    ? state.providerScripts.scripts
+    : [];
+  return scripts.find((script) => script.id === 'astra-intake')
+    || scripts.find((script) => script.visitType === 'intake')
+    || null;
+}
+
+function renderProviderScript() {
+  if (!els.scriptBody) return;
+
+  const script = getActiveProviderScript();
+  if (!script) {
+    els.scriptBody.innerHTML = [
+      '<article class="script-block">',
+      '<h3>Provider Script</h3>',
+      '<p>Astra provider script is unavailable. The app will retry Drive and bundled script loading.</p>',
+      '</article>',
+    ].join('');
+    if (els.scriptSectionCopy) {
+      els.scriptSectionCopy.textContent = 'Provider prompts loading from Drive.';
+    }
+    return;
+  }
+
+  els.scriptBody.innerHTML = script.sections
+    .map((section) => [
+      '<article class="script-block">',
+      `<h3>${escapeHtml(section.title)}</h3>`,
+      ...section.prompts.map((prompt) => `<p>${escapeHtml(prompt)}</p>`),
+      '</article>',
+    ].join(''))
+    .join('');
+
+  if (els.scriptSectionCopy) {
+    els.scriptSectionCopy.textContent = state.providerScriptsSource === 'drive'
+      ? 'Interview prompts loaded from Google Drive.'
+      : 'Interview prompts loaded from bundled fallback.';
+  }
+}
+
+async function initProviderScripts() {
+  try {
+    const response = await fetch(PROVIDER_SCRIPTS_URL, { cache: 'no-store' });
+    if (!response.ok) throw new Error(`Provider script fallback returned ${response.status}`);
+    const payload = await response.json();
+    if (!applyProviderScriptsPayload(payload, 'bundled')) {
+      throw new Error('Provider script fallback was invalid.');
+    }
+  } catch (error) {
+    state.providerScriptsSource = 'unavailable';
+    renderProviderScript();
+    console.error('Unable to load bundled provider scripts:', error);
   }
 }
 
@@ -1587,29 +1674,47 @@ async function callDriveEndpoint(action, payload = {}) {
     },
   };
 
-  const response = await fetch(config.endpointUrl, {
+  const parseDriveResponse = async (response) => {
+    if (!response.ok) {
+      throw new Error(`Drive action ${action} failed (${response.status}).`);
+    }
+
+    let data = null;
+    try {
+      data = await response.json();
+    } catch (error) {
+      throw new Error(`Drive action ${action} returned invalid JSON.`);
+    }
+
+    if (data && data.ok === false) {
+      throw new Error(data.error || `Drive action ${action} failed.`);
+    }
+
+    return data || {};
+  };
+
+  let response = await fetch(config.endpointUrl, {
     method: 'POST',
     body: JSON.stringify(requestBody),
     mode: 'cors',
     cache: 'no-store',
   });
 
-  if (!response.ok) {
-    throw new Error(`Drive action ${action} failed (${response.status}).`);
+  if (response.status === 405) {
+    const params = new URLSearchParams();
+    Object.entries(requestBody).forEach(([key, value]) => {
+      if (value == null || value === '') return;
+      params.set(key, typeof value === 'object' ? JSON.stringify(value) : String(value));
+    });
+    const separator = config.endpointUrl.includes('?') ? '&' : '?';
+    response = await fetch(`${config.endpointUrl}${separator}${params.toString()}`, {
+      method: 'GET',
+      mode: 'cors',
+      cache: 'no-store',
+    });
   }
 
-  let data = null;
-  try {
-    data = await response.json();
-  } catch (error) {
-    throw new Error(`Drive action ${action} returned invalid JSON.`);
-  }
-
-  if (data && data.ok === false) {
-    throw new Error(data.error || `Drive action ${action} failed.`);
-  }
-
-  return data || {};
+  return parseDriveResponse(response);
 }
 
 async function pullDriveDraft(force = false) {
@@ -1682,6 +1787,28 @@ async function pullDriveMedicationCatalog(force = false) {
   if (file.revision) {
     const revisions = getDriveRevisions();
     revisions[DRIVE_MED_COMPILED_PATH] = String(file.revision);
+    setDriveRevisions(revisions);
+  }
+
+  return applied;
+}
+
+async function pullDriveProviderScripts() {
+  if (!isDriveSyncEnabled()) return false;
+
+  const response = await callDriveEndpoint('file.get', { path: DRIVE_PROVIDER_SCRIPTS_PATH });
+  const file = response.file || response;
+  const content = typeof file.content === 'string' ? file.content : '';
+  if (!content) return false;
+
+  const payload = parseJsonOrNull(content);
+  if (!payload) return false;
+
+  const applied = applyProviderScriptsPayload(payload, 'drive');
+
+  if (file.revision) {
+    const revisions = getDriveRevisions();
+    revisions[DRIVE_PROVIDER_SCRIPTS_PATH] = String(file.revision);
     setDriveRevisions(revisions);
   }
 
@@ -1846,11 +1973,13 @@ async function pullDriveManifestAndDraft(force = false) {
       pullDriveMedicationCatalog(force),
       pullDriveRecentPatients(force),
       pullDriveRuntimeFallbacks(force),
+      pullDriveProviderScripts(),
     ]);
   } else {
     await pullDriveMedicationCatalog(false);
     await pullDriveRecentPatients(false);
     await pullDriveRuntimeFallbacks(false);
+    await pullDriveProviderScripts();
   }
 
   meta.manifestRevision = remoteRevision || meta.manifestRevision;
@@ -2301,130 +2430,49 @@ function initDriveSync() {
 }
 
 function updateBranding() {
-  const brand = brandConfig[state.practice];
-  const isAstra = state.practice === 'astra';
+  const brand = brandConfig.astra;
   const isIntake = state.visitType === 'intake';
-  const astraGptLabel = ASTRA_UNIVERSAL_GPT_LABEL;
 
-  els.body.dataset.practice = state.practice;
+  state.practice = 'astra';
+  els.body.dataset.practice = 'astra';
   els.body.dataset.visitType = state.visitType;
 
   if (els.brandKicker) els.brandKicker.textContent = brand.kicker;
   if (els.brandTitle) els.brandTitle.textContent = 'Clinical Note Builder';
-
   if (els.brandSubtitle) {
-    els.brandSubtitle.textContent = isAstra
-      ? `Astra capture with ${astraGptLabel} handoff.`
-      : isIntake
-        ? 'EBH intake capture with imported screening support.'
-        : 'EBH follow-up capture with prior-plan context.';
+    els.brandSubtitle.textContent = `Astra capture with ${ASTRA_UNIVERSAL_GPT_LABEL} handoff.`;
   }
+  if (els.brandLogoFallback) els.brandLogoFallback.textContent = brand.fallback;
 
-  if (els.brandLogoFallback) {
-    els.brandLogoFallback.textContent = brand.fallback;
-  }
-
-  safeShowLogo(els.astraLogo, isAstra);
-  safeShowLogo(els.ebhLogo, !isAstra);
+  safeShowLogo(els.astraLogo, true);
 
   if (els.workflowChip) {
-    els.workflowChip.textContent = `${isAstra ? 'Astra' : 'EBH'} ${isIntake ? 'Intake' : 'Follow-Up'}`;
+    els.workflowChip.textContent = `Astra ${isIntake ? 'Intake' : 'Follow-Up'}`;
   }
-
-  if (els.brandModePill) {
-    els.brandModePill.textContent = isAstra
-      ? 'Astra Workflow'
-      : isIntake
-        ? 'EBH Intake'
-        : 'EBH Follow-Up';
-  }
-
-  if (els.workflowRibbonCopy) {
-    els.workflowRibbonCopy.textContent = isAstra
-      ? 'Structured capture for Astra handoff.'
-      : isIntake
-        ? 'EBH intake with imported pre-visit data.'
-        : 'EBH follow-up with prior-plan continuity.';
-  }
-
-  if (els.practiceModeBanner && els.practiceModeKicker && els.practiceModeText) {
-    els.practiceModeBanner.classList.remove('hidden');
-    els.practiceModeKicker.textContent = isAstra ? 'Astra Mode' : 'EBH Mode';
-    els.practiceModeText.textContent = isAstra
-      ? 'Astra intake and follow-up route to one note GPT.'
-      : isIntake
-        ? 'EBH intake mode active.'
-        : 'EBH follow-up mode active.';
-  }
-
-  if (els.practiceContextPanel) {
-    els.practiceContextPanel.classList.toggle('hidden', isAstra);
-  }
-
-  if (els.practiceContextLabelPrimary && els.practiceContextTextPrimary) {
-    els.practiceContextLabelPrimary.textContent = isAstra ? 'Astra note flow' : 'EBH note flow';
-    els.practiceContextTextPrimary.textContent = isAstra
-      ? `Astra routes both visit formats into the ${astraGptLabel}.`
-      : isIntake
-        ? 'EBH intake uses imported pre-visit data.'
-        : 'EBH follow-up uses prior-plan context.';
-  }
-
-  if (els.practiceContextLabelSecondary && els.practiceContextTextSecondary) {
-    els.practiceContextLabelSecondary.textContent = 'Workflow emphasis';
-    els.practiceContextTextSecondary.textContent = isAstra
-      ? 'Context, setup, notes, closing.'
-      : 'Context, setup, notes, closing.';
-  }
-
-  if (els.setupSectionCopy) {
-    els.setupSectionCopy.textContent = isAstra
-      ? 'Core visit details.'
-      : 'Core visit details.';
-  }
-
+  if (els.brandModePill) els.brandModePill.textContent = 'Astra Workflow';
+  if (els.workflowRibbonCopy) els.workflowRibbonCopy.textContent = 'Structured capture for Astra handoff.';
+  if (els.setupSectionCopy) els.setupSectionCopy.textContent = 'Core visit details.';
   if (els.previousPlanSectionCopy) {
-    els.previousPlanSectionCopy.textContent = isAstra
-      ? state.astraFollowupContextMode === 'uploadedPreviousNote'
-        ? 'Upload the full previous note directly to the GPT; no prior plan paste is needed here.'
-        : 'Paste prior treatment context.'
-      : 'Paste prior EBH treatment context.';
+    els.previousPlanSectionCopy.textContent = state.astraFollowupContextMode === 'uploadedPreviousNote'
+      ? 'Upload the full previous note directly to the GPT; no prior plan paste is needed here.'
+      : 'Paste prior treatment context.';
   }
-
-  if (els.notesSectionCopy) {
-    els.notesSectionCopy.textContent = isAstra
-      ? 'Freeform encounter notes.'
-      : 'Freeform encounter notes.';
+  if (els.notesSectionCopy) els.notesSectionCopy.textContent = 'Freeform encounter notes.';
+  if (els.scriptSectionCopy && !getActiveProviderScript()) {
+    els.scriptSectionCopy.textContent = 'Provider prompts loading from Drive.';
   }
-
-  if (els.scriptSectionCopy) {
-    els.scriptSectionCopy.textContent = 'Interview prompts for intake.';
-  }
-
-  if (els.closingSectionCopy) {
-    els.closingSectionCopy.textContent = 'Schedule, close, and document timing.';
-  }
-
-  if (els.exportSectionCopy) {
-    els.exportSectionCopy.textContent = isAstra
-      ? `Copy or open the ${ASTRA_UNIVERSAL_GPT_LABEL}.`
-      : isIntake
-        ? 'Copy or open EBH Intake GPT.'
-        : 'Copy or open EBH Follow-Up GPT.';
-  }
-
+  if (els.closingSectionCopy) els.closingSectionCopy.textContent = 'Schedule, close, and document timing.';
+  if (els.exportSectionCopy) els.exportSectionCopy.textContent = `Copy or open the ${ASTRA_UNIVERSAL_GPT_LABEL}.`;
   if (els.setupMiniBadge) els.setupMiniBadge.textContent = 'Visit setup';
   if (els.previousPlanMiniBadge) {
-    els.previousPlanMiniBadge.textContent = isAstra && !isIntake && state.astraFollowupContextMode === 'uploadedPreviousNote'
+    els.previousPlanMiniBadge.textContent = !isIntake && state.astraFollowupContextMode === 'uploadedPreviousNote'
       ? 'Previous note upload'
       : 'Pre-visit context';
   }
   if (els.notesMiniBadge) els.notesMiniBadge.textContent = isIntake ? 'Intake narrative' : 'Live note capture';
-  if (els.scriptMiniBadge) els.scriptMiniBadge.textContent = 'Verbatim script';
+  if (els.scriptMiniBadge) els.scriptMiniBadge.textContent = 'Drive-backed script';
   if (els.closingMiniBadge) els.closingMiniBadge.textContent = 'Follow-up + close';
-  if (els.exportMiniBadge) {
-    els.exportMiniBadge.textContent = isAstra ? 'Final handoff' : isIntake ? 'EBH intake handoff' : 'EBH follow-up handoff';
-  }
+  if (els.exportMiniBadge) els.exportMiniBadge.textContent = 'Final handoff';
 }
 
 function updateScriptVisibility() {
@@ -2449,61 +2497,26 @@ function updateScriptVisibility() {
 }
 
 function updatePracticeSections() {
-  const isAstra = state.practice === 'astra';
   const isIntake = state.visitType === 'intake';
-  const isAstraFollowup = isAstra && !isIntake;
+  const isAstraFollowup = !isIntake;
   const usesUploadedPreviousNote = isAstraFollowup && state.astraFollowupContextMode === 'uploadedPreviousNote';
-  const usesManualScreening = isAstra && isIntake && state.astraIntakeScreeningMode === 'enterManually';
+  const usesManualScreening = isIntake && state.astraIntakeScreeningMode === 'enterManually';
 
-  if (els.previousPlanCard) {
-    els.previousPlanCard.classList.toggle('hidden', isIntake);
-  }
-
-  if (els.astraFollowupContextModeGroup) {
-    els.astraFollowupContextModeGroup.classList.toggle('hidden', !isAstraFollowup);
-  }
-
-  if (els.previousPlanField) {
-    els.previousPlanField.classList.toggle('hidden', usesUploadedPreviousNote);
-  }
-
-  if (els.astraSupportingDocsControl) {
-    els.astraSupportingDocsControl.classList.toggle('hidden', !isAstra);
-  }
-
-  if (els.astraScreeners) {
-    els.astraScreeners.classList.toggle('hidden', !(isAstra && isIntake));
-  }
-
-  if (els.astraIntakeScreeningModeGroup) {
-    els.astraIntakeScreeningModeGroup.classList.toggle('hidden', !(isAstra && isIntake));
-  }
-
-  if (els.astraScreenersFields) {
-    els.astraScreenersFields.classList.toggle('hidden', !usesManualScreening);
-  }
-
-  if (els.screeningInfoField) {
-    els.screeningInfoField.classList.toggle('hidden', !usesManualScreening);
-  }
-
+  if (els.previousPlanCard) els.previousPlanCard.classList.toggle('hidden', isIntake);
+  if (els.astraFollowupContextModeGroup) els.astraFollowupContextModeGroup.classList.toggle('hidden', !isAstraFollowup);
+  if (els.previousPlanField) els.previousPlanField.classList.toggle('hidden', usesUploadedPreviousNote);
+  if (els.astraSupportingDocsControl) els.astraSupportingDocsControl.classList.remove('hidden');
+  if (els.astraScreeners) els.astraScreeners.classList.toggle('hidden', !isIntake);
+  if (els.astraIntakeScreeningModeGroup) els.astraIntakeScreeningModeGroup.classList.toggle('hidden', !isIntake);
+  if (els.astraScreenersFields) els.astraScreenersFields.classList.toggle('hidden', !usesManualScreening);
+  if (els.screeningInfoField) els.screeningInfoField.classList.toggle('hidden', !usesManualScreening);
   if (els.astraIntakeScreeningModeHint) {
     els.astraIntakeScreeningModeHint.textContent = usesManualScreening
       ? 'Enter available screening scores below.'
       : 'Patient screening data will be uploaded separately to the Astra GPT.';
   }
-
-  if (els.astraScreeningInfo) {
-    els.astraScreeningInfo.classList.toggle('hidden', !(isAstra && isIntake));
-  }
-
-  if (els.ebhTests) {
-    els.ebhTests.classList.toggle('hidden', !(!isAstra && isIntake));
-  }
-
-  if (els.patientLettersBtn) {
-    els.patientLettersBtn.classList.toggle('hidden', !isAstra);
-  }
+  if (els.astraScreeningInfo) els.astraScreeningInfo.classList.toggle('hidden', !isIntake);
+  if (els.patientLettersBtn) els.patientLettersBtn.classList.remove('hidden');
 }
 
 function updateTopbarState(forceRecalc = false, scrollY = window.scrollY) {
@@ -2542,30 +2555,14 @@ function scheduleTopbarStateUpdate(forceRecalc = false) {
 }
 
 function updateActiveGptUrl() {
-  let url = '';
-  const isAstra = state.practice === 'astra';
   const isIntake = state.visitType === 'intake';
+  const url = isIntake
+    ? (els.body.dataset.astraIntakeGptUrl || '')
+    : (els.body.dataset.astraFollowupGptUrl || '');
 
-  if (isAstra && isIntake) {
-    url = els.body.dataset.astraIntakeGptUrl || '';
-  } else if (isAstra) {
-    url = els.body.dataset.astraFollowupGptUrl || '';
-  } else if (isIntake) {
-    url = els.body.dataset.ebhIntakeGptUrl || '';
-  } else {
-    url = els.body.dataset.ebhFollowupGptUrl || '';
-  }
-
-  if (els.activeGptUrl) {
-    els.activeGptUrl.value = url;
-  }
-
+  if (els.activeGptUrl) els.activeGptUrl.value = url;
   if (els.exportHelper) {
-    els.exportHelper.textContent = isAstra
-      ? `Astra ${isIntake ? 'intake' : 'follow-up'} routes to the universal Astra GPT.`
-      : isIntake
-        ? 'EBH intake mode routes to your EBH Intake GPT.'
-        : 'EBH follow-up mode routes to your EBH Follow-Up GPT.';
+    els.exportHelper.textContent = `Astra ${isIntake ? 'intake' : 'follow-up'} routes to the universal Astra GPT.`;
   }
 }
 
@@ -3163,12 +3160,11 @@ function buildExport() {
   const followupDetails = buildFollowupDetails();
   const previousPlan = getValue('previousPlan');
   const notes = getValue('notes');
-  const ebhTests = getValue('testDump');
   const screeners = buildScreenersText();
   const screeningInfo = buildScreeningInformationText();
   const supportingDocuments = buildAstraSupportingDocumentsText();
 
-  if (state.practice === 'astra' && state.visitType === 'followup') {
+  if (state.visitType === 'followup') {
     const priorContextBlock = state.astraFollowupContextMode === 'uploadedPreviousNote'
       ? [
         'PREVIOUS NOTE',
@@ -3198,66 +3194,34 @@ function buildExport() {
     ].join('\n');
   }
 
-  if (state.practice === 'astra' && state.visitType === 'intake') {
-    const screeningBlocks = state.astraIntakeScreeningMode === 'enterManually'
-      ? [
-        'PRE-VISIT SCREENERS',
-        screeners,
-        '',
-        'SCREENING DOCUMENTATION',
-        screeningInfo,
-      ]
-      : [
-        'PRE-VISIT SCREENERS',
-        'Patient screening data will be uploaded separately to the Astra GPT.',
-      ];
-
-    return [
-      buildAstraRawHeader(),
+  const screeningBlocks = state.astraIntakeScreeningMode === 'enterManually'
+    ? [
+      'PRE-VISIT SCREENERS',
+      screeners,
       '',
-      'VISIT DETAILS',
-      visitDetails,
-      '',
-      ...screeningBlocks,
-      '',
-      'UPLOADED SUPPORTING DOCUMENTS',
-      supportingDocuments || 'None selected in app.',
-      '',
-      'CLINICAL NOTES',
-      displayEntered(notes),
-      '',
-      'FOLLOW-UP / CLOSE',
-      followupDetails,
-    ].join('\n');
-  }
-
-  if (state.practice === 'ebh' && state.visitType === 'followup') {
-    return [
-      'VISIT DETAILS',
-      visitDetails,
-      '',
-      'PREVIOUS PLAN',
-      previousPlan,
-      '',
-      'FOLLOW-UP VISIT NOTES',
-      notes,
-      '',
-      'NEXT APPOINTMENT',
-      followupDetails,
-    ].join('\n');
-  }
+      'SCREENING DOCUMENTATION',
+      screeningInfo,
+    ]
+    : [
+      'PRE-VISIT SCREENERS',
+      'Patient screening data will be uploaded separately to the Astra GPT.',
+    ];
 
   return [
+    buildAstraRawHeader(),
+    '',
     'VISIT DETAILS',
     visitDetails,
     '',
-    'TESTS / SCREENERS / IMPORTED DATA',
-    ebhTests,
+    ...screeningBlocks,
     '',
-    'INTAKE NOTES',
-    notes,
+    'UPLOADED SUPPORTING DOCUMENTS',
+    supportingDocuments || 'None selected in app.',
     '',
-    'FOLLOW-UP',
+    'CLINICAL NOTES',
+    displayEntered(notes),
+    '',
+    'FOLLOW-UP / CLOSE',
     followupDetails,
   ].join('\n');
 }
@@ -3270,15 +3234,13 @@ function updateExport() {
 function evaluateCompletion() {
   let previsitComplete = false;
   if (isVisible(els.previousPlanCard)) {
-    previsitComplete = state.practice === 'astra' && state.visitType === 'followup' && state.astraFollowupContextMode === 'uploadedPreviousNote'
+    previsitComplete = state.visitType === 'followup' && state.astraFollowupContextMode === 'uploadedPreviousNote'
       ? true
       : isFilled('previousPlan');
   } else if (isVisible(els.astraScreeners)) {
     previsitComplete = state.astraIntakeScreeningMode === 'uploadToGpt'
       ? true
       : SCREENER_IDS.some((id) => isFilled(id));
-  } else if (isVisible(els.ebhTests)) {
-    previsitComplete = isFilled('testDump');
   }
 
   const setupComplete = [
@@ -3301,12 +3263,7 @@ function evaluateCompletion() {
     state.followupMode === 'prn' ? true : isFilled('followTime'),
   ].every(Boolean);
 
-  return {
-    previsitComplete,
-    setupComplete,
-    notesComplete,
-    closingComplete,
-  };
+  return { previsitComplete, setupComplete, notesComplete, closingComplete };
 }
 
 function updateCompletionIndicators() {
@@ -3333,12 +3290,6 @@ function updateCompletionIndicators() {
     setSectionCompletion(els.astraScreeningInfoCompletionStatus, els.astraScreeningInfo, screeningInfoComplete);
   } else {
     setSectionCompletion(els.astraScreeningInfoCompletionStatus, els.astraScreeningInfo, false);
-  }
-
-  if (isVisible(els.ebhTests)) {
-    setSectionCompletion(els.ebhTestsCompletionStatus, els.ebhTests, previsitComplete);
-  } else {
-    setSectionCompletion(els.ebhTestsCompletionStatus, els.ebhTests, false);
   }
 }
 
@@ -3782,7 +3733,7 @@ function applyDraft(draft) {
   if (!draft) return;
 
   if (draft.state) {
-    state.practice = draft.state.practice || state.practice;
+    state.practice = 'astra';
     state.visitType = draft.state.visitType || state.visitType;
     state.currentModality = draft.state.currentModality || '';
     state.followModality = draft.state.followModality || '';
@@ -4049,9 +4000,8 @@ function setPrnFollowup() {
   saveDraft({ markDirty: true });
 }
 
-function setPractice(practice) {
-  state.practice = practice;
-  setActiveByData('#practiceToggle .seg-btn', 'practice', practice);
+function setPractice() {
+  state.practice = 'astra';
   refreshUI(true, { markDirty: true });
 }
 
@@ -4071,7 +4021,7 @@ function setVisitType(visitType) {
 }
 
 function syncToggleStates() {
-  setActiveByData('#practiceToggle .seg-btn', 'practice', state.practice);
+  state.practice = 'astra';
   setActiveByData('#visitTypeToggle .seg-btn', 'visitType', state.visitType);
   setActiveByData('#currentModalityToggle .seg-btn', 'currentModality', state.currentModality);
   setActiveByData('#followModalityToggle .seg-btn', 'followModality', state.followModality);
@@ -4082,8 +4032,6 @@ function syncToggleStates() {
   if (els.scriptToggle) {
     els.scriptToggle.checked = Boolean(state.scriptVisible);
   }
-
-  syncAstraSupportingDocsControls();
 }
 
 function syncAstraSupportingDocsControls() {
@@ -4112,6 +4060,7 @@ function refreshUI(persist = true, options = {}) {
   updatePracticeSections();
   applyDefaultModalities();
   syncToggleStates();
+  syncAstraSupportingDocsControls();
   updateScriptVisibility();
   updateActiveGptUrl();
   updateFollowupSchedulingUI();
@@ -4264,10 +4213,7 @@ function attachInputListeners() {
 }
 
 function attachLogoFallbacks() {
-  [
-    { img: els.astraLogo, fallbackText: 'A' },
-    { img: els.ebhLogo, fallbackText: 'E' },
-  ].forEach(({ img, fallbackText }) => {
+  [{ img: els.astraLogo, fallbackText: 'A' }].forEach(({ img, fallbackText }) => {
     if (!img) return;
 
     img.addEventListener('error', () => {
@@ -4280,6 +4226,7 @@ function attachLogoFallbacks() {
     img.addEventListener('load', () => {
       if (!els.brandLogoFallback) return;
       els.brandLogoFallback.classList.add('hidden');
+      img.classList.remove('hidden');
     });
   });
 }
@@ -6749,8 +6696,6 @@ function openActiveGpt() {
 }
 
 function attachEventListeners() {
-  if (els.astraBtn) els.astraBtn.addEventListener('click', () => setPractice('astra'));
-  if (els.ebhBtn) els.ebhBtn.addEventListener('click', () => setPractice('ebh'));
   if (els.followBtn) els.followBtn.addEventListener('click', () => setVisitType('followup'));
   if (els.intakeBtn) els.intakeBtn.addEventListener('click', () => setVisitType('intake'));
 
@@ -6981,6 +6926,7 @@ function init() {
     saveDraft();
   }
 
+  initProviderScripts();
   initMedicationReference();
   initDriveSync();
   registerServiceWorker();

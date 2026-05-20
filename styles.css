@@ -1,6 +1,6 @@
 :root {
-  --bg-base: #dce7f7;
-  --bg-deep: #bfcfe6;
+  --bg-base: #edf5ff;
+  --bg-deep: #d4e5f7;
   --ink-strong: #0f172a;
   --ink-body: #1e293b;
   --ink-muted: #475569;
@@ -22,9 +22,9 @@
   --warn-500: #b45309;
   --danger-500: #be123c;
 
-  --radius-sm: 11px;
-  --radius-md: 16px;
-  --radius-lg: 22px;
+  --radius-sm: 8px;
+  --radius-md: 8px;
+  --radius-lg: 8px;
   --radius-pill: 999px;
 
   --title-font: "SF Pro Display", "Avenir Next", "Helvetica Neue", sans-serif;
@@ -42,15 +42,17 @@ body {
   min-height: 100%;
 }
 
+html {
+  background: linear-gradient(155deg, #f7fbff 0%, #eaf3ff 38%, #dbeafa 100%);
+}
+
 body {
   font-family: var(--body-font);
   color: var(--ink-body);
   background:
-    radial-gradient(circle at 12% 8%, rgba(110, 180, 255, 0.34), transparent 34%),
-    radial-gradient(circle at 86% 6%, rgba(95, 137, 245, 0.24), transparent 28%),
-    radial-gradient(circle at 80% 88%, rgba(170, 199, 255, 0.34), transparent 31%),
-    linear-gradient(155deg, #eaf2ff 0%, #dfeafb 44%, #d4e1f5 100%);
+    linear-gradient(155deg, #f7fbff 0%, #eaf3ff 38%, #dbeafa 100%);
   background-attachment: fixed;
+  background-color: var(--bg-base);
 }
 
 body::before {
@@ -59,8 +61,8 @@ body::before {
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(120deg, rgba(255, 255, 255, 0.34), transparent 44%),
-    radial-gradient(circle at 70% 26%, rgba(255, 255, 255, 0.26), transparent 35%);
+    linear-gradient(120deg, rgba(255, 255, 255, 0.52), transparent 44%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.24), transparent 62%);
   z-index: 0;
 }
 
@@ -70,14 +72,6 @@ body[data-practice="astra"] {
   --accent-600: #1d5fc5;
   --accent-weak: rgba(47, 127, 232, 0.17);
   --accent-border: rgba(47, 127, 232, 0.3);
-}
-
-body[data-practice="ebh"] {
-  --accent-400: #5bd6c6;
-  --accent-500: #139a8b;
-  --accent-600: #0f7168;
-  --accent-weak: rgba(19, 154, 139, 0.17);
-  --accent-border: rgba(19, 154, 139, 0.34);
 }
 
 header,

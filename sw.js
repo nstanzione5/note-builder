@@ -1,4 +1,4 @@
-const APP_BUILD_ID = '20260510-letter-page';
+const APP_BUILD_ID = '20260520-astra-drive-scripts';
 const CACHE_PREFIX = 'note-builder-shell-';
 const CACHE_NAME = `${CACHE_PREFIX}${APP_BUILD_ID}`;
 const SHELL_ASSETS = [
@@ -11,8 +11,8 @@ const SHELL_ASSETS = [
   './manifest.json',
   './icons/icon-192.png',
   './icons/icon-512.png',
-  './a_digital_vector_logo_features_an_uppercase_letter.png',
-  './ebh-logo.png',
+  './assets/astra-logo-horizontal.png',
+  './assets/astra-logo-vertical.png',
   './data/meds/compiled/medications.compiled.json',
   './data/meds/review/review-queue.json',
   './data/meds/review/runtime-fallbacks.json',
@@ -20,6 +20,7 @@ const SHELL_ASSETS = [
   './docs/drive-sync-setup.md',
   './config/drive-manifest.json',
   './config/astra-clinicians.json',
+  './config/provider-scripts.json',
 ];
 
 const NETWORK_FIRST_PATHS = new Set([

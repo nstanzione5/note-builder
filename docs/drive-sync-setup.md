@@ -85,8 +85,8 @@ When enabled:
 - `npm run drive:audit-roots` -> report canonical vs duplicate root folders
 - `npm run drive:cleanup:dry-run` -> preview high-volume direct-trash cleanup candidates (`cleanup.preview`)
 - `npm run drive:cleanup:apply` -> apply batched direct-trash cleanup (`cleanup.apply`)
-- `npm run drive:publish` -> push med artifacts + manifest (skips unchanged files by checksum)
-- `npm run drive:pull` -> pull med artifacts + manifest to local workspace
+- `npm run drive:publish` -> push med artifacts, provider scripts, and manifest (skips unchanged files by checksum)
+- `npm run drive:pull` -> pull med artifacts, provider scripts, and manifest to local workspace
 - `npm run med:knowledge-check` -> full med source refresh + compile + review + Drive publish
 - `npm run med:refresh-if-stale` -> staleness-aware refresh (monthly threshold unless forced)
 
@@ -97,6 +97,7 @@ When enabled:
 - `noteBuilderSnapshots_v1` remains local snapshot history (last 3).
 - `clear` only clears the current draft; snapshots stay intact by design.
 - During each Drive sync cycle, the app also pulls `data/meds/compiled/medications.compiled.json` so medication reference updates published to Drive can appear in runtime without rebuilding the app shell.
+- During each Drive sync cycle, the app tries `config/provider-scripts.json` from Drive first for Astra provider scripts and keeps the bundled JSON as the offline fallback.
 - Health now includes `appBuildId`, `resolvedUserEmail`, and explicit preflight status codes (`ok`, `root_missing`, `manifest_missing`, `identity_missing`, `version_mismatch`).
 - Cleanup now uses direct trash batches (`cleanup.preview` / `cleanup.apply`) instead of archive-only condense for large-scale My Drive artifact removal.
 

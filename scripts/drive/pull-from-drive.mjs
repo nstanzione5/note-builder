@@ -11,6 +11,7 @@ const FILE_MAP = [
   ['data/meds/review/review-report.json', 'data/meds/review/review-report.json'],
   ['data/meds/review/source-sync-log.json', 'data/meds/review/source-sync-log.json'],
   ['data/meds/review/runtime-fallbacks.json', 'data/meds/review/runtime-fallbacks.json'],
+  ['config/provider-scripts.json', 'config/provider-scripts.json'],
   ['config/drive-manifest.json', 'config/drive-manifest.json'],
 ];
 

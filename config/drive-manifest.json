@@ -16,9 +16,15 @@
     "logs/sync": "logs/sync",
     "config": "config"
   },
-  "pathMap": {},
-  "checksums": {},
-  "revisions": {},
+  "pathMap": {
+    "config/provider-scripts.json": ""
+  },
+  "checksums": {
+    "config/provider-scripts.json": ""
+  },
+  "revisions": {
+    "config/provider-scripts.json": ""
+  },
   "lastBootstrapAt": "",
   "lastUpdatedAt": ""
 }

@@ -83,7 +83,25 @@ async function createAppDom(options = {}) {
       window.alert = () => {};
       window.confirm = () => true;
       window.scrollTo = () => {};
-      window.fetch = undefined;
+      window.fetch = async (url) => {
+        if (String(url).includes('config/provider-scripts.json')) {
+          return {
+            ok: true,
+            json: async () => JSON.parse(fs.readFileSync(path.join(ROOT, 'config/provider-scripts.json'), 'utf8')),
+          };
+        }
+        if (String(url).includes('data/meds/compiled/medications.compiled.json')) {
+          return {
+            ok: true,
+            json: async () => JSON.parse(fs.readFileSync(path.join(ROOT, 'data/meds/compiled/medications.compiled.json'), 'utf8')),
+          };
+        }
+        return {
+          ok: false,
+          status: 404,
+          json: async () => ({}),
+        };
+      };
       window.requestAnimationFrame = (callback) => window.setTimeout(callback, 0);
       window.cancelAnimationFrame = (id) => window.clearTimeout(id);
       window.requestIdleCallback = (callback) => window.setTimeout(() => callback({ didTimeout: false, timeRemaining: () => 50 }), 0);
@@ -235,21 +253,7 @@ async function testAstraGptRouting() {
   );
   assert.match(document.getElementById('exportHelper').textContent, /universal Astra GPT/i);
 
-  document.getElementById('ebhBtn').click();
-
-  assert.equal(
-    document.getElementById('activeGptUrl').value,
-    'https://chatgpt.com/g/g-69f2450c4b648191b3b2ed94e74cf369-ebh-follow-up-note',
-    'EBH follow-up should route to the EBH follow-up GPT URL',
-  );
-
-  document.getElementById('intakeBtn').click();
-
-  assert.equal(
-    document.getElementById('activeGptUrl').value,
-    'https://chatgpt.com/g/g-69f245e113008191823124c55e26ec7f-ebh-intake-note',
-    'EBH intake should route to the EBH intake GPT URL',
-  );
+  assert.equal(document.getElementById('practiceToggle'), null, 'Practice toggle should be removed for Astra-only routing');
 
   dom.window.close();
 }
@@ -307,10 +311,6 @@ async function testAstraSupportingDocumentsInstruction() {
     Boolean(document.getElementById('astraSupportingDocsControl').compareDocumentPosition(document.querySelector('[data-section="export"]')) & window.Node.DOCUMENT_POSITION_FOLLOWING),
     'Supporting docs control should appear immediately before Export',
   );
-
-  document.getElementById('ebhBtn').click();
-  assert.ok(document.getElementById('astraSupportingDocsControl').classList.contains('hidden'));
-  document.getElementById('astraBtn').click();
 
   document.getElementById('intakeBtn').click();
   document.querySelector('[data-astra-intake-screening-mode="enterManually"]').click();
@@ -476,7 +476,6 @@ async function testScheduledStartDraftValueIsNotOverwritten() {
       mdq: '',
       otherScreener: '',
       screeningInfo: '',
-      testDump: '',
       notes: '',
       followModality: 'Telehealth',
       followDate: '',
@@ -578,7 +577,6 @@ async function testTelehealthDefaultsRespectBlankAndManualState() {
       mdq: '',
       otherScreener: '',
       screeningInfo: '',
-      testDump: '',
       notes: '',
       followModality: 'In-person',
       followDate: '',
@@ -788,7 +786,7 @@ async function testIncompletePatientBackupsDoNotUseQuestionMarkLabels() {
 }
 
 function testAppsScriptDiagnosticsAndBuildId() {
-  assert.match(appsScript, /const APP_BUILD_ID = '20260510-letter-page';/);
+  assert.match(appsScript, /const APP_BUILD_ID = '20260520-astra-drive-scripts';/);
   assert.match(appsScript, /function buildStatusHtml_/);
   assert.match(appsScript, /function htmlResponse_/);
   assert.match(appsScript, /DRIVE_LAST_ERROR/);
