@@ -785,7 +785,7 @@ async function testIncompletePatientBackupsDoNotUseQuestionMarkLabels() {
 }
 
 function testAppsScriptDiagnosticsAndBuildId() {
-  assert.match(appsScript, /const APP_BUILD_ID = '20260520-intake-screeners-ui';/);
+  assert.match(appsScript, /const APP_BUILD_ID = '20260520-drive-compat';/);
   assert.match(appsScript, /function buildStatusHtml_/);
   assert.match(appsScript, /function htmlResponse_/);
   assert.match(appsScript, /DRIVE_LAST_ERROR/);
