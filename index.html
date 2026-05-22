@@ -13,7 +13,7 @@
   <link rel="apple-touch-icon" href="icons/icon-192.png">
 </head>
 <body
-  data-app-build-id="20260520-drive-compat"
+  data-app-build-id="20260522-supporting-docs-drive"
   data-practice="astra"
   data-visit-type="followup"
   data-astra-intake-gpt-url="https://chatgpt.com/g/g-69f246601ad08191bc5f7522948c06ef-astra-note"
@@ -248,16 +248,19 @@
 
         <div class="field">
           <label>Scheduled Start <span class="required">*</span></label>
-          <div class="time-control" data-time-field="scheduledStart">
-            <input class="time-part time-part-hour" type="text" inputmode="numeric" maxlength="2" autocomplete="off" placeholder="HH" aria-label="Scheduled start hour" data-time-part="hour">
-            <span class="time-sep">:</span>
-            <input class="time-part time-part-minute" type="text" inputmode="numeric" maxlength="2" autocomplete="off" placeholder="MM" aria-label="Scheduled start minute" data-time-part="minute">
-            <input class="time-part time-part-meridiem" type="text" inputmode="text" maxlength="1" autocomplete="off" placeholder="A/P" aria-label="Scheduled start meridiem" data-time-part="meridiem">
-            <div class="time-meridiem-toggle" role="group" aria-label="Scheduled start meridiem quick select">
-              <button type="button" class="time-meridiem-btn" data-meridiem="AM">A</button>
-              <button type="button" class="time-meridiem-btn" data-meridiem="PM">P</button>
+          <div class="inline-input-row">
+            <div class="time-control" data-time-field="scheduledStart">
+              <input class="time-part time-part-hour" type="text" inputmode="numeric" maxlength="2" autocomplete="off" placeholder="HH" aria-label="Scheduled start hour" data-time-part="hour">
+              <span class="time-sep">:</span>
+              <input class="time-part time-part-minute" type="text" inputmode="numeric" maxlength="2" autocomplete="off" placeholder="MM" aria-label="Scheduled start minute" data-time-part="minute">
+              <input class="time-part time-part-meridiem" type="text" inputmode="text" maxlength="1" autocomplete="off" placeholder="A/P" aria-label="Scheduled start meridiem" data-time-part="meridiem">
+              <div class="time-meridiem-toggle" role="group" aria-label="Scheduled start meridiem quick select">
+                <button type="button" class="time-meridiem-btn" data-meridiem="AM">A</button>
+                <button type="button" class="time-meridiem-btn" data-meridiem="PM">P</button>
+              </div>
+              <input id="scheduledStart" type="hidden" value="">
             </div>
-            <input id="scheduledStart" type="hidden" value="">
+            <button type="button" class="mini-btn nowBtn" data-target="scheduledStart">Now</button>
           </div>
         </div>
 
@@ -467,7 +470,7 @@
         <span class="switch-label">Supporting docs uploaded</span>
       </label>
       <div class="astra-supporting-doc-type-row" id="astraSupportingDocTypes" role="group" aria-label="Supporting document types">
-        <button type="button" class="doc-type-btn" data-supporting-doc-type="intakeScreener" aria-pressed="false">Intake Screener</button>
+        <button type="button" class="doc-type-btn" data-supporting-doc-type="previousRecords" aria-pressed="false">Previous Records</button>
         <button type="button" class="doc-type-btn" data-supporting-doc-type="labs" aria-pressed="false">Labs</button>
         <button type="button" class="doc-type-btn" data-supporting-doc-type="genesight" aria-pressed="false">GeneSight</button>
         <button type="button" class="doc-type-btn" data-supporting-doc-type="other" aria-pressed="false">Other</button>
@@ -581,7 +584,9 @@
       </dl>
       <div class="action-row drive-diagnostics-actions">
         <button id="driveRunRepairBtn" type="button">Run Drive Repair</button>
+        <button id="driveResetQueueBtn" type="button" class="secondary-action-btn">Reset Queue &amp; Save Current</button>
       </div>
+      <p class="drive-cleanup-status" id="driveCleanupStatus" aria-live="polite"></p>
     </section>
   </div>
 

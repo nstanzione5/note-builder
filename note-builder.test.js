@@ -191,7 +191,7 @@ async function createLetterDom(options = {}) {
       window.alert = () => {};
       window.confirm = () => true;
       window.fetch = async (url, fetchOptions = {}) => {
-        if (fetchOptions && fetchOptions.method === 'POST') {
+        if (driveEnabled && String(url).includes('script.google.com')) {
           return {
             ok: true,
             json: async () => ({ ok: true, file: { content: JSON.stringify(clinicianConfig) } }),
@@ -270,10 +270,11 @@ async function testAstraIntakeExportIncludesScreeningInformation() {
   assert.ok(!document.getElementById('astraScreenersFields').classList.contains('hidden'));
   assert.ok(!document.getElementById('astraScreeningInfo').classList.contains('hidden'));
   assert.ok(!document.getElementById('screeningInfoField').classList.contains('hidden'));
-  assert.ok(document.getElementById('astraSupportingDocsUploaded').checked);
-  assert.ok(document.querySelector('[data-supporting-doc-type="intakeScreener"]').classList.contains('active'));
+  assert.ok(!document.getElementById('astraSupportingDocsUploaded').checked);
+  assert.equal(document.querySelector('[data-supporting-doc-type="intakeScreener"]'), null);
   assert.equal(document.getElementById('astraScreenersCompletionStatus').textContent, 'Complete');
-  assert.match(document.getElementById('exportBox').value, /Uploaded Documents: intake screener packet/);
+  assert.match(document.getElementById('exportBox').value, /INTAKE SCREENER PACKET\nThe intake screener\/background packet will be uploaded directly to the GPT\./);
+  assert.match(document.getElementById('exportBox').value, /Ancillary Supporting Documents: None selected in app/);
 
   document.querySelector('[data-astra-intake-screening-mode="enterManually"]').click();
   assert.ok(!document.getElementById('astraScreenersFields').classList.contains('hidden'));
@@ -313,20 +314,22 @@ async function testAstraSupportingDocumentsInstruction() {
 
   document.getElementById('intakeBtn').click();
   document.querySelector('[data-astra-intake-screening-mode="enterManually"]').click();
-  assert.ok(document.querySelector('[data-supporting-doc-type="intakeScreener"]'));
+  assert.equal(document.querySelector('[data-supporting-doc-type="intakeScreener"]'), null);
+  assert.ok(document.querySelector('[data-supporting-doc-type="previousRecords"]'));
 
   let exportText = document.getElementById('exportBox').value;
   assert.ok(!document.getElementById('astraSupportingDocsUploaded').checked);
-  assert.match(exportText, /Uploaded Documents: None selected in app/);
+  assert.match(exportText, /Ancillary Supporting Documents: None selected in app/);
   assert.match(exportText, /UPLOADED SUPPORTING DOCUMENTS\nNone selected in app\./);
 
+  document.querySelector('[data-supporting-doc-type="previousRecords"]').click();
   document.querySelector('[data-supporting-doc-type="labs"]').click();
   document.querySelector('[data-supporting-doc-type="genesight"]').click();
   document.querySelector('[data-supporting-doc-type="other"]').click();
   exportText = document.getElementById('exportBox').value;
   assert.match(
     exportText,
-    /Uploaded directly to GPT: lab results, GeneSight report, other supporting documentation\. Use uploaded documents as supporting context with the current encounter data\./,
+    /Uploaded directly to GPT: previous records, lab results, GeneSight report, other supporting documentation\. Use uploaded documents as supporting context with the current encounter data\./,
   );
   assert.doesNotMatch(exportText, /intake\/screening documentation/);
   assert.ok(
@@ -699,6 +702,9 @@ async function testPatientLettersPacketBuilderAndPersistence() {
 
   setField(window, 'letterType', 'accommodation', 'change');
   assert.ok(document.getElementById('letterIncludeFunctionalLimitations').checked);
+  setField(window, 'letterType', 'discharge', 'change');
+  assert.ok(!document.getElementById('letterIncludeFunctionalLimitations').checked);
+  setField(window, 'letterType', 'accommodation', 'change');
   setField(window, 'letterRecipient', 'HR Department');
   setField(window, 'letterPurpose', 'Request schedule flexibility. Use the uploaded prior note for demographics and clinical context.');
 
@@ -785,7 +791,7 @@ async function testIncompletePatientBackupsDoNotUseQuestionMarkLabels() {
 }
 
 function testAppsScriptDiagnosticsAndBuildId() {
-  assert.match(appsScript, /const APP_BUILD_ID = '20260520-drive-compat';/);
+  assert.match(appsScript, /const APP_BUILD_ID = '20260522-supporting-docs-drive';/);
   assert.match(appsScript, /function buildStatusHtml_/);
   assert.match(appsScript, /function htmlResponse_/);
   assert.match(appsScript, /DRIVE_LAST_ERROR/);

@@ -131,6 +131,8 @@ const els = {
   driveDiagnosticsModal: document.getElementById('driveDiagnosticsModal'),
   driveCloseDiagnosticsBtn: document.getElementById('driveCloseDiagnosticsBtn'),
   driveRunRepairBtn: document.getElementById('driveRunRepairBtn'),
+  driveResetQueueBtn: document.getElementById('driveResetQueueBtn'),
+  driveCleanupStatus: document.getElementById('driveCleanupStatus'),
   diagClientBuild: document.getElementById('diagClientBuild'),
   diagBackendBuild: document.getElementById('diagBackendBuild'),
   diagEndpoint: document.getElementById('diagEndpoint'),
@@ -176,7 +178,7 @@ const SCREENER_IDS = ['phq9', 'gad7', 'asrsA', 'asrsB', 'pcl5', 'mdq', 'otherScr
 const TIME_FIELD_IDS = ['scheduledStart', 'startTime', 'followTime', 'endTime', 'docEnd'];
 const DEFAULT_APPOINTMENT_MODALITY = 'Telehealth';
 const ASTRA_SUPPORTING_DOC_TYPE_LABELS = {
-  intakeScreener: 'intake screener packet',
+  previousRecords: 'previous records',
   labs: 'lab results',
   genesight: 'GeneSight report',
   other: 'other supporting documentation',
@@ -1227,6 +1229,18 @@ function setDriveWriteBlock(blocked, reason = '', code = '') {
   renderDriveDiagnostics();
 }
 
+function getDriveQueueFailure() {
+  const queue = getDriveQueue();
+  const failed = queue.find((item) => item && item.lastError);
+  if (!failed) return null;
+  const label = failed.path || failed.type || 'queued Drive item';
+  return {
+    count: queue.length,
+    label,
+    message: String(failed.lastError || 'Drive write failed.'),
+  };
+}
+
 function handleDriveRecovered() {
   // Avoid replaying stale blocked-period queue entries; publish a single fresh canonical state.
   setDriveQueue([]);
@@ -1348,6 +1362,23 @@ async function runDriveRepair(trigger = 'manual', options = {}) {
     }
     renderDriveDiagnostics();
   }
+}
+
+function resetDriveQueueAndSaveCurrent() {
+  setDriveQueue([]);
+  driveQueuedChecksums.clear();
+  setDriveRevisions({});
+
+  const meta = getDriveMeta();
+  meta.connection = navigator.onLine ? 'syncing' : 'offline';
+  meta.lastError = '';
+  setDriveMeta(meta);
+  setDriveWriteBlock(false, '');
+  setDriveCleanupStatus('Queue reset. Saving the current note...');
+
+  persistDraftNow({ force: true });
+  updateDriveStatusBadge();
+  scheduleDriveQueueFlush(150);
 }
 
 function canQueueDriveWrites() {
@@ -2135,6 +2166,14 @@ async function flushDriveQueue() {
     }
   } finally {
     driveQueueRunning = false;
+    const failure = getDriveQueueFailure();
+    if (failure) {
+      const failedMeta = getDriveMeta();
+      failedMeta.connection = navigator.onLine ? 'error' : 'offline';
+      failedMeta.lastError = `${failure.label}: ${failure.message}`;
+      setDriveMeta(failedMeta);
+      updateDriveStatusBadge(failedMeta);
+    }
     tryApplyPendingRemoteDraft();
   }
 }
@@ -2350,6 +2389,16 @@ async function runDriveSyncCycle(force = false) {
     await flushDriveQueue();
     tryApplyPendingRemoteDraft();
 
+    const queueFailure = getDriveQueueFailure();
+    if (queueFailure) {
+      const failedMeta = getDriveMeta();
+      failedMeta.connection = navigator.onLine ? 'error' : 'offline';
+      failedMeta.lastError = `${queueFailure.label}: ${queueFailure.message}`;
+      setDriveMeta(failedMeta);
+      updateDriveStatusBadge(failedMeta);
+      return;
+    }
+
     if (state.driveWritesBlocked) {
       const blockedMeta = getDriveMeta();
       blockedMeta.connection = navigator.onLine ? 'error' : 'offline';
@@ -2496,11 +2545,6 @@ function updatePracticeSections() {
   const isAstraFollowup = !isIntake;
   const usesUploadedPreviousNote = isAstraFollowup && state.astraFollowupContextMode === 'uploadedPreviousNote';
   const includesUploadedScreenerPacket = isIntake && state.astraIntakeScreeningMode === 'uploadToGpt';
-
-  if (includesUploadedScreenerPacket && !state.astraSupportingDocTypes.includes('intakeScreener')) {
-    state.astraSupportingDocTypes = ['intakeScreener', ...normalizeAstraSupportingDocTypes(state.astraSupportingDocTypes)];
-    state.astraSupportingDocsUploaded = true;
-  }
 
   if (els.previousPlanCard) els.previousPlanCard.classList.toggle('hidden', isIntake);
   if (els.astraFollowupContextModeGroup) els.astraFollowupContextModeGroup.classList.toggle('hidden', !isAstraFollowup);
@@ -3109,8 +3153,8 @@ function buildAstraRawHeader() {
     `Practice: Astra Psychiatry`,
     `Visit Type: ${isIntake ? 'Intake' : 'Follow-Up'}`,
     `GPT Target: ${ASTRA_UNIVERSAL_GPT_LABEL}`,
-    `Uploaded Documents: ${uploadedDocs}`,
-    'Conversion Instruction: Convert this raw structured input into the appropriate Astra clinical note. Use uploaded documents only when they are listed above and actually attached in GPT. Do not invent missing data.',
+    `Ancillary Supporting Documents: ${uploadedDocs}`,
+    'Conversion Instruction: Convert this raw structured input into the appropriate Astra clinical note. Use prior note/intake packet uploads when the relevant source toggle says they are attached. Use ancillary supporting documents only when they are listed above and actually attached in GPT. Do not invent missing data.',
   ].join('\n');
 }
 
@@ -3192,6 +3236,11 @@ function buildExport() {
     'PRE-VISIT SCREENERS',
     screeners,
     '',
+    'INTAKE SCREENER PACKET',
+    state.astraIntakeScreeningMode === 'uploadToGpt'
+      ? 'The intake screener/background packet will be uploaded directly to the GPT. Use it as background context with the typed testing results above.'
+      : 'No separate intake screener/background packet selected in the app.',
+    '',
     'SCREENING DOCUMENTATION',
     screeningInfo,
   ];
@@ -3258,7 +3307,7 @@ function evaluateCompletion() {
 function updateCompletionIndicators() {
   const { previsitComplete, setupComplete, notesComplete, closingComplete } = evaluateCompletion();
   const hasTypedScreenerData = SCREENER_IDS.some((id) => isFilled(id));
-  const hasUploadedScreenerPacket = state.astraSupportingDocsUploaded && state.astraSupportingDocTypes.includes('intakeScreener');
+  const hasUploadedScreenerPacket = state.visitType === 'intake' && state.astraIntakeScreeningMode === 'uploadToGpt';
   const screeningInfoComplete = isFilled('screeningInfo') || hasTypedScreenerData || hasUploadedScreenerPacket;
 
   setSectionCompletion(els.setupCompletionStatus, els.setupSection, setupComplete);
@@ -3871,17 +3920,6 @@ function setAstraFollowupContextMode(value, button) {
 
 function setAstraIntakeScreeningMode(value, button) {
   state.astraIntakeScreeningMode = value === 'enterManually' ? 'enterManually' : 'uploadToGpt';
-  if (state.astraIntakeScreeningMode === 'uploadToGpt') {
-    const types = normalizeAstraSupportingDocTypes(state.astraSupportingDocTypes);
-    state.astraSupportingDocTypes = types.includes('intakeScreener') ? types : ['intakeScreener', ...types];
-    state.astraSupportingDocsUploaded = true;
-  } else {
-    state.astraSupportingDocTypes = normalizeAstraSupportingDocTypes(state.astraSupportingDocTypes)
-      .filter((type) => type !== 'intakeScreener');
-    if (!state.astraSupportingDocTypes.length) {
-      state.astraSupportingDocsUploaded = false;
-    }
-  }
   setActiveByData('#astraIntakeScreeningModeToggle .seg-btn', 'astraIntakeScreeningMode', state.astraIntakeScreeningMode);
   if (button) setActiveButtons('#astraIntakeScreeningModeToggle', button);
   refreshUI(true, { markDirty: true });
@@ -3912,13 +3950,6 @@ function toggleAstraSupportingDocType(type) {
 
   if (state.astraSupportingDocTypes.length) {
     state.astraSupportingDocsUploaded = true;
-  }
-
-  if (normalizedType === 'intakeScreener') {
-    state.astraIntakeScreeningMode = state.astraSupportingDocTypes.includes('intakeScreener')
-      ? 'uploadToGpt'
-      : 'enterManually';
-    setActiveByData('#astraIntakeScreeningModeToggle .seg-btn', 'astraIntakeScreeningMode', state.astraIntakeScreeningMode);
   }
 
   syncAstraSupportingDocsControls();
@@ -4045,6 +4076,9 @@ function syncToggleStates() {
 
 function syncAstraSupportingDocsControls() {
   state.astraSupportingDocTypes = normalizeAstraSupportingDocTypes(state.astraSupportingDocTypes);
+  if (!state.astraSupportingDocTypes.length) {
+    state.astraSupportingDocsUploaded = false;
+  }
 
   if (els.astraSupportingDocsUploaded) {
     els.astraSupportingDocsUploaded.checked = Boolean(state.astraSupportingDocsUploaded);
@@ -6858,6 +6892,12 @@ function attachEventListeners() {
   if (els.driveRunRepairBtn) {
     els.driveRunRepairBtn.addEventListener('click', () => {
       runDriveRepair('manual');
+    });
+  }
+
+  if (els.driveResetQueueBtn) {
+    els.driveResetQueueBtn.addEventListener('click', () => {
+      resetDriveQueueAndSaveCurrent();
     });
   }
 
