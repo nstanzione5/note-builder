@@ -13,7 +13,7 @@
   <link rel="apple-touch-icon" href="icons/icon-192.png">
 </head>
 <body
-  data-app-build-id="20260522-supporting-docs-drive"
+  data-app-build-id="20260601-drive-glass-cleanup"
   data-astra-letter-gpt-url="https://chatgpt.com/g/g-69ff5644fd80819182ccbb07dfee15fa-astra-document-generator"
   data-drive-sync-enabled="true"
   data-drive-endpoint-url="https://script.google.com/macros/s/AKfycbwQDnypS2DgQJaFsrjAoMsU7ejP1Lu-n22SybUzfpv3JF7OMYEdJEfbS0oMedxm6GXWKw/exec"
@@ -52,7 +52,7 @@
         <div class="section-heading">
           <div>
             <h2 id="letterWriterTitle">Patient Letter Packet</h2>
-            <p>Minimal inputs for the Astra Document GPT.</p>
+            <p>Astra Document GPT packet.</p>
           </div>
           <div class="letter-status-actions">
             <div class="section-mini-badge" id="clinicianConfigStatus">Loading clinicians</div>
@@ -82,7 +82,10 @@
 
             <div class="field">
               <label for="letterDate">Letter Date</label>
-              <input id="letterDate" data-letter-field type="date">
+              <div class="inline-input-row">
+                <input id="letterDate" data-letter-field type="date">
+                <button type="button" class="mini-btn" id="letterDateTodayBtn">Today</button>
+              </div>
             </div>
 
             <div class="field">

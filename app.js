@@ -145,6 +145,8 @@ const els = {
   diagBlockCode: document.getElementById('diagBlockCode'),
   diagBlockReason: document.getElementById('diagBlockReason'),
   diagLastError: document.getElementById('diagLastError'),
+  diagQueueDetail: document.getElementById('diagQueueDetail'),
+  diagCleanup: document.getElementById('diagCleanup'),
   docEndPlusMinutes: document.getElementById('docEndPlusMinutes'),
   scriptResizeHandle: document.getElementById('scriptResizeHandle'),
 };
@@ -204,7 +206,7 @@ const CONDENSE_CLASS_EXIT = 0.62;
 
 const MED_CATALOG_URL = './data/meds/compiled/medications.compiled.json';
 const PROVIDER_SCRIPTS_URL = './config/provider-scripts.json';
-const APP_BUILD_ID = String((els.body && els.body.dataset && els.body.dataset.appBuildId) || '20260311-drive-reset-v2').trim() || '20260311-drive-reset-v2';
+const APP_BUILD_ID = String((els.body && els.body.dataset && els.body.dataset.appBuildId) || '20260601-drive-glass-cleanup').trim() || '20260601-drive-glass-cleanup';
 const MED_FAVORITES_KEY = 'medDrawerFavorites_v1';
 const MED_RECENTS_KEY = 'medDrawerRecents_v1';
 const MED_MISSING_REQUESTS_KEY = 'medDrawerMissingRequests_v1';
@@ -232,6 +234,8 @@ const DRAFT_PERSIST_IDLE_MS = 3000;
 const REMOTE_DRAFT_APPLY_TYPING_GRACE_MS = 1800;
 const RECENT_PATIENTS_DRIVE_MIN_INTERVAL_MS = 90000;
 const DRIVE_AUTO_REPAIR_COOLDOWN_MS = 1000 * 60 * 5;
+const DRIVE_AUTO_CLEANUP_INTERVAL_MS = 24 * 60 * 60 * 1000;
+const DRIVE_AUTO_CLEANUP_BATCH_SIZE = 40;
 const MEDICATION_FALLBACK_CACHE_TTL_MS = 1000 * 60 * 60 * 6;
 const SCRIPT_PANEL_HEIGHT_KEY = 'noteBuilderScriptPanelHeight_v1';
 const SCRIPT_PANEL_DEFAULT_HEIGHT = 760;
@@ -375,6 +379,9 @@ function applyScriptPanelHeight(height, options = {}) {
   const { persist = true } = options;
   const clampedHeight = Math.round(clamp(height, SCRIPT_PANEL_MIN_HEIGHT, getScriptPanelMaxHeight()));
   els.scriptPanel.style.setProperty('--script-panel-height', `${clampedHeight}px`);
+  if (els.workspaceGrid) {
+    els.workspaceGrid.style.setProperty('--workspace-panel-height', `${clampedHeight}px`);
+  }
   if (persist) {
     setStorageJSON(SCRIPT_PANEL_HEIGHT_KEY, clampedHeight);
   }
@@ -957,6 +964,10 @@ function getDriveMeta() {
     manifestChecksum: '',
     bootstrapCompleted: false,
     lastRepairAttemptAt: 0,
+    backendVersionWarning: '',
+    lastCleanupAttemptAt: 0,
+    lastCleanupAt: 0,
+    lastCleanupSummary: null,
   };
   const parsed = getStorageJSON(DRIVE_META_KEY, fallback);
   if (!parsed || typeof parsed !== 'object') return { ...fallback };
@@ -1021,6 +1032,18 @@ function applyDriveHealthState(healthPayload) {
   }
   if (resolvedRootFolderId) {
     state.driveCanonicalRootId = resolvedRootFolderId;
+  }
+
+  if (backendBuild && backendBuild !== APP_BUILD_ID) {
+    const meta = getDriveMeta();
+    meta.backendVersionWarning = `Client update pending: backend ${backendBuild}, client ${APP_BUILD_ID}. Redeploy Apps Script when convenient.`;
+    setDriveMeta(meta);
+  } else if (backendBuild) {
+    const meta = getDriveMeta();
+    if (meta.backendVersionWarning) {
+      meta.backendVersionWarning = '';
+      setDriveMeta(meta);
+    }
   }
 
   return {
@@ -1128,6 +1151,7 @@ function setDriveStatusBadge(message, status, title = '') {
     'drive-sync-status-syncing',
     'drive-sync-status-offline',
     'drive-sync-status-error',
+    'drive-sync-status-warning',
   );
 
   els.driveSyncStatus.classList.add(`drive-sync-status-${normalized}`);
@@ -1176,6 +1200,12 @@ function updateDriveStatusBadge(meta = getDriveMeta()) {
 
   if (meta.connection === 'error') {
     setDriveStatusBadge(`Drive: Sync error (${queued} queued)`, 'error', meta.lastError || 'Drive endpoint unavailable.');
+    renderDriveDiagnostics();
+    return;
+  }
+
+  if (meta.backendVersionWarning) {
+    setDriveStatusBadge('Drive: Backend update needed', 'warning', meta.backendVersionWarning);
     renderDriveDiagnostics();
     return;
   }
@@ -1234,10 +1264,13 @@ function getDriveQueueFailure() {
   const failed = queue.find((item) => item && item.lastError);
   if (!failed) return null;
   const label = failed.path || failed.type || 'queued Drive item';
+  const nextRetryAt = failed.nextRetryAt ? Date.parse(String(failed.nextRetryAt)) : 0;
   return {
     count: queue.length,
     label,
     message: String(failed.lastError || 'Drive write failed.'),
+    attempts: Number(failed.attempts || 0),
+    nextRetryAt: Number.isFinite(nextRetryAt) && nextRetryAt > 0 ? nextRetryAt : 0,
   };
 }
 
@@ -1257,9 +1290,6 @@ function handleDriveRecovered() {
   const snapshots = loadSnapshotsFromStorage();
   if (Array.isArray(snapshots) && snapshots.length) {
     queueDriveRecentPatientsWrite(snapshots, { force: true });
-    snapshots.forEach((snapshotEntry) => {
-      queueDriveBackupAppend(snapshotEntry);
-    });
   }
   scheduleDriveQueueFlush(450);
 }
@@ -1293,6 +1323,35 @@ function renderDriveDiagnostics() {
   if (els.diagBlockCode) els.diagBlockCode.textContent = state.driveWriteBlockCode || 'none';
   if (els.diagBlockReason) els.diagBlockReason.textContent = state.driveWriteBlockReason || 'none';
   if (els.diagLastError) els.diagLastError.textContent = meta.lastError || 'none';
+  if (els.diagQueueDetail) {
+    const failure = getDriveQueueFailure();
+    const queued = getDriveQueue().length;
+    if (failure) {
+      const retryLabel = failure.nextRetryAt
+        ? new Date(failure.nextRetryAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        : 'pending';
+      els.diagQueueDetail.textContent = `${queued} queued; ${failure.label}; attempt ${failure.attempts}; next retry ${retryLabel}`;
+    } else {
+      els.diagQueueDetail.textContent = queued ? `${queued} queued` : 'none';
+    }
+  }
+  if (els.diagCleanup) {
+    const summary = meta.lastCleanupSummary && typeof meta.lastCleanupSummary === 'object'
+      ? meta.lastCleanupSummary
+      : null;
+    const lastCleanup = meta.lastCleanupAt
+      ? new Date(meta.lastCleanupAt).toLocaleString()
+      : 'never';
+    if (summary && summary.error) {
+      els.diagCleanup.textContent = `Last cleanup: ${lastCleanup}; ${summary.error}`;
+    } else if (summary) {
+      const cleaned = Number(summary.trashedCount || summary.movedCount || 0);
+      const remaining = Number(summary.remainingCount || 0);
+      els.diagCleanup.textContent = `Last cleanup: ${lastCleanup}; cleaned ${cleaned}; remaining ${remaining}`;
+    } else {
+      els.diagCleanup.textContent = `Last cleanup: ${lastCleanup}`;
+    }
+  }
 }
 
 function openDriveDiagnostics() {
@@ -1379,6 +1438,52 @@ function resetDriveQueueAndSaveCurrent() {
   persistDraftNow({ force: true });
   updateDriveStatusBadge();
   scheduleDriveQueueFlush(150);
+}
+
+async function maybeRunDriveAutoCleanup() {
+  if (!isDriveSyncEnabled() || state.driveWritesBlocked) return false;
+  const meta = getDriveMeta();
+  const now = Date.now();
+  const lastAttempt = Number(meta.lastCleanupAttemptAt || 0);
+  const lastSuccess = Number(meta.lastCleanupAt || 0);
+  if ((lastAttempt && now - lastAttempt < DRIVE_AUTO_CLEANUP_INTERVAL_MS)
+    || (lastSuccess && now - lastSuccess < DRIVE_AUTO_CLEANUP_INTERVAL_MS)) {
+    return false;
+  }
+
+  meta.lastCleanupAttemptAt = now;
+  setDriveMeta(meta);
+  setDriveCleanupStatus('Drive cleanup check running...');
+
+  try {
+    await callDriveEndpoint('cleanup.snapshot', { maxItems: 2000 });
+    const cleanup = await callDriveEndpoint('cleanup.apply', {
+      maxItems: 2000,
+      batchSize: DRIVE_AUTO_CLEANUP_BATCH_SIZE,
+    });
+    const nextMeta = getDriveMeta();
+    nextMeta.lastCleanupAt = Date.now();
+    nextMeta.lastCleanupSummary = {
+      trashedCount: Number(cleanup.trashedCount || 0),
+      movedCount: Number(cleanup.movedCount || 0),
+      remainingCount: Number(cleanup.remainingCount || 0),
+      done: Boolean(cleanup.done),
+    };
+    setDriveMeta(nextMeta);
+    const cleaned = Number(cleanup.trashedCount || cleanup.movedCount || 0);
+    setDriveCleanupStatus(cleaned ? `Drive cleanup complete: ${cleaned} app artifact${cleaned === 1 ? '' : 's'} cleaned.` : 'Drive cleanup complete: no clutter found.');
+    renderDriveDiagnostics();
+    return true;
+  } catch (error) {
+    const nextMeta = getDriveMeta();
+    nextMeta.lastCleanupSummary = {
+      error: String(error && error.message ? error.message : error),
+    };
+    setDriveMeta(nextMeta);
+    setDriveCleanupStatus(`Drive cleanup skipped: ${nextMeta.lastCleanupSummary.error}`, true);
+    renderDriveDiagnostics();
+    return false;
+  }
 }
 
 function canQueueDriveWrites() {
@@ -2160,6 +2265,13 @@ async function flushDriveQueue() {
 
         const attemptCount = queue[0].attempts || 1;
         const retryMs = Math.min(30000, 1200 * (2 ** Math.min(attemptCount, 5)));
+        queue[0] = {
+          ...queue[0],
+          nextRetryAt: new Date(Date.now() + retryMs).toISOString(),
+          retryDelayMs: retryMs,
+        };
+        setDriveQueue(queue);
+        updateDriveStatusBadge(updatedMeta);
         scheduleDriveQueueFlush(retryMs);
         break;
       }
@@ -2413,6 +2525,7 @@ async function runDriveSyncCycle(force = false) {
     nextMeta.lastError = '';
     setDriveMeta(nextMeta);
     updateDriveStatusBadge(nextMeta);
+    await maybeRunDriveAutoCleanup();
   } catch (error) {
     const nextMeta = getDriveMeta();
     nextMeta.connection = navigator.onLine ? 'error' : 'offline';
@@ -2556,8 +2669,8 @@ function updatePracticeSections() {
   if (els.screeningInfoField) els.screeningInfoField.classList.toggle('hidden', !isIntake);
   if (els.astraIntakeScreeningModeHint) {
     els.astraIntakeScreeningModeHint.textContent = includesUploadedScreenerPacket
-      ? 'Type available testing scores here and upload the intake screener packet to the GPT for background context.'
-      : 'Type available testing scores and screening notes below.';
+      ? 'Typed scores + uploaded packet.'
+      : 'Typed scores only.';
   }
   if (els.astraScreeningInfo) els.astraScreeningInfo.classList.toggle('hidden', !isIntake);
   if (els.patientLettersBtn) els.patientLettersBtn.classList.remove('hidden');
@@ -2606,7 +2719,7 @@ function updateActiveGptUrl() {
 
   if (els.activeGptUrl) els.activeGptUrl.value = url;
   if (els.exportHelper) {
-    els.exportHelper.textContent = `Astra ${isIntake ? 'intake' : 'follow-up'} routes to the universal Astra GPT.`;
+    els.exportHelper.textContent = `${isIntake ? 'Intake' : 'Follow-up'} packet for Astra GPT.`;
   }
 }
 
@@ -2772,8 +2885,9 @@ function setTimeControlValue(id, canonicalValue) {
   if (!parsed) {
     control.hourInput.value = '';
     control.minuteInput.value = '';
-    control.activeMeridiem = 'AM';
-    setMeridiemControl(control, 'AM');
+    const fallbackMeridiem = id === 'scheduledStart' ? getCurrentMeridiemDefault() : 'AM';
+    control.activeMeridiem = fallbackMeridiem;
+    setMeridiemControl(control, fallbackMeridiem);
     control.hidden.value = '';
     markTimeControlValidity(control, true);
     return;
@@ -3387,7 +3501,7 @@ function updateTherapyButtons() {
 
   if (els.therapyInterwovenHint) {
     if (elapsed == null) {
-      els.therapyInterwovenHint.textContent = 'Enter face-to-face start and end times to unlock higher therapy tiers.';
+      els.therapyInterwovenHint.textContent = 'Enter times to unlock tiers.';
     } else {
       els.therapyInterwovenHint.textContent = `Face-to-face elapsed: ${elapsed} minutes.`;
     }
@@ -3437,16 +3551,13 @@ function saveSnapshotsToStorage(snapshots) {
 }
 
 function formatSnapshotLabel(entry) {
-  if (entry && entry.patientLabel) {
-    return entry.patientLabel;
-  }
-
   const age = entry && entry.draft && entry.draft.inputs ? String(entry.draft.inputs.age || '').trim() : '';
   const gender = entry && entry.draft && entry.draft.inputs ? String(entry.draft.inputs.gender || '').trim() : '';
+  const scheduledStart = entry && entry.draft && entry.draft.inputs ? String(entry.draft.inputs.scheduledStart || '').trim() : '';
   if (!age) return 'Incomplete patient';
   const ageText = age;
   const genderText = gender ? gender.charAt(0).toUpperCase() : 'unknown gender';
-  return `${ageText} ${genderText}`;
+  return scheduledStart ? `${ageText} ${genderText} · ${scheduledStart}` : `${ageText} ${genderText}`;
 }
 
 function getDraftPatientIdentity(draft) {
@@ -3454,6 +3565,7 @@ function getDraftPatientIdentity(draft) {
   const age = String(inputs.age || '').trim();
   const genderRaw = String(inputs.gender || '').trim();
   const genderInitial = genderRaw ? genderRaw.charAt(0).toUpperCase() : '';
+  const scheduledStart = String(inputs.scheduledStart || '').trim();
 
   if (!age) {
     return {
@@ -3473,7 +3585,7 @@ function getDraftPatientIdentity(draft) {
 
   return {
     key,
-    label: `${safeAge} ${safeGender}`,
+    label: scheduledStart ? `${safeAge} ${safeGender} · ${scheduledStart}` : `${safeAge} ${safeGender}`,
   };
 }
 
@@ -3622,7 +3734,6 @@ function queueSnapshot(draft, options = {}) {
 
     if (!skipDrive) {
       queueDriveRecentPatientsWrite(normalizedSnapshots);
-      queueDriveBackupAppend(snapshotEntry);
     }
   }, 1200);
 }
@@ -4093,7 +4204,7 @@ function syncAstraSupportingDocsControls() {
   });
 
   if (els.astraSupportingDocsHint) {
-    els.astraSupportingDocsHint.textContent = 'Select the files you will attach to GPT with this export.';
+    els.astraSupportingDocsHint.textContent = 'Ancillary files for GPT.';
   }
 }
 

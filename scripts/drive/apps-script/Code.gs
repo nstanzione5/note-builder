@@ -16,7 +16,7 @@ const ALLOWED_USER_EMAILS_PROPERTY = 'DRIVE_ALLOWED_USER_EMAILS';
 const SERVICE_TOKEN_PROPERTY = 'DRIVE_SERVICE_TOKEN';
 const LEGACY_OWNER_TOKEN_PROPERTY = 'DRIVE_OWNER_TOKEN';
 const LAST_ERROR_PROPERTY = 'DRIVE_LAST_ERROR';
-const APP_BUILD_ID = '20260522-supporting-docs-drive';
+const APP_BUILD_ID = '20260601-drive-glass-cleanup';
 const PREFLIGHT_STATUS = {
   OK: 'ok',
   ROOT_MISSING: 'root_missing',
@@ -680,6 +680,8 @@ function handleCleanupApply_(payload) {
     trashedByType: trashedByType,
     remainingCount: remaining.length,
     done: remaining.length <= 0 || batch.length <= 0,
+    protectedIdCount: Object.keys(protectedIds).length,
+    skippedUnsafeCount: 0,
     checkpoint: {
       remainingCount: remaining.length,
       nextSuggestedBatchSize: batchSize,
@@ -733,7 +735,7 @@ function findCleanupCandidatesV3_(rootFolderName, maxItems, protectedIds, shared
     })
     .filter(function (item) {
       if (!item || !item.id) return false;
-      if (!isSafeMyDriveCleanupCandidate_(item, sharedDriveId)) return false;
+      if (!isSafeMyDriveCleanupCandidate_(item, sharedDriveId, protectedMap)) return false;
       if (protectedMap[item.id]) return false;
       if (item.kind !== 'folder') return false;
       return isLikelyAppCleanupFolderName_(item.name, rootFolderName) || isLikelyAppRootFolder_(item.id);
@@ -764,7 +766,7 @@ function findCleanupCandidatesV3_(rootFolderName, maxItems, protectedIds, shared
     .filter(function (item) {
       if (!item || !item.id) return false;
       if (protectedMap[item.id]) return false;
-      if (!isSafeMyDriveCleanupCandidate_(item, sharedDriveId)) return false;
+      if (!isSafeMyDriveCleanupCandidate_(item, sharedDriveId, protectedMap)) return false;
       if (item.kind === 'folder') {
         if (isLikelyAppCleanupFolderName_(item.name, rootFolderName) || isLikelyAppRootFolder_(item.id)) {
           folderRootIds[item.id] = true;
@@ -788,7 +790,7 @@ function findCleanupCandidatesV3_(rootFolderName, maxItems, protectedIds, shared
       return item
         && item.id
         && !protectedMap[item.id]
-        && isSafeMyDriveCleanupCandidate_(item, sharedDriveId);
+        && isSafeMyDriveCleanupCandidate_(item, sharedDriveId, protectedMap);
     })
     .slice(0, scanTarget);
 }
@@ -848,14 +850,17 @@ function collectCleanupDescendants_(rootFolderIds, maxItems, protectedMap, share
   return out.slice(0, limit);
 }
 
-function isSafeMyDriveCleanupCandidate_(item, sharedDriveId) {
+function isSafeMyDriveCleanupCandidate_(item, sharedDriveId, protectedIds) {
   const id = normalizeText_((item && item.id) || '');
   if (!id) return false;
+  if (protectedIds && protectedIds[id]) return false;
+  if (isInsideProtectedDriveRoot_(item, protectedIds)) return false;
 
   const listedDriveId = normalizeText_((item && (item.driveId || item.teamDriveId)) || '');
-  if (listedDriveId) return false;
-
   const normalizedSharedDriveId = normalizeText_(sharedDriveId || '');
+  if (listedDriveId) {
+    return Boolean(normalizedSharedDriveId && listedDriveId === normalizedSharedDriveId);
+  }
   if (!normalizedSharedDriveId) return true;
 
   const parentIds = Array.isArray(item && item.parents)
@@ -875,11 +880,42 @@ function isSafeMyDriveCleanupCandidate_(item, sharedDriveId) {
   // Ambiguous parentless records are rare; hydrate once as a safety backstop.
   try {
     const meta = getFileSafe_(id);
-    return !fileBelongsToSharedDrive_(meta, normalizedSharedDriveId);
+      if (isInsideProtectedDriveRoot_(toCleanupItem_(meta), protectedIds)) return false;
+      return !fileBelongsToSharedDrive_(meta, normalizedSharedDriveId);
   } catch (error) {
     // Fail-closed for safety. Unknown scope items are not purged automatically.
     return false;
   }
+}
+
+function isInsideProtectedDriveRoot_(item, protectedIds) {
+  if (!item || !protectedIds) return false;
+  const ownId = normalizeText_(item.id || '');
+  if (ownId && protectedIds[ownId]) return true;
+  let parents = Array.isArray(item.parents)
+    ? item.parents.map(function (parent) {
+      return normalizeText_(parent && parent.id ? parent.id : parent);
+    }).filter(Boolean)
+    : [];
+  const seen = {};
+  let guard = 0;
+  while (parents.length && guard < 12) {
+    guard += 1;
+    const parentId = parents.shift();
+    if (!parentId || seen[parentId]) continue;
+    seen[parentId] = true;
+    if (protectedIds[parentId]) return true;
+    try {
+      const parentMeta = getFileSafe_(parentId);
+      const nextParents = getFileParentIds_(parentMeta);
+      nextParents.forEach(function (nextParentId) {
+        if (nextParentId && !seen[nextParentId]) parents.push(nextParentId);
+      });
+    } catch (error) {
+      // Unknown ancestry fails open only after direct protected checks above.
+    }
+  }
+  return false;
 }
 
 function mergeCleanupItemsById_(groups) {

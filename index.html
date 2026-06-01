@@ -13,7 +13,7 @@
   <link rel="apple-touch-icon" href="icons/icon-192.png">
 </head>
 <body
-  data-app-build-id="20260522-supporting-docs-drive"
+  data-app-build-id="20260601-drive-glass-cleanup"
   data-practice="astra"
   data-visit-type="followup"
   data-astra-intake-gpt-url="https://chatgpt.com/g/g-69f246601ad08191bc5f7522948c06ef-astra-note"
@@ -45,7 +45,7 @@
             <h1 id="brandTitle">Clinical Note Builder</h1>
             <span class="brand-mode-pill" id="brandModePill">Drive Synced</span>
           </div>
-          <p id="brandSubtitle">Structured raw-input capture for psychiatric documentation workflows.</p>
+          <p id="brandSubtitle">Astra documentation workspace.</p>
         </div>
 
         <nav class="brand-tools-rail" aria-label="Clinical tools">
@@ -85,7 +85,7 @@
         </div>
 
         <div class="toolbar-meta-row">
-          <p class="toolbar-hint">Dock app: Safari → File → Add to Dock</p>
+          <p class="toolbar-hint">Astra workspace</p>
           <button class="drive-sync-status drive-sync-status-local" id="driveSyncStatus" type="button" aria-live="polite" title="Open Drive diagnostics">Drive: Local only</button>
         </div>
       </section>
@@ -96,16 +96,16 @@
     <section class="workflow-ribbon">
       <div class="workflow-ribbon-left">
         <div class="section-chip" id="workflowChip">Follow-Up</div>
-        <p class="workflow-ribbon-copy" id="workflowRibbonCopy">Structured capture for GPT handoff.</p>
+        <p class="workflow-ribbon-copy" id="workflowRibbonCopy">Ready for GPT handoff.</p>
       </div>
-      <div class="workflow-ribbon-right">Live Structured Capture</div>
+      <div class="workflow-ribbon-right">Live Capture</div>
     </section>
 
     <section class="card" id="previousPlanCard" data-section="previsit">
       <div class="section-heading">
         <div>
           <h2>Pre-Visit Context</h2>
-          <p id="previousPlanSectionCopy">Prior context for today's visit.</p>
+          <p id="previousPlanSectionCopy">Prior context.</p>
         </div>
         <div class="section-heading-right">
           <span class="section-status completion-status-pending" id="previousPlanCompletionStatus">Pending</span>
@@ -134,7 +134,7 @@
       <div class="section-heading">
         <div>
           <h2>Pre-Visit Screening Results</h2>
-          <p>Type the scored testing details here, even when the intake screener packet is uploaded as background context.</p>
+          <p>Scored testing details.</p>
         </div>
         <div class="section-heading-right">
           <span class="section-status completion-status-pending" id="astraScreenersCompletionStatus">Pending</span>
@@ -187,7 +187,7 @@
       <div class="section-heading">
         <div>
           <h2>Screening Information</h2>
-          <p>Use the upload option for background packet context while keeping scored testing in the fields above.</p>
+          <p>Intake packet source.</p>
         </div>
         <div class="section-heading-right">
           <span class="section-status completion-status-pending" id="astraScreeningInfoCompletionStatus">Pending</span>
@@ -201,7 +201,7 @@
           <button type="button" class="seg-btn" data-astra-intake-screening-mode="enterManually">Typed Only</button>
           <button type="button" class="seg-btn" data-astra-intake-screening-mode="uploadToGpt">Typed + Uploaded Packet</button>
         </div>
-        <p class="helper-text" id="astraIntakeScreeningModeHint">Type available scores here and attach the intake screener packet to the GPT for background context.</p>
+        <p class="helper-text" id="astraIntakeScreeningModeHint">Attach packet separately when selected.</p>
       </div>
 
       <div class="field" id="screeningInfoField">
@@ -217,7 +217,7 @@
       <div class="section-heading">
         <div>
           <h2>Visit Setup</h2>
-          <p id="setupSectionCopy">Core visit details.</p>
+          <p id="setupSectionCopy">Core details.</p>
         </div>
         <div class="section-heading-right">
           <span class="section-status completion-status-pending" id="setupCompletionStatus">Pending</span>
@@ -296,7 +296,6 @@
         <div class="field">
           <label for="cc">Chief Complaint <span class="required">*</span></label>
           <input id="cc" type="text" placeholder="Enter chief complaint as stated by patient">
-          <p class="helper-text">Export wraps this in quotes.</p>
         </div>
       </div>
     </section>
@@ -306,7 +305,7 @@
         <div class="section-heading">
           <div>
             <h2>Appointment Notes</h2>
-            <p id="notesSectionCopy">Freeform encounter notes.</p>
+            <p id="notesSectionCopy">Encounter notes.</p>
           </div>
           <div class="section-heading-right">
             <span class="section-status completion-status-pending" id="notesCompletionStatus">Pending</span>
@@ -327,7 +326,7 @@
         <div class="section-heading">
           <div>
             <h2>Verbatim Intake Script</h2>
-            <p id="scriptSectionCopy">Interview prompts for intake.</p>
+            <p id="scriptSectionCopy">Intake prompts.</p>
           </div>
           <div class="section-mini-badge" id="scriptMiniBadge">Interview prompts</div>
         </div>
@@ -348,7 +347,7 @@
       <div class="section-heading">
         <div>
           <h2>Closing &amp; Follow-Up</h2>
-          <p id="closingSectionCopy">Schedule, close, and document timing.</p>
+          <p id="closingSectionCopy">Follow-up and timing.</p>
         </div>
         <div class="section-heading-right">
           <span class="section-status completion-status-pending" id="closingCompletionStatus">Pending</span>
@@ -377,8 +376,7 @@
           <button type="button" class="interval-btn" data-weeks="12">12 wk</button>
           <button type="button" class="interval-btn" data-followup-mode="prn">PRN</button>
         </div>
-        <p class="helper-text">Intervals auto-fill date. PRN clears scheduling.</p>
-        <p class="helper-text prn-helper-text hidden" id="prnHelperText">PRN selected: no follow-up appointment was scheduled during this encounter.</p>
+        <p class="helper-text prn-helper-text hidden" id="prnHelperText">PRN selected.</p>
       </div>
 
       <div class="grid grid-2 top-gap">
@@ -411,8 +409,7 @@
           <button type="button" class="seg-btn" data-therapy-tier=">=38">&gt;=38</button>
           <button type="button" class="seg-btn" data-therapy-tier=">=53">&gt;=53</button>
         </div>
-        <p class="helper-text">Options unlock from elapsed face-to-face time.</p>
-        <p class="helper-text" id="therapyInterwovenHint">Enter face-to-face start and end times to unlock higher therapy tiers.</p>
+        <p class="helper-text" id="therapyInterwovenHint">Enter times to unlock tiers.</p>
         <input type="hidden" id="therapyInterwoven" value="0">
       </div>
 
@@ -475,14 +472,14 @@
         <button type="button" class="doc-type-btn" data-supporting-doc-type="genesight" aria-pressed="false">GeneSight</button>
         <button type="button" class="doc-type-btn" data-supporting-doc-type="other" aria-pressed="false">Other</button>
       </div>
-      <p class="helper-text" id="astraSupportingDocsHint">Final pre-export checklist for documents uploaded to GPT.</p>
+      <p class="helper-text" id="astraSupportingDocsHint">Ancillary files uploaded to GPT.</p>
     </div>
 
     <section class="card export-card" data-section="export">
       <div class="section-heading">
         <div>
           <h2>Export</h2>
-          <p id="exportSectionCopy">Preview the structured output live, then copy into the target GPT.</p>
+          <p id="exportSectionCopy">Copy the final packet.</p>
         </div>
         <div class="section-mini-badge" id="exportMiniBadge">Final handoff</div>
       </div>
@@ -494,8 +491,8 @@
         <button id="clearBtn" type="button">Clear</button>
       </div>
 
-      <p class="helper-text export-helper" id="exportHelper">The correct GPT can be opened automatically based on selected practice and appointment type.</p>
-      <p class="shortcut-guide" id="shortcutGuide">Shortcuts: copy, copy+open, open GPT, Med Reference use Cmd/Ctrl+Shift+C/O/G/M.</p>
+      <p class="helper-text export-helper" id="exportHelper">Copy or open the Astra GPT.</p>
+      <p class="shortcut-guide" id="shortcutGuide">Shortcuts: Cmd/Ctrl+Shift+C/O/G/M.</p>
 
       <div class="field top-gap">
         <label for="exportBox">Export Preview</label>
@@ -506,7 +503,7 @@
       <section class="backup-tray" id="backupTray" aria-live="polite">
         <div class="backup-header">
           <span class="backup-title">Local Backup (last 10)</span>
-          <span class="backup-subtitle">Autosaved by patient (same patient overwrites previous autosave)</span>
+          <span class="backup-subtitle">Age, gender, scheduled start</span>
         </div>
         <div class="backup-list" id="backupList"></div>
         <p class="helper-text" id="backupEmpty">No patient drafts yet.</p>
@@ -581,6 +578,8 @@
         <div><dt>Block Code</dt><dd id="diagBlockCode">-</dd></div>
         <div><dt>Block Reason</dt><dd id="diagBlockReason">-</dd></div>
         <div><dt>Last Error</dt><dd id="diagLastError">-</dd></div>
+        <div><dt>Queue Detail</dt><dd id="diagQueueDetail">-</dd></div>
+        <div><dt>Cleanup</dt><dd id="diagCleanup">-</dd></div>
       </dl>
       <div class="action-row drive-diagnostics-actions">
         <button id="driveRunRepairBtn" type="button">Run Drive Repair</button>

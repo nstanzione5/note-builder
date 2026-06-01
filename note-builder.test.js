@@ -242,7 +242,7 @@ async function testAstraGptRouting() {
     'https://chatgpt.com/g/g-69f246601ad08191bc5f7522948c06ef-astra-note',
     'Astra intake should route to the universal Astra GPT URL',
   );
-  assert.match(document.getElementById('exportHelper').textContent, /universal Astra GPT/i);
+  assert.match(document.getElementById('exportHelper').textContent, /Astra GPT/i);
 
   document.getElementById('followBtn').click();
 
@@ -251,7 +251,7 @@ async function testAstraGptRouting() {
     'https://chatgpt.com/g/g-69f246601ad08191bc5f7522948c06ef-astra-note',
     'Astra follow-up should route back to the universal Astra GPT URL',
   );
-  assert.match(document.getElementById('exportHelper').textContent, /universal Astra GPT/i);
+  assert.match(document.getElementById('exportHelper').textContent, /Astra GPT/i);
 
   assert.equal(document.getElementById('practiceToggle'), null, 'Practice toggle should be removed for the single routing path');
 
@@ -504,6 +504,46 @@ async function testScheduledStartDraftValueIsNotOverwritten() {
   dom.window.close();
 }
 
+async function testScheduledStartClearReturnsToCurrentMeridiem() {
+  const dom = await createAppDom({ mockNow: '2026-04-29T13:15:00' });
+  const { window } = dom;
+
+  window.eval(`
+    setValue('scheduledStart', '9:00 AM');
+    setValue('scheduledStart', '');
+  `);
+
+  assert.ok(
+    window.document.querySelector('.time-control[data-time-field="scheduledStart"] .time-meridiem-btn[data-meridiem="PM"]').classList.contains('active'),
+    'Cleared Scheduled Start should return to the actual current PM default',
+  );
+
+  dom.window.close();
+}
+
+async function testIntakeScriptResizeMovesWithNotesPanel() {
+  const dom = await createAppDom();
+  const { window } = dom;
+
+  window.document.getElementById('intakeBtn').click();
+  window.document.getElementById('scriptToggle').checked = true;
+  window.document.getElementById('scriptToggle').dispatchEvent(new window.Event('change', { bubbles: true }));
+  window.eval('applyScriptPanelHeight(520, { persist: false })');
+
+  assert.equal(
+    window.document.getElementById('workspaceGrid').style.getPropertyValue('--workspace-panel-height'),
+    '520px',
+    'Shared workspace height should move appointment notes with the script panel',
+  );
+  assert.equal(
+    window.document.getElementById('scriptPanel').style.getPropertyValue('--script-panel-height'),
+    '520px',
+    'Script panel should keep its own height variable for the scroll area',
+  );
+
+  dom.window.close();
+}
+
 async function testScreeningInformationDraftRestore() {
   const firstDom = await createAppDom();
   const firstWindow = firstDom.window;
@@ -694,6 +734,9 @@ async function testPatientLettersPacketBuilderAndPersistence() {
   assert.match(document.getElementById('clinicianConfigStatus').textContent, /Clinicians from Drive/);
   assert.equal(document.getElementById('clinicianSelect').value, 'nick-stanzione');
   assert.match(document.getElementById('clinicianMeta').textContent, /NY-123/);
+  setField(window, 'letterDate', '2026-01-01', 'change');
+  document.getElementById('letterDateTodayBtn').click();
+  assert.equal(document.getElementById('letterDate').value, '2026-05-10');
   document.getElementById('refreshCliniciansBtn').click();
   await new Promise((resolve) => setTimeout(resolve, 0));
   assert.match(document.getElementById('clinicianConfigStatus').textContent, /Clinicians from Drive/);
@@ -787,11 +830,47 @@ async function testIncompletePatientBackupsDoNotUseQuestionMarkLabels() {
   assert.equal(ageOnly.patientLabel, '34 unknown gender');
   assert.doesNotMatch(ageOnly.patientLabel, /\?/);
 
+  const withScheduledStart = window.eval(`
+    normalizeSnapshotEntry({
+      draft: {
+        state: { practice: 'astra', visitType: 'followup' },
+        inputs: { age: '34', gender: 'Female', scheduledStart: '3:30 PM' }
+      }
+    })
+  `);
+  assert.equal(withScheduledStart.patientLabel, '34 F · 3:30 PM');
+  assert.equal(window.eval('formatSnapshotLabel(' + JSON.stringify(withScheduledStart) + ')'), '34 F · 3:30 PM');
+
+  dom.window.close();
+}
+
+async function testDriveQueueDiagnosticsAndCurrentOnlyBackups() {
+  const dom = await createAppDom();
+  const { window } = dom;
+
+  window.localStorage.setItem('driveSyncPendingWrites_v1', JSON.stringify([
+    {
+      type: 'file.put',
+      path: 'data/draft/users/nick-at-astrapsychiatry-com/current.json',
+      attempts: 2,
+      lastError: 'Drive action file.put failed.',
+      nextRetryAt: '2026-06-01T12:30:00.000Z',
+    },
+  ]));
+  const failure = window.eval('getDriveQueueFailure()');
+  assert.equal(failure.count, 1);
+  assert.equal(failure.attempts, 2);
+  assert.match(failure.label, /current\.json/);
+
+  const queueSnapshotSource = js.match(/function queueSnapshot[\s\S]*?\n}\n\nfunction buildDraftPayload/)[0];
+  assert.doesNotMatch(queueSnapshotSource, /queueDriveBackupAppend/, 'Normal autosave snapshots should not create Drive backup append files');
+  assert.match(queueSnapshotSource, /queueDriveRecentPatientsWrite/, 'Normal autosave snapshots should keep the per-user recent-patient index');
+
   dom.window.close();
 }
 
 function testAppsScriptDiagnosticsAndBuildId() {
-  assert.match(appsScript, /const APP_BUILD_ID = '20260522-supporting-docs-drive';/);
+  assert.match(appsScript, /const APP_BUILD_ID = '20260601-drive-glass-cleanup';/);
   assert.match(appsScript, /function buildStatusHtml_/);
   assert.match(appsScript, /function htmlResponse_/);
   assert.match(appsScript, /DRIVE_LAST_ERROR/);
@@ -808,12 +887,15 @@ async function run() {
   await testClosingTimeRowsUseLevelGrid();
   await testScheduledStartMeridiemDefaultsFromCurrentTime();
   await testScheduledStartDraftValueIsNotOverwritten();
+  await testScheduledStartClearReturnsToCurrentMeridiem();
+  await testIntakeScriptResizeMovesWithNotesPanel();
   await testScreeningInformationDraftRestore();
   await testTelehealthDefaultsRespectBlankAndManualState();
   await testMedicationDrawerKeyboardKeepsSearchEditable();
   await testPatientLettersPacketBuilderAndPersistence();
   await testPatientLettersLocalFallbackStatus();
   await testIncompletePatientBackupsDoNotUseQuestionMarkLabels();
+  await testDriveQueueDiagnosticsAndCurrentOnlyBackups();
   testAppsScriptDiagnosticsAndBuildId();
   console.log('All note-builder tests passed.');
 }

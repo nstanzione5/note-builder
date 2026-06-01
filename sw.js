@@ -1,4 +1,4 @@
-const APP_BUILD_ID = '20260522-supporting-docs-drive';
+const APP_BUILD_ID = '20260601-drive-glass-cleanup';
 const CACHE_PREFIX = 'note-builder-shell-';
 const CACHE_NAME = `${CACHE_PREFIX}${APP_BUILD_ID}`;
 const SHELL_ASSETS = [

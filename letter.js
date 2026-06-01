@@ -57,6 +57,7 @@ const els = {
   clinicianMeta: document.getElementById('clinicianMeta'),
   letterType: document.getElementById('letterType'),
   letterDate: document.getElementById('letterDate'),
+  letterDateTodayBtn: document.getElementById('letterDateTodayBtn'),
   letterRecipient: document.getElementById('letterRecipient'),
   letterRecipientAddress: document.getElementById('letterRecipientAddress'),
   letterPurpose: document.getElementById('letterPurpose'),
@@ -337,6 +338,10 @@ function updateClinicianMeta() {
 
 function setDefaultDate() {
   if (getValue('letterDate')) return;
+  setLetterDateToday();
+}
+
+function setLetterDateToday() {
   const now = new Date();
   const yyyy = now.getFullYear();
   const mm = String(now.getMonth() + 1).padStart(2, '0');
@@ -589,6 +594,12 @@ function attachEventListeners() {
       applyDraft(getStoredDraft());
       syncControls();
       saveDraft();
+    });
+  }
+  if (els.letterDateTodayBtn) {
+    els.letterDateTodayBtn.addEventListener('click', () => {
+      setLetterDateToday();
+      fieldChangeHandler({ target: els.letterDate });
     });
   }
   if (els.clearBtn) {
