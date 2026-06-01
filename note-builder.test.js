@@ -870,7 +870,7 @@ async function testDriveQueueDiagnosticsAndCurrentOnlyBackups() {
 }
 
 function testAppsScriptDiagnosticsAndBuildId() {
-  assert.match(appsScript, /const APP_BUILD_ID = '20260601-drive-glass-cleanup';/);
+  assert.match(appsScript, /const APP_BUILD_ID = '20260601-drive-repair-clarity';/);
   assert.match(appsScript, /function buildStatusHtml_/);
   assert.match(appsScript, /function htmlResponse_/);
   assert.match(appsScript, /DRIVE_LAST_ERROR/);

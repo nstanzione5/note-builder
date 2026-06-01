@@ -206,7 +206,7 @@ const CONDENSE_CLASS_EXIT = 0.62;
 
 const MED_CATALOG_URL = './data/meds/compiled/medications.compiled.json';
 const PROVIDER_SCRIPTS_URL = './config/provider-scripts.json';
-const APP_BUILD_ID = String((els.body && els.body.dataset && els.body.dataset.appBuildId) || '20260601-drive-glass-cleanup').trim() || '20260601-drive-glass-cleanup';
+const APP_BUILD_ID = String((els.body && els.body.dataset && els.body.dataset.appBuildId) || '20260601-drive-repair-clarity').trim() || '20260601-drive-repair-clarity';
 const MED_FAVORITES_KEY = 'medDrawerFavorites_v1';
 const MED_RECENTS_KEY = 'medDrawerRecents_v1';
 const MED_MISSING_REQUESTS_KEY = 'medDrawerMissingRequests_v1';
@@ -1204,12 +1204,6 @@ function updateDriveStatusBadge(meta = getDriveMeta()) {
     return;
   }
 
-  if (meta.backendVersionWarning) {
-    setDriveStatusBadge('Drive: Backend update needed', 'warning', meta.backendVersionWarning);
-    renderDriveDiagnostics();
-    return;
-  }
-
   if (pendingRemoteDraft) {
     const remoteLabel = pendingRemoteDraft.savedAtIso
       ? new Date(pendingRemoteDraft.savedAtIso).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
@@ -1300,7 +1294,11 @@ function renderDriveDiagnostics() {
   const meta = getDriveMeta();
 
   if (els.diagClientBuild) els.diagClientBuild.textContent = APP_BUILD_ID || 'n/a';
-  if (els.diagBackendBuild) els.diagBackendBuild.textContent = state.driveBackendBuildId || 'unknown';
+  if (els.diagBackendBuild) {
+    els.diagBackendBuild.textContent = meta.backendVersionWarning
+      ? `${state.driveBackendBuildId || 'unknown'} (redeploy needed)`
+      : (state.driveBackendBuildId || 'unknown');
+  }
   if (els.diagEndpoint) els.diagEndpoint.textContent = config.endpointUrl || 'not configured';
   if (els.diagResolvedUser) {
     const resolved = state.driveResolvedUserEmail || '';
@@ -1403,11 +1401,18 @@ async function runDriveRepair(trigger = 'manual', options = {}) {
       setDriveWriteBlock(false, '');
     }
 
+    const repairMessage = next.backendVersionSkew
+      ? 'Drive repair complete. Backend code is still old; redeploy Apps Script to finish the update.'
+      : 'Drive repair complete.';
+
     if (!skipResync) {
-      setDriveCleanupStatus('Drive repair complete. Running sync check...');
+      setDriveCleanupStatus(next.backendVersionSkew ? repairMessage : 'Drive repair complete. Running sync check...');
       await runDriveSyncCycle(true);
+      if (next.backendVersionSkew) {
+        setDriveCleanupStatus(repairMessage, true);
+      }
     } else {
-      setDriveCleanupStatus('Drive repair complete.');
+      setDriveCleanupStatus(repairMessage, next.backendVersionSkew);
     }
   } catch (error) {
     const message = String(error && error.message ? error.message : error);
