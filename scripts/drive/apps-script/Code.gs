@@ -16,7 +16,7 @@ const ALLOWED_USER_EMAILS_PROPERTY = 'DRIVE_ALLOWED_USER_EMAILS';
 const SERVICE_TOKEN_PROPERTY = 'DRIVE_SERVICE_TOKEN';
 const LEGACY_OWNER_TOKEN_PROPERTY = 'DRIVE_OWNER_TOKEN';
 const LAST_ERROR_PROPERTY = 'DRIVE_LAST_ERROR';
-const APP_BUILD_ID = '20260601-drive-repair-clarity';
+const APP_BUILD_ID = '20260729-drive-identity-screeners';
 const PREFLIGHT_STATUS = {
   OK: 'ok',
   ROOT_MISSING: 'root_missing',
@@ -2754,9 +2754,12 @@ function normalizeEmail_(value) {
 
 function resolveEffectiveUserEmail_(payload) {
   const active = normalizeEmail_(Session.getActiveUser().getEmail() || '');
+  const userFromPayload = normalizeEmail_((payload && payload.userEmail) || '');
+  if (active && userFromPayload && active !== userFromPayload && isEmailAllowlisted_(active) && isEmailAllowlisted_(userFromPayload)) {
+    throw new Error(`Drive identity mismatch: signed-in Apps Script user (${active}) differs from requested app user (${userFromPayload}). Redeploy the web app as "User accessing the web app" or sign into the matching account before saving.`);
+  }
   if (active) return active;
 
-  const userFromPayload = normalizeEmail_((payload && payload.userEmail) || '');
   if (userFromPayload) return userFromPayload;
 
   return normalizeEmail_((payload && payload.ownerEmail) || '');

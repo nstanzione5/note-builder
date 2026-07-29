@@ -258,7 +258,7 @@ async function testAstraGptRouting() {
   dom.window.close();
 }
 
-async function testAstraIntakeExportIncludesScreeningInformation() {
+async function testAstraIntakeUsesOtherScreenerForExtraScreeningInfo() {
   const dom = await createAppDom();
   const { window } = dom;
   const { document } = window;
@@ -266,10 +266,10 @@ async function testAstraIntakeExportIncludesScreeningInformation() {
   document.getElementById('intakeBtn').click();
 
   assert.ok(document.querySelector('[data-astra-intake-screening-mode="uploadToGpt"]').classList.contains('active'));
-  assert.equal(document.getElementById('astraIntakeScreeningModeGroup').closest('#astraScreeningInfo').id, 'astraScreeningInfo');
+  assert.equal(document.getElementById('astraIntakeScreeningModeGroup').closest('#astraScreeners').id, 'astraScreeners');
   assert.ok(!document.getElementById('astraScreenersFields').classList.contains('hidden'));
-  assert.ok(!document.getElementById('astraScreeningInfo').classList.contains('hidden'));
-  assert.ok(!document.getElementById('screeningInfoField').classList.contains('hidden'));
+  assert.equal(document.getElementById('astraScreeningInfo'), null);
+  assert.equal(document.getElementById('screeningInfoField'), null);
   assert.ok(!document.getElementById('astraSupportingDocsUploaded').checked);
   assert.equal(document.querySelector('[data-supporting-doc-type="intakeScreener"]'), null);
   assert.equal(document.getElementById('astraScreenersCompletionStatus').textContent, 'Complete');
@@ -278,22 +278,20 @@ async function testAstraIntakeExportIncludesScreeningInformation() {
 
   document.querySelector('[data-astra-intake-screening-mode="enterManually"]').click();
   assert.ok(!document.getElementById('astraScreenersFields').classList.contains('hidden'));
-  assert.ok(!document.getElementById('astraScreeningInfo').classList.contains('hidden'));
-  assert.ok(!document.getElementById('screeningInfoField').classList.contains('hidden'));
 
   setField(window, 'phq9', '14, moderate');
-  setField(window, 'screeningInfo', 'Pre-visit forms reported chronic sleep disruption and recent panic symptoms.');
+  setField(window, 'otherScreener', 'Pre-visit forms reported chronic sleep disruption and recent panic symptoms.');
   setField(window, 'notes', 'Discussed mood, anxiety, and treatment goals.');
 
   const exportText = document.getElementById('exportBox').value;
   assert.match(exportText, /ASTRA RAW GPT INPUT/);
   assert.match(exportText, /PRE-VISIT SCREENERS/);
-  assert.match(exportText, /SCREENING DOCUMENTATION/);
-  assert.match(exportText, /Pre-visit forms reported chronic sleep disruption and recent panic symptoms\./);
+  assert.match(exportText, /- Other: Pre-visit forms reported chronic sleep disruption and recent panic symptoms\./);
+  assert.doesNotMatch(exportText, /SCREENING DOCUMENTATION/);
   assert.ok(
-    exportText.indexOf('PRE-VISIT SCREENERS') < exportText.indexOf('SCREENING DOCUMENTATION')
-      && exportText.indexOf('SCREENING DOCUMENTATION') < exportText.indexOf('CLINICAL NOTES'),
-    'Screening documentation should appear between screeners and clinical notes',
+    exportText.indexOf('PRE-VISIT SCREENERS') < exportText.indexOf('INTAKE SCREENER PACKET')
+      && exportText.indexOf('INTAKE SCREENER PACKET') < exportText.indexOf('CLINICAL NOTES'),
+    'Intake screener packet instructions should appear between screeners and clinical notes',
   );
 
   dom.window.close();
@@ -332,8 +330,9 @@ async function testAstraSupportingDocumentsInstruction() {
     /Uploaded directly to GPT: previous records, lab results, GeneSight report, other supporting documentation\. Use uploaded documents as supporting context with the current encounter data\./,
   );
   assert.doesNotMatch(exportText, /intake\/screening documentation/);
+  assert.doesNotMatch(exportText, /SCREENING DOCUMENTATION/);
   assert.ok(
-    exportText.indexOf('SCREENING DOCUMENTATION') < exportText.indexOf('UPLOADED SUPPORTING DOCUMENTS')
+    exportText.indexOf('INTAKE SCREENER PACKET') < exportText.indexOf('UPLOADED SUPPORTING DOCUMENTS')
       && exportText.indexOf('UPLOADED SUPPORTING DOCUMENTS') < exportText.indexOf('CLINICAL NOTES'),
     'Supporting document instruction should appear before clinical notes',
   );
@@ -570,10 +569,11 @@ async function testScreeningInformationDraftRestore() {
   });
 
   assert.equal(
-    secondDom.window.document.getElementById('screeningInfo').value,
+    secondDom.window.document.getElementById('otherScreener').value,
     'Outside records note longstanding concentration problems and family anxiety history.',
-    'Screening information should restore from saved draft state',
+    'Legacy screening information should migrate into Other Screener',
   );
+  assert.equal(secondDom.window.document.getElementById('screeningInfo').value, '');
 
   secondDom.window.close();
 }
@@ -869,8 +869,39 @@ async function testDriveQueueDiagnosticsAndCurrentOnlyBackups() {
   dom.window.close();
 }
 
+async function testDrivePathsPreferResolvedUserScope() {
+  const dom = await createAppDom({
+    seedLocalStorage: {
+      driveSyncUserEmail_v1: JSON.stringify('nick@astrapsychiatry.com'),
+    },
+  });
+  const { window } = dom;
+
+  window.eval("state.driveResolvedUserEmail = 'kris@astrapsychiatry.com';");
+
+  assert.equal(
+    window.eval('getScopedStorageUserKey()'),
+    'kris-at-astrapsychiatry-com',
+    'Local draft storage should follow the backend-resolved user once known',
+  );
+  assert.equal(
+    window.eval('getScopedDriveDraftPath()'),
+    'data/draft/users/kris-at-astrapsychiatry-com/current.json',
+    'Drive current draft path should be scoped to the backend-resolved user',
+  );
+  assert.equal(
+    window.eval('getScopedDriveRecentPatientsPath()'),
+    'data/draft/users/kris-at-astrapsychiatry-com/recent-patients.json',
+    'Drive recent-patient path should be scoped to the backend-resolved user',
+  );
+
+  dom.window.close();
+}
+
 function testAppsScriptDiagnosticsAndBuildId() {
-  assert.match(appsScript, /const APP_BUILD_ID = '20260601-drive-repair-clarity';/);
+  assert.match(appsScript, /const APP_BUILD_ID = '20260729-drive-identity-screeners';/);
+  assert.match(appsScript, /Drive identity mismatch: signed-in Apps Script user/);
+  assert.match(appsScript, /User accessing the web app/);
   assert.match(appsScript, /function buildStatusHtml_/);
   assert.match(appsScript, /function htmlResponse_/);
   assert.match(appsScript, /DRIVE_LAST_ERROR/);
@@ -880,7 +911,7 @@ function testAppsScriptDiagnosticsAndBuildId() {
 
 async function run() {
   await testAstraGptRouting();
-  await testAstraIntakeExportIncludesScreeningInformation();
+  await testAstraIntakeUsesOtherScreenerForExtraScreeningInfo();
   await testAstraSupportingDocumentsInstruction();
   await testAstraFollowupUploadedPreviousNoteMode();
   await testAstraWorkflowTogglesDraftRestore();
@@ -896,6 +927,7 @@ async function run() {
   await testPatientLettersLocalFallbackStatus();
   await testIncompletePatientBackupsDoNotUseQuestionMarkLabels();
   await testDriveQueueDiagnosticsAndCurrentOnlyBackups();
+  await testDrivePathsPreferResolvedUserScope();
   testAppsScriptDiagnosticsAndBuildId();
   console.log('All note-builder tests passed.');
 }

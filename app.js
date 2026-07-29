@@ -71,9 +71,6 @@ const els = {
   astraScreeners: document.getElementById('astraScreeners'),
   astraScreenersCompletionStatus: document.getElementById('astraScreenersCompletionStatus'),
   astraScreenersFields: document.getElementById('astraScreenersFields'),
-  astraScreeningInfo: document.getElementById('astraScreeningInfo'),
-  screeningInfoField: document.getElementById('screeningInfoField'),
-  astraScreeningInfoCompletionStatus: document.getElementById('astraScreeningInfoCompletionStatus'),
   currentModality: document.getElementById('currentModality'),
   followModality: document.getElementById('followModality'),
   therapyInterwoven: document.getElementById('therapyInterwoven'),
@@ -206,7 +203,7 @@ const CONDENSE_CLASS_EXIT = 0.62;
 
 const MED_CATALOG_URL = './data/meds/compiled/medications.compiled.json';
 const PROVIDER_SCRIPTS_URL = './config/provider-scripts.json';
-const APP_BUILD_ID = String((els.body && els.body.dataset && els.body.dataset.appBuildId) || '20260601-drive-repair-clarity').trim() || '20260601-drive-repair-clarity';
+const APP_BUILD_ID = String((els.body && els.body.dataset && els.body.dataset.appBuildId) || '20260729-drive-identity-screeners').trim() || '20260729-drive-identity-screeners';
 const MED_FAVORITES_KEY = 'medDrawerFavorites_v1';
 const MED_RECENTS_KEY = 'medDrawerRecents_v1';
 const MED_MISSING_REQUESTS_KEY = 'medDrawerMissingRequests_v1';
@@ -846,10 +843,15 @@ function driveUserKeyFromEmail(email) {
     .replace(/^-|-$/g, '');
 }
 
-function getScopedStorageUserKey() {
+function getEffectiveDriveScopeEmail() {
   const config = getDriveConfig();
-  const effectiveEmail = String(config.userEmail || '').trim().toLowerCase();
-  return driveUserKeyFromEmail(effectiveEmail) || 'anonymous';
+  const configuredEmail = String(config.userEmail || '').trim().toLowerCase();
+  if (!configuredEmail) return '';
+  return String(state.driveResolvedUserEmail || configuredEmail).trim().toLowerCase();
+}
+
+function getScopedStorageUserKey() {
+  return driveUserKeyFromEmail(getEffectiveDriveScopeEmail()) || 'anonymous';
 }
 
 function getDraftStorageKey() {
@@ -918,15 +920,13 @@ function migrateAnonymousScopedStorageToResolvedUser() {
 }
 
 function getScopedDriveDraftPath() {
-  const config = getDriveConfig();
-  const userKey = driveUserKeyFromEmail(config.userEmail);
+  const userKey = driveUserKeyFromEmail(getEffectiveDriveScopeEmail());
   if (!userKey) return '';
   return `data/draft/users/${userKey}/current.json`;
 }
 
 function getScopedDriveRecentPatientsPath() {
-  const config = getDriveConfig();
-  const userKey = driveUserKeyFromEmail(config.userEmail);
+  const userKey = driveUserKeyFromEmail(getEffectiveDriveScopeEmail());
   if (!userKey) return '';
   return `data/draft/users/${userKey}/recent-patients.json`;
 }
@@ -2425,6 +2425,19 @@ async function runDriveSyncCycle(force = false) {
       return;
     }
 
+    if (!configuredUser) {
+      const reason = 'Confirm your Astra work email before Drive sync saves per-user drafts.';
+      const prompted = maybePromptForDriveUserEmail(reason, { force: true });
+      setDriveWriteBlock(true, prompted ? 'Drive identity captured. Retrying sync...' : reason, 'identity_missing');
+      updateDriveStatusBadge();
+      if (prompted) {
+        window.setTimeout(() => {
+          runWhenIdle(() => runDriveSyncCycle(true));
+        }, 250);
+      }
+      return;
+    }
+
     if (healthState.userChanged) {
       // Prevent cross-user leakage from stale queued payloads after identity resolves/changes.
       setDriveQueue([]);
@@ -2671,13 +2684,11 @@ function updatePracticeSections() {
   if (els.astraScreeners) els.astraScreeners.classList.toggle('hidden', !isIntake);
   if (els.astraIntakeScreeningModeGroup) els.astraIntakeScreeningModeGroup.classList.toggle('hidden', !isIntake);
   if (els.astraScreenersFields) els.astraScreenersFields.classList.remove('hidden');
-  if (els.screeningInfoField) els.screeningInfoField.classList.toggle('hidden', !isIntake);
   if (els.astraIntakeScreeningModeHint) {
     els.astraIntakeScreeningModeHint.textContent = includesUploadedScreenerPacket
       ? 'Typed scores + uploaded packet.'
       : 'Typed scores only.';
   }
-  if (els.astraScreeningInfo) els.astraScreeningInfo.classList.toggle('hidden', !isIntake);
   if (els.patientLettersBtn) els.patientLettersBtn.classList.remove('hidden');
 }
 
@@ -3231,9 +3242,19 @@ function buildScreenersText() {
   return lines.length ? lines.join('\n') : 'Not entered';
 }
 
-function buildScreeningInformationText() {
-  if (state.practice !== 'astra' || state.visitType !== 'intake') return '';
-  return getValue('screeningInfo') || 'Not entered';
+function migrateLegacyScreeningInfoToOtherScreener() {
+  const legacy = getValue('screeningInfo');
+  if (!legacy) return false;
+
+  const existingOther = getValue('otherScreener');
+  if (!existingOther) {
+    setValue('otherScreener', legacy);
+  } else if (!existingOther.toLowerCase().includes(legacy.toLowerCase())) {
+    setValue('otherScreener', `${existingOther}\n\nAdditional screening information: ${legacy}`);
+  }
+
+  setValue('screeningInfo', '');
+  return true;
 }
 
 function getAstraSupportingDocLabels() {
@@ -3318,7 +3339,6 @@ function buildExport() {
   const previousPlan = getValue('previousPlan');
   const notes = getValue('notes');
   const screeners = buildScreenersText();
-  const screeningInfo = buildScreeningInformationText();
   const supportingDocuments = buildAstraSupportingDocumentsText();
 
   if (state.visitType === 'followup') {
@@ -3359,9 +3379,6 @@ function buildExport() {
     state.astraIntakeScreeningMode === 'uploadToGpt'
       ? 'The intake screener/background packet will be uploaded directly to the GPT. Use it as background context with the typed testing results above.'
       : 'No separate intake screener/background packet selected in the app.',
-    '',
-    'SCREENING DOCUMENTATION',
-    screeningInfo,
   ];
 
   return [
@@ -3425,9 +3442,6 @@ function evaluateCompletion() {
 
 function updateCompletionIndicators() {
   const { previsitComplete, setupComplete, notesComplete, closingComplete } = evaluateCompletion();
-  const hasTypedScreenerData = SCREENER_IDS.some((id) => isFilled(id));
-  const hasUploadedScreenerPacket = state.visitType === 'intake' && state.astraIntakeScreeningMode === 'uploadToGpt';
-  const screeningInfoComplete = isFilled('screeningInfo') || hasTypedScreenerData || hasUploadedScreenerPacket;
 
   setSectionCompletion(els.setupCompletionStatus, els.setupSection, setupComplete);
   setSectionCompletion(els.notesCompletionStatus, els.notesSection, notesComplete);
@@ -3443,12 +3457,6 @@ function updateCompletionIndicators() {
     setSectionCompletion(els.astraScreenersCompletionStatus, els.astraScreeners, previsitComplete);
   } else {
     setSectionCompletion(els.astraScreenersCompletionStatus, els.astraScreeners, false);
-  }
-
-  if (isVisible(els.astraScreeningInfo)) {
-    setSectionCompletion(els.astraScreeningInfoCompletionStatus, els.astraScreeningInfo, screeningInfoComplete);
-  } else {
-    setSectionCompletion(els.astraScreeningInfoCompletionStatus, els.astraScreeningInfo, false);
   }
 }
 
@@ -3913,6 +3921,7 @@ function applyDraft(draft) {
         setValue(id, draft.inputs[id] || '');
       }
     });
+    migrateLegacyScreeningInfoToOtherScreener();
   }
 
   if (!state.therapyInterwovenTier) {
