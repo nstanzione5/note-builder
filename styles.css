@@ -2154,3 +2154,39 @@ body.script-resize-active * {
     justify-content: center;
   }
 }
+.astra-auth-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(15, 23, 42, 0.72);
+  backdrop-filter: blur(8px);
+}
+
+.astra-auth-card {
+  width: min(440px, 100%);
+  padding: 32px;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  border-radius: 22px;
+  background: #fff;
+  color: #172033;
+  box-shadow: 0 24px 80px rgba(15, 23, 42, 0.3);
+  text-align: center;
+}
+
+.astra-auth-card h2 {
+  margin: 0 0 10px;
+}
+
+.astra-auth-card p {
+  margin: 0 0 22px;
+  color: #526078;
+  line-height: 1.5;
+}
+
+.astra-google-signin {
+  display: flex;
+  justify-content: center;
+}

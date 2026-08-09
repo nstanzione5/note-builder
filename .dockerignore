@@ -1,0 +1,11 @@
+.git
+.gitignore
+.DS_Store
+node_modules
+puppeteer-screenshot.png
+scripts
+docs
+*.test.js
+server/*.test.js
+data/meds/source
+data/meds/curated

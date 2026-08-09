@@ -1,4 +1,4 @@
-const APP_BUILD_ID = '20260729-drive-identity-screeners';
+const APP_BUILD_ID = '20260809-google-cloud-auth';
 const CACHE_PREFIX = 'note-builder-shell-';
 const CACHE_NAME = `${CACHE_PREFIX}${APP_BUILD_ID}`;
 const SHELL_ASSETS = [
@@ -6,6 +6,7 @@ const SHELL_ASSETS = [
   './index.html',
   './letter.html',
   './styles.css',
+  './auth.js',
   './app.js',
   './letter.js',
   './manifest.json',
@@ -27,6 +28,7 @@ const NETWORK_FIRST_PATHS = new Set([
   '/index.html',
   '/letter.html',
   '/styles.css',
+  '/auth.js',
   '/app.js',
   '/letter.js',
   '/manifest.json',
@@ -57,6 +59,9 @@ self.addEventListener('fetch', (event) => {
 
   const url = new URL(request.url);
   const pathname = url.pathname;
+
+  // Authentication and API responses must always come from the live service.
+  if (url.origin === self.location.origin && pathname.startsWith('/api/')) return;
   const isNetworkFirst = NETWORK_FIRST_PATHS.has(pathname) || pathname.endsWith('/index.html') || pathname.endsWith('/app.js') || pathname.endsWith('/styles.css');
 
   if (request.mode === 'navigate') {
