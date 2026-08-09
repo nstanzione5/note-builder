@@ -125,22 +125,9 @@ function escapeHtml(value) {
 
 function getDriveConfig() {
   const dataset = document.body.dataset || {};
-  let storedUserEmail = '';
-  try {
-    storedUserEmail = String(window.localStorage.getItem('driveSyncUserEmail_v1') || '').trim();
-  } catch (error) {
-    storedUserEmail = '';
-  }
   return {
     enabled: dataset.driveSyncEnabled === 'true',
-    endpointUrl: String(dataset.driveEndpointUrl || '').trim(),
-    sharedDriveId: String(dataset.driveSharedDriveId || '').trim(),
-    rootFolderId: String(dataset.driveRootFolderId || '').trim(),
-    rootFolderName: String(dataset.driveRootFolderName || '').trim(),
-    userEmail: String(dataset.driveUserEmail || storedUserEmail || '').trim(),
-    ownerEmail: String(dataset.driveOwnerEmail || '').trim(),
-    serviceToken: String(dataset.driveServiceToken || '').trim(),
-    ownerToken: String(dataset.driveOwnerToken || '').trim(),
+    endpointUrl: String(dataset.driveEndpointUrl || '/api/v1/actions').trim(),
     appBuildId: String(dataset.appBuildId || '').trim(),
   };
 }
@@ -154,13 +141,6 @@ async function callDriveFileGet(path) {
   const requestBody = {
     action: 'file.get',
     path,
-    sharedDriveId: config.sharedDriveId,
-    rootFolderId: config.rootFolderId,
-    rootFolderName: config.rootFolderName,
-    userEmail: config.userEmail,
-    serviceToken: config.serviceToken || config.ownerToken,
-    ownerEmail: config.ownerEmail,
-    ownerToken: config.ownerToken,
     client: {
       app: 'note-builder-letter-writer',
       timestamp: new Date().toISOString(),
@@ -173,36 +153,18 @@ async function callDriveFileGet(path) {
   const timeout = controller ? window.setTimeout(() => controller.abort(), 15000) : null;
 
   try {
-    const params = new URLSearchParams();
-    Object.entries(requestBody).forEach(([key, value]) => {
-      if (value == null || value === '') return;
-      params.set(key, typeof value === 'object' ? JSON.stringify(value) : String(value));
-    });
-    const separator = config.endpointUrl.includes('?') ? '&' : '?';
-    let response = await fetch(`${config.endpointUrl}${separator}${params.toString()}`, {
-      method: 'GET',
-      mode: 'cors',
+    if (!window.astraAuth || typeof window.astraAuth.getIdToken !== 'function') {
+      throw new Error('Google sign-in is unavailable.');
+    }
+    const idToken = await window.astraAuth.getIdToken();
+    const response = await fetch(config.endpointUrl, {
+      method: 'POST',
+      headers: { 'authorization': `Bearer ${idToken}`, 'content-type': 'application/json' },
+      credentials: 'same-origin',
       cache: 'no-store',
       signal: controller ? controller.signal : undefined,
+      body: JSON.stringify(requestBody),
     });
-
-    if (!response.ok && response.status !== 404) {
-      response = await fetch(config.endpointUrl, {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-store',
-        signal: controller ? controller.signal : undefined,
-        body: JSON.stringify(requestBody),
-      });
-    }
-    if (response.status === 405) {
-      response = await fetch(`${config.endpointUrl}${separator}${params.toString()}`, {
-        method: 'GET',
-        mode: 'cors',
-        cache: 'no-store',
-        signal: controller ? controller.signal : undefined,
-      });
-    }
     if (!response.ok) throw new Error(`Drive file.get failed (${response.status}).`);
     const payload = await response.json();
     if (payload && payload.ok === false) throw new Error(payload.error || 'Drive file.get failed.');

@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "node note-builder.test.js",
+    "start": "node server/app.js",
+    "test": "node note-builder.test.js && node --test server/*.test.js",
     "med:compile": "node scripts/meds/compile-med-catalog.mjs",
     "med:sync": "node scripts/meds/sync-source-metadata.mjs",
     "med:sync:all": "node scripts/meds/sync-source-metadata.mjs --limit=260",
@@ -37,6 +38,9 @@
   },
   "homepage": "https://github.com/nstanzione5/note-builder#readme",
   "dependencies": {
+    "express": "^5.2.1",
+    "google-auth-library": "^10.9.1",
+    "googleapis": "^160.0.0",
     "jsdom": "^21.1.2"
   },
   "devDependencies": {

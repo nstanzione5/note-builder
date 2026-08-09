@@ -203,7 +203,7 @@ const CONDENSE_CLASS_EXIT = 0.62;
 
 const MED_CATALOG_URL = './data/meds/compiled/medications.compiled.json';
 const PROVIDER_SCRIPTS_URL = './config/provider-scripts.json';
-const APP_BUILD_ID = String((els.body && els.body.dataset && els.body.dataset.appBuildId) || '20260729-drive-identity-screeners').trim() || '20260729-drive-identity-screeners';
+const APP_BUILD_ID = String((els.body && els.body.dataset && els.body.dataset.appBuildId) || '20260809-google-cloud-auth').trim() || '20260809-google-cloud-auth';
 const MED_FAVORITES_KEY = 'medDrawerFavorites_v1';
 const MED_RECENTS_KEY = 'medDrawerRecents_v1';
 const MED_MISSING_REQUESTS_KEY = 'medDrawerMissingRequests_v1';
@@ -621,7 +621,10 @@ function isValidEmailFormat(value) {
 }
 
 function getConfiguredDriveUserEmail() {
-  return String(getStorageJSON(DRIVE_USER_EMAIL_KEY, '') || '').trim().toLowerCase();
+  const authenticated = window.astraAuth && typeof window.astraAuth.getUserEmail === 'function'
+    ? window.astraAuth.getUserEmail()
+    : '';
+  return String(authenticated || state.driveResolvedUserEmail || '').trim().toLowerCase();
 }
 
 function getDrivePromptMeta() {
@@ -642,47 +645,17 @@ function setDrivePromptMeta(meta) {
 }
 
 function maybePromptForDriveUserEmail(reason = '', options = {}) {
-  const { force = false } = options;
   if (driveIdentityPromptRunning) return false;
-
-  const meta = getDrivePromptMeta();
-  const now = Date.now();
-  if (!force && meta.lastPromptAt && (now - meta.lastPromptAt) < 45000) {
-    return false;
-  }
-
   driveIdentityPromptRunning = true;
-  try {
-    const message = `${reason ? `${reason}\n\n` : ''}Enter your work email to enable per-user Drive draft sync:`;
-    const existing = getConfiguredDriveUserEmail() || state.driveResolvedUserEmail || '';
-    const raw = window.prompt(message, existing);
-    const nextMeta = { ...meta, lastPromptAt: now };
-
-    if (raw == null) {
-      nextMeta.lastCancelAt = now;
-      setDrivePromptMeta(nextMeta);
-      return false;
-    }
-
-    const normalized = String(raw || '').trim().toLowerCase();
-    if (!isValidEmailFormat(normalized)) {
-      nextMeta.lastInvalidAt = now;
-      setDrivePromptMeta(nextMeta);
-      window.alert('A valid work email is required for Drive sync.');
-      return false;
-    }
-
-    setStorageJSON(DRIVE_USER_EMAIL_KEY, normalized);
-    if (state.driveResolvedUserEmail && state.driveResolvedUserEmail !== normalized) {
-      clearResolvedDriveUserEmail();
-    }
-    nextMeta.lastProvidedAt = now;
-    nextMeta.lastProvidedEmail = normalized;
-    setDrivePromptMeta(nextMeta);
+  const message = reason || 'Sign in with your approved Astra Google Workspace account to enable backup.';
+  if (window.astraAuth && typeof window.astraAuth.requireSignIn === 'function') {
+    window.astraAuth.requireSignIn(message)
+      .catch(() => {})
+      .finally(() => { driveIdentityPromptRunning = false; });
     return true;
-  } finally {
-    driveIdentityPromptRunning = false;
   }
+  driveIdentityPromptRunning = false;
+  return false;
 }
 
 function getDraftSavedAtMs(payload) {
@@ -800,20 +773,13 @@ function tryApplyPendingRemoteDraft() {
 
 function getDriveConfig() {
   const dataset = els.body ? els.body.dataset : {};
-  const query = typeof window !== 'undefined' ? new URLSearchParams(window.location.search || '') : null;
-  const queryUserEmail = query ? String(query.get('driveUserEmail') || '').trim().toLowerCase() : '';
-  const storedUserEmail = String(getStorageJSON(DRIVE_USER_EMAIL_KEY, '') || '').trim().toLowerCase();
-  // Never source the write identity from backend-resolved identity.
-  const userEmail = queryUserEmail || storedUserEmail || '';
-  if (userEmail && userEmail !== storedUserEmail) {
-    setStorageJSON(DRIVE_USER_EMAIL_KEY, userEmail);
-  }
+  const userEmail = getConfiguredDriveUserEmail();
   const intervalRaw = Number.parseInt(dataset.driveSyncMinutes || '', 10);
   const syncIntervalMinutes = Number.isFinite(intervalRaw) && intervalRaw > 0 ? intervalRaw : 30;
 
   return {
     enabled: dataset.driveSyncEnabled === 'true',
-    endpointUrl: String(dataset.driveEndpointUrl || '').trim(),
+    endpointUrl: String(dataset.driveEndpointUrl || '/api/v1/actions').trim(),
     sharedDriveId: String(dataset.driveSharedDriveId || '').trim(),
     rootFolderId: String(dataset.driveRootFolderId || '').trim(),
     rootFolderName: String(dataset.driveRootFolderName || '').trim() || DRIVE_SYNC_ENTERPRISE_NAME,
@@ -1036,7 +1002,7 @@ function applyDriveHealthState(healthPayload) {
 
   if (backendBuild && backendBuild !== APP_BUILD_ID) {
     const meta = getDriveMeta();
-    meta.backendVersionWarning = `Client update pending: backend ${backendBuild}, client ${APP_BUILD_ID}. Redeploy Apps Script when convenient.`;
+    meta.backendVersionWarning = `Client update pending: backend ${backendBuild}, client ${APP_BUILD_ID}. Deploy a matching Cloud Run revision.`;
     setDriveMeta(meta);
   } else if (backendBuild) {
     const meta = getDriveMeta();
@@ -1072,7 +1038,7 @@ function ensureDriveIdentityAligned(healthState = null) {
     return true;
   }
 
-  const reason = `Drive identity mismatch: configured user (${configuredUser}) differs from backend resolved user (${resolvedUser}). Redeploy Apps Script as "User accessing the web app" or sign into the correct account.`;
+  const reason = `Drive identity mismatch: signed-in user (${configuredUser}) differs from the identity verified by the service (${resolvedUser}). Sign out, then use the correct approved Google account.`;
   pendingRemoteDraft = null;
   setDriveWriteBlock(true, reason, 'identity_mismatch');
   const meta = getDriveMeta();
@@ -1402,7 +1368,7 @@ async function runDriveRepair(trigger = 'manual', options = {}) {
     }
 
     const repairMessage = next.backendVersionSkew
-      ? 'Drive repair complete. Backend code is still old; redeploy Apps Script to finish the update.'
+      ? 'Drive repair complete. The backend is still old; deploy a matching Cloud Run revision to finish the update.'
       : 'Drive repair complete.';
 
     if (!skipResync) {
@@ -1801,13 +1767,6 @@ async function callDriveEndpoint(action, payload = {}) {
   const requestBody = {
     ...payload,
     action,
-    sharedDriveId: payload.sharedDriveId || config.sharedDriveId,
-    rootFolderId: payload.rootFolderId || config.rootFolderId,
-    rootFolderName: payload.rootFolderName || config.rootFolderName,
-    userEmail: payload.userEmail || config.userEmail,
-    serviceToken: payload.serviceToken || config.serviceToken || config.ownerToken,
-    ownerEmail: config.ownerEmail,
-    ownerToken: config.ownerToken,
     manifestPath: DRIVE_MANIFEST_FILE,
     client: {
       app: 'note-builder',
@@ -1841,26 +1800,20 @@ async function callDriveEndpoint(action, payload = {}) {
     return data || {};
   };
 
-  let response = await fetch(config.endpointUrl, {
+  if (!window.astraAuth || typeof window.astraAuth.getIdToken !== 'function') {
+    throw new Error('Google sign-in is unavailable.');
+  }
+  const idToken = await window.astraAuth.getIdToken();
+  const response = await fetch(config.endpointUrl, {
     method: 'POST',
+    headers: {
+      'authorization': `Bearer ${idToken}`,
+      'content-type': 'application/json',
+    },
     body: JSON.stringify(requestBody),
-    mode: 'cors',
+    credentials: 'same-origin',
     cache: 'no-store',
   });
-
-  if (response.status === 405) {
-    const params = new URLSearchParams();
-    Object.entries(requestBody).forEach(([key, value]) => {
-      if (value == null || value === '') return;
-      params.set(key, typeof value === 'object' ? JSON.stringify(value) : String(value));
-    });
-    const separator = config.endpointUrl.includes('?') ? '&' : '?';
-    response = await fetch(`${config.endpointUrl}${separator}${params.toString()}`, {
-      method: 'GET',
-      mode: 'cors',
-      cache: 'no-store',
-    });
-  }
 
   return parseDriveResponse(response);
 }
@@ -2411,7 +2364,6 @@ async function runDriveSyncCycle(force = false) {
 
     if (configuredUser && !isValidEmailFormat(configuredUser)) {
       const reason = `Configured Drive email is invalid (${configuredUser}).`;
-      maybePromptForDriveUserEmail(reason, { force: true });
       setDriveWriteBlock(true, reason, 'identity_invalid');
       updateDriveStatusBadge();
       return;
@@ -2419,14 +2371,13 @@ async function runDriveSyncCycle(force = false) {
 
     if (configuredUser && allowlistedUsers.length && !allowlistedUsers.includes(configuredUser)) {
       const reason = `Configured Drive email (${configuredUser}) is not in the allowlist.`;
-      maybePromptForDriveUserEmail(reason);
       setDriveWriteBlock(true, reason, 'identity_not_allowlisted');
       updateDriveStatusBadge();
       return;
     }
 
     if (!configuredUser) {
-      const reason = 'Confirm your Astra work email before Drive sync saves per-user drafts.';
+      const reason = 'Sign in with your approved Astra Google Workspace account before Drive backup.';
       const prompted = maybePromptForDriveUserEmail(reason, { force: true });
       setDriveWriteBlock(true, prompted ? 'Drive identity captured. Retrying sync...' : reason, 'identity_missing');
       updateDriveStatusBadge();
@@ -2596,11 +2547,20 @@ function initDriveSync() {
 
   const configuredUser = getConfiguredDriveUserEmail();
   if (!configuredUser || !isValidEmailFormat(configuredUser)) {
-    maybePromptForDriveUserEmail('Drive sync requires your work email for per-user draft isolation.', { force: true });
+    maybePromptForDriveUserEmail('Use your approved Astra Google Workspace account. Your identity is verified by Google and is never typed into the app.', { force: true });
   }
 
   setDriveWriteBlock(true, 'Drive preflight pending.', 'preflight_pending');
   updateDriveStatusBadge();
+  window.addEventListener('astra-auth-changed', (event) => {
+    const email = String((event.detail && event.detail.email) || '').trim().toLowerCase();
+    if (!email) return;
+    localStorage.removeItem(DRIVE_USER_EMAIL_KEY);
+    localStorage.removeItem(DRIVE_USER_PROMPT_META_KEY);
+    state.driveResolvedUserEmail = email;
+    migrateAnonymousScopedStorageToResolvedUser();
+    runWhenIdle(() => runDriveSyncCycle(true));
+  });
   startDriveSync();
 }
 

@@ -17,11 +17,15 @@ const letterJs = fs.readFileSync(LETTER_JS_PATH, 'utf8');
 const appsScript = fs.readFileSync(APPS_SCRIPT_PATH, 'utf8');
 
 function inlineApp(sourceHtml) {
-  return sourceHtml.replace('<script src="app.js"></script>', `<script>\n${js}\n</script>`);
+  return sourceHtml
+    .replace('<script src="auth.js"></script>', '')
+    .replace('<script src="app.js"></script>', `<script>\n${js}\n</script>`);
 }
 
 function inlineLetterApp(sourceHtml) {
-  return sourceHtml.replace('<script src="letter.js"></script>', `<script>\n${letterJs}\n</script>`);
+  return sourceHtml
+    .replace('<script src="auth.js"></script>', '')
+    .replace('<script src="letter.js"></script>', `<script>\n${letterJs}\n</script>`);
 }
 
 function setField(window, id, value, eventName = 'input') {
@@ -190,8 +194,14 @@ async function createLetterDom(options = {}) {
 
       window.alert = () => {};
       window.confirm = () => true;
+      window.astraAuth = {
+        getIdToken: async () => 'test-google-id-token',
+        getUserEmail: () => 'approved@example.com',
+        requireSignIn: async () => 'test-google-id-token',
+      };
       window.fetch = async (url, fetchOptions = {}) => {
-        if (driveEnabled && String(url).includes('script.google.com')) {
+        if (driveEnabled && String(url).includes('/api/v1/actions')) {
+          assert.equal(fetchOptions.headers.authorization, 'Bearer test-google-id-token');
           return {
             ok: true,
             json: async () => ({ ok: true, file: { content: JSON.stringify(clinicianConfig) } }),
