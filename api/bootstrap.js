@@ -15,7 +15,7 @@ module.exports=async function handler(req,res){
  const design={revision:1,updatedAt:new Date().toISOString(),updatedBy:'Nick',design:starter};
  const lua="if redis.call('EXISTS',KEYS[1])~=0 then return 0 end\nredis.call('SET',KEYS[1],ARGV[1])\nredis.call('SET',KEYS[2],'1')\nreturn 1";
  try {
-  const response=await fetch(url.replace(/\\/$/,''),{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+token},body:JSON.stringify(['EVAL',lua,2,key,key+':revision',JSON.stringify(design)]),signal:AbortSignal.timeout(10000)});
+  const response=await fetch((url.endsWith('/')?url.slice(0,-1):url),{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+token},body:JSON.stringify(['EVAL',lua,2,key,key+':revision',JSON.stringify(design)]),signal:AbortSignal.timeout(10000)});
   const data=await response.json();
   if(!response.ok||data.error)return res.status(502).json({error:'Database initialization failed'});
   return res.status(200).json({initialized:Number(data.result)===1,exists:Number(data.result)===0,revision:1,pages:27,fields:309});
