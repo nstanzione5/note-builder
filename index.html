@@ -518,8 +518,10 @@ function astraPreviewApp(mount, project, config = {}) {
   }
   // Shared-by-link workspace: Vercel API keeps Upstash credentials on the server.
   // The base Version 5 editor still works offline; these controls run only on http(s).
-  const share={room:null,revision:0,dirty:false,serial:0,saving:false,conflict:false,saved:false,timer:null,poll:null,joining:false};
+  // Collaboration v2: adaptive sync, field-level three-way merge and guarded saves.
+  const share={room:null,revision:0,baseDesign:null,dirty:false,serial:0,saving:false,conflict:false,saved:false,timer:null,poll:null,joining:false,polling:false,lastActivity:Date.now(),errors:0};
   const shareStatus=$('collabStatus');
+  const sameJson=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
   function updateShareStatus(message, conflict=false){
     shareStatus.textContent=message;
     $('collabBar').classList.toggle('is-conflict',conflict);
@@ -527,7 +529,7 @@ function astraPreviewApp(mount, project, config = {}) {
     $('collabSave').disabled=!share.room||share.saving||share.conflict;
     $('collabReload').disabled=!share.room;
   }
-  function sharedName(){ return ($('collabName').value.trim()||'Editor').slice(0,50); }
+  function sharedName(){return ($('collabName').value.trim()||'Editor').slice(0,50);}
   function sharedRoomFromUrl(){
     const match=location.hash.match(/(?:^#|&)room=([a-f0-9]{32})(?:&|$)/);
     return match?match[1]:null;
@@ -536,110 +538,194 @@ function astraPreviewApp(mount, project, config = {}) {
     const bytes=new Uint8Array(16);crypto.getRandomValues(bytes);
     return [...bytes].map(b=>b.toString(16).padStart(2,'0')).join('');
   }
-  async function studioApi(method, body){
+  async function studioApi(method, body, since){
     const room=typeof body==='string'?body:body.room;
-    const url='/api/studio'+(method==='GET'?'?room='+encodeURIComponent(room):'');
-    const response=await fetch(url,{method,cache:'no-store',
-      headers:method==='POST'?{'Content-Type':'application/json'}:{},
-      body:method==='POST'?JSON.stringify(body):undefined});
-    const json=await response.json().catch(()=>({error:'Server returned an invalid response.'}));
-    if (!response.ok) {const err=new Error(json.error||'Shared server unavailable.');err.status=response.status;err.remoteRevision=json.remoteRevision;throw err;}
+    const url='/api/studio'+(method==='GET'?'?room='+encodeURIComponent(room)+(Number.isSafeInteger(since)?'&since='+since:''):'');
+    const response=await fetch(url,{method,cache:'no-store',headers:method==='POST'?{'Content-Type':'application/json'}:{},body:method==='POST'?JSON.stringify(body):undefined});
+    const json=await response.json().catch(()=>({error:'Invalid server response.'}));
+    if(!response.ok){const err=new Error(json.error||'Shared server unavailable.');err.status=response.status;err.remoteRevision=json.remoteRevision;throw err;}
     return json;
   }
-  function stashBrowserBackup(){
-    try{localStorage.setItem(KEY,JSON.stringify(data));}catch(e){}
+  function stashBrowserBackup(){try{localStorage.setItem(KEY,JSON.stringify(data));}catch(e){}}
+  function restoreEditorView(prevWorkflow,prevPage,prevField){
+    workflowIndex=Math.max(0,data.workflows.findIndex(w=>w.id===prevWorkflow));
+    const pages=data.workflows[workflowIndex].pages;
+    pageIndex=Math.max(0,pages.findIndex(p=>p.id===prevPage));
+    selectedId=pages[pageIndex].fields.some(f=>f.id===prevField)?prevField:null;
+    if(studioMode==='preview')switchStudioMode('preview');else renderAll();
   }
-  async function loadShared(force=false){
-    if(!share.room)return;
-    if(share.dirty&&!force){updateShareStatus('Another editor may have updated the project. Save a JSON backup before replacing your work.',true);return;}
-    try{
-      updateShareStatus('Loading shared project…');
-      const response=await studioApi('GET',share.room);
-      if(!response.exists){
-        share.saved=false;
-        updateShareStatus('This workspace has not been saved yet. Ask the creator to click Save shared now.');
-        return;
+  function applyRemote(project,revision,updatedBy){
+    const wi=data.workflows[workflowIndex]?.id;
+    const pi=data.workflows[workflowIndex]?.pages[pageIndex]?.id;
+    const fi=selectedId;
+    data=migrate(project);
+    share.baseDesign=clone(data);
+    share.revision=revision;share.saved=true;share.dirty=false;share.conflict=false;
+    share.serial++;
+    stashBrowserBackup();restoreEditorView(wi,pi,fi);
+    updateShareStatus('Synced revision '+revision+' - last saved by '+(updatedBy||'Editor'));
+  }
+  // Compare a common saved ancestor against both editors' copies. Merge distinct
+  // field/option properties, new pages and safe reorders; do NOT guess on collisions.
+  function threeWayMerge(base,local,remote){
+    const conflicts=[];
+    const copy=v=>v===undefined?undefined:clone(v);
+    const object=v=>v!==null&&typeof v==='object'&&!Array.isArray(v);
+    const ids=a=>Array.isArray(a)&&a.every(x=>object(x)&&typeof x.id==='string')&&new Set(a.map(x=>x.id)).size===a.length;
+    function walk(b,l,r,path){
+      if(sameJson(l,r))return copy(l);
+      if(sameJson(l,b))return copy(r);
+      if(sameJson(r,b))return copy(l);
+      if(Array.isArray(b)&&ids(b)&&ids(l)&&ids(r)){
+        const bm=new Map(b.map(x=>[x.id,x]));
+        const lm=new Map(l.map(x=>[x.id,x]));
+        const rm=new Map(r.map(x=>[x.id,x]));
+        const kept=b.filter(x=>lm.has(x.id)&&rm.has(x.id)).map(x=>x.id);
+        const only=a=>a.filter(x=>kept.includes(x.id)).map(x=>x.id).join('|');
+        const baseOrder=only(b),localOrder=only(l),remoteOrder=only(r);
+        const localMoved=localOrder!==baseOrder,remoteMoved=remoteOrder!==baseOrder;
+        if(localMoved&&remoteMoved&&localOrder!==remoteOrder)conflicts.push(path+' (both reordered)');
+        const primary=localMoved?l:r,secondary=localMoved?r:l;
+        const sequence=[...new Set([...primary.map(x=>x.id),...secondary.map(x=>x.id)])];
+        const merged=[];
+        for(const id of sequence){
+          const item=walk(bm.get(id),lm.get(id),rm.get(id),path+' / '+id);
+          if(item!==undefined)merged.push(item);
+        }
+        return merged;
       }
-      if(!valid(response.design))throw new Error('Shared project data has the wrong format.');
-      if(share.dirty&&!force){updateShareStatus('Local changes need saving; shared version not loaded.',true);return;}
-      data=migrate(response.design);share.revision=response.revision;share.saved=true;
-      share.dirty=false;share.conflict=false;share.serial++;selectedId=null;
-      workflowIndex=0;pageIndex=0;stashBrowserBackup();renderAll();
-      updateShareStatus('Synced revision '+share.revision+' · last edited by '+(response.updatedBy||'Editor'));
-    }catch(e){updateShareStatus('Cannot load shared project: '+e.message,true);}
+      if(object(l)&&object(r)&&(object(b)||b===undefined)){
+        const out={};
+        const keys=new Set([...Object.keys(b||{}),...Object.keys(l),...Object.keys(r)]);
+        for(const k of keys){const v=walk(b?.[k],l[k],r[k],path+' / '+k);if(v!==undefined)out[k]=v;}
+        return out;
+      }
+      conflicts.push(path);
+      return copy(l);
+    }
+    return {design:walk(base,local,remote,'Design'),conflicts:[...new Set(conflicts)]};
+  }
+  async function loadShared(force=false,prefetched=null){
+    if(!share.room)return;
+    if(share.dirty&&!force)return;
+    const startingSerial=share.serial;
+    try{
+      if(!prefetched)updateShareStatus('Loading shared design...');
+      const response=prefetched||await studioApi('GET',share.room);
+      if(!response.exists){share.saved=false;updateShareStatus('Workspace not yet saved. Ask its creator to save first.');return;}
+      if(!valid(response.design))throw Error('Unexpected saved project format.');
+      if(share.serial!==startingSerial||(!force&&share.dirty)){
+        updateShareStatus('Changes made while syncing. Saving local edits before refreshing.');
+        scheduleSharedSave(150);return;
+      }
+      if(share.revision===response.revision&&share.baseDesign)return;
+      applyRemote(response.design,response.revision,response.updatedBy);
+    }catch(e){updateShareStatus('Sync unavailable: '+e.message,true);}
   }
   async function saveShared(){
     if(!share.room||share.conflict||share.saving)return;
-    share.saving=true;
-    const thisSerial=share.serial;
-    updateShareStatus('Saving shared project…');
+    share.saving=true;clearTimeout(share.timer);
+    updateShareStatus('Saving shared design...');
     try{
-      const r=await studioApi('POST',{room:share.room,baseRevision:share.revision,editor:sharedName(),design:data});
-      share.revision=r.revision;share.saved=true;
-      share.dirty=share.serial!==thisSerial;
-      updateShareStatus('Shared save complete · revision '+share.revision+' · '+r.updatedBy);
-    }catch(e){
-      if(e.status===409){
-        share.conflict=true;
-        updateShareStatus('Save blocked: another editor changed this design. Download JSON backup, then Load latest shared.',true);
-      }else{
-        updateShareStatus('Shared save failed: '+e.message+' Browser backup remains available.',true);
+      for(let attempt=0;attempt<3;attempt++){
+        const snapshot=clone(data),serial=share.serial;
+        try{
+          const response=await studioApi('POST',{room:share.room,baseRevision:share.revision,editor:sharedName(),design:snapshot});
+          share.revision=response.revision;share.saved=true;share.baseDesign=snapshot;share.errors=0;
+          share.dirty=share.serial!==serial||!sameJson(data,snapshot);
+          updateShareStatus('Saved revision '+share.revision+' - '+response.updatedBy+(share.dirty?' (more changes pending)':''));
+          break;
+        }catch(e){
+          if(e.status!==409)throw e;
+          const fresh=await studioApi('GET',share.room);
+          if(!fresh.exists||!valid(fresh.design))throw Error('Cannot load the latest design for merging.');
+          const merged=threeWayMerge(share.baseDesign||snapshot,data,fresh.design);
+          if(merged.conflicts.length){
+            share.conflict=true;
+            stashBrowserBackup();
+            updateShareStatus('Edit conflict: '+merged.conflicts.slice(0,2).join('; ')+'. Download JSON backup, then Load latest shared. Your edits were NOT overwritten.',true);
+            break;
+          }
+          const wi=data.workflows[workflowIndex]?.id;
+          const pi=data.workflows[workflowIndex]?.pages[pageIndex]?.id;
+          const fi=selectedId;
+          data=migrate(merged.design);
+          share.baseDesign=clone(fresh.design);share.revision=fresh.revision;share.saved=true;
+          share.dirty=true;share.serial++;
+          stashBrowserBackup();restoreEditorView(wi,pi,fi);
+          updateShareStatus('Merged non-conflicting edits. Saving combined design...');
+        }
       }
+    }catch(e){
+      share.errors++;
+      updateShareStatus('Shared save unavailable: '+e.message+'. Your browser copy remains available.',true);
     }finally{
       share.saving=false;
       $('collabSave').disabled=share.conflict;
       $('collabShare').disabled=!share.saved;
-      if(share.dirty&&!share.conflict&&share.serial!==thisSerial) scheduleSharedSave();
+      if(share.dirty&&!share.conflict){
+        scheduleSharedSave(share.errors?Math.min(30000,5000*share.errors):1100);
+      }
     }
   }
-  function scheduleSharedSave(){
+  function scheduleSharedSave(delay=1100){
     if(!share.room||share.conflict)return;
     clearTimeout(share.timer);
-    share.timer=setTimeout(()=>saveShared(),1100);
+    share.timer=setTimeout(saveShared,delay);
+  }
+  function pollInterval(){
+    if(document.hidden)return 60000;
+    return Date.now()-share.lastActivity<120000?6000:15000;
+  }
+  function schedulePoll(delay){
+    clearTimeout(share.poll);
+    if(!share.room)return;
+    share.poll=setTimeout(async()=>{await pollShared();schedulePoll();},delay===undefined?pollInterval():delay);
   }
   async function pollShared(){
-    if(!share.room||share.saving||share.joining||share.conflict)return;
+    if(!share.room||share.saving||share.joining||share.conflict||share.polling)return;
+    share.polling=true;
     try{
-      const response=await studioApi('GET',share.room);
-      if(!response.exists||response.revision<=share.revision)return;
+      const response=await studioApi('GET',share.room,share.revision);
+      if(!response.exists||response.changed===false||response.revision<=share.revision)return;
       if(share.dirty){
-        share.conflict=true;
-        updateShareStatus('Another editor saved while you had local edits. Download your JSON backup before loading theirs.',true);
+        updateShareStatus('Another editor saved. Combining independent changes...');
+        scheduleSharedSave(100);
         return;
       }
-      await loadShared();
-    }catch(e){updateShareStatus('Shared refresh temporarily unavailable; editing remains local.',true);}
+      await loadShared(false,response);
+    }catch(e){updateShareStatus('Shared refresh temporarily unavailable; local editing continues.',true);}
+    finally{share.polling=false;}
   }
   function useRoom(room){
-    share.room=room;
-    share.revision=0;share.dirty=false;share.conflict=false;share.saved=false;
-    if(share.poll)clearInterval(share.poll);
-    share.poll=setInterval(pollShared,20000);
+    share.room=room;share.revision=0;share.baseDesign=null;share.dirty=false;share.conflict=false;share.saved=false;share.errors=0;
+    schedulePoll(6000);
     $('collabCreate').textContent='Create another workspace';
-    updateShareStatus('Connecting to shared workspace…');
+    updateShareStatus('Connecting to shared workspace...');
   }
-  $('collabName').addEventListener('change',()=>{
-    try{localStorage.setItem('astra-studio-editor-name',sharedName());}catch(e){}
-  });
+  function markActive(){share.lastActivity=Date.now();}
+  document.addEventListener('pointerdown',markActive,{passive:true});
+  document.addEventListener('keydown',markActive,{passive:true});
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)pollShared();schedulePoll();});
+  window.addEventListener('focus',()=>{pollShared();schedulePoll();});
+  window.addEventListener('online',()=>{if(share.dirty)scheduleSharedSave(200);else pollShared();});
+  $('collabName').addEventListener('change',()=>{try{localStorage.setItem('astra-studio-editor-name',sharedName());}catch(e){}});
   $('collabCreate').addEventListener('click',async()=>{
-    if(share.room&&!confirm('Create a NEW shared project? This will not delete the existing project. Save a JSON backup if you have unsaved edits.'))return;
-    const room=newRoom();
-    location.hash='room='+room;
-    useRoom(room);
+    if(share.room&&!confirm('Create a NEW shared project? Save or export your current work first.'))return;
+    const room=newRoom();location.hash='room='+room;useRoom(room);
     share.dirty=true;share.serial++;
     await saveShared();
   });
   $('collabShare').addEventListener('click',async()=>{
     const link=location.href;
-    try{
-      if(!navigator.clipboard?.writeText)throw Error('Clipboard unavailable');
-      await navigator.clipboard.writeText(link);
-      updateShareStatus('Invite link copied. Send the FULL URL (including #room=…) to Kris.');
-    }catch(e){prompt('Copy this entire link to send to your collaborator:',link);}
+    try{if(!navigator.clipboard?.writeText)throw Error('Clipboard unavailable');await navigator.clipboard.writeText(link);updateShareStatus('Invite link copied. Send the entire URL (including the #room= part).');}
+    catch(e){prompt('Copy the full shared design link:',link);}
   });
   $('collabSave').addEventListener('click',()=>{clearTimeout(share.timer);saveShared();});
   $('collabReload').addEventListener('click',async()=>{
-    if(!confirm('Replace the current design with the latest shared version? Download your JSON backup first if you want to preserve unsaved changes.'))return;
+    const unsaved=share.dirty||share.conflict;
+    if(!confirm(unsaved?'Download a JSON backup of your unsaved edits and replace the open design with the latest shared version?':'Load the newest shared design?'))return;
+    if(unsaved)download('Astra-Conflict-Backup-'+Date.now()+'.json',JSON.stringify(data,null,2),'application/json');
     share.conflict=false;share.dirty=false;clearTimeout(share.timer);
     await loadShared(true);
   });
@@ -648,11 +734,8 @@ function astraPreviewApp(mount, project, config = {}) {
     $('collabBar').style.display='block';
     try{$('collabName').value=localStorage.getItem('astra-studio-editor-name')||'';}catch(e){}
     const room=sharedRoomFromUrl();
-    if(room){
-      useRoom(room);share.joining=true;
-      // Never show stale browser-saved project as shared; wait for server data.
-      await loadShared(true);share.joining=false;
-    }else updateShareStatus('Local editor · create a shared workspace to collaborate with Kris.');
+    if(room){useRoom(room);share.joining=true;await loadShared(true);share.joining=false;}
+    else updateShareStatus('Local editor - create a shared workspace to collaborate.');
   }
   function change(){persist();renderAll();}
 
