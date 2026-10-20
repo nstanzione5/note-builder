@@ -1,7 +1,7 @@
 // Vercel Node endpoint: shared project storage in Upstash. No PHI.
 const ROOM=/^[a-f0-9]{32}$/;
 const PREFIX='astra:form-design:room:';
-const SCRIPT="local stored=redis.call('GET',KEYS[1])\nlocal previous=0\nif stored then local ok,parsed=pcall(cjson.decode,stored); if not ok or type(parsed)~='table' then return {-1,0} end; previous=tonumber(parsed.revision) or 0 end\nif previous~=tonumber(ARGV[1]) then return {0,previous} end\nredis.call('SET',KEYS[1],ARGV[2]); return {1,previous+1}";
+const SCRIPT="local stored=redis.call('GET',KEYS[1])\nlocal previous=0\nif stored then local ok,parsed=pcall(cjson.decode,stored); if not ok or type(parsed)~='table' then return {-1,0} end; previous=tonumber(parsed.revision) or 0 end\nif previous~=tonumber(ARGV[1]) then return {0,previous} end\nredis.call('SET',KEYS[1],ARGV[2]);redis.call('SET',KEYS[2],tostring(previous+1)); return {1,previous+1}";
 async function redis(command){
  const url=process.env.UPSTASH_REDIS_REST_URL||process.env.KV_REST_API_URL;
  const token=process.env.UPSTASH_REDIS_REST_TOKEN||process.env.KV_REST_API_TOKEN;
@@ -19,10 +19,17 @@ module.exports=async function handler(req,res){
   if(req.method==='GET'){
    const room=typeof req.query?.room==='string'?req.query.room:'';
    if(!ROOM.test(room))return fail(res,400,'Invalid shared workspace link.');
+   const sinceRaw=req.query?.since;
+   const since=typeof sinceRaw==='string'&&/^(0|[1-9][0-9]{0,12})$/.test(sinceRaw)?Number(sinceRaw):null;
+   if(since!==null){
+    const head=await redis(['GET',PREFIX+room+':revision']);
+    if(head!==null&&Number(head)<=since)return res.status(200).json({exists:true,changed:false,revision:Number(head)});
+   }
    const raw=await redis(['GET',PREFIX+room]);
    if(raw===null)return res.status(200).json({exists:false,revision:0});
    const record=typeof raw==='string'?JSON.parse(raw):raw;
-   return res.status(200).json({exists:true,revision:record.revision,updatedAt:record.updatedAt,updatedBy:record.updatedBy,design:record.design});
+   if(since!==null&&record.revision<=since)return res.status(200).json({exists:true,changed:false,revision:record.revision});
+   return res.status(200).json({exists:true,changed:true,revision:record.revision,updatedAt:record.updatedAt,updatedBy:record.updatedBy,design:record.design});
   }
   const body=typeof req.body==='string'?JSON.parse(req.body):req.body;
   const room=body?.room,base=body?.baseRevision,design=body?.design;
@@ -33,7 +40,7 @@ module.exports=async function handler(req,res){
   const next={revision:base+1,updatedAt:new Date().toISOString(),updatedBy,design};
   const serialized=JSON.stringify(next);
   if(Buffer.byteLength(serialized,'utf8')>1500000)return fail(res,413,'Project exceeds allowed size.');
-  const reply=await redis(['EVAL',SCRIPT,1,PREFIX+room,base,serialized]);
+  const reply=await redis(['EVAL',SCRIPT,2,PREFIX+room,PREFIX+room+':revision',base,serialized]);
   if(!Array.isArray(reply)||reply.length<2)return fail(res,502,'Unexpected database response.');
   if(+reply[0]===0)return res.status(409).json({error:'Another editor updated this project. Your local work was not overwritten.',remoteRevision:+reply[1]});
   if(+reply[0]!==1)return fail(res,500,'Stored project requires review.');
